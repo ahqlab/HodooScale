@@ -15,4 +15,7 @@ public interface PetBasicInfoService {
 
     @POST("pet/my/list")
     Call<List<String>> getMyPetList(@Query("groupId") String groupId);
+
+    @POST("pet/my/registered/list")
+    Call<List<PetBasicInfo>> getMyRegisteredPetList(@Query("groupId") String groupId);
 }

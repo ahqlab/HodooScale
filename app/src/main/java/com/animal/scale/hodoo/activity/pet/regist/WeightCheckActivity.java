@@ -3,12 +3,12 @@ package com.animal.scale.hodoo.activity.pet.regist;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.HomeActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityWeightCheckBinding;
@@ -16,7 +16,6 @@ import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.Groups;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
-import com.animal.scale.hodoo.activity.home.HomeActivity;
 import com.animal.scale.hodoo.util.ViewFlipperAction;
 
 import java.util.ArrayList;
@@ -98,9 +97,6 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
     }
 
     public void onClickCompleateBtn(View view) {
-        Log.e("getDomain : " ,  binding.getDomain().toString());
-        Log.e("getDomain : " ,  binding.getDomain().toString());
-        Log.e("getDomain : " ,  binding.getDomain().toString());
         Call<Integer> result = NetRetrofit.getInstance().getPetWeightInfoService().regist(binding.getDomain());
         result.enqueue(new Callback<Integer>() {
             @Override

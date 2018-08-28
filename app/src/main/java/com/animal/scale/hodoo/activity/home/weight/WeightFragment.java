@@ -142,13 +142,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         new AbstractAsyncTaskOfList<Float>() {
             @Override
             protected void doPostExecute(List<Float> datas) {
-                ArrayList<Integer> dataList = new ArrayList<>();
-                for(int i = 0; i < datas.size(); i++){
-                    dataList.add(Math.round(datas.get(i)));
+                if(datas.size() > 0){
+                    ArrayList<Integer> dataList = new ArrayList<>();
+                    for(int i = 0; i < datas.size(); i++){
+                        dataList.add(Math.round(datas.get(i)));
+                    }
+                    ArrayList<ArrayList<Integer>> dataLists = new ArrayList<>();
+                    dataLists.add(dataList);
+                    binding.chartView.setDataList(dataLists);
                 }
-                ArrayList<ArrayList<Integer>> dataLists = new ArrayList<>();
-                dataLists.add(dataList);
-                binding.chartView.setDataList(dataLists);
             }
             @Override
             protected void doPreExecute() {

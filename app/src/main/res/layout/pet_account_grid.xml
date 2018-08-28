@@ -12,7 +12,7 @@
 
         <variable
             name="domain"
-            type="com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccount" />
+            type="com.animal.scale.hodoo.domain.PetBasicInfo" />
     </data>
 
 
@@ -25,23 +25,22 @@
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/petIcon"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/pet_account_middle_male_icon_143_143" />
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:src="@drawable/pet_account_middle_male_icon_143_143"
+            app:loadPicasoImage="@{domain.profileFilePath}"
+            app:civ_border_color="@color/hodoo_midle_pink"
+            app:civ_border_width="2dp" />
 
         <TextView
             android:id="@+id/petName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="호두" />
-
-        <TextView
-            android:id="@+id/accountType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="메인계정" />
+            android:text="@={domain.petName}" />
     </LinearLayout>
 </layout>
 

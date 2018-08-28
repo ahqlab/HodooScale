@@ -136,14 +136,7 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
                                     });
                                 }
                             }
-                        /*} else {
-                            showToast(getText(R.string.required_chioce_disease).toString());
-                        }*/
-                    } else {
-                        showToast("삭제에 실패했습니다.");
                     }
-                } else {
-                    showToast("삭제에 실패했습니다.");
                 }
             }
 

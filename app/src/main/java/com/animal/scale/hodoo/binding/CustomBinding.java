@@ -2,11 +2,13 @@ package com.animal.scale.hodoo.binding;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
 
 import com.animal.scale.hodoo.R;
+import com.squareup.picasso.Picasso;
 
 public class CustomBinding {
 
@@ -64,6 +66,22 @@ public class CustomBinding {
     public static void imgload(ImageView imageView, int resid) {
         imageView.setImageResource(resid);
     }
+
+    @BindingAdapter({"loadPicasoImage"})
+    public static void loadPicasoImage(ImageView imageView, String url) {
+        Log.e("HJLEE","URL : "  + url);
+        if(url.matches("add")){
+            Picasso.with(imageView.getContext())
+                    .load(R.drawable.pet_account_midle_add_icon_143_143)
+                    .into(imageView);
+        }else{
+            Picasso.with(imageView.getContext())
+                    .load("http://121.183.234.14:7171/hodoo/" + url)
+                    .into(imageView);
+        }
+
+    }
+
 
     @BindingAdapter({"changeLinearBg"})
     public static void LinearLayoutChangeBackgound(LinearLayout leLinearLayout, int position) {

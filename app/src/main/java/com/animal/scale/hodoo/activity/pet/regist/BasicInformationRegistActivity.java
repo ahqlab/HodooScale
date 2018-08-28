@@ -70,7 +70,6 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         binding.setActivityInfo(new ActivityInfo(getString(R.string.basin_info_regist_title)));
         setNavi();
         super.setToolbarColor();
-        showToast("u id : " + mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID));
         Call<PetBasicInfo> result = NetRetrofit.getInstance().getPetBasicInfoService().getBasicInfo(mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID));
         result.enqueue(new Callback<PetBasicInfo>() {
             @Override
@@ -98,17 +97,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                             binding.maleBtn.setPressed(false);
                             binding.femaleBtn.setPressed(true);
                         }
-
-                    }else{
-                        binding.setInfo(new PetBasicInfo());
-                        REQUEST_MODE = false;
-                        REQUEST_URL = "http://121.183.234.14:7171/hodoo/pet/basic/regist";
                     }
-                } else {
-                    binding.setInfo(new PetBasicInfo());
-                    REQUEST_MODE = false;
-                    REQUEST_URL = "http://121.183.234.14:7171/hodoo/pet/basic/regist";
-                    Toast.makeText(getApplicationContext(), getString(R.string.user_regist_failed_message), Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -259,7 +248,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 for (int i = 0; i < permissions.length; i++) {
                     String permission = permissions[i];
                     int grantResult = grantResults[i];
-                    if (permission.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    if (permission.equals(Manifest.permission.CAMERA)) {
                         if (grantResult == PackageManager.PERMISSION_GRANTED) {
                             openCamera(); // start WIFIScan
                         } else {

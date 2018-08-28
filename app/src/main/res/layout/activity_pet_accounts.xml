@@ -39,6 +39,8 @@
             android:columnWidth="90dp"
             android:horizontalSpacing="10dp"
             android:numColumns="auto_fit"
-            android:verticalSpacing="10dp"></GridView>
+            android:verticalSpacing="10dp">
+
+        </GridView>
     </RelativeLayout>
 </layout>

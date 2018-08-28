@@ -1,14 +1,18 @@
 package com.animal.scale.hodoo.activity.setting.pet.accounts;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.pet.regist.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityPetAccountsBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.PetBasicInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> implements PetAccounts.View {
@@ -17,6 +21,8 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
 
     PetGridAdapter adapter;
 
+    PetAccounts.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +30,9 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo("펫 관리"));
         super.setToolbarColor();
-        adapter = new PetGridAdapter(PetAccountsActivity.this, pets());
-        binding.petGridView.setAdapter(adapter);
+        presenter = new PetAccountPresenter(this);
+        presenter.initUserData(getApplicationContext());
+        presenter.getData();
     }
 
     @Override
@@ -33,16 +40,18 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         return PetAccountsActivity.this;
     }
 
-    public List<PetAccount> pets() {
-        List<PetAccount> list = new ArrayList<PetAccount>();
-        list.add(new PetAccount("1", "2"));
-        list.add(new PetAccount("1", "2"));
-        list.add(new PetAccount("1", "2"));
-        list.add(new PetAccount("1", "2"));
-        list.add(new PetAccount("1", "2"));
-        list.add(new PetAccount("1", "2"));
-        list.add(new PetAccount("1", "2"));
-        list.add(new PetAccount("1", "2"));
-        return list;
+    @Override
+    public void setAdapter(List<PetBasicInfo> data) {
+        adapter = new PetGridAdapter(PetAccountsActivity.this, data);
+        binding.petGridView.setAdapter(adapter);
+        binding.petGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+                finish();
+            }
+        });
     }
 }
