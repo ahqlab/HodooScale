@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.wifi.FindHodoosActivity" />
+
+        <variable
+            name="activityInfo"
+            type="com.animal.scale.hodoo.domain.ActivityInfo" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hodoo_background_color"
+        tools:context=".activity.wifi.FindHodoosActivity">
+
+        <include
+            layout="@layout/common_toolbar"
+            bind:activityInfo="@{activityInfo}" />
+
+        <LinearLayout
+            android:id="@+id/find_hodoo_info"
+            android:layout_below="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/hodoo_text_black"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="15sp"
+                android:layout_margin="15dp"
+                android:textStyle="bold"
+                android:text="@string/find_hodoo_message1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/hodoo_gray"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="9sp"
+                android:text="@string/find_hodoo_message2"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/find_hodoo_info"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+
+            <at.grabner.circleprogress.CircleProgressView
+                android:id="@+id/circleView"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                CircleProgressView:cpv_barColor="@color/hodoo_pink"
+                CircleProgressView:cpv_barStartEndLineColor="@color/white"
+                CircleProgressView:cpv_barWidth="5dp"
+                CircleProgressView:cpv_innerContourColor="@color/white"
+                CircleProgressView:cpv_innerContourSize="50dp"
+                CircleProgressView:cpv_maxValue="100"
+                CircleProgressView:cpv_outerContourSize="0dp"
+                CircleProgressView:cpv_rimColor="@color/hodoo_light_light_pink"
+                CircleProgressView:cpv_rimWidth="5dp"
+                CircleProgressView:cpv_seekMode="true"
+                CircleProgressView:cpv_spinColor="@color/hodoo_pink"
+                CircleProgressView:cpv_spinSpeed="10"
+                CircleProgressView:cpv_textScale="1"
+                CircleProgressView:cpv_value="60" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_below="@+id/find_hodoo_info"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/connecting_middle_wifi_icon_99_76"
+                android:gravity="center_vertical|center_horizontal" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

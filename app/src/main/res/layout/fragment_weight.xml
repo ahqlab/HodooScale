@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.home.weight.WeightFragment" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hodoo_background_color"
+        tools:context=".activity.home.weight.WeightFragment">
+
+
+        <noman.weekcalendar.WeekCalendar
+            android:id="@+id/weekCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/white"
+            app:dayNameLength="threeLetters"
+            app:daysBackgroundColor="@color/white"
+            app:daysTextColor="@color/black"
+            app:daysTextSize="14sp"
+            app:numOfPages="150"
+            app:weekBackgroundColor="@color/white"
+            app:weekTextColor="@color/black"
+            app:weekTextSize="11sp" />
+
+
+        <LinearLayout
+            android:id="@+id/graph_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="136dp"
+            android:layout_below="@+id/weekCalendar"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/weight_middle_overweight_469_266"
+            android:orientation="vertical"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/clock_hands"
+            android:layout_width="200dp"
+            android:layout_height="192dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            android:onClick="@{activity::onClickResetGraph}"
+            android:src="@drawable/clock_hands" />
+
+        <TextView
+            android:id="@+id/currentKg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="190dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/weight_info_box"
+            android:layout_width="310dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/graph_bg"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/weight_middle_coment_background_550_112"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/weight_middle_doctor_icon_62_75" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:src="@drawable/weight_middle_check_icon_17_20" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="오늘의 평균 체중은?! 초과 | "
+                        android:textSize="9sp" />
+                    <TextView
+                        android:id="@+id/myBcsStep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/hodoo_midle_pink"
+                        android:text="BCS 4단계"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="현재 귀하의 반려견은 BCS 4단계로 평균 체중에 비해 과다한 상태입니다. \n 균형잡힌 식단과 올바른 황동으로 반려견의 체중을 관리해주셔야 합니다."
+                        android:textSize="8sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="310dp"
+            android:layout_height="170dp"
+            android:layout_below="@+id/weight_info_box"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/weight_bottom_chart_background_550_354"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="3dp"
+                android:text="오늘의 체중 기록"/>
+
+            <im.dacer.androidcharts.LineView
+                android:id="@+id/chartView"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/hodoo_light_message_pink"
+                android:gravity="center_vertical|center_horizontal">
+            </im.dacer.androidcharts.LineView>
+
+        </LinearLayout>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="15sp"
+            android:src="@drawable/weight_bottom_chart_icon_121_121"
+            android:onClick="@{activity::onClickFloatingBtn}"
+            app:fabSize="normal" />
+
+
+    </RelativeLayout>
+</layout>

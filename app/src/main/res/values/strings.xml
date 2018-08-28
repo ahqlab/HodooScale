@@ -1,0 +1,128 @@
+<resources>
+    <string name="app_name">HodooScale</string>
+    //common
+    <string name="not_connected_to_the_Internet">You are not connected to the Internet.</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">이메일</string>
+    <string name="prompt_password">비밀번호(8자 이상)</string>
+    <string name="prompt_password_check">비밀번호(8자 이상)</string>
+    <string name="prompt_nicname">닉네임(9자 이내)</string>
+    <string name="prompt_from">거주지역을 입력해주세요.</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <!-- COMMON TEXT -->
+    <string name="year">년도</string>
+    <string name="month">년도</string>
+    <string name="day">일</string>
+    <string name="male">수컷</string>
+    <string name="femle">암컷</string>
+    <string name="pet_width">체장</string>
+    <string name="pet_height">체고</string>
+    <string name="pet_unit">단위</string>
+    <string name="pet_weight">체중</string>
+    <string name="pet_temp">온도</string>
+    <string name="pet_kg">Kg</string>
+    <string name="compleate">완료</string>
+    <string name="cancle">취소</string>
+    <string name="agree">동의</string>
+    <string name="press_back_message">Press \'Back\' button again to exit.</string>
+    <string name="password">비밀번호</string>
+    <string name="gallery">갤러리</string>
+    <string name="camera">카메라</string>
+    <string name="failed">실패</string>
+    <string name="success">성공</string>
+
+
+    <!--ALERT MESSAGE-->
+    <string name="message">Message</string>
+    <string name="vailed_email">이메일 형식에 맞지 않습니다.</string>
+    <!-- COMMON MESSAGE -->
+    <string name="user_regist_failed_message">회원가입에 실패했습니다.</string>
+    <string name="user_login_failed_message">로그인에 실패했습니다. 아이디 및 비밀번호를 확인하세요.</string>
+
+
+    <!-- PAGE TITLE -->
+    <string name="login_page_title">LOGIN</string>
+    <string name="basin_info_regist_title">펫 추가</string>
+    <string name="disease_information_regist_title">펫의 병력</string>
+    <string name="physique_information_regist_title">펫의 체격</string>
+    <string name="weight_check_title">체중상태 체크</string>
+    <string name="weight_title">체중관리</string>
+    <string name="temp_title">체온관리</string>
+    <string name="wifi_list_title">와이파이 설정</string>
+    <string name="find_hodoo_title">스캐닝</string>
+
+    //TermsOfServiceActivity
+    <string name="signup_title">회원가입</string>
+    <string name="agree_terms">약관 동의</string>
+    <string name="agree_terms_message">개인정보 수집 및 이용에 동의합니다.</string>
+    <string name="term_of_service">서비스 이용약관</string>
+    <string name="agree_of_service">이용약관에 동의합니다.</string>
+    <!-- LoginActivity -->
+    <string name="btn_login">Login</string>
+    <string name="login_message1">square </string>
+    <string name="login_message2">계정으로</string>
+    <string name="login_message3"> Hoodo Fit</string>
+    <string name="login_message4"> 로그인</string>
+
+    <!-- Add Pet Activity -->
+    <string name="add_pet_name">펫의 이름</string>
+    <string name="add_pet_type">펫의 품종</string>
+    <string name="add_pet_birthday">생년월일</string>
+    <string name="add_pet_neuter">중성화 여부</string>
+    <string name="add_pet_next_btn">다음 단계</string>
+    <string name="add_pet_edit_hint">품종을 입력하세요</string>
+
+    <!-- DeseaseInformaionRegistActivity-->
+    <string name="required_chioce_disease">질병이 없다면 \'질병없음\'을 선택하세요.</string>
+    <!-- PhysiqueInformationRegistActivity -->
+    <string name="physique_information_guide_text1">펫의 정확한 건강관리를 위해 정보를 꼭 입력해주세요.</string>
+    <string name="physique_information_guide_text2">체장 : 엉덩이부터 가슴까지</string>
+    <string name="physique_information_guide_text3">체고 : 앞 발바닥부터 목과 등의 경계선까지</string>
+
+
+    <!-- WeightCheckActivity -->
+    <string name="self_check_bcs_info">호두는 BCS기법을 통해 반려동물의 지방 비율을 측정할 수 있습니다.</string>
+    <string name="fat_mass">지방량.</string>
+    <string name="self_check_desc1">지방량과 과체중</string>
+    <string name="self_check_desc2">체지방률이 조금 높아요! 잠까? 운동을 많이 안하셨순요! 이상태로 유지가 된다면 당뇨병, 고혈압 등 심혈관 질환이 발생할 수 있어 조심해야 해요!</string>
+    <string name="self_check_desc3">이곳에 해결책이 있어요</string>
+    <string name="self_check_desc4">우리같이 운동할까요? 주 2~6회 유산소 운동과 근력 운동을 병행하고 기초대사량에 맞는 식습관으로 개선해서 체지방을 불태워봅시다!!</string>
+
+    <!-- WIFI Search Activity -->
+    <string name="wifi_connection">WIFI 연결</string>
+    <string name="wifi_connection_advice">WIFI 신호 상태가 가장 좋은 인터넷을 사용해 주세요.</string>
+    <string name="wifi_connection_popup_password_hint">비밀번호를 입력하세요.</string>
+
+    <!-- FindHodooActivity -->
+    <string name="find_hodoo_message1">Hodoo Scale</string>
+    <string name="find_hodoo_message2">연결중입니다. 프리미엄 기기를 공유기에 가까이 놓아주세요.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_login2">Sign in</string>
+
+
+    <!-- ChangePasswordActivity -->
+    <string name="explanation_of_password_change">주기적인 비밀번호 변경은 개인정보를 안전하게 보호하고, 개인정보도용 피해를 예방합니다.</string>
+    <string name="current_password">현재 비밀번호</string>
+    <string name="new_password">새 비밀번호</string>
+    <string name="password_entry_limit">8자~20자, 영문, 숫자, 특수문자 사용</string>
+    <string name="password_hint">현재비밀번호 입력</string>
+    <string name="new_password_hint">새비밀번호 입력</string>
+    <string name="confirm">확인</string>
+</resources>

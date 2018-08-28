@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.animal.scale.hodoo">
+
+    <uses-sdk tools:overrideLibrary="com.tistory.dwfox.dwrulerviewlibrary" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- WIFI -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- CAMERA -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.user.login.LoginActivity" />
+        <activity android:name=".activity.user.signup.TermsOfServiceActivity" />
+        <activity android:name=".activity.pet.regist.BasicInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.DiseaseInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.PhysiqueInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.WeightCheckActivity" />
+        <activity android:name=".activity.user.signup.SignUpActivity" />
+        <activity android:name=".activity.home.HomeActivity" />
+        <activity android:name=".activity.wifi.WifiSearchActivity" />
+        <activity android:name=".activity.wifi.WIFIScanner" />
+        <activity
+            android:name=".activity.user.LoginActivity2"
+            android:label="@string/title_activity_login2" />
+        <activity android:name=".activity.wifi.FindHodoosActivity" />
+        <activity android:name=".activity.wifi.SearchFailedActivity" />
+        <activity android:name=".activity.setting.list.SettingListActivity" />
+        <activity android:name=".activity.setting.account.MyAccountActivity" />
+        <activity android:name=".activity.setting.account.change.password.ChangePasswordActivity" />
+        <activity android:name=".activity.home.weight.statistics.WeightStatisticsActivity" />
+        <activity android:name=".activity.setting.pet.accounts.PetAccountsActivity"></activity>
+    </application>
+
+</manifest>

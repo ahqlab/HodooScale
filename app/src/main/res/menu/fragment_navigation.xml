@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navigation_weight"
+        android:icon="@drawable/buttom_navigation_item_weight"
+        android:title="@string/pet_weight" />
+    <item
+        android:id="@+id/navigation_temp"
+        android:icon="@drawable/weight_bottom_enabled_temperature_icon_29_55"
+        android:title="@string/pet_temp" />
+</menu>

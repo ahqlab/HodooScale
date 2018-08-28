@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.home.weight.statistics.WeightStatisticsActivity" />
+        <variable
+            name="activityInfo"
+            type="com.animal.scale.hodoo.domain.ActivityInfo" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hodoo_background_color"
+        android:gravity="center_horizontal"
+        tools:context=".activity.home.weight.statistics.WeightStatisticsActivity">
+
+        <include
+            layout="@layout/common_toolbar"
+            bind:activityInfo="@{activityInfo}" />
+
+        <LinearLayout
+            android:id="@+id/top_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_toolbar"
+            android:background="@color/hodoo_gray"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/dayBtn"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/much_rounded_pink_bg"
+                android:onClick="@{activity::onClickDayBtn}"
+                android:text="하루"
+                android:textColor="@color/hodoo_midle_pink"
+                android:textSize="11dp" />
+
+            <Button
+                android:id="@+id/weekBtn"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/much_rounded_white_bg"
+                android:onClick="@{activity::onClickWeekBtn}"
+                android:text="한주"
+                android:textColor="@color/hodoo_text_gray"
+                android:textSize="11dp" />
+
+            <Button
+                android:id="@+id/monthBtn"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/much_rounded_white_bg"
+                android:onClick="@{activity::onClickMonthBtn}"
+                android:text="한달"
+                android:textColor="@color/hodoo_text_gray"
+                android:textSize="11dp" />
+
+            <Button
+                android:id="@+id/yearBtn"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/much_rounded_white_bg"
+                android:onClick="@{activity::onClickYearBtn}"
+                android:text="년"
+                android:textColor="@color/hodoo_text_gray"
+                android:textSize="11dp" />
+        </LinearLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:layout_below="@+id/top_buttons"
+            android:layout_weight="1" />
+
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</layout>
