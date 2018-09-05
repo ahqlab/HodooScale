@@ -3,12 +3,15 @@ package com.animal.scale.hodoo.activity.user.login;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Groups;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.ValidationUtil;
+
+import java.util.List;
 
 import retrofit2.Call;
 
@@ -59,13 +62,12 @@ public class LoginModel {
     }
 
     public void isRegistPetCheck(final RegistCheckListener registCheckListener) {
-        Call<Groups> call = NetRetrofit.getInstance().getGroupsService().get(new Groups(mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID), mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID)));
-        new AbstractAsyncTask<Groups>() {
+        Call<List<Groups>> call = NetRetrofit.getInstance().getGroupsService().getGroupLists(new Groups(mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID), mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID)));
+        new AbstractAsyncTaskOfList<Groups>() {
             @Override
-            protected void doPostExecute(Groups groups) {
+            protected void doPostExecute(List<Groups> groups) {
                 registCheckListener.doPostExecute(groups);
             }
-
             @Override
             protected void doPreExecute() {
                 registCheckListener.doPreExecute();
@@ -79,7 +81,7 @@ public class LoginModel {
     }
 
     public interface RegistCheckListener {
-        void doPostExecute(Groups groups);
+        void doPostExecute(List<Groups> groups);
         void doPreExecute();
     }
 

@@ -13,8 +13,11 @@ public interface PetBasicInfoService {
     @POST("pet/basic/get")
     Call<PetBasicInfo> getBasicInfo(@Query("userId") int userId);
 
+    @POST("pet/basic/info/check")
+    Call<PetBasicInfo> getBasicInfoForPetId(@Query("groupId") String groupId, @Query("id") int id);
+
     @POST("pet/my/list")
-    Call<List<String>> getMyPetList(@Query("groupId") String groupId);
+    Call<List<PetBasicInfo>> getMyPetList(@Query("groupId") String groupId);
 
     @POST("pet/my/registered/list")
     Call<List<PetBasicInfo>> getMyRegisteredPetList(@Query("groupId") String groupId);

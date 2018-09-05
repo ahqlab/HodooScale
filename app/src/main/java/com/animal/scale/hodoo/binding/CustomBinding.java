@@ -82,6 +82,23 @@ public class CustomBinding {
 
     }
 
+    @BindingAdapter({"loadUserAccountImage"})
+    public static void loadUserAccountImage(ImageView imageView, String sex) {
+        if(sex.matches("FEMALE")){
+            Picasso.with(imageView.getContext())
+                    .load(R.drawable.user_middle_hodoo_profile_icon_143_143)
+                    .into(imageView);
+        }else if(sex.matches("MALE")){
+            Picasso.with(imageView.getContext())
+                    .load(R.drawable.user_middle_jehoo_profile_icon_143_143)
+                    .into(imageView);
+        }else if(sex.matches("새 구성원")){
+            Picasso.with(imageView.getContext())
+                    .load(R.drawable.pet_account_midle_add_icon_143_143)
+                    .into(imageView);
+        }
+    }
+
 
     @BindingAdapter({"changeLinearBg"})
     public static void LinearLayoutChangeBackgound(LinearLayout leLinearLayout, int position) {

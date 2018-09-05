@@ -1,4 +1,4 @@
-package com.animal.scale.hodoo.activity.pet.regist;
+package com.animal.scale.hodoo.activity.pet.regist.second;
 
 import android.Manifest;
 import android.app.Activity;
@@ -24,7 +24,7 @@ import android.widget.Toast;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
-import com.animal.scale.hodoo.databinding.ActivityBasicInformaitonRegistBinding;
+import com.animal.scale.hodoo.databinding.ActivitySecondBasicInformaitonRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.ResultMessage;
@@ -41,11 +41,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BasicInformationRegistActivity extends BaseActivity<BasicInformationRegistActivity> {
+public class BasicSecondInformationRegistActivity extends BaseActivity<BasicSecondInformationRegistActivity> {
 
     public DatePickerDialog picker;
 
-    ActivityBasicInformaitonRegistBinding binding;
+    ActivitySecondBasicInformaitonRegistBinding binding;
 
     private static final int CAMERA_REQUEST = 1888;
 
@@ -61,16 +61,24 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     public static boolean REQUEST_MODE = false;
 
+    public int petId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_basic_informaiton_regist);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_second_basic_informaiton_regist);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.basin_info_regist_title)));
-        progressDialog = new ProgressDialog(BasicInformationRegistActivity.this);
-        setNavi();
         super.setToolbarColor();
-        Call<PetBasicInfo> result = NetRetrofit.getInstance().getPetBasicInfoService().getBasicInfo(mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID));
+        Intent intent = getIntent();
+        petId = intent.getIntExtra("petId", 0);
+        progressDialog = new ProgressDialog(BasicSecondInformationRegistActivity.this);
+        setNavi();
+        setInitView();
+    }
+
+    private void setInitView() {
+        Call<PetBasicInfo> result = NetRetrofit.getInstance().getPetBasicInfoService().getBasicInfoForPetId(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID), petId);
         result.enqueue(new Callback<PetBasicInfo>() {
             @Override
             public void onResponse(Call<PetBasicInfo> call, Response<PetBasicInfo> response) {
@@ -86,7 +94,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                         }else{
                             binding.switch1.setChecked(false);
                         }
-                        Picasso.with(BasicInformationRegistActivity.this)
+                        Picasso.with(BasicSecondInformationRegistActivity.this)
                                 .load("http://121.183.234.14:7171/hodoo/" + response.body().getProfileFilePath())
                                 .into(binding.profile);
                         if(response.body().getSex().matches("MALE")){
@@ -111,10 +119,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    Toast.makeText(BasicInformationRegistActivity.this, "YES", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BasicSecondInformationRegistActivity.this, "YES", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("YES");
                 }else{
-                    Toast.makeText(BasicInformationRegistActivity.this, "NO", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BasicSecondInformationRegistActivity.this, "NO", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("NO");
                 }
             }
@@ -132,7 +140,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DiseaseSecondInformationRegistActivity.class);
+                intent.putExtra("petId", petId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
@@ -141,7 +150,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PhysiqueSecondInformationRegistActivity.class);
+                intent.putExtra("petId", petId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
@@ -150,7 +160,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         binding.addPetNavigation.weightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
+                Intent intent = new Intent(getApplicationContext(), WeightSecondCheckActivity.class);
+                intent.putExtra("petId", petId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
@@ -159,12 +170,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     @Override
-    protected BaseActivity<BasicInformationRegistActivity> getActivityClass() {
-        return BasicInformationRegistActivity.this;
+    protected BaseActivity<BasicSecondInformationRegistActivity> getActivityClass() {
+        return BasicSecondInformationRegistActivity.this;
     }
 
     public void onClickMaleBtn(View view) {
-        Toast.makeText(BasicInformationRegistActivity.this, "MALE", Toast.LENGTH_SHORT).show();
+        Toast.makeText(BasicSecondInformationRegistActivity.this, "MALE", Toast.LENGTH_SHORT).show();
         binding.maleBtn.setBackgroundResource(R.drawable.add_pet_middle_click_btn_blue_252_68);
         binding.femaleBtn.setBackgroundResource(R.drawable.add_pet_middle_252_68);
         binding.femaleBtn.setPressed(false);
@@ -172,7 +183,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void onClickFemaleBtn(View view) {
-        Toast.makeText(BasicInformationRegistActivity.this, "FEMALE", Toast.LENGTH_SHORT).show();
+        Toast.makeText(BasicSecondInformationRegistActivity.this, "FEMALE", Toast.LENGTH_SHORT).show();
         binding.maleBtn.setBackgroundResource(R.drawable.add_pet_middle_btn_252_68);
         binding.femaleBtn.setBackgroundResource(R.drawable.add_pet_middle_click_btn_pink_252_68);
         binding.getInfo().setSex("FEMALE");
@@ -193,7 +204,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
                 int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
                 if (permissionCamera == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+                    ActivityCompat.requestPermissions(BasicSecondInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
                 } else {
                     Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
                     openCamera();
@@ -223,7 +234,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         int month = cldr.get(Calendar.MONTH);
         int year = cldr.get(Calendar.YEAR);
         // date picker dialog
-        picker = new DatePickerDialog(BasicInformationRegistActivity.this,
+        picker = new DatePickerDialog(BasicSecondInformationRegistActivity.this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -296,14 +307,16 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         protected void onPostExecute(String result) {
             Gson gson = new Gson();
             ResultMessageGroup resultMessageGroup = gson.fromJson(result, ResultMessageGroup.class);
+            Integer petId = gson.fromJson(String.valueOf(resultMessageGroup.getDomain()), Integer.class);
             if(resultMessageGroup.getResultMessage().toString().matches(String.valueOf(ResultMessage.SUCCESS))){
                 //페이지 이동
-                Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DiseaseSecondInformationRegistActivity.class);
+                intent.putExtra("petId", petId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }else{
-                Toast.makeText(BasicInformationRegistActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BasicSecondInformationRegistActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
             }
             progressDialog.dismiss();
             super.onPostExecute(result);

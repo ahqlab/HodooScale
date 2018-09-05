@@ -44,7 +44,9 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     public AlertDialog.Builder showBasicOneBtnPopup(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivityClass());
         builder.setTitle(title);
-        builder.setMessage(message);
+        if(message != null){
+            builder.setMessage(message);
+        }
         return builder;
     }
 

@@ -18,7 +18,6 @@ import android.view.animation.AnimationUtils;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.weight.statistics.WeightStatisticsActivity;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
-import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
@@ -27,7 +26,6 @@ import com.animal.scale.hodoo.service.NetRetrofit;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import im.dacer.androidcharts.LineView;
 import noman.weekcalendar.WeekCalendar;
@@ -70,7 +68,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     private void setCurrentKg() {
-        Call<Float> call = NetRetrofit.getInstance().getRealTimeWeightService().getLatelyData(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
+/*        Call<Float> call = NetRetrofit.getInstance().getRealTimeWeightService().getLatelyData(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
         new AbstractAsyncTask<Float>() {
             @Override
             protected void doPostExecute(Float aFloat) {
@@ -79,12 +77,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             @Override
             protected void doPreExecute() {
             }
-        }.execute(call);
+        }.execute(call);*/
     }
 
-    private void setBcsMessage() {
+    public void setBcsMessage(int petId) {
         mSharedPrefManager = SharedPrefManager.getInstance(getActivity());
-        Call<String> call = NetRetrofit.getInstance().getPetWeightInfoService().getMyBcs(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
+        Call<String> call = NetRetrofit.getInstance().getPetWeightInfoService().getMyBcs(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID), petId);
         new AbstractAsyncTask<String>() {
             @Override
             protected void doPostExecute(String str) {
@@ -138,7 +136,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     public void setServerData(){
-        Call<List<Float>> call = NetRetrofit.getInstance().getRealTimeWeightService().getRealTimeList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
+       /* Call<List<Float>> call = NetRetrofit.getInstance().getRealTimeWeightService().getRealTimeList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
         new AbstractAsyncTaskOfList<Float>() {
             @Override
             protected void doPostExecute(List<Float> datas) {
@@ -155,14 +153,14 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             @Override
             protected void doPreExecute() {
             }
-        }.execute(call);
+        }.execute(call);*/
     }
 
     private void init() {
 
         initLineView();
-        setBcsMessage();
-        setCurrentKg();
+       // setBcsMessage();
+        //setCurrentKg();
         setServerData();
 
        /* binding.weekCalendar.today;

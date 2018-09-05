@@ -7,7 +7,7 @@
     <data>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity" />
+            type="com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity" />
 
         <variable
             name="activityInfo"
@@ -15,7 +15,7 @@
 
         <variable
             name="domain"
-            type="com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccount" />
+            type="com.animal.scale.hodoo.activity.setting.user.account.UserAccount" />
     </data>
 
     <RelativeLayout
@@ -23,14 +23,14 @@
         android:layout_height="match_parent"
         android:background="@color/hodoo_background_color"
         android:gravity="center_horizontal"
-        tools:context=".activity.setting.pet.accounts.PetAccountsActivity">
+        tools:context=".activity.setting.user.account.UserAccountActivity">
 
         <include
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}" />
 
         <GridView
-            android:id="@+id/petGridView"
+            android:id="@+id/userGridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/my_toolbar"
@@ -41,5 +41,6 @@
             android:numColumns="auto_fit"
             android:verticalSpacing="10dp">
         </GridView>
+
     </RelativeLayout>
 </layout>

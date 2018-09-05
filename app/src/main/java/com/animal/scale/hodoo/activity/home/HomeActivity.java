@@ -31,6 +31,7 @@ import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityHomeBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
 import java.util.List;
@@ -77,6 +78,35 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         });
     }
 
+    private void setSpinner() {
+        Call<List<PetBasicInfo>> call = NetRetrofit.getInstance().getPetBasicInfoService().getMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
+        new AbstractAsyncTaskOfList<PetBasicInfo>() {
+            @Override
+            protected void doPostExecute(List<PetBasicInfo> data) {
+                if(data.size() > 0){
+                    adapterSpinner = new AdapterSpinner(getApplicationContext(), data);
+                    binding.appBarNavigation.userSelect.setAdapter(adapterSpinner);
+                    binding.appBarNavigation.userSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @SuppressLint("ResourceAsColor")
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            PetBasicInfo info = (PetBasicInfo) parent.getItemAtPosition(position);
+                            showToast("info : " + info.getPetName());
+                            WeightFragment tf = (WeightFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                            tf.setBcsMessage(info.getId());
+                        }
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }
+            }
+            @Override
+            protected void doPreExecute() {
+            }
+        }.execute(call);
+    }
+
+
     @Override
     protected BaseActivity<HomeActivity> getActivityClass() {
         return HomeActivity.this;
@@ -89,28 +119,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             finish();
     }
 
-    private void setSpinner() {
-        Call<List<String>> call = NetRetrofit.getInstance().getPetBasicInfoService().getMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
-        new AbstractAsyncTaskOfList<String>() {
-            @Override
-            protected void doPostExecute(List<String> data) {
-                if(data.size() > 0){
-                    adapterSpinner = new AdapterSpinner(getApplicationContext(), data);
-                    binding.appBarNavigation.userSelect.setAdapter(adapterSpinner);
-                    binding.appBarNavigation.userSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @SuppressLint("ResourceAsColor")
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        }
-                        public void onNothingSelected(AdapterView<?> parent) {
-                        }
-                    });
-                }
-            }
-            @Override
-            protected void doPreExecute() {
-            }
-        }.execute(call);
-    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

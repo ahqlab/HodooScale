@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.MyAccountActivity;
 import com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity;
+import com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfSetting;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivitySettingListBinding;
@@ -26,6 +27,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     SettingList.Presenter presenter;
 
     public final static int MY_CAAOUNT = 0;
+    public final static int USER_MANAGEMENT = 5;
     public final static int PET_MANAGEMENT = 6;
 
     @Override
@@ -56,12 +58,14 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                     Intent intent = new Intent(getApplicationContext(), MyAccountActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                    finish();
                 }else if(position == PET_MANAGEMENT){
                     Intent intent = new Intent(getApplicationContext(), PetAccountsActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                    finish();
+                }else if(position == USER_MANAGEMENT){
+                    Intent intent = new Intent(getApplicationContext(), UserAccountActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 }
             }
         });

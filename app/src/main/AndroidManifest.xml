@@ -56,7 +56,13 @@
         <activity android:name=".activity.setting.account.MyAccountActivity" />
         <activity android:name=".activity.setting.account.change.password.ChangePasswordActivity" />
         <activity android:name=".activity.home.weight.statistics.WeightStatisticsActivity" />
-        <activity android:name=".activity.setting.pet.accounts.PetAccountsActivity"></activity>
+        <activity android:name=".activity.setting.pet.accounts.PetAccountsActivity" />
+        <activity android:name=".activity.pet.regist.second.BasicSecondInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.second.DiseaseSecondInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.second.PhysiqueSecondInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.second.WeightSecondCheckActivity" />
+        <activity android:name=".activity.setting.user.account.UserAccountActivity" />
+        <activity android:name=".activity.setting.device.setting.DeviceSettingActivity"></activity>
     </application>
 
 </manifest>

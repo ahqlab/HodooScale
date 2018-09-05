@@ -18,7 +18,7 @@ public interface PetWeightInfoService {
 
 
     @POST("pet/weight/my/bcs")
-    Call<String> getMyBcs(@Query("groupId") String groupId);
+    Call<String> getMyBcs(@Query("groupId") String groupId, @Query("petId") int petId);
 
 
 }

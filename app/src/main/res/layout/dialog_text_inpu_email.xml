@@ -6,16 +6,15 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <AutoCompleteTextView
             android:id="@+id/input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/wifi_connection_popup_password_hint"
+            android:hint="@string/plus_friend_popup_email_hint"
             android:imeOptions="actionDone"
-            android:inputType="textPassword" />
+            android:inputType="textEmailAddress" />
 
     </android.support.design.widget.TextInputLayout>
 </FrameLayout>

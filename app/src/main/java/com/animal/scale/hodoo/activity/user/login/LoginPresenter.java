@@ -5,6 +5,8 @@ import android.content.Context;
 import com.animal.scale.hodoo.domain.Groups;
 import com.animal.scale.hodoo.domain.User;
 
+import java.util.List;
+
 public class LoginPresenter implements Login.Presenter {
 
     Login.View loginView;
@@ -56,7 +58,6 @@ public class LoginPresenter implements Login.Presenter {
         }
     }
 
-
     @Override
     public void saveUserSharedValue(User user) {
         loginModel.saveUserSharedValue(user);
@@ -66,14 +67,15 @@ public class LoginPresenter implements Login.Presenter {
     public void isRegistPetCheck() {
         loginModel.isRegistPetCheck(new LoginModel.RegistCheckListener() {
             @Override
-            public void doPostExecute(Groups groups) {
+            public void doPostExecute(List<Groups> groups) {
                 loginView.setProgress(false);
-                if (groups != null) {
+                if(groups.size() > 0){
                     loginView.goHomeActivity();
-                } else {
+                }else{
                     loginView.goRegistActivity();
                 }
             }
+
             @Override
             public void doPreExecute() {
                 loginView.setProgress(true);

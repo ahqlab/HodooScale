@@ -168,7 +168,7 @@
                         android:text="계정생성"
                         android:onClick="@{activity::onClickCreateAccountBtn}"
                         android:textColor="@color/hodoo_midle_pink"
-                        android:textSize="11sp" />
+                        android:textSize="11dp" />
 
                     <TextView
                         android:layout_width="wrap_content"

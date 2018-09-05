@@ -46,7 +46,6 @@ public class PetAccountModel {
         data.add(0, info);
     }
 
-
     public interface asyncTaskListner {
         void doPostExecute(List<PetBasicInfo> data);
         void doPreExecute();
