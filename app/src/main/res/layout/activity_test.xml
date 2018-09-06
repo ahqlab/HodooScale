@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.test.TestActivity" />
+
+        <variable
+            name="activityInfo"
+            type="com.animal.scale.hodoo.domain.ActivityInfo" />
+
+        <variable
+            name="user"
+            type="com.animal.scale.hodoo.domain.User" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/find_password_bg"
+        android:gravity="center_horizontal"
+        tools:context=".activity.test.TestActivity">
+
+        <include
+            layout="@layout/common_toolbar"
+            bind:activityInfo="@{activityInfo}" />
+
+        <TextView
+            android:layout_below="@+id/my_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@={user.nickname}"/>
+
+
+    </RelativeLayout>
+
+
+</layout>

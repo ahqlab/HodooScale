@@ -51,6 +51,4 @@ public class User implements Serializable{
     @SerializedName("createDate")
     @Expose
     private String createDate;
-
-
 }

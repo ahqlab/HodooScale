@@ -113,10 +113,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     }
 
     private void onClickSettingBtn(View view){
-            Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-            finish();
+        Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        finish();
     }
 
 

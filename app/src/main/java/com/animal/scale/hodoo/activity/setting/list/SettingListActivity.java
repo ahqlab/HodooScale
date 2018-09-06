@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.MyAccountActivity;
+import com.animal.scale.hodoo.activity.setting.device.setting.DeviceSettingActivity;
 import com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity;
 import com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfSetting;
@@ -27,6 +28,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     SettingList.Presenter presenter;
 
     public final static int MY_CAAOUNT = 0;
+    public final static int DEVICE_SETTING = 4;
     public final static int USER_MANAGEMENT = 5;
     public final static int PET_MANAGEMENT = 6;
 
@@ -58,6 +60,9 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                     Intent intent = new Intent(getApplicationContext(), MyAccountActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+                }else if(position == DEVICE_SETTING){
+                    Intent intent = new Intent(getApplicationContext(), DeviceSettingActivity.class);
+                    startActivity(intent);
                 }else if(position == PET_MANAGEMENT){
                     Intent intent = new Intent(getApplicationContext(), PetAccountsActivity.class);
                     startActivity(intent);

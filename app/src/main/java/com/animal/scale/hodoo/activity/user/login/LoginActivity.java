@@ -107,4 +107,8 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
+
+    public void onClickForgotPasswordBtn(View view){
+
+    }
 }
