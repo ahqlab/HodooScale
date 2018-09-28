@@ -41,5 +41,4 @@ public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTas
         super.onPostExecute(d);
     }
 
-
 }

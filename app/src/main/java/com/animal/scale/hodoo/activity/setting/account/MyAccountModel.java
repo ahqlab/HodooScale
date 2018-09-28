@@ -21,8 +21,8 @@ public class MyAccountModel {
 
     public List<SettingMenu> getSettingList() {
         final List<SettingMenu> settingMenus = new ArrayList<SettingMenu>();
-        settingMenus.add(new SettingMenu("비밀번호 변경"));
         settingMenus.add(new SettingMenu("로그아웃"));
+        settingMenus.add(new SettingMenu("사용자 정보 변경"));
         return settingMenus;
     }
 

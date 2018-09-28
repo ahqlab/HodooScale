@@ -6,11 +6,15 @@
     <data>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.pet.regist.DiseaseInformationRegistActivity" />
+            type="com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity" />
 
         <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
+
+        <variable
+            name="domain"
+            type="com.animal.scale.hodoo.domain.PetChronicDisease" />
     </data>
 
     <LinearLayout
@@ -18,7 +22,7 @@
         android:layout_height="match_parent"
         android:background="@color/hodoo_background_color"
         android:orientation="vertical"
-        tools:context=".activity.pet.regist.DiseaseInformationRegistActivity">
+        tools:context=".activity.pet.regist.disease.DiseaseInformationRegistActivity">
 
         <include
             layout="@layout/common_toolbar"

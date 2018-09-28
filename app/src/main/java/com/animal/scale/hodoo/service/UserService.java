@@ -20,4 +20,5 @@ public interface UserService{
 
     @POST("user/get/group/member")
     Call<List<User>> getGroupMemner(@Query("groupId") String groupId);
+
 }

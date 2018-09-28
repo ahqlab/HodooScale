@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
@@ -24,10 +25,10 @@ public class PetAccountModel {
     }
 
     public void getPetData(final asyncTaskListner asyncTaskListner) {
-        Call<List<PetBasicInfo>> call = NetRetrofit.getInstance().getPetBasicInfoService().getMyRegisteredPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
-        new AbstractAsyncTaskOfList<PetBasicInfo>() {
+        Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().aboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+        new AbstractAsyncTaskOfList<PetAllInfos>() {
             @Override
-            protected void doPostExecute(List<PetBasicInfo> data) {
+            protected void doPostExecute(List<PetAllInfos> data) {
                 if(data.size() > 0){
                     asyncTaskListner.doPostExecute(data);
                 }
@@ -39,15 +40,17 @@ public class PetAccountModel {
         }.execute(call);
     }
 
-    public void addRegistBtn(List<PetBasicInfo> data) {
+    public void addRegistBtn(List<PetAllInfos> data) {
+        PetAllInfos  infos = new PetAllInfos();
         PetBasicInfo info = new PetBasicInfo();
         info.setPetName("펫 추가");
         info.setProfileFilePath("add");
-        data.add(0, info);
+        infos.setPetBasicInfo(info);
+        data.add(0, infos);
     }
 
     public interface asyncTaskListner {
-        void doPostExecute(List<PetBasicInfo> data);
+        void doPostExecute(List<PetAllInfos> data);
         void doPreExecute();
     }
 }

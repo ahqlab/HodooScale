@@ -8,7 +8,7 @@
     <data>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.user.signup.TermsOfServiceActivity"/>
+            type="com.animal.scale.hodoo.activity.user.agree.TermsOfServiceActivity"/>
         <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
@@ -20,7 +20,7 @@
         android:background="@color/hodoo_background_color"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".activity.user.TermsOfServiceActivity">
+        tools:context=".activity.user.agree.TermsOfServiceActivity">
 
         <include
             layout="@layout/common_toolbar"

@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.databinding.PetAccountGridBinding;
-import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.PetAllInfos;
 
 import java.util.List;
 
@@ -18,11 +18,11 @@ public class PetGridAdapter extends BaseAdapter{
 
     Activity activity;
     private LayoutInflater inflater;
-    private List<PetBasicInfo> data;
+    private List<PetAllInfos> data;
 
     PetAccountGridBinding binding;
 
-    public PetGridAdapter(Activity activity, List<PetBasicInfo> data) {
+    public PetGridAdapter(Activity activity, List<PetAllInfos> data) {
         this.activity = activity;
         this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
@@ -48,11 +48,11 @@ public class PetGridAdapter extends BaseAdapter{
         if (convertView == null) {
             convertView = LayoutInflater.from(activity).inflate(R.layout.pet_account_grid, null);
             binding = DataBindingUtil.bind(convertView);
-            binding.setDomain(data.get(position));
+            binding.setDomain(data.get(position).getPetBasicInfo());
             convertView.setTag(binding);
         } else {
             binding = (PetAccountGridBinding) convertView.getTag();
-            binding.setDomain(data.get(position));
+            binding.setDomain(data.get(position).getPetBasicInfo());
         }
         return binding.getRoot();
     }

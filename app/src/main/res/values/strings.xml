@@ -59,6 +59,7 @@
     <string name="weight_check_title">체중상태 체크</string>
     <string name="weight_title">체중관리</string>
     <string name="temp_title">체온관리</string>
+    <string name="meal_title">식사관리</string>
     <string name="wifi_list_title">와이파이 설정</string>
     <string name="find_hodoo_title">스캐닝</string>
 
@@ -115,7 +116,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_login2">Sign in</string>
 
-
     <!-- ChangePasswordActivity -->
     <string name="explanation_of_password_change">주기적인 비밀번호 변경은 개인정보를 안전하게 보호하고, 개인정보도용 피해를 예방합니다.</string>
     <string name="current_password">현재 비밀번호</string>
@@ -125,13 +125,32 @@
     <string name="new_password_hint">새비밀번호 입력</string>
     <string name="confirm">확인</string>
 
-
     <!-- UserAccountActivity -->
     <string name="plus_friend_popup_email_hint">이메일을 입력하세요.</string>
-
     <!-- DeviceSettingActivity -->
     <string name="device_setting_activity_title">기기변경</string>
-
     <!-- SendCertificationNumberActivity-->
     <string name="send_btn_text">인증번호 전송</string>
+    <!-- ConfirmCertificationNumberActivity-->
+    <string name="cofirm_btn_text">확인</string>
+    <!-- CreateNewPasswordActivity -->
+    <string name="compleate_btn_text">완료</string>
+
+    <!-- DeviceRegistActivity -->
+    <string name="title_device_regist">기기등록</string>
+    <string name="message_device_regist1">배변판관 연결되어 있지 않습니다.</string>
+    <string name="message_device_regist2">배변판을 등록해 주세요.</string>
+
+    <!-- ChangeUserInfoActivity -->
+    <string name="change_user_info_title">사용자 정보 변경</string>
+    <string name="change_user_info_email">이메일</string>
+    <string name="change_user_info_password">비밀번호</string>
+    <string name="change_user_info_nickname">닉네임</string>
+    <string name="change_user_info_location">거주지역</string>
+    <string name="change_user_info_password_btn">비밀번호변경 > </string>
+
+    <!-- MealSearchActivity -->
+    <string name="title_meal_search">식사 검색</string>
+    <string name="tip">Tip</string>
+
 </resources>

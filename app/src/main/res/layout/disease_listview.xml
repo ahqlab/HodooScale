@@ -7,7 +7,7 @@
     <data>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.pet.regist.DiseaseInformationRegistActivity" />
+            type="com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity" />
 
         <variable
             name="disease"

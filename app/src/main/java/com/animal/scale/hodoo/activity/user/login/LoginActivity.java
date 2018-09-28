@@ -8,14 +8,19 @@ import android.text.Editable;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
+import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
+import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
+import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
+import com.animal.scale.hodoo.activity.user.agree.TermsOfServiceActivity;
+import com.animal.scale.hodoo.activity.user.reset.password.send.SendCertificationNumberActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityLoginBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.User;
-import com.animal.scale.hodoo.activity.home.HomeActivity;
-import com.animal.scale.hodoo.activity.pet.regist.BasicInformationRegistActivity;
-import com.animal.scale.hodoo.activity.user.signup.TermsOfServiceActivity;
 import com.animal.scale.hodoo.util.MyOwnBindingUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
 
@@ -32,7 +37,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo("LOGIN"));
-        binding.setUser(new User(mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_ID)));
+        binding.setUser(new User(mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL)));
         binding.setErrorMsg(getString(R.string.vailed_email));
         binding.setEmailRule(new MyOwnBindingUtil.StringRule() {
             @Override
@@ -85,8 +90,44 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     }
 
     @Override
-    public void goRegistActivity() {
+    public void goDeviceRegistActivity() {
+        Intent intent = new Intent(getApplicationContext(), DeviceRegistActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        finish();
+    }
+
+    @Override
+    public void goPetRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+        intent.putExtra("petIdx", petIdx);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        finish();
+    }
+
+    @Override
+    public void goDiseasesRegistActivity(int petIdx) {
+        Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+        intent.putExtra("petIdx", petIdx);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        finish();
+    }
+
+    @Override
+    public void goPhysicalRegistActivity(int petIdx) {
+        Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
+        intent.putExtra("petIdx", petIdx);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        finish();
+    }
+
+    @Override
+    public void goWeightRegistActivity(int petIdx) {
+        Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
+        intent.putExtra("petIdx", petIdx);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
@@ -100,6 +141,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         finish();
     }
 
+
     @Override
     public void goTermsOfServiceActivity() {
         Intent intent = new Intent(getApplicationContext(), TermsOfServiceActivity.class);
@@ -108,7 +150,12 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         finish();
     }
 
-    public void onClickForgotPasswordBtn(View view){
 
+    public void onClickForgotPasswordBtn(View view) {
+        Intent intent = new Intent(getApplicationContext(), SendCertificationNumberActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
+
+
 }

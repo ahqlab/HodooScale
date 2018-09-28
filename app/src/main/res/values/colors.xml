@@ -16,5 +16,6 @@
     <color name="hodoo_text_gray">#595959</color>
     <color name="hodoo_text_light_gray">#c3c3c3</color>
     <color name="hodoo_gray">#e5e5e5</color>
+    <color name="hodoo_deep_gray">#19455b63</color>
 
 </resources>

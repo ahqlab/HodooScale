@@ -8,17 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.PetAllInfos;
 
 import java.util.List;
 
 public class AdapterSpinner extends BaseAdapter {
     Context context;
-    List<PetBasicInfo> data;
+    List<PetAllInfos> data;
     LayoutInflater inflater;
 
 
-    public AdapterSpinner(Context context, List<PetBasicInfo> data) {
+    public AdapterSpinner(Context context, List<PetAllInfos> data) {
         this.context = context;
         this.data = data;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,7 +39,7 @@ public class AdapterSpinner extends BaseAdapter {
 
         if (data != null) {
             //데이터세팅
-            String text = data.get(position).getPetName();
+            String text = data.get(position).getPetBasicInfo().getPetName();
             ((TextView) convertView.findViewById(R.id.spinnerText)).setText(text);
         }
 
@@ -52,7 +52,7 @@ public class AdapterSpinner extends BaseAdapter {
             convertView = inflater.inflate(R.layout.my_spinner_content_style, parent, false);
         }
         //데이터세팅
-        String text = data.get(position).getPetName();
+        String text = data.get(position).getPetBasicInfo().getPetName();
         ((TextView) convertView.findViewById(R.id.spinnerText)).setText(text);
         return convertView;
     }
