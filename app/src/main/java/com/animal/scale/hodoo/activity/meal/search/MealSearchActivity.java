@@ -87,6 +87,7 @@ public class MealSearchActivity extends BaseActivity<MealSearchActivity> impleme
         Intent intent = new Intent(getApplicationContext(), MealTestActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        /*ssssssssss*/
         finish();
     }
 }
