@@ -2,7 +2,8 @@ package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
 
-import com.animal.scale.hodoo.domain.Groups;
+import com.animal.scale.hodoo.domain.Device;
+import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.User;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class LoginPresenter implements Login.Presenter {
                 loginView.setProgress(false);
                 if(user != null){
                     saveUserSharedValue(user);
-                    isRegistPetCheck();
+                    checkRegistrationStatus();
                 }else{
                     loginView.showPopup("비밀번호가 맞지않습니다.");
                 }
@@ -64,15 +65,45 @@ public class LoginPresenter implements Login.Presenter {
     }
 
     @Override
-    public void isRegistPetCheck() {
-        loginModel.isRegistPetCheck(new LoginModel.RegistCheckListener() {
+    public void checkRegistrationStatus() {
+
+        loginModel.confirmDeviceRegistration(new LoginModel.DeviceRegistrationListener() {
             @Override
-            public void doPostExecute(List<Groups> groups) {
-                loginView.setProgress(false);
-                if(groups.size() > 0){
-                    loginView.goHomeActivity();
+            public void doPostExecute(List<Device> devices) {
+                if(!devices.isEmpty()){
+                    //디바이스 등록됨.
+                    loginModel.confirmPetRegistration(new LoginModel.PetRegistrationListener() {
+                        @Override
+                        public void doPostExecute(List<Pet> pets) {
+                            if(!pets.isEmpty()){
+                                //PET 등록됨.
+                                if(pets.size() == 1){
+                                    if(pets.get(0).getBasic() == 0){
+                                        loginView.goPetRegistActivity(pets.get(0).getPetIdx());
+                                    }else if(pets.get(0).getDisease() == 0){
+                                        loginView.goDiseasesRegistActivity(pets.get(0).getPetIdx());
+                                    }else if(pets.get(0).getPhysical() == 0){
+                                        loginView.goPhysicalRegistActivity(pets.get(0).getPetIdx());
+                                    }else if(pets.get(0).getWeight() == 0){
+                                        loginView.goWeightRegistActivity(pets.get(0).getPetIdx());
+                                    }else{
+                                        loginView.goHomeActivity();
+                                    }
+                                }else{
+                                    loginView.goHomeActivity();
+                                }
+                            }else{
+                                //PET 등록페이지 이동
+                                loginView.goPetRegistActivity(0);
+                            }
+                        }
+                        @Override
+                        public void doPreExecute() {
+                        }
+                    });
                 }else{
-                    loginView.goRegistActivity();
+                    //디바이스 없음
+                    loginView.goDeviceRegistActivity();
                 }
             }
 

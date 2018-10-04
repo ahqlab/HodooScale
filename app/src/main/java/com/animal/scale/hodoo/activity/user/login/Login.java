@@ -12,7 +12,15 @@ public interface Login {
 
         public void setProgress(Boolean play);
 
-        public void goRegistActivity();
+        public void goDeviceRegistActivity();
+
+        public void goPetRegistActivity(int petIdx);
+
+        public void goDiseasesRegistActivity(int petIdx);
+
+        public void goPhysicalRegistActivity(int petIdx);
+
+        public void goWeightRegistActivity(int petIdx);
 
         public void goHomeActivity();
 
@@ -30,6 +38,6 @@ public interface Login {
 
         public void saveUserSharedValue(User user);
 
-        public void isRegistPetCheck();
+        public void checkRegistrationStatus();
     }
 }

@@ -8,7 +8,7 @@
 
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.home.weight.statistics.WeightStatisticsActivity" />
+            type="com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsActivity" />
         <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:background="@color/hodoo_background_color"
         android:gravity="center_horizontal"
-        tools:context=".activity.home.weight.statistics.WeightStatisticsActivity">
+        tools:context=".activity.home.fragment.weight.statistics.WeightStatisticsActivity">
 
         <include
             layout="@layout/common_toolbar"

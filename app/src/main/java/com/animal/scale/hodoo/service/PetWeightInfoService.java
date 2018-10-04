@@ -10,15 +10,18 @@ import retrofit2.http.Query;
 public interface PetWeightInfoService {
 
     @POST("pet/weight/get")
-    Call<PetWeightInfo> get(@Query("petId") int petId);
+    Call<PetWeightInfo> getPetWeightInformation(@Query("groupCode") String groupId, @Query("petIdx") int petId);
 
+    @POST("pet/weight/delete")
+    Call<Integer> delete(@Query("petIdx") int petIdx, @Query("id") int id);
 
     @POST("pet/weight/regist")
-    Call<Integer> regist(@Body PetWeightInfo petWeightInfo);
+    Call<Integer> regist(@Query("petIdx") int petIdx, @Body PetWeightInfo petWeightInfo);
+
+    @POST("pet/weight/bcs")
+    Call<PetWeightInfo> getBcs(@Query("basicIdx") int basicIdx);
 
 
-    @POST("pet/weight/my/bcs")
-    Call<String> getMyBcs(@Query("groupId") String groupId, @Query("petId") int petId);
 
 
 }

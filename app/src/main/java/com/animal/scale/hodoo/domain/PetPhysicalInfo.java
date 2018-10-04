@@ -1,14 +1,14 @@
 package com.animal.scale.hodoo.domain;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class PetPhysicalInfo{
+public class PetPhysicalInfo implements Serializable{
 	
 	private int id;
-	
-	private int petId;
-	
+
 	private String width;
 	
 	private String height;
@@ -16,8 +16,4 @@ public class PetPhysicalInfo{
 	private String weight;
 	
 	private String createDate;
-
-	public PetPhysicalInfo(int petId) {
-		this.petId = petId;
-	}
 }

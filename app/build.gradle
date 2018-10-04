@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "com.animal.scale.hodoo"
         //룰러 때문에 14 에서 19로 내림
@@ -43,36 +43,41 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //noinspection GradleCompatible
-    compile 'com.google.firebase:firebase-core:12.0.1'
-    compile 'com.google.firebase:firebase-messaging:12.0.1'
+    implementation 'com.google.firebase:firebase-core:12.0.1'
+    implementation 'com.google.firebase:firebase-messaging:12.0.1'
     // JSON Parsing
-    compile 'com.squareup.retrofit2:converter-jackson:2.3.0'
-    compile 'com.google.code.gson:gson:2.6.1'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.3.0'
+    implementation 'com.google.code.gson:gson:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
     //BindView
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //DWRuler
-    compile 'com.github.dwfox:DWRulerView:1.1.0'
+    implementation 'com.github.dwfox:DWRulerView:1.1.0'
     //Lombok
     compileOnly "org.projectlombok:lombok:1.16.18"
     annotationProcessor "org.projectlombok:lombok:1.16.18"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     //Circle progress
-    compile 'com.github.jakob-grabner:Circle-Progress-View:v1.3'
-    compile 'im.dacer:AndroidCharts:1.0.4'
+    implementation 'com.github.jakob-grabner:Circle-Progress-View:v1.3'
+    implementation 'im.dacer:AndroidCharts:1.0.4'
     //Retrifit
-    compile 'com.squareup.retrofit2:retrofit:2.1.0' // Retrofit
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3' // Gson 변환을 위한 converter
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0' // Retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta3' // Gson 변환을 위한 converter
     //Curcle ImageVIew
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //PICASSO
-    compile 'com.squareup.picasso:picasso:2.3.3'
+    implementation 'com.squareup.picasso:picasso:2.3.3'
     //MP CHART
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-    compile project(':weekcalendar2')
-    compile project(':library')
+    //JODA
+    implementation 'joda-time:joda-time:2.9.1'
+    //DATA BINDING BUG
+    annotationProcessor "androidx.databinding:databinding-compiler:3.2.0-alpha16"
+
+    implementation project(':weekcalendar2')
+    implementation project(':library')
 
 
 }

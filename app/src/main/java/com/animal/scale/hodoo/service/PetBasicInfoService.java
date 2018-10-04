@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.service;
 
+import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 
 import java.util.List;
@@ -17,8 +18,13 @@ public interface PetBasicInfoService {
     Call<PetBasicInfo> getBasicInfoForPetId(@Query("groupId") String groupId, @Query("id") int id);
 
     @POST("pet/my/list")
-    Call<List<PetBasicInfo>> getMyPetList(@Query("groupId") String groupId);
+    Call<List<PetBasicInfo>> getMyPetList(@Query("groupCode") String groupCode);
 
     @POST("pet/my/registered/list")
     Call<List<PetBasicInfo>> getMyRegisteredPetList(@Query("groupId") String groupId);
+
+
+    @POST("pet/about/my/pet/list")
+    Call<List<PetAllInfos>> aboutMyPetList(@Query("groupCode") String groupCode);
 }
+

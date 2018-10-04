@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.meal.list.FeedListActivity" />
+
+        <variable
+            name="domain"
+            type="com.animal.scale.hodoo.activity.meal.search.AutoCompleateFeed" />
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/setting_listview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/setting_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:text="@={domain.name}"
+            android:textColor="@color/hodoo_text_gray" />
+
+    </LinearLayout>
+
+</layout>
+
+
+

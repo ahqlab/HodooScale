@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.meal.regist.MealRegistrationActivity" />
+
+        <variable
+            name="activityInfo"
+            type="com.animal.scale.hodoo.domain.ActivityInfo" />
+
+        <variable
+            name="meal"
+            type="com.animal.scale.hodoo.domain.Feed" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hodoo_background_color"
+        android:gravity="center_horizontal"
+        tools:context=".activity.meal.regist.MealRegistrationActivity">
+
+        <include
+            layout="@layout/common_toolbar"
+            bind:activityInfo="@{activityInfo}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <SeekBar
+                android:id="@+id/seekBar_luminosite"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:progress="1"
+                android:progressDrawable="@drawable/meal_reg_seekbar_style"
+                android:thumb="@drawable/meal_reg_custom_thumb"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

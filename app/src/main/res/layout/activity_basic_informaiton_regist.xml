@@ -10,23 +10,25 @@
             type="com.animal.scale.hodoo.domain.PetBasicInfo"/>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.pet.regist.BasicInformationRegistActivity"/>
+            type="com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity"/>
         <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".activity.pet.regist.BasicInformationRegistActivity">
+        android:background="@color/hodoo_background_color"
+        android:gravity="center_horizontal"
+        tools:context=".activity.pet.regist.basic.BasicInformationRegistActivity">
 
         <include
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}" />
 
         <LinearLayout
+            android:layout_below="@+id/my_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -241,5 +243,14 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+        <!-- Login progress -->
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+    </RelativeLayout>
 </layout>

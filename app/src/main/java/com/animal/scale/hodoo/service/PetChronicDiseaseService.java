@@ -12,13 +12,17 @@ import retrofit2.http.Query;
 public interface PetChronicDiseaseService {
 
     @POST("chronic/desease/delete")
-    Call<Integer> delete(@Query("petId") int petId);
-
-
-    @POST("chronic/desease/regist")
-    Call<Integer> insert(@Body PetChronicDisease petChronicDisease);
+    Call<Integer> delete(@Query("petIdx") int petIdx, @Query("diseaseIdx") int diseaseIdx);
 
 
     @POST("chronic/desease/list")
-    Call<List<PetChronicDisease>> list(@Query("petId") int petId);
+    Call<List<PetChronicDisease>> list(@Query("groupId") int groupId);
+
+
+    @POST("chronic/desease/get")
+    Call<PetChronicDisease> getDiseaseformation(@Query("groupCode") String groupCode, @Query("petIdx") int petIdx);
+
+
+    @POST("chronic/desease/regist")
+    Call<Integer> registDiseaseformation(@Body PetChronicDisease domain,  @Query("petIdx") int petIdx);
 }

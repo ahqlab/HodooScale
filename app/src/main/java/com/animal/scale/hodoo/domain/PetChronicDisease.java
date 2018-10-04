@@ -1,21 +1,20 @@
 package com.animal.scale.hodoo.domain;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class PetChronicDisease {
+public class PetChronicDisease implements Serializable{
 
     public PetChronicDisease() {
     }
 
-    public PetChronicDisease(int petId, String diseaseName) {
-        this.petId = petId;
+    public PetChronicDisease(String diseaseName) {
         this.diseaseName = diseaseName;
     }
 
     private int id;
-
-    private int petId;
 
     private String diseaseName;
 }

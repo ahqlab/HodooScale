@@ -17,35 +17,35 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressBar bar;
 
-        private static final String CONNECTION_CONFIRM_CLIENT_URL = "http://clients3.google.com/generate_204";
+    private static final String CONNECTION_CONFIRM_CLIENT_URL = "http://clients3.google.com/generate_204";
 
-        public String store_version;
+    public String store_version;
 
-        public String device_version;
+    public String device_version;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            ButterKnife.bind(this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-            bar = (ProgressBar) findViewById(R.id.progress_loader);
-            if (isOnline()) {
-                new ServiceCheckTask().execute();
-            } else {
-                Toast.makeText(getApplicationContext(), R.string.not_connected_to_the_Internet, Toast.LENGTH_LONG).show();
-            }
+        bar = (ProgressBar) findViewById(R.id.progress_loader);
+        if (isOnline()) {
+            new ServiceCheckTask().execute();
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.not_connected_to_the_Internet, Toast.LENGTH_LONG).show();
         }
+    }
 
-        private boolean isOnline() {
-            CheckConnect cc = new CheckConnect(CONNECTION_CONFIRM_CLIENT_URL);
-            cc.start();
-            try {
-                cc.join();
-                return cc.isSuccess();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    private boolean isOnline() {
+        CheckConnect cc = new CheckConnect(CONNECTION_CONFIRM_CLIENT_URL);
+        cc.start();
+        try {
+            cc.join();
+            return cc.isSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
 
     }
@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(Void... arg0) {
-
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {

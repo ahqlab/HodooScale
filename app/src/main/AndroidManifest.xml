@@ -31,42 +31,40 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".activity.user.login.LoginActivity" />
-        <activity android:name=".activity.user.signup.TermsOfServiceActivity" />
-        <activity android:name=".activity.pet.regist.BasicInformationRegistActivity" />
-        <activity android:name=".activity.pet.regist.DiseaseInformationRegistActivity" />
-        <activity android:name=".activity.pet.regist.PhysiqueInformationRegistActivity" />
-        <activity android:name=".activity.pet.regist.WeightCheckActivity" />
-        <activity android:name=".activity.user.signup.SignUpActivity" />
-        <activity android:name=".activity.home.HomeActivity" />
-        <activity android:name=".activity.wifi.WifiSearchActivity" />
-        <activity android:name=".activity.wifi.WIFIScanner" />
-        <activity
-            android:name=".activity.user.LoginActivity2"
-            android:label="@string/title_activity_login2" />
-        <activity android:name=".activity.wifi.FindHodoosActivity" />
-        <activity android:name=".activity.wifi.SearchFailedActivity" />
-        <activity android:name=".activity.setting.list.SettingListActivity" />
-        <activity android:name=".activity.setting.account.MyAccountActivity" />
-        <activity android:name=".activity.setting.account.change.password.ChangePasswordActivity" />
-        <activity android:name=".activity.home.weight.statistics.WeightStatisticsActivity" />
-        <activity android:name=".activity.setting.pet.accounts.PetAccountsActivity" />
-        <activity android:name=".activity.pet.regist.second.BasicSecondInformationRegistActivity" />
-        <activity android:name=".activity.pet.regist.second.DiseaseSecondInformationRegistActivity" />
-        <activity android:name=".activity.pet.regist.second.PhysiqueSecondInformationRegistActivity" />
-        <activity android:name=".activity.pet.regist.second.WeightSecondCheckActivity" />
-        <activity android:name=".activity.setting.user.account.UserAccountActivity" />
-        <activity android:name=".activity.setting.device.setting.DeviceSettingActivity" />
-        <activity android:name=".activity.user.reset.password.send.SendCertificationNumberActivity" />
-        <activity android:name=".activity.test.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".activity.user.login.LoginActivity" />
+        <activity android:name=".activity.user.agree.TermsOfServiceActivity" />
+        <activity android:name=".activity.pet.regist.basic.BasicInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.disease.DiseaseInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.physique.PhysiqueInformationRegistActivity" />
+        <activity android:name=".activity.pet.regist.weight.WeightCheckActivity" />
+        <activity android:name=".activity.user.signup.SignUpActivity" />
+        <activity android:name=".activity.home.activity.HomeActivity" />
+        <activity android:name=".activity.wifi.WifiSearchActivity" />
+        <activity android:name=".activity.wifi.WIFIScanner" />
+        <activity android:name=".activity.wifi.FindHodoosActivity" />
+        <activity android:name=".activity.wifi.SearchFailedActivity" />
+        <activity android:name=".activity.setting.list.SettingListActivity" />
+        <activity android:name=".activity.setting.account.MyAccountActivity" />
+        <activity android:name=".activity.setting.account.change.password.ChangePasswordActivity" />
+        <activity android:name=".activity.home.fragment.weight.statistics.WeightStatisticsActivity" />
+        <activity android:name=".activity.setting.pet.accounts.PetAccountsActivity" />
+        <activity android:name=".activity.setting.user.account.UserAccountActivity" />
+        <activity android:name=".activity.setting.device.setting.DeviceSettingActivity" />
+        <activity android:name=".activity.user.reset.password.send.SendCertificationNumberActivity" />
+        <activity android:name=".activity.user.reset.password.confirm.ConfirmCertificationNumberActivity" />
+        <activity android:name=".activity.user.reset.password.create.CreateNewPasswordActivity" />
+        <activity android:name=".activity.device.regist.DeviceRegistActivity" />
+        <activity android:name=".activity.setting.account.info.ChangeUserInfoActivity" />
+        <activity android:name=".activity.meal.search.MealSearchActivity" />
+        <activity android:name=".activity.meal.list.FeedListActivity" />
+        <activity android:name=".activity.meal.test.MealTestActivity" />
+        <activity android:name=".activity.meal.regist.MealRegistrationActivity"></activity>
     </application>
 
 </manifest>

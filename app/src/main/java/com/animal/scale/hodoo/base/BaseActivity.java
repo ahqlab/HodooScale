@@ -16,7 +16,7 @@ import com.animal.scale.hodoo.common.SharedPrefManager;
 
 public abstract class BaseActivity<D extends Activity> extends AppCompatActivity {
 
-    protected final String TAG = getClass().getSimpleName();
+    protected final String TAG = "HJLEE";
 
     public SharedPrefManager mSharedPrefManager;
 

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.home.HomeActivity" />
+            type="com.animal.scale.hodoo.activity.home.activity.HomeActivity" />
         <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />

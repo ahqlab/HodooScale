@@ -21,11 +21,15 @@ public class NetRetrofit {
 
     UserService service = retrofit.create(UserService.class);
     PetBasicInfoService petBasicInfoService = retrofit.create(PetBasicInfoService.class);
-    GroupsService groupsService = retrofit.create(GroupsService.class);
     PetChronicDiseaseService petChronicDiseaseService = retrofit.create(PetChronicDiseaseService.class);
     PetPhysicalInfoService petPhysicalInfoService = retrofit.create(PetPhysicalInfoService.class);
     PetWeightInfoService petWeightInfoService = retrofit.create(PetWeightInfoService.class);
     RealTimeWeightService realTimeWeightService = retrofit.create(RealTimeWeightService.class);
+    PetGroupMappingService petGroupMappingService = retrofit.create(PetGroupMappingService.class);
+    DeviceService getDeviceService = retrofit.create(DeviceService.class);
+    PetService getPetService = retrofit.create(PetService.class);
+
+    FeedService feedService = retrofit.create(FeedService.class);
 
     public UserService getUserService() {
         return service;
@@ -35,10 +39,6 @@ public class NetRetrofit {
         return petBasicInfoService;
     }
 
-    public GroupsService getGroupsService() {
-        return groupsService;
-    }
-
     public PetChronicDiseaseService getPetChronicDiseaseService() { return petChronicDiseaseService; }
 
     public PetPhysicalInfoService getPetPhysicalInfoService() { return petPhysicalInfoService; }
@@ -46,5 +46,14 @@ public class NetRetrofit {
     public PetWeightInfoService getPetWeightInfoService() { return petWeightInfoService; }
 
     public RealTimeWeightService getRealTimeWeightService() { return realTimeWeightService; }
+
+    public PetGroupMappingService getPetGroupMappingService() { return petGroupMappingService; }
+
+    public DeviceService getDeviceService() { return getDeviceService; }
+
+    public PetService getPetService() { return getPetService; }
+
+    public FeedService getFeedService() { return feedService; }
+
 }
 

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hodoo_background_color"
+        tools:context=".activity.home.fragment.meal.MealFragment">
+
+        <noman.weekcalendar.WeekCalendar
+            android:id="@+id/weekCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/white"
+            app:dayNameLength="threeLetters"
+            app:daysBackgroundColor="@color/white"
+            app:daysTextColor="@color/black"
+            app:daysTextSize="14sp"
+            app:numOfPages="150"
+            app:weekBackgroundColor="@color/white"
+            app:weekTextColor="@color/black"
+            app:weekTextSize="11sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/weekCalendar"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/weight_info_box"
+                android:layout_width="298.9dp"
+                android:layout_height="88.4dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="28.2dp"
+                android:background="@drawable/weight_middle_coment_background_550_112"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="61.8dp"
+                        android:layout_height="60.6dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginTop="14dp"
+                        android:src="@drawable/weight_middle_doctor_icon_62_75" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="17.3dp"
+                            android:layout_height="15.1dp"
+                            android:src="@drawable/weight_middle_check_icon_17_20" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:layout_marginLeft="5dp"
+                            android:text="오늘의 한마디"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="-0.03"
+                            android:lineSpacingExtra="6sp"
+                            android:textColor="#666666"
+                            android:textSize="8sp"
+                            android:textStyle="normal"
+                            android:text="대형견에게 칼로리, 단백질, 지방이 많이 함유되어 있는 소형견용 사료를 먹이면 칼슘 과다로 뼈의 성장이 지연되고 고관절 질환으로 이어질 수 있으니 주의하세요!"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="298.9dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="21.6dp"
+                android:background="@drawable/weight_middle_coment_background_550_112"
+                android:onClick="@{activity::onClickRegistBtn}"
+                android:gravity="center_horizontal|center_vertical">
+
+                <LinearLayout
+                    android:layout_width="262.1dp"
+                    android:layout_height="34.7dp"
+                    android:background="@drawable/left_pink_border"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="1dp"
+                            android:layout_marginTop="1dp"
+                            android:text="식사관리"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오늘의 식사를 기록하세요."
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text=">"
+                            android:textColor="@color/hodoo_pink"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="298.9dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="21.6dp"
+                android:background="@drawable/weight_middle_coment_background_550_112"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/meal_home_warning" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:lineSpacingExtra="7sp"
+                        android:text="비타민 수치가 과다입니다."
+                        android:textColor="#666666"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="-0.08"
+                        android:lineSpacingExtra="6sp"
+                        android:textColor="#666666"
+                        android:textSize="8sp"
+                        android:textStyle="normal"
+                        android:text="비타민은 크게 지용성 비타민과 수용성 비타민으로 나눌 수 있습니다. 지용성 비타민은
+A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽산, 판토텐산, 비오틴의
+8가지가 있습니다. 개는 사람과 달리 비타민C를 몸에서 스스로 만들 수 있으므로 필수
+영양소가 아닙니다.
+과다한 비타민C는 신장, 방광, 결석과 관련이 있으므로 비타민C가 함유되어 있는 음식은
+피하는 것이 좋습니다. 혹시 과다하게 비타민을 주고 계신건 아닌가요?" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
