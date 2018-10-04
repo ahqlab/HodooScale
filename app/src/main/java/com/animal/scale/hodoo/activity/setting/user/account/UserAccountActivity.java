@@ -32,7 +32,7 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_account);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo("펫 관리"));
+        binding.setActivityInfo(new ActivityInfo("유저관리"));
         super.setToolbarColor();
 
         presenter = new UserAccountPresenter(this);

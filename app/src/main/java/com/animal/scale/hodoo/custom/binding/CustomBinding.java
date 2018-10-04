@@ -1,4 +1,4 @@
-package com.animal.scale.hodoo.binding;
+package com.animal.scale.hodoo.custom.binding;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Color;

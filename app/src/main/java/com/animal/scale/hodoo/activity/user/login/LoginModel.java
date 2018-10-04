@@ -11,7 +11,9 @@ import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.ValidationUtil;
+import com.github.mikephil.charting.data.Entry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

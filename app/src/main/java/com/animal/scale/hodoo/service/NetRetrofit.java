@@ -29,6 +29,8 @@ public class NetRetrofit {
     DeviceService getDeviceService = retrofit.create(DeviceService.class);
     PetService getPetService = retrofit.create(PetService.class);
 
+    FeedService feedService = retrofit.create(FeedService.class);
+
     public UserService getUserService() {
         return service;
     }
@@ -36,7 +38,6 @@ public class NetRetrofit {
     public PetBasicInfoService getPetBasicInfoService() {
         return petBasicInfoService;
     }
-
 
     public PetChronicDiseaseService getPetChronicDiseaseService() { return petChronicDiseaseService; }
 
@@ -51,5 +52,8 @@ public class NetRetrofit {
     public DeviceService getDeviceService() { return getDeviceService; }
 
     public PetService getPetService() { return getPetService; }
+
+    public FeedService getFeedService() { return feedService; }
+
 }
 

@@ -2,7 +2,10 @@ package com.animal.scale.hodoo.common;
 
 import android.os.AsyncTask;
 
+import com.github.mikephil.charting.data.Entry;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

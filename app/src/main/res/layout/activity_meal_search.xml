@@ -67,12 +67,25 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:orientation="vertical">
 
-                <EditText
+                <AutoCompleteTextView
+                    android:id="@+id/feed_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:drawableLeft="@drawable/search_meal_m_glass"
-                    android:text="123123" />
+                    android:drawableRight="@drawable/search_meal_m_glass" />
+
+                <ListView
+                    android:id="@+id/feed_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+
+                <!--<Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:onClick="@{activity::onClickConfirmBtn}"
+                    android:text="확인"/>-->
 
             </LinearLayout>
 

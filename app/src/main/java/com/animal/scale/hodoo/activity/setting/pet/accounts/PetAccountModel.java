@@ -8,7 +8,9 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
+import com.github.mikephil.charting.data.Entry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

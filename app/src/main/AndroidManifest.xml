@@ -61,7 +61,10 @@
         <activity android:name=".activity.user.reset.password.create.CreateNewPasswordActivity" />
         <activity android:name=".activity.device.regist.DeviceRegistActivity" />
         <activity android:name=".activity.setting.account.info.ChangeUserInfoActivity" />
-        <activity android:name=".activity.meal.search.MealSearchActivity"></activity>
+        <activity android:name=".activity.meal.search.MealSearchActivity" />
+        <activity android:name=".activity.meal.list.FeedListActivity" />
+        <activity android:name=".activity.meal.test.MealTestActivity" />
+        <activity android:name=".activity.meal.regist.MealRegistrationActivity"></activity>
     </application>
 
 </manifest>
