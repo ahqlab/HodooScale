@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.user.reset.password.confirm.ConfirmCertificationNumberActivity" />
+
+        <variable
+            name="activityInfo"
+            type="com.animal.scale.hodoo.domain.ActivityInfo" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/find_password_bg"
+        android:gravity="center_horizontal"
+        tools:context=".activity.user.reset.password.confirm.ConfirmCertificationNumberActivity">
+
+        <include
+            layout="@layout/common_toolbar"
+            bind:activityInfo="@{activityInfo}" />
+
+        <LinearLayout
+            android:layout_below="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    android:textSize="25dp"
+                    android:text="@string/istyle_question_of_lost_password"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/istyle_answer_of_lost_password"/>
+
+                <EditText
+                    android:id="@+id/email"
+                    style="@style/Edittext.Email"
+                    android:layout_width="290dp"
+                    android:layout_marginTop="30dp"
+                    android:hint="@string/istyle_email_hint" />
+                <EditText
+                    android:id="@+id/cerificationNumber"
+                    style="@style/Edittext.Email"
+                    android:layout_width="290dp"
+                    android:layout_marginTop="3dp"
+                    android:hint="@string/istyle_cerification_number_text" />
+
+                <Button
+                    style="@style/CommonBtn"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/cofirm_btn_text"
+                    android:onClick="@{activity::onClickConfirmBtn}"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!-- Login progress -->
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+</layout>

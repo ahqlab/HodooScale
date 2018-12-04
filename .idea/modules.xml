@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HodooScale.iml" filepath="$PROJECT_DIR$/HodooScale.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esptouch/esptouch.iml" filepath="$PROJECT_DIR$/esptouch/esptouch.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/weekcalendar/weekcalendar2.iml" filepath="$PROJECT_DIR$/weekcalendar/weekcalendar2.iml" />
     </modules>
