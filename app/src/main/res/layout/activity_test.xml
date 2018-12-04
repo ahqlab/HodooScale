@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -9,14 +7,12 @@
         <variable
             name="activity"
             type="com.animal.scale.hodoo.activity.test.TestActivity" />
-
         <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
-
         <variable
-            name="user"
-            type="com.animal.scale.hodoo.domain.User" />
+            name="testDomain"
+            type="com.animal.scale.hodoo.activity.test.TestDomain"/>
     </data>
 
     <RelativeLayout
@@ -31,10 +27,30 @@
             bind:activityInfo="@{activityInfo}" />
 
         <TextView
+            android:id="@+id/nick_name"
             android:layout_below="@+id/my_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@={user.nickname}"/>
+            android:text='@={testDomain.name}'/>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/nick_name"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/nick_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/nick_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="confirm"
+                android:onClick="@{activity::setOnClick}"/>
+
+        </LinearLayout>
 
 
     </RelativeLayout>

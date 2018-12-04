@@ -31,6 +31,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.user.login.LoginActivity" />
         <activity android:name=".activity.user.signup.TermsOfServiceActivity" />
@@ -60,11 +65,6 @@
         <activity android:name=".activity.setting.device.setting.DeviceSettingActivity" />
         <activity android:name=".activity.user.reset.password.send.SendCertificationNumberActivity" />
         <activity android:name=".activity.test.TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
     </application>

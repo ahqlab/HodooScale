@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 import lombok.Data;
+import lombok.Singular;
+
 
 @Data
 public class User implements Serializable{
@@ -17,6 +19,7 @@ public class User implements Serializable{
     }
 
     @SerializedName("id")
+    @Singular
     @Expose
     private int id;
 
