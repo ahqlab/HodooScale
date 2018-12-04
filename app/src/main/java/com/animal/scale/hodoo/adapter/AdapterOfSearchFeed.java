@@ -17,7 +17,7 @@ import com.animal.scale.hodoo.domain.Feed;
 
 import java.util.List;
 
-public class AdapterOfFeed extends BaseAdapter {
+public class AdapterOfSearchFeed extends BaseAdapter {
 
     Context context;
 
@@ -27,7 +27,7 @@ public class AdapterOfFeed extends BaseAdapter {
 
     FeedListviewBinding binding;
 
-    public AdapterOfFeed(Context context, List<AutoCompleateFeed> data) {
+    public AdapterOfSearchFeed(Context context, List<AutoCompleateFeed> data) {
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;

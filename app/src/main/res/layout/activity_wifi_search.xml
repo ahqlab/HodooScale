@@ -37,16 +37,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wifi_connection"
                 android:layout_marginTop="20dp"
+                android:text="@string/wifi_connection"
                 android:textColor="@color/hodoo_text_gray"
                 android:textSize="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wifi_connection_advice"
                 android:layout_marginTop="5dp"
+                android:text="@string/wifi_connection_advice"
                 android:textColor="@color/hodoo_midle_pink"
                 android:textSize="10dp" />
 
@@ -59,10 +59,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_below="@+id/wifiSanTopLayout"
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/wifiSanTopLayout"
+            android:background="@color/white">
 
             <ListView
                 android:id="@+id/listview"
@@ -73,5 +73,12 @@
 
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
     </RelativeLayout>
 </layout>

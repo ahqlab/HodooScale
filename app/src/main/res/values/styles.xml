@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -8,6 +7,10 @@
         <item name="colorAccent">@color/hodoo_midle_pink</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!--Status Bar 배경색-->
+        <item name="android:statusBarColor">@color/white</item>
+        <!--Status Bar 글자색깔-->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -15,16 +18,16 @@
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Edittext">
-        <item name="android:background">@drawable/edittext_border</item>
-        <item name="android:layout_height">45dp</item>
-        <item name="android:layout_width">325dp</item>
         <item name="android:maxLines">1</item>
-        <item name="android:padding">5dp</item>
         <item name="android:singleLine">true</item>
+        <item name="android:colorControlActivated">@color/mainBlack</item>
     </style>
 
     <style name="Edittext.Email">
         <item name="android:inputType">textEmailAddress</item>
+        <item name="android:imeActionId">6</item>
+        <item name="android:imeActionLabel">@string/action_sign_in_short</item>
+        <item name="android:imeOptions">actionUnspecified</item>
     </style>
 
     <style name="Edittext.Password">
@@ -32,6 +35,16 @@
         <item name="android:imeActionId">6</item>
         <item name="android:imeActionLabel">@string/action_sign_in_short</item>
         <item name="android:imeOptions">actionUnspecified</item>
+    </style>
+
+
+    <style name="CommonLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="CommonBtn">

@@ -47,7 +47,7 @@
                     android:gravity="center_horizontal"
                     android:textColor="@color/white"
                     android:textSize="25dp"
-                    android:text="비밀번호를 잊으셨나요?"/>
+                    android:text="@string/istyle_question_of_lost_password"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -56,14 +56,14 @@
                     android:textColor="@color/white"
                     android:textSize="14dp"
                     android:layout_marginTop="5dp"
-                    android:text="괜찮아요, 바로찾을 수 있어요"/>
+                    android:text="@string/istyle_answer_of_lost_password"/>
 
                 <EditText
                     android:id="@+id/email"
                     style="@style/Edittext.Email"
                     android:layout_width="290dp"
                     android:layout_marginTop="30dp"
-                    android:hint="이메일을 입력하세요." />
+                    android:hint="@string/istyle_email_hint" />
 
                 <Button
                     android:id="@+id/sendBtn"

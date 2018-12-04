@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LoginButton">
+        <attr name="bg" format="reference|integer" />
+        <attr name="symbol" format="reference|integer" />
+        <attr name="text" format="reference|string" />
+        <attr name="textColor" format="reference|integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CommonEditText">
+        <attr name="title" format="reference|string" />
+        <attr name="editTextResourceId" format="reference" />
+        <attr name="titleSize" format="reference|float" />
+        <attr name="errorMessageSize" format="reference|float" />
+    </declare-styleable>
+
+
+</resources>

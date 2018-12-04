@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ee605b</color>
-    <color name="colorPrimaryDark">#f5d9d7</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#faa0a0</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
 
-    <color name="hodoo_background_color">#f7f7f7</color>
+    <color name="hodoo_background_color">#ffffff</color>
     <color name="hodoo_pink">#ee605b</color>
-    <color name="hodoo_midle_pink">#ed6154</color>
+    <color name="hodoo_midle_pink">#ee6156</color>
     <color name="hodoo_light_pink">#f5d9d7</color>
     <color name="hodoo_light_light_pink">#f8dadc</color>
     <color name="hodoo_light_message_pink">#fbe7e8</color>
@@ -18,6 +19,14 @@
     <color name="hodoo_gray">#e5e5e5</color>
     <color name="hodoo_deep_gray">#19455b63</color>
 
+    <color name="hodoo_non_active_btn_bg">#4cc7c7cd</color>
+
+    <!-- ISTYLE -->
+    <color name="mainBlack">#1c0000</color>
+    <color name="mainRed">#ee6156</color>
+    <color name="labelColor">#9b9b9b</color>
+    <color name="cameraCurcle">#e7e7e7</color>
+
 
 
     <color name="red">#FA5858</color>
@@ -25,6 +34,8 @@
     <color name="blue">#58ACFA</color>
     <color name="yellow">#D7DF01</color>
     <color name="grey">#6E6E6E</color>
+
+    <color name="seek_bar_gray">#aaaaaa</color>
 
 
 

@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="9dp"
                     android:letterSpacing="-0.03"
-                    android:text="자주 기록된 음식은 이곳에 자동으로 저장되어, 좀 더 편안한 검색과 기록을 하실 수 있습니다. 음식에 들어가는 재료를 따로 나누거나, 보다 일반적은 음식 이름으로 검색해주세요."
+                    android:text="@string/istyle_search_info"
                     android:textSize="9sp" />
 
             </LinearLayout>
@@ -74,18 +74,21 @@
                     android:layout_margin="16dp"
                     android:drawableRight="@drawable/search_meal_m_glass" />
 
+                <TextView
+                    android:id="@+id/list_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="@string/istyle_recent_search_word"/>
+
                 <ListView
                     android:id="@+id/feed_listview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </ListView>
-
-                <!--<Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:onClick="@{activity::onClickConfirmBtn}"
-                    android:text="확인"/>-->
 
             </LinearLayout>
 

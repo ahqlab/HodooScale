@@ -33,7 +33,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_account);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo("내 계정"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_my_account)));
         super.setToolbarColor();
         presenter = new MyAccountPresenter(this);
         presenter.initLoadData(getApplicationContext());

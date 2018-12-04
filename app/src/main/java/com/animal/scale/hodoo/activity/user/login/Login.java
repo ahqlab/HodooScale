@@ -32,7 +32,7 @@ public interface Login {
 
         public void initUserData(User user, Context context);
 
-        public void sendServer();
+        public void sendServer(User user);
 
         public void userValidationCheck(User user);
 

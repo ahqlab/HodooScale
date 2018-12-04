@@ -6,8 +6,8 @@ android {
     defaultConfig {
         applicationId "com.animal.scale.hodoo"
         //룰러 때문에 14 에서 19로 내림
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 23
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
@@ -56,15 +56,17 @@ dependencies {
     //DWRuler
     implementation 'com.github.dwfox:DWRulerView:1.1.0'
     //Lombok
-    compileOnly "org.projectlombok:lombok:1.16.18"
+    compileOnly 'org.projectlombok:lombok:1.16.18'
     annotationProcessor "org.projectlombok:lombok:1.16.18"
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     //Circle progress
     implementation 'com.github.jakob-grabner:Circle-Progress-View:v1.3'
     implementation 'im.dacer:AndroidCharts:1.0.4'
     //Retrifit
-    implementation 'com.squareup.retrofit2:retrofit:2.1.0' // Retrofit
-    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta3' // Gson 변환을 위한 converter
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    // Retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
+    // Gson 변환을 위한 converter
     //Curcle ImageVIew
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //PICASSO
@@ -75,9 +77,9 @@ dependencies {
     implementation 'joda-time:joda-time:2.9.1'
     //DATA BINDING BUG
     annotationProcessor "androidx.databinding:databinding-compiler:3.2.0-alpha16"
-
+    //반응형 레이아웃
+    implementation 'com.ssomai:android.scalablelayout:2.1.6'
     implementation project(':weekcalendar2')
     implementation project(':library')
-
-
+    implementation project(':esptouch')
 }

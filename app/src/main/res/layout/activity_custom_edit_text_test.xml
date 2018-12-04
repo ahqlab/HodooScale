@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.test.ActivityCustomEditTextTest" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".test.ActivityCustomEditTextTest">
+
+        <LinearLayout
+            android:id="@+id/zzz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                android:id="@+id/sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                app:title="아이디를 입력해주세요."
+                app:editTextResourceId="@layout/email_edittext"
+                app:titleSize="13"
+                app:errorMessageSize="11"/>
+
+            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                app:title="비밀번호를 입력해주세요."
+                app:editTextResourceId="@layout/email_edittext"
+                app:titleSize="13"
+                app:errorMessageSize="11"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/zzz"
+            android:orientation="horizontal">
+
+            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                app:title="아이디를 입력해주세요."
+                app:editTextResourceId="@layout/email_edittext"
+                app:titleSize="13"
+                app:errorMessageSize="11"/>
+
+            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                app:title="비밀번호를 입력해주세요."
+                app:editTextResourceId="@layout/email_edittext"
+                app:titleSize="13"
+                app:errorMessageSize="11"/>
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:layout_alignParentBottom="true"
+            android:text="입력"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{activity::onBtnClick}"/>
+
+    </RelativeLayout>
+
+</layout>

@@ -1,5 +1,8 @@
 package com.animal.scale.hodoo.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -31,6 +34,8 @@ public class NetRetrofit {
 
     FeedService feedService = retrofit.create(FeedService.class);
 
+    MealHistoryService mealHistoryService = retrofit.create(MealHistoryService.class);
+
     public UserService getUserService() {
         return service;
     }
@@ -54,6 +59,8 @@ public class NetRetrofit {
     public PetService getPetService() { return getPetService; }
 
     public FeedService getFeedService() { return feedService; }
+
+    public MealHistoryService getMealHistoryService() { return mealHistoryService; }
 
 }
 

@@ -1,5 +1,7 @@
 package com.animal.scale.hodoo.activity.setting.list;
 
+import android.content.Context;
+
 public class SettingListPresenter implements SettingList.Presenter{
 
     SettingList.View settingListView;
@@ -8,6 +10,11 @@ public class SettingListPresenter implements SettingList.Presenter{
     public SettingListPresenter(SettingList.View settingListView) {
         this.settingListView = settingListView;
         this.settingListModel = new SettingListModel();
+    }
+
+    @Override
+    public void loadData(Context context) {
+        settingListModel.loadData(context);
     }
 
     @Override

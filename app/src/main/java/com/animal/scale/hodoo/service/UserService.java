@@ -16,7 +16,7 @@ public interface UserService{
     Call<ResultMessageGroup> registUser(@Body User user);
 
     @POST("user/login")
-    Call<User> login(@Body User user);
+    Call<ResultMessageGroup> login(@Body User user);
 
     @POST("user/get")
     Call<User> get(@Query("userIdx") int userIdx);

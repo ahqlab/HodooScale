@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.setting.pet.accounts;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -45,7 +46,7 @@ public class PetAccountModel {
     public void addRegistBtn(List<PetAllInfos> data) {
         PetAllInfos  infos = new PetAllInfos();
         PetBasicInfo info = new PetBasicInfo();
-        info.setPetName("펫 추가");
+        info.setPetName(context.getString(R.string.basin_info_regist_title));
         info.setProfileFilePath("add");
         infos.setPetBasicInfo(info);
         data.add(0, infos);

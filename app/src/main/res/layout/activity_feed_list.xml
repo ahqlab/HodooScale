@@ -18,19 +18,64 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/hodoo_background_color"
-        android:gravity="center_horizontal"
+        android:gravity="center_vertical"
         tools:context=".activity.setting.list.SettingListActivity">
 
         <include
             layout="@layout/common_toolbar"
-            bind:activityInfo="@{activityInfo}"/>
+            bind:activityInfo="@{activityInfo}" />
 
-        <ListView
+        <LinearLayout
+            android:id="@+id/ss"
             android:layout_below="@+id/my_toolbar"
-            android:id="@+id/feed_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ListView>
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/istyle_calories_taken_today" />
+
+            <com.animal.scale.hodoo.custom.view.seekbar.CustomSeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="20dp"
+                android:max="100"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:progress="0"
+                android:progressDrawable="@android:color/transparent"
+                android:thumb="@android:color/transparent"
+                android:thumbOffset="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/ss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#19455b63"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/istyle_food_taken_today" />
+
+            <ListView
+                android:id="@+id/feed_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"></ListView>
+
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/login_progress"
@@ -39,6 +84,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:visibility="gone" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="15sp"
+            android:onClick="@{activity::onClickFloatingBtn}"
+            app:fabSize="normal"
+            app:srcCompat="@android:drawable/ic_input_add" />
 
     </RelativeLayout>
 </layout>

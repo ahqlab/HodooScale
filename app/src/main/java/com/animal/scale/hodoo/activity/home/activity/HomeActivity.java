@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,7 +71,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setActivity(this);
-        super.setToolbarColor();
+        //super.setToolbarColor();
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
 
@@ -80,38 +81,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
         presenter.loadCustomDropdownView();
         presenter.getSttingListMenu();
     }
-
-   /* public void showDropUp() {
-        ResizeAnimation listVIewArea = new ResizeAnimation(
-                binding.appBarNavigation.customSpinnerListView,
-                -binding.appBarNavigation.customSpinnerListView.getHeight(),
-                binding.appBarNavigation.customSpinnerListView.getHeight()
-        );
-        listVIewArea.setDuration(200);
-        binding.appBarNavigation.customSpinnerListView.startAnimation(listVIewArea);
-
-
-        ResizeAnimation frameLayoutArea = new ResizeAnimation(
-                binding.appBarNavigation.petCustomSpinner,
-                -binding.appBarNavigation.petCustomSpinner.getHeight(),
-                binding.appBarNavigation.petCustomSpinner.getHeight()
-        );
-        frameLayoutArea.setDuration(200);
-        binding.appBarNavigation.petCustomSpinner.startAnimation(frameLayoutArea);
-
-
-        ResizeAnimation registBtnArea = new ResizeAnimation(
-                binding.appBarNavigation.petRegistBtn,
-                -binding.appBarNavigation.petRegistBtn.getHeight(),
-                binding.appBarNavigation.petRegistBtn.getHeight()
-        );
-        registBtnArea.setDuration(200);
-        binding.appBarNavigation.petRegistBtn.startAnimation(registBtnArea);
-    }*/
-
 
     public void onPetImageClick(View view) {
         adapter = new AdapterOfPets(HomeActivity.this, data, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
@@ -141,7 +114,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
                 intent.putExtra("petIdx", ADD_PET);
                 startActivity(intent);
-                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+                //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
             }
         });
         alertDialog.show();
@@ -150,39 +123,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public void onSettingBtnClick(View view) {
         Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        overridePendingTransition(0,0);
     }
-
-    /*public void showDropdown() {
-        List<PetAllInfos> getList = adapter.getList();
-        final float scale = getActivityClass().getResources().getDisplayMetrics().density;
-        int layoutPixels = (int) (((getList.size() * 64) + 44) * scale + 0.5f);
-        int btnPixels = (int) (44 * scale + 0.5f);
-
-        ResizeAnimation frameLayoutArea = new ResizeAnimation(
-                binding.appBarNavigation.petCustomSpinner,
-                layoutPixels,
-                0
-        );
-        frameLayoutArea.setDuration(200);
-        binding.appBarNavigation.petCustomSpinner.startAnimation(frameLayoutArea);
-
-        ResizeAnimation listVIewArea = new ResizeAnimation(
-                binding.appBarNavigation.customSpinnerListView,
-                (int) ((getList.size() * 64) * scale + 0.5f),
-                0
-        );
-        listVIewArea.setDuration(200);
-        binding.appBarNavigation.customSpinnerListView.startAnimation(listVIewArea);
-
-        ResizeAnimation registBtnArea = new ResizeAnimation(
-                binding.appBarNavigation.petRegistBtn,
-                btnPixels,
-                0
-        );
-        registBtnArea.setDuration(200);
-        binding.appBarNavigation.petRegistBtn.startAnimation(registBtnArea);
-    }*/
 
 
     @Override
@@ -190,11 +132,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         return HomeActivity.this;
     }
 
-    private void onClickSettingBtn(View view) {
-        Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -211,10 +148,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     replaceFragment(WeightFragment.newInstance());
                     presenter.loadCustomDropdownView();
                     return true;
-                case R.id.navigation_temp:
+          /*      case R.id.navigation_temp:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
                     replaceFragment(TempFragment.newInstance());
-                    return true;
+                    return true;*/
                 case R.id.navigation_meal:
                     replaceFragment(MealFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
@@ -285,6 +222,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     WeightFragment weightFragment = (WeightFragment) tf;
                     weightFragment.setBcsMessage(info.getPet().getBasic());
                     weightFragment.drawChart();
+                }else if(tf instanceof MealFragment){
+                    MealFragment mealFragment = (MealFragment) tf;
+                    mealFragment.initRaderChart();
                 }
             }
         }

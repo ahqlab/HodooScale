@@ -22,7 +22,7 @@ public interface RealTimeWeightService {
     Call<Float> getLatelyData(@Query("mac") String mac);
 
     @POST("weight/get/last/collection/data")
-    Call<RealTimeWeight> getLastCollectionData(@Query("groupCode") String groupCode);
+    Call<RealTimeWeight> getLastCollectionData(@Query("date") String date, @Query("groupCode") String groupCode);
 
 
     @POST("weight/get/statistics/list/of/time")

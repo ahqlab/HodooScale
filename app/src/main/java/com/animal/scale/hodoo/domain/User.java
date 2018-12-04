@@ -7,11 +7,10 @@ import lombok.Data;
 @Data
 public class User implements Serializable{
 
+    public User() {}
+
     public User(String email) {
         this.email = email;
-    }
-
-    public User() {
     }
 
     private int userIdx;
@@ -26,7 +25,7 @@ public class User implements Serializable{
 
     private String sex;
 
-    private String from;
+    private String country;
 
     private String createDate;
     //joinColumn

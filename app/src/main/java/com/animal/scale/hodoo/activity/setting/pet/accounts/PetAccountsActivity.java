@@ -30,7 +30,7 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pet_accounts);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo("펫 관리"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_management_pet)));
         super.setToolbarColor();
         presenter = new PetAccountPresenter(this);
         presenter.initUserData(getApplicationContext());

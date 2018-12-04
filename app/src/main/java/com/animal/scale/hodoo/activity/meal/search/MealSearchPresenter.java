@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.activity.meal.list.FeedListModel;
 import com.animal.scale.hodoo.domain.Feed;
+import com.animal.scale.hodoo.domain.SearchHistory;
 
 import java.util.List;
 
@@ -23,32 +24,4 @@ public class MealSearchPresenter implements MealSearchIn.Presenter{
         model.loadData(context);
     }
 
-    @Override
-    public void getSearchFeed(String s) {
-        model.getSearchFeed(s, new FeedListModel.DomainListCallBackListner<AutoCompleateFeed>() {
-            @Override
-            public void doPostExecute(List<AutoCompleateFeed> d) {
-                view.setFeedList(d);
-            }
-            @Override
-            public void doPreExecute() {
-            }
-        });
-    }
-
-    @Override
-    public void getAllFeed() {
-        model.getAllFeed(new FeedListModel.DomainListCallBackListner<AutoCompleateFeed>() {
-            @Override
-            public void doPostExecute(List<AutoCompleateFeed> d) {
-                view.setProgress(false);
-                view.setFeedList(d);
-            }
-
-            @Override
-            public void doPreExecute() {
-                view.setProgress(true);
-            }
-        });
-    }
 }

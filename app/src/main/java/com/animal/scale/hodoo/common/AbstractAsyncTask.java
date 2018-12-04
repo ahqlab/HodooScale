@@ -8,6 +8,10 @@ import java.io.Serializable;
 import retrofit2.Call;
 import retrofit2.Response;
 
+/**
+ *
+ * @param <D>
+ */
 public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTask<Call, Void, D> {
 
     protected abstract void doPostExecute(D d);
@@ -40,5 +44,4 @@ public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTas
         doPostExecute(d);
         super.onPostExecute(d);
     }
-
 }

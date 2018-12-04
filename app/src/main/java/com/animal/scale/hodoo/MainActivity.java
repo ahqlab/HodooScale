@@ -9,9 +9,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
+import com.animal.scale.hodoo.activity.user.signup.SignUpActivity;
+import com.animal.scale.hodoo.activity.user.signup.SignUpIn;
 import com.animal.scale.hodoo.util.CheckConnect;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,17 +26,32 @@ public class MainActivity extends AppCompatActivity {
 
     public String device_version;
 
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         bar = (ProgressBar) findViewById(R.id.progress_loader);
-        if (isOnline()) {
-            new ServiceCheckTask().execute();
-        } else {
+        bar.setVisibility(View.GONE);
+        if (!isOnline()) {
             Toast.makeText(getApplicationContext(), R.string.not_connected_to_the_Internet, Toast.LENGTH_LONG).show();
+            // new ServiceCheckTask().execute();
+        }
+    }
+
+    @OnClick({R.id.signup_btn, R.id.login_btn})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.signup_btn:
+                intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.login_btn:
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 

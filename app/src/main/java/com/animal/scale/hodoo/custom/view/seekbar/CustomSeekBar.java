@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -18,7 +19,12 @@ import java.util.ArrayList;
 
 public class CustomSeekBar extends android.support.v7.widget.AppCompatSeekBar {
 
+    Context context;
+
     private TextPaint mTextPaint;
+
+    private TextPaint thumbPaintLine;
+    private TextPaint thumbPaintBg;
 
     private int mThumbSize;
 
@@ -26,10 +32,12 @@ public class CustomSeekBar extends android.support.v7.widget.AppCompatSeekBar {
 
     public CustomSeekBar(Context context) {
         super(context);
+        this.context = context;
     }
 
     public CustomSeekBar(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         init();
         mThumbSize = getResources().getDimensionPixelSize(R.dimen.thumb_size);
 
@@ -38,15 +46,24 @@ public class CustomSeekBar extends android.support.v7.widget.AppCompatSeekBar {
         mTextPaint.setTextSize(20);
         mTextPaint.setTypeface(Typeface.DEFAULT_BOLD);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
+
+        thumbPaintLine = new TextPaint();
+        thumbPaintLine.setColor(Color.RED);
+        thumbPaintLine.setStyle(Paint.Style.STROKE );
+
+        thumbPaintBg = new TextPaint();
+        thumbPaintBg.setColor(Color.WHITE);
+        thumbPaintBg.setStyle(Paint.Style.FILL );
     }
 
     public void init() {
         /* 뷰의 크기에 영향을 받으며 아래와 같이 패딩을 설정하면 캔버스를 넓게 사용할 수 있습니다. */
-        //this.setPadding(0, 100, 0, 100);
+       // this.setMargin(0, 100, 0, 100);
     }
 
     public CustomSeekBar(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        this.context = context;
     }
 
     public void initData(ArrayList<ProgressItem> progressItemsList) {
@@ -54,101 +71,63 @@ public class CustomSeekBar extends android.support.v7.widget.AppCompatSeekBar {
     }
 
     @Override
-    protected synchronized void onMeasure(int widthMeasureSpec,
-                                          int heightMeasureSpec) {
+    protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
     @Override
-    protected synchronized void onDraw(Canvas canvas) {
-
+    protected  synchronized void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
         if (mProgressItemsList.size() > 0) {
-            int progressBarWidth = getWidth();
+            int progressBarWidth = getWidth() - getPaddingRight();
             int progressBarHeight = getHeight();
             int thumboffset = getThumbOffset();
-            int lastProgressX = 0;
+            int lastProgressX = getPaddingLeft();
             int progressItemWidth, progressItemRight;
             for (int i = 0; i < mProgressItemsList.size(); i++) {
 
                 ProgressItem progressItem = mProgressItemsList.get(i);
                 Paint progressPaint = new Paint();
                 progressPaint.setColor(getResources().getColor(progressItem.color));
-                progressItemWidth = (int) (progressItem.progressItemPercentage * progressBarWidth / 100);
+                progressItemWidth = (int) (progressItem.progressItemPercentage * progressBarWidth / 100) ;
                 progressItemRight = lastProgressX + progressItemWidth;
                 // for last item give right to progress item to the width
-                if (i == mProgressItemsList.size() - 1
-                        && progressItemRight != progressBarWidth) {
+                if (i == mProgressItemsList.size() - 1 && progressItemRight != progressBarWidth) {
                     progressItemRight = progressBarWidth;
                 }
                 Rect progressRect = new Rect();
-                progressRect.set(lastProgressX, thumboffset / 2, progressItemRight, progressBarHeight - thumboffset / 2);
-                canvas.drawRect(progressRect, progressPaint);
+                RectF progressRectF = new RectF();
+                if(progressItem.color == R.color.seek_bar_gray){
+                    progressRect.set(lastProgressX, thumboffset / 2, progressItemRight , progressBarHeight - thumboffset / 2);
+                    progressRectF.set(lastProgressX, thumboffset / 2, progressItemRight , progressBarHeight - thumboffset / 2);
+                    canvas.drawLine(progressItemRight,0,progressItemRight, 100, progressPaint);
+                    canvas.drawRoundRect(progressRectF, 6, 6, progressPaint);
+                }else if(progressItem.color == R.color.grey){
+                    progressRect.set(lastProgressX, thumboffset / 2, progressItemRight , progressBarHeight - thumboffset / 2);
+                    canvas.drawLine(progressItemRight,0,progressItemRight, 100, progressPaint);
+                    int median =  ((progressItemRight - lastProgressX) / 2 ) + lastProgressX;
+                    canvas.drawText(context.getString(R.string.excess), median, 15, mTextPaint);
+                    canvas.drawRect(progressRect, progressPaint);
+                }else{
+                    int median =  ((progressItemRight - lastProgressX) / 2 ) + lastProgressX;
+                    canvas.drawText(context.getString(R.string.recommend), median, 15, mTextPaint);
+                    progressRect.set(lastProgressX, thumboffset / 2, progressItemRight , progressBarHeight - thumboffset / 2);
+                    canvas.drawRect(progressRect, progressPaint);
+                }
+
+                //progressRect.set(lastProgressX, thumboffset / 2, progressItemRight , progressBarHeight - thumboffset / 2);
                 lastProgressX = progressItemRight;
             }
-            super.onDraw(canvas);
+
             setProgressOnThumb(canvas);
-            drwaLine(canvas);
+            //drwaLine(canvas);
         }
-
-    }
-
-    private void drwaLine(Canvas canvas) {
-        /* 테스트1 */
-        /* 시크바 라인 관련 */
-        Paint paint = new Paint();
-        paint.setColor(0xffff7700);
-        paint.setStrokeWidth(11);
-
-        //paint = new Paint();
-        //paint.setColor(0xffff7700);
-
-        //paint.setStrokeWidth(2);
-
-        /*canvas.drawLine(
-                0,100,0, 0, paint);
-        canvas.drawLine(
-                100,100,100, 0, paint);
-        canvas.drawLine(
-                200,100,200, 0, paint);
-        canvas.drawLine(
-                300,100,300, 0, paint);
-        canvas.drawLine(
-                400,100,400, 0, paint);*/
-
-
-
-              canvas.drawLine(
-                0,0,10, 100, paint);
-        canvas.drawLine(
-                100,0,100, 100, paint);
-        canvas.drawLine(
-                200,0,200, 100, paint);
-        canvas.drawLine(
-                300,0,300, 100, paint);
-        canvas.drawLine(
-                400,0,400, 100, paint);
-
-
-
-       /* *//* 테스트2 *//*
-        *//* 패스 관련 *//*
-        paint = new Paint();
-        paint.setColor(0xffff7700);
-        paint.setStrokeWidth(11);
-        paint.setStyle(Paint.Style.STROKE);
-
-        Path path = new Path();
-        path.moveTo(0, 0);
-        path.lineTo(600, 600);
-        path.lineTo(800, 800);
-        path.close();
-
-        canvas.drawPath(path, paint);*/
     }
 
     private void setProgressOnThumb(Canvas canvas) {
         String progressText = String.valueOf(getProgress());
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(progressText, 0, progressText.length(), bounds);
+
 
         int leftPadding = getPaddingLeft() - getThumbOffset();
         int rightPadding = getPaddingRight() - getThumbOffset();
@@ -157,8 +136,10 @@ public class CustomSeekBar extends android.support.v7.widget.AppCompatSeekBar {
         float thumbOffset = mThumbSize * (.5f - progressRatio);
         float thumbX = progressRatio * width + leftPadding + thumbOffset;
         float thumbY = getHeight() / 2f + bounds.height() / 2f;
-        canvas.drawText(progressText, thumbX, thumbY, mTextPaint);
-
+        RectF rectF = new RectF();
+        rectF.set(thumbX - 50, 2, thumbX + 50, getHeight());
+        canvas.drawRoundRect(rectF,15, 15, thumbPaintBg);
+        canvas.drawRoundRect(rectF, 15, 15, thumbPaintLine);
+        canvas.drawText(progressText + "kcal", thumbX, thumbY, mTextPaint);
     }
-
 }

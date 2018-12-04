@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- CAMERA -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- espressif -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -47,7 +49,7 @@
         <activity android:name=".activity.home.activity.HomeActivity" />
         <activity android:name=".activity.wifi.WifiSearchActivity" />
         <activity android:name=".activity.wifi.WIFIScanner" />
-        <activity android:name=".activity.wifi.FindHodoosActivity" />
+        <activity android:name=".activity.wifi.find.FindHodoosActivity" />
         <activity android:name=".activity.wifi.SearchFailedActivity" />
         <activity android:name=".activity.setting.list.SettingListActivity" />
         <activity android:name=".activity.setting.account.MyAccountActivity" />
@@ -63,8 +65,13 @@
         <activity android:name=".activity.setting.account.info.ChangeUserInfoActivity" />
         <activity android:name=".activity.meal.search.MealSearchActivity" />
         <activity android:name=".activity.meal.list.FeedListActivity" />
-        <activity android:name=".activity.meal.test.MealTestActivity" />
-        <activity android:name=".activity.meal.regist.MealRegistrationActivity"></activity>
+        <activity android:name=".activity.meal.regist.MealRegistrationActivity" />
+        <activity android:name=".activity.meal.update.MealUpdateActivity" />
+        <activity android:name=".activity.meal.detail.IngredientsOfMealActivity" />
+        <activity android:name=".activity.setting.device.list.DeviceListActivity" />
+        <activity android:name=".activity.setting.device.bowelplate.list.BowelPlateListActivity" />
+        <activity android:name=".test.ActivityCustomEditTextTest">
+        </activity>
     </application>
 
 </manifest>

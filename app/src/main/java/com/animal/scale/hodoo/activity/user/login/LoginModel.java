@@ -4,10 +4,13 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Device;
+import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.Pet;
+import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.ValidationUtil;
@@ -18,7 +21,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class LoginModel {
+public class LoginModel extends CommonModel {
 
     User user;
 
@@ -39,16 +42,16 @@ public class LoginModel {
         return ValidationUtil.isValidEmail(message);
     }
 
-    public void sendServer(final LoginResultListener loginResultListener) {
-        Call<User> call = NetRetrofit.getInstance().getUserService().login(user);
-        new AbstractAsyncTask<User>() {
+    public void sendServer(User user, final DomainCallBackListner<ResultMessageGroup> domainCallBackListner) {
+        Call<ResultMessageGroup> call = NetRetrofit.getInstance().getUserService().login(user);
+        new AbstractAsyncTask<ResultMessageGroup>() {
             @Override
-            protected void doPostExecute(User user) {
-                loginResultListener.doPostExecute(user);
+            protected void doPostExecute(ResultMessageGroup resultMessageGroup) {
+                domainCallBackListner.doPostExecute(resultMessageGroup);
             }
             @Override
             protected void doPreExecute() {
-                loginResultListener.doPreExecute();
+                domainCallBackListner.doPreExecute();
             }
         }.execute(call);
     }
@@ -60,7 +63,6 @@ public class LoginModel {
     }
 
     public void confirmDeviceRegistration(final DeviceRegistrationListener deviceRegistrationListener) {
-
         Call<List<Device>> call = NetRetrofit.getInstance().getDeviceService().getMyDeviceList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AbstractAsyncTaskOfList<Device>() {
             @Override
@@ -72,7 +74,6 @@ public class LoginModel {
                 deviceRegistrationListener.doPreExecute();
             }
         }.execute(call);
-
     }
 
     public void confirmPetRegistration(final PetRegistrationListener petRegistrationListener) {
@@ -87,7 +88,6 @@ public class LoginModel {
                 petRegistrationListener.doPreExecute();
             }
         }.execute(call);
-
     }
 
     public interface LoginResultListener {

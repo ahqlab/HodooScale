@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.setting.user.account;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.domain.User;
 
@@ -36,7 +37,7 @@ public class UserAccountModel {
 
     public void addRegistBtn(List<User> data) {
         User info = new User();
-        info.setSex("새 구성원");
+        info.setSex(context.getString(R.string.istyle_new_group_user));
         data.add(0, info);
     }
 

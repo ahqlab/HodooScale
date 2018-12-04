@@ -1,17 +1,27 @@
 package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
+import android.util.JsonReader;
+import android.util.Log;
 
+import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Pet;
+import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
+import com.animal.scale.hodoo.message.ResultMessage;
+import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
+import java.io.StringReader;
 import java.util.List;
 
 public class LoginPresenter implements Login.Presenter {
 
     Login.View loginView;
     LoginModel loginModel;
+    Context context;
 
     public LoginPresenter(Login.View loginView) {
         this.loginView = loginView;
@@ -20,20 +30,26 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void initUserData(User user, Context context) {
+        this.context = context;
         loginModel.initUserData(user, context);
     }
 
     @Override
-    public void sendServer() {
-        loginModel.sendServer(new LoginModel.LoginResultListener() {
+    public void sendServer(User user) {
+        loginModel.sendServer(user, new LoginModel.DomainCallBackListner<ResultMessageGroup>() {
             @Override
-            public void doPostExecute(User user) {
-                loginView.setProgress(false);
-                if(user != null){
+            public void doPostExecute(ResultMessageGroup resultMessageGroup) {
+                if(resultMessageGroup.getResultMessage().equals(ResultMessage.NOT_FOUND_EMAIL)){
+                    loginView.showPopup(context.getString(R.string.not_found_email));
+                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.ID_PASSWORD_DO_NOT_MATCH)){
+                    loginView.showPopup(context.getString(R.string.id_password_do_not_match));
+                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)){
+                    loginView.showPopup(context.getString(R.string.failed));
+                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)){
+                    Gson gson = new Gson();
+                    User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
                     saveUserSharedValue(user);
                     checkRegistrationStatus();
-                }else{
-                    loginView.showPopup("비밀번호가 맞지않습니다.");
                 }
             }
 
@@ -46,17 +62,18 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void userValidationCheck(User user) {
-        if (loginModel.editTextisEmptyCheck(user.getEmail())) {
+        sendServer(user);
+        /*if (loginModel.editTextisEmptyCheck(user.getEmail())) {
             //이메일 형식에 어긋납니다.
-            loginView.showPopup("이메일을 입력해주세요.");
+            loginView.showPopup(context.getString(R.string.istyle_enter_the_email));
         } else if (!loginModel.editTextisValidEmail(user.getEmail())) {
             //이메일 형식에 어긋납니다.
-            loginView.showPopup("이메일 형식에 맞지 않습니다.");
+            loginView.showPopup(context.getString(R.string.istyle_not_valid_email_format));
         } else if (loginModel.editTextisEmptyCheck(user.getPassword())) {
-            loginView.showPopup("비밀번호를 입력하세요.");
+            loginView.showPopup(context.getString(R.string.istyle_enter_the_password));
         } else {
             sendServer();
-        }
+        }*/
     }
 
     @Override
@@ -66,7 +83,6 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void checkRegistrationStatus() {
-
         loginModel.confirmDeviceRegistration(new LoginModel.DeviceRegistrationListener() {
             @Override
             public void doPostExecute(List<Device> devices) {
@@ -99,6 +115,7 @@ public class LoginPresenter implements Login.Presenter {
                         }
                         @Override
                         public void doPreExecute() {
+
                         }
                     });
                 }else{
@@ -106,7 +123,6 @@ public class LoginPresenter implements Login.Presenter {
                     loginView.goDeviceRegistActivity();
                 }
             }
-
             @Override
             public void doPreExecute() {
                 loginView.setProgress(true);

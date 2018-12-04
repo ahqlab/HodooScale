@@ -8,7 +8,6 @@ public class ValidationUtil {
         if (target == null) {
             return false;
         } else {
-            //android Regex to check the email address Validation
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }

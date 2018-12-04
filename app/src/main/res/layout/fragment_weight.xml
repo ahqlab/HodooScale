@@ -5,16 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="activity"
             type="com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment" />
     </data>
 
+
     <RelativeLayout
+        android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/hodoo_background_color"
+        android:onClick="@{activity::onRootViewClick}"
         tools:context=".activity.home.fragment.weight.WeightFragment">
 
 
@@ -128,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="현재 귀하의 반려견은 BCS 4단계로 평균 체중에 비해 과다한 상태입니다. \n 균형잡힌 식단과 올바른 황동으로 반려견의 체중을 관리해주셔야 합니다."
+                        android:text="@string/istyle_bcs_comment"
                         android:textSize="8sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -149,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="3dp"
-                android:text="오늘의 체중 기록"/>
+                android:text="@string/istyle_weight_history_of_the_day"/>
 
 <!--            <im.dacer.androidcharts.LineView
                 android:id="@+id/chartView"
@@ -171,6 +173,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
+                android:background="@color/white"
                 android:gravity="center_vertical|center_horizontal" />
 
         </LinearLayout>

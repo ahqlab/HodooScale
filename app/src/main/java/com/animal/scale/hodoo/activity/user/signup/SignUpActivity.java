@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
+import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivitySignUpBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -66,17 +67,16 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
     //ESP31
     public void onClickSubmitBtn(View view) {
         if(ValidationUtil.isEmpty(binding.email)){
-            //이메일 형식에 어긋납니다.
-            super.showBasicOneBtnPopup(getString(R.string.message),  getString(R.string.istyle_enter_the_email))
+            super.showBasicOneBtnPopup(null,  getString(R.string.istyle_enter_the_email))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
                     }).show();
-        }else if (!isEmailVailed) {
+        }else if (!ValidationUtil.isValidEmail(binding.email.getText().toString())) {
             //이메일 형식에 어긋납니다.
-            super.showBasicOneBtnPopup(getString(R.string.message), getString(R.string.istyle_not_valid_email_format))
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_not_valid_email_format))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -85,7 +85,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                     }).show();
             return;
         } else if (ValidationUtil.isEmpty(binding.password)) {
-            super.showBasicOneBtnPopup(getString(R.string.message), getString(R.string.istyle_enter_the_password))
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_the_password))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -94,7 +94,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                     }).show();
             return;
         } else if (ValidationUtil.isEmpty(binding.passwordCheck)) {
-            super.showBasicOneBtnPopup(getString(R.string.message), getString(R.string.istyle_enter_your_confirmation_password))
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_confirmation_password))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -102,7 +102,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                         }
                     }).show();
         } else if (!binding.passwordCheck.getText().toString().matches(binding.password.getText().toString())) {
-            super.showBasicOneBtnPopup(getString(R.string.message), getString(R.string.istyle_password_is_incorrect))
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_password_is_incorrect))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -110,7 +110,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                         }
                     }).show();
         } else if (ValidationUtil.isEmpty(binding.nickName)) {
-            super.showBasicOneBtnPopup(getString(R.string.message), getString(R.string.istyle_enter_your_nik_name))
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_nik_name))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -118,7 +118,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                         }
                     }).show();
         } else if (!binding.radioFemale.isChecked() && !binding.radioMale.isChecked()) {
-            super.showBasicOneBtnPopup(getString(R.string.message), getString(R.string.istyle_select_gender))
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_select_gender))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -126,7 +126,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                         }
                     }).show();
         } else if (ValidationUtil.isEmpty(binding.from)) {
-            super.showBasicOneBtnPopup(getString(R.string.message), getString(R.string.istyle_enter_your_place_of_residence))
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_place_of_residence))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -168,7 +168,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     @Override
     public void goNextPage() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WifiSearchActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();

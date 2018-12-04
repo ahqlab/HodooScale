@@ -20,7 +20,7 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_send_certification_number);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo("비밀번호찾기"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_find_password)));
         super.setToolbarColor();
     }
 

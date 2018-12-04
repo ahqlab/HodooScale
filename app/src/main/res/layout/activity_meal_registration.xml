@@ -14,9 +14,8 @@
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
 
         <variable
-            name="meal"
+            name="domain"
             type="com.animal.scale.hodoo.domain.Feed" />
-
     </data>
 
     <RelativeLayout
@@ -33,15 +32,124 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/my_toolbar"
             android:orientation="vertical">
 
-            <SeekBar
-                android:id="@+id/seekBar_luminosite"
-                android:layout_width="300dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progress="1"
-                android:progressDrawable="@drawable/meal_reg_seekbar_style"
-                android:thumb="@drawable/meal_reg_custom_thumb"/>
+                android:background="#19455b63"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/istyle_calories_taken_today" />
+
+                <com.animal.scale.hodoo.custom.view.seekbar.CustomSeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:max="100"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:progress="0"
+                    android:progressDrawable="@android:color/transparent"
+                    android:thumb="@android:color/transparent"
+                    android:thumbOffset="12dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="43dp"
+                    android:layout_marginBottom="5dp"
+                    app:conOnlyFloatToString="@{domain.calculationCalories}"
+                    android:textColor="@color/hodoo_pink"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@={domain.name}"
+                    android:textSize="27dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="42dp"
+                    android:background="@drawable/rounded_edittext_bg"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/istyle_check_components"
+                    android:onClick="@{activity::onClickDetailBtn}"
+                    android:textColor="@color/hodoo_pink"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#19455b63"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/istyle_select_components_and_units" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal">
+
+                <NumberPicker
+                    android:id="@+id/jungsu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp" />
+
+                <NumberPicker
+                    android:id="@+id/umsu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp" />
+
+                <NumberPicker
+                    android:id="@+id/unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    style="@style/CommonBtn"
+                    android:layout_marginTop="16dp"
+                    android:onClick="@{activity::onClickSaveBtn}"
+                    android:text="@string/save" />
+            </LinearLayout>
 
         </LinearLayout>
     </RelativeLayout>

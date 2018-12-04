@@ -4,21 +4,25 @@
     <item
         android:id="@+id/navigation_weight"
         android:icon="@drawable/menu_icon_48_48_02"
+        android:enabled="true"
         android:title="@string/pet_weight"
-        app:showAsAction="always|withText" />
-    <item
+        app:showAsAction="ifRoom" />
+    <!--<item
         android:id="@+id/navigation_temp"
         android:icon="@drawable/menu_icon_48_48_01"
+        android:enabled="true"
         android:title="@string/pet_temp"
-        app:showAsAction="always|withText"/>
+        app:showAsAction="ifRoom"/>-->
     <item
         android:id="@+id/navigation_meal"
         android:icon="@drawable/menu_icon_48_48_03"
+        android:enabled="true"
         android:title="식사"
-        app:showAsAction="always|withText"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/navigation_activity"
         android:icon="@drawable/menu_icon_48_48_04"
-        android:title="푸드"
-        app:showAsAction="always|withText"/>
+        android:enabled="true"
+        android:title="활동"
+        app:showAsAction="ifRoom"/>
 </menu>

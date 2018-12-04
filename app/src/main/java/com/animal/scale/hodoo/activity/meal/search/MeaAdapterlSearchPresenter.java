@@ -36,4 +36,10 @@ public class MeaAdapterlSearchPresenter implements MealSearchIn.AdapterPresenter
             }
         });
     }
+
+
+    @Override
+    public void setSearchHistory() {
+        view.setSearchHistory(model.getSearchHistory());
+    }
 }
