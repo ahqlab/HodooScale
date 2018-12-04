@@ -19,6 +19,10 @@ import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
+import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
+import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
+import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityFindHodoosBinding;
@@ -167,10 +171,52 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
 
     @Override
     public void registDeviceResult(Integer result) {
+
         if(result != 0){
-            wifiSearchActivity.finish();
-            finish();
+            presenter.confirmPetRegistration();
         }
+    }
+
+    @Override
+    public void successDevideResigt() {
+        wifiSearchActivity.finish();
+        finish();
+    }
+
+    @Override
+    public void goBasicRegistActivity(int petIdx) {
+        Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+        intent.putExtra("petIdx", petIdx);
+        startActivity(intent);
+        wifiSearchActivity.finish();
+        finish();
+    }
+
+    @Override
+    public void goDiseasesRegistActivity(int petIdx) {
+        Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+        intent.putExtra("petIdx", petIdx);
+        startActivity(intent);
+        wifiSearchActivity.finish();
+        finish();
+    }
+
+    @Override
+    public void goPhysicalRegistActivity(int petIdx) {
+        Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
+        intent.putExtra("petIdx", petIdx);
+        startActivity(intent);
+        wifiSearchActivity.finish();
+        finish();
+    }
+
+    @Override
+    public void goWeightRegistActivity(int petIdx) {
+        Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        wifiSearchActivity.finish();
+        finish();
     }
 
     public class EsptouchAsyncTask4 extends AsyncTask<byte[], Void, List<IEsptouchResult>> {
