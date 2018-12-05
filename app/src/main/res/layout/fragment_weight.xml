@@ -15,7 +15,6 @@
         android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/hodoo_background_color"
         android:onClick="@{activity::onRootViewClick}"
         tools:context=".activity.home.fragment.weight.WeightFragment">
 
@@ -34,138 +33,308 @@
             app:weekTextColor="@color/black"
             app:weekTextSize="11sp" />
 
-
-        <LinearLayout
-            android:id="@+id/graph_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="136dp"
+        <ScrollView
             android:layout_below="@+id/weekCalendar"
-            android:layout_marginLeft="65dp"
-            android:layout_marginRight="65dp"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"></LinearLayout>
-
-        <ImageView
-            android:id="@+id/clock_hands"
-            android:layout_width="200dp"
-            android:layout_height="192dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="120dp"
-            android:onClick="@{activity::onClickResetGraph}"
-            android:src="@drawable/clock_hands" />
-
-        <TextView
-            android:id="@+id/currentKg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="190dp"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/weight_info_box"
-            android:layout_width="310dp"
-            android:layout_height="65dp"
-            android:layout_below="@+id/graph_bg"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/weight_middle_coment_background_550_112"
-            android:orientation="horizontal">
-
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/weight_middle_doctor_icon_62_75" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="10dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
-                        android:src="@drawable/weight_middle_check_icon_17_20" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="오늘의 평균 체중은?! 초과 | "
-                        android:textSize="9sp" />
-                    <TextView
-                        android:id="@+id/myBcsStep"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/hodoo_midle_pink"
-                        android:text="BCS 4단계"
-                        android:textSize="9sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/istyle_bcs_comment"
-                        android:textSize="8sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="310dp"
-            android:layout_height="170dp"
-            android:layout_below="@+id/weight_info_box"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/weight_bottom_chart_background_550_354"
-            android:orientation="vertical">
-
-            <TextView
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                android:padding="3dp"
-                android:text="@string/istyle_weight_history_of_the_day"/>
+                android:gravity="center_horizontal">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center_horizontal">
+                    <LinearLayout
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <com.robinhood.ticker.TickerView
+                            android:id="@+id/tickerView"
+                            app:ticker_animationDuration="2000"
+                            android:textSize="40sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textSize="40sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="kg"/>
+                    </LinearLayout>
+                    <com.animal.scale.hodoo.custom.view.WeightView
+                        android:id="@+id/weight_view"
+                        app:displayNum="3"
+                        app:textSize="40sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/average_weight_for_today"
+                        android:textColor="#9b9b9b"/>
 
-<!--            <im.dacer.androidcharts.LineView
-                android:id="@+id/chartView"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_vertical|center_horizontal">
-            </im.dacer.androidcharts.LineView>-->
+                    <!-- bcs (s) -->
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:id="@+id/bcs_step"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:text="3"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/bcs_step_str"
+                                android:textColor="@color/subscript_color"/>
+                        </LinearLayout>
+                        <View
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#f4f4f4"/>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:id="@+id/bcs_subscript"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/mainRed"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/bcs_description_str"
+                                android:textColor="@color/subscript_color"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!-- bcs (e) -->
+                    <!-- sync (s) -->
+                    <RelativeLayout
+                        android:paddingTop="30dp"
+                        android:paddingBottom="22dp"
+                        android:paddingLeft="38dp"
+                        android:paddingRight="38dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/last_refresh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:alpha=".32"
+                            android:textSize="11sp"
+                            android:text="@string/last_sync_refresh_str"
+                            android:textColor="#9b9b9b"/>
+                        <ImageView
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/refresh_icon"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/refresh"
+                            android:onClick="@{activity::onRefreshClick}"/>
+
+                    </RelativeLayout>
+                    <!-- sync (e) -->
+                </LinearLayout>
+                <com.animal.scale.hodoo.custom.view.CustomCollapse
+                    android:layout_marginTop="1dp"
+                    android:paddingLeft="38dp"
+                    android:paddingRight="38dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white">
+                    <LinearLayout
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_marginRight="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TIP"
+                            android:textColor="@color/mainBlack"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="title"
+                            android:textColor="@color/subscript_color"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="29dp"
+                        android:layout_below="@+id/header"
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20dp">
+                        <TextView
+                            android:textColor="#9b9b9b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/test_content"/>
+                    </LinearLayout>
+                </com.animal.scale.hodoo.custom.view.CustomCollapse>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+        <!--<LinearLayout-->
+            <!--android:visibility="invisible"-->
+            <!--android:id="@+id/graph_bg"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="136dp"-->
+            <!--android:layout_below="@+id/weekCalendar"-->
+            <!--android:layout_marginLeft="65dp"-->
+            <!--android:layout_marginRight="65dp"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:orientation="vertical"></LinearLayout>-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/clock_hands"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="192dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="120dp"-->
+            <!--android:onClick="@{activity::onClickResetGraph}"-->
+            <!--android:src="@drawable/clock_hands" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/currentKg"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="190dp"-->
+            <!--android:text=""-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="24sp"-->
+            <!--android:textStyle="bold" />-->
+
+        <!--<LinearLayout-->
+            <!--android:visibility="invisible"-->
+            <!--android:id="@+id/weight_info_box"-->
+            <!--android:layout_width="310dp"-->
+            <!--android:layout_height="65dp"-->
+            <!--android:layout_below="@+id/graph_bg"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:background="@drawable/weight_middle_coment_background_550_112"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:src="@drawable/weight_middle_doctor_icon_62_75" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:visibility="invisible"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="13dp"-->
+                        <!--android:layout_height="13dp"-->
+                        <!--android:src="@drawable/weight_middle_check_icon_17_20" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:text="오늘의 평균 체중은?! 초과 | "-->
+                        <!--android:textSize="9sp" />-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/myBcsStep"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:textColor="@color/hodoo_midle_pink"-->
+                        <!--android:text="BCS 4단계"-->
+                        <!--android:textSize="9sp" />-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:text="@string/istyle_bcs_comment"-->
+                        <!--android:textSize="8sp" />-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="310dp"-->
+            <!--android:layout_height="170dp"-->
+            <!--android:layout_below="@+id/weight_info_box"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:background="@drawable/weight_bottom_chart_background_550_354"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal|center_vertical"-->
+                <!--android:padding="3dp"-->
+                <!--android:text="@string/istyle_weight_history_of_the_day"/>-->
+
+            <!--<im.dacer.androidcharts.LineView-->
+                <!--android:id="@+id/chartView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="130dp"-->
+                <!--android:layout_gravity="center_vertical|center_horizontal"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:gravity="center_vertical|center_horizontal">-->
+            <!--</im.dacer.androidcharts.LineView>-->
 
 
             <com.github.mikephil.charting.charts.LineChart
+                android:visibility="invisible"
                 android:id="@+id/chartView"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
@@ -176,7 +345,7 @@
                 android:background="@color/white"
                 android:gravity="center_vertical|center_horizontal" />
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
 
         <android.support.design.widget.FloatingActionButton

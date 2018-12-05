@@ -141,7 +141,7 @@
     <string name="add_pet_name">펫의 이름</string>
     <string name="add_pet_type">펫의 품종</string>
     <string name="add_pet_birthday">생년월일</string>
-    <string name="add_pet_gender">성별</string>
+    <string name="add_pet_gender">설별</string>
     <string name="add_pet_neuter">중성화 여부</string>
     <string name="add_pet_next_btn">다음 단계</string>
     <string name="add_pet_edit_hint">품종을 입력하세요</string>
@@ -250,9 +250,6 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="istyle_weight_history_of_the_day">오늘의 체중 기록</string>
     <string name="average_weight_for_today">오늘의 평균 체중</string>
     <string name="bcs_step_str">BCS 단계</string>
-    <string name="bcs_description_str">BCS 설명</string>
-    <string name="last_sync_refresh_str">마지막 동기화</string>
-    <string name="test_content">BCS 3단계 유의사항 컨텐츠가 들어가는 공간</string>
 
     <!-- Meal Detail Info Dialog -->
     <string name="istyle_one_hundred_g_supply">100g 제공량</string>

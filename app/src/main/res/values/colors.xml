@@ -7,6 +7,9 @@
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
 
+    <color name="hodoo_new_background_color">#f1f1f1</color>
+    <color name="hodoo_card_background_color">#ffffff</color>
+
     <color name="hodoo_background_color">#ffffff</color>
     <color name="hodoo_pink">#ee605b</color>
     <color name="hodoo_midle_pink">#ee6156</color>
@@ -36,6 +39,9 @@
     <color name="grey">#6E6E6E</color>
 
     <color name="seek_bar_gray">#aaaaaa</color>
+
+    <!-- 2018.12.05 new color code edit by song -->
+    <color name="subscript_color">#4a4a4a</color>
 
 
 
