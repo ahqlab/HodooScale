@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false" android:state_focused="false">
+        <shape>
+            <gradient
+                android:centerY="0.2"
+                android:startColor="@color/hodoo_pink"
+                android:centerColor="@color/hodoo_pink"
+                android:endColor="@color/hodoo_pink"
+                android:angle="270"
+                />
+            <stroke
+                android:width="1dp"
+                android:color="@color/hodoo_pink" />
+            <corners 
+                android:bottomLeftRadius="20dp"
+                android:topLeftRadius="20dp"
+                android:topRightRadius="20dp"/>
+        </shape>
+    </item>
+</selector>

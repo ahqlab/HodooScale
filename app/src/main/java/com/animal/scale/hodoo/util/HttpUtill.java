@@ -7,7 +7,10 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.ResultMessageGroup;
+import com.google.gson.Gson;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -143,8 +146,9 @@ public class HttpUtill {
         return s;
     }
 
-    public static String HttpFileRegist(String url, int userId, String groupId, PetBasicInfo basicInfo, ImageView profile) {
-        String s = null;
+    public static Pet HttpFileRegist(String url, String groupCode, PetBasicInfo basicInfo, ImageView profile) {
+        String jsonResult = null;
+        Pet pet = null;
         try {
             String filepath = String.valueOf(System.currentTimeMillis()) + ".jpg";
             connectUrl = new URL(url);
@@ -168,19 +172,11 @@ public class HttpUtill {
             // write data
             DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
             //BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(dos, "UTF-8"));
-
-            // USERID
-            dos.writeBytes(twoHyphens + boundary + lineEnd);
-            dos.writeBytes("Content-Disposition: form-data; name=\"userId\"" + lineEnd);
-            dos.writeBytes(lineEnd);
-            dos.writeBytes(String.valueOf(userId));
-            dos.writeBytes(lineEnd);
-
             // 그룹아이디
             dos.writeBytes(twoHyphens + boundary + lineEnd);
-            dos.writeBytes("Content-Disposition: form-data; name=\"groupId\"" + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"groupCode\"" + lineEnd);
             dos.writeBytes(lineEnd);
-            dos.write(groupId.getBytes("utf-8"));
+            dos.writeBytes(groupCode);
             dos.writeBytes(lineEnd);
             // 성별
             dos.writeBytes(twoHyphens + boundary + lineEnd);
@@ -249,14 +245,18 @@ public class HttpUtill {
             while ((ch = is.read()) != -1) {
                 b.append((char) ch);
             }
-            s = b.toString().trim();
-            Log.e("Test", "result = " + s);
-            // mEdityEntry.setText(s);
+            jsonResult = b.toString().trim();
+            Gson gson = new Gson();
+            ResultMessageGroup resultMessageGroup = gson.fromJson(jsonResult, ResultMessageGroup.class);
+            Log.e("HJLEE", "resultMessageGroup = " + resultMessageGroup);
+            pet = gson.fromJson(resultMessageGroup.getDomain().toString(), Pet.class);
+            Log.e("HJLEE", "pet = " + pet);
+            // mEdityEntry.setText(jsonResult);
             dos.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return s;
+        return pet;
     }
 }

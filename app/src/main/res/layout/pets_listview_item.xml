@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.home.activity.HomeActivity" />
+        <variable
+            name="domain"
+            type="com.animal.scale.hodoo.domain.PetAllInfos" />
+        <variable
+            name="currentPetIdx"
+            type="java.lang.Integer" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/add_pet_top_camera__190_190"
+            app:loadPicasoImage="@{domain.petBasicInfo.profileFilePath}"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/grey"/>
+
+        <TextView
+            android:id="@+id/petName"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:text="@={domain.petBasicInfo.petName}"
+            android:layout_weight="1"
+            android:textColor="@color/hodoo_text_gray" />
+
+        <RadioButton
+            android:id="@+id/currentPetCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:isCurrentPet="@{currentPetIdx}"
+            app:petIdx="@{domain.pet.petIdx}"
+            android:focusable="false"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:button="@drawable/custom_disease_list_checkbox" />
+    </LinearLayout>
+</layout>
+
+
+

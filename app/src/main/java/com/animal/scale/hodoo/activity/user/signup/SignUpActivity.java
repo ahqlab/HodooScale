@@ -10,13 +10,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+import com.animal.scale.hodoo.activity.user.login.LoginActivity;
+import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivitySignUpBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
-import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.util.MyOwnBindingUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
 
@@ -24,20 +26,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpActivity extends BaseActivity<SignUpActivity> {
+public class SignUpActivity extends BaseActivity<SignUpActivity> implements SignUpIn.View{
 
     ActivitySignUpBinding binding;
+
     boolean isEmailVailed = false;
+
+    SignUpIn.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
         super.setToolbarColor();
+        presenter = new SignUpPresenter(this);
+        presenter.loadData(SignUpActivity.this);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.signup_title)));
         binding.setUser(new User());
-        binding.setErrorMsg(getString(R.string.vailed_email));
+     /*   binding.setErrorMsg(getString(R.string.vailed_email));
         binding.setEmailRule(new MyOwnBindingUtil.StringRule() {
             @Override
             public boolean validate(Editable s) {
@@ -49,7 +56,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
                     return true;
                 }
             }
-        });
+        });*/
     }
 
     @Override
@@ -59,20 +66,17 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
 
     //ESP31
     public void onClickSubmitBtn(View view) {
-        Log.e("HJLEE", "0");
         if(ValidationUtil.isEmpty(binding.email)){
-            //이메일 형식에 어긋납니다.
-            super.showBasicOneBtnPopup(getString(R.string.message), "이메일을 입력해주세요.")
+            super.showBasicOneBtnPopup(null,  getString(R.string.istyle_enter_the_email))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
                     }).show();
-        }else if (!isEmailVailed) {
-            Log.e("HJLEE", "1");
+        }else if (!ValidationUtil.isValidEmail(binding.email.getText().toString())) {
             //이메일 형식에 어긋납니다.
-            super.showBasicOneBtnPopup(getString(R.string.message), "이메일 형식에 어긋납니다.")
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_not_valid_email_format))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -81,8 +85,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
                     }).show();
             return;
         } else if (ValidationUtil.isEmpty(binding.password)) {
-            Log.e("HJLEE", "2");
-            super.showBasicOneBtnPopup(getString(R.string.message), "비밀번호입력")
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_the_password))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -91,8 +94,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
                     }).show();
             return;
         } else if (ValidationUtil.isEmpty(binding.passwordCheck)) {
-            Log.e("HJLEE", "3");
-            super.showBasicOneBtnPopup(getString(R.string.message), "비밀번호 확인을 입력하세요.")
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_confirmation_password))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -100,8 +102,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
                         }
                     }).show();
         } else if (!binding.passwordCheck.getText().toString().matches(binding.password.getText().toString())) {
-            Log.e("HJLEE", "4");
-            super.showBasicOneBtnPopup(getString(R.string.message), "비밀번호가 맞지않습니다.")
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_password_is_incorrect))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -109,8 +110,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
                         }
                     }).show();
         } else if (ValidationUtil.isEmpty(binding.nickName)) {
-            Log.e("HJLEE", "5");
-            super.showBasicOneBtnPopup(getString(R.string.message), "NICK NAME 을 입력하세요.")
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_nik_name))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -118,8 +118,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
                         }
                     }).show();
         } else if (!binding.radioFemale.isChecked() && !binding.radioMale.isChecked()) {
-            Log.e("HJLEE", "6");
-            super.showBasicOneBtnPopup(getString(R.string.message), "성별을 선택하세요.")
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_select_gender))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -127,8 +126,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
                         }
                     }).show();
         } else if (ValidationUtil.isEmpty(binding.from)) {
-            Log.e("HJLEE", "7");
-            super.showBasicOneBtnPopup(getString(R.string.message), "거주지를 입력하세요.")
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_place_of_residence))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -141,11 +139,11 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
             }else if(binding.radioMale.isChecked()){
                 binding.getUser().setSex("MALE");
             }
-            sendServer();
+            presenter.registUser(binding.getUser());
         }
     }
 
-    public void sendServer() {
+   /* public void sendServer() {
         Call<ResultMessageGroup> result = NetRetrofit.getInstance().getUserService().registUser(binding.getUser());
         result.enqueue(new Callback<ResultMessageGroup>() {
             @Override
@@ -166,13 +164,30 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> {
             public void onFailure(Call<ResultMessageGroup> call, Throwable t) {
             }
         });
-    }
+    }*/
 
+    @Override
     public void goNextPage() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WifiSearchActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
+    @Override
+    public void registUserResult(ResultMessageGroup resultMessageGroup) {
+
+    }
+
+    @Override
+    public void showPopup(String message) {
+        super.showBasicOneBtnPopup(getString(R.string.message), message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }
+                ).show();
+    }
 }

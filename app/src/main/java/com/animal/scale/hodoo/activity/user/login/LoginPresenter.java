@@ -1,16 +1,27 @@
 package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
+import android.util.JsonReader;
+import android.util.Log;
 
-import com.animal.scale.hodoo.domain.Groups;
+import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.domain.Device;
+import com.animal.scale.hodoo.domain.Pet;
+import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
+import com.animal.scale.hodoo.message.ResultMessage;
+import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
+import java.io.StringReader;
 import java.util.List;
 
 public class LoginPresenter implements Login.Presenter {
 
     Login.View loginView;
     LoginModel loginModel;
+    Context context;
 
     public LoginPresenter(Login.View loginView) {
         this.loginView = loginView;
@@ -19,20 +30,26 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void initUserData(User user, Context context) {
+        this.context = context;
         loginModel.initUserData(user, context);
     }
 
     @Override
-    public void sendServer() {
-        loginModel.sendServer(new LoginModel.LoginResultListener() {
+    public void sendServer(User user) {
+        loginModel.sendServer(user, new LoginModel.DomainCallBackListner<ResultMessageGroup>() {
             @Override
-            public void doPostExecute(User user) {
-                loginView.setProgress(false);
-                if(user != null){
+            public void doPostExecute(ResultMessageGroup resultMessageGroup) {
+                if(resultMessageGroup.getResultMessage().equals(ResultMessage.NOT_FOUND_EMAIL)){
+                    loginView.showPopup(context.getString(R.string.not_found_email));
+                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.ID_PASSWORD_DO_NOT_MATCH)){
+                    loginView.showPopup(context.getString(R.string.id_password_do_not_match));
+                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)){
+                    loginView.showPopup(context.getString(R.string.failed));
+                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)){
+                    Gson gson = new Gson();
+                    User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
                     saveUserSharedValue(user);
-                    isRegistPetCheck();
-                }else{
-                    loginView.showPopup("비밀번호가 맞지않습니다.");
+                    checkRegistrationStatus();
                 }
             }
 
@@ -45,17 +62,18 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void userValidationCheck(User user) {
-        if (loginModel.editTextisEmptyCheck(user.getEmail())) {
+        sendServer(user);
+        /*if (loginModel.editTextisEmptyCheck(user.getEmail())) {
             //이메일 형식에 어긋납니다.
-            loginView.showPopup("이메일을 입력해주세요.");
+            loginView.showPopup(context.getString(R.string.istyle_enter_the_email));
         } else if (!loginModel.editTextisValidEmail(user.getEmail())) {
             //이메일 형식에 어긋납니다.
-            loginView.showPopup("이메일 형식에 맞지 않습니다.");
+            loginView.showPopup(context.getString(R.string.istyle_not_valid_email_format));
         } else if (loginModel.editTextisEmptyCheck(user.getPassword())) {
-            loginView.showPopup("비밀번호를 입력하세요.");
+            loginView.showPopup(context.getString(R.string.istyle_enter_the_password));
         } else {
             sendServer();
-        }
+        }*/
     }
 
     @Override
@@ -64,18 +82,47 @@ public class LoginPresenter implements Login.Presenter {
     }
 
     @Override
-    public void isRegistPetCheck() {
-        loginModel.isRegistPetCheck(new LoginModel.RegistCheckListener() {
+    public void checkRegistrationStatus() {
+        loginModel.confirmDeviceRegistration(new LoginModel.DeviceRegistrationListener() {
             @Override
-            public void doPostExecute(List<Groups> groups) {
-                loginView.setProgress(false);
-                if(groups.size() > 0){
-                    loginView.goHomeActivity();
+            public void doPostExecute(List<Device> devices) {
+                if(!devices.isEmpty()){
+                    //디바이스 등록됨.
+                    loginModel.confirmPetRegistration(new LoginModel.PetRegistrationListener() {
+                        @Override
+                        public void doPostExecute(List<Pet> pets) {
+                            if(!pets.isEmpty()){
+                                //PET 등록됨.
+                                if(pets.size() == 1){
+                                    if(pets.get(0).getBasic() == 0){
+                                        loginView.goPetRegistActivity(pets.get(0).getPetIdx());
+                                    }else if(pets.get(0).getDisease() == 0){
+                                        loginView.goDiseasesRegistActivity(pets.get(0).getPetIdx());
+                                    }else if(pets.get(0).getPhysical() == 0){
+                                        loginView.goPhysicalRegistActivity(pets.get(0).getPetIdx());
+                                    }else if(pets.get(0).getWeight() == 0){
+                                        loginView.goWeightRegistActivity(pets.get(0).getPetIdx());
+                                    }else{
+                                        loginView.goHomeActivity();
+                                    }
+                                }else{
+                                    loginView.goHomeActivity();
+                                }
+                            }else{
+                                //PET 등록페이지 이동
+                                loginView.goPetRegistActivity(0);
+                            }
+                        }
+                        @Override
+                        public void doPreExecute() {
+
+                        }
+                    });
                 }else{
-                    loginView.goRegistActivity();
+                    //디바이스 없음
+                    loginView.goDeviceRegistActivity();
                 }
             }
-
             @Override
             public void doPreExecute() {
                 loginView.setProgress(true);

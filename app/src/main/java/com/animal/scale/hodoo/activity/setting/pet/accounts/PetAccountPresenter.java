@@ -2,7 +2,7 @@ package com.animal.scale.hodoo.activity.setting.pet.accounts;
 
 import android.content.Context;
 
-import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.PetAllInfos;
 
 import java.util.List;
 
@@ -23,9 +23,9 @@ public class PetAccountPresenter implements PetAccounts.Presenter{
 
     @Override
     public void getData() {
-        model.getPetData(new PetAccountModel.asyncTaskListner() {
+       model.getPetData(new PetAccountModel.asyncTaskListner() {
             @Override
-            public void doPostExecute(List<PetBasicInfo> data) {
+            public void doPostExecute(List<PetAllInfos> data) {
                 model.addRegistBtn(data);
                 view.setAdapter(data);
             }

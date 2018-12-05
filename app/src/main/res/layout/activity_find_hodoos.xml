@@ -4,12 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
-
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.wifi.FindHodoosActivity" />
+            type="com.animal.scale.hodoo.activity.wifi.find.FindHodoosActivity" />
 
         <variable
             name="activityInfo"
@@ -20,11 +18,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/hodoo_background_color"
-        tools:context=".activity.wifi.FindHodoosActivity">
+        tools:context=".activity.wifi.find.FindHodoosActivity">
 
         <include
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/find_hodoo_info"
@@ -47,6 +53,7 @@
                 android:textStyle="bold"
                 android:text="@string/find_hodoo_message1"/>
             <TextView
+                android:id="@+id/find_hodoo_message2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/hodoo_gray"
@@ -59,6 +66,7 @@
 
 
         <LinearLayout
+            android:id="@+id/find_device_indicatior"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/find_hodoo_info"
@@ -88,8 +96,32 @@
                 CircleProgressView:cpv_value="60" />
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/find_device_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/find_hodoo_info"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+           <ImageView
+               android:layout_width="130dp"
+               android:layout_height="wrap_content"
+               android:src="@drawable/device_regist_scale_icon"/>
+
+            <TextView
+                android:id="@+id/device_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="12312312"/>
+
+        </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/wifi_icon"
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:layout_below="@+id/find_hodoo_info"
@@ -104,6 +136,17 @@
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:background="@drawable/connecting_middle_wifi_icon_99_76"
                 android:gravity="center_vertical|center_horizontal" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btn_area"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
 
         </LinearLayout>
     </RelativeLayout>

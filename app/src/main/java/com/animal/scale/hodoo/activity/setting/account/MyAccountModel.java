@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.setting.account;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.domain.SettingMenu;
 
@@ -21,8 +22,8 @@ public class MyAccountModel {
 
     public List<SettingMenu> getSettingList() {
         final List<SettingMenu> settingMenus = new ArrayList<SettingMenu>();
-        settingMenus.add(new SettingMenu("비밀번호 변경"));
-        settingMenus.add(new SettingMenu("로그아웃"));
+        settingMenus.add(new SettingMenu(context.getString(R.string.log_out)));
+        settingMenus.add(new SettingMenu(context.getString(R.string.change_user_account_info)));
         return settingMenus;
     }
 

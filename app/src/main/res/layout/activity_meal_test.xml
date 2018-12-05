@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="#EFF8FB" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.animal.scale.hodoo.custom.view.seekbar.CustomSeekBar
+            android:id="@+id/seekBar0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:max="100"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:progress="0"
+            android:progressDrawable="@android:color/transparent"
+            android:thumb="@drawable/meal_text_seekbar_thumb"
+            android:thumbOffset="12dp" />
+
+        <com.animal.scale.hodoo.custom.view.seekbar.TestView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_margin="10dp"
+            android:max="100"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:progress="0"
+            android:progressDrawable="@android:color/transparent"
+            android:thumb="@drawable/meal_text_seekbar_thumb"
+            android:thumbOffset="12dp"/>
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/txtSeekProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnSeekTo"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/btnSeekTo"
+        android:inputType="number" >
+    </EditText>
+
+    <Button
+        android:id="@+id/btnSeekTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Seek To" />
+
+    <ToggleButton
+        android:id="@+id/btnToogleSeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txtSeekProgress"
+        android:checked="true"
+        android:textOff="Enable SeekBar"
+        android:textOn="Disable SeekBar" />
+
+</RelativeLayout>

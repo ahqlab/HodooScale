@@ -10,13 +10,13 @@ import retrofit2.http.Query;
 public interface PetPhysicalInfoService {
 
     @POST("pet/physical/get")
-    Call<PetPhysicalInfo> get(@Query("petId") int petId);
+    Call<PetPhysicalInfo> getPhysicalIformation(@Query("groupCode") String groupCode, @Query("petIdx") int petIdx);
 
 
     @POST("pet/physical/regist")
-    Call<Integer> regist(@Body PetPhysicalInfo petPhysicalInfo);
+    Call<Integer> regist(@Query("petIdx") int petIdx, @Body PetPhysicalInfo petPhysicalInfo);
 
 
     @POST("pet/physical/delete")
-    Call<Integer> delete(@Query("petId") int petId);
+    Call<Integer> delete(@Query("petIdx") int petIdx, @Query("id") int id);
 }

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.pet.regist.WeightCheckActivity" />
+            type="com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity" />
         <variable
             name="domain"
             type="com.animal.scale.hodoo.domain.PetWeightInfo" />
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".activity.pet.regist.WeightCheckActivity">
+        tools:context=".activity.pet.regist.weight.WeightCheckActivity">
 
         <include
             layout="@layout/common_toolbar"

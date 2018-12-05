@@ -102,7 +102,7 @@ public class BottomDialog {
             if (builder.customView.getParent() != null)
                 ((ViewGroup) builder.customView.getParent()).removeAllViews();
             vCustomView.addView(builder.customView);
-            vCustomView.setPadding(builder.customViewPaddingLeft, builder.customViewPaddingTop, builder.customViewPaddingRight, builder.customViewPaddingBottom);
+            //vCustomView.setPadding(builder.customViewPaddingLeft, builder.customViewPaddingTop, builder.customViewPaddingRight, builder.customViewPaddingBottom);
         }
 
         if (builder.btn_positive != null) {

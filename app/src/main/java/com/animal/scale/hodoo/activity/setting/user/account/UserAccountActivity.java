@@ -32,7 +32,7 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_account);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo("펫 관리"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_management_user)));
         super.setToolbarColor();
 
         presenter = new UserAccountPresenter(this);
@@ -48,7 +48,7 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
 
     /*public void showPopup(final String SSID) {
         AlertDialog.Builder builder = new AlertDialog.Builder(WifiSearchActivity.this);
-        builder.setTitle(SSID);
+        builder.setTitleView(SSID);
 
         LayoutInflater inflater = this.getLayoutInflater();
         View viewInflated = inflater.inflate(R.layout.dialog_text_inpu_password, null);

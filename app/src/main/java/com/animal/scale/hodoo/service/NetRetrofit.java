@@ -1,5 +1,8 @@
 package com.animal.scale.hodoo.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -21,11 +24,17 @@ public class NetRetrofit {
 
     UserService service = retrofit.create(UserService.class);
     PetBasicInfoService petBasicInfoService = retrofit.create(PetBasicInfoService.class);
-    GroupsService groupsService = retrofit.create(GroupsService.class);
     PetChronicDiseaseService petChronicDiseaseService = retrofit.create(PetChronicDiseaseService.class);
     PetPhysicalInfoService petPhysicalInfoService = retrofit.create(PetPhysicalInfoService.class);
     PetWeightInfoService petWeightInfoService = retrofit.create(PetWeightInfoService.class);
     RealTimeWeightService realTimeWeightService = retrofit.create(RealTimeWeightService.class);
+    PetGroupMappingService petGroupMappingService = retrofit.create(PetGroupMappingService.class);
+    DeviceService getDeviceService = retrofit.create(DeviceService.class);
+    PetService getPetService = retrofit.create(PetService.class);
+
+    FeedService feedService = retrofit.create(FeedService.class);
+
+    MealHistoryService mealHistoryService = retrofit.create(MealHistoryService.class);
 
     public UserService getUserService() {
         return service;
@@ -35,10 +44,6 @@ public class NetRetrofit {
         return petBasicInfoService;
     }
 
-    public GroupsService getGroupsService() {
-        return groupsService;
-    }
-
     public PetChronicDiseaseService getPetChronicDiseaseService() { return petChronicDiseaseService; }
 
     public PetPhysicalInfoService getPetPhysicalInfoService() { return petPhysicalInfoService; }
@@ -46,5 +51,16 @@ public class NetRetrofit {
     public PetWeightInfoService getPetWeightInfoService() { return petWeightInfoService; }
 
     public RealTimeWeightService getRealTimeWeightService() { return realTimeWeightService; }
+
+    public PetGroupMappingService getPetGroupMappingService() { return petGroupMappingService; }
+
+    public DeviceService getDeviceService() { return getDeviceService; }
+
+    public PetService getPetService() { return getPetService; }
+
+    public FeedService getFeedService() { return feedService; }
+
+    public MealHistoryService getMealHistoryService() { return mealHistoryService; }
+
 }
 

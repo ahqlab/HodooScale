@@ -7,7 +7,7 @@
     <data>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.home.HomeActivity" />
+            type="com.animal.scale.hodoo.activity.home.activity.HomeActivity" />
         <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
@@ -25,7 +25,8 @@
             layout="@layout/app_bar_navigation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            bind:activityInfo="@{activityInfo}" />
+            bind:activityInfo="@{activityInfo}"
+            bind:activity="@{activity}"/>
 
     </android.support.v4.widget.DrawerLayout>
 </layout>

@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.home.activity.HomeActivity" />
+        <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
     </data>
@@ -12,7 +15,7 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.animal.scale.hodoo.activity.home.HomeActivity">
+        tools:context="com.animal.scale.hodoo.activity.home.activity.HomeActivity">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -25,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:minHeight="?attr/actionBarSize"
-                app:navigationIcon="?attr/homeAsUpIndicator"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -45,26 +47,28 @@
                     android:gravity="right|center_vertical"
                     android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/user_select"
-                        android:layout_width="120dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/edittext_white_border"
-                        android:layout_marginRight="10dp">
-                    </Spinner>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/petImage"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/setting_pet_icon_50_50"
+                        android:onClick="@{activity::onPetImageClick}"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/hodoo_text_light_gray"/>
 
                     <ImageView
                         android:id="@+id/setting"
                         android:gravity="center_vertical"
                         android:layout_gravity="center_vertical"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginRight="10dp"
+                        android:onClick="@{activity::onSettingBtnClick}"
                         android:src="@drawable/weight_top_setting_icon_38_38" />
                 </LinearLayout>
-
             </android.support.v7.widget.Toolbar>
-
 
         </android.support.design.widget.AppBarLayout>
 

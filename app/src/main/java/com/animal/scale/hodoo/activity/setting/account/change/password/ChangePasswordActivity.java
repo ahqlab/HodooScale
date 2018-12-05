@@ -21,7 +21,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity>
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_change_password);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo("비밀번호 변경"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_change_password)));
         super.setToolbarColor();
         presenter = new ChangePasswordPresenter(this);
     }

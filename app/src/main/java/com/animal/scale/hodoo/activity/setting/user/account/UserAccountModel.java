@@ -2,15 +2,11 @@ package com.animal.scale.hodoo.activity.setting.user.account;
 
 import android.content.Context;
 
-import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.SharedPrefManager;
-import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.User;
-import com.animal.scale.hodoo.service.NetRetrofit;
 
 import java.util.List;
-
-import retrofit2.Call;
 
 public class UserAccountModel {
 
@@ -24,7 +20,7 @@ public class UserAccountModel {
     }
 
     public void getUserData(final UserAccountModel.asyncTaskListner asyncTaskListner) {
-       Call<List<User>> call = NetRetrofit.getInstance().getUserService().getGroupMemner(mSharedPrefManager.getStringExtra(SharedPrefVariable.GEOUP_ID));
+     /*  Call<List<User>> call = NetRetrofit.getInstance().getUserService().getGroupMemner(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_ID));
         new AbstractAsyncTaskOfList<User>() {
             @Override
             protected void doPostExecute(List<User> data) {
@@ -36,12 +32,12 @@ public class UserAccountModel {
             protected void doPreExecute() {
                 asyncTaskListner.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call);*/
     }
 
     public void addRegistBtn(List<User> data) {
         User info = new User();
-        info.setSex("새 구성원");
+        info.setSex(context.getString(R.string.istyle_new_group_user));
         data.add(0, info);
     }
 

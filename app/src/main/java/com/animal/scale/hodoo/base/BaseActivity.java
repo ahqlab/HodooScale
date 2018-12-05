@@ -2,6 +2,8 @@ package com.animal.scale.hodoo.base;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +18,7 @@ import com.animal.scale.hodoo.common.SharedPrefManager;
 
 public abstract class BaseActivity<D extends Activity> extends AppCompatActivity {
 
-    protected final String TAG = getClass().getSimpleName();
+    protected final String TAG = "HJLEE";
 
     public SharedPrefManager mSharedPrefManager;
 
@@ -43,7 +45,9 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
 
     public AlertDialog.Builder showBasicOneBtnPopup(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivityClass());
-        builder.setTitle(title);
+        if(title != null){
+            builder.setTitle(title);
+        }
         if(message != null){
             builder.setMessage(message);
         }
@@ -52,6 +56,15 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
 
     public void showToast(String message) {
         Toast.makeText(getActivityClass(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void moveIntent(Context packageContext, Class<?> cls, int enterAnim, int exitAnim, boolean kill){
+        Intent intent = new Intent(packageContext, cls);
+        startActivity(intent);
+        overridePendingTransition(enterAnim , exitAnim);
+        if(kill){
+            finish();
+        }
     }
 
     @Override

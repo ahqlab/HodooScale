@@ -1,6 +1,8 @@
 package com.animal.scale.hodoo.service;
 
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.RealTimeWeight;
+import com.animal.scale.hodoo.domain.Statistics;
 
 import java.util.List;
 
@@ -19,6 +21,22 @@ public interface RealTimeWeightService {
     @POST("weight/get/lately/data")
     Call<Float> getLatelyData(@Query("mac") String mac);
 
-    @POST("weight/get/list/of/group")
-    Call<List<Float>> getRealTimeList(@Query("mac") String mac);
+    @POST("weight/get/last/collection/data")
+    Call<RealTimeWeight> getLastCollectionData(@Query("date") String date, @Query("groupCode") String groupCode);
+
+
+    @POST("weight/get/statistics/list/of/time")
+    Call<List<Statistics>> getStatisticsOfTime(@Query("groupCode") String groupCode, @Query("today") String today);
+
+    @POST("weight/get/statistics/list/of/day")
+    Call<List<Statistics>> getStatisticsOfDay(@Query("groupCode") String groupCode);
+
+    @POST("weight/get/statistics/list/of/week")
+    Call<List<Statistics>> getStatisticsOfWeek(@Query("groupCode") String groupCode, @Query("month") String month);
+
+    @POST("weight/get/statistics/list/of/month")
+    Call<List<Statistics>> getStatisticsOfMonth(@Query("groupCode") String groupCode, @Query("year") String month);
+
+    @POST("weight/get/statistics/list/of/year")
+    Call<List<Statistics>> getStatisticsOfYear(@Query("groupCode") String groupCode);
 }

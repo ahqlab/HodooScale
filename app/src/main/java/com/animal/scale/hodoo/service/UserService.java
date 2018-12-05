@@ -16,8 +16,15 @@ public interface UserService{
     Call<ResultMessageGroup> registUser(@Body User user);
 
     @POST("user/login")
-    Call<User> login(@Body User user);
+    Call<ResultMessageGroup> login(@Body User user);
+
+    @POST("user/get")
+    Call<User> get(@Query("userIdx") int userIdx);
+
+    @POST("user/update/basic/info")
+    Call<Integer> updateBasicInfo(@Body User user);
 
     @POST("user/get/group/member")
     Call<List<User>> getGroupMemner(@Query("groupId") String groupId);
+
 }

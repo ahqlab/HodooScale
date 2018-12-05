@@ -69,12 +69,12 @@ public class AdapterOfDiseaseList extends BaseAdapter {
         binding.setDisease(data.get(position));
         for (PetChronicDisease petChronicDisease: chronic) {
             if(petChronicDisease.getDiseaseName().matches(data.get(position).getName())){
-                    Log.e("HJLEE", "checked : " + data.get(position).getName());
                     binding.choiceDisease.setChecked(true);
                     setCheckedCount(getCheckedCount() + 1);
                     data.get(position).setChecked(true);
             }
         }
+
         binding.choiceDisease.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

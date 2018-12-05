@@ -66,19 +66,19 @@ public class AdapterOfWifiList extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if(getCurrentSsid(context) == null){
+        if (getCurrentSsid(context) == null) {
             viewHolder.name.setText(scanResult.SSID.toString());
             viewHolder.name.setTextColor(ContextCompat.getColor(context, R.color.hodoo_text_black));
             viewHolder.rssi.setText("");
             viewHolder.wifiStrength.setImageDrawable(context.getResources().getDrawable(getWifiStrengthResource(scanResult.level)));
-        }else{
+        } else {
             if (scanResult.SSID.toString().matches(getCurrentSsid(context))) {
                 //현재 연결된 WIFI
                 viewHolder.name.setText(scanResult.SSID.toString());
                 viewHolder.name.setTextColor(ContextCompat.getColor(context, R.color.hodoo_pink));
-                viewHolder.rssi.setText("현재폰에 연결된 WIFI 사용");
+                viewHolder.rssi.setText(context.getString(R.string.istyle_use_the_current_wifi));
                 viewHolder.wifiStrength.setImageDrawable(context.getResources().getDrawable(getWifiStrengthResource(scanResult.level)));
-            }else{
+            } else {
                 viewHolder.name.setText(scanResult.SSID.toString());
                 viewHolder.name.setTextColor(ContextCompat.getColor(context, R.color.hodoo_text_black));
                 viewHolder.rssi.setText("");
