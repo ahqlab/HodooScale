@@ -22,7 +22,7 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     LineChart chart;
 
-    public WeightFragmentPresenter(WeightFragment weightFragment,  LineChart chart){
+    public WeightFragmentPresenter(WeightFragment weightFragment, LineChart chart){
         this.view = weightFragment;
         this.chart = chart;
         this.model = new WeightFragmentModel();

@@ -39,17 +39,21 @@ public class LoginPresenter implements Login.Presenter {
         loginModel.sendServer(user, new LoginModel.DomainCallBackListner<ResultMessageGroup>() {
             @Override
             public void doPostExecute(ResultMessageGroup resultMessageGroup) {
-                if(resultMessageGroup.getResultMessage().equals(ResultMessage.NOT_FOUND_EMAIL)){
-                    loginView.showPopup(context.getString(R.string.not_found_email));
-                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.ID_PASSWORD_DO_NOT_MATCH)){
-                    loginView.showPopup(context.getString(R.string.id_password_do_not_match));
-                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)){
+                if ( resultMessageGroup != null ) {
+                    if (resultMessageGroup.getResultMessage().equals(ResultMessage.NOT_FOUND_EMAIL)) {
+                        loginView.showPopup(context.getString(R.string.not_found_email));
+                    } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.ID_PASSWORD_DO_NOT_MATCH)) {
+                        loginView.showPopup(context.getString(R.string.id_password_do_not_match));
+                    } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
+                        loginView.showPopup(context.getString(R.string.failed));
+                    } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
+                        Gson gson = new Gson();
+                        User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
+                        saveUserSharedValue(user);
+                        checkRegistrationStatus();
+                    }
+                } else {
                     loginView.showPopup(context.getString(R.string.failed));
-                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)){
-                    Gson gson = new Gson();
-                    User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
-                    saveUserSharedValue(user);
-                    checkRegistrationStatus();
                 }
             }
 

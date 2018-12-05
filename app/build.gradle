@@ -82,4 +82,7 @@ dependencies {
     implementation project(':weekcalendar2')
     implementation project(':library')
     implementation project(':esptouch')
+
+    //number animation
+    implementation 'com.robinhood.ticker:ticker:2.0.0'
 }
