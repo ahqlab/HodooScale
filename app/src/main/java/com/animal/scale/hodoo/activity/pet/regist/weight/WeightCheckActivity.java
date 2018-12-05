@@ -50,7 +50,6 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
         presenter.getWeightInformation(petIdx);
     }
 
-
     @Override
     protected BaseActivity<WeightCheckActivity> getActivityClass() {
         return WeightCheckActivity.this;
@@ -207,13 +206,13 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
 
     @Override
     public void setNavigation() {
-        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.add_pet_nav_reverse_btn);
+        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
-                startActivity(intent);
                 intent.putExtra("petIdx", petIdx);
+                startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
@@ -222,8 +221,8 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
-                startActivity(intent);
                 intent.putExtra("petIdx", petIdx);
+                startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
@@ -232,22 +231,22 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
-                startActivity(intent);
                 intent.putExtra("petIdx", petIdx);
+                startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
         });
-        binding.addPetNavigation.weightBtn.setOnClickListener(new View.OnClickListener() {
+        /*binding.addPetNavigation.weightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
-                startActivity(intent);
                 intent.putExtra("petIdx", petIdx);
+                startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
-        });
+        });*/
     }
 
 

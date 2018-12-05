@@ -47,12 +47,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:src="@drawable/step_one" />
+                    <include
+                        android:id="@+id/add_pet_navigation"
+                        layout="@layout/add_pet_nav"/>
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile"

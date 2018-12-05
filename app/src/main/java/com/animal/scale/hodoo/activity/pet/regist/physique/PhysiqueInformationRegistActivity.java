@@ -52,7 +52,6 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         presenter = new PhysiqueInformationRegistPresenter(this);
         presenter.loadData(PhysiqueInformationRegistActivity.this);
         presenter.setNavigation();
-
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
         presenter.getPhysiqueInformation(petIdx);
@@ -137,13 +136,13 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
 
     @Override
     public void setNavigation() {
-        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.add_pet_nav_reverse_btn);
+        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
-                startActivity(intent);
                 intent.putExtra("petIdx", petIdx);
+                startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
@@ -152,18 +151,18 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
-                startActivity(intent);
                 intent.putExtra("petIdx", petIdx);
+                startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
         });
-        binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {
+       /* binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
-                startActivity(intent);
                 intent.putExtra("petIdx", petIdx);
+                startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
@@ -172,12 +171,12 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
-                startActivity(intent);
                 intent.putExtra("petIdx", petIdx);
+                startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
-        });
+        });*/
     }
 
 

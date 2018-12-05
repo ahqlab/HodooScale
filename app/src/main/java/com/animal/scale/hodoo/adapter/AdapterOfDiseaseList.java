@@ -74,7 +74,6 @@ public class AdapterOfDiseaseList extends BaseAdapter {
                     data.get(position).setChecked(true);
             }
         }
-
         binding.choiceDisease.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
