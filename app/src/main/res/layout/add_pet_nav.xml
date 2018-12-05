@@ -7,62 +7,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/basic_btn"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/add_pet_nav_btn" />
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="10dp"
             android:layout_weight="1"
-            android:background="@drawable/add_pet_top_navi_line_520_18"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:layout_marginRight="4dp"
+            android:background="@drawable/rounded_gray_btn" />
 
         <Button
             android:id="@+id/disease_btn"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/add_pet_nav_btn" />
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="10dp"
             android:layout_weight="1"
-            android:background="@drawable/add_pet_top_navi_line_520_18"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/rounded_gray_btn" />
 
         <Button
             android:id="@+id/physique_btn"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/add_pet_nav_btn" />
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="10dp"
             android:layout_weight="1"
-            android:background="@drawable/add_pet_top_navi_line_520_18"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/rounded_gray_btn"/>
 
         <Button
             android:id="@+id/weight_btn"
-            android:layout_width="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="10dp"
-            android:background="@drawable/add_pet_nav_btn" />
-
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/rounded_gray_btn" />
 
     </LinearLayout>
 

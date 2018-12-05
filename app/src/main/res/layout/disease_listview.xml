@@ -40,10 +40,12 @@
 
                     <CheckBox
                         android:id="@+id/choice_disease"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_margin="10dp"
-                        android:button="@drawable/custom_disease_list_checkbox" />
+                        android:button="@null"
+                        android:background="@drawable/custom_disease_list_checkbox"
+                        android:scaleType="centerInside" />
 
                     <TextView
                         android:id="@+id/disease_name"

@@ -67,17 +67,6 @@ public class LoginPresenter implements Login.Presenter {
     @Override
     public void userValidationCheck(User user) {
         sendServer(user);
-        /*if (loginModel.editTextisEmptyCheck(user.getEmail())) {
-            //이메일 형식에 어긋납니다.
-            loginView.showPopup(context.getString(R.string.istyle_enter_the_email));
-        } else if (!loginModel.editTextisValidEmail(user.getEmail())) {
-            //이메일 형식에 어긋납니다.
-            loginView.showPopup(context.getString(R.string.istyle_not_valid_email_format));
-        } else if (loginModel.editTextisEmptyCheck(user.getPassword())) {
-            loginView.showPopup(context.getString(R.string.istyle_enter_the_password));
-        } else {
-            sendServer();
-        }*/
     }
 
     @Override

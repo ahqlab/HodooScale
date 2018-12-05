@@ -47,15 +47,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:src="@drawable/step_one" />
-                    <!-- <include
-                         android:id="@+id/add_pet_navigation"
-                         layout="@layout/add_pet_nav"/>-->
+                    <include
+                        android:id="@+id/add_pet_navigation"
+                        layout="@layout/add_pet_nav"/>
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile"
@@ -67,59 +61,63 @@
                         android:src="@drawable/add_pet_top_camera__190_190"
                         app:civ_border_color="@color/cameraCurcle"
                         app:civ_border_width="2dp" />
-
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="@string/add_pet_name" />
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="@={info.petName}"
-                            android:textSize="13sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/add_pet_name" />
 
-                    </LinearLayout>
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@={info.petName}"
+                                android:layout_marginTop="8dp"
+                                android:textSize="13sp" />
 
-                    <LinearLayout
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
+                        </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="@string/add_pet_type" />
+                            android:layout_weight="1"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical">
 
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:drawableRight="@drawable/magnifying_glass_drwable_left"
-                            android:hint="@string/add_pet_edit_hint"
-                            android:text="@={info.petBreed}"
-                            android:textSize="13sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/add_pet_type" />
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@={info.petBreed}"
+                                android:layout_marginTop="8dp"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -127,18 +125,18 @@
 
                 <TextView
                     style="@style/CommonLabel"
-                    android:text="@string/add_pet_birthday"
-                    android:layout_marginTop="16dp"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"/>
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="40dp"
+                    android:text="@string/add_pet_birthday" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -151,10 +149,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:enabled="false"
+                            android:layout_marginTop="8dp"
                             android:hint="00/00/0000"
-                            android:text="@={info.birthday}"
+                            android:focusable="false"
                             android:onClick="@{activity::onClickCalDalog}"
+                            android:text="@={info.birthday}"
                             android:textSize="13sp" />
 
 
@@ -177,6 +176,7 @@
 
                     <RadioGroup
                         android:id="@+id/radio_group_sex"
+                        android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -201,13 +201,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:layout_marginTop="16dp"
+                    android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="320dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
@@ -235,10 +237,10 @@
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="40dp"
                     android:background="@drawable/rounded_pink_btn"
                     android:onClick="@{activity::goDiseaseActivity}"
                     android:text="@string/add_pet_next_btn"

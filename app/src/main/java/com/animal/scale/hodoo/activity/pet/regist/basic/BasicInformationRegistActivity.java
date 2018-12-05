@@ -12,11 +12,14 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
@@ -64,15 +67,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         binding.setActivityInfo(new ActivityInfo(getString(R.string.basin_info_regist_title)));
         progressDialog = new ProgressDialog(BasicInformationRegistActivity.this);
         super.setToolbarColor();
-
         presenter = new BasicInformationRegistPresenter(this);
         presenter.loadData(BasicInformationRegistActivity.this);
         presenter.setNavigation();
-
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
         presenter.getPetBasicInformation(petIdx);
-
         binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -82,6 +82,18 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 } else {
                     Toast.makeText(BasicInformationRegistActivity.this, "NO", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("NO");
+                }
+            }
+        });
+        binding.radioGroupSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int rd = radioGroup.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(rd);
+                if (radioButton.getText().toString().matches("암컷")) {
+                    binding.getInfo().setSex("FEMALE");
+                } else if (radioButton.getText().toString().matches("수컷")) {
+                    binding.getInfo().setSex("MALE");
                 }
             }
         });
@@ -117,11 +129,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 .load("http://121.183.234.14:7171/hodoo/" + basicInfo.getProfileFilePath())
                 .into(binding.profile);
         if (basicInfo.getSex().matches("MALE")) {
-            binding.maleBtn.setPressed(true);
-            binding.femaleBtn.setPressed(false);
+            binding.maleBtn.setChecked(true);
         } else if (basicInfo.getSex().matches("FEMALE")) {
-            binding.maleBtn.setPressed(false);
-            binding.femaleBtn.setPressed(true);
+            binding.femaleBtn.setChecked(true);
         }
     }
 
@@ -247,6 +257,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         }
     }
 
+    public void onSplitTypeChanged(RadioGroup radioGroup, int id) {
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
@@ -266,8 +279,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     @Override
     public void setNavigation() {
-       /* binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.add_pet_nav_reverse_btn);
-        binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
+        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+        /*binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

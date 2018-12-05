@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.pet.regist.disease;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
@@ -128,20 +129,22 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
 
     @Override
     public void setNavigation() {
-        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.add_pet_nav_reverse_btn);
+        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+                intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
         });
-        binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
+        /*binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+                intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
@@ -151,6 +154,7 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
+                intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
@@ -160,10 +164,11 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
+                intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
-        });
+        });*/
     }
 }

@@ -35,6 +35,11 @@ public class LoginModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
+    public void initUserData(Context context) {
+        this.context = context;
+        mSharedPrefManager = SharedPrefManager.getInstance(context);
+    }
+
     public boolean editTextisEmptyCheck(String message){
         return ValidationUtil.isEmpty(message);
     }

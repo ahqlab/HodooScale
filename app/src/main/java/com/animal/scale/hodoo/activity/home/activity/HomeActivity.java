@@ -101,12 +101,12 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             }
         });
         alertDialog.setView(customView);
-        alertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+       /* alertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
-        });
+        });*/
         Button addBtn = (Button) customView.findViewById(R.id.add_pet);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -168,7 +168,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     @Override
     public void goNextPage() {
-        Intent intent = new Intent(getApplicationContext(), WifiSearchActivity.class);
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();

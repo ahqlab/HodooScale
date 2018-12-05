@@ -26,5 +26,7 @@ public interface FindHodoosIn {
         void registDevice(String bssid);
 
         void confirmPetRegistration();
+
+        void loginModelData(Context context);
     }
 }
