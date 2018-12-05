@@ -12,11 +12,14 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
@@ -117,11 +120,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 .load("http://121.183.234.14:7171/hodoo/" + basicInfo.getProfileFilePath())
                 .into(binding.profile);
         if (basicInfo.getSex().matches("MALE")) {
-            binding.maleBtn.setPressed(true);
-            binding.femaleBtn.setPressed(false);
+            binding.maleBtn.setChecked(false);
         } else if (basicInfo.getSex().matches("FEMALE")) {
-            binding.maleBtn.setPressed(false);
-            binding.femaleBtn.setPressed(true);
+            binding.femaleBtn.setChecked(false);
         }
     }
 
@@ -257,7 +258,14 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void goDiseaseActivity(View view) {
-        if (REQUEST_MODE) {
+        int rd = binding.radioGroupSex.getCheckedRadioButtonId();
+        RadioButton radioButton = findViewById(rd);
+        if(radioButton.getText().toString().matches("암컷")){
+            binding.getInfo().setSex("FEMALE");
+        }else if(radioButton.getText().toString().matches("수컷")){
+            binding.getInfo().setSex("MALE");
+        }
+       if (REQUEST_MODE) {
             presenter.updateBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         } else {
             presenter.registBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);

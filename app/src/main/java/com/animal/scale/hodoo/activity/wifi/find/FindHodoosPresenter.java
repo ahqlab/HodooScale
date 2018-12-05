@@ -77,4 +77,9 @@ public class FindHodoosPresenter implements  FindHodoosIn.Presenter {
             }
         });
     }
+
+    @Override
+    public void loginModelData(Context context) {
+        loginModel.initUserData(context);
+    }
 }

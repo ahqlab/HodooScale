@@ -66,6 +66,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         wifiSearchActivity = (WifiSearchActivity) WifiSearchActivity.wifiSearchActivity;
         presenter = new FindHodoosPresenter(this);
         presenter.loadData(FindHodoosActivity.this);
+        presenter.loginModelData(FindHodoosActivity.this);
         binding.findDeviceLayout.setVisibility(View.GONE);
         ssid = intent.getStringExtra("ssid");
         bssid = intent.getStringExtra("bssid");

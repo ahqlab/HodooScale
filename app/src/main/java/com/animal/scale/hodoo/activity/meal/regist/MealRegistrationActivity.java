@@ -50,9 +50,9 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
     private String[] unitArray;
 
-    private String[] doubleUnitArray = {"g", getString(R.string.cup)};
+    private String[] doubleUnitArray;
 
-    private String[] singleUnitArray = {getString(R.string.ea)};
+    private String[] singleUnitArray;
 
     private int feedId;
 
@@ -70,7 +70,10 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         Intent intent = getIntent();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_meal_registration);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo(getString(R.string.food)));
+        binding.setActivityInfo(new ActivityInfo(getResources().getString(R.string.food)));
+        doubleUnitArray = new String[]{"g", this.getResources().getString(R.string.cup)};
+        singleUnitArray = new String[]{this.getResources().getString(R.string.ea)};
+
         presenter = new MealRegistrationPresenter(this);
         presenter.loadData(this);
         presenter.getPetAllInfo();

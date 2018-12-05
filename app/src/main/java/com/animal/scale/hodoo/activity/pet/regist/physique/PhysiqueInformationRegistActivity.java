@@ -143,6 +143,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
                 startActivity(intent);
+                intent.putExtra("petIdx", petIdx);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
@@ -152,6 +153,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
                 startActivity(intent);
+                intent.putExtra("petIdx", petIdx);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
@@ -161,6 +163,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
                 startActivity(intent);
+                intent.putExtra("petIdx", petIdx);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }
@@ -170,6 +173,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
                 startActivity(intent);
+                intent.putExtra("petIdx", petIdx);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                 finish();
             }

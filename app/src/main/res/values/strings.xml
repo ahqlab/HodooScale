@@ -141,7 +141,7 @@
     <string name="add_pet_name">펫의 이름</string>
     <string name="add_pet_type">펫의 품종</string>
     <string name="add_pet_birthday">생년월일</string>
-    <string name="add_pet_gender">설별</string>
+    <string name="add_pet_gender">성별</string>
     <string name="add_pet_neuter">중성화 여부</string>
     <string name="add_pet_next_btn">다음 단계</string>
     <string name="add_pet_edit_hint">품종을 입력하세요</string>

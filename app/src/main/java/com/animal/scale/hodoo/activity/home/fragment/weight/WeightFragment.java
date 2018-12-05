@@ -165,7 +165,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Log.e("HJLEE", "WF " + item.getItemId());
         return false;
     }
 
