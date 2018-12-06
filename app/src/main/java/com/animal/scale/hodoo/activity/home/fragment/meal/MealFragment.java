@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.meal.list.FeedListActivity;
@@ -20,10 +21,8 @@ import com.animal.scale.hodoo.custom.mpchart.RadarMarkerView;
 import com.animal.scale.hodoo.databinding.FragmentMealLayoutBinding;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.util.DateUtil;
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -33,11 +32,11 @@ import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 
-import noman.weekcalendar.WeekCalendar;
-import android.animation.TimeInterpolator;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+
+import noman.weekcalendar.WeekCalendar;
 
 public class MealFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, MealFragmentIn.View {
 
@@ -52,6 +51,10 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     protected Typeface tfRegular;
 
     protected Typeface tfLight;
+
+    private boolean refrashState = false;
+    private long nowTime;
+    private SimpleDateFormat lastRefreshSdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
 
     public MealFragment() {
     }
@@ -72,6 +75,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         presenter = new MealFragmentPresenter(this);
         presenter.loadData(getActivity());
         presenter.initRaderChart();
+        nowTime = System.currentTimeMillis();
+        binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
 
         tfRegular = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
         tfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
@@ -217,11 +222,42 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         chart.setData(data);
         chart.invalidate();
     }
+    public void onRefreshClick( View v ) {
+        if ( !refrashState ) {
+            rotationStart(v);
+            /* 새로고침에 대한 데이터 처리 (s) */
+
+            nowTime = System.currentTimeMillis();
+            binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
+            /* 새로고침에 대한 데이터 처리 (e) */
+            refrashState = true;
+        } else {
+            rotationStop(v);
+            refrashState = false;
+        }
+    }
+    private void rotationStart( View v ) {
+        RotateAnimation rotate = new RotateAnimation(
+                0, 360,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        );
+
+        rotate.setDuration(900);
+        rotate.setRepeatCount(Animation.INFINITE);
+        v.startAnimation(rotate);
+    }
+    private void rotationStop( View v ) {
+        v.clearAnimation();
+        v.animate().cancel();
+    }
 
 
     @Override
     public void onStart() {
         presenter.initRaderChart();
+        //calorie_view
+        binding.calorieView.setNumber(540);
         super.onStart();
     }
 }
