@@ -75,7 +75,7 @@
     <string name="recommend">권장</string>
 
     <!-- MAIN Activity -->
-    <string name="istyle_already_a_member">이미 호두 회원이신가요비?</string>
+    <string name="istyle_already_a_member">이미 호두 회원이신가요?</string>
     <!-- Login Activity -->
     <string name="istyle_forgot_password">비밀번호를 잊으셨나요?</string>
 
