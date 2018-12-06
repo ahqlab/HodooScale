@@ -324,6 +324,13 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
 
     <!--  AdapterOfWifiList -->
     <string name="istyle_use_the_current_wifi">현재폰에 연결된 WIFI 사용</string>
+    <string name="korea">대한민국</string>
+    <string name="usa">미국</string>
+    <string name="japan">일본</string>
+    <string name="china">중국</string>
+    <string name="choice_country">국가</string>
+    <string name="bcs_watching_tv_desc">동영상을 본 후 반려견의 BCS 단계를 선택하십시오.</string>
+    <string name="select_bcs">Select BCS</string>
 
 
 </resources>

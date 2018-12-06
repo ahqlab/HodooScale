@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.user.signup;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
@@ -26,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpActivity extends BaseActivity<SignUpActivity> implements SignUpIn.View{
+public class SignUpActivity extends BaseActivity<SignUpActivity> implements SignUpIn.View {
 
     ActivitySignUpBinding binding;
 
@@ -66,15 +69,15 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     //ESP31
     public void onClickSubmitBtn(View view) {
-        if(ValidationUtil.isEmpty(binding.email)){
-            super.showBasicOneBtnPopup(null,  getString(R.string.istyle_enter_the_email))
+        if (ValidationUtil.isEmpty(binding.email)) {
+            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_the_email))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
                     }).show();
-        }else if (!ValidationUtil.isValidEmail(binding.email.getText().toString())) {
+        } else if (!ValidationUtil.isValidEmail(binding.email.getText().toString())) {
             //이메일 형식에 어긋납니다.
             super.showBasicOneBtnPopup(null, getString(R.string.istyle_not_valid_email_format))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -134,9 +137,9 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                         }
                     }).show();
         } else {
-            if(binding.radioFemale.isChecked()){
+            if (binding.radioFemale.isChecked()) {
                 binding.getUser().setSex("FEMALE");
-            }else if(binding.radioMale.isChecked()){
+            } else if (binding.radioMale.isChecked()) {
                 binding.getUser().setSex("MALE");
             }
             presenter.registUser(binding.getUser());
@@ -189,5 +192,35 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                             }
                         }
                 ).show();
+    }
+
+
+    public void onClickCountryEditTextClick(View view) {
+        final String[] values = new String[]{
+                this.getString(R.string.korea),
+                this.getString(R.string.usa),
+                this.getString(R.string.japan),
+                this.getString(R.string.china)
+        };
+        AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
+        builder.setTitle(getResources().getString(R.string.choice_country));
+        // add a radio button list
+        builder.setItems(values, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                binding.from.setText(values[which]);
+                dialog.dismiss();
+            }
+        });
+        // add OK and Cancel buttons
+       /* builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // user clicked OK
+            }
+        });
+        builder.setNegativeButton("Cancel", null);*/
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

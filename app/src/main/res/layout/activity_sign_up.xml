@@ -41,21 +41,22 @@
             bind:activityInfo="@{activityInfo}" />
 
         <LinearLayout
+            android:layout_below="@+id/my_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/my_toolbar"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="40dp"
+
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
                 android:text="@string/istyle_label_email"
                 android:textColor="@color/labelColor"
                 android:textSize="13sp"
-                android:paddingLeft="4dp"
                 android:textStyle="bold" />
 
             <EditText
@@ -63,17 +64,17 @@
                 style="@style/Edittext.Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mainBlack"
-                android:text="@={user.email}" />
+                android:text="@={user.email}"
+                android:textColor="@color/mainBlack" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
+                android:paddingLeft="4dp"
                 android:text="@string/istyle_label_password"
                 android:textColor="@color/labelColor"
                 android:textSize="13sp"
-                android:paddingLeft="4dp"
                 android:textStyle="bold" />
 
             <EditText
@@ -87,17 +88,17 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/mainBlack"
-                android:text="@={user.password}" />
+                android:text="@={user.password}"
+                android:textColor="@color/mainBlack" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
+                android:paddingLeft="4dp"
                 android:text="@string/istyle_label_confirm_password"
                 android:textColor="@color/labelColor"
                 android:textSize="13sp"
-                android:paddingLeft="4dp"
                 android:textStyle="bold" />
 
             <EditText
@@ -111,18 +112,18 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/mainBlack"
-                android:text="@={user.passwordCheck}" />
+                android:text="@={user.passwordCheck}"
+                android:textColor="@color/mainBlack" />
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
+                android:paddingLeft="4dp"
                 android:text="@string/istyle_label_nickname"
                 android:textColor="@color/labelColor"
                 android:textSize="13sp"
-                android:paddingLeft="4dp"
                 android:textStyle="bold" />
 
             <EditText
@@ -136,8 +137,8 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/mainBlack"
-                android:text="@={user.nickname}" />
+                android:text="@={user.nickname}"
+                android:textColor="@color/mainBlack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,8 +148,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginRight="4dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -165,11 +166,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:focusable="false"
                         android:imeActionId="6"
                         android:imeActionLabel="@string/prompt_from"
                         android:imeOptions="actionUnspecified"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:onClick="@{activity::onClickCountryEditTextClick}"
                         android:singleLine="true"
                         android:text="@={user.country}"
                         android:textColor="@color/mainBlack" />
@@ -187,10 +190,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
+                        android:paddingLeft="4dp"
                         android:text="@string/istyle_label_sex"
                         android:textColor="@color/labelColor"
                         android:textSize="13sp"
-                        android:paddingLeft="4dp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -202,18 +205,34 @@
                             android:id="@+id/radio_group_sex"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:orientation="horizontal">
 
                             <RadioButton
                                 android:id="@+id/radio_female"
-                                android:layout_weight="1"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_marginRight="4dp"
+
+                                android:background="@drawable/custom_disease_list_checkbox"
+                                android:button="@null" />
+
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="34dp"
                                 android:text="@string/woman" />
 
                             <RadioButton
                                 android:id="@+id/radio_male"
-                                android:layout_weight="1"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_marginRight="4dp"
+                                android:background="@drawable/custom_disease_list_checkbox"
+                                android:button="@null" />
+
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/men" />
@@ -221,27 +240,30 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
                 android:layout_gravity="right"
+                android:layout_marginTop="34dp"
                 android:gravity="right"
                 android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/singup_agree_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/custom_disease_list_checkbox"
+                    android:button="@null" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:paddingLeft="4dp"
-                    android:textStyle="bold"
+                    android:text="@string/istyle_label_agree"
                     android:textColor="@color/mainBlack"
-                    android:text="@string/istyle_label_agree"/>
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -255,22 +277,25 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@color/labelColor"
                     android:layout_marginTop="8dp"
-                    android:text="@string/istyle_label_term"/>
+                    android:layout_marginRight="8dp"
+                    android:text="@string/istyle_label_term"
+                    android:textColor="@color/labelColor"
+                    android:textSize="13sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@color/labelColor"
                     android:layout_marginTop="8dp"
-                    android:text="@string/istyle_label_private"/>
+                    android:text="@string/istyle_label_private"
+                    android:textColor="@color/labelColor"
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -289,10 +314,10 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="18dp"
                 android:background="@drawable/rounded_pink_btn"
-                android:textSize="18sp"
                 android:onClick="@{activity::onClickSubmitBtn}"
                 android:text="@string/istyle_btn_text"
                 android:textColor="@color/white"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

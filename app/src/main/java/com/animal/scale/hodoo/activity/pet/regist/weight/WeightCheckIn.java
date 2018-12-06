@@ -16,7 +16,7 @@ public interface WeightCheckIn {
 
         void registResult(Integer integer);
 
-        void setViewFlipper();
+        //void setViewFlipper();
     }
     interface Presenter{
 
@@ -30,6 +30,6 @@ public interface WeightCheckIn {
 
         void registWeightInfo(int petIdx, PetWeightInfo domain);
 
-        void setViewFlipper();
+        //void setViewFlipper();
     }
 }
