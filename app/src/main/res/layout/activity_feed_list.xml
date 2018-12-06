@@ -59,10 +59,15 @@
                 android:layout_marginRight="40dp"
                 android:orientation="vertical">
 
-                <SeekBar
+                <ProgressBar
                     android:id="@+id/seek_bar"
+                    style="@style/CalorieProgress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="10dp"
+                    android:max="100"
+                    android:progress="50"
+                    android:progressTint="@color/mainRed"
+                    android:progressBackgroundTint="#f1f1f1"/>
 
             </LinearLayout>
 

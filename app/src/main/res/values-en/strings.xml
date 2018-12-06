@@ -254,7 +254,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="last_sync_refresh_str">Last refresh</string>
     <string name="test_content">BCS 3단계 유의사항 컨텐츠가 들어가는 공간</string>
     <string name="not_data">No Data</string>
-
+    <string name="today_intake_kcal">오늘 섭취한 총 칼로리</string>
     <!-- Meal Detail Info Dialog -->
     <string name="istyle_one_hundred_g_supply">100g 제공량</string>
     <string name="istyle_kcal">칼로기</string>

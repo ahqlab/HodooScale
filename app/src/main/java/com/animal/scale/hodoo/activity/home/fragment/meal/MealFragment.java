@@ -81,6 +81,9 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
         tfRegular = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
         tfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
+
+        //binding.calorieBar.setPro
+
         return binding.getRoot();
     }
 
