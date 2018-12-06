@@ -133,8 +133,14 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 //            animation = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_two_step);
         }
         Log.e(TAG, String.format("bcs : %d", bcs));
-        binding.bcsSubscript.setText(bcsArr[bcs - 1]);
-        binding.bcsStep.setText( String.valueOf(bcs) );
+        if ( bcs > 0 ) {
+            binding.bcsSubscript.setText(bcsArr[bcs - 1]);
+            binding.bcsStep.setText( String.valueOf(bcs) );
+        } else {
+            binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
+            binding.bcsStep.setText( String.valueOf(bcs) );
+        }
+
 //        binding.clockHands.startAnimation(animation);
     }
 
