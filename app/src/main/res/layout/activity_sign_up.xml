@@ -168,14 +168,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:focusable="false"
-                        android:imeActionId="6"
                         android:imeActionLabel="@string/prompt_from"
+                        android:imeActionId="6"
                         android:imeOptions="actionUnspecified"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:onClick="@{activity::onClickCountryEditTextClick}"
                         android:singleLine="true"
+                        android:focusable="false"
+                        android:onClick="@{activity::onClickCountryEditTextClick}"
                         android:text="@={user.country}"
                         android:textColor="@color/mainBlack" />
                 </LinearLayout>

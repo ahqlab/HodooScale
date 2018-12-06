@@ -113,10 +113,15 @@
                                 android:text="@string/add_pet_type" />
 
                             <EditText
+                                android:id="@+id/pet_breed"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@={info.petBreed}"
                                 android:layout_marginTop="8dp"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:focusable="false"
+                                android:onClick="@{activity::onClickSelectEditText}"
                                 android:textSize="13sp" />
                         </LinearLayout>
 
