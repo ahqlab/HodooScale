@@ -49,30 +49,21 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:gravity="center_horizontal">
-                    <LinearLayout
-                        android:visibility="invisible"
+                    <ImageView
+                        android:layout_marginBottom="8dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <com.robinhood.ticker.TickerView
-                            android:id="@+id/tickerView"
-                            app:ticker_animationDuration="2000"
-                            android:textSize="40sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:textSize="40sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="kg"/>
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ruler"/>
                     <com.animal.scale.hodoo.custom.view.WeightView
                         android:id="@+id/weight_view"
-                        app:displayNum="3"
+                        app:displayNum="2"
                         app:textSize="40sp"
+                        app:sufFix="kg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"/>
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/average_weight_for_today"
@@ -80,6 +71,7 @@
 
                     <!-- bcs (s) -->
                     <LinearLayout
+                        android:layout_marginTop="30dp"
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -186,15 +178,24 @@
                         android:layout_below="@+id/header"
                         android:id="@+id/content"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="20dp">
+                        android:layout_height="wrap_content">
                         <TextView
+                            android:id="@+id/collapse_content"
                             android:textColor="#9b9b9b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/test_content"/>
                     </LinearLayout>
                 </com.animal.scale.hodoo.custom.view.CustomCollapse>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chartView"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical|center_horizontal" />
 
             </LinearLayout>
         </ScrollView>
@@ -333,17 +334,6 @@
             <!--</im.dacer.androidcharts.LineView>-->
 
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:visibility="invisible"
-                android:id="@+id/chartView"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/white"
-                android:gravity="center_vertical|center_horizontal" />
 
         <!--</LinearLayout>-->
 
