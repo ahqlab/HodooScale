@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.home.fragment.weight;
 
         import android.content.res.TypedArray;
         import android.databinding.DataBindingUtil;
+        import android.graphics.Color;
         import android.os.Build;
         import android.os.Bundle;
         import android.os.Handler;
@@ -17,10 +18,14 @@ package com.animal.scale.hodoo.activity.home.fragment.weight;
         import android.view.animation.Animation;
         import android.view.animation.AnimationUtils;
         import android.view.animation.RotateAnimation;
+        import android.widget.RadioGroup;
         import android.widget.Toast;
 
         import com.animal.scale.hodoo.R;
         import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+        import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
+        import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsActivity;
+        import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
         import com.animal.scale.hodoo.common.SharedPrefManager;
         import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
         import com.animal.scale.hodoo.domain.PetWeightInfo;
@@ -39,7 +44,7 @@ package com.animal.scale.hodoo.activity.home.fragment.weight;
         import noman.weekcalendar.listener.OnDateClickListener;
         import noman.weekcalendar.listener.OnWeekChangeListener;
 
-public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener , WeightFragmentIn.View{
+public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener , WeightFragmentIn.View, WeightStatistics.View{
 
     protected final String TAG = "HJLEE";
 
@@ -54,6 +59,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     SharedPrefManager mSharedPrefManager;
 
     WeightFragmentIn.Presenter presenter;
+    WeightStatistics.Presenter statisicsPresenter;
 
     public int bcs;
     private boolean refrashState = false;
@@ -87,6 +93,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
         presenter = new WeightFragmentPresenter(this, binding.chartView);
         presenter.loadData(getActivity());
+
+        statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
+        statisicsPresenter.initLoadData(getContext());
+        statisicsPresenter.getDailyStatisticalData();
+
 //        //Kcal 로리 표시
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
 //        presenter.initWeekCalendar();
@@ -250,10 +261,30 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         //Kcal 로리 표시
 //        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
 //        presenter.initWeekCalendar();
-
-//        binding.weightView.setNumber(28.3f);
-
-
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
+                switch ( radioId ) {
+                    case R.id.chart_day :
+                        statisicsPresenter.getDailyStatisticalData();
+                        break;
+                    case R.id.chart_week :
+                        statisicsPresenter.getWeeklyStatisticalData();
+                        break;
+                    case R.id.chart_month :
+                        statisicsPresenter.getMonthlyStatisticalData();
+                        break;
+                    case R.id.chart_year :
+                        statisicsPresenter.getStatisticalDataByYear();
+                        break;
+                }
+            }
+        });
     }
 }

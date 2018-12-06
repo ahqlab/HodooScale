@@ -48,7 +48,7 @@ public class WeightStatisticsModel extends CommonModel{
         MyMarkerView mv  = new MyMarkerView(context, R.layout.mpchart_market_layout);
         mv.setChartView(chart); // For bounds control
         chart.setMarker(mv); // Set the marker to the chart
-        chart.setBackgroundColor(Color.parseColor("#f7f7f7"));
+//        chart.setBackgroundColor(Color.parseColor("#f7f7f7"));
         chart.getAxisRight().setEnabled(false);
         chart.getXAxis().setDrawGridLines(false);
 
