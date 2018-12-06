@@ -17,6 +17,7 @@ import android.view.animation.RotateAnimation;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.meal.list.FeedListActivity;
+import com.animal.scale.hodoo.activity.meal.search.MealSearchActivity;
 import com.animal.scale.hodoo.custom.mpchart.RadarMarkerView;
 import com.animal.scale.hodoo.databinding.FragmentMealLayoutBinding;
 import com.animal.scale.hodoo.domain.Feed;
@@ -251,6 +252,10 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         v.clearAnimation();
         v.animate().cancel();
     }
+    public void onClickFloatingBtn( View v ) {
+        Intent intent = new Intent(getActivity(), FeedListActivity.class);
+        startActivity(intent);
+    }
 
 
     @Override
@@ -259,5 +264,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         //calorie_view
         binding.calorieView.setNumber(540);
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+//        binding.calorieScrollview
+        super.onResume();
     }
 }
