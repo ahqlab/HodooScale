@@ -183,14 +183,28 @@
                     </LinearLayout>
                 </com.animal.scale.hodoo.custom.view.CustomCollapse>
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chartView"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_gravity="center_vertical|center_horizontal"
+                <LinearLayout
+                    android:paddingTop="16dp"
+                    android:orientation="vertical"
                     android:layout_marginTop="1dp"
-                    android:background="@color/white"
-                    android:gravity="center_vertical|center_horizontal" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+                    <com.animal.scale.hodoo.custom.view.CircleTextView
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginBottom="18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="오늘의 몸무게"
+                        android:textSize="11sp"/>
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chartView"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="8dp"
                     android:id="@+id/averageChart"
@@ -201,10 +215,11 @@
                     android:orientation="vertical"
                     android:background="@android:color/white">
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal">
+                        android:gravity="center_horizontal"
+                        android:background="@android:color/white">
                         <RadioGroup
                             android:id="@+id/chart_wrap"
                             android:orientation="horizontal"
@@ -244,6 +259,13 @@
                                 android:background="@drawable/custom_radio_background"
                                 android:button="@null"/>
                         </RadioGroup>
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart1"
+                            android:layout_width="match_parent"
+                            android:layout_height="310dp"
+                            android:layout_below="@+id/top_buttons"
+                            android:background="@color/white"
+                            android:layout_weight="1" />
                     </LinearLayout>
 
                 </LinearLayout>
