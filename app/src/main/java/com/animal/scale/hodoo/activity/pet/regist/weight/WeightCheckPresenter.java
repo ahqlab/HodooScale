@@ -68,11 +68,10 @@ public class WeightCheckPresenter implements WeightCheckIn.Presenter{
 
             }
         });
-
     }
 
-    @Override
+    /*@Override
     public void setViewFlipper() {
         view.setViewFlipper();
-    }
+    }*/
 }

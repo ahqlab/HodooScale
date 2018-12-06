@@ -62,13 +62,17 @@
                     android:id="@+id/email"
                     style="@style/Edittext.Email"
                     android:layout_width="290dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:hint="@string/istyle_email_hint" />
 
                 <Button
                     android:id="@+id/sendBtn"
                     style="@style/CommonBtn"
+                    android:layout_height="55dp"
                     android:layout_marginTop="25dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
                     android:text="@string/send_btn_text"
                     android:onClick="@{activity::onClickSendBtn}"/>
 

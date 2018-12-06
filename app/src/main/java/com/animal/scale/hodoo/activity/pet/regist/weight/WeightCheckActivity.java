@@ -22,7 +22,7 @@ import com.animal.scale.hodoo.util.ViewFlipperAction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> implements ViewFlipperAction.ViewFlipperCallback, WeightCheckIn.View {
+public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> implements  WeightCheckIn.View {
 
     //뷰플리퍼
     //인덱스
@@ -44,7 +44,8 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
         presenter = new WeightCheckPresenter(this);
         presenter.loadData(WeightCheckActivity.this);
         presenter.setNavigation();
-        presenter.setViewFlipper();
+        //
+        //presenter.setViewFlipper();
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
         presenter.getWeightInformation(petIdx);
@@ -79,10 +80,13 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
         }else{
             Log.e("HJLEE", "registResult ERROR");
         }
-
     }
 
-    @Override
+    public void onClickCompleateBtn(View view) {
+        presenter.deleteWeightInfo(petIdx, binding.getDomain().getId());
+    }
+
+    /*@Override
     public void setViewFlipper() {
         //인덱스리스트
         indexes = new ArrayList<>();
@@ -108,9 +112,7 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
         binding.flipper.setOnTouchListener(new ViewFlipperAction(this, binding.flipper));
     }
 
-    public void onClickCompleateBtn(View view) {
-        presenter.deleteWeightInfo(petIdx, binding.getDomain().getId());
-    }
+
 
     public void setDisplayFirst(View view) {
         binding.flipper.setDisplayedChild(0);
@@ -201,7 +203,7 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
             indexes.get(3).setImageResource(R.drawable.self_check_middle_4_step_grey_98_45);
             indexes.get(4).setImageResource(R.drawable.self_check_middle_5_step_red_98_45);
         }
-    }
+    }*/
 
 
     @Override

@@ -122,7 +122,6 @@
 
                 </LinearLayout>
 
-
                 <TextView
                     style="@style/CommonLabel"
                     android:layout_marginLeft="40dp"
