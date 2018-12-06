@@ -34,6 +34,8 @@
         android:background="@color/hodoo_background_color"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         tools:context=".activity.user.signup.SignUpActivity">
 
         <include
@@ -41,9 +43,9 @@
             bind:activityInfo="@{activityInfo}" />
 
         <LinearLayout
-            android:layout_below="@+id/my_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/my_toolbar"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="40dp"

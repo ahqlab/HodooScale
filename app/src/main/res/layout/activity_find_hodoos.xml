@@ -106,17 +106,17 @@
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
-           <ImageView
-               android:layout_width="130dp"
-               android:layout_height="wrap_content"
-               android:src="@drawable/device_regist_scale_icon"/>
+            <ImageView
+                android:layout_width="242dp"
+                android:layout_height="154dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/device_regist_scale_icon" />
 
             <TextView
                 android:id="@+id/device_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="12312312"/>
+                android:layout_margin="16dp"/>
 
         </LinearLayout>
 
@@ -137,7 +137,6 @@
                 android:background="@drawable/connecting_middle_wifi_icon_99_76"
                 android:gravity="center_vertical|center_horizontal" />
 
-
         </LinearLayout>
         <LinearLayout
             android:id="@+id/btn_area"
@@ -146,7 +145,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
         </LinearLayout>
     </RelativeLayout>

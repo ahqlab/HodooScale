@@ -91,7 +91,6 @@ public class PetAllInfos implements Serializable {
             } else {
                 //5
                 if (petBasicInfo.getNeutralization().matches("YES")) {
-
                     if (petWeightInfo.getBcs() <= 3) {
                         //5-1
                         factor = 1.6;
@@ -117,7 +116,7 @@ public class PetAllInfos implements Serializable {
                 }
             }
         }else{
-            return 0;
+            factor = 0;
         }
         return Float.parseFloat(String.valueOf(factor));
     }

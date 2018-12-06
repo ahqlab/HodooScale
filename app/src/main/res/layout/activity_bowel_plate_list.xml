@@ -72,12 +72,14 @@
 
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <ImageView
+                    android:layout_width="242dp"
+                    android:layout_height="154dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="30dp"
-                    android:text="@string/bowel_plate" />
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp"
+                    android:src="@drawable/device_regist_scale_icon" />
 
             </LinearLayout>
 

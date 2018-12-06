@@ -23,7 +23,7 @@ public class DeviceListActivity extends BaseActivity<DeviceListActivity> {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_device_list);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_select_device)));
-
+        super.setToolbarColor();
         String[] values = new String[] {
                 this.getString(R.string.bowel_plate),
                 this.getString(R.string.pet_bed),

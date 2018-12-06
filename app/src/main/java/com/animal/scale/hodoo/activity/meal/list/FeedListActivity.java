@@ -47,7 +47,6 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
 
     private float darkGreySpan;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +54,14 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feed_list);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_feed)));
+        super.setToolbarColor();
         presenter = new FeedListPresenter(this);
         presenter.loadData(FeedListActivity.this);
-        this.initSeekbar();
+        //this.initSeekbar();
         presenter.getTodaySumCalorie();
     }
 
-    public void initDataToSeekbar(float rer, float kcal) {
+   /* public void initDataToSeekbar(float rer, float kcal) {
         mProgressItem = new ProgressItem();
         mProgressItem.progressItemPercentage = (float) (((rer * 0.7) / kcal) * 100);
         mProgressItem.color = R.color.seek_bar_gray;
@@ -93,12 +93,12 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         progressItemList.add(mProgressItem);
 
         binding.seekBar.invalidate();
-    }
+    }*/
 
     @Override
     public void initSeekbar() {
-        progressItemList = new ArrayList<ProgressItem>();
-        binding.seekBar.initData(progressItemList);
+        //progressItemList = new ArrayList<ProgressItem>();
+        //binding.seekBar.initData(progressItemList);
     }
 
     @Override
@@ -106,16 +106,21 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         if (mealHistory != null) {
             if (rer > mealHistory.getCalorie()) {
                 binding.seekBar.setMax((int) rer);
-                initDataToSeekbar(rer);
+                binding.rer.setText(String.valueOf(rer) + "kcal");
+                //initDataToSeekbar(rer);
             } else {
                 binding.seekBar.setMax((int) mealHistory.getCalorie());
-                initDataToSeekbar(rer, mealHistory.getCalorie());
+                binding.rer.setText(String.valueOf(rer) + "kcal");
+                //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
             binding.seekBar.setProgress((int) mealHistory.getCalorie());
+            binding.calorieIntake.setText((int) mealHistory.getCalorie() + "kcal");
         } else {
             binding.seekBar.setMax((int) rer);
-            initDataToSeekbar(rer);
+            binding.rer.setText(String.valueOf(rer) + "kcal");
+            //initDataToSeekbar(rer);
             binding.seekBar.setProgress(0);
+            binding.calorieIntake.setText(0 + "kcal");
         }
         binding.seekBar.setEnabled(true);
     }
@@ -123,8 +128,11 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
+        Log.e("HJLEE", "toString : " + petAllInfos.toString());
         rer = new RER(5,  petAllInfos.getFactor()).getRER();
-        progressItemList.clear();
+        Log.e("HJLEE", "FACTOR : " + petAllInfos.getFactor());
+        Log.e("HJLEE", "RER : " + rer);
+        //progressItemList.clear();
         binding.seekBar.invalidate();
         presenter.getTodaySumCalorie();
     }

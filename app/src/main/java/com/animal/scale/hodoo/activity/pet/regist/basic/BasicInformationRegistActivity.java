@@ -38,7 +38,6 @@ import java.util.Calendar;
 
 public class BasicInformationRegistActivity extends BaseActivity<BasicInformationRegistActivity> implements BasicInformationRegistIn.View {
 
-
     ActivityBasicInformaitonRegistBinding binding;
 
     private static final int CAMERA_REQUEST = 1888;

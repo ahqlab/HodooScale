@@ -75,7 +75,7 @@
     <string name="recommend">권장</string>
 
     <!-- MAIN Activity -->
-    <string name="istyle_already_a_member">이미 호두 회원이신가요비?</string>
+    <string name="istyle_already_a_member">이미 호두 회원이신가요?</string>
     <!-- Login Activity -->
     <string name="istyle_forgot_password">비밀번호를 잊으셨나요?</string>
 
@@ -331,6 +331,6 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="choice_country">국가</string>
     <string name="bcs_watching_tv_desc">동영상을 본 후 반려견의 BCS 단계를 선택하십시오.</string>
     <string name="select_bcs">Select BCS</string>
-
+    <string name="istyle_required_select_bcs_message">BCS를 선택하세요.</string>
 
 </resources>

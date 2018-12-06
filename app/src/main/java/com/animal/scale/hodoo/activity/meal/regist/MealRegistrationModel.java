@@ -1,7 +1,10 @@
 package com.animal.scale.hodoo.activity.meal.regist;
 
+import android.content.Context;
+
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
@@ -11,6 +14,15 @@ import com.animal.scale.hodoo.service.NetRetrofit;
 import retrofit2.Call;
 
 public class MealRegistrationModel extends CommonModel {
+
+    Context context;
+
+    public SharedPrefManager sharedPrefManager;
+
+    public void loadData(Context context) {
+        this.context = context;
+        sharedPrefManager = SharedPrefManager.getInstance(context);
+    }
 
     public void getFeedInfo(int feedId, final DomainCallBackListner<Feed> domainCallBackListner) {
         Call<Feed> call = NetRetrofit.getInstance().getFeedService().getFeedInfo(feedId);

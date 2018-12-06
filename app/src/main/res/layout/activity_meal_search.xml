@@ -34,6 +34,39 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
+
+                <AutoCompleteTextView
+                    android:id="@+id/feed_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/rounded_rect_radius_10"
+                    android:drawableLeft="@drawable/search_meal_m_glass"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:id="@+id/list_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="@string/istyle_recent_search_word"/>
+
+                <ListView
+                    android:id="@+id/feed_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </ListView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/hodoo_deep_gray"
                 android:gravity="center_vertical|center_horizontal"
                 android:orientation="horizontal"
@@ -58,37 +91,6 @@
                     android:letterSpacing="-0.03"
                     android:text="@string/istyle_search_info"
                     android:textSize="9sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical|center_horizontal"
-                android:orientation="vertical">
-
-                <AutoCompleteTextView
-                    android:id="@+id/feed_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:drawableRight="@drawable/search_meal_m_glass" />
-
-                <TextView
-                    android:id="@+id/list_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="5dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="@string/istyle_recent_search_word"/>
-
-                <ListView
-                    android:id="@+id/feed_listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </ListView>
 
             </LinearLayout>
 

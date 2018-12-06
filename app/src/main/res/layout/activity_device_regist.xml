@@ -35,8 +35,8 @@
 
 
             <ImageView
-                android:layout_width="192.7dp"
-                android:layout_height="65.9dp"
+                android:layout_width="242dp"
+                android:layout_height="154dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="70.9dp"
                 android:src="@drawable/device_regist_scale_icon" />

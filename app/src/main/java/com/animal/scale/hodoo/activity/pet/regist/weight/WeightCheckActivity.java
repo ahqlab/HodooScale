@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.pet.regist.weight;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
@@ -22,7 +24,7 @@ import com.animal.scale.hodoo.util.ViewFlipperAction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> implements  WeightCheckIn.View {
+public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> implements WeightCheckIn.View {
 
     //뷰플리퍼
     //인덱스
@@ -58,11 +60,40 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
 
     @Override
     public void setDomain(PetWeightInfo petWeightInfo) {
-        if(petWeightInfo != null){
+        if (petWeightInfo != null) {
             binding.setDomain(petWeightInfo);
-        }else{
+            setNumberPicker(binding.bcs, petWeightInfo);
+        } else {
             binding.setDomain(new PetWeightInfo());
+            setNumberPicker(binding.bcs);
         }
+    }
+
+    private void setNumberPicker(NumberPicker numberPicker, PetWeightInfo petWeightInfo) {
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(5);
+        numberPicker.setValue(petWeightInfo.getBcs());
+        numberPicker.setWrapSelectorWheel(true);
+        //Set a value change listener for NumberPicker
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                binding.getDomain().setBcs(newVal);
+            }
+        });
+    }
+
+    private void setNumberPicker(NumberPicker numberPicker) {
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(5);
+        numberPicker.setWrapSelectorWheel(true);
+        //Set a value change listener for NumberPicker
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                binding.getDomain().setBcs(newVal);
+            }
+        });
     }
 
     @Override
@@ -72,18 +103,28 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
 
     @Override
     public void registResult(Integer integer) {
-        if(integer != 0){
+        if (integer != 0) {
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
             finish();
-        }else{
+        } else {
             Log.e("HJLEE", "registResult ERROR");
         }
     }
 
     public void onClickCompleateBtn(View view) {
-        presenter.deleteWeightInfo(petIdx, binding.getDomain().getId());
+        if (binding.getDomain().getBcs() > 0) {
+            presenter.deleteWeightInfo(petIdx, binding.getDomain().getId());
+        } else {
+            super.showBasicOneBtnPopup(null, getResources().getString(R.string.istyle_required_select_bcs_message))
+                    .setPositiveButton(getResources().getString(R.string.istyle_required_select_bcs_message), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).show();
+        }
     }
 
     /*@Override
