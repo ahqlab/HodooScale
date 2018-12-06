@@ -78,12 +78,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_weight, container, false);
         binding.setActivity(this);
-//        binding.chartView.setNoDataText("Description that you want");
-
-        /*칼로리 숫자 초기설정 (s)*/
-        binding.tickerView.setCharacterLists(TickerUtils.provideNumberList());
-        binding.tickerView.setText( String.valueOf(0));
-        /*칼로리 숫자 초기설정 (e)*/
 
         bcsArr = getResources().getStringArray(R.array.bcs_arr);
         binding.bcsSubscript.setText(bcsArr[0]);
@@ -219,28 +213,32 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public void onRefreshClick(View v) {
         Log.e(TAG, "refrash click");
         if ( !refrashState ) {
-            RotateAnimation rotate = new RotateAnimation(
-                    0, 360,
-                    Animation.RELATIVE_TO_SELF, 0.5f,
-                    Animation.RELATIVE_TO_SELF, 0.5f
-            );
-
-            rotate.setDuration(900);
-            rotate.setRepeatCount(Animation.INFINITE);
-            v.startAnimation(rotate);
-
+            rotationStart(v);
             /* 새로고침에 대한 데이터 처리 (s) */
 
             nowTime = System.currentTimeMillis();
             binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
-
             /* 새로고침에 대한 데이터 처리 (e) */
             refrashState = true;
         } else {
-            v.clearAnimation();
-            v.animate().cancel();
+            rotationStop(v);
             refrashState = false;
         }
+    }
+    private void rotationStart( View v ) {
+        RotateAnimation rotate = new RotateAnimation(
+                0, 360,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        );
+
+        rotate.setDuration(900);
+        rotate.setRepeatCount(Animation.INFINITE);
+        v.startAnimation(rotate);
+    }
+    private void rotationStop( View v ) {
+        v.clearAnimation();
+        v.animate().cancel();
     }
 
     @Override
@@ -248,13 +246,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         //Kcal 로리 표시
 //        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
 //        presenter.initWeekCalendar();
-
-        final int testNumberMax = 14;
-        for (float i = 0; i < testNumberMax; i++) {
-            Log.e(TAG, String.format("%.2f", i));
-            binding.tickerView.setText( String.format("%.2f", i) );
-        }
-        binding.tickerView.setText( String.valueOf(4.36f));
 
         binding.weightView.setNumber(28.3f);
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -14,14 +13,13 @@ import com.animal.scale.hodoo.R;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
-import java.util.stream.IntStream;
-
 public class WeightView extends LinearLayout {
     private final String TAG = WeightView.class.getSimpleName();
-    private int displayCount = 0;
-    private float textSize = 12;
-    private TickerView[] firstNum;
-    private TickerView[] pointView;
+    private int mDisplayCount = 0;
+    private float mTextSize = 12;
+    private String mSufFix = "";
+    private TickerView[] mFirstNum;
+    private TickerView[] mPointView;
     public WeightView(Context context) {
         this(context, null);
     }
@@ -38,41 +36,48 @@ public class WeightView extends LinearLayout {
     private void init () {
         setOrientation(HORIZONTAL);
         LinearLayout.LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        pointView = new TickerView[displayCount - 1];
-        firstNum = new TickerView[3];
-        for (int i = 0; i < displayCount; i++) {
-            if ( i == 0 && displayCount > 1 ) {
-                for (int j = 0; j < firstNum.length - 1; j++) {
-                    TickerView firstNumView = new TickerView(getContext());
-                    firstNumView.setAnimationDuration(1500);
-                    firstNumView.setCharacterLists(TickerUtils.provideNumberList());
-                    firstNumView.setTextSize(textSize);
-                    firstNumView.setLayoutParams(params);
-                    firstNum[j] = firstNumView;
-                    addView(firstNum[j]);
-                }
+        mPointView = new TickerView[mDisplayCount];
+        mFirstNum = new TickerView[3];
 
-                TextView dot = new TextView(getContext());
-                dot.setText(".");
-                dot.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize / 4);
+        /* 100단위 배치 */
+        for (int j = 0; j < mFirstNum.length - 1; j++) {
+            TickerView firstNumView = new TickerView(getContext());
+            firstNumView.setAnimationDuration(2000);
+            firstNumView.setCharacterLists(TickerUtils.provideNumberList());
+            firstNumView.setTextSize(mTextSize);
+            firstNumView.setLayoutParams(params);
+            mFirstNum[j] = firstNumView;
+            addView(mFirstNum[j]);
+        }
 
-                firstNum[0].setText("0");
-                addView(dot);
-                continue;
-            }
+        if ( mDisplayCount > 0 ) {
+            TextView dot = new TextView(getContext());
+            dot.setText(".");
+            dot.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize / 4);
+
+            mFirstNum[0].setText("0");
+            addView(dot);
+        }
+        /* 소수점 표현을 위한 배치 */
+        for (int i = 0; i < mDisplayCount; i++) {
             TickerView number = new TickerView(getContext());
             number.setCharacterLists(TickerUtils.provideNumberList());
 
-            number.setTextSize(textSize);
+            number.setTextSize(mTextSize);
             number.setLayoutParams(params);
-            number.setAnimationDuration(1500);
-            pointView[i - 1] = number;
+            number.setAnimationDuration(2000);
+            mPointView[i] = number;
             addView(number);
             number.setText("0");
         }
-        TextView kg = new TextView(getContext());
-        kg.setText("kg");
-        addView(kg);
+        //접미사 처리
+        if ( mSufFix != null || !mSufFix.equals("") ) {
+            TextView kg = new TextView(getContext());
+            kg.setText(mSufFix);
+            kg.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize / 4);
+            addView(kg);
+        }
+
     }
     private void getAttr ( AttributeSet attrs ) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WeightView);
@@ -83,9 +88,9 @@ public class WeightView extends LinearLayout {
         setAttr(typedArray);
     }
     private void setAttr( TypedArray attr ) {
-        displayCount = attr.getInteger(R.styleable.WeightView_displayNum, 1);
-        Log.e(TAG, String.format("displayCount : %d", displayCount));
-        textSize = attr.getDimension(R.styleable.WeightView_textSize, 12);
+        mDisplayCount = attr.getInteger(R.styleable.WeightView_displayNum, 1);
+        mTextSize = attr.getDimension(R.styleable.WeightView_textSize, 12);
+        mSufFix = attr.getString(R.styleable.WeightView_sufFix);
         attr.recycle();
     }
     public void setNumber ( float num ) {
@@ -96,21 +101,20 @@ public class WeightView extends LinearLayout {
         char[] number = new char[splitStr[0].length()];
         for(int i=0;i<number.length;i++){
             number[i]=(splitStr[0].charAt(i));
-            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++) {
-                firstNum[i].setText(String.valueOf(j));
-            }
-            System.out.println(number[i]); //출력
+            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++)
+                mFirstNum[i].setText(String.valueOf(j));
         }
-//        for (int i = 0; i <= Integer.parseInt(splitStr[0]); i++) {
-//            firstNum.setText( String.valueOf(i) );
-//        }
-//        for (int i = 0; i < displayCount - 1; i++) {
-//            for (int j = 0; j < point.length; j++) {
-//                for (int k = 0; k < Integer.parseInt(point[j]); k++) {
-//                    pointView[i].setText(String.valueOf(k));
-//                }
-//            }
-//
-//        }
+        number = new char[splitStr[1].length()];
+        if ( number.length < mDisplayCount) {
+            number = new char[mDisplayCount];
+            for (int i = 0; i < number.length; i++)
+                if ( i < splitStr[1].length() )
+                    number[i]=(splitStr[1].charAt(i));
+                else
+                    number[i]='0';
+        }
+        for (int i = 0; i < number.length; i++) {
+            mPointView[i].setText(String.valueOf(number[i]));
+        }
     }
 }

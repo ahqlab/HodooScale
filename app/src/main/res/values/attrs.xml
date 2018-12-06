@@ -16,6 +16,7 @@
     </declare-styleable>
 
     <declare-styleable name="WeightView">
+        <attr name="sufFix" format="reference|string"/>
         <attr name="textSize" format="dimension" />
         <attr name="displayNum" format="reference|integer"/>
     </declare-styleable>

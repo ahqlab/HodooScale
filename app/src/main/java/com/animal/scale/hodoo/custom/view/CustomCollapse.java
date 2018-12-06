@@ -119,10 +119,9 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
 
     }
     private void initSize () {
-
         header = this.getChildAt(0);
         content = this.getChildAt(1);
-
+//
         if ( mIconView == null ) {
             LayoutParams iconParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             iconParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -135,22 +134,16 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
 
             addView(mIconView);
         }
-
+//
         header.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
         content.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-        openHeight = dpToPx(content.getMeasuredHeight());
-
-
-        LinearLayout wrap = (LinearLayout) content;
-        Rect realSize = new Rect();
-        TextView contentTv = (TextView) wrap.getChildAt(0);
-        contentTv.getPaint().getTextBounds(contentTv.getText().toString(), 0, contentTv.getText().length(), realSize);
 
         if ( !initState ) {
             LayoutParams params = (LayoutParams) content.getLayoutParams();
             params.height = 0;
             content.setLayoutParams(params);
         }
+
         ViewGroup.LayoutParams params = this.getLayoutParams();
         params.height = dpToPx(header.getMeasuredHeight() - 15);
         this.setLayoutParams(params);
