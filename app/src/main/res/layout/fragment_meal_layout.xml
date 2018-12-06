@@ -32,6 +32,7 @@
             app:weekTextSize="11sp" />
 
         <ScrollView
+            android:id="@+id/calorie_scrollview"
             android:layout_below="@+id/weekCalendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -180,6 +181,19 @@
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="15sp"
+            android:onClick="@{activity::onClickFloatingBtn}"
+            app:fabSize="normal"
+            android:tint="@android:color/white"
+            android:src="@drawable/edit" />
+
+        <!-- new layout (e) -->
 
 
         <ScrollView
