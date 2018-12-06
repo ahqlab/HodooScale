@@ -35,7 +35,6 @@ import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import noman.weekcalendar.WeekCalendar;
 
@@ -172,13 +171,6 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         ArrayList<RadarEntry> entries1 = new ArrayList<>();
         ArrayList<RadarEntry> entries2 = new ArrayList<>();
 
-        List<String> lables = new ArrayList<>();
-        lables.add("지방");
-        lables.add("비타민");
-        lables.add("미네랄");
-        lables.add("철분");
-        lables.add("단백질");
-
         entries1.add(new RadarEntry(100));
         entries1.add(new RadarEntry(100));
         entries1.add(new RadarEntry(100));
@@ -227,9 +219,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         data.setDrawValues(false);
         data.setValueTextColor(Color.WHITE);
 
-//radar_chart
-        binding.radarChart.setData(data);
-        binding.radarChart.invalidate();
+        chart.setData(data);
+        chart.invalidate();
     }
     public void onRefreshClick( View v ) {
         if ( !refrashState ) {

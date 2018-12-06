@@ -173,12 +173,10 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white">
                     <com.github.mikephil.charting.charts.RadarChart
-                        android:layout_marginTop="50dp"
-                        android:layout_marginBottom="40dp"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/radar_chart"
-                        android:layout_width="211dp"
-                        android:layout_height="220dp"/>
+                        android:id="@+id/chart1"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_margin="8dp" />
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
@@ -332,13 +330,6 @@
                     android:layout_marginTop="21.6dp"
                     android:background="@drawable/weight_middle_coment_background_550_112"
                     android:orientation="vertical">
-
-                    <com.github.mikephil.charting.charts.RadarChart
-                        android:id="@+id/chart1"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_margin="8dp" />
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
