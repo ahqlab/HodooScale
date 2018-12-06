@@ -80,7 +80,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.setActivity(this);
 
         bcsArr = getResources().getStringArray(R.array.bcs_arr);
-        binding.bcsSubscript.setText(bcsArr[0]);
+        binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
 
@@ -88,7 +88,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         presenter = new WeightFragmentPresenter(this, binding.chartView);
         presenter.loadData(getActivity());
 //        //Kcal 로리 표시
-//        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
 //        presenter.initWeekCalendar();
         /*((HomeActivity)getActivity()).binding.appBarNavigation.petImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,20 +140,17 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
             binding.bcsStep.setText( String.valueOf(bcs) );
         }
-
-//        binding.clockHands.startAnimation(animation);
     }
 
     //여기 날짜도 들어가야함..
     @Override
     public void setLastCollectionData(RealTimeWeight d) {
-//        if(d != null){
-//            DecimalFormat fmt = new DecimalFormat("0.##");
-//            String decimal =  fmt.format(d.getValue());
-//            binding.currentKg.setText(decimal + "Kg");
-//        }else{
-//            binding.currentKg.setText("0 Kg");
-//        }
+        if(d != null){
+            DecimalFormat fmt = new DecimalFormat("0.##");
+            binding.weightView.setNumber(d.getValue());
+        }else{
+            binding.weightView.setNumber(0f);
+        }
     }
 
     @Override
@@ -209,7 +206,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setBcs(PetWeightInfo petWeightInfo) {
-//        binding.myBcsStep.setText("BCS " + (petWeightInfo.getBcs() + 1) + "단계");
         presenter.setAnimationGaugeChart(petWeightInfo.getBcs());
     }
 
@@ -224,6 +220,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
             nowTime = System.currentTimeMillis();
             binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
+
+            presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
             /* 새로고침에 대한 데이터 처리 (e) */
             refrashState = true;
         } else {
@@ -253,7 +251,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 //        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
 //        presenter.initWeekCalendar();
 
-        binding.weightView.setNumber(28.3f);
+//        binding.weightView.setNumber(28.3f);
 
 
         super.onStart();

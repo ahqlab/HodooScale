@@ -7,8 +7,8 @@
     </string-array>
     <string-array name="bcs_arr">
         <item>부족</item>
-        <item>적정</item>
         <item>초과</item>
+        <item>적정</item>
     </string-array>
 
 </resources>

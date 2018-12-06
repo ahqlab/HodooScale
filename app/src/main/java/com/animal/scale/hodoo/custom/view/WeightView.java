@@ -17,6 +17,7 @@ public class WeightView extends LinearLayout {
     private final String TAG = WeightView.class.getSimpleName();
     private int mDisplayCount = 0;
     private float mTextSize = 12;
+    private int MAX_COUNT = 4;
     private String mSufFix = "";
     private TickerView[] mFirstNum;
     private TickerView[] mPointView;
@@ -37,9 +38,9 @@ public class WeightView extends LinearLayout {
         setOrientation(HORIZONTAL);
         LinearLayout.LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mPointView = new TickerView[mDisplayCount];
-        mFirstNum = new TickerView[3];
+        mFirstNum = new TickerView[MAX_COUNT];
 
-        /* 100단위 배치 */
+        /* MAX_COUNT 배치 */
         for (int j = 0; j < mFirstNum.length - 1; j++) {
             TickerView firstNumView = new TickerView(getContext());
             firstNumView.setAnimationDuration(2000);
@@ -94,8 +95,8 @@ public class WeightView extends LinearLayout {
         attr.recycle();
     }
     public void setNumber ( float num ) {
-        
-        String numberStr = String.valueOf(num);
+        String formatStr = "%." + String.valueOf(mDisplayCount) + "f";
+        String numberStr = String.format(formatStr, num);
         String[] splitStr = numberStr.split("\\.");
 
         char[] number = new char[splitStr[0].length()];
@@ -104,17 +105,21 @@ public class WeightView extends LinearLayout {
             for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++)
                 mFirstNum[i].setText(String.valueOf(j));
         }
-        number = new char[splitStr[1].length()];
-        if ( number.length < mDisplayCount) {
-            number = new char[mDisplayCount];
-            for (int i = 0; i < number.length; i++)
-                if ( i < splitStr[1].length() )
+        if ( mDisplayCount > 0 ) {
+            number = new char[splitStr[1].length()];
+            if ( number.length < mDisplayCount) {
+                number = new char[mDisplayCount];
+                for (int i = 0; i < number.length; i++)
+                    if ( i < splitStr[1].length() )
+                        number[i]=(splitStr[1].charAt(i));
+                    else
+                        number[i]='0';
+            } else {
+                for (int i = 0; i < number.length; i++)
                     number[i]=(splitStr[1].charAt(i));
-                else
-                    number[i]='0';
-        }
-        for (int i = 0; i < number.length; i++) {
-            mPointView[i].setText(String.valueOf(number[i]));
+            }
+            for (int i = 0; i < number.length; i++)
+                mPointView[i].setText(String.valueOf(number[i]));
         }
     }
 }

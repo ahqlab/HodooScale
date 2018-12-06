@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/hodoo_background_color"
+        android:background="@color/hodoo_new_background_color"
         tools:context=".activity.home.fragment.meal.MealFragment">
 
         <noman.weekcalendar.WeekCalendar
@@ -31,8 +31,159 @@
             app:weekTextColor="@color/black"
             app:weekTextSize="11sp" />
 
+        <ScrollView
+            android:layout_below="@+id/weekCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <com.animal.scale.hodoo.custom.view.TopImageLayout
+                    android:paddingLeft="38dp"
+                    android:paddingRight="38dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center_horizontal"
+                    app:topImage="@drawable/fork_and_knife">
+                    <com.animal.scale.hodoo.custom.view.WeightView
+                        android:id="@+id/calorie_view"
+                        app:displayNum="0"
+                        app:textSize="40sp"
+                        app:sufFix="kcal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"/>
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/today_intake_kcal"
+                        android:textColor="#9b9b9b"/>
+
+
+                    <LinearLayout
+                        android:layout_marginTop="30dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ProgressBar
+                            android:id="@+id/calorie_bar"
+                            style="@style/CalorieProgress"
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressTint="@color/mainRed"
+                            android:progressBackgroundTint="#f1f1f1"/>
+                        <RelativeLayout
+                            android:layout_marginTop="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_alignParentLeft="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0kcal"/>
+                            <TextView
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="700kcal\n(권장량)"/>
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <!-- sync (s) -->
+                    <RelativeLayout
+                        android:paddingTop="30dp"
+                        android:paddingBottom="22dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/last_refresh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:alpha=".32"
+                            android:textSize="11sp"
+                            android:text="@string/last_sync_refresh_str"
+                            android:textColor="#9b9b9b"/>
+                        <ImageView
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/refresh_icon"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/refresh"
+                            android:onClick="@{activity::onRefreshClick}"/>
+                    </RelativeLayout>
+                    <!-- sync (e) -->
+
+                </com.animal.scale.hodoo.custom.view.TopImageLayout>
+
+                <com.animal.scale.hodoo.custom.view.CustomCollapse
+                    android:layout_marginTop="1dp"
+                    android:paddingLeft="38dp"
+                    android:paddingRight="38dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white">
+                    <LinearLayout
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_marginRight="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TIP"
+                            android:textColor="@color/mainBlack"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="title"
+                            android:textColor="@color/subscript_color"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="29dp"
+                        android:layout_below="@+id/header"
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/collapse_content"
+                            android:textColor="#9b9b9b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/test_content"/>
+                    </LinearLayout>
+                </com.animal.scale.hodoo.custom.view.CustomCollapse>
+                <RelativeLayout
+                    android:layout_marginTop="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white">
+                    <com.github.mikephil.charting.charts.RadarChart
+                        android:id="@+id/chart1"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_margin="8dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
 
         <ScrollView
+            android:visibility="invisible"
             android:layout_below="@+id/weekCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -179,13 +330,6 @@
                     android:layout_marginTop="21.6dp"
                     android:background="@drawable/weight_middle_coment_background_550_112"
                     android:orientation="vertical">
-
-                    <com.github.mikephil.charting.charts.RadarChart
-                        android:id="@+id/chart1"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_margin="8dp" />
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
