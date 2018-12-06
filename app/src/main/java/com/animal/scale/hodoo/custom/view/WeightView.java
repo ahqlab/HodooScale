@@ -94,8 +94,8 @@ public class WeightView extends LinearLayout {
         attr.recycle();
     }
     public void setNumber ( float num ) {
-        
-        String numberStr = String.valueOf(num);
+        String formatStr = "%." + String.valueOf(mDisplayCount) + "f";
+        String numberStr = String.format(formatStr, num);
         String[] splitStr = numberStr.split("\\.");
 
         char[] number = new char[splitStr[0].length()];
@@ -112,9 +112,11 @@ public class WeightView extends LinearLayout {
                     number[i]=(splitStr[1].charAt(i));
                 else
                     number[i]='0';
+        } else {
+            for (int i = 0; i < number.length; i++)
+                number[i]=(splitStr[1].charAt(i));
         }
-        for (int i = 0; i < number.length; i++) {
+        for (int i = 0; i < number.length; i++)
             mPointView[i].setText(String.valueOf(number[i]));
-        }
     }
 }
