@@ -24,5 +24,4 @@
         <attr name="topImage" format="reference|integer"/>
     </declare-styleable>
 
-
 </resources>

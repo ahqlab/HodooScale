@@ -137,7 +137,6 @@
                             android:layout_height="14dp"
                             android:src="@drawable/refresh"
                             android:onClick="@{activity::onRefreshClick}"/>
-
                     </RelativeLayout>
                     <!-- sync (e) -->
                 </com.animal.scale.hodoo.custom.view.TopImageLayout>
