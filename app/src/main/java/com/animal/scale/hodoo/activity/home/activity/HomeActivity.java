@@ -87,7 +87,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     }
 
     public void onPetImageClick(View view) {
-        adapter = new AdapterOfPets(HomeActivity.this, data, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
+        adapter = new AdapterOfPets(HomeActivity.this, HomeActivity.this ,data, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
         alertDialog = super.showBasicOneBtnPopup("PET 선택", null);
         View customView = getLayoutInflater().inflate(R.layout.pet_list_dialog, null);
         ListView li = (ListView) customView.findViewById(R.id.pet_listview);
@@ -213,6 +213,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     public void setCurrentPetInfos(List<PetAllInfos> data) {
         for (PetAllInfos info : data) {
+            if(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) == 0){
+                mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, info.getPet().getPetIdx());
+            }
             if (info.getPet().getPetIdx() == mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)) {
                 //Curcle 이미지 셋팅
                 presenter.setCurcleImage(info);

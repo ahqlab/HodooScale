@@ -40,6 +40,21 @@ public class ActivityBowelPlateListPresenter implements ActivityBowelPlateListIn
     }
 
     @Override
+    public void setChangeDeviceRegisted(int deviceIdx, boolean b) {
+        model.setChangeDeviceRegisted(deviceIdx, b, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer integer) {
+                view.setChangeDeviceRegistedResult(integer);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
+
+    @Override
     public void getMyBowlPlateList() {
         model.getMyBowlPlateList(new CommonModel.DomainListCallBackListner<Device>() {
             @Override

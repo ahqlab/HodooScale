@@ -22,6 +22,8 @@ public interface WeightFragmentIn {
         void setLastCollectionData(RealTimeWeight d);
 
         void initWeekCalendar();
+
+        void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d);
     }
 
     interface Presenter{

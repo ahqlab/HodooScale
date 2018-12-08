@@ -15,11 +15,13 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="0dp"
         tools:context="com.animal.scale.hodoo.activity.home.activity.HomeActivity">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="0dp"
             android:theme="@style/AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
@@ -29,6 +31,7 @@
                 android:background="@color/white"
                 android:minHeight="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:elevation="0dp"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <TextView
@@ -37,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:text="@{activityInfo.barTitle}"
+                    android:textSize="20dp"
                     android:textColor="@color/hodoo_text_gray"
                     android:textStyle="bold" />
 

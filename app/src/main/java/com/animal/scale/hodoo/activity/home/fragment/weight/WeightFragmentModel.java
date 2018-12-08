@@ -110,6 +110,17 @@ public class WeightFragmentModel extends CommonModel {
         //커브 곡선
         set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set1.setCubicIntensity(0.2f);
+        set1.setDrawFilled(false);
+        set1.setDrawCircles(false);
+        set1.setLineWidth(1.8f);
+        set1.setCircleRadius(4f);
+        set1.setCircleColor(context.getResources().getColor(R.color.mainRed));
+        set1.setHighLightColor(context.getResources().getColor(R.color.mainRed));
+        set1.setColor(context.getResources().getColor(R.color.mainRed));
+        set1.setDrawHorizontalHighlightIndicator(false);
+
+        /*set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set1.setCubicIntensity(0.2f);
         //set1.setLineWidth(1.75f);
         //set1.setCircleRadius(5f);
         //set1.setCircleHoleRadius(2.5f);
@@ -121,7 +132,7 @@ public class WeightFragmentModel extends CommonModel {
         set1.setHighLightColor(Color.parseColor("#fc9596"));
         set1.setFillAlpha(100);
         // set the filled area
-        set1.setDrawFilled(true);
+        set1.setDrawFilled(true);*/
         set1.setFillFormatter(new IFillFormatter() {
             @Override
             public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {

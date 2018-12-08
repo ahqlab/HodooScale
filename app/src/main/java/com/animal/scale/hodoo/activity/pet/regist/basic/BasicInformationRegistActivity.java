@@ -463,15 +463,13 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 "카발리에 킹 찰스 스패니얼"
 
         };
-        AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
-        builder.setTitle(getResources().getString(R.string.pet_breed));
-        // add a radio button list
-        builder.setItems(values, new DialogInterface.OnClickListener() {
+        super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null)
+                .setItems(values, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 binding.petBreed.setText(values[which]);
                 dialog.dismiss();
             }
-        });
+        }).show();
     }
 }

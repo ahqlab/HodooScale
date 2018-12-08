@@ -16,6 +16,8 @@ import com.animal.scale.hodoo.activity.meal.update.MealUpdateActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfMealManager;
 import com.animal.scale.hodoo.adapter.AdapterOfSearchFeed;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.seekbar.ProgressItem;
 import com.animal.scale.hodoo.databinding.ActivityFeedListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -30,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FeedListActivity extends BaseActivity<FeedListActivity> implements FeedListIn.View {
+
+    SharedPrefManager mSharedPrefManager;
 
     ActivityFeedListBinding binding;
 
@@ -54,6 +58,9 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feed_list);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_feed)));
+
+        mSharedPrefManager = SharedPrefManager.getInstance(FeedListActivity.this);
+
         super.setToolbarColor();
         presenter = new FeedListPresenter(this);
         presenter.loadData(FeedListActivity.this);
@@ -106,21 +113,24 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         if (mealHistory != null) {
             if (rer > mealHistory.getCalorie()) {
                 binding.seekBar.setMax((int) rer);
-                binding.rer.setText(String.valueOf(rer) + "kcal");
+                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/"+String.valueOf(rer) + "kcal");
                 //initDataToSeekbar(rer);
             } else {
                 binding.seekBar.setMax((int) mealHistory.getCalorie());
-                binding.rer.setText(String.valueOf(rer) + "kcal");
+                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/"+String.valueOf(rer) + "kcal");
                 //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
             binding.seekBar.setProgress((int) mealHistory.getCalorie());
-            binding.calorieIntake.setText((int) mealHistory.getCalorie() + "kcal");
+            binding.calorieIntake.setText(String.valueOf(mealHistory.getCalorie()));
         } else {
             binding.seekBar.setMax((int) rer);
-            binding.rer.setText(String.valueOf(rer) + "kcal");
+            binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+            binding.rer2.setText("/"+String.valueOf(rer) + "kcal");
             //initDataToSeekbar(rer);
             binding.seekBar.setProgress(0);
-            binding.calorieIntake.setText(0 + "kcal");
+            binding.calorieIntake.setText("0");
         }
         binding.seekBar.setEnabled(true);
     }
@@ -128,11 +138,7 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
-        Log.e("HJLEE", "toString : " + petAllInfos.toString());
-        rer = new RER(5,  petAllInfos.getFactor()).getRER();
-        Log.e("HJLEE", "FACTOR : " + petAllInfos.getFactor());
-        Log.e("HJLEE", "RER : " + rer);
-        //progressItemList.clear();
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)) ,  petAllInfos.getFactor()).getRER();
         binding.seekBar.invalidate();
         presenter.getTodaySumCalorie();
     }

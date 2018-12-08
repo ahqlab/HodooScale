@@ -27,6 +27,7 @@ package com.animal.scale.hodoo.activity.home.fragment.weight;
         import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsActivity;
         import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
         import com.animal.scale.hodoo.common.SharedPrefManager;
+        import com.animal.scale.hodoo.common.SharedPrefVariable;
         import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
         import com.animal.scale.hodoo.domain.PetWeightInfo;
         import com.animal.scale.hodoo.domain.RealTimeWeight;
@@ -85,6 +86,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_weight, container, false);
         binding.setActivity(this);
 
+        mSharedPrefManager = SharedPrefManager.getInstance(getActivity());
+
         bcsArr = getResources().getStringArray(R.array.bcs_arr);
         binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
         nowTime = System.currentTimeMillis();
@@ -100,7 +103,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
 //        //Kcal 로리 표시
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
-//        presenter.initWeekCalendar();
+        presenter.initWeekCalendar();
         /*((HomeActivity)getActivity()).binding.appBarNavigation.petImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,10 +160,23 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void setLastCollectionData(RealTimeWeight d) {
         if(d != null){
+            Log.e("HJLEE", " >>>> "  + d.toString());
             DecimalFormat fmt = new DecimalFormat("0.##");
             binding.weightView.setNumber(d.getValue());
         }else{
             binding.weightView.setNumber(0f);
+        }
+    }
+
+    @Override
+    public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
+        if(d != null){
+            DecimalFormat fmt = new DecimalFormat("0.##");
+            binding.weightView.setNumber(d.getValue());
+            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+        }else{
+            binding.weightView.setNumber(0f);
+            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
     }
 
@@ -173,17 +189,21 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         /*todaysDate.setText(new DateTime().toLocalDate().toString() + " (Reset Button)");
         selectedDate.setText(new DateTime().plusDays(50).toLocalDate().toString()  + " (Set Selected Date Button)");
         startDate.setText(new DateTime().plusDays(7).toLocalDate().toString() + " (Set Start Date Button)");*/
-
         binding.weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
                 DateTime dt = dateTime;
+                DateTime now = new DateTime();
                 String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
-                presenter.getDefaultData(date);
-                //setBcsMessage(info.getPet().getBasic());
-                //weightFragment.drawChart();
-                presenter.getLastCollectionData(date);
-                presenter.setAnimationGaugeChart(bcs);
+                if (now.toDateTime().toString().compareTo(date) < 0) {
+
+                }else{
+                    presenter.getDefaultData(date);
+                    //setBcsMessage(info.getPet().getBasic());
+                    //weightFragment.drawChart();
+                    presenter.getLastCollectionData(date);
+                    presenter.setAnimationGaugeChart(bcs);
+                }
             }
         });
 
@@ -194,6 +214,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             }
         });
     }
+
+
 
     public void onClickResetGraph(View view){
 //        binding.clockHands.startAnimation(animation);

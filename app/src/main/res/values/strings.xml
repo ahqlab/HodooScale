@@ -335,6 +335,13 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="select_bcs">Select BCS</string>
     <string name="istyle_required_select_bcs_message">BCS를 선택하세요.</string>
     <string name="pet_breed">견종</string>
+    <string name="istyle_statistic_week">주</string>
+    <string name="istyle_statistic_month">월</string>
+    <string name="detail_meal_info">상세 성분</string>
+    <string name="delete">삭제</string>
+    <string name="device_is_already_registered">이미 등록된 기기입니다.</string>
+
+    <style name="ecommended">(권장량)</style>
 
 
 </resources>

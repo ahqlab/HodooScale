@@ -36,7 +36,6 @@ public class FindHodoosPresenter implements  FindHodoosIn.Presenter {
             public void doPostExecute(Integer result) {
                 view.registDeviceResult(result);
             }
-
             @Override
             public void doPreExecute() {
 

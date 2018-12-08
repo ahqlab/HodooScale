@@ -31,73 +31,105 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/my_toolbar"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#19455b63"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:text="@string/istyle_calories_taken_today" />
-
-                <com.animal.scale.hodoo.custom.view.seekbar.CustomSeekBar
-                    android:id="@+id/seekBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:max="100"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:progress="0"
-                    android:progressDrawable="@android:color/transparent"
-                    android:thumb="@android:color/transparent"
-                    android:thumbOffset="12dp" />
-
-            </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:background="@color/white"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="43dp"
-                    android:layout_marginBottom="5dp"
-                    app:conOnlyFloatToString="@{domain.calculationCalories}"
-                    android:textColor="@color/hodoo_pink"
-                    android:textSize="24dp" />
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:letterSpacing="0.01"
+                        android:text="@string/istyle_calories_taken_today"
+                        android:textColor="@color/mainBlack"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/calorie_intake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123"
+                        android:textColor="@color/mainRed"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/rer2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/700Kcal"
+                        android:textColor="@color/mainBlack"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@={domain.name}"
-                    android:textSize="27dp" />
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="40dp"
+                    android:orientation="vertical">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginBottom="42dp"
-                    android:background="@drawable/rounded_edittext_bg"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="@string/istyle_check_components"
-                    android:onClick="@{activity::onClickDetailBtn}"
-                    android:textColor="@color/hodoo_pink"
-                    android:textStyle="bold" />
+                    <ProgressBar
+                        android:id="@+id/seek_bar"
+                        style="@style/CalorieProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:max="100"
+                        android:progress="50"
+                        android:progressBackgroundTint="#f1f1f1"
+                        android:progressTint="@color/mainRed" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="31dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.01"
+                        android:text="0kcal"
+                        android:textColor="#4a4a4a"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/rer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:letterSpacing="0.01"
+                        android:text="700kcal"
+                        android:textColor="#4a4a4a"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -105,52 +137,131 @@
                 android:layout_height="wrap_content"
                 android:background="#19455b63"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="1dp">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/istyle_select_components_and_units" />
+                    android:text="@={domain.name}"
+                    android:textSize="20dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="236Kcal"
+                        android:textColor="@color/mainRed"
+                        android:textSize="30sp"
+                        app:conOnlyFloatToString="@{domain.calculationCalories}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" / 100g"
+                        android:textColor="@color/mainBlack"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:background="@drawable/meal_info_icon"
+                        android:layout_marginRight="5dp"
+                        android:onClick="@{activity::onClickDetailBtn}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_meal_info"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#19455b63"
+                android:orientation="vertical"
+                android:padding="1dp">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:gravity="center_horizontal|center_vertical"
                 android:orientation="horizontal">
 
                 <NumberPicker
                     android:id="@+id/jungsu"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp" />
+                    android:layout_marginRight="27dp"
+                    android:focusable="false" />
 
                 <NumberPicker
                     android:id="@+id/umsu"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_marginRight="27dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp" />
+                    android:focusable="false" />
 
                 <NumberPicker
                     android:id="@+id/unit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp" />
+                    android:focusable="false"
+                    android:maxLength="10" />
+
             </LinearLayout>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <Button
-                    style="@style/CommonBtn"
-                    android:layout_marginTop="16dp"
-                    android:onClick="@{activity::onClickSaveBtn}"
-                    android:text="@string/save" />
-            </LinearLayout>
-
+                android:layout_height="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/rounded_pink_btn"
+                android:onClick="@{activity::onClickSaveBtn}"
+                android:text="@string/save"
+                android:textColor="@color/white" />
         </LinearLayout>
     </RelativeLayout>
 </layout>

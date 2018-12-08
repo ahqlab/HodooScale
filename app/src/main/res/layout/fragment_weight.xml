@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white">
                     <com.animal.scale.hodoo.custom.view.CircleTextView
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="23dp"
                         android:layout_marginBottom="18dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -200,7 +200,10 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/chartView"
                         android:layout_width="match_parent"
-                        android:layout_height="130dp"
+                        android:layout_height="163dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="12dp"
                         android:layout_gravity="center_vertical|center_horizontal"
                         android:gravity="center_vertical|center_horizontal" />
 
@@ -262,7 +265,9 @@
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chart1"
                             android:layout_width="match_parent"
-                            android:layout_height="310dp"
+                            android:layout_height="238dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
                             android:layout_below="@+id/top_buttons"
                             android:background="@color/white"
                             android:layout_weight="1" />

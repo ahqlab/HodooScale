@@ -13,6 +13,8 @@ public interface ActivityBowelPlateListIn {
         void MyBowlPlateList(List<Device> d);
 
         void setChangeSwithStatusResult(Integer integer);
+
+        void setChangeDeviceRegistedResult(Integer integer);
     }
 
     interface Presenter{
@@ -22,5 +24,7 @@ public interface ActivityBowelPlateListIn {
         void loadData(Context context);
 
         void setChangeSwithStatus(int deviceIdx, boolean b);
+
+        void setChangeDeviceRegisted(int deviceIdx, boolean b);
     }
 }

@@ -79,9 +79,10 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         presenter.getPetAllInfo();
         feedId = intent.getIntExtra("feedId", 0);
         presenter.getFeedInfo(feedId);
+
         dbHandler = new DBHandler(this);
         progressItemList = new ArrayList<ProgressItem>();
-        binding.seekBar.initData(progressItemList);
+        //binding.seekBar.initData(progressItemList);
     }
 
 
@@ -133,7 +134,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         return MealRegistrationActivity.this;
     }
 
-    public void initDataToSeekbar(float rer, float kcal) {
+    /*public void initDataToSeekbar(float rer, float kcal) {
         mProgressItem = new ProgressItem();
         mProgressItem.progressItemPercentage = (float) (((rer * 0.7) / kcal) * 100);
         mProgressItem.color = R.color.seek_bar_gray;
@@ -165,7 +166,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         progressItemList.add(mProgressItem);
 
         binding.seekBar.invalidate();
-    }
+    }*/
 
     @Override
     public void setFeedInfo(Feed feed) {
@@ -187,7 +188,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
-        rer = new RER(5, petAllInfos.getFactor()).getRER();
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         presenter.getTodaySumCalorie();
     }
 
@@ -196,16 +197,24 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         if (mealHistory != null) {
             if (rer > mealHistory.getCalorie()) {
                 binding.seekBar.setMax((int) rer);
-                initDataToSeekbar(rer);
+                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+                //initDataToSeekbar(rer);
             } else {
                 binding.seekBar.setMax((int) mealHistory.getCalorie());
-                initDataToSeekbar(rer, mealHistory.getCalorie());
+                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+                //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
             binding.seekBar.setProgress((int) mealHistory.getCalorie());
+            binding.calorieIntake.setText(String.valueOf(mealHistory.getCalorie()));
         } else {
             binding.seekBar.setMax((int) rer);
-            initDataToSeekbar(rer);
+            binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+            binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+            //initDataToSeekbar(rer);
             binding.seekBar.setProgress(0);
+            binding.calorieIntake.setText("0");
         }
         binding.seekBar.setEnabled(true);
     }

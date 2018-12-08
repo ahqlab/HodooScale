@@ -7,6 +7,7 @@ import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.animal.scale.hodoo.util.DateUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -90,11 +91,15 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
     }
 
     @Override
-    public void getLastCollectionData(String date) {
+    public void getLastCollectionData(final String date) {
         model.getLastCollectionData(date, new WeightFragmentModel.DomainCallBackListner<RealTimeWeight>() {
             @Override
             public void doPostExecute(RealTimeWeight d) {
-                view.setLastCollectionData(d);
+                if(date.matches(DateUtil.getCurrentDatetime())){
+                    view.setLastCollectionDataOrSaveAvgWeight(d);
+                }else{
+                    view.setLastCollectionData(d);
+                }
             }
 
             @Override

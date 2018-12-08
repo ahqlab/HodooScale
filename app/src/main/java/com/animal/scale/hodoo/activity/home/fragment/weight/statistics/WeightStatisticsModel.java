@@ -85,11 +85,11 @@ public class WeightStatisticsModel extends CommonModel{
     }
 
     public String setWeekXValueFormatted(float value, AxisBase axis, List<Statistics> xValues){
-        return xValues.get((int) value % xValues.size()).getTheWeek() + context.getString(R.string.istyle_one_week);
+        return xValues.get((int) value % xValues.size()).getTheWeek() + context.getString(R.string.istyle_statistic_week);
     }
 
     public String setMonthXValueFormatted(float value, AxisBase axis, List<Statistics> xValues){
-        return xValues.get((int) value % xValues.size()).getTheMonth() + context.getString(R.string.istyle_one_month);
+        return xValues.get((int) value % xValues.size()).getTheMonth() + context.getString(R.string.istyle_statistic_month);
     }
 
     public String setYearXValueFormatted(float value, AxisBase axis, List<Statistics> xValues){
@@ -99,14 +99,17 @@ public class WeightStatisticsModel extends CommonModel{
     public LineData getData(ArrayList<Entry> yVals) {
         LineDataSet set1 = new LineDataSet(yVals, "DataSet");
         set1.setDrawValues(false);
+        //커브 곡선
         set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set1.setCubicIntensity(0.2f);
-        set1.setLineWidth(1.75f);
-        set1.setCircleRadius(5f);
-        set1.setCircleHoleRadius(2.5f);
-        set1.setColor(Color.parseColor("#fc9596"));
-        set1.setCircleColor(Color.parseColor("#fc9596"));
-        set1.setHighLightColor(Color.parseColor("#fc9596"));
+        set1.setDrawFilled(false);
+        set1.setDrawCircles(false);
+        set1.setLineWidth(1.8f);
+        set1.setCircleRadius(4f);
+        set1.setCircleColor(context.getResources().getColor(R.color.mainRed));
+        set1.setHighLightColor(context.getResources().getColor(R.color.mainRed));
+        set1.setColor(context.getResources().getColor(R.color.mainRed));
+        set1.setDrawHorizontalHighlightIndicator(false);
         return new LineData(set1);
     }
 

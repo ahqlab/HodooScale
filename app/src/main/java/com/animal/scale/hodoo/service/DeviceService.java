@@ -24,4 +24,7 @@ public interface DeviceService {
 
     @POST("device/change/connect/status")
     Call<Integer> setChangeSwithStatus(@Query("deviceIdx") int deviceIdx , @Query("connect") boolean b);
+
+    @POST("device/change/connection")
+    Call<Integer> setChangeRegisted(@Query("deviceIdx") int deviceIdx , @Query("isDel") boolean isDel);
 }

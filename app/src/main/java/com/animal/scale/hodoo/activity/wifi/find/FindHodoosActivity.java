@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.wifi.find;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -172,9 +173,18 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
 
     @Override
     public void registDeviceResult(Integer result) {
-
         if(result != 0){
-            presenter.confirmPetRegistration();
+            if(result == 100){
+                super.showBasicOneBtnPopup(null, getString(R.string.device_is_already_registered))
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            }else if(result == 1){
+                presenter.confirmPetRegistration();
+            }
         }
     }
 

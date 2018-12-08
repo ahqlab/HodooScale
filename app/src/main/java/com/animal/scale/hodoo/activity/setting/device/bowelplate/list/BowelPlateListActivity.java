@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.setting.device.bowelplate.list;
 
+import android.content.DialogInterface;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -69,8 +70,7 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
 
     @Override
     public void MyBowlPlateList(List<Device> list) {
-        adapter = new AbsractCommonAdapter<Device>(this, list) {
-            ListviewBowelPlateItemBinding adapterBinding;
+        adapter = new AbsractCommonAdapter<Device>(this, list) { ListviewBowelPlateItemBinding adapterBinding;
 
             @Override
             protected View getUserEditView(final int position, View convertView, ViewGroup parent) {
@@ -83,6 +83,13 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
                     adapterBinding = (ListviewBowelPlateItemBinding) convertView.getTag();
                     adapterBinding.setDomain(adapter.data.get(position));
                 }
+                convertView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        deleteDlalog(adapter.data.get(position).getDeviceIdx());
+                        return false;
+                    }
+                });
                 adapterBinding.usedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -97,10 +104,31 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
 
     @Override
     public void setChangeSwithStatusResult(Integer integer) {
-       // adapter.notifyDataSetChanged();
+        // adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void setChangeDeviceRegistedResult(Integer integer) {
+        presenter.getMyBowlPlateList();
     }
 
     public void onClickBowelPlateRegistBtn(View view) {
         BowelPlateListActivity.super.moveIntent(this, WifiSearchActivity.class, 0, 0, false);
+    }
+
+    public void deleteDlalog(final int deviceIdx) {
+        final String[] values = new String[]{
+                getResources().getString(R.string.delete)
+        };
+        super.showBasicOneBtnPopup(null, null)
+                .setItems(values, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //showToast("deviceIdx : " + deviceIdx);
+                        presenter.setChangeDeviceRegisted(deviceIdx, false);
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 }

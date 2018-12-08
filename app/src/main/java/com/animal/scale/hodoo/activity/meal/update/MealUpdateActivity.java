@@ -42,9 +42,9 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
 
     private String[] unitArray;
 
-    private String[] doubleUnitArray = {"g", getString(R.string.cup)};
+    private String[] doubleUnitArray;
 
-    private String[] singleUnitArray = {getString(R.string.ea)};
+    private String[] singleUnitArray;
 
     private int feedId;
 
@@ -62,19 +62,26 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+        feedId = intent.getIntExtra("feedId", 0);
+        historyIdx = intent.getIntExtra("historyIdx", 0);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_meal_update);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.food)));
+        super.setToolbarColor();
+
+        doubleUnitArray = new String[]{"g", this.getResources().getString(R.string.cup)};
+        singleUnitArray = new String[]{this.getResources().getString(R.string.ea)};
+
         presenter = new MealUpdatePresenter(this);
         presenter.loadData(this);
         presenter.getPetAllInfo();
-        feedId = intent.getIntExtra("feedId", 0);
         presenter.getFeedInfo(feedId);
-        historyIdx = intent.getIntExtra("historyIdx", 0);
         presenter.getThisHistory(historyIdx);
+
         dbHandler = new DBHandler(this);
         progressItemList = new ArrayList<ProgressItem>();
-        binding.seekBar.initData(progressItemList);
+        //binding.seekBar.initData(progressItemList);
     }
 
     private void setNumberPicker(NumberPicker numberPicker) {
@@ -125,6 +132,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     protected BaseActivity<MealUpdateActivity> getActivityClass() {
         return MealUpdateActivity.this;
     }
+
 
     public void initDataToSeekbar(float rer, float kcal) {
         mProgressItem = new ProgressItem();
@@ -180,7 +188,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
-        rer = new RER(5, petAllInfos.getFactor()).getRER();
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         presenter.getTodaySumCalorie();
     }
 
@@ -189,16 +197,24 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         if (mealHistory != null) {
             if (rer > mealHistory.getCalorie()) {
                 binding.seekBar.setMax((int) rer);
-                initDataToSeekbar(rer);
+                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+                //initDataToSeekbar(rer);
             } else {
                 binding.seekBar.setMax((int) mealHistory.getCalorie());
-                initDataToSeekbar(rer, mealHistory.getCalorie());
+                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+                //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
             binding.seekBar.setProgress((int) mealHistory.getCalorie());
+            binding.calorieIntake.setText(String.valueOf(mealHistory.getCalorie()));
         } else {
             binding.seekBar.setMax((int) rer);
-            initDataToSeekbar(rer);
+            binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+            binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+            //initDataToSeekbar(rer);
             binding.seekBar.setProgress(0);
+            binding.calorieIntake.setText("0");
         }
         binding.seekBar.setEnabled(true);
     }
@@ -209,14 +225,14 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         String[] array = String.valueOf(mealHistory.getCalorie()).split("\\.");
         binding.jungsu.setValue(extractIntegerFromFloat(mealHistory.getCalorie()));
         int nagativeValue = findDecimalArrayIndexFromNumberPicker(decimalArray, extractNegativeNumberFromFloat(mealHistory.getCalorie()));
-        if(nagativeValue != -1){
+        if (nagativeValue != -1) {
             binding.umsu.setValue(nagativeValue);
-        }else{
+        } else {
             binding.umsu.setValue(0);
         }
-        if(binding.getDomain().getTag().equals("D")){
+        if (binding.getDomain().getTag().equals("D")) {
             binding.unit.setValue(mealHistory.getUnitIndex());
-        }else if(binding.getDomain().getTag().equals("S")){
+        } else if (binding.getDomain().getTag().equals("S")) {
             binding.unit.setValue(0);
         }
     }
@@ -252,27 +268,27 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         presenter.updateMeal(mealHistory);
     }
 
-    public int findDecimalArrayIndexFromNumberPicker(String arr[] , String s) {
-        for (int i=0; i < arr.length; i++)
-            if(arr[i].matches("." + s))
+    public int findDecimalArrayIndexFromNumberPicker(String arr[], String s) {
+        for (int i = 0; i < arr.length; i++)
+            if (arr[i].matches("." + s))
                 return i;
 
         return -1;
     }
 
-
-    public String extractNegativeNumberFromFloat(float calorie){
+    public String extractNegativeNumberFromFloat(float calorie) {
         String[] array = String.valueOf(calorie).split("\\.");
-        if(array.length > 0){
+        if (array.length > 0) {
             return array[array.length - 1];
         }
         return null;
     }
-    public int extractIntegerFromFloat(float calorie){
+
+    public int extractIntegerFromFloat(float calorie) {
         String[] array = String.valueOf(calorie).split("\\.");
-        if(array.length > 0){
+        if (array.length > 0) {
             return Integer.parseInt(array[0]);
         }
-       return Integer.parseInt(String.valueOf(calorie));
+        return Integer.parseInt(String.valueOf(calorie));
     }
 }

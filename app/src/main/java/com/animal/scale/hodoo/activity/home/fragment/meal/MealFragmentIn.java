@@ -19,6 +19,10 @@ public interface MealFragmentIn {
         void initRaderChart();
 
         void setRadarChartData(Feed d);
+
+        void setPetAllInfo(PetAllInfos petAllInfos);
+
+        void setTodaySumCalorie(MealHistory mealHistory);
     }
     interface Presenter{
 
@@ -27,6 +31,10 @@ public interface MealFragmentIn {
         void initRaderChart();
 
         void getRadarChartData(String currentDatetime);
+
+        void getPetAllInfo();
+
+        void getTodaySumCalorie();
     }
 
 }
