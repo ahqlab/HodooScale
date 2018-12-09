@@ -243,6 +243,13 @@
     <!-- WeightFragment -->
     <string name="istyle_bcs_comment">現在、あなたのペットはBCS 4段階に平均体重に比べて過剰な状態です。\nバランスの取れた献立と正しい行動でペットの体重を管理しなければいけません。 </string>
     <string name="istyle_weight_history_of_the_day">今日の体重記録</string>
+    <string name="average_weight_for_today">오늘의 평균 체중</string>
+    <string name="bcs_step_str">BCS 단계</string>
+    <string name="bcs_description_str">BCS 설명</string>
+    <string name="last_sync_refresh_str">마지막 동기화</string>
+    <string name="test_content">BCS 3단계 유의사항 컨텐츠가 들어가는 공간</string>
+    <string name="not_data">데이터 없음</string>
+    <string name="today_intake_kcal">오늘 섭취한 총 칼로리</string>
 
     <!-- Meal Detail Info Dialog -->
     <string name="istyle_one_hundred_g_supply">100g提供量</string>
@@ -325,6 +332,8 @@
     <string name="pet_breed">견종</string>
     <string name="istyle_statistic_week">주</string>
     <string name="istyle_statistic_month">월</string>
+    <string name="detail_meal_info">상세 성분</string>
+    <string name="delete">삭제</string>
     <string name="device_is_already_registered">이미 등록된 기기입니다.</string>
 
     <style name="ecommended">(권장량)</style>
