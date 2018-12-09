@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 27
@@ -79,6 +80,9 @@ dependencies {
     annotationProcessor "androidx.databinding:databinding-compiler:3.2.0-alpha16"
     //반응형 레이아웃
     implementation 'com.ssomai:android.scalablelayout:2.1.6'
+
+
+
     implementation project(':weekcalendar2')
     implementation project(':library')
     implementation project(':esptouch')

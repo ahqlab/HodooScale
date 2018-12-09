@@ -88,7 +88,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     public void onPetImageClick(View view) {
         adapter = new AdapterOfPets(HomeActivity.this, HomeActivity.this ,data, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
-        alertDialog = super.showBasicOneBtnPopup("PET 선택", null);
+        alertDialog = super.showBasicOneBtnPopup(null, null);
         View customView = getLayoutInflater().inflate(R.layout.pet_list_dialog, null);
         ListView li = (ListView) customView.findViewById(R.id.pet_listview);
         li.setAdapter(adapter);

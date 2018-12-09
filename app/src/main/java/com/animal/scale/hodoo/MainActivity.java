@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -18,9 +19,14 @@ import com.animal.scale.hodoo.activity.user.signup.SignUpActivity;
 import com.animal.scale.hodoo.activity.user.signup.SignUpIn;
 import com.animal.scale.hodoo.custom.view.WelcomeViewPager;
 import com.animal.scale.hodoo.util.CheckConnect;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lombok.NonNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        FirebaseInstanceId.getInstance().getToken();
+        if (FirebaseInstanceId.getInstance().getToken() != null) {
+            Log.e("HJLEE", "token = " + FirebaseInstanceId.getInstance().getToken());
+        }else{
+            Log.e("HJLEE", "asdasdasds");
+        }
+
+
 //        ButterKnife.bind(this);
         mSlideView = findViewById(R.id.slide_view);
 
