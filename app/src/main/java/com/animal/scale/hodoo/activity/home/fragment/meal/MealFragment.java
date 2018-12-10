@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
@@ -92,6 +93,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         presenter = new MealFragmentPresenter(this);
         presenter.loadData(getActivity());
         presenter.initRaderChart();
+
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
 
@@ -281,15 +283,19 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         if (!refrashState) {
             rotationStart(v);
             /* 새로고침에 대한 데이터 처리 (s) */
+            refreshData();
 
-            nowTime = System.currentTimeMillis();
-            binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
+            //데이터를 가져오기전에 임시 정지 처리
+            rotationStop(v);
             /* 새로고침에 대한 데이터 처리 (e) */
-            refrashState = true;
+
         } else {
             rotationStop(v);
-            refrashState = false;
         }
+    }
+    private void refreshData () {
+        nowTime = System.currentTimeMillis();
+        binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
     }
 
     private void rotationStart(View v) {
@@ -302,11 +308,18 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         rotate.setDuration(900);
         rotate.setRepeatCount(Animation.INFINITE);
         v.startAnimation(rotate);
+        refrashState = true;
     }
 
-    private void rotationStop(View v) {
-        v.clearAnimation();
-        v.animate().cancel();
+    private void rotationStop(final View v) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                v.clearAnimation();
+                v.animate().cancel();
+                refrashState = false;
+            }
+        }, 2000);
     }
 
     public void onClickFloatingBtn(View v) {

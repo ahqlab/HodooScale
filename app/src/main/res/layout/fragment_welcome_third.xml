@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
     </data>
     <LinearLayout
-        android:paddingTop="40dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:background="@android:color/white">
 
-        <TextView
+        <com.ssomai.android.scalablelayout.ScalableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textColor="@color/mainBlack"
-            android:text="활동 관리"/>
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="#4a4a4a"
-            android:textSize="15sp"
-            android:text="쾌적한 산책을 위한 날씨정보와 건강상태에\n맞는 산책(운동량)분석을 만나보세요"/>
-        <ImageView
-            android:layout_marginTop="32dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mockup"/>
+            android:layout_height="match_parent"
+            app:scale_base_width="360"
+            app:scale_base_height="640">
+
+            <TextView
+                app:scale_top="40"
+                app:scale_left="40"
+                app:scale_width="280"
+                app:scale_textsize="20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/mainBlack"
+                android:text="@string/activity_title"/>
+            <TextView
+                app:scale_top="83"
+                app:scale_left="40"
+                app:scale_width="280"
+                app:scale_textsize="15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#4a4a4a"
+                android:text="@string/activity_content"/>
+            <ImageView
+                app:scale_top="180"
+                app:scale_width="360"
+                app:scale_height="410"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mockup"/>
+
+        </com.ssomai.android.scalablelayout.ScalableLayout>
 
     </LinearLayout>
 

@@ -89,7 +89,7 @@ public class WeightFragmentModel extends CommonModel {
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return xValues.get((int) value % xValues.size()).getTheHour() + "시";
+                return xValues.get((int) value % xValues.size()).getTheHour() + context.getResources().getString(R.string.time);
             }
         });
         chart.setData(data);

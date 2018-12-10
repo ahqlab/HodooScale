@@ -73,9 +73,18 @@
     <string name="change_user_account_info">ユーザーアカウント情報</string>
     <string name="excess">超過</string>
     <string name="recommend">勧奨</string>
+    <string name="meal">식사</string>
+    <string name="activity">활동</string>
+    <string name="test_text">BCS 3단계 유의사항 컨텐츠가 들어가는 공간입니다. 현재 보여지는 텍스트는 테스트 텍스트입니다.</string>
+    <string name="time">시</string>
 
     <!-- MAIN Activity -->
     <string name="istyle_already_a_member">既にHodooに登録されてますか？</string>
+
+    <string name="activity_title">활동 관리</string>
+    <string name="weight_content">스마트 배변판을 통해 자동으로 측정된 체중과\n변화를 한눈에 확인하세요</string>
+    <string name="meal_content">건강한 체중을 위한 적정 섭취 칼로리와\n섭취한 음식의 영양균형 상태를 분석해드려요</string>
+    <string name="activity_content">쾌적한 산책을 위한 날씨정보와 건강상태에\n맞는 산책(운동량)분석을 만나보세요</string>
     <!-- Login Activity -->
     <string name="istyle_forgot_password">パスワードをお忘れですか？</string>
 
@@ -233,7 +242,7 @@
     <!-- MealFragment -->
     <string name="istyle_todays_word">今日の一言</string>
     <string name="istyle_todays_word_contnet">大型犬にカロリー、タンパク質、脂肪が多く含有されている小型犬用の餌を与えると、カルシウム過剰で骨の成長が遅延され、股関節疾患に繋がる恐れがありますので、ご注意ください!</string>
-    <string name="istyle_eating_management">食事管理리</string>
+    <string name="istyle_eating_management">食事管理</string>
     <string name="istyle_record_todays_meal">今日の食事を記録してください。</string>
     <string name="istyle_todays_prescription">炭水化物の過剰摂取が疑われます。</string>
     <string name="istyle_todays_prescription_desc">ビタミンは大きく脂溶性と水溶性ビタミンに分けられます。脂溶性ビタミンA、D、E、Kの４つがあり、水溶性ビタミンはC、B1、B2、B6、B12、葉酸、パントテン酸、ビオチンの8つがあります。犬は人と違ってビタミンCを体で自ら作られるため、必須栄養素ではありません。
@@ -244,12 +253,18 @@
     <string name="istyle_bcs_comment">現在、あなたのペットはBCS 4段階に平均体重に比べて過剰な状態です。\nバランスの取れた献立と正しい行動でペットの体重を管理しなければいけません。 </string>
     <string name="istyle_weight_history_of_the_day">今日の体重記録</string>
     <string name="average_weight_for_today">오늘의 평균 체중</string>
+    <string name="weight_for_today">오늘의 몸무게</string>
     <string name="bcs_step_str">BCS 단계</string>
     <string name="bcs_description_str">BCS 설명</string>
     <string name="last_sync_refresh_str">마지막 동기화</string>
-    <string name="test_content">BCS 3단계 유의사항 컨텐츠가 들어가는 공간</string>
     <string name="not_data">데이터 없음</string>
     <string name="today_intake_kcal">오늘 섭취한 총 칼로리</string>
+
+    <string name="one_day">하루</string>
+    <string name="one_week">한주</string>
+    <string name="one_month">한달</string>
+    <string name="one_year">년</string>
+
 
     <!-- Meal Detail Info Dialog -->
     <string name="istyle_one_hundred_g_supply">100g提供量</string>

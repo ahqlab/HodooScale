@@ -37,28 +37,25 @@ public class MainActivity extends AppCompatActivity {
     public String store_version;
 
     public String device_version;
+
     private WelcomeViewPager mSlideView;
 
     Intent intent;
+
     private boolean isCreated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         FirebaseInstanceId.getInstance().getToken();
         if (FirebaseInstanceId.getInstance().getToken() != null) {
             Log.e("HJLEE", "token = " + FirebaseInstanceId.getInstance().getToken());
-        }else{
+        } else {
             Log.e("HJLEE", "asdasdasds");
         }
-
-
 //        ButterKnife.bind(this);
         mSlideView = findViewById(R.id.slide_view);
-
 //        bar = (ProgressBar) findViewById(R.id.progress_loader);
 //        bar.setVisibility(View.GONE);
 //        if (!isOnline()) {
@@ -66,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 //            // new ServiceCheckTask().execute();
 //        }
     }
-
 //    @OnClick({R.id.signup_btn, R.id.login_btn})
 //    public void onViewClicked(View view) {
 //        switch (view.getId()) {
@@ -125,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if ( !isCreated ) {
+        if (!isCreated) {
             mSlideView.setFragments(getSupportFragmentManager(), WelcomeHomeFragment.newInstance(), WelcomeFirstFragment.newInstance(), WelcomeSecondFragment.newInstance(), WelcomeThirdFragment.newInstance());
             isCreated = true;
         }
