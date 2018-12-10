@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DimenRes;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
@@ -69,17 +70,27 @@ public class DefaultDayDecorator implements DayDecorator {
         if (selectedDateTime != null) {
             if (selectedDateTime.toLocalDate().equals(dateTime.toLocalDate())) {
                 if (!selectedDateTime.toLocalDate().equals(calendarStartDate.toLocalDate()))
-                    dayTextView.setBackground(holoCircle);
+                    if (dateTime.toDateTime().toString().compareTo(calendarStartDate.toLocalDate().toString()) < 0) {
+                        dayTextView.setBackground(holoCircle);
+                    }
             } else {
                 dayTextView.setBackground(null);
             }
         }
-
         if (dateTime.toLocalDate().equals(calendarStartDate.toLocalDate())) {
             dayTextView.setBackground(solidCircle);
             dayTextView.setTextColor(this.todayDateTextColor);
         } else {
-            dayTextView.setTextColor(textColor);
+
+            if (dateTime.toDateTime().toString().compareTo(calendarStartDate.toLocalDate().toString()) < 0) {
+                dayTextView.setTextColor(textColor);
+            }else{
+                dayTextView.setTextColor(Color.GRAY);
+            }
+            //dayTextView.setTextColor(textColor);
+           /* if(dateTime.toLocalDate(). < calendarStartDate.toLocalDate(){
+
+            }*/
         }
         float size = textSize;
         if (size == -1)
