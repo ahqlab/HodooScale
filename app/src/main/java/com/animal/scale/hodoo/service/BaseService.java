@@ -7,7 +7,7 @@ public class BaseService {
 
     protected static Object retrofit(Class<?> className)
     {
-        String host = "http://121.183.234.14:7070/";
+        String host = "http://192.168.0.49:8181/";
         Retrofit retrofit = new Retrofit.Builder().baseUrl(host).addConverterFactory(GsonConverterFactory.create()).build();
         return retrofit.create(className);
     }

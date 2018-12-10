@@ -182,7 +182,6 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     }
 
     public void setData() {
-
         presenter.getRadarChartData(DateUtil.getCurrentDatetime());
     }
 
