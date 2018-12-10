@@ -9,6 +9,7 @@ import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
@@ -18,6 +19,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
     LineChart chart;
 
+    private Context mContext;
+
     public WeightStatisticsPresenter(WeightStatistics.View view, LineChart chart) {
         this.view = view;
         this.chart = chart;
@@ -26,6 +29,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
     @Override
     public void initLoadData(Context context) {
+        mContext = context;
         model.initLoadData(context);
     }
 
@@ -34,6 +38,19 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if (d.size() > 0) {
+
+                    /* 임시 일본어 처리(s) */
+                    String[] ko = { "월", "화", "수", "목", "금", "토", "일" };
+                    String[] ja = { "月", "火", "水", "木", "金", "土", "日" };
+                    Locale locale = mContext.getResources().getConfiguration().locale;
+                    String localeStr = locale.getLanguage();
+                    if ( localeStr.equals("ja") )
+                        for ( Statistics value : d )
+                            for (int i = 0; i < ko.length; i++)
+                                if ( value.getTheDay().equals(ko[i]) )
+                                    value.setTheDay(ja[i]);
+                    /* 임시 일본어 처리(e) */
+
                     if (chart.getData() != null) {
                         chart.getData().notifyDataChanged();
                     }

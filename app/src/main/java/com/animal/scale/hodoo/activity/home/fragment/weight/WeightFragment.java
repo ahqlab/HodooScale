@@ -1,49 +1,43 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
-        import android.content.res.TypedArray;
-        import android.databinding.DataBindingUtil;
-        import android.graphics.Color;
-        import android.os.Build;
-        import android.os.Bundle;
-        import android.os.Handler;
-        import android.support.annotation.NonNull;
-        import android.support.annotation.RequiresApi;
-        import android.support.design.widget.NavigationView;
-        import android.support.v4.app.Fragment;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.animation.Animation;
-        import android.view.animation.AnimationUtils;
-        import android.view.animation.RotateAnimation;
-        import android.widget.RadioGroup;
-        import android.widget.Toast;
+import android.databinding.DataBindingUtil;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
-        import com.animal.scale.hodoo.R;
-        import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
-        import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
-        import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsActivity;
-        import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
-        import com.animal.scale.hodoo.common.SharedPrefManager;
-        import com.animal.scale.hodoo.common.SharedPrefVariable;
-        import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
-        import com.animal.scale.hodoo.domain.PetWeightInfo;
-        import com.animal.scale.hodoo.domain.RealTimeWeight;
-        import com.animal.scale.hodoo.util.DateUtil;
-        import com.robinhood.ticker.TickerUtils;
+import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
+import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
+import com.animal.scale.hodoo.domain.PetWeightInfo;
+import com.animal.scale.hodoo.domain.RealTimeWeight;
+import com.animal.scale.hodoo.util.DateUtil;
 
-        import org.joda.time.DateTime;
-        import org.joda.time.format.DateTimeFormat;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
-        import java.text.DecimalFormat;
-        import java.text.SimpleDateFormat;
-        import java.util.Date;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-        import noman.weekcalendar.WeekCalendar;
-        import noman.weekcalendar.listener.OnDateClickListener;
-        import noman.weekcalendar.listener.OnWeekChangeListener;
+import noman.weekcalendar.WeekCalendar;
+import noman.weekcalendar.listener.OnDateClickListener;
+import noman.weekcalendar.listener.OnWeekChangeListener;
 
 public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener , WeightFragmentIn.View, WeightStatistics.View{
 
@@ -67,6 +61,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     private String[] bcsArr;
     private long nowTime;
     private SimpleDateFormat lastRefreshSdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+    private View rotationView;
+    int mBasicIdx = 0;
 
     public WeightFragment() {
     }
@@ -88,9 +84,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
         mSharedPrefManager = SharedPrefManager.getInstance(getActivity());
 
+        nowTime = System.currentTimeMillis();
+
         bcsArr = getResources().getStringArray(R.array.bcs_arr);
         binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
-        nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
 
 
@@ -127,28 +124,33 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
     //BCS 를
     public void setBcsMessage(int basicIdx) {
+        mBasicIdx = basicIdx;
         presenter.getBcs(basicIdx);
     }
 
     @Override
     public void setAnimationGaugeChart(int bcs){
         this.bcs = bcs;
-        if(bcs < 2){
+        int checkBCS = 0;
+        if(bcs < 3){
+            checkBCS = 0;
             //부족
 //            binding.graphBg.setBackgroundResource(R.drawable.weight_middle_thin_469_266);
 //            animation = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_one_step);
-        } else if(bcs > 2){
+        } else if(bcs > 3){
             //초과
+            checkBCS = 1;
 //            binding.graphBg.setBackgroundResource(R.drawable.weight_middle_overweight_469_266);
 //            animation = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_three_step);
         } else {
+            checkBCS = 2;
             //적정
 //            binding.graphBg.setBackgroundResource(R.drawable.weight_middle_ideal_469_266);
 //            animation = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_two_step);
         }
-        Log.e(TAG, String.format("bcs : %d", bcs));
+
         if ( bcs > 0 ) {
-            binding.bcsSubscript.setText(bcsArr[bcs - 1]);
+            binding.bcsSubscript.setText(bcsArr[checkBCS]);
             binding.bcsStep.setText( String.valueOf(bcs) );
         } else {
             binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
@@ -166,6 +168,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         }else{
             binding.weightView.setNumber(0f);
         }
+
+        if ( refrashState )
+            rotationStop(rotationView);
     }
 
     @Override
@@ -178,6 +183,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
+        if ( refrashState )
+            rotationStop(rotationView);
     }
 
     @Override
@@ -203,6 +210,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                     //weightFragment.drawChart();
                     presenter.getLastCollectionData(date);
                     presenter.setAnimationGaugeChart(bcs);
+                    refreshData();
                 }
             }
         });
@@ -246,21 +254,23 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         /*((HomeActivity)getActivity()).showDropUp();*/
     }
     public void onRefreshClick(View v) {
-        Log.e(TAG, "refrash click");
+        if ( rotationView == null )
+            rotationView = v;
         if ( !refrashState ) {
             rotationStart(v);
             /* 새로고침에 대한 데이터 처리 (s) */
 
-            nowTime = System.currentTimeMillis();
-            binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
-
-            presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
+            refreshData();
             /* 새로고침에 대한 데이터 처리 (e) */
-            refrashState = true;
         } else {
             rotationStop(v);
-            refrashState = false;
         }
+    }
+    private void refreshData () {
+        nowTime = System.currentTimeMillis();
+        binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
+        presenter.getBcs(mBasicIdx);
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
     }
     private void rotationStart( View v ) {
         RotateAnimation rotate = new RotateAnimation(
@@ -272,10 +282,17 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         rotate.setDuration(900);
         rotate.setRepeatCount(Animation.INFINITE);
         v.startAnimation(rotate);
+        refrashState = true;
     }
-    private void rotationStop( View v ) {
-        v.clearAnimation();
-        v.animate().cancel();
+    private void rotationStop(final View v ) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                v.clearAnimation();
+                v.animate().cancel();
+                refrashState = false;
+            }
+        }, 2000);
     }
 
     @Override

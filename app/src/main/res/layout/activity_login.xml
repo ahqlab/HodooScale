@@ -50,7 +50,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginRight="40dp"
-                    app:title="이메일"
+                    app:title="@string/istyle_label_email"
                     app:editTextResourceId="@layout/email_edittext"
                     app:titleSize="13"
                     app:errorMessageSize="11"/>

@@ -13,12 +13,16 @@
             android:layout_height="wrap_content">
         </ListView>
         <Button
+            android:layout_marginBottom="16dp"
             android:id="@+id/add_pet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal|center_vertical"
-            android:text="@string/istyle_add_pet"/>
+            android:text="@string/istyle_add_pet"
+            android:background="@drawable/circle_border_pink_40"
+            android:drawableLeft="@drawable/plus"
+            android:drawablePadding="9dp"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

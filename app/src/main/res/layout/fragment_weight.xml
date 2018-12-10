@@ -161,12 +161,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="TIP"
-                            android:textColor="@color/mainBlack"/>
+                            android:textColor="@color/mainBlack"
+                            android:gravity="center_vertical"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="title"
-                            android:textColor="@color/subscript_color"/>
+                            android:textColor="@color/subscript_color"
+                            android:gravity="center_vertical"/>
                     </LinearLayout>
                     <LinearLayout
                         android:paddingLeft="29dp"
@@ -175,11 +177,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:paddingRight="15dp"
                             android:id="@+id/collapse_content"
                             android:textColor="#9b9b9b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/test_content"/>
+                            android:text="@string/test_text"/>
                     </LinearLayout>
                 </com.animal.scale.hodoo.custom.view.CustomCollapse>
 
@@ -195,7 +198,7 @@
                         android:layout_marginBottom="18dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="오늘의 몸무게"
+                        android:text="@string/weight_for_today"
                         android:textSize="11sp"/>
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/chartView"
@@ -233,7 +236,7 @@
                                 android:id="@+id/chart_day"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="하루"
+                                android:text="@string/one_day"
                                 android:textColor="@drawable/custom_radio_background"
                                 android:background="@drawable/custom_radio_background"
                                 android:button="@null"/>
@@ -241,7 +244,7 @@
                                 android:id="@+id/chart_week"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="한주"
+                                android:text="@string/one_week"
                                 android:textColor="@drawable/custom_radio_background"
                                 android:background="@drawable/custom_radio_background"
                                 android:button="@null"/>
@@ -249,7 +252,7 @@
                                 android:id="@+id/chart_month"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="한달"
+                                android:text="@string/one_month"
                                 android:textColor="@drawable/custom_radio_background"
                                 android:background="@drawable/custom_radio_background"
                                 android:button="@null"/>
@@ -257,7 +260,7 @@
                                 android:id="@+id/chart_year"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="년"
+                                android:text="@string/one_year"
                                 android:textColor="@drawable/custom_radio_background"
                                 android:background="@drawable/custom_radio_background"
                                 android:button="@null"/>
