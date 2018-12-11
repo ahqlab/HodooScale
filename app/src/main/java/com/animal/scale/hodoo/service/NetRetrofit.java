@@ -19,8 +19,8 @@ public class NetRetrofit {
     }
 
     Retrofit retrofit = new Retrofit.Builder()
-           // .baseUrl("http://121.183.234.14:7171/hodoo/")
-            .baseUrl("http://192.168.0.49:8181/")
+            .baseUrl("http://121.183.234.14:7171/")
+//            .baseUrl("http://192.168.0.49:8181/")
             .addConverterFactory(GsonConverterFactory.create()) // 파싱등록
             .build();
 
