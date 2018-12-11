@@ -182,7 +182,7 @@
                             android:textColor="#9b9b9b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/test_text"/>
+                            android:text="@string/istyle_bcs_comment"/>
                     </LinearLayout>
                 </com.animal.scale.hodoo.custom.view.CustomCollapse>
 

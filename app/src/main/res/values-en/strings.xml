@@ -342,5 +342,20 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
 
     <style name="ecommended">(권장량)</style>
 
+    <string name="one_day">하루</string>
+    <string name="one_week">한주</string>
+    <string name="one_month">한달</string>
+    <string name="one_year">년</string>
 
+
+    <string name="meal">식사</string>
+    <string name="activity">활동</string>
+    <string name="test_text">BCS 3단계 유의사항 컨텐츠가 들어가는 공간입니다. 현재 보여지는 텍스트는 테스트 텍스트입니다.</string>
+    <string name="time">시</string>
+
+
+    <string name="activity_title">활동 관리</string>
+    <string name="weight_content">스마트 배변판을 통해 자동으로 측정된 체중과\n변화를 한눈에 확인하세요</string>
+    <string name="meal_content">건강한 체중을 위한 적정 섭취 칼로리와\n섭취한 음식의 영양균형 상태를 분석해드려요</string>
+    <string name="activity_content">쾌적한 산책을 위한 날씨정보와 건강상태에\n맞는 산책(운동량)분석을 만나보세요</string>
 </resources>

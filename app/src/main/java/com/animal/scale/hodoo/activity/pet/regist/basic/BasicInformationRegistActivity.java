@@ -29,6 +29,7 @@ import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegi
 import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityBasicInformaitonRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.Pet;
@@ -91,9 +92,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int rd = radioGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = findViewById(rd);
-                if (radioButton.getText().toString().matches("암컷")) {
+                if (radioButton.getText().toString().matches(getResources().getString(R.string.femle))) {
                     binding.getInfo().setSex("FEMALE");
-                } else if (radioButton.getText().toString().matches("수컷")) {
+                } else if (radioButton.getText().toString().matches(getResources().getString(R.string.male))) {
                     binding.getInfo().setSex("MALE");
                 }
             }
@@ -105,12 +106,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         if (basicInfo != null) {
             binding.setInfo(basicInfo);
             REQUEST_MODE = true;
-            REQUEST_URL = "http://121.183.234.14:7171/hodoo/pet/basic/update";
+            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/update";
             presenter.setView(basicInfo);
         } else {
             binding.setInfo(new PetBasicInfo());
             REQUEST_MODE = false;
-            REQUEST_URL = "http://121.183.234.14:7171/hodoo/pet/basic/regist";
+            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist";
         }
     }
 
@@ -127,11 +128,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             binding.switch1.setChecked(false);
         }
         Picasso.with(BasicInformationRegistActivity.this)
-                .load("http://121.183.234.14:7171/hodoo/" + basicInfo.getProfileFilePath())
+                .load(SharedPrefVariable.SERVER_ROOT + basicInfo.getProfileFilePath())
                 .into(binding.profile);
-        if (basicInfo.getSex().matches("MALE")) {
+
+        if (basicInfo.getSex().matches(getResources().getString(R.string.femle))) {
             binding.maleBtn.setChecked(true);
-        } else if (basicInfo.getSex().matches("FEMALE")) {
+        } else if (basicInfo.getSex().matches(getResources().getString(R.string.femle))) {
             binding.femaleBtn.setChecked(true);
         }
     }
@@ -271,9 +273,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void goDiseaseActivity(View view) {
+        Log.e("HJLEE", ">>" + REQUEST_MODE);
         if (REQUEST_MODE) {
             presenter.updateBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         } else {
+            Log.e("HJLEE", binding.getInfo().toString());
             presenter.registBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         }
     }

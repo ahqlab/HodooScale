@@ -93,7 +93,7 @@ public class CustomBinding {
                     .into(imageView);
         } else {
             Picasso.with(imageView.getContext())
-                    .load("http://121.183.234.14:7171/hodoo/" + url)
+                    .load(SharedPrefVariable.SERVER_ROOT + url)
                     .into(imageView);
         }
 
