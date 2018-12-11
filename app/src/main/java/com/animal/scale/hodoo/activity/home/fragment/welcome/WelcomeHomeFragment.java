@@ -38,17 +38,18 @@ public class WelcomeHomeFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_welcome_home, container, false);
         binding.setFragment(this);
         binding.progressLoader.setVisibility(View.GONE);
-        if (!isOnline()) {
+      /*  if (!isOnline()) {
             Toast.makeText(getContext(), R.string.not_connected_to_the_Internet, Toast.LENGTH_LONG).show();
             // new ServiceCheckTask().execute();
-        }
+        }*/
         return binding.getRoot();
     }
 
     public static Fragment newInstance() {
         return new WelcomeHomeFragment();
     }
-    private boolean isOnline() {
+
+   /* private boolean isOnline() {
         CheckConnect cc = new CheckConnect(CONNECTION_CONFIRM_CLIENT_URL);
         cc.start();
         try {
@@ -58,7 +59,8 @@ public class WelcomeHomeFragment extends Fragment {
             e.printStackTrace();
         }
         return false;
-    }
+    }*/
+
     public void onButtonClick( View v ) {
         Log.e(TAG, "buttonClick");
         switch (v.getId()) {

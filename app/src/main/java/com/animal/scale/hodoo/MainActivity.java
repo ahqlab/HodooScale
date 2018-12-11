@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseInstanceId.getInstance().getToken();
-        if (FirebaseInstanceId.getInstance().getToken() != null) {
+        //FirebaseInstanceId.getInstance().getToken();
+        /*if (FirebaseInstanceId.getInstance().getToken() != null) {
             Log.e("HJLEE", "token = " + FirebaseInstanceId.getInstance().getToken());
         } else {
             Log.e("HJLEE", "asdasdasds");
-        }
+        }*/
 //        ButterKnife.bind(this);
         mSlideView = findViewById(R.id.slide_view);
 //        bar = (ProgressBar) findViewById(R.id.progress_loader);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-    private boolean isOnline() {
+   /* private boolean isOnline() {
         CheckConnect cc = new CheckConnect(CONNECTION_CONFIRM_CLIENT_URL);
         cc.start();
         try {
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
 
-    }
+    }*/
 
 //    private class ServiceCheckTask extends AsyncTask<Void, Void, String> {
 //        @Override
