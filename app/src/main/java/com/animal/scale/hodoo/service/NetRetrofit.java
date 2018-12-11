@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.service;
 
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -7,7 +8,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetRetrofit {
-
     private static NetRetrofit ourInstance = new NetRetrofit();
 
     public static NetRetrofit getInstance() {
@@ -19,8 +19,7 @@ public class NetRetrofit {
     }
 
     Retrofit retrofit = new Retrofit.Builder()
-           // .baseUrl("http://121.183.234.14:7171/hodoo/")
-            .baseUrl("http://192.168.0.49:8181/")
+            .baseUrl(SharedPrefVariable.SERVER_ROOT)
             .addConverterFactory(GsonConverterFactory.create()) // 파싱등록
             .build();
 

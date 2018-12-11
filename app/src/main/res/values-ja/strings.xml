@@ -75,7 +75,7 @@
     <string name="recommend">勧奨</string>
     <string name="meal">食事</string>
     <string name="activity">活動</string>
-
+    <string name="test_text">BCS 3단계 유의사항 컨텐츠가 들어가는 공간입니다. 현재 보여지는 텍스트는 테스트 텍스트입니다.</string>
     <string name="time">時</string>
 
     <!-- MAIN Activity -->

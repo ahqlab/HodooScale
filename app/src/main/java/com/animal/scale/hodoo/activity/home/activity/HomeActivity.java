@@ -236,7 +236,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     public void setCurcleImage(PetAllInfos info) {
         Picasso.with(this)
-                .load("http://121.183.234.14:7171/hodoo/" + info.getPetBasicInfo().getProfileFilePath())
+                .load(SharedPrefVariable.SERVER_ROOT + info.getPetBasicInfo().getProfileFilePath())
                 .into(binding.appBarNavigation.petImage);
     }
 
