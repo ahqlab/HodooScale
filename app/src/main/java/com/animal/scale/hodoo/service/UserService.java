@@ -25,6 +25,6 @@ public interface UserService{
     Call<Integer> updateBasicInfo(@Body User user);
 
     @POST("user/get/group/member")
-    Call<List<User>> getGroupMemner(@Query("groupId") String groupId);
+    Call<List<User>> getGroupMemner(@Query("groupCode") String groupCode);
 
 }

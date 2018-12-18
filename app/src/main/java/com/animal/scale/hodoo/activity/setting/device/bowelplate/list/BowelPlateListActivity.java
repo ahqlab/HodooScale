@@ -70,7 +70,9 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
 
     @Override
     public void MyBowlPlateList(List<Device> list) {
-        adapter = new AbsractCommonAdapter<Device>(this, list) { ListviewBowelPlateItemBinding adapterBinding;
+        adapter = new AbsractCommonAdapter<Device>(this, list) {
+
+            ListviewBowelPlateItemBinding adapterBinding;
 
             @Override
             protected View getUserEditView(final int position, View convertView, ViewGroup parent) {
