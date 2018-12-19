@@ -42,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
-                s
                 <com.animal.scale.hodoo.custom.view.TopImageLayout
                     android:paddingLeft="38dp"
                     android:paddingRight="38dp"

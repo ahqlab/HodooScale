@@ -2,5 +2,6 @@
 <resources>
     <string name="base_url"></string>
     <string name="test_url"></string>
+    <string name="get_weather_url">http://121.183.234.14:7171/weather/forecast/for/weatherbit</string>
 
 </resources>
