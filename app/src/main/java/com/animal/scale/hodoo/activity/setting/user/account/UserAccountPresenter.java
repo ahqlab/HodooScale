@@ -9,6 +9,7 @@ import java.util.List;
 public class UserAccountPresenter implements UserAccountIn.Presenter {
 
     UserAccountIn.View view;
+
     UserAccountModel model;
 
     public UserAccountPresenter(UserAccountIn.View view) {

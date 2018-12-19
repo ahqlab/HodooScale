@@ -28,7 +28,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lombok.NonNull;
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
 
     private ProgressBar bar;
 
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return false;
-
     }*/
 
 //    private class ServiceCheckTask extends AsyncTask<Void, Void, String> {

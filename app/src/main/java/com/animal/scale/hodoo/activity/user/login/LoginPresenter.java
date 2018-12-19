@@ -47,6 +47,7 @@ public class LoginPresenter implements Login.Presenter {
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
                         loginView.showPopup(context.getString(R.string.failed));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
+                        Log.e("HJLEE", "LOGIN RESULT : " + resultMessageGroup.getDomain().toString().trim());
                         Gson gson = new Gson();
                         User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
                         saveUserSharedValue(user);

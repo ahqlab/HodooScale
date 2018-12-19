@@ -14,6 +14,7 @@ import com.animal.scale.hodoo.databinding.FragmentWelcomeFirstBinding;
 
 
 public class WelcomeFirstFragment extends Fragment {
+
     private FragmentWelcomeFirstBinding binding;
 
     @Nullable

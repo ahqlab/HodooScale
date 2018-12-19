@@ -3,10 +3,15 @@ package com.animal.scale.hodoo.activity.setting.user.account;
 import android.content.Context;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.User;
+import com.animal.scale.hodoo.service.NetRetrofit;
 
 import java.util.List;
+
+import retrofit2.Call;
 
 public class UserAccountModel {
 
@@ -20,7 +25,7 @@ public class UserAccountModel {
     }
 
     public void getUserData(final UserAccountModel.asyncTaskListner asyncTaskListner) {
-     /*  Call<List<User>> call = NetRetrofit.getInstance().getUserService().getGroupMemner(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_ID));
+       Call<List<User>> call = NetRetrofit.getInstance().getUserService().getGroupMemner(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AbstractAsyncTaskOfList<User>() {
             @Override
             protected void doPostExecute(List<User> data) {
@@ -32,7 +37,7 @@ public class UserAccountModel {
             protected void doPreExecute() {
                 asyncTaskListner.doPreExecute();
             }
-        }.execute(call);*/
+        }.execute(call);
     }
 
     public void addRegistBtn(List<User> data) {
