@@ -19,7 +19,7 @@
             type="com.animal.scale.hodoo.domain.User" />
         <!-- <variable
              name="watcher"
-             type="android.text.TextWatcher"/>
+             type="android.text.CommonTextWatcher"/>
          <variable
              name="emailRule"
              type="com.animal.scale.hodoo.util.MyOwnBindingUtil.StringRule"/>

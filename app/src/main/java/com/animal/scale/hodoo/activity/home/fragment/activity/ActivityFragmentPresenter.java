@@ -71,7 +71,6 @@ public class ActivityFragmentPresenter implements ActivityFragmentIn.Presenter {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mView.setProgress(false);
             }
         }.execute();
     }

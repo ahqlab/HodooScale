@@ -158,7 +158,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
                     return true;
                 case R.id.navigation_activity :
-                    Log.e(TAG, "활동 버튼 클릭");
                     replaceFragment(ActivityFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.activity)));
                     return true;

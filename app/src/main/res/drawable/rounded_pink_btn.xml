@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="false" android:state_focused="false">
+    <item android:state_pressed="false" android:state_focused="false" android:state_enabled="true">
         <shape>
             <gradient
                 android:centerY="0.2"
@@ -15,5 +15,12 @@
             <corners 
                 android:radius="58dp" />
         </shape>
+    </item>
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="#4cc7c7cd"/>
+            <corners android:radius="58dp" />
+        </shape>
+
     </item>
 </selector>

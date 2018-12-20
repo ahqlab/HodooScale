@@ -1,10 +1,12 @@
 package com.animal.scale.hodoo.activity.home.fragment.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,10 +20,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.databinding.FragmentActivityLayoutBinding;
 import com.animal.scale.hodoo.domain.Weatherbit;
+import com.animal.scale.hodoo.util.VIewUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,12 +42,13 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
 
     private final int REQUEST_LOCATION = 100;
     private long nowTime;
-
+    private boolean rotationState = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_activity_layout, container, false);
+        binding.setFragment(this);
 
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
@@ -79,6 +84,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
         });
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void setProgress(boolean state) {
         if (state) {
@@ -113,10 +119,20 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, // 등록할 위치제공자
-                100,
-                1,
-                this);
+        boolean statusOfGPS = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean statusOfNetwork = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if ( statusOfGPS ) {
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    100,
+                    1,
+                    this);
+        }
+        if ( statusOfNetwork ) {
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    100,
+                    1,
+                    this);
+        }
 
         binding.kcalView.setNumber(236);
         presenter = new ActivityFragmentPresenter(getContext(), this);
@@ -132,14 +148,19 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
         presenter.getWeather(lat, lon, new ActivityFragmentPresenter.WeatherCallback() {
             @Override
             public <T> void onResponse(Response<T> response) {
-                Weatherbit weatherbit = (Weatherbit) response.body();
-                binding.temp.setText(String.format("%.0f˚", weatherbit.getData().get(0).getTemp()));
-                binding.cityName.setText(weatherbit.getCity_name());
-                binding.district.setText(weatherbit.getDistrict());
-                binding.windSpeed.setText(String.format("%.1fm/s", weatherbit.getData().get(0).getWind_spd()));
-                binding.uv.setText(String.format("%.0f", weatherbit.getData().get(0).getUv()));
-                binding.ozon.setText(String.format("%.3fppm", weatherbit.getData().get(0).getOzone()));
-                presenter.getWeatherIcon(getContext(), weatherbit.getData().get(0).getWeather().getIcon());
+                if ( response.body() != null ) {
+                    Weatherbit weatherbit = (Weatherbit) response.body();
+                    binding.temp.setText(String.format("%.0f˚", weatherbit.getData().get(0).getTemp()));
+                    binding.cityName.setText(weatherbit.getCity_name());
+                    binding.district.setText(weatherbit.getDistrict());
+                    binding.windSpeed.setText(String.format("%.1fm/s", weatherbit.getData().get(0).getWind_spd()));
+                    binding.uv.setText(String.format("%.0f", weatherbit.getData().get(0).getUv()));
+                    binding.ozon.setText(String.format("%.3fppm", weatherbit.getData().get(0).getOzone()));
+                    presenter.getWeatherIcon(getContext(), weatherbit.getData().get(0).getWeather().getIcon());
+                    setProgress(false);
+                } else {
+                    binding.district.setText("위치를 파악할 수 없음");
+                }
 
             }
         });
@@ -161,5 +182,13 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
     @Override
     public void onProviderDisabled(String s) {
 
+    }
+    public void onRefresh ( View v ) {
+        rotationState = rotationState ? VIewUtil.rotationStop(v) : VIewUtil.rotationStart(v);
+        if ( rotationState ) {
+            nowTime = System.currentTimeMillis();
+            binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
+            rotationState = VIewUtil.rotationStop(v);
+        }
     }
 }
