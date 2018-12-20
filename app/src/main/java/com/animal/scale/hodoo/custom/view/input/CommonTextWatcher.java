@@ -44,8 +44,6 @@ public class CommonTextWatcher implements TextWatcher {
     public void afterTextChanged(Editable editable) {view.setErrorMessageViewisExposed(false);}
     public void checkValidation (CharSequence charSequence) {
         state = mType == EMAIL_TYPE ? ValidationUtil.isValidEmail(charSequence.toString()) : !ValidationUtil.isEmpty(charSequence.toString());
-        
-        Log.e(TAG, String.format("state : %b", state));
         view.setErrorMessageViewisExposed(!state);
         view.setErrorMessage(!state ? context.getString(mMsgResource) : "");
         view.setStatus(state);
