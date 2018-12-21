@@ -24,6 +24,7 @@ import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.MyOwnBindingUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,6 +48,13 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.signup_title)));
         binding.setUser(new User());
+        FirebaseInstanceId.getInstance().getToken();
+        if (FirebaseInstanceId.getInstance().getToken() != null) {
+            binding.getUser().setPushToken(FirebaseInstanceId.getInstance().getToken());
+            Log.e("HJLEE", "token = " + FirebaseInstanceId.getInstance().getToken());
+        } else {
+            Log.e("HJLEE", "asdasdasds");
+        }
      /*   binding.setErrorMsg(getString(R.string.vailed_email));
         binding.setEmailRule(new MyOwnBindingUtil.StringRule() {
             @Override

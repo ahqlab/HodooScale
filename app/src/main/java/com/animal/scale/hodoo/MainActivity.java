@@ -49,14 +49,17 @@ MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //FirebaseInstanceId.getInstance().getToken();
-        /*if (FirebaseInstanceId.getInstance().getToken() != null) {
+
+       /* FirebaseInstanceId.getInstance().getToken();
+        if (FirebaseInstanceId.getInstance().getToken() != null) {
             Log.e("HJLEE", "token = " + FirebaseInstanceId.getInstance().getToken());
         } else {
             Log.e("HJLEE", "asdasdasds");
         }*/
 //        ButterKnife.bind(this);
-        mSlideView = findViewById(R.id.slide_view);
+        //TopicManagementResponse response = FirebaseMessaging.getInstance().subscribeToTopic(registrationTokens, topic);
+
+                mSlideView = findViewById(R.id.slide_view);
 //        bar = (ProgressBar) findViewById(R.id.progress_loader);
 //        bar.setVisibility(View.GONE);
 //        if (!isOnline()) {
