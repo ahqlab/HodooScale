@@ -245,12 +245,18 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 //                        }
 //                    }).show();
 //        } else {
-//            if (binding.radioFemale.isChecked()) {
-//                binding.getUser().setSex("FEMALE");
-//            } else if (binding.radioMale.isChecked()) {
-//                binding.getUser().setSex("MALE");
-//            }
-            presenter.registUser(binding.getUser());
+
+        User user = binding.getUser();
+        user.setEmail( binding.email.editText.getText().toString() );
+        user.setPassword( binding.password.editText.getText().toString() );
+        user.setNickname( binding.nickName.editText.getText().toString() );
+        user.setCountry( binding.from.editText.getText().toString() );
+        if (binding.radioFemale.isChecked()) {
+            binding.getUser().setSex("FEMALE");
+        } else if (binding.radioMale.isChecked()) {
+            binding.getUser().setSex("MALE");
+        }
+        presenter.registUser(binding.getUser());
 //        }
     }
 
