@@ -43,6 +43,7 @@
             bind:activityInfo="@{activityInfo}" />
 
         <LinearLayout
+            android:id="@+id/form_wrap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/my_toolbar"
@@ -52,95 +53,48 @@
 
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:text="@string/istyle_label_email"
-                android:textColor="@color/labelColor"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
+            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
                 android:id="@+id/email"
-                style="@style/Edittext.Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={user.email}"
-                android:textColor="@color/mainBlack" />
+                android:layout_marginTop="24dp"
+                app:title="@string/istyle_label_email"
+                app:editTextResourceId="@layout/email_edittext"
+                app:titleSize="13"
+                app:errorMessageSize="11"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
                 android:layout_marginTop="14dp"
-                android:paddingLeft="4dp"
-                android:text="@string/istyle_label_password"
-                android:textColor="@color/labelColor"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_password"
-                android:imeActionId="6"
-                android:imeActionLabel="@string/prompt_password"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@={user.password}"
-                android:textColor="@color/mainBlack" />
+                app:title="@string/password"
+                app:hint="비밀번호(8자 이상)"
+                app:editTextResourceId="@layout/password_edittext"
+                app:titleSize="13"
+                app:errorMessageSize="11"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
                 android:layout_marginTop="14dp"
-                android:paddingLeft="4dp"
-                android:text="@string/istyle_label_confirm_password"
-                android:textColor="@color/labelColor"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
                 android:id="@+id/passwordCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_password_check"
-                android:imeActionId="6"
-                android:imeActionLabel="@string/prompt_password_check"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@={user.passwordCheck}"
-                android:textColor="@color/mainBlack" />
+                app:title="@string/istyle_label_confirm_password"
+                app:hint="비밀번호(8자 이상)"
+                app:editTextResourceId="@layout/password_edittext"
+                app:titleSize="13"
+                app:errorMessageSize="11"/>
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
                 android:layout_marginTop="14dp"
-                android:paddingLeft="4dp"
-                android:text="@string/istyle_label_nickname"
-                android:textColor="@color/labelColor"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
                 android:id="@+id/nick_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_nicname"
-                android:imeActionId="6"
-                android:imeActionLabel="@string/prompt_nicname"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@={user.nickname}"
-                android:textColor="@color/mainBlack" />
+                app:title="@string/istyle_label_nickname"
+                app:hint="닉네임(9자 이상)"
+                app:editTextResourceId="@layout/normal_edittext"
+                app:titleSize="13"
+                app:errorMessageSize="11"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,30 +108,15 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
                         android:layout_marginTop="14dp"
-                        android:text="@string/istyle_label_country"
-                        android:textColor="@color/labelColor"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <EditText
                         android:id="@+id/from"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:imeActionLabel="@string/prompt_from"
-                        android:imeActionId="6"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:focusable="false"
-                        android:onClick="@{activity::onClickCountryEditTextClick}"
-                        android:text="@={user.country}"
-                        android:textColor="@color/mainBlack" />
+                        app:title="@string/istyle_label_country"
+                        app:editTextResourceId="@layout/normal_edittext"
+                        app:titleSize="13"
+                        app:errorMessageSize="11"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -199,46 +138,57 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioGroup
-                            android:id="@+id/radio_group_sex"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
                             android:orientation="horizontal">
 
-                            <RadioButton
-                                android:id="@+id/radio_female"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:layout_marginRight="4dp"
-
-                                android:background="@drawable/custom_disease_list_checkbox"
-                                android:button="@null" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <RadioGroup
+                                android:id="@+id/radio_group_sex"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="34dp"
-                                android:text="@string/woman" />
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
 
-                            <RadioButton
-                                android:id="@+id/radio_male"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:layout_marginRight="4dp"
-                                android:background="@drawable/custom_disease_list_checkbox"
-                                android:button="@null" />
+                                <RadioButton
+                                    android:id="@+id/radio_female"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_marginRight="4dp"
+                                    android:background="@drawable/custom_disease_list_checkbox"
+                                    android:button="@null" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/men" />
-                        </RadioGroup>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="34dp"
+                                    android:text="@string/woman" />
+
+                                <RadioButton
+                                    android:id="@+id/radio_male"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_marginRight="4dp"
+                                    android:background="@drawable/custom_disease_list_checkbox"
+                                    android:button="@null" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/men" />
+                            </RadioGroup>
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/gender_error"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="13sp"
+                            android:textColor="@color/mainRed"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

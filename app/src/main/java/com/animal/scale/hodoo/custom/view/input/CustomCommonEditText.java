@@ -40,6 +40,8 @@ public class CustomCommonEditText extends LinearLayout implements CustomCommonEd
 
     boolean status = false;
 
+    String hint;
+
 
     public CustomCommonEditText(Context context) {
         super(context);
@@ -73,6 +75,7 @@ public class CustomCommonEditText extends LinearLayout implements CustomCommonEd
         titleMessage = typedArray.getString(R.styleable.CommonEditText_title);
         titleSize = typedArray.getFloat(R.styleable.CommonEditText_titleSize, 0);
         messageSize = typedArray.getFloat(R.styleable.CommonEditText_errorMessageSize, 0);
+        hint = typedArray.getString(R.styleable.CommonEditText_hint);
         initView();
         typedArray.recycle();
     }
@@ -109,6 +112,7 @@ public class CustomCommonEditText extends LinearLayout implements CustomCommonEd
 
         LinearLayout contentView = (LinearLayout) inflater.inflate(contentAttrResourceId, this, false);
         editText = contentView.findViewById(R.id.edittext);
+        editText.setHint(hint);
         editText.setLayoutParams(params);
         this.addView(contentView);
     }
@@ -157,6 +161,10 @@ public class CustomCommonEditText extends LinearLayout implements CustomCommonEd
     @Override
     public String getText() {
         return editText.getText().toString();
+    }
+
+    public String getTitleMessage () {
+        return titleMessage;
     }
 
     public void changeContentBg(int drawable) {

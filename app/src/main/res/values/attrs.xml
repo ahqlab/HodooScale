@@ -13,6 +13,7 @@
         <attr name="editTextResourceId" format="reference" />
         <attr name="titleSize" format="reference|float" />
         <attr name="errorMessageSize" format="reference|float" />
+        <attr name="hint" format="reference|string" />
     </declare-styleable>
 
     <declare-styleable name="WeightView">
