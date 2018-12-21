@@ -36,6 +36,7 @@ public class NetRetrofit {
     FeedService feedService = retrofit.create(FeedService.class);
 
     MealHistoryService mealHistoryService = retrofit.create(MealHistoryService.class);
+    ActivityService activityService = retrofit.create(ActivityService.class);
 
     public UserService getUserService() {
         return service;
@@ -62,6 +63,8 @@ public class NetRetrofit {
     public FeedService getFeedService() { return feedService; }
 
     public MealHistoryService getMealHistoryService() { return mealHistoryService; }
+
+    public ActivityService getActivityService() { return activityService; }
 
 }
 

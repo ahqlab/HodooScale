@@ -45,11 +45,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
                 <com.animal.scale.hodoo.custom.view.TopImageLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:gravity="center_horizontal">
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="center_horizontal">
                     <com.animal.scale.hodoo.custom.view.WeightView
                         android:id="@+id/weight_view"
                         app:displayNum="2"

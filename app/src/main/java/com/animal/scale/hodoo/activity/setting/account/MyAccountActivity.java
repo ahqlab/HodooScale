@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfMyAccountList;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityMyAccountBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.SettingMenu;
@@ -63,9 +66,12 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
 
     @Override
     public void goLoginPage() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra(SharedPrefVariable.LOGOUT_INTENT_KEY, true);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+
+        finishAffinity();
         finish();
     }
 

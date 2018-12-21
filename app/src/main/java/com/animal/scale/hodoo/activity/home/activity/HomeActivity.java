@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.fragment.activity.ActivityFragment;
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
@@ -155,6 +156,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 case R.id.navigation_meal:
                     replaceFragment(MealFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
+                    return true;
+                case R.id.navigation_activity :
+                    replaceFragment(ActivityFragment.newInstance());
+                    binding.setActivityInfo(new ActivityInfo(getString(R.string.activity)));
                     return true;
             }
             return false;

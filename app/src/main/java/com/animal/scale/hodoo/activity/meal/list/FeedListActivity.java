@@ -176,6 +176,7 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
     };
 
     public void onClickFloatingBtn(View view) {
+        Log.e(TAG, "onClickFloatingBtn");
         Intent intent = new Intent(getApplicationContext(), MealSearchActivity.class);
         startActivity(intent);
     }

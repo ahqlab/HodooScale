@@ -13,4 +13,5 @@ public interface CustomCommonEditTextIn {
     boolean getStatus();
 
     String getText();
+
 }
