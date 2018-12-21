@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#80000000"
-
+            android:visibility="gone"
             >
             <ProgressBar
                 android:layout_width="wrap_content"
@@ -127,7 +127,7 @@
                                     android:id="@+id/wind_speed_dis"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="풍속"/>
+                                    android:text="@string/wind_speed"/>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -152,14 +152,14 @@
                                     android:id="@+id/uv_str"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="낮음"
+                                    android:text="보통"
                                     android:textColor="@color/labelColor"/>
                                 <TextView
                                     android:layout_gravity="center"
                                     android:id="@+id/uv_dis"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="자외선 지수"
+                                    android:text="@string/uv_index"
                                     android:textColor="@color/mainBlack"/>
                             </LinearLayout>
                         </LinearLayout>
@@ -171,7 +171,7 @@
                             android:layout_height="wrap_content">
                             <TextView
                                 android:layout_gravity="center"
-                                android:id="@+id/ozon"
+                                android:id="@+id/ozone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0ppm"
@@ -182,17 +182,17 @@
                                 android:layout_height="wrap_content">
                                 <TextView
                                     android:layout_gravity="center"
-                                    android:id="@+id/ozon_str"
+                                    android:id="@+id/ozone_str"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="보통"
                                     android:textColor="@color/labelColor"/>
                                 <TextView
                                     android:layout_gravity="center"
-                                    android:id="@+id/ozon_dis"
+                                    android:id="@+id/ozone_dis"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="오존 지수"
+                                    android:text="@string/ozone_index"
                                     android:textColor="@color/mainBlack"/>
                             </LinearLayout>
                         </LinearLayout>
@@ -266,7 +266,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="오늘의 총 소비 칼로리"
+                        android:text="@string/today_all_calroie"
                         android:textAlignment="center"/>
 
                     <LinearLayout

@@ -358,4 +358,11 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="weight_content">스마트 배변판을 통해 자동으로 측정된 체중과\n변화를 한눈에 확인하세요</string>
     <string name="meal_content">건강한 체중을 위한 적정 섭취 칼로리와\n섭취한 음식의 영양균형 상태를 분석해드려요</string>
     <string name="activity_content">쾌적한 산책을 위한 날씨정보와 건강상태에\n맞는 산책(운동량)분석을 만나보세요</string>
+
+    <!-- ActivityFragment (s) -->
+    <string name="wind_speed">WIND</string>
+    <string name="uv_index">UV INDEX</string>
+    <string name="ozone_index">OZONE</string>
+    <string name="today_all_calroie">CALORIES PET CONSUMED TODAY</string>
+    <!-- ActivityFragment (e) -->
 </resources>
