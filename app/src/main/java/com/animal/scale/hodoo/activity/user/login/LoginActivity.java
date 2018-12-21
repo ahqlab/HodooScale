@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
@@ -17,12 +16,9 @@ import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRe
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.activity.user.agree.TermsOfServiceActivity;
 import com.animal.scale.hodoo.activity.user.reset.password.send.SendCertificationNumberActivity;
-import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
-import com.animal.scale.hodoo.custom.view.input.EmailTextWatcher;
-import com.animal.scale.hodoo.custom.view.input.PasswordTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityLoginBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.User;
@@ -64,7 +60,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
                 checkState();
             }
         }));
-        binding.password.editText.addTextChangedListener(new CommonTextWatcher(binding.password, this, CommonTextWatcher.PASSWORD_TYPE, R.string.istyle_enter_the_password, new CommonTextWatcher.CommonTextWatcherCallback() {
+        binding.password.editText.addTextChangedListener(new CommonTextWatcher(binding.password, this, CommonTextWatcher.EMPTY_TYPE, R.string.istyle_enter_the_password, new CommonTextWatcher.CommonTextWatcherCallback() {
             @Override
             public void onChangeState(boolean state) {
                 if ( pwState != state )

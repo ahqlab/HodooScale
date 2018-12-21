@@ -187,6 +187,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+                finishAffinity();
                 super.onBackPressed();
             } else {
                 backPressedTime = tempTime;
