@@ -142,7 +142,8 @@
                     </RelativeLayout>
                     <!-- sync (e) -->
                 </com.animal.scale.hodoo.custom.view.TopImageLayout>
-                <com.animal.scale.hodoo.custom.view.CustomCollapse
+
+               <!-- <com.animal.scale.hodoo.custom.view.CustomCollapse
                     android:layout_marginTop="1dp"
                     android:paddingLeft="38dp"
                     android:paddingRight="38dp"
@@ -185,7 +186,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/istyle_bcs_comment"/>
                     </LinearLayout>
-                </com.animal.scale.hodoo.custom.view.CustomCollapse>
+                </com.animal.scale.hodoo.custom.view.CustomCollapse>-->
 
                 <LinearLayout
                     android:paddingTop="16dp"
