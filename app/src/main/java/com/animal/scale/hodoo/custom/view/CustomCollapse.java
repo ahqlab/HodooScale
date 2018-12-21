@@ -2,12 +2,7 @@ package com.animal.scale.hodoo.custom.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Rect;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -17,8 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
-
-import org.w3c.dom.Text;
 
 public class CustomCollapse extends RelativeLayout implements View.OnClickListener {
     private String TAG = CustomCollapse.class.getSimpleName();
@@ -51,23 +44,9 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
         mIcon = R.drawable.down;
         setOnClickListener(this);
     }
-//    private void setTitle ( String title ) {
-//        mTitle = title;
-//    }
-//    private void setContent ( String con ) {
-//        mCon = con;
-//    }
-//    private void setCollapseIcon ( int icon ) {
-//        mIcon = icon;
-//    }
-//
-//    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
         if ( v.equals(this) ) {
-//            if ( initHeight < 0 )
-//                initHeight = this.getMeasuredHeight();
-
             int start = 0, end = 0;
             if ( flag < 0 ) {
                 start = 0;
@@ -77,29 +56,6 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
                 end = 0;
             }
 
-//
-//            ValueAnimator anim = ValueAnimator.ofInt(start, end);
-//            anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                @Override
-//                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                    int val = (int) valueAnimator.getAnimatedValue();
-//
-//                    ViewGroup.LayoutParams layoutParams = CustomCollapse.this.getLayoutParams();
-//                    layoutParams.height = val;
-//                    CustomCollapse.this.setLayoutParams(layoutParams);
-//                }
-//            });
-//            anim.setDuration(500);
-//            anim.start();
-//
-//            if ( flag < 0 ) {
-//                start = 0;
-//                end = this.getMeasuredHeight() + openHeight;
-//            } else {
-//                start = this.getMeasuredHeight();
-//                end = 0;
-//            }
-//
             ValueAnimator tvAnim = ValueAnimator.ofInt(start, end);
             tvAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
@@ -116,14 +72,7 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
             flag = flag < 0 ? 1 : -1;
         }
     }
-//
-//    @Override
-//    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-//        super.onSizeChanged(w, h, oldw, oldh);
-//
-//    }
     private void initSize () {
-        Log.e(TAG, "init size");
         header = this.getChildAt(0);
         content = this.getChildAt(1);
 
@@ -150,7 +99,6 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
             @Override
             public void onGlobalLayout() {
                 openHeight = contentTextView.getMeasuredHeight();
-                Log.e(TAG, String.format("openHeight : %d", openHeight));
                 LayoutParams params = (LayoutParams) content.getLayoutParams();
                 params.height = 0;
                 content.setLayoutParams(params);
@@ -165,11 +113,5 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
         super.onAttachedToWindow();
         initSize();
     }
-//
-//    public static int pxToDp(int px) {
-//        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
-//    }
-//    public static int dpToPx(int dp) {
-//        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
-//    }
+
 }
