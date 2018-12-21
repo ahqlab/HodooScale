@@ -41,11 +41,12 @@ import noman.weekcalendar.listener.OnWeekChangeListener;
 
 public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener , WeightFragmentIn.View, WeightStatistics.View{
 
+    FragmentWeightBinding binding;
+
     protected final String TAG = "HJLEE";
 
     private WeekCalendar weekCalendar;
 
-    FragmentWeightBinding binding;
 
     Animation animation;
 
@@ -97,7 +98,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
         statisicsPresenter.initLoadData(getContext());
         statisicsPresenter.getDailyStatisticalData();
-
 //        //Kcal 로리 표시
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
         presenter.initWeekCalendar();

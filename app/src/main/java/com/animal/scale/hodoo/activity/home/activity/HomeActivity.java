@@ -149,10 +149,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     replaceFragment(WeightFragment.newInstance());
                     presenter.loadCustomDropdownView();
                     return true;
-          /*      case R.id.navigation_temp:
+                case R.id.navigation_temp:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
                     replaceFragment(TempFragment.newInstance());
-                    return true;*/
+                    return true;
                 case R.id.navigation_meal:
                     replaceFragment(MealFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));

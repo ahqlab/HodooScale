@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.home.fragment.weight;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.domain.ArrayListDevice;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
@@ -23,12 +24,17 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     LineChart chart;
 
-    public WeightFragmentPresenter(WeightFragment weightFragment, LineChart chart){
-        this.view = weightFragment;
+    public WeightFragmentPresenter(WeightFragment fragment, LineChart chart){
+        this.view = fragment;
         this.chart = chart;
         this.model = new WeightFragmentModel();
     }
 
+    public WeightFragmentPresenter(TempFragment fragment, LineChart chart){
+        this.view = fragment;
+        this.chart = chart;
+        this.model = new WeightFragmentModel();
+    }
 
     @Override
     public void loadData(Context context) {
