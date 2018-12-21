@@ -55,13 +55,13 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
                     intent.putExtra("petIdx", ADD_PET);
                     startActivity(intent);
                     overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                    finish();
+//                    finish();
                 }else{
                     Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
                     intent.putExtra("petIdx", petAllInfos.getPet().getPetIdx());
                     startActivity(intent);
                     overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                    finish();
+//                    finish();
                 }
             }
         });

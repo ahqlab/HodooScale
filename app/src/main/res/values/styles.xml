@@ -12,6 +12,10 @@
         <!--Status Bar 글자색깔-->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:colorBackground">@color/hodoo_new_background_color</item>
+
+        <item name="colorControlNormal">@color/edt_normal_color</item>
+        <item name="colorControlActivated">@color/labelColor</item>
+        <item name="colorControlHighlight">@color/mainRed</item>
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -61,5 +65,4 @@
         <item name="android:minHeight">10dp</item>
         <item name="android:maxHeight">10dp</item>
     </style>
-
 </resources>
