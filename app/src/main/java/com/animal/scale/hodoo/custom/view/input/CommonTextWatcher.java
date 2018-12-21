@@ -83,6 +83,8 @@ public class CommonTextWatcher implements TextWatcher {
                     views[1].setErrorMessageViewisExposed(!state);
                     views[1].setErrorMessage(!state ? context.getString(mMsgResources[1]) : "");
                     views[1].setStatus(state);
+                    if ( mCallback != null )
+                        mCallback.onChangeState(state);
                 }
             }
             else if ( mType == PWCHECK_TYPE ) {

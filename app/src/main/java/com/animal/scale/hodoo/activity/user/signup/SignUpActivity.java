@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
@@ -102,7 +103,10 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                     @Override
                     public void onChangeState(boolean state) {
                         pwCheckState = state;
+                        if ( pwCheckState )
+                            pwState = true;
                         Log.e(TAG, String.format("pwState : %b", pwCheckState));
+                        vaildation();
                     }
                 }
         ));
@@ -116,6 +120,21 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                     public void onChangeState(boolean state) {
                         ninkState = state;
                         Log.e(TAG, String.format("ninkState : %b", ninkState));
+                        vaildation();
+                    }
+                }
+        ));
+        binding.from.editText.addTextChangedListener(new CommonTextWatcher(
+                binding.from,
+                this,
+                CommonTextWatcher.EMPTY_TYPE,
+                0,
+                new CommonTextWatcher.CommonTextWatcherCallback() {
+                    @Override
+                    public void onChangeState(boolean state) {
+                        countryState = state;
+                        Log.e(TAG, String.format("countryState : %b", countryState));
+                        vaildation();
                     }
                 }
         ));
@@ -129,11 +148,21 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         binding.radioGroupSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if ( !radioCheckState )
+                if ( !radioCheckState ) {
                     radioCheckState = true;
+                    vaildation();
+                }
+
             }
         });
         setBtnEnable(false);
+        binding.singupAgreeCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                agreeState = b;
+                vaildation();
+            }
+        });
      /*   binding.setErrorMsg(getString(R.string.vailed_email));
         binding.setEmailRule(new MyOwnBindingUtil.StringRule() {
             @Override
@@ -221,7 +250,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 //            } else if (binding.radioMale.isChecked()) {
 //                binding.getUser().setSex("MALE");
 //            }
-//            presenter.registUser(binding.getUser());
+            presenter.registUser(binding.getUser());
 //        }
     }
 
@@ -314,9 +343,15 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         }
     }
     private void vaildation() {
-        if ( emailState &&
+        if (
+                emailState &&
                 pwState &&
-                pwCheckState ) {
+                pwCheckState &&
+                ninkState &&
+                countryState &&
+                radioCheckState &&
+                agreeState
+                ) {
             setBtnEnable(true);
         } else {
             setBtnEnable(false);
