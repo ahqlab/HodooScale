@@ -67,7 +67,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
             @Override
             public void onChangeState(boolean state) {
                 emailState = state;
-                 Log.e(TAG, String.format("emailState : %b", emailState));
+                Log.e(TAG, String.format("emailState : %b", emailState));
                 vaildation();
             }
         }));

@@ -13,13 +13,13 @@ public interface WeightStatistics {
 
         void initLoadData(Context context);
 
-        void getDailyStatisticalData();
+        void getDailyStatisticalData(String type);
 
-        void getWeeklyStatisticalData();
+        void getWeeklyStatisticalData(String type);
 
-        void getMonthlyStatisticalData();
+        void getMonthlyStatisticalData(String type);
 
-        void getStatisticalDataByYear();
+        void getStatisticalDataByYear(String type);
 
         void initChart();
     }

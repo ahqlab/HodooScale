@@ -7,18 +7,292 @@
     <data>
         <variable
             name="activity"
-            type="com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment"/>
+            type="com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment" />
     </data>
 
-    <FrameLayout
+
+    <RelativeLayout
+        android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="@{activity::onRootViewClick}"
         tools:context=".activity.home.fragment.temp.TempFragment">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="TEMP" />
 
-    </FrameLayout>
+        <noman.weekcalendar.WeekCalendar
+            android:id="@+id/weekCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/white"
+            app:dayNameLength="threeLetters"
+            app:daysBackgroundColor="@color/white"
+            app:daysTextColor="@color/black"
+            app:daysTextSize="14sp"
+            app:numOfPages="150"
+            app:weekBackgroundColor="@color/white"
+            app:weekTextColor="@color/black"
+            app:weekTextSize="11sp" />
+
+        <ScrollView
+            android:layout_below="@+id/weekCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <com.animal.scale.hodoo.custom.view.TopImageLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center_horizontal">
+
+                    <com.animal.scale.hodoo.custom.view.WeightView
+                        android:id="@+id/weight_view"
+                        app:displayNum="2"
+                        app:textSize="40sp"
+                        app:sufFix="℃"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"/>
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/average_temp_for_today"
+                        android:textColor="#9b9b9b"/>
+
+                    <!-- bcs (s) -->
+                    <!--<LinearLayout
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:id="@+id/bcs_step"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:text="0"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/bcs_step_str"
+                                android:textColor="@color/subscript_color"/>
+                        </LinearLayout>
+                        <View
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#f4f4f4"/>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:id="@+id/bcs_subscript"
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/mainRed"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/bcs_description_str"
+                                android:textColor="@color/subscript_color"/>
+                        </LinearLayout>
+                    </LinearLayout>-->
+                    <!-- bcs (e) -->
+                    <!-- sync (s) -->
+                    <RelativeLayout
+                        android:paddingTop="30dp"
+                        android:paddingBottom="22dp"
+                        android:paddingLeft="38dp"
+                        android:paddingRight="38dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/last_refresh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:alpha=".32"
+                            android:textSize="11sp"
+                            android:text="@string/last_sync_refresh_str"
+                            android:textColor="#9b9b9b"/>
+                        <ImageView
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/refresh_icon"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/refresh"
+                            android:onClick="@{activity::onRefreshClick}"/>
+                    </RelativeLayout>
+                    <!-- sync (e) -->
+                </com.animal.scale.hodoo.custom.view.TopImageLayout>
+                <com.animal.scale.hodoo.custom.view.CustomCollapse
+                    android:layout_marginTop="1dp"
+                    android:paddingLeft="38dp"
+                    android:paddingRight="38dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white">
+                    <LinearLayout
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_marginRight="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TIP"
+                            android:textColor="@color/mainBlack"
+                            android:gravity="center_vertical"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="title"
+                            android:textColor="@color/subscript_color"
+                            android:gravity="center_vertical"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:paddingLeft="29dp"
+                        android:layout_below="@+id/header"
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:paddingRight="15dp"
+                            android:id="@+id/collapse_content"
+                            android:textColor="#9b9b9b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/istyle_bcs_comment"/>
+                    </LinearLayout>
+                </com.animal.scale.hodoo.custom.view.CustomCollapse>
+
+                <LinearLayout
+                    android:paddingTop="16dp"
+                    android:orientation="vertical"
+                    android:layout_marginTop="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+                    <com.animal.scale.hodoo.custom.view.CircleTextView
+                        android:layout_marginLeft="23dp"
+                        android:layout_marginBottom="18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/temp_for_today"
+                        android:textSize="11sp"/>
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chartView"
+                        android:layout_width="match_parent"
+                        android:layout_height="163dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/averageChart"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@android:color/white">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:background="@android:color/white">
+                        <RadioGroup
+                            android:id="@+id/chart_wrap"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkedButton="@id/chart_day">
+                            <RadioButton
+                                android:id="@+id/chart_day"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/one_day"
+                                android:textColor="@drawable/custom_radio_background"
+                                android:background="@drawable/custom_radio_background"
+                                android:button="@null"/>
+                            <RadioButton
+                                android:id="@+id/chart_week"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/one_week"
+                                android:textColor="@drawable/custom_radio_background"
+                                android:background="@drawable/custom_radio_background"
+                                android:button="@null"/>
+                            <RadioButton
+                                android:id="@+id/chart_month"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/one_month"
+                                android:textColor="@drawable/custom_radio_background"
+                                android:background="@drawable/custom_radio_background"
+                                android:button="@null"/>
+                            <RadioButton
+                                android:id="@+id/chart_year"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/one_year"
+                                android:textColor="@drawable/custom_radio_background"
+                                android:background="@drawable/custom_radio_background"
+                                android:button="@null"/>
+                        </RadioGroup>
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart1"
+                            android:layout_width="match_parent"
+                            android:layout_height="238dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_below="@+id/top_buttons"
+                            android:background="@color/white"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:visibility="invisible"
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="15sp"
+            android:src="@drawable/weight_bottom_chart_icon_121_121"
+            android:onClick="@{activity::onClickFloatingBtn}"
+            app:fabSize="normal" />
+
+    </RelativeLayout>
 </layout>

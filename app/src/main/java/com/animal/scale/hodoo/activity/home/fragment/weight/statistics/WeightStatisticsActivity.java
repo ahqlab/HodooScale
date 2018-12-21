@@ -26,7 +26,7 @@ public class WeightStatisticsActivity extends BaseActivity<WeightStatisticsActiv
         super.setToolbarColor();
         presenter = new WeightStatisticsPresenter(this, binding.chart1);
         presenter.initLoadData(WeightStatisticsActivity.this);
-        presenter.getDailyStatisticalData();
+       // presenter.getDailyStatisticalData();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class WeightStatisticsActivity extends BaseActivity<WeightStatisticsActiv
         binding.monthBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.hodoo_text_gray));
         binding.yearBtn.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.much_rounded_white_bg));
         binding.yearBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.hodoo_text_gray));
-        presenter.getDailyStatisticalData();
+      //  presenter.getDailyStatisticalData();
     }
 
     public void onClickWeekBtn(View vIew) {
@@ -55,7 +55,7 @@ public class WeightStatisticsActivity extends BaseActivity<WeightStatisticsActiv
         binding.monthBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.hodoo_text_gray));
         binding.yearBtn.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.much_rounded_white_bg));
         binding.yearBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.hodoo_text_gray));
-        presenter.getWeeklyStatisticalData();
+        //presenter.getWeeklyStatisticalData();
     }
 
     public void onClickMonthBtn(View vIew) {
@@ -67,7 +67,7 @@ public class WeightStatisticsActivity extends BaseActivity<WeightStatisticsActiv
         binding.monthBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.hodoo_midle_pink));
         binding.yearBtn.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.much_rounded_white_bg));
         binding.yearBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.hodoo_text_gray));
-        presenter.getMonthlyStatisticalData();
+       // presenter.getMonthlyStatisticalData();
     }
 
     public void onClickYearBtn(View vIew) {
@@ -79,6 +79,6 @@ public class WeightStatisticsActivity extends BaseActivity<WeightStatisticsActiv
         binding.monthBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.hodoo_text_gray));
         binding.yearBtn.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.much_rounded_pink_bg));
         binding.yearBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.hodoo_midle_pink));
-        presenter.getStatisticalDataByYear();
+     //   presenter.getStatisticalDataByYear();
     }
 }

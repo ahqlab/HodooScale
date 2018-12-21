@@ -41,11 +41,12 @@ import noman.weekcalendar.listener.OnWeekChangeListener;
 
 public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener , WeightFragmentIn.View, WeightStatistics.View{
 
+    FragmentWeightBinding binding;
+
     protected final String TAG = "HJLEE";
 
     private WeekCalendar weekCalendar;
 
-    FragmentWeightBinding binding;
 
     Animation animation;
 
@@ -90,16 +91,14 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
         binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
 
-
         presenter = new WeightFragmentPresenter(this, binding.chartView);
         presenter.loadData(getActivity());
 
         statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
         statisicsPresenter.initLoadData(getContext());
-        statisicsPresenter.getDailyStatisticalData();
-
-//        //Kcal 로리 표시
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
+        statisicsPresenter.getDailyStatisticalData("weight");
+        ////Kcal 로리 표시
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), "weight");
         presenter.initWeekCalendar();
         /*((HomeActivity)getActivity()).binding.appBarNavigation.petImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +119,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     /* Call from the Home Activity */
     //차트를 그린다.. 동적 로딩 OK
     public void drawChart(){
-        presenter.getDefaultData(DateUtil.getCurrentDatetime());
+        presenter.getDefaultData(DateUtil.getCurrentDatetime(), "weight");
     }
     //BCS 를
     public void setBcsMessage(int basicIdx) {
@@ -205,10 +204,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 if (now.toDateTime().toString().compareTo(date) < 0) {
 
                 }else{
-                    presenter.getDefaultData(date);
+                    presenter.getDefaultData(date, "weight");
                     //setBcsMessage(info.getPet().getBasic());
                     //weightFragment.drawChart();
-                    presenter.getLastCollectionData(date);
+                    presenter.getLastCollectionData(date,"weight");
                     presenter.setAnimationGaugeChart(bcs);
                     refreshData();
                 }
@@ -270,7 +269,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
         presenter.getBcs(mBasicIdx);
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),"weight");
     }
     private void rotationStart( View v ) {
         RotateAnimation rotate = new RotateAnimation(
@@ -311,16 +310,16 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
                 switch ( radioId ) {
                     case R.id.chart_day :
-                        statisicsPresenter.getDailyStatisticalData();
+                        statisicsPresenter.getDailyStatisticalData("weight");
                         break;
                     case R.id.chart_week :
-                        statisicsPresenter.getWeeklyStatisticalData();
+                        statisicsPresenter.getWeeklyStatisticalData("weight");
                         break;
                     case R.id.chart_month :
-                        statisicsPresenter.getMonthlyStatisticalData();
+                        statisicsPresenter.getMonthlyStatisticalData("weight");
                         break;
                     case R.id.chart_year :
-                        statisicsPresenter.getStatisticalDataByYear();
+                        statisicsPresenter.getStatisticalDataByYear("weight");
                         break;
                 }
             }

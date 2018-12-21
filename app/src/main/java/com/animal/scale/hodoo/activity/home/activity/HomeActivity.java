@@ -149,10 +149,11 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     replaceFragment(WeightFragment.newInstance());
                     presenter.loadCustomDropdownView();
                     return true;
-          /*      case R.id.navigation_temp:
+                case R.id.navigation_temp:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
                     replaceFragment(TempFragment.newInstance());
-                    return true;*/
+                    presenter.loadCustomDropdownView();
+                    return true;
                 case R.id.navigation_meal:
                     replaceFragment(MealFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
@@ -234,6 +235,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 }else if(tf instanceof MealFragment){
                     MealFragment mealFragment = (MealFragment) tf;
                     mealFragment.initRaderChart();
+                }else if(tf instanceof TempFragment){
+                    TempFragment tempFragment = (TempFragment) tf;
+                    tempFragment.drawChart();
                 }
             }
         }

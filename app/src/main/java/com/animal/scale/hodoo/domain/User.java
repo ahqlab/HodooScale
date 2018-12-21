@@ -27,6 +27,8 @@ public class User implements Serializable{
 
     private String country;
 
+    private String pushToken;
+
     private String createDate;
     //joinColumn
     private String groupCode;

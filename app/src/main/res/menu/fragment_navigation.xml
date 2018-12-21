@@ -7,12 +7,12 @@
         android:enabled="true"
         android:title="@string/pet_weight"
         app:showAsAction="ifRoom" />
-    <!--<item
+    <item
         android:id="@+id/navigation_temp"
         android:icon="@drawable/menu_icon_48_48_01"
         android:enabled="true"
         android:title="@string/pet_temp"
-        app:showAsAction="ifRoom"/>-->
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/navigation_meal"
         android:icon="@drawable/menu_icon_48_48_03"

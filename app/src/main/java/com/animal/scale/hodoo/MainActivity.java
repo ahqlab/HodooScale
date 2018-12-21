@@ -17,7 +17,6 @@ import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragmen
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.activity.user.signup.SignUpActivity;
 import com.animal.scale.hodoo.activity.user.signup.SignUpIn;
-import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.WelcomeViewPager;
 import com.animal.scale.hodoo.util.CheckConnect;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,13 +44,11 @@ MainActivity extends AppCompatActivity {
     Intent intent;
 
     private boolean isCreated = false;
-    private boolean logoutState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        logoutState = getIntent().getBooleanExtra(SharedPrefVariable.LOGOUT_INTENT_KEY, false);
         //FirebaseInstanceId.getInstance().getToken();
         /*if (FirebaseInstanceId.getInstance().getToken() != null) {
             Log.e("HJLEE", "token = " + FirebaseInstanceId.getInstance().getToken());
@@ -127,10 +124,6 @@ MainActivity extends AppCompatActivity {
         if (!isCreated) {
             mSlideView.setFragments(getSupportFragmentManager(), WelcomeHomeFragment.newInstance(), WelcomeFirstFragment.newInstance(), WelcomeSecondFragment.newInstance(), WelcomeThirdFragment.newInstance());
             isCreated = true;
-            if ( logoutState ) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            }
         }
     }
 }
