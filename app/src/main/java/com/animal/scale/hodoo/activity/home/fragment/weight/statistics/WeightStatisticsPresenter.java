@@ -33,8 +33,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         model.initLoadData(context);
     }
 
-    public void getDailyStatisticalData() {
-        model.getDailyStatisticalData(new CommonModel.DomainListCallBackListner<Statistics>() {
+    public void getDailyStatisticalData(String type) {
+        model.getDailyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if (d.size() > 0) {
@@ -67,8 +67,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     @Override
-    public void getWeeklyStatisticalData() {
-        model.getWeeklyStatisticalData(new CommonModel.DomainListCallBackListner<Statistics>() {
+    public void getWeeklyStatisticalData(String type) {
+        model.getWeeklyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if (d.size() > 0) {
@@ -88,8 +88,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     @Override
-    public void getMonthlyStatisticalData() {
-        model.getMonthlyStatisticalData(new CommonModel.DomainListCallBackListner<Statistics>() {
+    public void getMonthlyStatisticalData(String type) {
+        model.getMonthlyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if (d.size() > 0) {
@@ -109,8 +109,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     @Override
-    public void getStatisticalDataByYear() {
-        model.getStatisticalDataByYear(new CommonModel.DomainListCallBackListner<Statistics>() {
+    public void getStatisticalDataByYear(String type) {
+        model.getStatisticalDataByYear(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if (d.size() > 0) {

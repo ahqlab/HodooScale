@@ -87,18 +87,18 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
 
         nowTime = System.currentTimeMillis();
 
-        bcsArr = getResources().getStringArray(R.array.bcs_arr);
-        binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
-        binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
+        //bcsArr = getResources().getStringArray(R.array.bcs_arr);
+        //binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
+        //binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
 
         presenter = new WeightFragmentPresenter(this, binding.chartView);
         presenter.loadData(getActivity());
 
         statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
         statisicsPresenter.initLoadData(getContext());
-        statisicsPresenter.getDailyStatisticalData();
+        statisicsPresenter.getDailyStatisticalData("temp");
         //Kcal 로리 표시
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),"temp");
         presenter.initWeekCalendar();
         /*((HomeActivity)getActivity()).binding.appBarNavigation.petImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +121,7 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
     /* Call from the Home Activity */
     //차트를 그린다.. 동적 로딩 OK
     public void drawChart() {
-        presenter.getDefaultData(DateUtil.getCurrentDatetime());
+        presenter.getDefaultData(DateUtil.getCurrentDatetime(),"temp");
     }
 
     //BCS 를
@@ -151,13 +151,13 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
 //            animation = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_two_step);
         }
 
-        if (bcs > 0) {
+        /*if (bcs > 0) {
             binding.bcsSubscript.setText(bcsArr[checkBCS]);
             binding.bcsStep.setText(String.valueOf(bcs));
         } else {
             binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
             binding.bcsStep.setText(String.valueOf(bcs));
-        }
+        }*/
     }
 
     //여기 날짜도 들어가야함..
@@ -207,10 +207,10 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
                 if (now.toDateTime().toString().compareTo(date) < 0) {
 
                 } else {
-                    presenter.getDefaultData(date);
+                    presenter.getDefaultData(date,"temp");
                     //setBcsMessage(info.getPet().getBasic());
                     //weightFragment.drawChart();
-                    presenter.getLastCollectionData(date);
+                    presenter.getLastCollectionData(date,"temp");
                     presenter.setAnimationGaugeChart(bcs);
                     refreshData();
                 }
@@ -271,9 +271,9 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
 
     private void refreshData() {
         nowTime = System.currentTimeMillis();
-        binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
-        presenter.getBcs(mBasicIdx);
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
+        //binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
+        //presenter.getBcs(mBasicIdx);
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),"temp");
     }
 
     private void rotationStart(View v) {
@@ -316,16 +316,16 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
                 switch (radioId) {
                     case R.id.chart_day:
-                        statisicsPresenter.getDailyStatisticalData();
+                        statisicsPresenter.getDailyStatisticalData("temp");
                         break;
                     case R.id.chart_week:
-                        statisicsPresenter.getWeeklyStatisticalData();
+                        statisicsPresenter.getWeeklyStatisticalData("temp");
                         break;
                     case R.id.chart_month:
-                        statisicsPresenter.getMonthlyStatisticalData();
+                        statisicsPresenter.getMonthlyStatisticalData("temp");
                         break;
                     case R.id.chart_year:
-                        statisicsPresenter.getStatisticalDataByYear();
+                        statisicsPresenter.getStatisticalDataByYear("temp");
                         break;
                 }
             }

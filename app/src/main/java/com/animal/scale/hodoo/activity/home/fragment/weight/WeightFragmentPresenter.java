@@ -62,8 +62,8 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
     }
 
     @Override
-    public void getDefaultData(String date) {
-        model.getDayData(date, new WeightFragmentModel.DomainListCallBackListner<Statistics>() {
+    public void getDefaultData(String date, String type) {
+        model.getDayData(date, type, new WeightFragmentModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if(d.size() > 0){
@@ -97,8 +97,8 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
     }
 
     @Override
-    public void getLastCollectionData(final String date) {
-        model.getLastCollectionData(date, new WeightFragmentModel.DomainCallBackListner<RealTimeWeight>() {
+    public void getLastCollectionData(final String date, String type) {
+        model.getLastCollectionData(date, type , new WeightFragmentModel.DomainCallBackListner<RealTimeWeight>() {
             @Override
             public void doPostExecute(RealTimeWeight d) {
                 if(date.matches(DateUtil.getCurrentDatetime())){
@@ -107,7 +107,6 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
                     view.setLastCollectionData(d);
                 }
             }
-
             @Override
             public void doPreExecute() {
             }

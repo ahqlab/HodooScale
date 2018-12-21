@@ -253,7 +253,9 @@
     <string name="istyle_bcs_comment">現在、あなたのペットはBCS 4段階に平均体重に比べて過剰な状態です。\nバランスの取れた献立と正しい行動でペットの体重を管理しなければいけません。 </string>
     <string name="istyle_weight_history_of_the_day">今日の体重記録</string>
     <string name="average_weight_for_today">今日の平均体重</string>
+    <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
     <string name="weight_for_today">今日の体重</string>
+    <string name="temp_for_today">today\'s temp</string>
     <string name="bcs_step_str">BCS 段階</string>
     <string name="bcs_description_str">BCS 説明</string>
     <string name="last_sync_refresh_str">最後の同期化</string>

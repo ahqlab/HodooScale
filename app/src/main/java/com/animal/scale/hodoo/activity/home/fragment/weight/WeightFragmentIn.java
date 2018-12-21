@@ -34,11 +34,11 @@ public interface WeightFragmentIn {
 
         void setAnimationGaugeChart(int bcs);
 
-        void getDefaultData(String date);
+        void getDefaultData(String date, String type);
 
         void setupDefaultChart();
 
-        void getLastCollectionData(String date);
+        void getLastCollectionData(String date, String type);
 
         void initWeekCalendar();
 
