@@ -363,5 +363,11 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="uv_index">자외선 지수</string>
     <string name="ozone_index">오존 지수</string>
     <string name="today_all_calroie">오늘의 총 소비 칼로리</string>
+    <string name="question_of_change_the_password">비밀번호를 변경하시겠습니까?</string>
+    <string name="confirm_new_password">새 비밀번호 확인</string>
+    <string name="not_mathed_old_password">이전비밀번호와 동일하지 않습니다.</string>
+    <string name="password_edit_success">비밀번호를 변경했습니다.</string>
+    <string name="pet_name_empty_msg" >펫의 이름을 입력하세요.</string>
+    <string name="pet_birthday_empty_msg">생년월일을 입력하세요</string>
     <!-- ActivityFragment (e) -->
 </resources>

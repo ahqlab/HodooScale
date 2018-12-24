@@ -62,8 +62,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity>
                 CommonTextWatcher.JOIN_PW_TYPE,
                 new int[]{
                         R.string.istyle_enter_the_password,
-                        R.string.istyle_password_is_incorrect,
-                        R.string.same_as_previous_password
+                        R.string.istyle_password_is_incorrect
                 },
                 new CommonTextWatcher.CommonTextWatcherCallback() {
                     @Override
@@ -81,8 +80,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity>
                 CommonTextWatcher.PWCHECK_TYPE,
                 new int[]{
                         R.string.istyle_enter_the_password,
-                        R.string.istyle_password_is_incorrect,
-                        R.string.same_as_previous_password
+                        R.string.istyle_password_is_incorrect
                 },
                 new CommonTextWatcher.CommonTextWatcherCallback() {
                     @Override
