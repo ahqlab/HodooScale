@@ -23,7 +23,6 @@ import retrofit2.Response;
 public class ActivityFragmentPresenter implements ActivityFragmentIn.Presenter {
     private static final String TAG = ActivityFragmentPresenter.class.getSimpleName();
 
-
     public static final int WIND_TYPE = 0;
     public static final int UV_TYPE = 1;
     public static final int OZON_TYPE = 2;
@@ -46,7 +45,7 @@ public class ActivityFragmentPresenter implements ActivityFragmentIn.Presenter {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mView.setProgress(true);
+//                mView.setProgress(true);
             }
 
             @Override
