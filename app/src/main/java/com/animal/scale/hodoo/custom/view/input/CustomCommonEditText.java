@@ -39,8 +39,10 @@ public class CustomCommonEditText extends LinearLayout implements CustomCommonEd
     public EditText editText;
 
     boolean status = false;
+    boolean focusble = false;
 
     String hint;
+    String text;
 
 
     public CustomCommonEditText(Context context) {
@@ -76,8 +78,13 @@ public class CustomCommonEditText extends LinearLayout implements CustomCommonEd
         titleSize = typedArray.getFloat(R.styleable.CommonEditText_titleSize, 0);
         messageSize = typedArray.getFloat(R.styleable.CommonEditText_errorMessageSize, 0);
         hint = typedArray.getString(R.styleable.CommonEditText_hint);
+        focusble = typedArray.getBoolean(R.styleable.CommonEditText_edtFocusble, true);
+        text = typedArray.getString(R.styleable.CommonEditText_edtText);
         initView();
         typedArray.recycle();
+    }
+    public void setOnEdtClick (  ) {
+
     }
 
     public void initView() {
@@ -113,6 +120,7 @@ public class CustomCommonEditText extends LinearLayout implements CustomCommonEd
         LinearLayout contentView = (LinearLayout) inflater.inflate(contentAttrResourceId, this, false);
         editText = contentView.findViewById(R.id.edittext);
         editText.setHint(hint);
+        editText.setFocusable(focusble);
         editText.setLayoutParams(params);
         this.addView(contentView);
     }
