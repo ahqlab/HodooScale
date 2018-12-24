@@ -30,10 +30,12 @@ import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRe
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityBasicInformaitonRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.util.ValidationUtil;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.squareup.picasso.Picasso;
 
@@ -60,6 +62,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     BasicInformationRegistIn.Presenter presenter;
 
     private int petIdx;
+
+    private final String GENDER_MALE = "MALE";
+    private final String GENDER_FEMALE = "FEMALE";
+    private boolean genderCheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +103,42 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 } else if (radioButton.getText().toString().matches(getResources().getString(R.string.male))) {
                     binding.getInfo().setSex("MALE");
                 }
+                genderCheck = true;
+                validation();
             }
         });
+        binding.petBreed.editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickSelectEditText(view);
+            }
+        });
+        binding.petBirthday.editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickCalDalog(view);
+            }
+        });
+        validation();
+//        binding.nextStep.setEnabled(validation());
+        binding.petName.editText.addTextChangedListener(new CommonTextWatcher(binding.petName, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+            @Override
+            public void onChangeState(boolean state) {
+                validation();
+            }
+        }));
+        binding.petBreed.editText.addTextChangedListener(new CommonTextWatcher(binding.petBreed, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+            @Override
+            public void onChangeState(boolean state) {
+                validation();
+            }
+        }));
+        binding.petBirthday.editText.addTextChangedListener(new CommonTextWatcher(binding.petBirthday, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_birthday_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+            @Override
+            public void onChangeState(boolean state) {
+                validation();
+            }
+        }));
     }
 
     @Override
@@ -122,6 +162,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     @Override
     public void setView(PetBasicInfo basicInfo) {
+
+        binding.petName.editText.setText(basicInfo.getPetName());
+        binding.petBreed.editText.setText(basicInfo.getPetBreed());
+
+        binding.petBirthday.editText.setText(basicInfo.getBirthday());
         if (basicInfo.getNeutralization().matches("YES")) {
             binding.switch1.setChecked(true);
         } else {
@@ -131,11 +176,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 .load(SharedPrefVariable.SERVER_ROOT + basicInfo.getProfileFilePath())
                 .into(binding.profile);
 
-        if (basicInfo.getSex().matches(getResources().getString(R.string.femle))) {
+        if (basicInfo.getSex().matches(GENDER_MALE)) {
             binding.maleBtn.setChecked(true);
-        } else if (basicInfo.getSex().matches(getResources().getString(R.string.femle))) {
+        } else if (basicInfo.getSex().matches(GENDER_FEMALE)) {
             binding.femaleBtn.setChecked(true);
         }
+        validation();
     }
 
     @Override
@@ -233,7 +279,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        binding.getDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        binding.petBirthday.editText.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+//                        binding.getDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     }
                 }, year, month, day);
         picker.show();
@@ -274,12 +321,18 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     public void goDiseaseActivity(View view) {
         Log.e("HJLEE", ">>" + REQUEST_MODE);
+        setBasicInfo();
         if (REQUEST_MODE) {
             presenter.updateBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         } else {
             Log.e("HJLEE", binding.getInfo().toString());
             presenter.registBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         }
+    }
+    private void setBasicInfo() {
+        binding.getInfo().setPetName(binding.petName.editText.getText().toString());
+        binding.getInfo().setPetBreed(binding.petBreed.editText.getText().toString());
+        binding.getInfo().setBirthday(binding.petBirthday.editText.getText().toString());
     }
 
     @Override
@@ -471,9 +524,27 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 .setItems(values, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                binding.petBreed.setText(values[which]);
+                binding.petBreed.editText.setText(values[which]);
                 dialog.dismiss();
             }
         }).show();
+    }
+    private void validation () {
+        if ( !ValidationUtil.isEmpty(binding.petName.editText.getText().toString()) &&
+                !ValidationUtil.isEmpty(binding.petBreed.editText.getText().toString()) &&
+                !ValidationUtil.isEmpty(binding.petBirthday.editText.getText().toString()) &&
+                genderCheck) {
+            setBtnEnable(true);
+        } else {
+            setBtnEnable(false);
+        }
+    }
+    private void setBtnEnable ( boolean state ) {
+        binding.nextStep.setEnabled(state);
+        if ( binding.nextStep.isEnabled() ) {
+            binding.nextStep.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        } else {
+            binding.nextStep.setTextColor(ContextCompat.getColor(this, R.color.mainRed));
+        }
     }
 }
