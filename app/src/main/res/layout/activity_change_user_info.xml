@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="activity"
             type="com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity" />
@@ -22,6 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/hodoo_background_color"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_horizontal"
         tools:context=".activity.setting.account.info.ChangeUserInfoActivity">
 
@@ -29,189 +32,98 @@
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}" />
 
+
         <LinearLayout
             android:id="@+id/email_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/my_toolbar"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/change_user_info_email"
-                android:textColor="@color/hodoo_midle_pink"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@={domain.email}"
-                android:textColor="@color/hodoo_pink"
-                android:textSize="27sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/my_toolbar"
-            android:layout_marginTop="141.9dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginRight="40dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="@string/change_user_info_email"
+                    android:textColor="@color/labelColor"
+                    android:textSize="16sp" />
 
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="16dp"
-                        android:layout_marginLeft="17dp"
-                        android:layout_marginRight="15.8dp"
-                        android:src="@drawable/change_user_info_password_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/change_user_info_password"
-                        android:textColor="@color/hodoo_pink"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:background="@drawable/bottom_border"
-                    android:orientation="horizontal">
+                    android:text="@={domain.email}"
+                    android:textColor="@color/black"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="5dp"
-                        android:layout_weight="1"
-                        android:password="true"
-                        android:text="@={domain.password}"
-                        android:textSize="13sp" />
-
-                    <Button
-                        android:layout_width="92dp"
-                        android:layout_height="27dp"
-                        android:background="@drawable/rounded_edittext_bg"
-                        android:textSize="12sp"
-                        android:textColor="@color/hodoo_pink"
-                        android:onClick="@{activity::onChangePasswordBtn}"
-                        android:text="@string/change_user_info_password_btn"/>
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/my_toolbar"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="16dp"
+                    android:focusable="true"
+                    android:enabled="false"
+                    app:editTextResourceId="@layout/password_edittext"
+                    app:errorMessageSize="11"
+                    app:title="@string/current_password"
+                    app:titleSize="13" />
 
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="16dp"
-                        android:layout_marginLeft="17dp"
-                        android:layout_marginRight="15.8dp"
-                        android:src="@drawable/change_user_info_user_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/change_user_info_nickname"
-                        android:textColor="@color/hodoo_pink"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <LinearLayout
+                <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                    android:id="@+id/nick_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="16dp"
+                    app:editTextResourceId="@layout/normal_edittext"
+                    app:errorMessageSize="11"
+                    app:title="@string/new_password"
+                    app:titleSize="13" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:text="@={domain.nickname}"
-                        android:textSize="13sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                    android:id="@+id/country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="16dp"
+                    app:editTextResourceId="@layout/normal_edittext"
+                    app:errorMessageSize="11"
+                    app:title="@string/istyle_label_country"
+                    app:titleSize="13" />
 
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="16dp"
-                        android:layout_marginLeft="17dp"
-                        android:layout_marginRight="15.8dp"
-                        android:src="@drawable/change_user_info_location_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/change_user_info_location"
-                        android:textColor="@color/hodoo_pink"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:text="@={domain.country}"
-                        android:textSize="13sp" />
-                </LinearLayout>
 
                 <Button
-                    android:id="@+id/email_sign_in_button"
-                    style="@style/CommonBtn"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/confirm"
-                    android:onClick="@{activity::onConfirmBtn}"/>
-            </LinearLayout>
-        </LinearLayout>
+                    android:id="@+id/confirm"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/rounded_pink_btn"
+                    android:onClick="@{activity::onConfirmBtn}"
+                    android:text="@string/cofirm_btn_text"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
+            </LinearLayout>
+
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/login_progress"

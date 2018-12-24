@@ -26,4 +26,8 @@ public interface UserService{
 
     @POST("user/get/group/member")
     Call<List<User>> getGroupMemner(@Query("groupCode") String groupCode);
+
+
+    @POST("user/update/user/password")
+    Call<Integer> updateUsetPassword(@Body User user);
 }

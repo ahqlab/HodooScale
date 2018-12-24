@@ -65,6 +65,7 @@ public class LoginModel extends CommonModel {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_UNIQUE_ID, user.getUserIdx());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_EMAIL, user.getEmail());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.GROUP_CODE, user.getGroupCode());
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_PASSWORD, user.getPassword());
     }
 
     public void confirmDeviceRegistration(final DeviceRegistrationListener deviceRegistrationListener) {
