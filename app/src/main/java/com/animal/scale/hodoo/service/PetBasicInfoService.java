@@ -23,7 +23,6 @@ public interface PetBasicInfoService {
     @POST("pet/my/registered/list")
     Call<List<PetBasicInfo>> getMyRegisteredPetList(@Query("groupId") String groupId);
 
-
     @POST("pet/about/my/pet/list")
     Call<List<PetAllInfos>> aboutMyPetList(@Query("groupCode") String groupCode);
 }

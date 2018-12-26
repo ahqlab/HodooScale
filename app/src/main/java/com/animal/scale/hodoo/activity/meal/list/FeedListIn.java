@@ -23,6 +23,8 @@ public interface FeedListIn {
         void setTodaySumCalorie(MealHistory mealHistory);
 
         void setPetAllInfo(PetAllInfos petAllInfos);
+
+        void deleteResult(Integer integer);
     }
 
     interface Presenter{
@@ -36,5 +38,7 @@ public interface FeedListIn {
         void getTodaySumCalorie();
 
         void getPetAllInfo();
+
+        void deleteMealHistory(int historyIdx);
     }
 }

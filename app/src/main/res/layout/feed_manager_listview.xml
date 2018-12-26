@@ -22,16 +22,43 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
+
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="16dp"
-                android:src="@drawable/ugly_human" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/user_circle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="16dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="형"
+                    android:textSize="20dp"
+                    android:background="@drawable/circle_pink"/>
+
+                <TextView
+                    android:id="@+id/user_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="형"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"/>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -43,12 +70,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp"
+                android:textColor="@color/labelColor"
+                android:textSize="12sp"
                 app:dateTimeConverter="@{domain.mealHistory.createDate}"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
+                android:textSize="15sp"
+                android:textColor="@color/mainBlack"
                 android:text="@{domain.feed.name}" />
         </LinearLayout>
         <LinearLayout

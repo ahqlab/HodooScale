@@ -175,7 +175,7 @@
             android:layout_margin="15sp"
             android:onClick="@{activity::onClickFloatingBtn}"
             app:fabSize="normal"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@drawable/plus_white" />
 
     </RelativeLayout>
 </layout>

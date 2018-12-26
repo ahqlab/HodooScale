@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.meal.list;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragmentModel;
 import com.animal.scale.hodoo.activity.meal.regist.MealRegistrationModel;
@@ -82,4 +83,19 @@ public class FeedListPresenter implements FeedListIn.Presenter {
         });
     }
 
+    @Override
+    public void deleteMealHistory(int historyIdx) {
+        model.deleteMealHistory(historyIdx, new FeedListModel.DomainCallBackListner<Integer>(){
+
+            @Override
+            public void doPostExecute(Integer integer) {
+                view.deleteResult(integer);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
 }
