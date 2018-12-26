@@ -44,7 +44,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
 
     private final int REQUEST_LOCATION = 100;
     private long nowTime;
-    private boolean rotationState = false, isActivity = false;
+    private boolean rotationState = false, isActivity = false, isLocation = true;
     private int LIMIT_TIME = 20 * 1000; //20초 셋팅
 
     @Nullable
@@ -110,6 +110,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
     private void getWeather() {
         if ( lm == null )
             lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        if ( !isLocation ) isLocation = true;
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -125,14 +126,14 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
         boolean statusOfNetwork = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         if ( statusOfGPS ) {
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    100,
-                    1,
+                    0,
+                    0,
                     this);
         }
         if ( statusOfNetwork ) {
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                    100,
-                    1,
+                    0,
+                    0,
                     this);
         }
 
@@ -142,80 +143,79 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-        double lon = location.getLongitude(); //경도
-        double lat= location.getLatitude();   //위도
-        float acc = location.getAccuracy();    //정확도
-        String provider = location.getProvider();
-        presenter.getWeather(lat, lon, new ActivityFragmentPresenter.WeatherCallback() {
-            @Override
-            public <T> void onResponse(Response<T> response) {
-                if ( response.body() != null ) {
-                    if ( isActivity ) {
-                        Weatherbit weatherbit = (Weatherbit) response.body();
-                        float uv = weatherbit.getData().get(0).getUv(),
-                                ozone = weatherbit.getData().get(0).getOzone(),
-                                windspeed = weatherbit.getData().get(0).getWind_spd();
-                        binding.temp.setText(String.format("%.0f˚", weatherbit.getData().get(0).getTemp()));
-                        binding.cityName.setText(weatherbit.getCity_name());
-                        binding.district.setText(weatherbit.getDistrict());
-                        binding.windSpeed.setText(String.format("%.1fm/s", windspeed));
-                        binding.uv.setText(String.format("%.0f", uv));
-                        binding.ozone.setText(String.format("%.3fppm", ozone));
-                        presenter.getWeatherIcon(getContext(), weatherbit.getData().get(0).getWeather().getIcon());
+    public void onLocationChanged(final Location location) {
+        if ( isLocation ) {
+            double lon = location.getLongitude(); //경도
+            double lat= location.getLatitude();   //위도
+            float acc = location.getAccuracy();    //정확도
+            String provider = location.getProvider();
+            presenter.getWeather(lat, lon, new ActivityFragmentPresenter.WeatherCallback() {
+                @Override
+                public <T> void onResponse(Response<T> response) {
+                    if ( response.body() != null ) {
+                        if ( isActivity ) {
+                            Weatherbit weatherbit = (Weatherbit) response.body();
+                            float uv = weatherbit.getData().get(0).getUv(),
+                                    ozone = weatherbit.getData().get(0).getOzone(),
+                                    windspeed = weatherbit.getData().get(0).getWind_spd();
+                            binding.temp.setText(String.format("%.0f˚", weatherbit.getData().get(0).getTemp()));
+                            binding.cityName.setText(weatherbit.getCity_name());
+                            binding.district.setText(weatherbit.getDistrict());
+                            binding.windSpeed.setText(String.format("%.1fm/s", windspeed));
+                            binding.uv.setText(String.format("%.0f", uv));
+                            binding.ozone.setText(String.format("%.3fppm", ozone));
+                            presenter.getWeatherIcon(getContext(), weatherbit.getData().get(0).getWeather().getIcon());
 
-                        /* uv description (s) */
-                        String[] uvDesciption = getResources().getStringArray(R.array.uv_description_arr),
-                                ozoneDescription = getResources().getStringArray(R.array.ozone_description_arr),
-                                windspeedDescription = getResources().getStringArray(R.array.wind_speed_description_arr);
-                        int uvState = 0, ozoneState = 0, windspeedState = 0;
-                        if ( uv >= 0 && uv < 3 )
-                            uvState = 0;
-                        else if ( uv >= 3 && uv < 6 )
-                            uvState = 1;
-                        else if ( uv >= 6 && uv < 8 )
-                            uvState = 2;
-                        else if ( uv >= 8 && uv < 11 )
-                            uvState = 3;
-                        else
-                            uvState = 4;
-                        /* uv description (e) */
+                            /* uv description (s) */
+                            String[] uvDesciption = getResources().getStringArray(R.array.uv_description_arr),
+                                    ozoneDescription = getResources().getStringArray(R.array.ozone_description_arr),
+                                    windspeedDescription = getResources().getStringArray(R.array.wind_speed_description_arr);
+                            int uvState = 0, ozoneState = 0, windspeedState = 0;
+                            if ( uv >= 0 && uv < 3 )
+                                uvState = 0;
+                            else if ( uv >= 3 && uv < 6 )
+                                uvState = 1;
+                            else if ( uv >= 6 && uv < 8 )
+                                uvState = 2;
+                            else if ( uv >= 8 && uv < 11 )
+                                uvState = 3;
+                            else
+                                uvState = 4;
+                            /* uv description (e) */
 
-                        /* ozone description (s) */
-                        if ( ozone >= 0 && ozone < 0.031 )
-                            ozoneState = 0;
-                        else if ( ozone >= 0.031 && ozone < 0.091 )
-                            ozoneState = 1;
-                        else if ( ozone >= 0.091 && ozone < 0.151 )
-                            ozoneState = 2;
-                        else
-                            ozoneState = 3;
-                        /* ozone description (e) */
+                            /* ozone description (s) */
+                            if ( ozone >= 0 && ozone < 0.031 )
+                                ozoneState = 0;
+                            else if ( ozone >= 0.031 && ozone < 0.091 )
+                                ozoneState = 1;
+                            else if ( ozone >= 0.091 && ozone < 0.151 )
+                                ozoneState = 2;
+                            else
+                                ozoneState = 3;
+                            /* ozone description (e) */
 
-                        /* wind speed description (s) */
-                        if ( windspeed >= 0 && windspeed < 4 )
-                            windspeedState = 0;
-                        else if ( windspeed >= 4 && windspeed < 9 )
-                            windspeedState = 1;
-                        else if ( windspeed >= 9 && windspeed < 14 )
-                            windspeedState = 2;
-                        else
-                            windspeedState = 3;
-                        /* ozone description (e) */
-                        binding.uvStr.setText(uvDesciption[uvState]);
-                        binding.ozoneStr.setText(ozoneDescription[ozoneState]);
-                        binding.windSpeedStr.setText(windspeedDescription[windspeedState]);
+                            /* wind speed description (s) */
+                            if ( windspeed >= 0 && windspeed < 4 )
+                                windspeedState = 0;
+                            else if ( windspeed >= 4 && windspeed < 9 )
+                                windspeedState = 1;
+                            else if ( windspeed >= 9 && windspeed < 14 )
+                                windspeedState = 2;
+                            else
+                                windspeedState = 3;
+                            /* ozone description (e) */
+                            binding.uvStr.setText(uvDesciption[uvState]);
+                            binding.ozoneStr.setText(ozoneDescription[ozoneState]);
+                            binding.windSpeedStr.setText(windspeedDescription[windspeedState]);
+                        }
+                    } else {
+                        binding.district.setText("위치를 파악할 수 없음");
                     }
-                } else {
-                    binding.district.setText("위치를 파악할 수 없음");
+                    setProgress(false);
+                    isLocation = false;
                 }
-                setProgress(false);
-
-            }
-        });
-
-        Log.e(TAG, String.format("lon : %f, lat : %f", lon, lat));
-        lm.removeUpdates(this);
+            });
+        }
     }
 
     @Override
@@ -253,5 +253,8 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
         super.onDestroy();
         isActivity = false;
         lm.removeUpdates(this);
+    }
+    public void refreshWeather( View view ) {
+        getWeather();
     }
 }
