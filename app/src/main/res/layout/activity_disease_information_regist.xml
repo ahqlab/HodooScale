@@ -54,14 +54,14 @@
                         android:id="@+id/add_pet_navigation"
                         layout="@layout/add_pet_nav"/>
 
-                    <ListView
-                        android:id="@+id/listview"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview"
                         android:layout_marginBottom="15dp"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
-                        android:layout_marginTop="15dp"></ListView>
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -78,7 +78,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/common_type_1"
+                    android:background="@drawable/rounded_pink_btn"
                     android:text="@string/add_pet_next_btn"
                     android:onClick="@{activity::onClickNextBtn}"
                     android:textColor="@color/white"

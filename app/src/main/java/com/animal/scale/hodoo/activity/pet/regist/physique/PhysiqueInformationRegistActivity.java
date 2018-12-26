@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityPhysiqueInformationRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
+import com.animal.scale.hodoo.util.ValidationUtil;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.tistory.dwfox.dwrulerviewlibrary.utils.DWUtils;
 import com.tistory.dwfox.dwrulerviewlibrary.view.DWRulerSeekbar;
@@ -55,6 +58,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
         presenter.getPhysiqueInformation(petIdx);
+        setTextWatcher( binding.editWidth, binding.editHeight, binding.editWeight );
     }
 
     @Override
@@ -69,6 +73,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         }else{
             binding.setDomain(new PetPhysicalInfo());
         }
+        validation();
     }
 
     public void onClickWidthEt(View view){
@@ -127,7 +132,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         intent.putExtra("petIdx", petIdx);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-        finish();
+//        finish();
     }
 
     public void onClickNextBtn(View view){
@@ -136,6 +141,8 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
 
     @Override
     public void setNavigation() {
+        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +184,37 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
                 finish();
             }
         });*/
+    }
+    private void setTextWatcher ( EditText... edts ) {
+        for ( EditText edt : edts ) {
+            edt.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    validation();
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+        }
+    }
+    private void validation () {
+        if (
+                !ValidationUtil.isEmpty( binding.editWidth.getText().toString() ) &&
+                !ValidationUtil.isEmpty( binding.editHeight.getText().toString() ) &&
+                !ValidationUtil.isEmpty( binding.editWeight.getText().toString() )) {
+            binding.nextStep.setEnabled(true);
+        } else {
+            binding.nextStep.setEnabled(false);
+        }
+
     }
 
 
