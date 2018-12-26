@@ -92,7 +92,7 @@
                     android:layout_marginTop="16dp"
                     app:editTextResourceId="@layout/normal_edittext"
                     app:errorMessageSize="11"
-                    app:title="@string/new_password"
+                    app:title="@string/istyle_label_nickname"
                     app:titleSize="13" />
 
                 <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText

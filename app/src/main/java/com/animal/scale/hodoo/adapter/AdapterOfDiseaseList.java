@@ -23,6 +23,8 @@ import lombok.Setter;
 
 public class AdapterOfDiseaseList extends BaseAdapter {
 
+    private final String TAG = AdapterOfDiseaseList.class.getSimpleName();
+
     Activity activity;
     private LayoutInflater inflater;
     private List<Disease> data;
@@ -68,15 +70,17 @@ public class AdapterOfDiseaseList extends BaseAdapter {
         }
         binding.setDisease(data.get(position));
         for (PetChronicDisease petChronicDisease: chronic) {
-            if(petChronicDisease.getDiseaseName().matches(data.get(position).getName())){
+            if(petChronicDisease.getDiseaseNameStr().matches(data.get(position).getName())){
                     binding.choiceDisease.setChecked(true);
                     setCheckedCount(getCheckedCount() + 1);
                     data.get(position).setChecked(true);
+                    Log.e(TAG, String.format("position : %d", position));
             }
         }
         binding.choiceDisease.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Log.e(TAG, String.format("listener position : %d", position));
                 if (b) {
                     data.get(position).setChecked(true);
                     setCheckedCount(getCheckedCount() + 1);

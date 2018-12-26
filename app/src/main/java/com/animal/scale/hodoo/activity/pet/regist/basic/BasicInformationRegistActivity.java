@@ -199,7 +199,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         intent.putExtra("petIdx", petIdx);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-        finish();
+//        finish();
     }
 
     @Override

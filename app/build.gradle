@@ -89,4 +89,7 @@ dependencies {
 
     //number animation
     implementation 'com.robinhood.ticker:ticker:2.0.0'
+
+    //flex box layout
+    implementation 'com.google.android:flexbox:0.3.0'
 }

@@ -230,7 +230,6 @@
                     android:onClick="@{activity::goDiseaseActivity}"
                     android:text="@string/add_pet_next_btn"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

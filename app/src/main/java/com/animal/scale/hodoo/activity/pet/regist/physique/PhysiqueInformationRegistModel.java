@@ -19,7 +19,7 @@ public class PhysiqueInformationRegistModel {
     public void loadData(Context context){
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
-    };
+    }
 
     public void getPhysiqueInformation(int petIdx, final getPhysiqueInformationResultListner getPhysiqueInformationResultListner) {
         Call<PetPhysicalInfo> call = NetRetrofit.getInstance().getPetPhysicalInfoService().getPhysicalIformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
