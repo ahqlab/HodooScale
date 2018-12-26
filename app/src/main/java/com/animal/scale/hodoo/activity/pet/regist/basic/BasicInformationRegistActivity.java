@@ -81,6 +81,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
         presenter.getPetBasicInformation(petIdx);
+
         binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -150,6 +151,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             presenter.setView(basicInfo);
         } else {
             binding.setInfo(new PetBasicInfo());
+            if(binding.switch1.isChecked()){
+                binding.getInfo().setNeutralization("YES");
+            }else{
+                binding.getInfo().setNeutralization("NO");
+            }
             REQUEST_MODE = false;
             REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist";
         }
@@ -320,15 +326,14 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void goDiseaseActivity(View view) {
-        Log.e("HJLEE", ">>" + REQUEST_MODE);
         setBasicInfo();
         if (REQUEST_MODE) {
             presenter.updateBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         } else {
-            Log.e("HJLEE", binding.getInfo().toString());
             presenter.registBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         }
     }
+
     private void setBasicInfo() {
         binding.getInfo().setPetName(binding.petName.editText.getText().toString());
         binding.getInfo().setPetBreed(binding.petBreed.editText.getText().toString());
@@ -373,7 +378,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         });*/
     }
 
-    public void onClickSelectEditText(View view){
+    public void onClickSelectEditText(View view) {
         final String[] values = new String[]{
                 "마스티프",
                 "보르도 마스티프",
@@ -522,15 +527,16 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         };
         super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null)
                 .setItems(values, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                binding.petBreed.editText.setText(values[which]);
-                dialog.dismiss();
-            }
-        }).show();
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        binding.petBreed.editText.setText(values[which]);
+                        dialog.dismiss();
+                    }
+                }).show();
     }
-    private void validation () {
-        if ( !ValidationUtil.isEmpty(binding.petName.editText.getText().toString()) &&
+
+    private void validation() {
+        if (!ValidationUtil.isEmpty(binding.petName.editText.getText().toString()) &&
                 !ValidationUtil.isEmpty(binding.petBreed.editText.getText().toString()) &&
                 !ValidationUtil.isEmpty(binding.petBirthday.editText.getText().toString()) &&
                 genderCheck) {
@@ -539,9 +545,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             setBtnEnable(false);
         }
     }
-    private void setBtnEnable ( boolean state ) {
+
+    private void setBtnEnable(boolean state) {
         binding.nextStep.setEnabled(state);
-        if ( binding.nextStep.isEnabled() ) {
+        if (binding.nextStep.isEnabled()) {
             binding.nextStep.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         } else {
             binding.nextStep.setTextColor(ContextCompat.getColor(this, R.color.mainRed));
