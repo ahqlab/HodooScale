@@ -48,16 +48,17 @@
 
         <RadioButton
             android:id="@+id/currentPetCheckBox"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="13dp"
             android:layout_margin="10dp"
+            android:layout_marginRight="16dp"
             app:isCurrentPet="@{currentPetIdx}"
             app:petIdx="@{domain.pet.petIdx}"
             android:focusable="false"
             android:clickable="false"
             android:focusableInTouchMode="false"
             android:button="@null"
-            android:background="@drawable/custom_disease_list_checkbox" />
+            android:background="@drawable/custom_disease_list_checkbox_ver2" />
     </LinearLayout>
 </layout>
 

@@ -11,9 +11,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +42,7 @@ import com.animal.scale.hodoo.util.ValidationUtil;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.Calendar;
 
 public class BasicInformationRegistActivity extends BaseActivity<BasicInformationRegistActivity> implements BasicInformationRegistIn.View {
@@ -46,8 +50,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     ActivityBasicInformaitonRegistBinding binding;
 
     private static final int CAMERA_REQUEST = 1888;
+    private static final int GALLERY_REQUEST = 1889;
 
     public static final int CAMERA_PERMISSION_CODE = 100;
+    public static final int STORAGE_PERMISSION_CODE = 101;
 
     ProgressDialog progressDialog;
 
@@ -66,6 +72,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     private final String GENDER_MALE = "MALE";
     private final String GENDER_FEMALE = "FEMALE";
     private boolean genderCheck = false;
+
+    private Uri photoUri;
+    private String imageFilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,6 +218,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     @Override
+    public void setSaveImageFile(Bitmap image) {
+        binding.profile.setImageBitmap(image);
+    }
+
+    @Override
     protected BaseActivity<BasicInformationRegistActivity> getActivityClass() {
         return BasicInformationRegistActivity.this;
     }
@@ -253,7 +267,13 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "gallery", Toast.LENGTH_LONG).show();
+                int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+                if (permissionStorage == PackageManager.PERMISSION_DENIED) {
+                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                } else {
+                    openGallery();
+                    builder.dismiss();
+                }
             }
         });
     }
@@ -262,7 +282,22 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     public void openCamera() {
         builder.dismiss();
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        if ( cameraIntent.resolveActivity(getPackageManager()) != null ) {
+            File photo = presenter.setSaveImageFile(this);
+            if ( photo != null ) {
+                imageFilePath = photo.getAbsolutePath();
+                photoUri = FileProvider.getUriForFile(this, getPackageName(), photo);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        }
+    }
+    public void openGallery () {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_REQUEST);
+        Toast.makeText(getApplicationContext(), "gallery", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -310,6 +345,19 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                     }
                 }
                 break;
+            case STORAGE_PERMISSION_CODE :
+                for (int i = 0; i < permissions.length; i++) {
+                    String permission = permissions[i];
+                    int grantResult = grantResults[i];
+                    if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                            openGallery();
+                        } else {
+//                            Toast.makeText(getApplicationContext(), "CAMERA permission denied", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+                break;
         }
     }
 
@@ -319,8 +367,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            binding.profile.setImageBitmap(photo);
+//            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            presenter.rotationImage(imageFilePath);
+        } else if ( requestCode == GALLERY_REQUEST && resultCode == Activity.RESULT_OK ) {
+            presenter.setGalleryImage(this, data.getData());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
