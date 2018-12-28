@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.user.signup;
 
+import android.annotation.SuppressLint;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
@@ -47,5 +48,19 @@ class SignUpModel extends CommonModel {
             public void onFailure(Call<ResultMessageGroup> call, Throwable t) {
             }
         });*/
+    }
+    public void userCertifiedMailSend (String toMailAddr, final DomainCallBackListner callback ) {
+        Call<Integer> call = NetRetrofit.getInstance().getUserService().userCertifiedMailSend(toMailAddr);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer integer) {
+                callback.doPostExecute(integer);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
     }
 }
