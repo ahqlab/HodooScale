@@ -252,7 +252,11 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
     public void onDestroy() {
         super.onDestroy();
         isActivity = false;
-        lm.removeUpdates(this);
+        if ( lm != null ) {
+            lm.removeUpdates(this);
+            lm = null;
+        }
+
     }
     public void refreshWeather( View view ) {
         getWeather();

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -93,6 +95,12 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         View customView = getLayoutInflater().inflate(R.layout.pet_list_dialog, null);
         ListView li = (ListView) customView.findViewById(R.id.pet_listview);
         li.setAdapter(adapter);
+        if ( adapter.listViewHeight > 0 ) {
+            ViewGroup.LayoutParams params = li.getLayoutParams();
+            params.height = adapter.listViewHeight;
+            li.setLayoutParams(params);
+        }
+
         li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -118,7 +126,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
             }
         });
-        alertDialog.show();
+        AlertDialog dialog = alertDialog.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+//        alertDialog.show();
     }
 
     public void onSettingBtnClick(View view) {

@@ -22,6 +22,8 @@ import java.util.List;
 
 public class AdapterOfPets extends BaseAdapter {
 
+    private final String TAG = AdapterOfPets.class.getSimpleName();
+
     Activity activity;
     Context context;
     private LayoutInflater inflater;
@@ -31,6 +33,8 @@ public class AdapterOfPets extends BaseAdapter {
 
     PetsListviewItemBinding binding;
 
+    public int listViewHeight = 0;
+
     public AdapterOfPets(Activity activity, Context context, List<PetAllInfos> data, int currentPetIdx) {
         this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.activity = activity;
@@ -38,6 +42,11 @@ public class AdapterOfPets extends BaseAdapter {
         this.data = data;
         this.currentPetIdx = currentPetIdx;
         mSharedPrefManager = SharedPrefManager.getInstance(activity);
+        View view = LayoutInflater.from(activity).inflate(R.layout.pets_listview_item, null);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        if ( data.size() >= 3 )
+            listViewHeight = view.getMeasuredHeight() * 3;
+        Log.e(TAG, String.format("height : %d", view.getMeasuredHeight()));
     }
 
     public List<PetAllInfos> getList(){
@@ -71,7 +80,6 @@ public class AdapterOfPets extends BaseAdapter {
             binding = (PetsListviewItemBinding) convertView.getTag();
             binding.setDomain(data.get(position));
             binding.setCurrentPetIdx(currentPetIdx);
-
         }
         return binding.getRoot();
     }
