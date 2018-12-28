@@ -42,6 +42,7 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
         Intent intent = new Intent(getApplicationContext(), ConfirmCertificationNumberActivity.class);
         intent.putExtra("email", binding.email.editText.getText().toString());
         startActivity(intent);
+        finish();
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
     private void checkState () {
