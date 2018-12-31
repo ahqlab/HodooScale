@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class User implements Serializable{
+public class User implements Domain{
 
     public User() {}
 

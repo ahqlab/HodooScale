@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.adapter;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class AdapterOfDisease extends RecyclerView.Adapter<AdapterOfDisease.Item
         return new ItemViewHolder(view);
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onBindViewHolder(@NonNull final ItemViewHolder holder, final int position) {
         holder.name.setText(mItems.get(position).getName());

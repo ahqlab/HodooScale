@@ -370,5 +370,5 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="pet_name_empty_msg" >펫의 이름을 입력하세요.</string>
     <string name="pet_birthday_empty_msg">생년월일을 입력하세요</string>
 
-
+    <string name="forgot_password_sub_scription">이메일로 임시비밀번호를 발송해드립니다.</string>
 </resources>
