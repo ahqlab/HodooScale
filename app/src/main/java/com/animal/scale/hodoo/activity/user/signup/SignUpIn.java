@@ -16,6 +16,10 @@ public interface SignUpIn {
         void registUserResult(ResultMessageGroup resultMessageGroup);
 
         void showPopup(String message);
+
+        void sendEmail( String userEmail );
+
+        void setProgress ( boolean state );
     }
 
     interface Presenter{

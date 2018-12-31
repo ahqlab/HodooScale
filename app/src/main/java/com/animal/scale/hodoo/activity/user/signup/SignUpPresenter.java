@@ -32,7 +32,7 @@ class SignUpPresenter implements SignUpIn.Presenter {
     }
 
     @Override
-    public void registUser(User user) {
+    public void registUser(final User user) {
         model.registUser(user, new SignUpModel.DomainCallBackListner<ResultMessageGroup>() {
             @Override
             public void doPostExecute(ResultMessageGroup resultMessageGroup) {
@@ -41,11 +41,12 @@ class SignUpPresenter implements SignUpIn.Presenter {
                 }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)){
                     view.showPopup("FAILED");
                 }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)){
-                    view.goNextPage();
+                    view.sendEmail(user.getEmail());
                 }
             }
             @Override
             public void doPreExecute() {
+                view.setProgress(true);
             }
         });
     }
@@ -56,14 +57,11 @@ class SignUpPresenter implements SignUpIn.Presenter {
             @Override
             public void doPostExecute(Integer result) {
                 if ( result > 0 )
-                    view.registUser();
-                Log.e(TAG, String.format("result : %d", result));
+                    view.setProgress(false);
+                    view.goNextPage();
             }
-
             @Override
-            public void doPreExecute() {
-
-            }
+            public void doPreExecute() {}
         });
     }
 }

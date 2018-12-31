@@ -31,7 +31,17 @@ import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.MyOwnBindingUtil;
+import com.animal.scale.hodoo.util.RSA;
 import com.animal.scale.hodoo.util.ValidationUtil;
+
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -245,8 +255,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 //                        }
 //                    }).show();
 //        } else {
-
-        presenter.userCertifiedMailSend("songchic2@gmail.com");
+        registUser();
 
 //        }
     }
@@ -276,9 +285,6 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     @Override
     public void goNextPage() {
-
-
-
         Intent intent = new Intent(getApplicationContext(), SignUpFinishActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
@@ -297,6 +303,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         } else if (binding.radioMale.isChecked()) {
             binding.getUser().setSex("MALE");
         }
+        setProgress(true);
         presenter.registUser(binding.getUser());
     }
 
@@ -315,6 +322,16 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                             }
                         }
                 ).show();
+    }
+
+    @Override
+    public void sendEmail(String userEmail) {
+        presenter.userCertifiedMailSend(userEmail);
+    }
+
+    @Override
+    public void setProgress(boolean state) {
+        binding.signupProgress.setVisibility( state ? View.VISIBLE : View.GONE );
     }
 
 
@@ -371,5 +388,23 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         } else {
             setBtnEnable(false);
         }
+    }
+    private String mixToken ( String uId ) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmDDss");
+        String mix = "";
+        try {
+            mix = RSA.Encrypt(uId + sdf.format(new Date()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return mix;
     }
 }

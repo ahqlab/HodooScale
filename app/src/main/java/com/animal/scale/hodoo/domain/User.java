@@ -33,4 +33,6 @@ public class User implements Serializable{
     //joinColumn
     private String groupCode;
 
+    private int userCode;
+
 }

@@ -50,6 +50,10 @@ public class LoginPresenter implements Login.Presenter {
                         Log.e("HJLEE", "LOGIN RESULT : " + resultMessageGroup.getDomain().toString().trim());
                         Gson gson = new Gson();
                         User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
+                        if ( user.getUserCode() <= 0 ) {
+                            loginView.showPopup("이메일 인증을 진행해주세요.");
+                            return;
+                        }
                         saveUserSharedValue(user);
                         checkRegistrationStatus();
                     }
