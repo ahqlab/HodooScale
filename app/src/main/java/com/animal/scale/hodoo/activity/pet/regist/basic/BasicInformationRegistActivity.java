@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -57,7 +58,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     ProgressDialog progressDialog;
 
-    BottomDialog builder;
+    BottomSheetDialog dialog;
 
     public static String REQUEST_URL = "";
 
@@ -244,12 +245,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     public void onClickOpenBottomDlg(View view) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View customView = inflater.inflate(R.layout.image_select_bottom_custom_view, null);
-        builder = new BottomDialog.Builder(BasicInformationRegistActivity.this)
-                .setCustomView(customView)
-                .setNegativeText("Close")
-                .show();
-        Button camera = (Button) customView.findViewById(R.id.camera);
+        dialog = new BottomSheetDialog(this);
+        dialog.setContentView(R.layout.image_select_bottom_custom_view);
+        dialog.show();
+
+        Button camera = (Button) dialog.findViewById(R.id.camera);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +263,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             }
         });
 
-        Button gallery = (Button) customView.findViewById(R.id.gallery);
+        Button gallery = (Button) dialog.findViewById(R.id.gallery);
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -272,7 +272,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                     ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
                 } else {
                     openGallery();
-                    builder.dismiss();
+                    dialog.dismiss();
                 }
             }
         });
@@ -280,7 +280,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     @Override
     public void openCamera() {
-        builder.dismiss();
+//        builder.dismiss();
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         if ( cameraIntent.resolveActivity(getPackageManager()) != null ) {
             File photo = presenter.setSaveImageFile(this);
@@ -289,6 +289,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 photoUri = FileProvider.getUriForFile(this, getPackageName(), photo);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                dialog.dismiss();
             }
         }
     }

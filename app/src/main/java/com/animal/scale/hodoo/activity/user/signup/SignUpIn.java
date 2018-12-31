@@ -11,6 +11,8 @@ public interface SignUpIn {
 
         void goNextPage();
 
+        void registUser();
+
         void registUserResult(ResultMessageGroup resultMessageGroup);
 
         void showPopup(String message);
@@ -21,5 +23,7 @@ public interface SignUpIn {
         void loadData(Context context);
 
         void registUser(User user);
+
+        void userCertifiedMailSend (String toMail);
     }
 }

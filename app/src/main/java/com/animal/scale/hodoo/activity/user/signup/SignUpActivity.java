@@ -246,17 +246,8 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 //                    }).show();
 //        } else {
 
-        User user = binding.getUser();
-        user.setEmail( binding.email.editText.getText().toString() );
-        user.setPassword( binding.password.editText.getText().toString() );
-        user.setNickname( binding.nickName.editText.getText().toString() );
-        user.setCountry( binding.from.editText.getText().toString() );
-        if (binding.radioFemale.isChecked()) {
-            binding.getUser().setSex("FEMALE");
-        } else if (binding.radioMale.isChecked()) {
-            binding.getUser().setSex("MALE");
-        }
-        presenter.registUser(binding.getUser());
+        presenter.userCertifiedMailSend("songchic2@gmail.com");
+
 //        }
     }
 
@@ -285,10 +276,28 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     @Override
     public void goNextPage() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+
+
+
+        Intent intent = new Intent(getApplicationContext(), SignUpFinishActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
+    }
+
+    @Override
+    public void registUser() {
+        User user = binding.getUser();
+        user.setEmail( binding.email.editText.getText().toString() );
+        user.setPassword( binding.password.editText.getText().toString() );
+        user.setNickname( binding.nickName.editText.getText().toString() );
+        user.setCountry( binding.from.editText.getText().toString() );
+        if (binding.radioFemale.isChecked()) {
+            binding.getUser().setSex("FEMALE");
+        } else if (binding.radioMale.isChecked()) {
+            binding.getUser().setSex("MALE");
+        }
+        presenter.registUser(binding.getUser());
     }
 
     @Override

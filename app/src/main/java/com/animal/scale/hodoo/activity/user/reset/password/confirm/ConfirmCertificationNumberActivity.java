@@ -10,6 +10,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.activity.user.reset.password.create.CreateNewPasswordActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityConfirmCertificationNumberBinding;
@@ -44,8 +45,9 @@ public class ConfirmCertificationNumberActivity extends BaseActivity<ConfirmCert
     }
 
     public void onClickConfirmBtn(View vIew){
-       Intent intent = new Intent(getApplicationContext(), CreateNewPasswordActivity.class);
-        startActivity(intent);
+//       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//        startActivity(intent);
+        finish();
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 }
