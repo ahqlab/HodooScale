@@ -40,4 +40,11 @@
         <item>암</item>
     </string-array>
 
+    <string-array name="country">
+        <item>대한민국</item>
+        <item>미국</item>
+        <item>일본</item>
+        <item>중국</item>
+    </string-array>
+
 </resources>

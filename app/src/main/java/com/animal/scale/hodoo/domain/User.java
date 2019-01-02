@@ -25,7 +25,7 @@ public class User implements Serializable{
 
     private String sex;
 
-    private String country;
+    private int country;
 
     private String pushToken;
 

@@ -6,33 +6,18 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
-import com.animal.scale.hodoo.activity.user.login.LoginActivity;
-import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
-import com.animal.scale.hodoo.custom.view.input.CustomCommonEditText;
 import com.animal.scale.hodoo.databinding.ActivitySignUpBinding;
-import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
-import com.animal.scale.hodoo.service.NetRetrofit;
-import com.animal.scale.hodoo.util.MyOwnBindingUtil;
 import com.animal.scale.hodoo.util.RSA;
-import com.animal.scale.hodoo.util.ValidationUtil;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -43,10 +28,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class SignUpActivity extends BaseActivity<SignUpActivity> implements SignUpIn.View {
 
     ActivitySignUpBinding binding;
@@ -55,13 +36,15 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     SignUpIn.Presenter presenter;
 
-    boolean radioCheckState = false,
-            emailState = false,
-            pwState = false,
-            pwCheckState = false,
-            ninkState = false,
-            countryState = false,
-            agreeState = false;
+    private boolean radioCheckState = false;
+    private boolean emailState = false;
+    private boolean pwState = false;
+    private boolean pwCheckState = false;
+    private boolean ninkState = false;
+    private boolean countryState = false;
+    private boolean agreeState = false;
+
+    private int selectCountry = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +54,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         presenter = new SignUpPresenter(this);
         presenter.loadData(SignUpActivity.this);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo(getString(R.string.signup_title)));
+//        binding.setActivityInfo(new ActivityInfo(getString(R.string.signup_title)));
         binding.setUser(new User());
 
         binding.email.editText.addTextChangedListener(new CommonTextWatcher(binding.email, this, CommonTextWatcher.EMAIL_TYPE, R.string.vailed_email, new CommonTextWatcher.CommonTextWatcherCallback() {
@@ -297,7 +280,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         user.setEmail( binding.email.editText.getText().toString() );
         user.setPassword( binding.password.editText.getText().toString() );
         user.setNickname( binding.nickName.editText.getText().toString() );
-        user.setCountry( binding.from.editText.getText().toString() );
+        user.setCountry(selectCountry);
         if (binding.radioFemale.isChecked()) {
             binding.getUser().setSex("FEMALE");
         } else if (binding.radioMale.isChecked()) {
@@ -336,12 +319,8 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
 
     public void onClickCountryEditTextClick(View view) {
-        final String[] values = new String[]{
-                this.getString(R.string.korea),
-                this.getString(R.string.usa),
-                this.getString(R.string.japan),
-                this.getString(R.string.china)
-        };
+
+        final String [] values = getResources().getStringArray(R.array.country);
         AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
         builder.setTitle(getResources().getString(R.string.choice_country));
         // add a radio button list
@@ -349,6 +328,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 binding.from.editText.setText(values[which]);
+                selectCountry = which;
                 dialog.dismiss();
             }
         });

@@ -12,7 +12,6 @@ import android.view.View;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.change.password.ChangePasswordActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
-import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityChangeUserInfoBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -27,6 +26,10 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
     boolean
             ninkState = false,
             countryState = false;
+
+
+    private String[] country;
+    private int selectCountry = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
                 onClickCountryEditTextClick(view);
             }
         });
+        country = getResources().getStringArray(R.array.country);
     }
 
     @Override
@@ -110,20 +114,16 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
     }
 
     private void onClickCountryEditTextClick(View view) {
-        final String[] values = new String[]{
-                this.getString(R.string.korea),
-                this.getString(R.string.usa),
-                this.getString(R.string.japan),
-                this.getString(R.string.china)
-        };
+
         AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
         builder.setTitle(getResources().getString(R.string.choice_country));
         // add a radio button list
-        builder.setItems(values, new DialogInterface.OnClickListener() {
+        builder.setItems(country, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                binding.country.editText.setText(values[which]);
+                binding.country.editText.setText(country[which]);
                 dialog.dismiss();
+                selectCountry = which;
             }
         });
         AlertDialog dialog = builder.create();
@@ -145,9 +145,9 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 
     public void onConfirmBtn(View view) {
         String nickName =  binding.nickName.editText.getText().toString();
-        String country =  binding.country.editText.getText().toString();
+
         binding.getDomain().setNickname(nickName);
-        binding.getDomain().setCountry(country);
+        binding.getDomain().setCountry(selectCountry);
         Log.e("HJLEE", binding.getDomain().toString());
         presenter.updateBasicInfo(binding.getDomain());
         /*Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
@@ -177,7 +177,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
     public void setUserInfo(User user) {
         binding.password.editText.setText(user.getPassword());
         binding.nickName.editText.setText(user.getNickname());
-        binding.country.editText.setText(user.getCountry());
+        binding.country.editText.setText(country[user.getCountry()]);
         binding.setDomain(user);
     }
 
