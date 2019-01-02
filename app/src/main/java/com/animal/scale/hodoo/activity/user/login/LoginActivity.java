@@ -22,6 +22,7 @@ import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityLoginBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.User;
+import com.animal.scale.hodoo.util.VIewUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
 
 public class LoginActivity extends BaseActivity<LoginActivity> implements Login.View {

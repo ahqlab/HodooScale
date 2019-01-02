@@ -2,17 +2,27 @@ package com.animal.scale.hodoo.activity.setting.account.info;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.Country;
 import com.animal.scale.hodoo.domain.User;
+import com.animal.scale.hodoo.util.CountryModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.List;
 
 public class ChangeUserInfoPresenter implements ChangeUserInfoIn.Presenter{
 
     ChangeUserInfoIn.View view;
 
     ChangeUserInfoModel model;
+    CountryModel countryModel;
 
     public ChangeUserInfoPresenter(ChangeUserInfoIn.View view){
         this.view = view;
         this.model = new ChangeUserInfoModel();
+        countryModel = new CountryModel();
     }
 
     @Override
@@ -41,6 +51,21 @@ public class ChangeUserInfoPresenter implements ChangeUserInfoIn.Presenter{
             @Override
             public void doPostExecute(Integer integer) {
                 view.showResultPopup(integer);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
+
+    @Override
+    public void getCountry(int language) {
+        countryModel.getAllCountry(language, new CommonModel.DomainListCallBackListner<Country>() {
+            @Override
+            public void doPostExecute(List<Country> d) {
+                view.setCountry(d);
             }
 
             @Override

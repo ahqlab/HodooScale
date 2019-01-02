@@ -4,25 +4,37 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivitySignUpBinding;
+import com.animal.scale.hodoo.domain.Country;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.util.RSA;
+import com.animal.scale.hodoo.util.VIewUtil;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -45,6 +57,8 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
     private boolean agreeState = false;
 
     private int selectCountry = 0;
+
+    private JSONArray countries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -319,8 +333,16 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
 
     public void onClickCountryEditTextClick(View view) {
+        presenter.getAllCountry(VIewUtil.getLocationCode(this));
+    }
+    public void showCountry (final List<Country> country) {
 
-        final String [] values = getResources().getStringArray(R.array.country);
+        String[] countreis = new String[country.size()];
+        for (int i = 0; i < country.size(); i++) {
+            countreis[i] = country.get(i).getName();
+        }
+        final String[] values = countreis;
+
         AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
         builder.setTitle(getResources().getString(R.string.choice_country));
         // add a radio button list
@@ -328,7 +350,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 binding.from.editText.setText(values[which]);
-                selectCountry = which;
+                selectCountry = country.get(which).getId();
                 dialog.dismiss();
             }
         });
@@ -341,6 +363,10 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         });
         builder.setNegativeButton("Cancel", null);*/
         AlertDialog dialog = builder.create();
+        ListView listView = dialog.getListView();
+        listView.setDivider(new ColorDrawable(Color.parseColor("#e1e1e1")));
+        listView.setDividerHeight(2);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.rounded_rect_white_radius_10);
         dialog.show();
     }
     private boolean checkValidation( int type ) {

@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 
+import com.animal.scale.hodoo.R;
+
+import java.util.Locale;
+
 public class VIewUtil {
 
     Context context;
@@ -47,5 +51,18 @@ public class VIewUtil {
             }
         }, 2000);
         return false;
+    }
+    public static int getLocationCode ( Context context ) {
+        Locale systemLocale = context.getApplicationContext().getResources().getConfiguration().locale;
+        int result = 0;
+        String language = systemLocale.getLanguage();
+        String[] languageArr = context.getResources().getStringArray(R.array.language);
+        for (int i = 0; i < languageArr.length; i++) {
+            if ( language.equals(languageArr[i]) ) {
+                result = i;
+                break;
+            }
+        }
+        return result;
     }
 }

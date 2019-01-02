@@ -1,16 +1,18 @@
 package com.animal.scale.hodoo.activity.user.signup;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.Country;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.message.ResultMessage;
+import com.animal.scale.hodoo.util.CountryModel;
 
-import java.io.Serializable;
+import org.json.JSONArray;
+import org.json.JSONException;
 
-import static android.support.constraint.Constraints.TAG;
+import java.util.List;
 
 class SignUpPresenter implements SignUpIn.Presenter {
 
@@ -20,9 +22,12 @@ class SignUpPresenter implements SignUpIn.Presenter {
 
     SignUpModel model;
 
+    CountryModel countryModel;
+
     public SignUpPresenter(SignUpIn.View view) {
         this.view = view;
         this.model = new SignUpModel();
+        countryModel = new CountryModel();
     }
 
     @Override
@@ -62,6 +67,21 @@ class SignUpPresenter implements SignUpIn.Presenter {
             }
             @Override
             public void doPreExecute() {}
+        });
+    }
+
+    @Override
+    public void getAllCountry(int country) {
+        countryModel.getAllCountry(country, new CommonModel.DomainListCallBackListner<Country>() {
+            @Override
+            public void doPostExecute(List<Country> d) {
+                view.showCountry(d);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
         });
     }
 }

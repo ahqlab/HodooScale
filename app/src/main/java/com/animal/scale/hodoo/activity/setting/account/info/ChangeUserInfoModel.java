@@ -9,6 +9,8 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
+import org.json.JSONArray;
+
 import retrofit2.Call;
 
 public class ChangeUserInfoModel extends CommonModel {

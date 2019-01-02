@@ -2,7 +2,12 @@ package com.animal.scale.hodoo.activity.setting.account.info;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.domain.Country;
 import com.animal.scale.hodoo.domain.User;
+
+import org.json.JSONArray;
+
+import java.util.List;
 
 public interface ChangeUserInfoIn {
 
@@ -11,6 +16,8 @@ public interface ChangeUserInfoIn {
         void setUserInfo(User user);
 
         void showResultPopup(Integer integer);
+
+        void setCountry(List<Country> country);
     }
 
     interface Presenter{
@@ -20,6 +27,8 @@ public interface ChangeUserInfoIn {
         void initUserData();
 
         void updateBasicInfo(User user);
+
+        void getCountry ( int language );
 
     }
 }
