@@ -16,23 +16,30 @@ import android.util.Log;
 
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.fcm.PushWakeLock;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
+
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
     // 메시지 수신
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.i(TAG, "onMessageReceived");
+        Log.i("HJLEE", "onMessageReceived");
 
         Map<String, String> data = remoteMessage.getData();
         String title = data.get("title");
         String messagae = data.get("content");
 
-        sendNotification(title, messagae);
+        //sendNotification(title, messagae);
+
+        // 잠든 단말을 깨워라.
+        PushWakeLock.acquireCpuWakeLock(this);
+// WakeLock 해제.
+        PushWakeLock.releaseCpuLock();
     }
 
     private void sendNotification(String title, String message) {
@@ -51,7 +58,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager =  (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }

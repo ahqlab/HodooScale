@@ -34,5 +34,5 @@ public interface UserService{
     Call<Integer> updateUsetPassword(@Body User user);
 
     @GET("user/find/user/password")
-    Call<String> findUserPassword(@Query("email") String groupCode);
+    Call<ResultMessageGroup> findUserPassword(@Query("email") String groupCode);
 }

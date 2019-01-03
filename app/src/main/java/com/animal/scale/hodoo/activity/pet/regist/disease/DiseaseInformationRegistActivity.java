@@ -28,6 +28,7 @@ import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInformationRegistActivity> implements DiseaseInformationIn.View{
 
@@ -41,6 +42,8 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
 
     private int petIdx;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,7 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         presenter = new DiseaseInformationPresenter(this);
         presenter.loadData(DiseaseInformationRegistActivity.this);
         presenter.setNavigation();
+
 
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
