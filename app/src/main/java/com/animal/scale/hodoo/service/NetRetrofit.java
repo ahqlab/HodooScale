@@ -32,6 +32,7 @@ public class NetRetrofit {
     PetGroupMappingService petGroupMappingService = retrofit.create(PetGroupMappingService.class);
     DeviceService getDeviceService = retrofit.create(DeviceService.class);
     PetService getPetService = retrofit.create(PetService.class);
+    CountryService countryService = retrofit.create(CountryService.class);
 
     FeedService feedService = retrofit.create(FeedService.class);
 
@@ -66,5 +67,8 @@ public class NetRetrofit {
 
     public ActivityService getActivityService() { return activityService; }
 
+    public CountryService getCountryService() {
+        return countryService;
+    }
 }
 

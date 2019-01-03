@@ -4,19 +4,29 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.change.password.ChangePasswordActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
-import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityChangeUserInfoBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.Country;
 import com.animal.scale.hodoo.domain.User;
+import com.animal.scale.hodoo.util.VIewUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity> implements ChangeUserInfoIn.View {
 
@@ -27,6 +37,11 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
     boolean
             ninkState = false,
             countryState = false;
+
+
+    private String[] country;
+    private int selectCountry = 0;
+    private List<Country> countries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +99,13 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         });
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
         presenter.initLoadData(getApplicationContext());
-        presenter.initUserData();
+        presenter.getCountry(VIewUtil.getLocationCode(this));
+
     }
 
     private void onClickPasswordEditTextClick(View view) {
@@ -110,23 +127,23 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
     }
 
     private void onClickCountryEditTextClick(View view) {
-        final String[] values = new String[]{
-                this.getString(R.string.korea),
-                this.getString(R.string.usa),
-                this.getString(R.string.japan),
-                this.getString(R.string.china)
-        };
+
         AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
         builder.setTitle(getResources().getString(R.string.choice_country));
         // add a radio button list
-        builder.setItems(values, new DialogInterface.OnClickListener() {
+        builder.setItems(country, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                binding.country.editText.setText(values[which]);
+                binding.country.editText.setText(country[which]);
                 dialog.dismiss();
+                selectCountry = countries.get(which).getId();
             }
         });
         AlertDialog dialog = builder.create();
+        ListView listView = dialog.getListView();
+        listView.setDivider(new ColorDrawable(Color.parseColor("#e1e1e1")));
+        listView.setDividerHeight(2);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.rounded_rect_white_radius_10);
         dialog.show();
     }
 
@@ -145,9 +162,9 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 
     public void onConfirmBtn(View view) {
         String nickName =  binding.nickName.editText.getText().toString();
-        String country =  binding.country.editText.getText().toString();
+
         binding.getDomain().setNickname(nickName);
-        binding.getDomain().setCountry(country);
+        binding.getDomain().setCountry(selectCountry);
         Log.e("HJLEE", binding.getDomain().toString());
         presenter.updateBasicInfo(binding.getDomain());
         /*Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
@@ -177,7 +194,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
     public void setUserInfo(User user) {
         binding.password.editText.setText(user.getPassword());
         binding.nickName.editText.setText(user.getNickname());
-        binding.country.editText.setText(user.getCountry());
+        binding.country.editText.setText(country[user.getCountry() - 1]);
         binding.setDomain(user);
     }
 
@@ -193,5 +210,16 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
                         }
                     }).show();
         }
+    }
+
+    @Override
+    public void setCountry(List<Country> country) {
+        String[] countreis = new String[country.size()];
+        for (int i = 0; i < country.size(); i++) {
+            countreis[i] = country.get(i).getName();
+        }
+        countries = country;
+        this.country = countreis;
+        presenter.initUserData();
     }
 }
