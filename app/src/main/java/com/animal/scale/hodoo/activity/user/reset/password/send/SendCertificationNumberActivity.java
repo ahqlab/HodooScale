@@ -15,6 +15,8 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivitySendCertificationNumberBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.ResultMessageGroup;
+import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.util.ValidationUtil;
 
 public class SendCertificationNumberActivity extends BaseActivity<SendCertificationNumberActivity> {
