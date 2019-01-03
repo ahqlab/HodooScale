@@ -11,4 +11,11 @@
         <item>適正</item>
     </string-array>
 
+    <string-array name="country">
+        <item>大韓民國</item>
+        <item>美國</item>
+        <item>日本</item>
+        <item>中國</item>
+    </string-array>
+
 </resources>

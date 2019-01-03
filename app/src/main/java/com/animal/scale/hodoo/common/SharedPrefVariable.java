@@ -11,5 +11,5 @@ public class SharedPrefVariable {
     public static final String LOGOUT_INTENT_KEY = "LOGOUT_INTENT";
     public static final String USER_PASSWORD = "USER_PASSWORD";
     public static final String SERVER_ROOT = "http://121.183.234.14:7171/";
-//    public static final String SERVER_ROOT = "http://192.168.0.49:8181/";
+//    public static final String SERVER_ROOT = "http://192.168.10.104:9090/";
 }

@@ -30,8 +30,12 @@ public interface UserService{
     @POST("user/get/group/member")
     Call<List<User>> getGroupMemner(@Query("groupCode") String groupCode);
 
+
     @POST("user/update/user/password")
     Call<Integer> updateUsetPassword(@Body User user);
+
+    @POST("mail//user/certified")
+    Call<Integer> userCertifiedMailSend(@Query("toMailAddr") String toMailAddr);
 
     @GET("user/find/user/password")
     Call<ResultMessageGroup> findUserPassword(@Query("email") String groupCode);

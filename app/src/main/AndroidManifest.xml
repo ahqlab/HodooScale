@@ -61,6 +61,7 @@
         <activity android:name=".activity.pet.regist.physique.PhysiqueInformationRegistActivity" />
         <activity android:name=".activity.pet.regist.weight.WeightCheckActivity" />
         <activity android:name=".activity.user.signup.SignUpActivity" />
+        <activity android:name=".activity.user.signup.SignUpFinishActivity" />
         <activity android:name=".activity.home.activity.HomeActivity" />
         <activity android:name=".activity.wifi.WifiSearchActivity" />
         <activity android:name=".activity.wifi.WIFIScanner" />
