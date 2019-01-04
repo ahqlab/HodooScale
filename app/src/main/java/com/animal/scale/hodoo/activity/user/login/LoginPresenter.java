@@ -1,20 +1,18 @@
 package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
-import android.util.JsonReader;
 import android.util.Log;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.message.ResultMessage;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
-import java.io.StringReader;
 import java.util.List;
 
 public class LoginPresenter implements Login.Presenter {
@@ -55,7 +53,7 @@ public class LoginPresenter implements Login.Presenter {
                             return;
                         }
                         saveUserSharedValue(user);
-                        checkRegistrationStatus();
+                        saveFCMToken( user );
                     }
                 } else {
                     loginView.showPopup(context.getString(R.string.failed));
@@ -126,5 +124,25 @@ public class LoginPresenter implements Login.Presenter {
                 loginView.setProgress(true);
             }
         });
+    }
+
+    @Override
+    public void saveFCMToken(User user) {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        user.setPushToken(token);
+        loginModel.saveFCMToken(user, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer integer) {
+
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+
+
+        checkRegistrationStatus();
     }
 }

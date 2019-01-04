@@ -57,8 +57,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
     private boolean agreeState = false;
 
     private int selectCountry = 0;
-
-    private JSONArray countries;
+    private List<Country> countries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -333,28 +332,25 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
 
     public void onClickCountryEditTextClick(View view) {
-        presenter.getAllCountry(VIewUtil.getLocationCode(this));
-    }
-    public void showCountry (final List<Country> country) {
-
-        String[] countreis = new String[country.size()];
-        for (int i = 0; i < country.size(); i++) {
-            countreis[i] = country.get(i).getName();
-        }
-        final String[] values = countreis;
-
-        AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
-        builder.setTitle(getResources().getString(R.string.choice_country));
-        // add a radio button list
-        builder.setItems(values, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                binding.from.editText.setText(values[which]);
-                selectCountry = country.get(which).getId();
-                dialog.dismiss();
+        if ( countries != null ) {
+            String[] countreis = new String[countries.size()];
+            for (int i = 0; i < countries.size(); i++) {
+                countreis[i] = countries.get(i).getName();
             }
-        });
-        // add OK and Cancel buttons
+            final String[] values = countreis;
+
+            AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
+            builder.setTitle(getResources().getString(R.string.choice_country));
+            // add a radio button list
+            builder.setItems(values, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    binding.from.editText.setText(values[which]);
+                    selectCountry = countries.get(which).getId();
+                    dialog.dismiss();
+                }
+            });
+            // add OK and Cancel buttons
        /* builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -362,13 +358,19 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
             }
         });
         builder.setNegativeButton("Cancel", null);*/
-        AlertDialog dialog = builder.create();
-        ListView listView = dialog.getListView();
-        listView.setDivider(new ColorDrawable(Color.parseColor("#e1e1e1")));
-        listView.setDividerHeight(2);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.rounded_rect_white_radius_10);
-        dialog.show();
+            AlertDialog dialog = builder.create();
+            ListView listView = dialog.getListView();
+            listView.setDivider(new ColorDrawable(Color.parseColor("#e1e1e1")));
+            listView.setDividerHeight(2);
+            dialog.getWindow().setBackgroundDrawableResource(R.drawable.rounded_rect_white_radius_10);
+            dialog.show();
+        }
     }
+    @Override
+    public void setCountry(List<Country> countries) {
+        this.countries = countries;
+    }
+
     private boolean checkValidation( int type ) {
         return true;
     }
@@ -412,5 +414,12 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
             e.printStackTrace();
         }
         return mix;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if ( countries == null )
+            presenter.getAllCountry(VIewUtil.getLocationCode(this));
     }
 }

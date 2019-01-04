@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.setting.account;
 import android.content.Context;
 
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.animal.scale.hodoo.domain.User;
 
 import java.util.List;
 
@@ -30,5 +31,9 @@ public interface MyAccount {
         public void logout();
 
         public void changePassword();
+
+        void initUserData();
+
+        void saveFCMToken ( User user );
     }
 }

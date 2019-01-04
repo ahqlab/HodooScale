@@ -39,4 +39,10 @@ public interface UserService{
 
     @GET("user/find/user/password")
     Call<ResultMessageGroup> findUserPassword(@Query("email") String groupCode);
+
+    @POST("user/update/fcmToken")
+    Call<Integer> saveFCMToken(@Body User user);
+
+    @POST("user/invitation/approval")
+    Call<Integer> invitationApproval(@Query("toUserIdx") int toUserIdx, @Query("fromUserIdx") int fromUserIdx);
 }

@@ -26,7 +26,7 @@ public interface SignUpIn {
 
         void setProgress ( boolean state );
 
-        void showCountry (List<Country> countries);
+        void setCountry ( List<Country> countries );
     }
 
     interface Presenter{

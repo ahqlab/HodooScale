@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.user.invitation.InvitationActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.activity.wifi.find.FindHodoosActivity;
@@ -13,7 +14,7 @@ import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityDeviceRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 
-public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> implements DeviceRegistIn.View{
+public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> implements DeviceRegistIn.View {
 
     ActivityDeviceRegistBinding binding;
 
@@ -28,6 +29,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         super.setToolbarColor();
         presenter = new DeviceRegistPresenter(this);
         presenter.loadData(getApplicationContext());
+
     }
 
     @Override
@@ -65,6 +67,12 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         Intent intent = new Intent(getApplicationContext(), WifiSearchActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-        finish();
+//        finish();
+    }
+
+    public void moveInvitation( View v ) {
+        Intent intent = new Intent(getApplicationContext(), InvitationActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 }

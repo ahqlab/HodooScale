@@ -8,9 +8,7 @@ import android.widget.AdapterView;
 
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity;
-import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfMyAccountList;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
@@ -56,7 +54,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if(position == MyAccount.LOGOUT){
-                    presenter.logout();
+                    presenter.initUserData();
                 }else if(position == MyAccount.CHANGE_USER_INFO){
                     presenter.changePassword();
                 }
@@ -67,7 +65,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
     @Override
     public void goLoginPage() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra(SharedPrefVariable.LOGOUT_INTENT_KEY, true);
+        intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
 

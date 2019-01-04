@@ -75,7 +75,7 @@ class SignUpPresenter implements SignUpIn.Presenter {
         countryModel.getAllCountry(country, new CommonModel.DomainListCallBackListner<Country>() {
             @Override
             public void doPostExecute(List<Country> d) {
-                view.showCountry(d);
+                view.setCountry(d);
             }
 
             @Override

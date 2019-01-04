@@ -39,5 +39,7 @@ public interface Login {
         public void saveUserSharedValue(User user);
 
         public void checkRegistrationStatus();
+
+        void saveFCMToken(User user);
     }
 }
