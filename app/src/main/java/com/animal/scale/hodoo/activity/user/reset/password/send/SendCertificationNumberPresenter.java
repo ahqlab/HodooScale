@@ -3,8 +3,6 @@ package com.animal.scale.hodoo.activity.user.reset.password.send;
 import android.content.Context;
 
 import com.animal.scale.hodoo.domain.CommonResponce;
-import com.animal.scale.hodoo.domain.FinPasswordResponse;
-import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 
 public class SendCertificationNumberPresenter implements SendCertificationNumberIn.Presenter {

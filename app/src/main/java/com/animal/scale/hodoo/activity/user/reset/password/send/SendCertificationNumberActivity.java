@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.user.agree.TermsOfServiceActivity;
 import com.animal.scale.hodoo.activity.user.reset.password.confirm.ConfirmCertificationNumberActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
@@ -18,8 +15,6 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivitySendCertificationNumberBinding;
 import com.animal.scale.hodoo.domain.CommonResponce;
-import com.animal.scale.hodoo.domain.FinPasswordResponse;
-import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.message.ResultMessage;
 import com.animal.scale.hodoo.util.ValidationUtil;
@@ -63,11 +58,6 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
         user.setEmail(email);
         user.setPassword(password);
         presenter.sendTempPassword(user);
-
-        /*Intent intent = new Intent(getApplicationContext(), ConfirmCertificationNumberActivity.class);
-        intent.putExtra("email", binding.email.editText.getText().toString());
-        startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);*/
     }
 
     private void checkState() {

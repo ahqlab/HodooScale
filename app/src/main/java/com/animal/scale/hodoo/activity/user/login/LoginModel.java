@@ -7,6 +7,7 @@ import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.Pet;
@@ -47,11 +48,11 @@ public class LoginModel extends CommonModel {
         return ValidationUtil.isValidEmail(message);
     }
 
-    public void sendServer(User user, final DomainCallBackListner<ResultMessageGroup> domainCallBackListner) {
-        Call<ResultMessageGroup> call = NetRetrofit.getInstance().getUserService().login(user);
-        new AbstractAsyncTask<ResultMessageGroup>() {
+    public void sendServer(User user, final DomainCallBackListner<CommonResponce<User>> domainCallBackListner) {
+        Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().login(user);
+        new AbstractAsyncTask<CommonResponce<User>>() {
             @Override
-            protected void doPostExecute(ResultMessageGroup resultMessageGroup) {
+            protected void doPostExecute(CommonResponce<User> resultMessageGroup) {
                 domainCallBackListner.doPostExecute(resultMessageGroup);
             }
             @Override

@@ -375,4 +375,5 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <!-- ActivityFragment (e) -->
 
     <string name="forgot_password_sub_scription">이메일로 임시비밀번호를 발송해드립니다.</string>
+    <string name="send_mail_failed">메일 전송에 실패하였습니다.</string>
 </resources>
