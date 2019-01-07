@@ -16,7 +16,7 @@ import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.util.ValidationUtil;
 
-public class SendCertificationNumberActivity extends BaseActivity<SendCertificationNumberActivity> implements SendCertificationNumberIn.View {
+public class SendCertificationNumberActivity extends BaseActivity<SendCertificationNumberActivity> implements SendCertificationNumberIn.View{
 
     ActivitySendCertificationNumberBinding binding;
 
@@ -48,7 +48,6 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
     }
 
     public void onClickSendBtn(View view){
-
         String email = binding.email.editText.getText().toString();
         String password = sharedPrefManager.getStringExtra(SharedPrefVariable.USER_PASSWORD);
         User user = new User();
