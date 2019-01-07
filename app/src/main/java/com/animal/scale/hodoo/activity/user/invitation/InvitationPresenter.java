@@ -38,6 +38,8 @@ public class InvitationPresenter implements Invitation.Presenter {
                     });
                 } else if ( result == InvitationActivity.NOT_TO_USER ) {
                     mView.showPopup("사용자 초대 에러", "초대하실 회원이 없습니다.", null);
+                } else if ( result == InvitationActivity.NOT_TO_DEVICE ) {
+                    mView.showPopup("사용자 초대 에러", "초대하신 회원이 디바이스를 가지고 있지 않습니다.", null);
                 }
             }
 

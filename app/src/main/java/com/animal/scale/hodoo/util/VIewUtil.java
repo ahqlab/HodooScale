@@ -1,6 +1,9 @@
 package com.animal.scale.hodoo.util;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.util.TypedValue;
@@ -10,6 +13,7 @@ import android.view.animation.RotateAnimation;
 
 import com.animal.scale.hodoo.R;
 
+import java.util.List;
 import java.util.Locale;
 
 public class VIewUtil {

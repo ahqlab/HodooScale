@@ -50,12 +50,23 @@ public class AdapterOfSetting extends BaseAdapter {
             binding = DataBindingUtil.bind(convertView);
             binding.setSetting(data.get(position));
             binding.setPosition(position);
+
+            binding.settingBadge.setVisibility(data.get(position).getBadgeCount() > 0 ? View.VISIBLE : View.GONE);
+            binding.settingBadge.setText( String.valueOf(Math.min(data.get(position).getBadgeCount(), 99)) );
+                    //data.get(position).getBadgeCount() > 0
+
             convertView.setTag(binding);
         } else {
             binding = (SettingListviewBinding) convertView.getTag();
             binding.setSetting(data.get(position));
             binding.setPosition(position);
+            binding.settingBadge.setVisibility(data.get(position).getBadgeCount() > 0 ? View.VISIBLE : View.GONE);
+            binding.settingBadge.setText( String.valueOf(Math.min(data.get(position).getBadgeCount(), 99)) );
         }
         return binding.getRoot();
+    }
+    public void setData( List<SettingMenu> data ) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 }
