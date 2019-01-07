@@ -4,44 +4,42 @@ package com.animal.scale.hodoo.service;
  * Created by Joo on 2017. 12. 19.
  */
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
+import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.fcm.PushWakeLock;
+import com.animal.scale.hodoo.receiver.ServiceReceiver;
 import com.animal.scale.hodoo.util.BadgeUtils;
-import com.animal.scale.hodoo.util.VIewUtil;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
+
+    int count = 0;
 
     // 메시지 수신
     @Override
@@ -83,8 +81,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(context);
         int badge_count = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
-        if ( badge_count == 0 )
-            badge_count += 1;
+        badge_count += 1;
 
         String title = data.get("title");
         String message = data.get("content");
@@ -99,7 +96,9 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         intent.putExtra("data", gson.toJson(data));
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0 /* Request code */, intent,
+        Random random = new Random();
+        count = random.nextInt();
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, count /* Request code */, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
 
@@ -113,17 +112,27 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setPriority(type)
-                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
                 .setContentIntent(pendingIntent);
 
         //.addAction(R.drawable.change_user_info_user_icon, context.getString(R.string.confirm), pendingIntent)
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(count /* ID of notification */, notificationBuilder.build());
 
         BadgeUtils.setBadge(context, badge_count);
-        sharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, badge_count + 1);
+        sharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, badge_count);
+
+        Intent broadIntent = new Intent("unique_name");
+        //put whatever data you want to send, if any
+        broadIntent.putExtra("message", message);
+
+        //send broadcast
+        context.sendBroadcast(broadIntent);
+
+
+
     }
 
 

@@ -1,10 +1,14 @@
 package com.animal.scale.hodoo.activity.setting.list;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -16,9 +20,12 @@ import com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity;
 import com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfSetting;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivitySettingListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.animal.scale.hodoo.util.BadgeUtils;
 
 import java.util.List;
 
@@ -35,6 +42,20 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     public final static int USER_MANAGEMENT = 5;
     public final static int PET_MANAGEMENT = 6;
 
+    SharedPrefManager sharedPrefManager;
+    List<SettingMenu> menus;
+
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            Log.e(TAG, "messageeeeeeeeeeeeeeeeeeeeeeeeee : " + message);
+            int count = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
+            menus.get(5).setBadgeCount(count);
+            Adapter.setData(menus);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +63,10 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_setting)));
         super.setToolbarColor();
+        sharedPrefManager = SharedPrefManager.getInstance(this);
         presenter = new SettingListPresenter(this);
         presenter.loadData(SettingListActivity.this);
-        presenter.getSttingListMenu();
+
     }
 
     @Override
@@ -54,6 +76,14 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
 
     @Override
     public void setListviewAdapter(List<SettingMenu> menus) {
+        this.menus = menus;
+        for (int i = 0; i < menus.size(); i++) {
+            if ( i == 5 ) {
+                menus.get(i).setBadgeCount(sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT));
+            } else {
+                menus.get(i).setBadgeCount(0);
+            }
+        }
         Adapter = new AdapterOfSetting(SettingListActivity.this, menus);
         binding.settingListview.setAdapter(Adapter);
         binding.settingListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,5 +100,19 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.getSttingListMenu();
+        registerReceiver(receiver, new IntentFilter("unique_name"));
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
     }
 }

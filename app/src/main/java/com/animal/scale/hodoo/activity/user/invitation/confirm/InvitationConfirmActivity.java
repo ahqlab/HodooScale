@@ -1,6 +1,8 @@
 package com.animal.scale.hodoo.activity.user.invitation.confirm;
 
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -39,6 +41,9 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        NotificationManager notifManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notifManager.cancelAll();
 
         SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(this);
         int badgeCount = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
