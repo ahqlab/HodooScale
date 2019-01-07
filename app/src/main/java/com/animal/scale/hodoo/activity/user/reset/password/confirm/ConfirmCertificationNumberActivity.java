@@ -48,6 +48,6 @@ public class ConfirmCertificationNumberActivity extends BaseActivity<ConfirmCert
 //       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 //        startActivity(intent);
         finish();
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 }

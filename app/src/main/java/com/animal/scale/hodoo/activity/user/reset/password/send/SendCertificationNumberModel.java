@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.user.reset.password.send;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.FinPasswordResponse;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
@@ -12,18 +13,20 @@ import retrofit2.Call;
 public class SendCertificationNumberModel extends CommonModel {
 
 
-    public void sendTempPassword(User user, final  DomainCallBackListner<ResultMessageGroup> commonResponceDomainCallBackListner) {
-        Call<ResultMessageGroup> call = NetRetrofit.getInstance().getUserService().findUserPassword(user.getEmail());
-        new AbstractAsyncTask<ResultMessageGroup>() {
+    public void sendTempPassword(User user, final  DomainCallBackListner<CommonResponce<User>> commonResponceDomainCallBackListner) {
+        Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().findUserPassword(user.getEmail());
+        new AbstractAsyncTask<CommonResponce<User>>() {
             @Override
-            protected void doPostExecute(ResultMessageGroup resultMessageGroup) {
-                commonResponceDomainCallBackListner.doPostExecute(resultMessageGroup);
+            protected void doPostExecute(CommonResponce<User> userCommonResponce) {
+                commonResponceDomainCallBackListner.doPostExecute(userCommonResponce);
             }
 
             @Override
             protected void doPreExecute() {
                 commonResponceDomainCallBackListner.doPreExecute();
             }
+
+
         }.execute(call);
     }
 }
