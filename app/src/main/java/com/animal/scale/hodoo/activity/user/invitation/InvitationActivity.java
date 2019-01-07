@@ -22,6 +22,7 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class InvitationActivity extends BaseActivity<InvitationActivity> implements Invitation.View {
 
+    public static int NOT_TO_DEVICE = -2;
     public static int NOT_TO_USER = -1;
     public static int ERROR = 0;
     public static int SUCESS = 1;

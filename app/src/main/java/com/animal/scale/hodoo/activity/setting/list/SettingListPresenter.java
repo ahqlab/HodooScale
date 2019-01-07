@@ -2,7 +2,9 @@ package com.animal.scale.hodoo.activity.setting.list;
 
 import android.content.Context;
 
-public class SettingListPresenter implements SettingList.Presenter{
+import com.animal.scale.hodoo.domain.SettingMenu;
+
+public class SettingListPresenter implements SettingList.Presenter {
 
     SettingList.View settingListView;
     SettingListModel settingListModel;
