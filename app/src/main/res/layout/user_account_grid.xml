@@ -15,31 +15,65 @@
             type="com.animal.scale.hodoo.domain.User" />
     </data>
 
-
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/speaker_avatar_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_margin="15dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:orientation="vertical">
+        android:padding="15dp"
+        android:gravity="center_vertical|center_horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <TextView
+            android:id="@+id/placeholder"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
+            android:gravity="center"
+            android:background="@drawable/circle"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="@={domain.nickname}"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:visibility="gone"
+            android:id="@+id/avatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/pet_account_middle_male_icon_143_143"
             app:loadUserAccountImage="@{domain.sex}"
             app:civ_border_color="@color/hodoo_midle_pink"
             app:civ_border_width="2dp" />
+        <ImageView
+            android:id="@+id/squareAvatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+    </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@={domain.nickname}" />
-    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_columnWeight="1"-->
+        <!--android:layout_gravity="center_vertical|center_horizontal"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:gravity="center_vertical|center_horizontal"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:src="@drawable/pet_account_middle_male_icon_143_143"-->
+            <!--app:loadUserAccountImage="@{domain.sex}"-->
+            <!--app:civ_border_color="@color/hodoo_midle_pink"-->
+            <!--app:civ_border_width="2dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@={domain.nickname}" />-->
+    <!--</LinearLayout>-->
 </layout>
 
 

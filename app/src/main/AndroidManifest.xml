@@ -37,6 +37,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/main_logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.animal.scale.hodoo"
@@ -87,6 +95,22 @@
         <activity android:name=".activity.setting.device.list.DeviceListActivity" />
         <activity android:name=".activity.setting.device.bowelplate.list.BowelPlateListActivity" />
         <activity android:name=".test.ActivityCustomEditTextTest" />
+        <activity android:name=".activity.user.invitation.InvitationActivity" />
+        <activity android:name=".activity.user.invitation.confirm.InvitationConfirmActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.user.invitation.confirm.InvitationConfirmActivity"/>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="invitation"
+                    android:scheme="selphone" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>

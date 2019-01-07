@@ -42,6 +42,7 @@ public class UserAccountModel {
 
     public void addRegistBtn(List<User> data) {
         User info = new User();
+        info.setNickname("+");
         info.setSex(context.getString(R.string.istyle_new_group_user));
         data.add(0, info);
     }

@@ -1,6 +1,5 @@
 package com.animal.scale.hodoo.activity.user.reset.password.send;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -8,13 +7,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.user.reset.password.confirm.ConfirmCertificationNumberActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivitySendCertificationNumberBinding;
-import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.util.ValidationUtil;

@@ -95,6 +95,21 @@ public class LoginModel extends CommonModel {
             }
         }.execute(call);
     }
+    public void saveFCMToken (User user, final LoginModel.DomainCallBackListner<Integer> callback) {
+        Call<Integer> call = NetRetrofit.getInstance().getUserService().saveFCMToken(user);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer integer) {
+                callback.doPostExecute(integer);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
+    }
+
 
     public interface LoginResultListener {
         void doPostExecute(User user);

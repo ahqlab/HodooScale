@@ -4,25 +4,37 @@ package com.animal.scale.hodoo.service;
  * Created by Joo on 2017. 12. 19.
  */
 
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.app.KeyguardManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.fcm.PushWakeLock;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.Gson;
 
+import java.util.List;
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
-
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
     // 메시지 수신
@@ -33,34 +45,113 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         Map<String, String> data = remoteMessage.getData();
         String title = data.get("title");
         String messagae = data.get("content");
+        String host = data.get("host");
+        int type = NotificationCompat.PRIORITY_MAX;
 
-        //sendNotification(title, messagae);
+        KeyguardManager km = (KeyguardManager) getApplicationContext().getSystemService(Context.KEYGUARD_SERVICE);
 
-        // 잠든 단말을 깨워라.
-        PushWakeLock.acquireCpuWakeLock(this);
-// WakeLock 해제.
-        PushWakeLock.releaseCpuLock();
+
+        if(km.inKeyguardRestrictedInputMode()){
+            PushWakeLock.acquireCpuWakeLock(getApplicationContext());
+            PushWakeLock.releaseCpuLock();
+        }
+        if ( isAppIsInBackground(getApplicationContext()) && !km.inKeyguardRestrictedInputMode() ) {
+            Intent intent = new Intent(getApplicationContext(), AlwaysOnTopService.class);
+            intent.putExtra("title", title);
+            intent.putExtra("message", messagae);
+            intent.putExtra("host", host);
+            Gson gson = new Gson();
+            intent.putExtra("data", gson.toJson(data));
+            if ( !isServiceRunning() ) {
+                getApplicationContext().startService(intent);
+            } else {
+                getApplicationContext().stopService(intent);
+                getApplicationContext().startService(intent);
+            }
+            type = NotificationCompat.PRIORITY_LOW;
+        }
+        sendNotification(getApplicationContext(), data, type);
     }
 
-    private void sendNotification(String title, String message) {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void sendNotification(Context context, Map<String, String> data, int type) {
+
+        String title = data.get("title");
+        String message = data.get("content");
+        String host = data.get("host");
+        String url = "selphone://" + host;
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        intent.putExtra("title", title);
+        intent.putExtra("message", message);
+        intent.putExtra("host", host);
+        Gson gson = new Gson();
+        intent.putExtra("data", gson.toJson(data));
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0 /* Request code */, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_dialog_info))
-                .setSmallIcon(R.mipmap.ic_launcher)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.transparent_logo))
+                .setSmallIcon(R.drawable.transparent_white_logo)
+                .setColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed))
                 .setContentTitle(title)
-                .setContentText(message)
+                .setContentText(message  + "님의 초대입니다.")
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
+                .setPriority(type)
+                .setVibrate(new long[]{0, 1000, 500, 1000})
+                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
                 .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        unbindService(connection);
+    }
+    private boolean isAppIsInBackground(Context context) {
+        boolean isInBackground = true;
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+            List<ActivityManager.RunningAppProcessInfo> runningProcesses = am.getRunningAppProcesses();
+            for (ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
+                if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                    for (String activeProcess : processInfo.pkgList) {
+                        if (activeProcess.equals(context.getPackageName())) {
+                            isInBackground = false;
+                        }
+                    }
+                }
+            }
+        } else {
+            List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+            ComponentName componentInfo = taskInfo.get(0).topActivity;
+            if (componentInfo.getPackageName().equals(context.getPackageName())) {
+                isInBackground = false;
+            }
+        }
+
+        return isInBackground;
+    }
+
+    public boolean isServiceRunning() {
+        ActivityManager manager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE))
+        {
+            if (AlwaysOnTopService.class.getName().equals(service.service.getClassName()))
+                return true;
+        }
+        return false;
+    }
+
+
 }
 
