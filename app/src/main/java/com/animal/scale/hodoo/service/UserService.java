@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.service;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.FinPasswordResponse;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 
@@ -34,11 +35,11 @@ public interface UserService{
     @POST("user/update/user/password")
     Call<Integer> updateUsetPassword(@Body User user);
 
-    @POST("mail//user/certified")
+    @POST("mail/user/certified")
     Call<Integer> userCertifiedMailSend(@Query("toMailAddr") String toMailAddr);
 
-    @GET("user/find/user/password")
-    Call<ResultMessageGroup> findUserPassword(@Query("email") String groupCode);
+    @POST("user/find/user/password")
+    Call<CommonResponce<User>> findUserPassword(@Query("email") String groupCode);
 
     @POST("user/update/fcmToken")
     Call<Integer> saveFCMToken(@Body User user);
