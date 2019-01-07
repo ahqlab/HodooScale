@@ -15,6 +15,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
@@ -27,7 +29,11 @@ import android.util.Log;
 
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.fcm.PushWakeLock;
+import com.animal.scale.hodoo.util.BadgeUtils;
+import com.animal.scale.hodoo.util.VIewUtil;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 
@@ -75,6 +81,11 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
     private void sendNotification(Context context, Map<String, String> data, int type) {
 
+        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(context);
+        int badge_count = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
+        if ( badge_count == 0 )
+            badge_count += 1;
+
         String title = data.get("title");
         String message = data.get("content");
         String host = data.get("host");
@@ -102,14 +113,21 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setPriority(type)
-                .setVibrate(new long[]{0, 1000, 500, 1000})
                 .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
                 .setContentIntent(pendingIntent);
+
+        //.addAction(R.drawable.change_user_info_user_icon, context.getString(R.string.confirm), pendingIntent)
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+
+        BadgeUtils.setBadge(context, badge_count);
+        sharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, badge_count + 1);
     }
+
+
+
 
     @Override
     public void onDestroy() {
@@ -139,6 +157,13 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         }
 
         return isInBackground;
+    }
+    private String getActiveActivity(Context context) {
+        ActivityManager activityManager = (ActivityManager)context.getSystemService(context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> info;
+        info = activityManager.getRunningTasks(1);
+        ActivityManager.RunningTaskInfo runningTaskInfo = info.get(0);
+        return runningTaskInfo.topActivity.getClassName();
     }
 
     public boolean isServiceRunning() {

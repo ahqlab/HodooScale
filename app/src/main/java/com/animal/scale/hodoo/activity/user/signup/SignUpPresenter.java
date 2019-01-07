@@ -47,7 +47,9 @@ class SignUpPresenter implements SignUpIn.Presenter {
                     view.showPopup("FAILED");
                 }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)){
                     view.sendEmail(user.getEmail());
+                    return;
                 }
+                view.setProgress(false);
             }
             @Override
             public void doPreExecute() {
@@ -61,7 +63,7 @@ class SignUpPresenter implements SignUpIn.Presenter {
         model.userCertifiedMailSend(toMail, new SignUpModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
-                if ( result > 0 )
+                if ( result != null || result > 0 )
                     view.setProgress(false);
                     view.goNextPage();
             }

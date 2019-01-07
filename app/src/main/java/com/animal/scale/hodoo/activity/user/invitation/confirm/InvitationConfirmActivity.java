@@ -13,8 +13,12 @@ import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.user.invitation.InvitationActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityInvitationConfirmBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.util.BadgeUtils;
+import com.animal.scale.hodoo.util.VIewUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -35,6 +39,13 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(this);
+        int badgeCount = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
+        if ( badgeCount > 0 ) {
+            BadgeUtils.clearBadge(this);
+            sharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, 0);
+        }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invitation_confirm);
         presenter = new InvitationConfirmPresenter(this);
