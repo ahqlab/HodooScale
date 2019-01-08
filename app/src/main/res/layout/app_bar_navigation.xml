@@ -29,9 +29,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:elevation="0dp"
                 android:minHeight="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                android:elevation="0dp"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <TextView
@@ -40,8 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@{activityInfo.barTitle}"
-                    android:textSize="20dp"
                     android:textColor="@color/hodoo_text_gray"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -57,18 +57,18 @@
                         android:layout_height="30dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginRight="10dp"
-                        android:src="@drawable/setting_pet_icon_50_50"
                         android:onClick="@{activity::onPetImageClick}"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="@color/hodoo_text_light_gray"/>
+                        android:src="@drawable/setting_pet_icon_50_50"
+                        app:civ_border_color="@color/hodoo_text_light_gray"
+                        app:civ_border_width="1dp" />
 
                     <ImageView
                         android:id="@+id/setting"
-                        android:gravity="center_vertical"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
+                        android:gravity="center_vertical"
                         android:onClick="@{activity::onSettingBtnClick}"
                         android:src="@drawable/weight_top_setting_icon_38_38" />
                 </LinearLayout>
