@@ -45,20 +45,12 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
         NotificationManager notifManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
 
-        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(this);
-        int badgeCount = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
-        if ( badgeCount > 0 ) {
-            BadgeUtils.clearBadge(this);
-            sharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, 0);
-        }
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invitation_confirm);
         presenter = new InvitationConfirmPresenter(this);
 
         binding.setActivityInfo(new ActivityInfo("회원 초대"));
         binding.setActivity(this);
         presenter.loadData(this);
-
 
         onNewIntent(getIntent());
     }
@@ -76,6 +68,11 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
                 e.printStackTrace();
             }
         } else if ( v == binding.cancel ) {
+            try {
+                presenter.invitationRefusal( data.getInt("toUserIdx"), data.getInt("fromUserIdx") );
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             finish();
         }
     }
@@ -95,6 +92,12 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
     }
 
     @Override
+    public void clearBadge() {
+        BadgeUtils.clearBadge(this);
+        presenter.saveBadgeCount(0);
+    }
+
+    @Override
     public void closeActivity() {
         finish();
     }
@@ -108,11 +111,16 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
             try {
                 data = new JSONObject(extras.getString("data"));
                 binding.toUserEmailInfo.setText(data.getString("fromUserEmail") + "님의 초대입니다.");
+                presenter.updateBadgeCount(data.getInt("toUserIdx"), data.getInt("fromUserIdx"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

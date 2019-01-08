@@ -1,45 +1,51 @@
-package com.animal.scale.hodoo.service;
+package com.animal.scale.hodoo.service.firebase;
 
 /**
  * Created by Joo on 2017. 12. 19.
  */
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.fcm.PushWakeLock;
-import com.animal.scale.hodoo.receiver.ServiceReceiver;
+import com.animal.scale.hodoo.service.AlwaysOnTopService;
 import com.animal.scale.hodoo.util.BadgeUtils;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
+public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService implements FirebaseIn.View {
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
-
     int count = 0;
+    private FirebasePresenter presenter;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.e(TAG, "onCreate");
+        presenter = new FirebasePresenter(this);
+        presenter.initDate(getApplicationContext());
+    }
 
     // 메시지 수신
     @Override
@@ -47,13 +53,19 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         Log.i("HJLEE", "onMessageReceived");
 
         Map<String, String> data = remoteMessage.getData();
+        presenter.getData(data);
+
+//        sendNotification(getApplicationContext(), data, type);
+    }
+
+    public void sendNotification( Map<String, String> data) {
+
         String title = data.get("title");
         String messagae = data.get("content");
         String host = data.get("host");
         int type = NotificationCompat.PRIORITY_MAX;
 
         KeyguardManager km = (KeyguardManager) getApplicationContext().getSystemService(Context.KEYGUARD_SERVICE);
-
 
         if(km.inKeyguardRestrictedInputMode()){
             PushWakeLock.acquireCpuWakeLock(getApplicationContext());
@@ -74,37 +86,40 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
             }
             type = NotificationCompat.PRIORITY_LOW;
         }
-        sendNotification(getApplicationContext(), data, type);
-    }
 
-    private void sendNotification(Context context, Map<String, String> data, int type) {
+        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
+        Gson gson = new Gson();
 
-        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(context);
         int badge_count = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
         badge_count += 1;
 
-        String title = data.get("title");
+        String notiTypeStr = data.get("notiType");
+        int notiType = 0;
+        if ( notiTypeStr != null || !notiTypeStr.equals("") )
+            notiType = Integer.parseInt( notiTypeStr );
+        int idx = Integer.parseInt(data.get("toUserIdx"));
+        int fromUserIdx = Integer.parseInt(data.get("fromUserIdx"));
+
+
         String message = data.get("content");
-        String host = data.get("host");
         String url = "selphone://" + host;
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         intent.putExtra("title", title);
         intent.putExtra("message", message);
         intent.putExtra("host", host);
-        Gson gson = new Gson();
         intent.putExtra("data", gson.toJson(data));
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Random random = new Random();
         count = random.nextInt();
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, count /* Request code */, intent,
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), idx /* Request code */, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.transparent_logo))
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
+                .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.transparent_logo))
                 .setSmallIcon(R.drawable.transparent_white_logo)
                 .setColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed))
                 .setContentTitle(title)
@@ -117,25 +132,27 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         //.addAction(R.drawable.change_user_info_user_icon, context.getString(R.string.confirm), pendingIntent)
 
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(count /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(idx /* ID of notification */, notificationBuilder.build());
 
-        BadgeUtils.setBadge(context, badge_count);
-        sharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, badge_count);
-
-        Intent broadIntent = new Intent("unique_name");
-        //put whatever data you want to send, if any
-        broadIntent.putExtra("message", message);
-
-        //send broadcast
-        context.sendBroadcast(broadIntent);
-
+        presenter.countingBadge();
 
 
     }
 
+    @Override
+    public void setBadge(int count) {
+        BadgeUtils.setBadge(getApplicationContext(), count);
+        presenter.saveBadgeCount(count);
+    }
 
+    @Override
+    public void sendBroad() {
+        Intent broadIntent = new Intent("unique_name");
+        broadIntent.putExtra("message", "test");
+        getApplicationContext().sendBroadcast(broadIntent);
+    }
 
 
     @Override
@@ -186,6 +203,8 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         return false;
     }
 
-
+    public static Object fromJson(String jsonString, Type type) {
+        return new Gson().fromJson(jsonString, type);
+    }
 }
 

@@ -97,6 +97,8 @@
         <activity android:name=".activity.setting.device.bowelplate.list.BowelPlateListActivity" />
         <activity android:name=".test.ActivityCustomEditTextTest" />
         <activity android:name=".activity.user.invitation.InvitationActivity" />
+        <activity android:name=".activity.setting.user.group.manager.UserGroupManagerActivity" />
+        <activity android:name=".activity.setting.user.group.list.UserGroupListActivity" />
         <activity android:name=".activity.user.invitation.confirm.InvitationConfirmActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -113,7 +115,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.MyFirebaseMessagingService">
+        <service android:name=".service.firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

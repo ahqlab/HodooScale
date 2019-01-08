@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.util.BadgeUtils;
 
 public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
     private InvitationConfirm.View mView;
@@ -16,6 +18,17 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
     @Override
     public void loadData(Context context) {
         mModel.loadData(context);
+    }
+
+    @Override
+    public void updateBadgeCount( int to, int from ) {
+        int count = mModel.updateBadgeCount(to, from);
+        if ( count > 0 ) {
+            saveBadgeCount(count);
+        } else {
+            mView.clearBadge();
+
+        }
     }
 
     @Override
@@ -39,5 +52,27 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
 
             }
         });
+    }
+
+    @Override
+    public void invitationRefusal(int to, int from) {
+        mModel.invitationRefusal(to, from, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer result) {
+                if ( result > 0 ) {
+                    mView.closeActivity();
+                }
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
+
+    @Override
+    public void saveBadgeCount( int count ) {
+        mModel.saveBadgeCount(count);
     }
 }
