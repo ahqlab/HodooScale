@@ -185,6 +185,8 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
             }else if(result == 1){
                 presenter.confirmPetRegistration();
             }
+        }else{
+            //서버와의 연결이 끊어졌습니다.
         }
     }
 

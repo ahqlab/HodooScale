@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class User implements Serializable{
+public class User implements Domain{
 
     public User() {}
 
@@ -25,12 +25,14 @@ public class User implements Serializable{
 
     private String sex;
 
-    private String country;
+    private int country;
 
     private String pushToken;
 
     private String createDate;
     //joinColumn
     private String groupCode;
+
+    private int userCode;
 
 }

@@ -17,21 +17,21 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/find_password_bg"
         android:gravity="center_horizontal"
+        android:background="@android:color/white"
         tools:context=".activity.user.reset.password.send.SendCertificationNumberActivity">
 
         <include
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}" />
 
-
         <LinearLayout
             android:layout_below="@+id/my_toolbar"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:layout_marginTop="50dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -42,37 +42,37 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:layout_below="@+id/common_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/white"
-                    android:textSize="25dp"
-                    android:text="@string/istyle_question_of_lost_password"/>
-
+                    android:text="@string/istyle_lost_password"
+                    android:textSize="30sp"
+                    android:textColor="@color/mainBlack"
+                    />
                 <TextView
+                    android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/white"
-                    android:textSize="14dp"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/istyle_answer_of_lost_password"/>
+                    android:text="@string/forgot_password_sub_scription"
+                    android:textColor="@color/subscript_color"/>
 
-                <EditText
+                <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
                     android:id="@+id/email"
-                    style="@style/Edittext.Email"
-                    android:layout_width="290dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:hint="@string/istyle_email_hint" />
+                    app:title="@string/istyle_label_email"
+                    app:editTextResourceId="@layout/email_edittext"
+                    app:titleSize="13"
+                    app:errorMessageSize="11"/>
+
 
                 <Button
                     android:id="@+id/sendBtn"
-                    style="@style/CommonBtn"
+                    android:background="@drawable/rounded_pink_btn"
+                    android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="25dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginLeft="40dp"
                     android:text="@string/send_btn_text"
                     android:onClick="@{activity::onClickSendBtn}"/>
 

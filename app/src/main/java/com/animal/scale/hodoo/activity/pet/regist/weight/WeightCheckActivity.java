@@ -9,12 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
+import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityWeightCheckBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -104,10 +106,13 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
     @Override
     public void registResult(Integer integer) {
         if (integer != 0) {
-            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+
+            Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
             finish();
+            Toast.makeText(this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
         } else {
             Log.e("HJLEE", "registResult ERROR");
         }
@@ -249,6 +254,9 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
 
     @Override
     public void setNavigation() {
+        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override

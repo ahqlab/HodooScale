@@ -29,9 +29,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:elevation="0dp"
                 android:minHeight="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:elevation="0dp"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <TextView
@@ -40,37 +40,58 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@{activityInfo.barTitle}"
-                    android:textColor="@color/hodoo_text_gray"
                     android:textSize="20dp"
+                    android:textColor="@color/hodoo_text_gray"
                     android:textStyle="bold" />
 
                 <LinearLayout
+                    android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_gravity="right|center_vertical"
                     android:gravity="right|center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:clipChildren="false">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/petImage"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal|center_vertical"
                         android:layout_marginRight="10dp"
-                        android:onClick="@{activity::onPetImageClick}"
                         android:src="@drawable/setting_pet_icon_50_50"
-                        app:civ_border_color="@color/hodoo_text_light_gray"
-                        app:civ_border_width="1dp" />
+                        android:onClick="@{activity::onPetImageClick}"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/hodoo_text_light_gray"/>
 
-                    <ImageView
-                        android:id="@+id/setting"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center_vertical"
-                        android:onClick="@{activity::onSettingBtnClick}"
-                        android:src="@drawable/weight_top_setting_icon_38_38" />
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="false"
+                        android:layout_gravity="center_vertical">
+                        <ImageView
+                            android:id="@+id/setting"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="10dp"
+                            android:onClick="@{activity::onSettingBtnClick}"
+                            android:src="@drawable/weight_top_setting_icon_38_38" />
+                        <TextView
+                            android:id="@+id/setting_badge"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="top|right"
+                            android:layout_marginTop="-5dp"
+                            android:background="@drawable/badge_background"
+                            android:gravity="center"
+                            android:padding="3dp"
+                            android:textColor="@android:color/white"
+                            android:text="0"
+                            android:textSize="10sp"/>
+
+                    </FrameLayout>
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
 

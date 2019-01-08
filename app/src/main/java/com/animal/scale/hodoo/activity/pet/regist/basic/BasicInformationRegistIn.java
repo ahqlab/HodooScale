@@ -1,10 +1,14 @@
 package com.animal.scale.hodoo.activity.pet.regist.basic;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.widget.EditText;
 
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -28,6 +32,8 @@ public interface BasicInformationRegistIn {
 
         void successUpdate();
 
+        void setSaveImageFile ( Bitmap image );
+
     }
 
     interface Presenter{
@@ -49,5 +55,11 @@ public interface BasicInformationRegistIn {
         void getPetBasicInformation(int petIdx);
 
         void setView(PetBasicInfo basicInfo);
+
+        File setSaveImageFile(Context context );
+
+        void rotationImage ( String imageFilePath );
+
+        void setGalleryImage (Context context, Uri img);
     }
 }

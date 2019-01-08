@@ -3,6 +3,9 @@ package com.animal.scale.hodoo.activity.pet.regist.disease;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 
@@ -10,15 +13,22 @@ import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
+import com.animal.scale.hodoo.adapter.AdapterOfDisease;
 import com.animal.scale.hodoo.adapter.AdapterOfDiseaseList;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityDiseaseInformationRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.Disease;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInformationRegistActivity> implements DiseaseInformationIn.View{
 
@@ -26,11 +36,13 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
 
     ActivityDiseaseInformationRegistBinding binding;
 
-    AdapterOfDiseaseList Adapter;
+    AdapterOfDisease adapter;
 
     DiseaseInformationIn.Presenter presenter;
 
     private int petIdx;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +55,7 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         presenter.loadData(DiseaseInformationRegistActivity.this);
         presenter.setNavigation();
 
+
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
         presenter.getDiseaseInformation(petIdx);
@@ -54,28 +67,37 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         List<PetChronicDisease> list;
         if(petChronicDisease != null){
             binding.setDomain(petChronicDisease);
-            list = presenter.stringToListConversion(petChronicDisease.getDiseaseName());
-            setListviewAdapter(list);
+//            list = presenter.stringToListConversion(petChronicDisease.getDiseaseNameStr());
+            setListviewAdapter(petChronicDisease);
         }else{
             binding.setDomain(new PetChronicDisease());
-            list = new ArrayList<PetChronicDisease>();
-            setListviewAdapter(list);
+//            list = new ArrayList<PetChronicDisease>();
+            setListviewAdapter(petChronicDisease);
         }
     }
 
-    public void setListviewAdapter(List<PetChronicDisease> petChronicDisease){
+    public void setListviewAdapter(PetChronicDisease petChronicDisease){
         final List<Disease> diseases = new ArrayList<Disease>();
-        diseases.add(new Disease(getString(R.string.no_disease)));
-        diseases.add(new Disease(getString(R.string.diabetes)));
-        diseases.add(new Disease(getString(R.string.allergy)));
-        diseases.add(new Disease(getString(R.string.dementia)));
-        diseases.add(new Disease(getString(R.string.arthritis)));
-        diseases.add(new Disease(getString(R.string.parboxylitis)));
-        diseases.add(new Disease(getString(R.string.obesity)));
-        diseases.add(new Disease(getString(R.string.cancer)));
 
-        Adapter = new AdapterOfDiseaseList(DiseaseInformationRegistActivity.this, diseases, petChronicDisease);
-        binding.listview.setAdapter(Adapter);
+        /* new code 2018.12.26 (s) */
+        String[] diseasesStr = getResources().getStringArray(R.array.disease);
+        for ( String disease : diseasesStr )
+            diseases.add(new Disease(disease));
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
+        layoutManager.setAlignItems(AlignItems.FLEX_START);
+
+        binding.recyclerview.setLayoutManager(layoutManager);
+
+        adapter = new AdapterOfDisease(diseases, petChronicDisease);
+        binding.recyclerview.setAdapter(adapter);
+        /* new code 2018.12.26 (e) */
+
+
+//        Adapter = new AdapterOfDiseaseList(DiseaseInformationRegistActivity.this, diseases, petChronicDisease);
+//        binding.listview.setAdapter(Adapter);
     }
 
     @Override
@@ -84,25 +106,25 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
     }
 
     public void onClickNextBtn(View view){
-        StringBuilder sb = new StringBuilder();
-        if (Adapter.getCheckedCount() > 0) {
-            for (int i = 0; i < Adapter.getCount(); i++) {
-                Disease disease = (Disease) Adapter.getItem(i);
-                if (disease.isChecked()) {
-                    sb.append(disease.getName());
-                    sb.append(",");
-                }
-            }
-        }
         presenter.deleteDiseaseInformation(petIdx, binding.getDomain().getId());
     }
 
     public String getDiseaName(){
         StringBuilder sb = new StringBuilder();
-        if (Adapter.getCheckedCount() > 0) {
-            for (int i = 0; i < Adapter.getCount(); i++) {
-                Disease disease = (Disease) Adapter.getItem(i);
-                if (disease.isChecked()) {
+//        if (Adapter.getCheckedCount() > 0) {
+//            for (int i = 0; i < Adapter.getCount(); i++) {
+//                Disease disease = (Disease) Adapter.getItem(i);
+//                if (disease.isChecked()) {
+//                    sb.append(disease.getName());
+//                    sb.append(",");
+//                }
+//            }
+//        }
+        int checkNumber = adapter.getCheckNumber();
+        if ( checkNumber > 0 ) {
+            for (int i = 0; i < adapter.mItems.size(); i++) {
+                if ( (checkNumber & (0x01<<i)) != 0 ) {
+                    Disease disease = adapter.getItem(i);
                     sb.append(disease.getName());
                     sb.append(",");
                 }
@@ -114,7 +136,7 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
     @Override
     public void registDiseaseInformation() {
         PetChronicDisease petChronicDisease =  binding.getDomain();
-        petChronicDisease.setDiseaseName(getDiseaName());
+        petChronicDisease.setDiseaseName(adapter.getCheckNumber());
         presenter.registDiseaseInformation(petChronicDisease,  petIdx);
     }
 
@@ -124,11 +146,12 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         intent.putExtra("petIdx", petIdx);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-        finish();
+//        finish();
     }
 
     @Override
     public void setNavigation() {
+        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override

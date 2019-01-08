@@ -57,4 +57,19 @@ public class FeedListModel extends CommonModel {
             }
         }.execute(call);
     }
+
+    public void deleteMealHistory(int historyIdx, final DomainCallBackListner<Integer> domainCallBackListner) {
+        Call<Integer> call = NetRetrofit.getInstance().getMealHistoryService().deleteMealHistory(historyIdx);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer integer) {
+                domainCallBackListner.doPostExecute(integer);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
+    }
 }

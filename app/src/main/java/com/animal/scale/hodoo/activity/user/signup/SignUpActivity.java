@@ -4,38 +4,41 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.Window;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
-import com.animal.scale.hodoo.activity.user.login.LoginActivity;
-import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
-import com.animal.scale.hodoo.custom.view.input.CustomCommonEditText;
 import com.animal.scale.hodoo.databinding.ActivitySignUpBinding;
-import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.Country;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
-import com.animal.scale.hodoo.service.NetRetrofit;
-import com.animal.scale.hodoo.util.MyOwnBindingUtil;
-import com.animal.scale.hodoo.util.ValidationUtil;
+import com.animal.scale.hodoo.util.RSA;
+import com.animal.scale.hodoo.util.VIewUtil;
+import com.google.gson.JsonObject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class SignUpActivity extends BaseActivity<SignUpActivity> implements SignUpIn.View {
 
@@ -45,13 +48,16 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     SignUpIn.Presenter presenter;
 
-    boolean radioCheckState = false,
-            emailState = false,
-            pwState = false,
-            pwCheckState = false,
-            ninkState = false,
-            countryState = false,
-            agreeState = false;
+    private boolean radioCheckState = false;
+    private boolean emailState = false;
+    private boolean pwState = false;
+    private boolean pwCheckState = false;
+    private boolean ninkState = false;
+    private boolean countryState = false;
+    private boolean agreeState = false;
+
+    private int selectCountry = 0;
+    private List<Country> countries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +67,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         presenter = new SignUpPresenter(this);
         presenter.loadData(SignUpActivity.this);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo(getString(R.string.signup_title)));
+//        binding.setActivityInfo(new ActivityInfo(getString(R.string.signup_title)));
         binding.setUser(new User());
 
         binding.email.editText.addTextChangedListener(new CommonTextWatcher(binding.email, this, CommonTextWatcher.EMAIL_TYPE, R.string.vailed_email, new CommonTextWatcher.CommonTextWatcherCallback() {
@@ -245,18 +251,8 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 //                        }
 //                    }).show();
 //        } else {
+        registUser();
 
-        User user = binding.getUser();
-        user.setEmail( binding.email.editText.getText().toString() );
-        user.setPassword( binding.password.editText.getText().toString() );
-        user.setNickname( binding.nickName.editText.getText().toString() );
-        user.setCountry( binding.from.editText.getText().toString() );
-        if (binding.radioFemale.isChecked()) {
-            binding.getUser().setSex("FEMALE");
-        } else if (binding.radioMale.isChecked()) {
-            binding.getUser().setSex("MALE");
-        }
-        presenter.registUser(binding.getUser());
 //        }
     }
 
@@ -285,10 +281,26 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     @Override
     public void goNextPage() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SignUpFinishActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
+    }
+
+    @Override
+    public void registUser() {
+        User user = binding.getUser();
+        user.setEmail( binding.email.editText.getText().toString() );
+        user.setPassword( binding.password.editText.getText().toString() );
+        user.setNickname( binding.nickName.editText.getText().toString() );
+        user.setCountry(selectCountry);
+        if (binding.radioFemale.isChecked()) {
+            binding.getUser().setSex("FEMALE");
+        } else if (binding.radioMale.isChecked()) {
+            binding.getUser().setSex("MALE");
+        }
+        setProgress(true);
+        presenter.registUser(binding.getUser());
     }
 
     @Override
@@ -308,25 +320,37 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                 ).show();
     }
 
+    @Override
+    public void sendEmail(String userEmail) {
+        presenter.userCertifiedMailSend(userEmail);
+    }
+
+    @Override
+    public void setProgress(boolean state) {
+        binding.signupProgress.setVisibility( state ? View.VISIBLE : View.GONE );
+    }
+
 
     public void onClickCountryEditTextClick(View view) {
-        final String[] values = new String[]{
-                this.getString(R.string.korea),
-                this.getString(R.string.usa),
-                this.getString(R.string.japan),
-                this.getString(R.string.china)
-        };
-        AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
-        builder.setTitle(getResources().getString(R.string.choice_country));
-        // add a radio button list
-        builder.setItems(values, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                binding.from.editText.setText(values[which]);
-                dialog.dismiss();
+        if ( countries != null ) {
+            String[] countreis = new String[countries.size()];
+            for (int i = 0; i < countries.size(); i++) {
+                countreis[i] = countries.get(i).getName();
             }
-        });
-        // add OK and Cancel buttons
+            final String[] values = countreis;
+
+            AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
+            builder.setTitle(getResources().getString(R.string.choice_country));
+            // add a radio button list
+            builder.setItems(values, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    binding.from.editText.setText(values[which]);
+                    selectCountry = countries.get(which).getId();
+                    dialog.dismiss();
+                }
+            });
+            // add OK and Cancel buttons
        /* builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -334,9 +358,19 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
             }
         });
         builder.setNegativeButton("Cancel", null);*/
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            AlertDialog dialog = builder.create();
+            ListView listView = dialog.getListView();
+            listView.setDivider(new ColorDrawable(Color.parseColor("#e1e1e1")));
+            listView.setDividerHeight(2);
+            dialog.getWindow().setBackgroundDrawableResource(R.drawable.rounded_rect_white_radius_10);
+            dialog.show();
+        }
     }
+    @Override
+    public void setCountry(List<Country> countries) {
+        this.countries = countries;
+    }
+
     private boolean checkValidation( int type ) {
         return true;
     }
@@ -362,5 +396,30 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         } else {
             setBtnEnable(false);
         }
+    }
+    private String mixToken ( String uId ) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmDDss");
+        String mix = "";
+        try {
+            mix = RSA.Encrypt(uId + sdf.format(new Date()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return mix;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if ( countries == null )
+            presenter.getAllCountry(VIewUtil.getLocationCode(this));
     }
 }

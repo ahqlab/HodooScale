@@ -10,7 +10,7 @@ import com.animal.scale.hodoo.databinding.ActivityCreateNewPasswordBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 
 public class CreateNewPasswordActivity extends BaseActivity<CreateNewPasswordActivity> {
-
+    //사용안함 2019/01/07 이형준
     ActivityCreateNewPasswordBinding binding;
 
     @Override

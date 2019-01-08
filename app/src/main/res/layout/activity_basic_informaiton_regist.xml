@@ -61,6 +61,7 @@
                         android:layout_margin="20dp"
                         android:onClick="@{activity::onClickOpenBottomDlg}"
                         android:src="@drawable/add_pet_top_camera__190_190"
+                        android:antialias="true"
                         app:civ_border_color="@color/cameraCurcle"
                         app:civ_border_width="2dp" />
                 </LinearLayout>
@@ -87,17 +88,15 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_pet_name" />
-
-                            <EditText
+                            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                                android:id="@+id/pet_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@={info.petName}"
-                                android:layout_marginTop="8dp"
-                                android:textSize="13sp" />
+                                android:layout_marginTop="24dp"
+                                app:title="@string/add_pet_name"
+                                app:editTextResourceId="@layout/normal_edittext"
+                                app:titleSize="13"
+                                app:errorMessageSize="11"/>
 
                         </LinearLayout>
 
@@ -109,34 +108,21 @@
                             android:layout_marginLeft="8dp"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_pet_type" />
-
-                            <EditText
+                            <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
                                 android:id="@+id/pet_breed"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@={info.petBreed}"
-                                android:layout_marginTop="8dp"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:focusable="false"
-                                android:onClick="@{activity::onClickSelectEditText}"
-                                android:textSize="13sp" />
+                                android:layout_marginTop="24dp"
+                                app:title="@string/add_pet_type"
+                                app:editTextResourceId="@layout/normal_edittext"
+                                app:titleSize="13"
+                                app:edtFocusble="false"
+                                app:errorMessageSize="11"/>
                         </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <TextView
-                    style="@style/CommonLabel"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="40dp"
-                    android:text="@string/add_pet_birthday" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -147,25 +133,17 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                        android:id="@+id/pet_birthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <EditText
-                            android:id="@+id/getDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginTop="8dp"
-                            android:hint="00/00/0000"
-                            android:focusable="false"
-                            android:onClick="@{activity::onClickCalDalog}"
-                            android:text="@={info.birthday}"
-                            android:textSize="13sp" />
-
-
-                    </LinearLayout>
+                        android:layout_marginTop="24dp"
+                        app:title="@string/add_pet_birthday"
+                        app:editTextResourceId="@layout/normal_edittext"
+                        app:hint="00/00/0000"
+                        app:titleSize="13"
+                        app:edtFocusble="false"
+                        app:errorMessageSize="11"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -253,7 +231,6 @@
                     android:onClick="@{activity::goDiseaseActivity}"
                     android:text="@string/add_pet_next_btn"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

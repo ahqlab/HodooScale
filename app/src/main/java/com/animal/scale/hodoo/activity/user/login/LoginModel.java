@@ -7,6 +7,7 @@ import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.Pet;
@@ -47,11 +48,11 @@ public class LoginModel extends CommonModel {
         return ValidationUtil.isValidEmail(message);
     }
 
-    public void sendServer(User user, final DomainCallBackListner<ResultMessageGroup> domainCallBackListner) {
-        Call<ResultMessageGroup> call = NetRetrofit.getInstance().getUserService().login(user);
-        new AbstractAsyncTask<ResultMessageGroup>() {
+    public void sendServer(User user, final DomainCallBackListner<CommonResponce<User>> domainCallBackListner) {
+        Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().login(user);
+        new AbstractAsyncTask<CommonResponce<User>>() {
             @Override
-            protected void doPostExecute(ResultMessageGroup resultMessageGroup) {
+            protected void doPostExecute(CommonResponce<User> resultMessageGroup) {
                 domainCallBackListner.doPostExecute(resultMessageGroup);
             }
             @Override
@@ -65,6 +66,7 @@ public class LoginModel extends CommonModel {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_UNIQUE_ID, user.getUserIdx());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_EMAIL, user.getEmail());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.GROUP_CODE, user.getGroupCode());
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_PASSWORD, user.getPassword());
     }
 
     public void confirmDeviceRegistration(final DeviceRegistrationListener deviceRegistrationListener) {
@@ -94,6 +96,21 @@ public class LoginModel extends CommonModel {
             }
         }.execute(call);
     }
+    public void saveFCMToken (User user, final LoginModel.DomainCallBackListner<Integer> callback) {
+        Call<Integer> call = NetRetrofit.getInstance().getUserService().saveFCMToken(user);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer integer) {
+                callback.doPostExecute(integer);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
+    }
+
 
     public interface LoginResultListener {
         void doPostExecute(User user);

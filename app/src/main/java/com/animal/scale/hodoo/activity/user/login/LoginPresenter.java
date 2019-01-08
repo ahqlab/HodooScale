@@ -1,20 +1,19 @@
 package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
-import android.util.JsonReader;
 import android.util.Log;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.message.ResultMessage;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
-import java.io.StringReader;
 import java.util.List;
 
 public class LoginPresenter implements Login.Presenter {
@@ -36,9 +35,9 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void sendServer(User user) {
-        loginModel.sendServer(user, new LoginModel.DomainCallBackListner<ResultMessageGroup>() {
+        loginModel.sendServer(user, new LoginModel.DomainCallBackListner<CommonResponce<User>>() {
             @Override
-            public void doPostExecute(ResultMessageGroup resultMessageGroup) {
+            public void doPostExecute(CommonResponce<User> resultMessageGroup) {
                 if ( resultMessageGroup != null ) {
                     if (resultMessageGroup.getResultMessage().equals(ResultMessage.NOT_FOUND_EMAIL)) {
                         loginView.showPopup(context.getString(R.string.not_found_email));
@@ -48,10 +47,14 @@ public class LoginPresenter implements Login.Presenter {
                         loginView.showPopup(context.getString(R.string.failed));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
                         Log.e("HJLEE", "LOGIN RESULT : " + resultMessageGroup.getDomain().toString().trim());
-                        Gson gson = new Gson();
-                        User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
-                        saveUserSharedValue(user);
-                        checkRegistrationStatus();
+                        /*Gson gson = new Gson();
+                        User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);*/
+                        if ( resultMessageGroup.getDomain().getUserCode() <= 0 ) {
+                            loginView.showPopup("이메일 인증을 진행해주세요.");
+                            return;
+                        }
+                        saveUserSharedValue(resultMessageGroup.getDomain());
+                        saveFCMToken( resultMessageGroup.getDomain() );
                     }
                 } else {
                     loginView.showPopup(context.getString(R.string.failed));
@@ -122,5 +125,25 @@ public class LoginPresenter implements Login.Presenter {
                 loginView.setProgress(true);
             }
         });
+    }
+
+    @Override
+    public void saveFCMToken(User user) {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        user.setPushToken(token);
+        loginModel.saveFCMToken(user, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer integer) {
+
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+
+
+        checkRegistrationStatus();
     }
 }

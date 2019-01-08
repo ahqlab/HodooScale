@@ -11,10 +11,12 @@ public class PetChronicDisease implements Serializable{
     }
 
     public PetChronicDisease(String diseaseName) {
-        this.diseaseName = diseaseName;
+        this.diseaseNameStr = diseaseName;
     }
 
     private int id;
 
-    private String diseaseName;
+    private String diseaseNameStr;
+
+    private int diseaseName;
 }

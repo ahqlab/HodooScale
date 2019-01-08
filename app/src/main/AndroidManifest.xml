@@ -6,6 +6,7 @@
     <uses-sdk tools:overrideLibrary="com.tistory.dwfox.dwrulerviewlibrary" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -20,6 +21,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- espressif -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -32,6 +38,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/main_logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.animal.scale.hodoo"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +70,7 @@
         <activity android:name=".activity.pet.regist.physique.PhysiqueInformationRegistActivity" />
         <activity android:name=".activity.pet.regist.weight.WeightCheckActivity" />
         <activity android:name=".activity.user.signup.SignUpActivity" />
+        <activity android:name=".activity.user.signup.SignUpFinishActivity" />
         <activity android:name=".activity.home.activity.HomeActivity" />
         <activity android:name=".activity.wifi.WifiSearchActivity" />
         <activity android:name=".activity.wifi.WIFIScanner" />
@@ -71,6 +96,22 @@
         <activity android:name=".activity.setting.device.list.DeviceListActivity" />
         <activity android:name=".activity.setting.device.bowelplate.list.BowelPlateListActivity" />
         <activity android:name=".test.ActivityCustomEditTextTest" />
+        <activity android:name=".activity.user.invitation.InvitationActivity" />
+        <activity android:name=".activity.user.invitation.confirm.InvitationConfirmActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.user.invitation.confirm.InvitationConfirmActivity"/>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="invitation"
+                    android:scheme="selphone" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
@@ -82,8 +123,18 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+        <service android:name=".service.AlwaysOnTopService"/>
+        <receiver
+            android:name=".receiver.FirebaseDataReceiver.FirebaseDataReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <activity android:name=".activity.intro.IntroActivity" />
+        <activity android:name=".fcm.AlertActivity"></activity>
 
-        <activity android:name=".activity.intro.IntroActivity"></activity>
     </application>
 
 </manifest>

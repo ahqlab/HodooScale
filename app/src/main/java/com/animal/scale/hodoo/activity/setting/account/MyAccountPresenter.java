@@ -2,7 +2,10 @@ package com.animal.scale.hodoo.activity.setting.account;
 
 import android.content.Context;
 
-public class MyAccountPresenter implements MyAccount.Presenter{
+import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.User;
+
+public class MyAccountPresenter implements MyAccount.Presenter {
 
     MyAccount.View myAccountView;
 
@@ -11,6 +14,7 @@ public class MyAccountPresenter implements MyAccount.Presenter{
     @Override
     public void initLoadData(Context context) {
         myAccountModel.initLoadData(context);
+
     }
 
     public MyAccountPresenter(MyAccount.View myAccountView) {
@@ -31,5 +35,36 @@ public class MyAccountPresenter implements MyAccount.Presenter{
     @Override
     public void changePassword() {
         myAccountView.goChangePasswordPage();
+    }
+
+    @Override
+    public void initUserData() {
+        myAccountModel.initUserData(new CommonModel.DomainCallBackListner<User>() {
+            @Override
+            public void doPostExecute(User user) {
+                user.setPushToken(null);
+                saveFCMToken(user);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
+
+    @Override
+    public void saveFCMToken(User user) {
+        myAccountModel.saveFCMToken(user, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer integer) {
+                logout();
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
     }
 }

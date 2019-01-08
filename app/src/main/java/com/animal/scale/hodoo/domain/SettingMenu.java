@@ -17,4 +17,8 @@ public class SettingMenu {
     private int icon;
 
     private String name;
+
+    private boolean badgeState;
+
+    private int badgeCount;
 }

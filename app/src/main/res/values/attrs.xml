@@ -14,6 +14,8 @@
         <attr name="titleSize" format="reference|float" />
         <attr name="errorMessageSize" format="reference|float" />
         <attr name="hint" format="reference|string" />
+        <attr name="edtFocusble" format="boolean"/>
+        <attr name="edtText" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="WeightView">

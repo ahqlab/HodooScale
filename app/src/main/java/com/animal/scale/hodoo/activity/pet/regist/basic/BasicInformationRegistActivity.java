@@ -11,9 +11,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,13 +34,16 @@ import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRe
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityBasicInformaitonRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.util.ValidationUtil;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.Calendar;
 
 public class BasicInformationRegistActivity extends BaseActivity<BasicInformationRegistActivity> implements BasicInformationRegistIn.View {
@@ -44,12 +51,14 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     ActivityBasicInformaitonRegistBinding binding;
 
     private static final int CAMERA_REQUEST = 1888;
+    private static final int GALLERY_REQUEST = 1889;
 
     public static final int CAMERA_PERMISSION_CODE = 100;
+    public static final int STORAGE_PERMISSION_CODE = 101;
 
     ProgressDialog progressDialog;
 
-    BottomDialog builder;
+    BottomSheetDialog dialog;
 
     public static String REQUEST_URL = "";
 
@@ -60,6 +69,13 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     BasicInformationRegistIn.Presenter presenter;
 
     private int petIdx;
+
+    private final String GENDER_MALE = "MALE";
+    private final String GENDER_FEMALE = "FEMALE";
+    private boolean genderCheck = false;
+
+    private Uri photoUri;
+    private String imageFilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +91,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
         presenter.getPetBasicInformation(petIdx);
+
         binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -97,8 +114,42 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 } else if (radioButton.getText().toString().matches(getResources().getString(R.string.male))) {
                     binding.getInfo().setSex("MALE");
                 }
+                genderCheck = true;
+                validation();
             }
         });
+        binding.petBreed.editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickSelectEditText(view);
+            }
+        });
+        binding.petBirthday.editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickCalDalog(view);
+            }
+        });
+        validation();
+//        binding.nextStep.setEnabled(validation());
+        binding.petName.editText.addTextChangedListener(new CommonTextWatcher(binding.petName, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+            @Override
+            public void onChangeState(boolean state) {
+                validation();
+            }
+        }));
+        binding.petBreed.editText.addTextChangedListener(new CommonTextWatcher(binding.petBreed, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+            @Override
+            public void onChangeState(boolean state) {
+                validation();
+            }
+        }));
+        binding.petBirthday.editText.addTextChangedListener(new CommonTextWatcher(binding.petBirthday, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_birthday_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+            @Override
+            public void onChangeState(boolean state) {
+                validation();
+            }
+        }));
     }
 
     @Override
@@ -110,6 +161,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             presenter.setView(basicInfo);
         } else {
             binding.setInfo(new PetBasicInfo());
+            if(binding.switch1.isChecked()){
+                binding.getInfo().setNeutralization("YES");
+            }else{
+                binding.getInfo().setNeutralization("NO");
+            }
             REQUEST_MODE = false;
             REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist";
         }
@@ -122,6 +178,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     @Override
     public void setView(PetBasicInfo basicInfo) {
+
+        binding.petName.editText.setText(basicInfo.getPetName());
+        binding.petBreed.editText.setText(basicInfo.getPetBreed());
+
+        binding.petBirthday.editText.setText(basicInfo.getBirthday());
         if (basicInfo.getNeutralization().matches("YES")) {
             binding.switch1.setChecked(true);
         } else {
@@ -131,11 +192,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 .load(SharedPrefVariable.SERVER_ROOT + basicInfo.getProfileFilePath())
                 .into(binding.profile);
 
-        if (basicInfo.getSex().matches(getResources().getString(R.string.femle))) {
+        if (basicInfo.getSex().matches(GENDER_MALE)) {
             binding.maleBtn.setChecked(true);
-        } else if (basicInfo.getSex().matches(getResources().getString(R.string.femle))) {
+        } else if (basicInfo.getSex().matches(GENDER_FEMALE)) {
             binding.femaleBtn.setChecked(true);
         }
+        validation();
     }
 
     @Override
@@ -153,7 +215,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         intent.putExtra("petIdx", petIdx);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-        finish();
+//        finish();
+    }
+
+    @Override
+    public void setSaveImageFile(Bitmap image) {
+        binding.profile.setImageBitmap(image);
     }
 
     @Override
@@ -178,12 +245,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     public void onClickOpenBottomDlg(View view) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View customView = inflater.inflate(R.layout.image_select_bottom_custom_view, null);
-        builder = new BottomDialog.Builder(BasicInformationRegistActivity.this)
-                .setCustomView(customView)
-                .setNegativeText("Close")
-                .show();
-        Button camera = (Button) customView.findViewById(R.id.camera);
+        dialog = new BottomSheetDialog(this);
+        dialog.setContentView(R.layout.image_select_bottom_custom_view);
+        dialog.show();
+
+        Button camera = (Button) dialog.findViewById(R.id.camera);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,20 +263,42 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             }
         });
 
-        Button gallery = (Button) customView.findViewById(R.id.gallery);
+        Button gallery = (Button) dialog.findViewById(R.id.gallery);
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "gallery", Toast.LENGTH_LONG).show();
+                int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+                if (permissionStorage == PackageManager.PERMISSION_DENIED) {
+                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                } else {
+                    openGallery();
+                    dialog.dismiss();
+                }
             }
         });
     }
 
     @Override
     public void openCamera() {
-        builder.dismiss();
+//        builder.dismiss();
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        if ( cameraIntent.resolveActivity(getPackageManager()) != null ) {
+            File photo = presenter.setSaveImageFile(this);
+            if ( photo != null ) {
+                imageFilePath = photo.getAbsolutePath();
+                photoUri = FileProvider.getUriForFile(this, getPackageName(), photo);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                dialog.dismiss();
+            }
+        }
+    }
+    public void openGallery () {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_REQUEST);
+        Toast.makeText(getApplicationContext(), "gallery", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -233,7 +321,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        binding.getDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        binding.petBirthday.editText.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+//                        binding.getDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     }
                 }, year, month, day);
         picker.show();
@@ -257,6 +346,19 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                     }
                 }
                 break;
+            case STORAGE_PERMISSION_CODE :
+                for (int i = 0; i < permissions.length; i++) {
+                    String permission = permissions[i];
+                    int grantResult = grantResults[i];
+                    if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                            openGallery();
+                        } else {
+//                            Toast.makeText(getApplicationContext(), "CAMERA permission denied", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+                break;
         }
     }
 
@@ -266,20 +368,27 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            binding.profile.setImageBitmap(photo);
+//            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            presenter.rotationImage(imageFilePath);
+        } else if ( requestCode == GALLERY_REQUEST && resultCode == Activity.RESULT_OK ) {
+            presenter.setGalleryImage(this, data.getData());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void goDiseaseActivity(View view) {
-        Log.e("HJLEE", ">>" + REQUEST_MODE);
+        setBasicInfo();
         if (REQUEST_MODE) {
             presenter.updateBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         } else {
-            Log.e("HJLEE", binding.getInfo().toString());
             presenter.registBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
         }
+    }
+
+    private void setBasicInfo() {
+        binding.getInfo().setPetName(binding.petName.editText.getText().toString());
+        binding.getInfo().setPetBreed(binding.petBreed.editText.getText().toString());
+        binding.getInfo().setBirthday(binding.petBirthday.editText.getText().toString());
     }
 
     @Override
@@ -320,7 +429,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         });*/
     }
 
-    public void onClickSelectEditText(View view){
+    public void onClickSelectEditText(View view) {
         final String[] values = new String[]{
                 "마스티프",
                 "보르도 마스티프",
@@ -469,11 +578,31 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         };
         super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null)
                 .setItems(values, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                binding.petBreed.setText(values[which]);
-                dialog.dismiss();
-            }
-        }).show();
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        binding.petBreed.editText.setText(values[which]);
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+    private void validation() {
+        if (!ValidationUtil.isEmpty(binding.petName.editText.getText().toString()) &&
+                !ValidationUtil.isEmpty(binding.petBreed.editText.getText().toString()) &&
+                !ValidationUtil.isEmpty(binding.petBirthday.editText.getText().toString()) &&
+                genderCheck) {
+            setBtnEnable(true);
+        } else {
+            setBtnEnable(false);
+        }
+    }
+
+    private void setBtnEnable(boolean state) {
+        binding.nextStep.setEnabled(state);
+        if (binding.nextStep.isEnabled()) {
+            binding.nextStep.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        } else {
+            binding.nextStep.setTextColor(ContextCompat.getColor(this, R.color.mainRed));
+        }
     }
 }

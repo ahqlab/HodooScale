@@ -30,4 +30,8 @@ public interface MealHistoryService {
 
     @POST("history/meal/update")
     Call<Integer> update(@Body MealHistory mealHistory);
+
+
+    @POST("history/meal/delete")
+    Call<Integer> deleteMealHistory(@Query("historyIdx") int historyIdx);
 }

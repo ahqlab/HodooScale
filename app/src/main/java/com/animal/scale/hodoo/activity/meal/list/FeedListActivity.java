@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.meal.list;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
@@ -114,12 +115,12 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
             if (rer > mealHistory.getCalorie()) {
                 binding.seekBar.setMax((int) rer);
                 binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-                binding.rer2.setText("/"+String.valueOf(rer) + "kcal");
+                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
                 //initDataToSeekbar(rer);
             } else {
                 binding.seekBar.setMax((int) mealHistory.getCalorie());
                 binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-                binding.rer2.setText("/"+String.valueOf(rer) + "kcal");
+                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
                 //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
             binding.seekBar.setProgress((int) mealHistory.getCalorie());
@@ -127,7 +128,7 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         } else {
             binding.seekBar.setMax((int) rer);
             binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-            binding.rer2.setText("/"+String.valueOf(rer) + "kcal");
+            binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
             //initDataToSeekbar(rer);
             binding.seekBar.setProgress(0);
             binding.calorieIntake.setText("0");
@@ -138,10 +139,12 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
-        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)) ,  petAllInfos.getFactor()).getRER();
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         binding.seekBar.invalidate();
         presenter.getTodaySumCalorie();
     }
+
+
 
     @Override
     protected BaseActivity<FeedListActivity> getActivityClass() {
@@ -162,6 +165,23 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         adapter = new AdapterOfMealManager(this, d);
         binding.feedListview.setAdapter(adapter);
         binding.feedListview.setOnItemClickListener(onItemClickListener);
+        binding.feedListview.setOnItemLongClickListener(onItemLongClickListener);
+    }
+
+    private AdapterView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            deleteDlalog(adapter.getItem(i).getMealHistory().getHistoryIdx());
+            return true;
+        }
+    };
+
+    @Override
+    public void deleteResult(Integer result) {
+        if(result != 0){
+            presenter.getPetAllInfo();
+            presenter.getList(DateUtil.getCurrentDatetime());
+        }
     }
 
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
@@ -174,6 +194,20 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
             startActivity(intent);
         }
     };
+
+    public void deleteDlalog(final int historyIdx) {
+        final String[] values = new String[]{
+                getResources().getString(R.string.delete)
+        };
+        super.showBasicOneBtnPopup(null, null)
+                .setItems(values, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.deleteMealHistory(historyIdx);
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
 
     public void onClickFloatingBtn(View view) {
         Log.e(TAG, "onClickFloatingBtn");

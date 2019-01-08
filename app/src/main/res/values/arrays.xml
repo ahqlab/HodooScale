@@ -29,5 +29,29 @@
         <item>강함</item>
         <item>매우강함</item>
     </string-array>
+    <string-array name="disease">
+        <item>질병없음</item>
+        <item>당뇨</item>
+        <item>알러지</item>
+        <item>치매</item>
+        <item>관절염</item>
+        <item>파보 장염</item>
+        <item>비만</item>
+        <item>암</item>
+    </string-array>
+
+    <string-array name="country">
+        <item>대한민국</item>
+        <item>미국</item>
+        <item>일본</item>
+        <item>중국</item>
+    </string-array>
+
+    <string-array name="language">
+        <item>ko</item>
+        <item>en</item>
+        <item>ja</item>
+        <item>ch</item>
+    </string-array>
 
 </resources>
