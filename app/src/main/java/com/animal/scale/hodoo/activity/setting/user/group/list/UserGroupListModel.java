@@ -2,6 +2,8 @@ package com.animal.scale.hodoo.activity.setting.user.group.list;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.activity.user.invitation.confirm.InvitationConfirmModel;
+import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
@@ -34,5 +36,36 @@ public class UserGroupListModel extends CommonModel {
 
             }
         }.execute(call);
+    }
+    public void setInvitationState(int state, int toUserIdx, int fromUseridx, final UserGroupListModel.DomainCallBackListner<Integer> callback) {
+        Call<Integer> call = NetRetrofit.getInstance().getInvitationService().setInvitationType(state, toUserIdx, fromUseridx);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer result) {
+                    callback.doPostExecute(result);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
+    }
+    public void invitationApproval ( int toUserIdx, int fromUserIdx, final InvitationConfirmModel.DomainCallBackListner<Integer> callback ) {
+        Call<Integer> call = NetRetrofit.getInstance().getUserService().invitationApproval(toUserIdx, fromUserIdx);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer result) {
+                callback.doPostExecute(result);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
+    }
+    public void setNotificationData (  ) {
+
     }
 }

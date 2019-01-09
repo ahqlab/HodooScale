@@ -13,12 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 
 import java.util.regex.Pattern;
 
@@ -27,6 +29,10 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     protected final String TAG = "HJLEE";
     public SharedPrefManager mSharedPrefManager;
     private boolean badgeState = false;
+
+    public interface OnSubBtnClickListener {
+        void onClick( View v );
+    }
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
@@ -55,6 +61,20 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
             public void onClick(View v) {
                 finish();
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+            }
+        });
+    }
+    public void setSubBtn ( String text, final OnSubBtnClickListener clickListener ) {
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        Button subBtn = toolbar.findViewById(R.id.sub_btn);
+        subBtn.setVisibility(View.VISIBLE);
+        subBtn.setText(text);
+        subBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ( clickListener != null ) {
+                    clickListener.onClick(view);
+                }
             }
         });
     }
@@ -102,7 +122,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         super.onResume();
         setBadge();
         if ( badgeState )
-            getApplicationContext().registerReceiver(mMessageReceiver, new IntentFilter("unique_name"));
+            getApplicationContext().registerReceiver(mMessageReceiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
 
     }
 
@@ -129,21 +149,23 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         super.onDestroy();
     }
     public void setBadge () {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        if ( toolbar != null ) {
-            TextView settingBadge = toolbar.findViewById(R.id.setting_badge);
-            if ( settingBadge != null ) {
-                int count = mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
-                badgeState = true;
-                if ( count <= 0 ) {
-                    settingBadge.setVisibility(View.GONE);
-                } else {
-                    if ( settingBadge.getVisibility() == View.GONE )
-                        settingBadge.setVisibility(View.VISIBLE);
-                    settingBadge.setText(String.valueOf(Math.min(count, 99)));
+        if ( findViewById(R.id.my_toolbar) instanceof Toolbar ) {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+            if ( toolbar != null ) {
+                TextView settingBadge = toolbar.findViewById(R.id.setting_badge);
+                if ( settingBadge != null ) {
+                    int count = mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
+                    badgeState = true;
+                    if ( count <= 0 ) {
+                        settingBadge.setVisibility(View.GONE);
+                    } else {
+                        if ( settingBadge.getVisibility() == View.GONE )
+                            settingBadge.setVisibility(View.VISIBLE);
+                        settingBadge.setText(String.valueOf(Math.min(count, 99)));
+                    }
                 }
-            }
 
+            }
         }
     }
 }

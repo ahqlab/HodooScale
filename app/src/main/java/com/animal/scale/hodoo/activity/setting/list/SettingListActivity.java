@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.MyAccountActivity;
 import com.animal.scale.hodoo.activity.setting.device.list.DeviceListActivity;
@@ -19,6 +20,7 @@ import com.animal.scale.hodoo.adapter.AdapterOfSetting;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivitySettingListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.SettingMenu;
@@ -99,10 +101,21 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     }
 
     @Override
+    public void goLoginPage() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+
+        finishAffinity();
+        finish();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         presenter.getSttingListMenu();
-        registerReceiver(receiver, new IntentFilter("unique_name"));
+        registerReceiver(receiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
 
     }
 
@@ -110,5 +123,8 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+    }
+    public void logout ( View v ) {
+        presenter.logout();
     }
 }

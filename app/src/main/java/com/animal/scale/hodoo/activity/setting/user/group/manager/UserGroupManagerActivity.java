@@ -16,6 +16,7 @@ import com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity;
 import com.animal.scale.hodoo.activity.setting.user.group.list.UserGroupListActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfSetting;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityUserGroupManagerBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.SettingMenu;
@@ -99,7 +100,7 @@ public class UserGroupManagerActivity extends BaseActivity<UserGroupManagerActiv
     protected void onResume() {
         super.onResume();
         presenter.getBadgeCount( UserGroupPresenter.INIT_TYPE );
-        registerReceiver(receiver, new IntentFilter("unique_name"));
+        registerReceiver(receiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
     }
 
     @Override

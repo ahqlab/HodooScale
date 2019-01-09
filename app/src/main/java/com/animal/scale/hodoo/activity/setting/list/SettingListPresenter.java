@@ -23,4 +23,10 @@ public class SettingListPresenter implements SettingList.Presenter {
     public void getSttingListMenu() {
         settingListView.setListviewAdapter(settingListModel.getSettingList());
     }
+
+    @Override
+    public void logout() {
+        settingListModel.logout();
+        settingListView.goLoginPage();
+    }
 }

@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.setting.user.group.list;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.CommonNotificationData;
 import com.animal.scale.hodoo.domain.InvitationUser;
 
 import java.util.List;
@@ -11,11 +12,13 @@ import java.util.regex.Pattern;
 public class UserGroupPresenter implements UserGroupList.Presenter {
     private UserGroupList.View mView;
     private UserGroupListModel mModel;
+    private CommonNotificationData mNotiModel;
     private Context mContext;
     UserGroupPresenter (Context context, UserGroupList.View view) {
         mView = view;
         mContext = context;
         mModel = new UserGroupListModel();
+        mNotiModel = CommonNotificationData.getInstance(context);
         mModel.loadData(context);
     }
 
@@ -28,6 +31,46 @@ public class UserGroupPresenter implements UserGroupList.Presenter {
                     users.get(i).setConvertNickName( matches( users.get(i).getNickname() ) );
                 }
                 mView.setAdapterData(users);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
+
+    @Override
+    public void setInvitationState(final int state, final int toUserIdx, final int fromUseridx) {
+        mModel.setInvitationState(state, toUserIdx, fromUseridx, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer result) {
+                if ( result != null ) {
+                    if ( result > 0 ) {
+                        mNotiModel.removeInvitationData(toUserIdx, fromUseridx);
+                        if ( UserGroupListActivity.ACCEPT_TYPE == state ) {
+                            mModel.invitationApproval(toUserIdx, fromUseridx, new CommonModel.DomainCallBackListner<Integer>() {
+                                @Override
+                                public void doPostExecute(Integer result) {
+                                    if ( result > 0 ) {
+                                        getInvitationList();
+                                    }
+                                }
+
+                                @Override
+                                public void doPreExecute() {
+
+                                }
+                            });
+                        } else {
+                            getInvitationList();
+                        }
+
+                    } else {
+
+                    }
+                }
+
             }
 
             @Override

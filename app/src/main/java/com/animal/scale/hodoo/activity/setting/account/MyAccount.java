@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface MyAccount {
 
-    public static final int LOGOUT = 0;
-    public static final int CHANGE_USER_INFO = 1;
+    public static final int LOGOUT = -1;
+    public static final int CHANGE_USER_INFO = 0;
 
     interface View {
 

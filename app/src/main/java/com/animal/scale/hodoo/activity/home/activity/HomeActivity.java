@@ -280,4 +280,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter.loadCustomDropdownView();
         //Kcal 로리 표시
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.setNotiCount();
+    }
 }

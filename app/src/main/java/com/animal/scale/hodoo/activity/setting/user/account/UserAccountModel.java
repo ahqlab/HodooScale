@@ -47,6 +47,10 @@ public class UserAccountModel {
         data.add(0, info);
     }
 
+    public int getUserIdx() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+    }
+
     public interface asyncTaskListner {
         void doPostExecute(List<User> data);
         void doPreExecute();

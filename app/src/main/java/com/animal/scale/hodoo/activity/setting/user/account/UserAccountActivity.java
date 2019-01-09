@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.animal.scale.hodoo.R;
@@ -27,6 +29,8 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
 
     public static final int USER_REGIST = 0;
 
+    private boolean editState = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,15 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_management_user)));
         super.setToolbarColor();
+        super.setSubBtn("편집", new OnSubBtnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Button) v).setText(!editState ? "완료" : "편집");
+                editState = !editState;
+                adapter.setEditState(editState);
+                Log.e(TAG, "편집");
+            }
+        });
 
         presenter = new UserAccountPresenter(this);
         presenter.initUserData(getApplicationContext());
@@ -99,8 +112,8 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
     }
 
     @Override
-    public void setAdapter(List<User> data) {
-        adapter = new UserAccountGridAdapter(UserAccountActivity.this, data);
+    public void setAdapter(int idx, List<User> data) {
+        adapter = new UserAccountGridAdapter(UserAccountActivity.this, idx, data);
         binding.userGridView.setAdapter(adapter);
         binding.userGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

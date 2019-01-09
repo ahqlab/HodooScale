@@ -12,7 +12,7 @@ public interface UserAccountIn {
 
         void showPopup(String title, String message);
 
-        void setAdapter(List<User> data);
+        void setAdapter(int idx, List<User> data);
     }
 
     interface Presenter {

@@ -23,6 +23,8 @@ public class User implements Domain{
 
     private String nickname;
 
+    private String convertNickname;
+
     private String sex;
 
     private int country;

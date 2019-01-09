@@ -149,7 +149,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
     @Override
     public void sendBroad() {
-        Intent broadIntent = new Intent("unique_name");
+        Intent broadIntent = new Intent(HodooConstant.FCM_RECEIVER_NAME);
         broadIntent.putExtra("message", "test");
         getApplicationContext().sendBroadcast(broadIntent);
     }

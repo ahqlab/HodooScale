@@ -30,7 +30,7 @@ public class MyAccountModel {
 
     public List<SettingMenu> getSettingList() {
         final List<SettingMenu> settingMenus = new ArrayList<SettingMenu>();
-        settingMenus.add(new SettingMenu(context.getString(R.string.log_out)));
+//        settingMenus.add(new SettingMenu(context.getString(R.string.log_out)));
         settingMenus.add(new SettingMenu(context.getString(R.string.change_user_account_info)));
         return settingMenus;
     }

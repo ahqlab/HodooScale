@@ -10,5 +10,6 @@ public interface UserGroupList {
     }
     interface Presenter {
         void getInvitationList();
+        void setInvitationState( int state, int toUserIdx, int fromUseridx );
     }
 }
