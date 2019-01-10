@@ -34,7 +34,6 @@ public class UserGroupManagerActivity extends BaseActivity<UserGroupManagerActiv
         @Override
         public void onReceive(Context context, Intent intent) {
             String message = intent.getStringExtra("message");
-            Log.e(TAG, "messageeeeeeeeeeeeeeeeeeeeeeeeee : " + message);
             presenter.getBadgeCount(UserGroupPresenter.UPDATE_TYPE);
         }
     };

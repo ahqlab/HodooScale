@@ -35,44 +35,53 @@ public class FirebasePresenter implements FirebaseIn.Presenter {
         int type = 0;
         if ( notiTypeStr != null || !notiTypeStr.equals("") )
             type = Integer.parseInt( notiTypeStr );
-        int toUserIdx = Integer.parseInt(data.get("toUserIdx"));
-        int fromUserIdx = Integer.parseInt(data.get("fromUserIdx"));
 
-        Gson gson = new Gson();
+        switch (type) {
+            case HodooConstant.FIREBASE_NORMAL_TYPE :
 
-        List<InvitationUser> invitationUsers = new ArrayList<>();
 
-        if ( firebaseInfos != null ) {
-            switchStatement : switch ( type ) {
-                case HodooConstant.FIREBASE_INVITATION_TYPE :
-                    String invitationStr = firebaseInfos.get( String.valueOf(type) );
-                    invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
+                break;
+            case HodooConstant.FIREBASE_INVITATION_TYPE:
 
-                    for ( InvitationUser user : invitationUsers) {
-                        if ( user.getToUserIdx() == toUserIdx && user.getFromUserIdx() == fromUserIdx )
-                            break switchStatement;
+                int toUserIdx = Integer.parseInt(data.get("toUserIdx"));
+                int fromUserIdx = Integer.parseInt(data.get("fromUserIdx"));
+
+                Gson gson = new Gson();
+
+                List<InvitationUser> invitationUsers = new ArrayList<>();
+
+                if ( firebaseInfos != null ) {
+                    switchStatement : switch ( type ) {
+                        case HodooConstant.FIREBASE_INVITATION_TYPE :
+                            String invitationStr = firebaseInfos.get( String.valueOf(type) );
+                            invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
+
+                            for ( InvitationUser user : invitationUsers) {
+                                if ( user.getToUserIdx() == toUserIdx && user.getFromUserIdx() == fromUserIdx )
+                                    break switchStatement;
+                            }
+                            InvitationUser user = InvitationUser.builder()
+                                    .toUserIdx( toUserIdx )
+                                    .fromUserIdx( fromUserIdx )
+                                    .build();
+                            invitationUsers.add(user);
+                            firebaseInfos.put( String.valueOf(type), gson.toJson(invitationUsers) );
+                            mModel.setData( gson.toJson(firebaseInfos) );
+                            break;
                     }
+                } else {
+                    firebaseInfos = new HashMap<>();
+                    invitationUsers = new ArrayList<>();
                     InvitationUser user = InvitationUser.builder()
-                            .toUserIdx( toUserIdx )
-                            .fromUserIdx( fromUserIdx )
+                            .toUserIdx(toUserIdx)
+                            .fromUserIdx(fromUserIdx)
                             .build();
                     invitationUsers.add(user);
-                    firebaseInfos.put( String.valueOf(type), gson.toJson(invitationUsers) );
+
+                    firebaseInfos.put( String.valueOf(type), gson.toJson(invitationUsers));
                     mModel.setData( gson.toJson(firebaseInfos) );
-                    break;
-            }
-        } else {
-
-            firebaseInfos = new HashMap<>();
-            invitationUsers = new ArrayList<>();
-            InvitationUser user = InvitationUser.builder()
-                    .toUserIdx(toUserIdx)
-                    .fromUserIdx(fromUserIdx)
-                    .build();
-            invitationUsers.add(user);
-
-            firebaseInfos.put( String.valueOf(type), gson.toJson(invitationUsers));
-            mModel.setData( gson.toJson(firebaseInfos) );
+                }
+                break;
         }
 
         /* send noti (s) */
@@ -82,15 +91,26 @@ public class FirebasePresenter implements FirebaseIn.Presenter {
     }
 
     @Override
-    public void countingBadge() {
-        int count = 0;
-        Map<String, String> firebaseInfos = mModel.getFirebaseInfos();
-        if ( firebaseInfos != null ) {
-            List<InvitationUser> invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(firebaseInfos.get(String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE)), new TypeToken<List<InvitationUser>>(){}.getType());
-            if ( invitationUsers != null )
-                count += invitationUsers.size();
+    public void countingBadge( int type, int badgeCount ) {
+
+        switch (type) {
+            case HodooConstant.FIREBASE_NORMAL_TYPE :
+                badgeCount += 1;
+                break;
+            case HodooConstant.FIREBASE_INVITATION_TYPE:
+                int count = 0;
+                Map<String, String> firebaseInfos = mModel.getFirebaseInfos();
+                if ( firebaseInfos != null ) {
+                    List<InvitationUser> invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(firebaseInfos.get(String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE)), new TypeToken<List<InvitationUser>>(){}.getType());
+                    if ( invitationUsers != null )
+                        count += invitationUsers.size();
+                }
+                badgeCount += count;
+                break;
         }
-        mView.setBadge(count);
+
+
+        mView.setBadge(badgeCount);
 
     }
 

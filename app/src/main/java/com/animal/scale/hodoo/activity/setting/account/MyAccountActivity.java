@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.setting.account;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfMyAccountList;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.CommonListener;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityMyAccountBinding;
@@ -55,8 +57,21 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if(position == MyAccount.LOGOUT){
                     presenter.initUserData();
-                }else if(position == MyAccount.CHANGE_USER_INFO){
+                } else if(position == MyAccount.CHANGE_USER_INFO){
                     presenter.changePassword();
+                }  else if ( position == MyAccount.WITHDRAW ) {
+                    showPopup(getApplicationContext().getString(R.string.withdraw_subscript), new CommonListener.PopupClickListener() {
+                        @Override
+                        public void onPositiveClick(DialogInterface dialog, int which) {
+                            presenter.withdraw();
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void onNegativeClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
                 }
             }
         });
@@ -79,5 +94,29 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
+    }
+
+    @Override
+    public void showPopup( String message ) {
+        super.showBasicOneBtnPopup(getString(R.string.message), message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }
+                ).show();
+    }
+
+    @Override
+    public void showPopup(String message, final CommonListener.PopupClickListener clickListener) {
+        super.showBasicOneBtnPopup(getString(R.string.message), message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                clickListener.onPositiveClick(dialog, which);
+                            }
+                        }
+                ).show();
     }
 }

@@ -17,6 +17,7 @@ import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityUserGroupListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.InvitationUser;
+import com.animal.scale.hodoo.util.BadgeUtils;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
     private ActivityUserGroupListBinding binding;
     private AdapterOfUserGroup adapter;
     private List<InvitationUser> users;
-    private UserGroupPresenter presenter;
+    private UserGroupList.Presenter presenter;
 
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -53,6 +54,7 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
     protected void onResume() {
         super.onResume();
         presenter.getInvitationList();
+        presenter.getPushCount();
         registerReceiver(receiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
     }
 
@@ -81,6 +83,11 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
             adapter.setData(users);
         }
 
+    }
+
+    @Override
+    public void setPushCount(int count) {
+        BadgeUtils.setBadge(this, count);
     }
 
     @Override

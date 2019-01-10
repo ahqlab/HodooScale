@@ -3,7 +3,7 @@ package com.animal.scale.hodoo.activity.home.activity;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.CommonModel;
-import com.animal.scale.hodoo.common.CommonNotificationData;
+import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 
@@ -15,7 +15,7 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter{
 
     public HomeActivityModel model;
 
-    private CommonNotificationData notiModel;
+    private CommonNotificationModel notiModel;
 
 
     public HomeActivityPresenter(HomeActivityIn.View view){
@@ -26,7 +26,7 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter{
     @Override
     public void loadData(Context context) {
         model.loadData(context);
-        notiModel = CommonNotificationData.getInstance(context);
+        notiModel = CommonNotificationModel.getInstance(context);
     }
 
     @Override
@@ -61,6 +61,7 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter{
 
     @Override
     public void setNotiCount() {
+//        notiModel.getInvitationBadgeCount();
         model.getInvitationCount(new CommonModel.DomainListCallBackListner<InvitationUser>() {
             @Override
             public void doPostExecute(List<InvitationUser> result) {

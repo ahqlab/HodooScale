@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 
 import com.animal.scale.hodoo.R;
@@ -20,6 +21,11 @@ public class LoginPresenter implements Login.Presenter {
     Login.View loginView;
     LoginModel loginModel;
     Context context;
+
+    public interface OnDialogClickListener {
+        void onPositiveClick(DialogInterface dialog, int which );
+        void onNegativeClick(DialogInterface dialog, int which);
+    }
 
     public LoginPresenter(Login.View loginView) {
         this.loginView = loginView;
@@ -42,6 +48,8 @@ public class LoginPresenter implements Login.Presenter {
                         loginView.showPopup(context.getString(R.string.not_found_email));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.ID_PASSWORD_DO_NOT_MATCH)) {
                         loginView.showPopup(context.getString(R.string.id_password_do_not_match));
+                    } else if ( resultMessageGroup.getResultMessage().equals(ResultMessage.WITHDRAW_USER) ) {
+                        loginView.showPopup("탈퇴한 회원입니다.");
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
                         loginView.showPopup(context.getString(R.string.failed));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
@@ -49,7 +57,18 @@ public class LoginPresenter implements Login.Presenter {
                         Gson gson = new Gson();
                         User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
                         if ( user.getUserCode() <= 0 ) {
-                            loginView.showPopup("이메일 인증을 진행해주세요.");
+                            loginView.showPopup("이메일 인증을 진행해주세요.", new OnDialogClickListener() {
+                                @Override
+                                public void onPositiveClick(DialogInterface dialog, int which) {
+                                    loginView.goEmailCertified();
+                                    dialog.dismiss();
+                                }
+
+                                @Override
+                                public void onNegativeClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
                             return;
                         }
                         saveUserSharedValue(user);
@@ -99,10 +118,10 @@ public class LoginPresenter implements Login.Presenter {
                                     }else if(pets.get(0).getWeight() == 0){
                                         loginView.goWeightRegistActivity(pets.get(0).getPetIdx());
                                     }else{
-                                        loginView.goHomeActivity();
+                                        loginView.setAutoLoginState();
                                     }
                                 }else{
-                                    loginView.goHomeActivity();
+                                    loginView.setAutoLoginState();
                                 }
                             }else{
                                 //PET 등록페이지 이동
@@ -144,5 +163,12 @@ public class LoginPresenter implements Login.Presenter {
 
 
         checkRegistrationStatus();
+    }
+
+    @Override
+    public void setAutoLogin(boolean state) {
+        if ( state )
+            loginModel.saveAutoLogin();
+        loginView.goHomeActivity();
     }
 }

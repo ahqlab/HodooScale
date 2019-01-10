@@ -13,4 +13,6 @@ public class UserGroupMapping {
 
     private String createDate;
 
+    private int accessType;
+
 }

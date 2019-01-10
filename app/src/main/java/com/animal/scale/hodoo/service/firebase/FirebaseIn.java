@@ -16,7 +16,7 @@ public interface FirebaseIn {
     interface Presenter {
         void initDate ( Context context );
         void getData ( Map<String, String> data );
-        void countingBadge ();
+        void countingBadge ( int type, int badgeCount );
         void saveBadgeCount ( int count );
     }
 }

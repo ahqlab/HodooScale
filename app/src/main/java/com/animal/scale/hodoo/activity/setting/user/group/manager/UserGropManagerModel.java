@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonModel;
-import com.animal.scale.hodoo.common.CommonNotificationData;
+import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.domain.SettingMenu;
 
@@ -13,17 +13,17 @@ import java.util.List;
 
 public class UserGropManagerModel extends CommonModel {
     private SharedPrefManager mSharedPrefManager;
-    private CommonNotificationData notificationData;
+    private CommonNotificationModel notificationData;
     private Context context;
     @Override
     public void loadData(Context context) {
         super.loadData(context);
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
-        notificationData = CommonNotificationData.getInstance(context);
+        notificationData = CommonNotificationModel.getInstance(context);
     }
     public int getBadgeCount () {
-        return notificationData.getBadgeCount();
+        return notificationData.getInvitationBadgeCount();
     }
     public List<SettingMenu> getSettingList() {
         final List<SettingMenu> settingMenus = new ArrayList<SettingMenu>();

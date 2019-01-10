@@ -10,7 +10,7 @@ public interface SettingList {
 
     interface View {
 
-        public void setListviewAdapter(List<SettingMenu> menus);
+        public void setListviewAdapter(int badgeCount, List<SettingMenu> menus);
         void goLoginPage();
     }
 

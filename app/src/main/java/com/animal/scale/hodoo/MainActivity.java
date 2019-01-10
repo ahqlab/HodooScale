@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFirstFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeHomeFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeSecondFragment;
@@ -27,6 +28,7 @@ import com.animal.scale.hodoo.activity.user.signup.SignUpActivity;
 import com.animal.scale.hodoo.activity.user.signup.SignUpIn;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.WelcomeViewPager;
+import com.animal.scale.hodoo.util.BadgeUtils;
 import com.animal.scale.hodoo.util.CheckConnect;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +40,7 @@ import butterknife.OnClick;
 import lombok.NonNull;
 
 public class
-MainActivity extends AppCompatActivity {
+MainActivity extends AppCompatActivity implements Main.View {
 
     private ProgressBar bar;
 
@@ -56,11 +58,16 @@ MainActivity extends AppCompatActivity {
 
     private boolean logoutState = false;
 
+    private Main.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         logoutState = getIntent().getBooleanExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, false);
+        presenter = new MainPresenter(this);
+        presenter.initDate(this);
+
         FirebaseInstanceId.getInstance().getToken();
         if (FirebaseInstanceId.getInstance().getToken() != null) {
             Log.e("HJLEE", "token = " + FirebaseInstanceId.getInstance().getToken());
@@ -161,5 +168,19 @@ MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.getData();
+    }
+
+    @Override
+    public void goHomeActivity() {
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        finish();
     }
 }

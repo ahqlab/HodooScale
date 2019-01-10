@@ -10,6 +10,8 @@ public interface Login {
 
         public void showPopup(String message);
 
+        public void showPopup(String message, LoginPresenter.OnDialogClickListener callback);
+
         public void setProgress(Boolean play);
 
         public void goDeviceRegistActivity();
@@ -26,6 +28,10 @@ public interface Login {
 
         public void goTermsOfServiceActivity();
 
+        void setAutoLoginState();
+
+        void goEmailCertified();
+
     }
 
     interface Presenter {
@@ -41,5 +47,7 @@ public interface Login {
         public void checkRegistrationStatus();
 
         void saveFCMToken(User user);
+
+        void setAutoLogin( boolean state );
     }
 }

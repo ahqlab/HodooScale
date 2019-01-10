@@ -38,8 +38,12 @@ public class UserAccountGridAdapter extends BaseAdapter{
 
     private int mIdx;
     private boolean editState = false;
+    private EditBtnClickListener clickListener;
 
     private ImageView[] removeBtns;
+    public interface EditBtnClickListener {
+        void onClick(User user);
+    }
 
     public UserAccountGridAdapter(Activity activity, int idx, List<User> data) {
         this.activity = activity;
@@ -47,14 +51,7 @@ public class UserAccountGridAdapter extends BaseAdapter{
         this.data = data;
         removeBtns = new ImageView[data.size()];
         mIdx = idx;
-        for (int i = 0; i < data.size(); i++) {
-            if ( i == 0 ) {
-                data.get(i).setConvertNickname( data.get(i).getNickname() );
-                data.get(i).setNickname("");
-                continue;
-            }
-            data.get(i).setConvertNickname( matches( data.get(i).getNickname() ) );
-        }
+        setConvertNicName(this.data);
     }
 
     @Override
@@ -73,7 +70,7 @@ public class UserAccountGridAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
+    public View getView(final int position, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
             convertView = LayoutInflater.from(activity).inflate(R.layout.user_account_grid, null);
             binding = DataBindingUtil.bind(convertView);
@@ -116,11 +113,11 @@ public class UserAccountGridAdapter extends BaseAdapter{
             binding.removeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.e(TAG, "icon click");
+                    if ( clickListener != null )
+                        clickListener.onClick(data.get(position));
                 }
             });
             binding.setDomain(data.get(position));
-
         }
         return binding.getRoot();
     }
@@ -139,6 +136,25 @@ public class UserAccountGridAdapter extends BaseAdapter{
     public void setEditState( boolean state ) {
         editState = state;
         notifyDataSetChanged();
+    }
+    public void setClickListener ( EditBtnClickListener clickListener ) {
+        this.clickListener = clickListener;
+    }
+    public void setData ( List<User> newData ) {
+        data = newData;
+        setConvertNicName(data);
+        notifyDataSetChanged();
+    }
+    public void setConvertNicName( List<User> data ) {
+        for (int i = 0; i < data.size(); i++) {
+            if ( i == 0 ) {
+                data.get(i).setConvertNickname( data.get(i).getNickname() );
+                data.get(i).setNickname("");
+                continue;
+            }
+            data.get(i).setConvertNickname( matches( data.get(i).getNickname() ) );
+        }
+        this.data = data;
     }
 
 }

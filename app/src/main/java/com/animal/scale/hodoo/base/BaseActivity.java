@@ -18,10 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
+import com.animal.scale.hodoo.domain.InvitationUser;
+import com.animal.scale.hodoo.util.BadgeUtils;
+import com.animal.scale.hodoo.util.VIewUtil;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public abstract class BaseActivity<D extends Activity> extends AppCompatActivity {
@@ -120,9 +128,22 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     protected void onResume() {
         Log.v(TAG, "onResume");
         super.onResume();
+
+        CommonNotificationModel commonModel = CommonNotificationModel.getInstance(this);
+
+        int count = Math.abs( (commonModel.getBadgeCount() - commonModel.getInvitationBadgeCount()) - commonModel.getBadgeCount() );
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
+        if ( count > 0 ) {
+            BadgeUtils.setBadge(this, Math.min(count, 99));
+        } else {
+            BadgeUtils.clearBadge(this);
+        }
+
         setBadge();
         if ( badgeState )
             getApplicationContext().registerReceiver(mMessageReceiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
+
+
 
     }
 
@@ -154,8 +175,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
             if ( toolbar != null ) {
                 TextView settingBadge = toolbar.findViewById(R.id.setting_badge);
                 if ( settingBadge != null ) {
-                    int count = mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
-                    badgeState = true;
+                    int count = getInvitationBadgeCount();
                     if ( count <= 0 ) {
                         settingBadge.setVisibility(View.GONE);
                     } else {
@@ -167,5 +187,16 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
 
             }
         }
+    }
+    public int getInvitationBadgeCount() {
+        Map<String, String> firebaseInfos = (Map<String, String>) VIewUtil.fromJson( mSharedPrefManager.getStringExtra(SharedPrefVariable.FIREBASE_NOTI), new TypeToken< Map<String,String>>(){}.getType());
+        List<InvitationUser> invitationUsers = new ArrayList<>();
+        if ( firebaseInfos != null ) {
+            String invitationStr = firebaseInfos.get( String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE) );
+            if ( invitationStr != null || !invitationStr.equals("") )
+                invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
+
+        }
+        return invitationUsers.size();
     }
 }

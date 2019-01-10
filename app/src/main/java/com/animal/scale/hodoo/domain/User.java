@@ -35,6 +35,8 @@ public class User implements Domain{
     //joinColumn
     private String groupCode;
 
+    private int accessType;
+
     private int userCode;
 
 }

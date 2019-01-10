@@ -3,7 +3,7 @@ package com.animal.scale.hodoo.activity.setting.user.group.list;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.CommonModel;
-import com.animal.scale.hodoo.common.CommonNotificationData;
+import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.domain.InvitationUser;
 
 import java.util.List;
@@ -12,13 +12,13 @@ import java.util.regex.Pattern;
 public class UserGroupPresenter implements UserGroupList.Presenter {
     private UserGroupList.View mView;
     private UserGroupListModel mModel;
-    private CommonNotificationData mNotiModel;
+    private CommonNotificationModel mNotiModel;
     private Context mContext;
     UserGroupPresenter (Context context, UserGroupList.View view) {
         mView = view;
         mContext = context;
         mModel = new UserGroupListModel();
-        mNotiModel = CommonNotificationData.getInstance(context);
+        mNotiModel = CommonNotificationModel.getInstance(context);
         mModel.loadData(context);
     }
 
@@ -78,6 +78,11 @@ public class UserGroupPresenter implements UserGroupList.Presenter {
 
             }
         });
+    }
+
+    @Override
+    public void getPushCount() {
+        mView.setPushCount( Math.abs(mNotiModel.getBadgeCount() - mNotiModel.getInvitationBadgeCount()) );
     }
 
     private String matches ( String name ) {

@@ -10,7 +10,10 @@ public class SharedPrefVariable {
     public static final String TODAY_AVERAGE_WEIGHT = "TODAY_AVERAGE_WEIGHT";
     public static final String LOGIN_PAGE_INTENT = "LOGIN_PAGE_INTENT";
     public static final String USER_PASSWORD = "USER_PASSWORD";
+    public static final String USER_GROUP_ACCESS_TYPE = "USER_GROUP_ACCESS_TYPE";
+
     public static final String BADGE_COUNT = "BADGE_COUNT";
+    public static final String AUTO_LOGIN = "AUTO_LOGIN";
 
     /* notification (s) */
     public static final String FIREBASE_NOTI = "FIREBASE_NOTI";

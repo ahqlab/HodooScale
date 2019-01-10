@@ -13,17 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CommonNotificationData {
+public class CommonNotificationModel {
     private SharedPrefManager mSharedPrefManager;
     private Context mContext;
-    CommonNotificationData ( Context context ) {
+    CommonNotificationModel(Context context ) {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
         mContext = context;
     }
-    public static CommonNotificationData getInstance ( Context context ) {
-        return new CommonNotificationData(context);
+    public static CommonNotificationModel getInstance (Context context ) {
+        return new CommonNotificationModel(context);
     }
     public int getBadgeCount () {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
+    }
+    public int getInvitationBadgeCount() {
         Map<String, String> firebaseInfos = (Map<String, String>) VIewUtil.fromJson( mSharedPrefManager.getStringExtra(SharedPrefVariable.FIREBASE_NOTI), new TypeToken< Map<String,String>>(){}.getType());
         List<InvitationUser> invitationUsers = new ArrayList<>();
         if ( firebaseInfos != null ) {
@@ -50,8 +53,8 @@ public class CommonNotificationData {
             }
             firebaseInfos.put(String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE), gson.toJson(invitationUsers));
             mSharedPrefManager.putStringExtra(SharedPrefVariable.FIREBASE_NOTI, gson.toJson(firebaseInfos));
-            mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, getBadgeCount());
-            BadgeUtils.setBadge(mContext, getBadgeCount());
+            mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, getInvitationBadgeCount());
+            BadgeUtils.setBadge(mContext, getInvitationBadgeCount());
         }
     }
     public List<InvitationUser> getSavedinvitationUsers () {

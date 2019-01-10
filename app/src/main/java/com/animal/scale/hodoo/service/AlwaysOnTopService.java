@@ -24,6 +24,10 @@ import android.widget.TextView;
 
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.constant.HodooConstant;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -49,6 +53,8 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
     static final int CONNECT = 0;
     static final int SEND_VALUE = 2;
 
+    int notiType = 0;
+
     @Override
     public IBinder onBind(Intent arg0) { return null; }
 
@@ -68,6 +74,18 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
 
         host = intent.getStringExtra("host");
         data = intent.getStringExtra("data");
+
+        try {
+            JSONObject obj = new JSONObject(data);
+            String notiTypeStr = obj.getString("notiType");
+
+            if ( notiTypeStr != null || !notiTypeStr.equals("") )
+                notiType = Integer.parseInt( notiTypeStr );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
         Button cancelBtn = alert.findViewById(R.id.cancel_btn);
         Button confirmBtn = alert.findViewById(R.id.confirm_btn);
@@ -113,13 +131,24 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.confirm_btn :
-                String url = "selphone://" + host;
+                Intent intent = null;
+                switch (notiType) {
+                    case HodooConstant.FIREBASE_NORMAL_TYPE :
+                        intent = new Intent(this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        break;
+                    case HodooConstant.FIREBASE_INVITATION_TYPE :
+                        String url = "selphone://" + host;
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                intent.putExtra("toUserEmail", toUserEmail);
-                intent.putExtra("data", data);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        intent.putExtra("toUserEmail", toUserEmail);
+                        intent.putExtra("data", data);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        break;
+                }
+
                 break;
         }
         stopSelf();

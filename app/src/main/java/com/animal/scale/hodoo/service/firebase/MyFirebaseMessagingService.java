@@ -19,6 +19,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -60,22 +61,66 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
     public void sendNotification( Map<String, String> data) {
 
-        String title = data.get("title");
-        String messagae = data.get("content");
-        String host = data.get("host");
-        int type = NotificationCompat.PRIORITY_MAX;
+        /* variable (s) */
 
+        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
         KeyguardManager km = (KeyguardManager) getApplicationContext().getSystemService(Context.KEYGUARD_SERVICE);
 
+        Intent intent = null;
+        int type = NotificationCompat.PRIORITY_MAX, notiType = 0, badgeCount = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT), pushIdx = 0, badgeType = 0;
+
+        String notiTypeStr = data.get("notiType"), title = data.get("title"), message = data.get("content"), host = data.get("host");
+        /* variable (e) */
+
+        if ( notiTypeStr != null || !notiTypeStr.equals("") )
+            notiType = Integer.parseInt( notiTypeStr );
+
+        switch (notiType) {
+            case HodooConstant.FIREBASE_NORMAL_TYPE :
+                Random random = new Random();
+                pushIdx = random.nextInt();
+                intent = new Intent(this, MainActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("message", message);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                badgeType = HodooConstant.FIREBASE_NORMAL_TYPE;
+                break;
+            case HodooConstant.FIREBASE_INVITATION_TYPE :
+
+                Gson gson = new Gson();
+                int idx = Integer.parseInt(data.get("toUserIdx"));
+                int fromUserIdx = Integer.parseInt(data.get("fromUserIdx"));
+                String url = "selphone://" + host;
+
+                pushIdx = idx;
+
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                intent.putExtra("title", title);
+                intent.putExtra("message", message);
+                intent.putExtra("host", host);
+                intent.putExtra("data", gson.toJson(data));
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                message += "님의 초대입니다.";
+                badgeType = HodooConstant.FIREBASE_INVITATION_TYPE;
+                break;
+        }
+
+        /* device wake (s) */
         if(km.inKeyguardRestrictedInputMode()){
             PushWakeLock.acquireCpuWakeLock(getApplicationContext());
             PushWakeLock.releaseCpuLock();
         }
+        /* device wake (e) */
+
+        /* application is background (s) */
         if ( isAppIsInBackground(getApplicationContext()) && !km.inKeyguardRestrictedInputMode() ) {
-            Intent intent = new Intent(getApplicationContext(), AlwaysOnTopService.class);
+            intent = new Intent(getApplicationContext(), AlwaysOnTopService.class);
             intent.putExtra("title", title);
-            intent.putExtra("message", messagae);
-            intent.putExtra("host", host);
+            intent.putExtra("message", message);
+            if ( host != null && !host.equals("") )
+                intent.putExtra("host", host);
+
             Gson gson = new Gson();
             intent.putExtra("data", gson.toJson(data));
             if ( !isServiceRunning() ) {
@@ -86,59 +131,28 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
             }
             type = NotificationCompat.PRIORITY_LOW;
         }
+        /* application is background (e) */
 
-        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
-        Gson gson = new Gson();
-
-        int badge_count = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
-        badge_count += 1;
-
-        String notiTypeStr = data.get("notiType");
-        int notiType = 0;
-        if ( notiTypeStr != null || !notiTypeStr.equals("") )
-            notiType = Integer.parseInt( notiTypeStr );
-        int idx = Integer.parseInt(data.get("toUserIdx"));
-        int fromUserIdx = Integer.parseInt(data.get("fromUserIdx"));
-
-
-        String message = data.get("content");
-        String url = "selphone://" + host;
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        intent.putExtra("title", title);
-        intent.putExtra("message", message);
-        intent.putExtra("host", host);
-        intent.putExtra("data", gson.toJson(data));
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Random random = new Random();
-        count = random.nextInt();
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), idx /* Request code */, intent,
+        /* start push (s) */
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), pushIdx /* Request code */, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-
-
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
                 .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.transparent_logo))
                 .setSmallIcon(R.drawable.transparent_white_logo)
                 .setColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed))
                 .setContentTitle(title)
-                .setContentText(message  + "님의 초대입니다.")
+                .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setPriority(type)
                 .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
                 .setContentIntent(pendingIntent);
-
-        //.addAction(R.drawable.change_user_info_user_icon, context.getString(R.string.confirm), pendingIntent)
-
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(pushIdx /* ID of notification */, notificationBuilder.build());
 
-        notificationManager.notify(idx /* ID of notification */, notificationBuilder.build());
-
-        presenter.countingBadge();
-
-
+        presenter.countingBadge( badgeType, badgeCount );
+        /* start push (e) */
     }
 
     @Override

@@ -73,11 +73,11 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     }
 
     @Override
-    public void setListviewAdapter(List<SettingMenu> menus) {
+    public void setListviewAdapter(int badgeCount, List<SettingMenu> menus) {
         this.menus = menus;
         for (int i = 0; i < menus.size(); i++) {
             if ( i == 5 ) {
-                menus.get(i).setBadgeCount(sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT));
+                menus.get(i).setBadgeCount(badgeCount);
             } else {
                 menus.get(i).setBadgeCount(0);
             }

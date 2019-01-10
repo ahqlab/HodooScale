@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.user.invitation.confirm;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.activity.setting.user.group.list.UserGroupListModel;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
@@ -28,6 +29,20 @@ public class InvitationConfirmModel extends CommonModel {
     public void loadData(Context context) {
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
+    }
+    public void setInvitationState(int state, int toUserIdx, int fromUseridx, final UserGroupListModel.DomainCallBackListner<Integer> callback) {
+        Call<Integer> call = NetRetrofit.getInstance().getInvitationService().setInvitationType(state, toUserIdx, fromUseridx);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer result) {
+                callback.doPostExecute(result);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
     }
     public void invitationApproval ( int toUserIdx, int fromUserIdx, final InvitationConfirmModel.DomainCallBackListner<Integer> callback ) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().invitationApproval(toUserIdx, fromUserIdx);
