@@ -3,8 +3,6 @@ package com.animal.scale.hodoo.activity.user.reset.password.send;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
-import com.animal.scale.hodoo.domain.FinPasswordResponse;
-import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
