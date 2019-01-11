@@ -69,8 +69,12 @@
     <string name="ea">개</string>
     <string name="food">음식</string>
     <string name="edit_success">정보를 변경하였습니다.</string>
+
     <string name="log_out">로그아웃</string>
     <string name="change_user_account_info">사용자 계정 정보</string>
+    <string name="withdraw">회원탈퇴</string>
+    <string name="withdraw_subscript">탈퇴하시면 HODOO 서비스를 이용하실 수 없습니다.\n정말 탈퇴하시겠습니까?</string>
+
     <string name="excess">초과</string>
     <string name="recommend">권장</string>
 

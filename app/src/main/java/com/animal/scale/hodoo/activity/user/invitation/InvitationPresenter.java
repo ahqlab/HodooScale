@@ -36,6 +36,13 @@ public class InvitationPresenter implements Invitation.Presenter {
 //                            mView.goLoginPage();
                         }
                     });
+                } else if (result == InvitationActivity.EXISTENCE_USER) {
+                    mView.showPopup("사용자 초대 에러",  "이미 초대가 완료되었습니다.\n로그인창으로 이동합니다.", new InvitationActivity.CustomDialogCallback() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            mView.goLoginPage();
+                        }
+                    });
                 } else if ( result == InvitationActivity.NOT_TO_USER ) {
                     mView.showPopup("사용자 초대 에러", "초대하실 회원이 없습니다.", null);
                 } else if ( result == InvitationActivity.NOT_TO_DEVICE ) {

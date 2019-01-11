@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivitySignUpBinding;
 import com.animal.scale.hodoo.domain.Country;
@@ -282,6 +283,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
     @Override
     public void goNextPage() {
         Intent intent = new Intent(getApplicationContext(), SignUpFinishActivity.class);
+        intent.putExtra(SharedPrefVariable.USER_EMAIL, binding.email.editText.getText().toString());
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();

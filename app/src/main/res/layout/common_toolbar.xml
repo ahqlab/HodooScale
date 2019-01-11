@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -36,6 +36,20 @@
             android:layout_gravity="right"
             android:indeterminateTint="#795548"
             android:indeterminateTintMode="src_in" />-->
+        <Button
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:visibility="gone"
+            android:stateListAnimator="@null"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:background="@color/white"
+            android:layout_gravity="right"
+            android:id="@+id/sub_btn"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/mainRed"
+            android:text="" />
 
     </android.support.v7.widget.Toolbar>
 </layout>

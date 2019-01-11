@@ -26,6 +26,7 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
     public static int NOT_TO_USER = -1;
     public static int ERROR = 0;
     public static int SUCESS = 1;
+    public static int EXISTENCE_USER = 2;
 
     private ActivityInvitationBinding binding;
     private Invitation.Presenter presenter;

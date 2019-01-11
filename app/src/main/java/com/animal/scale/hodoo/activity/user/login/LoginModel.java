@@ -7,6 +7,7 @@ import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Feed;
@@ -67,6 +68,7 @@ public class LoginModel extends CommonModel {
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_EMAIL, user.getEmail());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.GROUP_CODE, user.getGroupCode());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_PASSWORD, user.getPassword());
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_GROUP_ACCESS_TYPE, user.getAccessType());
     }
 
     public void confirmDeviceRegistration(final DeviceRegistrationListener deviceRegistrationListener) {
@@ -109,6 +111,10 @@ public class LoginModel extends CommonModel {
 
             }
         }.execute(call);
+    }
+
+    public void saveAutoLogin() {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, HodooConstant.AUTO_LOGIN_SUCCESS);
     }
 
 

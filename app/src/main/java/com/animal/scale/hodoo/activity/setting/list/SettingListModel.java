@@ -32,4 +32,8 @@ public class SettingListModel extends CommonModel {
         settingMenus.add(new SettingMenu(R.drawable.setting_pet_icon_50_50, context.getString(R.string.istyle_setting_menu_management_pet)));
         return settingMenus;
     }
+
+    public void logout() {
+        sharedPrefManager.removeAllPreferences();
+    }
 }

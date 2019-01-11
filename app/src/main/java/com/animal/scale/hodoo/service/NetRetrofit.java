@@ -34,6 +34,7 @@ public class NetRetrofit {
     PetService getPetService = retrofit.create(PetService.class);
     CountryService countryService = retrofit.create(CountryService.class);
     InvitationService invitationService = retrofit.create(InvitationService.class);
+    FcmService fcmService = retrofit.create(FcmService.class);
 
     FeedService feedService = retrofit.create(FeedService.class);
 
@@ -73,6 +74,10 @@ public class NetRetrofit {
 
     public CountryService getCountryService() {
         return countryService;
+    }
+
+    public FcmService getFcmService() {
+        return fcmService;
     }
 }
 

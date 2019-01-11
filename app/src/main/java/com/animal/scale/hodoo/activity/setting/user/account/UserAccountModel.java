@@ -3,7 +3,9 @@ package com.animal.scale.hodoo.activity.setting.user.account;
 import android.content.Context;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.User;
@@ -45,6 +47,28 @@ public class UserAccountModel {
         info.setNickname("+");
         info.setSex(context.getString(R.string.istyle_new_group_user));
         data.add(0, info);
+    }
+
+    public int getUserIdx() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+    }
+    public void withdrawGroup (int from, final CommonModel.DomainCallBackListner<Integer> callback) {
+        int to = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+        Call<Integer> call = NetRetrofit.getInstance().getUserService().withdrawGroup(to, from);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer result) {
+                callback.doPostExecute(result);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
+    }
+    public int getAccessType() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_GROUP_ACCESS_TYPE);
     }
 
     public interface asyncTaskListner {

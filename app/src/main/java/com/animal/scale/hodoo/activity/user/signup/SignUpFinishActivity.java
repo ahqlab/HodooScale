@@ -9,10 +9,12 @@ import android.view.View;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivitySignUpFinishBinding;
 
 public class SignUpFinishActivity extends BaseActivity<SignUpFinishActivity> {
     private ActivitySignUpFinishBinding binding;
+    private String userEmail;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,5 +32,11 @@ public class SignUpFinishActivity extends BaseActivity<SignUpFinishActivity> {
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userEmail = getIntent().getStringExtra(SharedPrefVariable.USER_EMAIL);
     }
 }
