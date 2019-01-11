@@ -28,7 +28,7 @@ public class HomeActivityModel extends CommonModel{
     public void loadData(Context context){
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
-    };
+    }
 
     public void setSpinner(final DomainListCallBackListner<PetAllInfos> domainListCallBackListner) {
         Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().aboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
@@ -71,5 +71,8 @@ public class HomeActivityModel extends CommonModel{
 
             }
         }.execute(call);
+    }
+    public void setNotiCount ( int count ) {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
     }
 }

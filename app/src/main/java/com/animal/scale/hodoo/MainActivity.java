@@ -3,20 +3,14 @@ package com.animal.scale.hodoo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PixelFormat;
-import android.os.AsyncTask;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFirstFragment;
@@ -24,20 +18,14 @@ import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeHomeFragment
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeSecondFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragment;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
-import com.animal.scale.hodoo.activity.user.signup.SignUpActivity;
-import com.animal.scale.hodoo.activity.user.signup.SignUpIn;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.WelcomeViewPager;
-import com.animal.scale.hodoo.util.BadgeUtils;
-import com.animal.scale.hodoo.util.CheckConnect;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import lombok.NonNull;
+import java.security.Permission;
+
+import static com.animal.scale.hodoo.constant.HodooConstant.ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE;
 
 public class
 MainActivity extends AppCompatActivity implements Main.View {
@@ -76,6 +64,7 @@ MainActivity extends AppCompatActivity implements Main.View {
         }
 //        ButterKnife.bind(this);
         mSlideView = findViewById(R.id.slide_view);
+
 //        bar = (ProgressBar) findViewById(R.id.progress_loader);
 //        bar.setVisibility(View.GONE);
 //        if (!isOnline()) {
@@ -163,18 +152,17 @@ MainActivity extends AppCompatActivity implements Main.View {
         if (!isCreated) {
             mSlideView.setFragments(getSupportFragmentManager(), WelcomeHomeFragment.newInstance(), WelcomeFirstFragment.newInstance(), WelcomeSecondFragment.newInstance(), WelcomeThirdFragment.newInstance());
             isCreated = true;
-            if ( logoutState ) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            }
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.getData();
+
+        systemAlertPermission();
     }
+
+
 
     @Override
     public void goHomeActivity() {
@@ -182,5 +170,49 @@ MainActivity extends AppCompatActivity implements Main.View {
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
+    }
+
+    public void systemAlertPermission () {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                AlertDialog builder = new AlertDialog.Builder(this)
+                        .setTitle("권한 확인")
+                        .setMessage("해당 권한이 있어야 알림을 받아보실 수 있습니다.\n권한 : SystemAlert")
+                        .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                        Uri.parse("package:" + getPackageName()));
+                                startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
+                            }
+                        }).setNegativeButton(R.string.cancle, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                presenter.getData();
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .setCancelable(false)
+                        .create();
+                builder.setCanceledOnTouchOutside(false);
+                builder.show();
+            }
+        }
+    }
+
+    public void checkAutoLogin() {
+        if ( logoutState ) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (Settings.canDrawOverlays(this)) {
+            presenter.getData();
+        }
     }
 }

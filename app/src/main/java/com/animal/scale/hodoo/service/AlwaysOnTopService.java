@@ -1,17 +1,12 @@
 package com.animal.scale.hodoo.service;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.net.Uri;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.util.TypedValue;
@@ -29,8 +24,6 @@ import com.animal.scale.hodoo.constant.HodooConstant;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
 public class AlwaysOnTopService extends Service implements View.OnClickListener {
     private String TAG = AlwaysOnTopService.class.getSimpleName();
 
@@ -41,7 +34,7 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
     private String title;
     private String msg;
     private String host;
-    private String toUserEmail = "";
+    private String message = "";
     private String data = "";
     
     private View alert;
@@ -93,10 +86,10 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
         cancelBtn.setOnClickListener(this);
         confirmBtn.setOnClickListener(this);
 
-        toUserEmail = intent.getStringExtra("message");
+        message = intent.getStringExtra("message");
 
         title.setText( intent.getStringExtra("title") );
-        content.setText( toUserEmail + "님의 초대입니다." );
+        content.setText( message );
 
         mPopupView = new TextView(this);                                         //뷰 생성
         mPopupView.setText( intent.getStringExtra("title") );
@@ -142,7 +135,7 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
                         String url = "selphone://" + host;
 
                         intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                        intent.putExtra("toUserEmail", toUserEmail);
+                        intent.putExtra("message", message);
                         intent.putExtra("data", data);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

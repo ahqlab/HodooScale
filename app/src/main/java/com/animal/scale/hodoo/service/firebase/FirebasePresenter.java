@@ -92,25 +92,7 @@ public class FirebasePresenter implements FirebaseIn.Presenter {
 
     @Override
     public void countingBadge( int type, int badgeCount ) {
-
-        switch (type) {
-            case HodooConstant.FIREBASE_NORMAL_TYPE :
-                badgeCount += 1;
-                break;
-            case HodooConstant.FIREBASE_INVITATION_TYPE:
-                int count = 0;
-                Map<String, String> firebaseInfos = mModel.getFirebaseInfos();
-                if ( firebaseInfos != null ) {
-                    List<InvitationUser> invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(firebaseInfos.get(String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE)), new TypeToken<List<InvitationUser>>(){}.getType());
-                    if ( invitationUsers != null )
-                        count += invitationUsers.size();
-                }
-                badgeCount += count;
-                break;
-        }
-
-
-        mView.setBadge(badgeCount);
+        mView.setBadge(badgeCount + 1);
 
     }
 
