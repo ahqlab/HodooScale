@@ -368,5 +368,6 @@
 
 
     <string name="forgot_password_sub_scription">이메일로 임시비밀번호를 발송해드립니다.</string>
+    <string name="send_mail_failed">메일 전송에 실패하였습니다.</string>
 
 </resources>

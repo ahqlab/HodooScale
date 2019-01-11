@@ -44,10 +44,7 @@ public class ConfirmCertificationNumberActivity extends BaseActivity<ConfirmCert
         return ConfirmCertificationNumberActivity.this;
     }
 
-    public void onClickConfirmBtn(View vIew){
-//       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//        startActivity(intent);
+    public void onClickConfirmBtn(View vIew) {
         finish();
-        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 }

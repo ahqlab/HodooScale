@@ -1,8 +1,6 @@
 package com.animal.scale.hodoo.service;
 
-import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
-import com.animal.scale.hodoo.domain.FinPasswordResponse;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 
@@ -10,7 +8,6 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -20,7 +17,7 @@ public interface UserService{
     Call<ResultMessageGroup> registUser(@Body User user);
 
     @POST("user/login2")
-    Call<ResultMessageGroup> login(@Body User user);
+    Call<CommonResponce<User>> login(@Body User user);
 
     @POST("user/get")
     Call<User> get(@Query("userIdx") int userIdx);
