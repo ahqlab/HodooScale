@@ -7,12 +7,10 @@ import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.adapter.AdapterOfUserGroup;
 import com.animal.scale.hodoo.base.BaseActivity;
-import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityUserGroupListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -54,7 +52,7 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
     protected void onResume() {
         super.onResume();
         presenter.getInvitationList();
-        presenter.getPushCount();
+        presenter.setPushCount();
         registerReceiver(receiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
     }
 
@@ -87,7 +85,13 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
 
     @Override
     public void setPushCount(int count) {
-        BadgeUtils.setBadge(this, count);
+
+        if ( count <= 0 ) {
+            BadgeUtils.clearBadge(this);
+        } else {
+            BadgeUtils.setBadge(this, Math.min(count, 99));
+        }
+
     }
 
     @Override

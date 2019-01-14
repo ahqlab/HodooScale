@@ -2,6 +2,8 @@ package com.animal.scale.hodoo.constant;
 
 public class HodooConstant {
 
+    public static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 100;
+
     public static final boolean DEBUG = true;
 
     public static final int ACCEPT_TYPE = 1;

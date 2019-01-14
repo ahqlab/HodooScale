@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -114,7 +115,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         /* device wake (e) */
 
         /* application is background (s) */
-        if ( isAppIsInBackground(getApplicationContext()) && !km.inKeyguardRestrictedInputMode() ) {
+        if ( isAppIsInBackground(getApplicationContext()) && !km.inKeyguardRestrictedInputMode() &&  Settings.canDrawOverlays(getApplicationContext()) ) {
             intent = new Intent(getApplicationContext(), AlwaysOnTopService.class);
             intent.putExtra("title", title);
             intent.putExtra("message", message);

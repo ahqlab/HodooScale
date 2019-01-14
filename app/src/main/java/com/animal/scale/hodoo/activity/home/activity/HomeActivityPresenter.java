@@ -1,15 +1,20 @@
 package com.animal.scale.hodoo.activity.home.activity;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivityPresenter implements HomeActivityIn.Presenter{
+import static android.support.constraint.Constraints.TAG;
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
+
+public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
     public HomeActivityIn.View view;
 
@@ -60,22 +65,66 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter{
     }
 
     @Override
+    public void getInvitationToServer() {
+
+    }
+
+    @Override
     public void setNotiCount() {
 //        notiModel.getInvitationBadgeCount();
         model.getInvitationCount(new CommonModel.DomainListCallBackListner<InvitationUser>() {
             @Override
             public void doPostExecute(List<InvitationUser> result) {
+                for (int i = 0; i < result.size(); i++) {
+                    if ( result.get(i).getState() > 0 )
+                        result.remove(i);
+                }
                 List<InvitationUser> savedUsers = notiModel.getSavedinvitationUsers();
-                for (int i = 0; i < savedUsers.size(); i++) {
-                    for (int j = 0; j < result.size(); j++) {
-                        if ( savedUsers.get(i).getToUserIdx() == result.get(j).getToUserIdx() && savedUsers.get(i).getFromUserIdx() == result.get(j).getFromUserIdx() ) {
-                            savedUsers.remove(i);
+                List<InvitationUser> bigUsers = new ArrayList<>();
+                List<InvitationUser> smallUsers = new ArrayList<>();
+                List<InvitationUser> tempUsers = new ArrayList<>();
+
+                if ( result.size() > savedUsers.size() ) {
+                    bigUsers = result;
+                    smallUsers = savedUsers;
+                } else {
+                    smallUsers = result;
+                    bigUsers = savedUsers;
+                }
+                /* 서버에 저장되어 있는 유저와 크기가 다를 경우 (s) */
+                if ( bigUsers.size() != smallUsers.size() && smallUsers.size() > 0 ) {
+                    for (int i = 0; i < bigUsers.size(); i++) {
+                        for (int j = 0; j < smallUsers.size(); j++) {
+                            if ( bigUsers.get(i).getToUserIdx() == smallUsers.get(j).getToUserIdx() &&
+                                    bigUsers.get(i).getFromUserIdx() == smallUsers.get(j).getFromUserIdx() &&
+                                    bigUsers.get(i).getState() > 0) {
+                                continue;
+                            }
+                            tempUsers.add(bigUsers.get(i));
                         }
                     }
+                    notiModel.saveInvitationUsers(tempUsers);
+                    view.refreshBadge();
+                } else if ( bigUsers.size() != smallUsers.size() && smallUsers.size() == 0  ) {
+                    notiModel.saveInvitationUsers(bigUsers);
+                    view.refreshBadge();
                 }
-                for (int i = 0; i < savedUsers.size(); i++) {
-                    notiModel.removeInvitationData(savedUsers.get(i).getToUserIdx(), savedUsers.get(i).getFromUserIdx());
+                /* 서버에 저장되어 있는 유저와 크기가 다를 경우 (e) */
+
+                int badgeCount = notiModel.getBadgeCount();
+                int count;
+                if ( badgeCount > 0 ) {
+                    count = badgeCount - notiModel.getInvitationBadgeCount();
+                } else {
+                    count = 0;
                 }
+
+                /* 배지 셋팅 (s) */
+
+                model.setNotiCount(count <= 0 ? 0 : count + 1);
+                view.setPushCount( count );
+                /* 배지 셋팅 (e) */
+
             }
 
             @Override

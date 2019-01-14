@@ -19,7 +19,9 @@ public interface HomeActivityIn {
 
         void setCurcleImage(PetAllInfos info);
 
-//        void resetNoti( int  );
+        void refreshBadge();
+
+        void setPushCount ( int count );
     }
 
     interface Presenter{
@@ -33,6 +35,8 @@ public interface HomeActivityIn {
         void setCurrentPetInfos(List<PetAllInfos> data);
 
         void setCurcleImage(PetAllInfos info);
+
+        void getInvitationToServer();
 
         void setNotiCount();
     }

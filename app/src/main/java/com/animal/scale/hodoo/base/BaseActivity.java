@@ -131,19 +131,18 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
 
         CommonNotificationModel commonModel = CommonNotificationModel.getInstance(this);
 
-        int count = Math.abs( (commonModel.getBadgeCount() - commonModel.getInvitationBadgeCount()) - commonModel.getBadgeCount() );
-        mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
-        if ( count > 0 ) {
-            BadgeUtils.setBadge(this, Math.min(count, 99));
-        } else {
-            BadgeUtils.clearBadge(this);
-        }
-
+//        int count = Math.abs( (commonModel.getBadgeCount() - commonModel.getInvitationBadgeCount()) - commonModel.getBadgeCount() );
+//        int count = commonModel.getBadgeCount();
+//        mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
+//        if ( count > 0 ) {
+//            BadgeUtils.setBadge(this, Math.min(count, 99));
+//        } else {
+//            BadgeUtils.clearBadge(this);
+//        }
+//
         setBadge();
         if ( badgeState )
             getApplicationContext().registerReceiver(mMessageReceiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
-
-
 
     }
 
@@ -175,6 +174,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
             if ( toolbar != null ) {
                 TextView settingBadge = toolbar.findViewById(R.id.setting_badge);
                 if ( settingBadge != null ) {
+                    badgeState = true;
                     int count = getInvitationBadgeCount();
                     if ( count <= 0 ) {
                         settingBadge.setVisibility(View.GONE);

@@ -81,8 +81,10 @@ public class UserGroupPresenter implements UserGroupList.Presenter {
     }
 
     @Override
-    public void getPushCount() {
-        mView.setPushCount( Math.abs(mNotiModel.getBadgeCount() - mNotiModel.getInvitationBadgeCount()) );
+    public void setPushCount() {
+        if ( mNotiModel.getBadgeCount() > 0 )
+            mView.setPushCount( mNotiModel.getBadgeCount() - mNotiModel.getInvitationBadgeCount() );
+
     }
 
     private String matches ( String name ) {

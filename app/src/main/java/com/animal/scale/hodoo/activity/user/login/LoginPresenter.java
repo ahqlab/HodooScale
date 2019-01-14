@@ -41,6 +41,8 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void sendServer(User user) {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        user.setPushToken(token);
         loginModel.sendServer(user, new LoginModel.DomainCallBackListner<CommonResponce<User>>() {
             @Override
             public void doPostExecute(CommonResponce<User> resultMessageGroup) {
@@ -56,7 +58,7 @@ public class LoginPresenter implements Login.Presenter {
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
                         Log.e("HJLEE", "LOGIN RESULT : " + resultMessageGroup.getDomain().toString().trim());
                         Gson gson = new Gson();
-                        User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);
+                        User user = resultMessageGroup.getDomain();
                         if ( user.getUserCode() <= 0 ) {
                             loginView.showPopup("이메일 인증을 진행해주세요.", new OnDialogClickListener() {
                                 @Override
@@ -73,7 +75,7 @@ public class LoginPresenter implements Login.Presenter {
                             return;
                         }
                         saveUserSharedValue(resultMessageGroup.getDomain());
-                        saveFCMToken( resultMessageGroup.getDomain() );
+                        checkRegistrationStatus();
                     }
                 } else {
                     loginView.showPopup(context.getString(R.string.failed));
@@ -148,22 +150,6 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void saveFCMToken(User user) {
-        String token = FirebaseInstanceId.getInstance().getToken();
-        user.setPushToken(token);
-        loginModel.saveFCMToken(user, new CommonModel.DomainCallBackListner<Integer>() {
-            @Override
-            public void doPostExecute(Integer integer) {
-
-            }
-
-            @Override
-            public void doPreExecute() {
-
-            }
-        });
-
-
-        checkRegistrationStatus();
     }
 
     @Override
