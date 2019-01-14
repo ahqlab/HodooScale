@@ -24,7 +24,7 @@ public class MainPresenter implements Main.Presenter {
     @Override
     public void getData() {
         if ( mModel.getAutoLoginData() > 0 ) {
-            mView.goHomeActivity();
+            mView.goAutoLogin();
         }
     }
 }

@@ -99,6 +99,7 @@
         <activity android:name=".activity.user.invitation.InvitationActivity" />
         <activity android:name=".activity.setting.user.group.manager.UserGroupManagerActivity" />
         <activity android:name=".activity.setting.user.group.list.UserGroupListActivity" />
+        <activity android:name=".activity.user.invitation.finish.InvitationFinishActivity" />
         <activity android:name=".activity.user.invitation.confirm.InvitationConfirmActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -80,51 +80,13 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
                         result.remove(i);
                 }
                 List<InvitationUser> savedUsers = notiModel.getSavedinvitationUsers();
-                List<InvitationUser> bigUsers = new ArrayList<>();
-                List<InvitationUser> smallUsers = new ArrayList<>();
-                List<InvitationUser> tempUsers = new ArrayList<>();
+                int count = savedUsers.size();
 
-                if ( result.size() > savedUsers.size() ) {
-                    bigUsers = result;
-                    smallUsers = savedUsers;
-                } else {
-                    smallUsers = result;
-                    bigUsers = savedUsers;
+                if ( savedUsers.size() == 0 ) {
+                    savedUsers = result;
+                    notiModel.saveInvitationUsers(savedUsers);
                 }
-                /* 서버에 저장되어 있는 유저와 크기가 다를 경우 (s) */
-                if ( bigUsers.size() != smallUsers.size() && smallUsers.size() > 0 ) {
-                    for (int i = 0; i < bigUsers.size(); i++) {
-                        for (int j = 0; j < smallUsers.size(); j++) {
-                            if ( bigUsers.get(i).getToUserIdx() == smallUsers.get(j).getToUserIdx() &&
-                                    bigUsers.get(i).getFromUserIdx() == smallUsers.get(j).getFromUserIdx() &&
-                                    bigUsers.get(i).getState() > 0) {
-                                continue;
-                            }
-                            tempUsers.add(bigUsers.get(i));
-                        }
-                    }
-                    notiModel.saveInvitationUsers(tempUsers);
-                    view.refreshBadge();
-                } else if ( bigUsers.size() != smallUsers.size() && smallUsers.size() == 0  ) {
-                    notiModel.saveInvitationUsers(bigUsers);
-                    view.refreshBadge();
-                }
-                /* 서버에 저장되어 있는 유저와 크기가 다를 경우 (e) */
-
-                int badgeCount = notiModel.getBadgeCount();
-                int count;
-                if ( badgeCount > 0 ) {
-                    count = badgeCount - notiModel.getInvitationBadgeCount();
-                } else {
-                    count = 0;
-                }
-
-                /* 배지 셋팅 (s) */
-
-                model.setNotiCount(count <= 0 ? 0 : count + 1);
-                view.setPushCount( count );
-                /* 배지 셋팅 (e) */
-
+                view.refreshBadge();
             }
 
             @Override

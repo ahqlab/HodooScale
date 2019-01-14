@@ -49,6 +49,11 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         super.setToolbarColor();
         presenter = new LoginPresenter(this);
         presenter.initUserData(binding.getUser(), getApplicationContext());
+
+        if ( getIntent().getIntExtra(SharedPrefVariable.AUTO_LOGIN, 0) > 0 ) {
+            presenter.autoLogin();
+        }
+
         User user = new User(mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL));
         if(user != null){
             binding.email.editText.setText(user.getEmail());

@@ -6,7 +6,7 @@ public interface Invitation {
     interface View {
         void showPopup(String title, String content, InvitationActivity.CustomDialogCallback callback);
         void setProgress( boolean state );
-        void goLoginPage();
+        void goFinishPage();
     }
     interface Presenter {
         void loadData (Context context);

@@ -5,6 +5,7 @@ import android.content.Context;
 public interface Main {
     interface View {
         void goHomeActivity();
+        void goAutoLogin();
     }
     interface Presenter {
         void initDate(Context context);

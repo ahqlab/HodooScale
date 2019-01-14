@@ -117,6 +117,14 @@ public class LoginModel extends CommonModel {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, HodooConstant.AUTO_LOGIN_SUCCESS);
     }
 
+    public User getUser () {
+        User user = new User();
+        user.setEmail(mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL));
+        user.setPassword(mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_PASSWORD));
+
+        return user;
+    }
+
 
     public interface LoginResultListener {
         void doPostExecute(User user);
