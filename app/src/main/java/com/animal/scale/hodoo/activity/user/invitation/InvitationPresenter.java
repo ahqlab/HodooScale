@@ -29,18 +29,19 @@ public class InvitationPresenter implements Invitation.Presenter {
             public void doPostExecute(Integer result) {
                 mView.setProgress(false);
                 if ( result == InvitationActivity.SUCESS ) {
-                    Log.e(TAG, "전송 완료");
-                    mView.showPopup("사용자 초대 완료", to + "님에게 초대 메세지를 발송했습니다.", new InvitationActivity.CustomDialogCallback() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int i) {
-//                            mView.goLoginPage();
-                        }
-                    });
+                    mView.goFinishPage();
+//                    Log.e(TAG, "전송 완료");
+//                    mView.showPopup("사용자 초대 완료", to + "님에게 초대 메세지를 발송했습니다.", new InvitationActivity.CustomDialogCallback() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int i) {
+//                    mView.goFinishPage();
+//                        }
+//                    });
                 } else if (result == InvitationActivity.EXISTENCE_USER) {
                     mView.showPopup("사용자 초대 에러",  "이미 초대가 완료되었습니다.\n로그인창으로 이동합니다.", new InvitationActivity.CustomDialogCallback() {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {
-                            mView.goLoginPage();
+                            mView.goFinishPage();
                         }
                     });
                 } else if ( result == InvitationActivity.NOT_TO_USER ) {

@@ -26,6 +26,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import java.security.Permission;
 
 import static com.animal.scale.hodoo.constant.HodooConstant.ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE;
+import static com.animal.scale.hodoo.constant.HodooConstant.AUTO_LOGIN_SUCCESS;
 
 public class
 MainActivity extends AppCompatActivity implements Main.View {
@@ -158,7 +159,6 @@ MainActivity extends AppCompatActivity implements Main.View {
     @Override
     protected void onResume() {
         super.onResume();
-
         systemAlertPermission();
     }
 
@@ -167,6 +167,15 @@ MainActivity extends AppCompatActivity implements Main.View {
     @Override
     public void goHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        finish();
+    }
+
+    @Override
+    public void goAutoLogin() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.putExtra(SharedPrefVariable.AUTO_LOGIN, AUTO_LOGIN_SUCCESS);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
@@ -197,14 +206,11 @@ MainActivity extends AppCompatActivity implements Main.View {
                         .create();
                 builder.setCanceledOnTouchOutside(false);
                 builder.show();
+            } else {
+                presenter.getData();
             }
-        }
-    }
-
-    public void checkAutoLogin() {
-        if ( logoutState ) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+        } else {
+            presenter.getData();
         }
     }
 

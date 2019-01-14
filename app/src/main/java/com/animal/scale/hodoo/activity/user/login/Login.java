@@ -49,5 +49,7 @@ public interface Login {
         void saveFCMToken(User user);
 
         void setAutoLogin( boolean state );
+
+        void autoLogin ();
     }
 }

@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.base;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -129,21 +130,20 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         Log.v(TAG, "onResume");
         super.onResume();
 
-        CommonNotificationModel commonModel = CommonNotificationModel.getInstance(this);
-
-//        int count = Math.abs( (commonModel.getBadgeCount() - commonModel.getInvitationBadgeCount()) - commonModel.getBadgeCount() );
-//        int count = commonModel.getBadgeCount();
-//        mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
-//        if ( count > 0 ) {
-//            BadgeUtils.setBadge(this, Math.min(count, 99));
-//        } else {
-//            BadgeUtils.clearBadge(this);
-//        }
-//
         setBadge();
         if ( badgeState )
             getApplicationContext().registerReceiver(mMessageReceiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
+        cancelNotification( this );
 
+        if ( mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT) > 0 ) {
+            mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, 0);
+            BadgeUtils.clearBadge(this);
+        }
+    }
+    public static void cancelNotification(Context ctx) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager notifManager = (NotificationManager) ctx.getSystemService(ns);
+        notifManager.cancelAll();
     }
 
     @Override
@@ -195,7 +195,6 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
             String invitationStr = firebaseInfos.get( String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE) );
             if ( invitationStr != null || !invitationStr.equals("") )
                 invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
-
         }
         return invitationUsers.size();
     }

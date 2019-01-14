@@ -158,4 +158,10 @@ public class LoginPresenter implements Login.Presenter {
             loginModel.saveAutoLogin();
         loginView.goHomeActivity();
     }
+
+    @Override
+    public void autoLogin() {
+        User user = loginModel.getUser();
+        sendServer(user);
+    }
 }

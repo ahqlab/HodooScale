@@ -119,6 +119,8 @@ public class CustomCommonEditText extends LinearLayout implements CustomCommonEd
 
         LinearLayout contentView = (LinearLayout) inflater.inflate(contentAttrResourceId, this, false);
         editText = contentView.findViewById(R.id.edittext);
+        if ( text != null && !text.equals("") )
+            editText.setText(text);
         editText.setHint(hint);
         editText.setFocusable(focusble);
         editText.setLayoutParams(params);

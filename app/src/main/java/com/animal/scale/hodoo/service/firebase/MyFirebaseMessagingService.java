@@ -149,6 +149,9 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 .setPriority(type)
                 .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
                 .setContentIntent(pendingIntent);
+
+        if ( message.length() > 20 )
+            notificationBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(pushIdx /* ID of notification */, notificationBuilder.build());
 
