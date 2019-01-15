@@ -247,7 +247,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
-      rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)) , petAllInfos.getFactor()).getRER();
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)) , petAllInfos.getFactor()).getRER();
         binding.calorieBar.invalidate();
         presenter.getTodaySumCalorie();
     }

@@ -375,5 +375,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="sign_up_finish_title">회원가입 완료</string>
     <string name="sign_up_finish_sub_scription">등록하신 이메일로 인증메일을 발송드렸습니다.\n이메일 인증을 완료하면 HODOO의 서비스를 이용하실 수 있습니다.</string>
     <string name="send_mail_failed">메일 전송에 실패하였습니다.</string>
+    <string name="feed_order">급식하기</string>
+    <string name="pet_feeder">급식기</string>
 
 </resources>
