@@ -33,7 +33,6 @@ public class UserGroupManagerActivity extends BaseActivity<UserGroupManagerActiv
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String message = intent.getStringExtra("message");
             presenter.getBadgeCount(UserGroupPresenter.UPDATE_TYPE);
         }
     };

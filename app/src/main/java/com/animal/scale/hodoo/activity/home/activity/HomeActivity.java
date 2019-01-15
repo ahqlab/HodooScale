@@ -48,6 +48,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
+
 public class HomeActivity extends BaseActivity<HomeActivity> implements NavigationView.OnNavigationItemSelectedListener, HomeActivityIn.View {
 
     private final long FINISH_INTERVAL_TIME = 2000;
@@ -299,6 +301,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.setNotiCount();
+        presenter.getInvitationToServer();
+        if ( DEBUG ) Log.e(TAG, "onResume");
     }
 }

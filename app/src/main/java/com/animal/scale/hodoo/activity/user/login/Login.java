@@ -32,6 +32,8 @@ public interface Login {
 
         void goEmailCertified();
 
+        void setPassword( String pw );
+
     }
 
     interface Presenter {

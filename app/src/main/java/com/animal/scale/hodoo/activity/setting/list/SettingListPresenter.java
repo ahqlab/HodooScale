@@ -24,12 +24,17 @@ public class SettingListPresenter implements SettingList.Presenter {
 
     @Override
     public void getSttingListMenu() {
-        settingListView.setListviewAdapter(notificationModel.getInvitationBadgeCount(), settingListModel.getSettingList());
+        settingListView.setListviewAdapter(notificationModel.getInvitationCount(), settingListModel.getSettingList());
     }
 
     @Override
     public void logout() {
         settingListModel.logout();
         settingListView.goLoginPage();
+    }
+
+    @Override
+    public void getInvitationCount() {
+        settingListView.updateBadgeCount(notificationModel.getInvitationCount());
     }
 }
