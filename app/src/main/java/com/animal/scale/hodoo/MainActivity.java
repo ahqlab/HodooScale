@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ViewUtils;
 import android.util.Log;
 import android.widget.ProgressBar;
 
@@ -18,12 +19,15 @@ import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeHomeFragment
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeSecondFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragment;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
+import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.WelcomeViewPager;
+import com.animal.scale.hodoo.util.VIewUtil;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.security.Permission;
+import java.util.List;
 
 import static com.animal.scale.hodoo.constant.HodooConstant.ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE;
 import static com.animal.scale.hodoo.constant.HodooConstant.AUTO_LOGIN_SUCCESS;
@@ -49,6 +53,9 @@ MainActivity extends AppCompatActivity implements Main.View {
 
     private Main.Presenter presenter;
 
+    public SharedPrefManager sharedPrefManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +63,10 @@ MainActivity extends AppCompatActivity implements Main.View {
         logoutState = getIntent().getBooleanExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, false);
         presenter = new MainPresenter(this);
         presenter.initDate(this);
+        sharedPrefManager = SharedPrefManager.getInstance(MainActivity.this);
+        String countryCode = VIewUtil.getMyLocationCode(MainActivity.this);
+        sharedPrefManager.putStringExtra(SharedPrefVariable.CURRENT_COUNTRY, countryCode);
 
-        FirebaseInstanceId.getInstance().getToken();
-        if (FirebaseInstanceId.getInstance().getToken() != null) {
-            Log.e("HJLEE", "token = " + FirebaseInstanceId.getInstance().getToken());
-        } else {
-            Log.e("HJLEE", "asdasdasds");
-        }
-//        ButterKnife.bind(this);
         mSlideView = findViewById(R.id.slide_view);
 
 //        bar = (ProgressBar) findViewById(R.id.progress_loader);

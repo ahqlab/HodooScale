@@ -16,6 +16,7 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.github.mikephil.charting.charts.LineChart;
@@ -100,7 +101,8 @@ public class WeightFragmentModel extends CommonModel {
 
         Highlight highlight = new Highlight((float) data.getEntryCount(), 0, -1);
         chart.highlightValue(highlight, false);
-        chart.setNoDataText("Description that you want");
+        chart.setNoDataText(context.getString(R.string.weight_data_available));
+        chart.setNoDataTextColor(context.getResources().getColor(R.color.mainBlack));
     }
 
 
@@ -178,6 +180,21 @@ public class WeightFragmentModel extends CommonModel {
             @Override
             protected void doPostExecute(RealTimeWeight realTimeWeight) {
                 domainListCallBackListner.doPostExecute(realTimeWeight);
+            }
+
+            @Override
+            protected void doPreExecute() {
+                domainListCallBackListner.doPreExecute();
+            }
+        }.execute(call);
+    }
+
+    public void getTipMessageOfCountry(WeightTip weightTip, final DomainCallBackListner<WeightTip> domainListCallBackListner) {
+        Call<WeightTip> call = NetRetrofit.getInstance().getWeightTipService().getWeightTipOfCountry(weightTip);
+        new AbstractAsyncTask<WeightTip>() {
+            @Override
+            protected void doPostExecute(WeightTip tip) {
+                domainListCallBackListner.doPostExecute(tip);
             }
 
             @Override

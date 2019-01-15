@@ -245,7 +245,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
     public void onResume() {
         super.onResume();
         isActivity = true;
-        getWeather();
+        //getWeather();
     }
 
     @Override

@@ -26,6 +26,7 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentTempBinding;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 
 import org.joda.time.DateTime;
@@ -40,7 +41,6 @@ import noman.weekcalendar.listener.OnDateClickListener;
 import noman.weekcalendar.listener.OnWeekChangeListener;
 
 public class TempFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
-
 
     FragmentTempBinding binding;
 
@@ -187,6 +187,11 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
         }
         if (refrashState)
             rotationStop(rotationView);
+    }
+
+    @Override
+    public void setTipMessageOfCountry(WeightTip weightTip) {
+
     }
 
     @Override

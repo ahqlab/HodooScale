@@ -3,11 +3,13 @@ package com.animal.scale.hodoo.activity.home.fragment.weight;
 import android.content.Context;
 
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.ArrayListDevice;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -120,5 +122,20 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     @Override
     public void initChart() {
+    }
+
+    @Override
+    public void getTipMessageOfCountry(WeightTip weightTip) {
+        model.getTipMessageOfCountry(weightTip, new CommonModel.DomainCallBackListner<WeightTip>() {
+            @Override
+            public void doPostExecute(WeightTip weightTip) {
+                view.setTipMessageOfCountry(weightTip);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
     }
 }

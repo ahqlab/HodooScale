@@ -381,5 +381,6 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="send_mail_failed">메일 전송에 실패하였습니다.</string>
     <string name="feed_order">급식하기</string>
     <string name="pet_feeder">급식기</string>
+    <string name="weight_data_available">측정된 체중 데이터가 없습니다.</string>
 
 </resources>

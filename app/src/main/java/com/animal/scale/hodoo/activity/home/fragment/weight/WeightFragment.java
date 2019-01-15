@@ -26,6 +26,7 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 
 import org.joda.time.DateTime;
@@ -47,7 +48,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     private WeekCalendar weekCalendar;
 
-
     Animation animation;
 
     int randomint = 6;
@@ -55,7 +55,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     SharedPrefManager mSharedPrefManager;
 
     WeightFragmentIn.Presenter presenter;
+
     WeightStatistics.Presenter statisicsPresenter;
+
+    private String country;
 
     public int bcs;
     private boolean refrashState = false;
@@ -100,6 +103,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         ////Kcal 로리 표시
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), "weight");
         presenter.initWeekCalendar();
+
+        country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
+
         /*((HomeActivity)getActivity()).binding.appBarNavigation.petImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -187,6 +193,13 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     @Override
+    public void setTipMessageOfCountry(WeightTip weightTip) {
+        Log.e("HJLEE", "weightTip.getContent() : " + weightTip.getContent());
+        binding.messageTitle.setText(weightTip.getTitle());
+        binding.collapseContent.setText(weightTip.getContent());
+    }
+
+    @Override
     public void initWeekCalendar() {
          /* binding.weekCalendar.today;
         Button todaysDate = (Button) findViewById(R.id.today);
@@ -247,6 +260,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void setBcs(PetWeightInfo petWeightInfo) {
         presenter.setAnimationGaugeChart(petWeightInfo.getBcs());
+        presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
     }
 
     public void onRootViewClick(View view){

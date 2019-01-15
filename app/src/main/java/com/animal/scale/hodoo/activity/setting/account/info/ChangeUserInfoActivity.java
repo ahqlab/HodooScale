@@ -40,7 +40,6 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
             ninkState = false,
             countryState = false;
 
-
     private String[] country;
     private int selectCountry = 0;
     private List<Country> countries;
@@ -191,7 +190,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         String nickName =  binding.nickName.editText.getText().toString();
         binding.getDomain().setNickname(nickName);
         binding.getDomain().setCountry(selectCountry);
-        Log.e("HJLEE", binding.getDomain().toString());
+        //Log.e("HJLEE", binding.getDomain().toString());
         presenter.updateBasicInfo(binding.getDomain());
         /*Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
         startActivity(intent);
