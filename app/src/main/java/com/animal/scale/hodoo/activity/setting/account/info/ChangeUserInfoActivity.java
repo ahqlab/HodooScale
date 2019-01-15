@@ -187,8 +187,8 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
     }
 
     public void onConfirmBtn(View view) {
-        String nickName =  binding.nickName.editText.getText().toString();
 
+        String nickName =  binding.nickName.editText.getText().toString();
         binding.getDomain().setNickname(nickName);
         binding.getDomain().setCountry(selectCountry);
         Log.e("HJLEE", binding.getDomain().toString());
@@ -221,6 +221,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         binding.password.editText.setText(user.getPassword());
         binding.nickName.editText.setText(user.getNickname());
         binding.country.editText.setText(country[user.getCountry() - 1]);
+        selectCountry = user.getCountry();
         binding.email.editText.setText(user.getEmail());
         binding.setDomain(user);
     }
