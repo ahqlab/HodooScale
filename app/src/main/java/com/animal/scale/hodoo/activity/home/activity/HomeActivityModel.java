@@ -62,8 +62,13 @@ public class HomeActivityModel extends CommonModel{
         Call<List<InvitationUser>> call = NetRetrofit.getInstance().getInvitationService().getInvitationUser(idx);
         new AbstractAsyncTaskOfList<InvitationUser>() {
             @Override
-            protected void doPostExecute(List<InvitationUser> d) {
-                callback.doPostExecute(d);
+            protected void doPostExecute(List<InvitationUser> users) {
+                for (int i = 0; i < users.size(); i++)
+                    if ( users.get(i).getState() > 0 )
+                        users.remove(i);
+
+
+                callback.doPostExecute(users);
             }
 
             @Override

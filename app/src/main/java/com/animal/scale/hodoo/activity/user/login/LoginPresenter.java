@@ -162,6 +162,7 @@ public class LoginPresenter implements Login.Presenter {
     @Override
     public void autoLogin() {
         User user = loginModel.getUser();
+        loginView.setPassword(user.getPassword());
         sendServer(user);
     }
 }

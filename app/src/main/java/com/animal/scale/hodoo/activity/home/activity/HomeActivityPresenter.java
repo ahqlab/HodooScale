@@ -1,7 +1,6 @@
 package com.animal.scale.hodoo.activity.home.activity;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
@@ -10,9 +9,6 @@ import com.animal.scale.hodoo.domain.PetAllInfos;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.constraint.Constraints.TAG;
-import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
@@ -66,27 +62,32 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
     @Override
     public void getInvitationToServer() {
-
-    }
-
-    @Override
-    public void setNotiCount() {
-//        notiModel.getInvitationBadgeCount();
         model.getInvitationCount(new CommonModel.DomainListCallBackListner<InvitationUser>() {
             @Override
-            public void doPostExecute(List<InvitationUser> result) {
-                for (int i = 0; i < result.size(); i++) {
-                    if ( result.get(i).getState() > 0 )
-                        result.remove(i);
-                }
-                List<InvitationUser> savedUsers = notiModel.getSavedinvitationUsers();
-                int count = savedUsers.size();
+            public void doPostExecute(List<InvitationUser> users) {
+                List<InvitationUser> saveUsers = notiModel.getInvitationUsers();
 
-                if ( savedUsers.size() == 0 ) {
-                    savedUsers = result;
-                    notiModel.saveInvitationUsers(savedUsers);
+
+                if ( saveUsers != null && users != null ) {
+                    List<InvitationUser> big, small, tempUsers = new ArrayList<>();
+                    if ( saveUsers.size() > users.size() ) {
+                        big = saveUsers;
+                        small = users;
+                    } else {
+                        small = saveUsers;
+                        big = users;
+                    }
+
+                    for (int i = 0; i < big.size(); i++) {
+                        for (int j = 0; j < small.size(); j++) {
+                            if ( big.get(i).getToUserIdx() != small.get(j).getToUserIdx() && big.get(i).getFromUserIdx() != small.get(i).getFromUserIdx() ) {
+                                tempUsers.add(big.get(i));
+                            }
+                        }
+                    }
+                } else if ( saveUsers == null ) {
+                    notiModel.setAllInvitationUsers(users);
                 }
-                view.refreshBadge();
             }
 
             @Override
@@ -95,4 +96,6 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
             }
         });
     }
+
+
 }

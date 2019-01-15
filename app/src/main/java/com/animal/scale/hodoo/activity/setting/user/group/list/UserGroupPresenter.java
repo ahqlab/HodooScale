@@ -47,7 +47,7 @@ public class UserGroupPresenter implements UserGroupList.Presenter {
             public void doPostExecute(Integer result) {
                 if ( result != null ) {
                     if ( result > 0 ) {
-                        mNotiModel.removeInvitationData(toUserIdx, fromUseridx);
+                        mNotiModel.removeInvitationUser(toUserIdx, fromUseridx);
                         if ( UserGroupListActivity.ACCEPT_TYPE == state ) {
                             mModel.invitationApproval(toUserIdx, fromUseridx, new CommonModel.DomainCallBackListner<Integer>() {
                                 @Override
@@ -82,8 +82,6 @@ public class UserGroupPresenter implements UserGroupList.Presenter {
 
     @Override
     public void setPushCount() {
-        if ( mNotiModel.getBadgeCount() > 0 )
-            mView.setPushCount( mNotiModel.getBadgeCount() - mNotiModel.getInvitationBadgeCount() );
 
     }
 

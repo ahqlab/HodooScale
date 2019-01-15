@@ -47,8 +47,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         @Override
         public void onReceive(Context context, Intent intent) {
             // Extract data included in the Intent
-            String message = intent.getStringExtra("message");
-            Log.e(TAG, "messageeeeeeeeeeeeeeeeeeeeeeeeee : " + message);
+            Log.e(TAG, "Base onReceive");
             setBadge();
             //do other stuff here
         }
@@ -175,7 +174,8 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
                 TextView settingBadge = toolbar.findViewById(R.id.setting_badge);
                 if ( settingBadge != null ) {
                     badgeState = true;
-                    int count = getInvitationBadgeCount();
+                    CommonNotificationModel notificationModel = CommonNotificationModel.getInstance(this);
+                    int count = notificationModel.getInvitationCount();
                     if ( count <= 0 ) {
                         settingBadge.setVisibility(View.GONE);
                     } else {

@@ -39,7 +39,7 @@ import java.util.Random;
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService implements FirebaseIn.View {
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
     int count = 0;
-    private FirebasePresenter presenter;
+    private FirebaseIn.Presenter presenter;
 
     @Override
     public void onCreate() {
@@ -104,6 +104,8 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 message += "님의 초대입니다.";
                 badgeType = HodooConstant.FIREBASE_INVITATION_TYPE;
+
+                presenter.setInvitationUser(idx, fromUserIdx);
                 break;
         }
 
@@ -116,19 +118,19 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         /* application is background (s) */
         if ( isAppIsInBackground(getApplicationContext()) && !km.inKeyguardRestrictedInputMode() &&  Settings.canDrawOverlays(getApplicationContext()) ) {
-            intent = new Intent(getApplicationContext(), AlwaysOnTopService.class);
-            intent.putExtra("title", title);
-            intent.putExtra("message", message);
+            Intent bacckgroundIntent = new Intent(getApplicationContext(), AlwaysOnTopService.class);
+            bacckgroundIntent.putExtra("title", title);
+            bacckgroundIntent.putExtra("message", message);
             if ( host != null && !host.equals("") )
-                intent.putExtra("host", host);
+                bacckgroundIntent.putExtra("host", host);
 
             Gson gson = new Gson();
-            intent.putExtra("data", gson.toJson(data));
+            bacckgroundIntent.putExtra("data", gson.toJson(data));
             if ( !isServiceRunning() ) {
-                getApplicationContext().startService(intent);
+                getApplicationContext().startService(bacckgroundIntent);
             } else {
-                getApplicationContext().stopService(intent);
-                getApplicationContext().startService(intent);
+                getApplicationContext().stopService(bacckgroundIntent);
+                getApplicationContext().startService(bacckgroundIntent);
             }
             type = NotificationCompat.PRIORITY_LOW;
         }
@@ -149,6 +151,12 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 .setPriority(type)
                 .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
                 .setContentIntent(pendingIntent);
+
+        //&& !isAppIsInBackground(getApplicationContext())
+        if ( notiType == HodooConstant.FIREBASE_INVITATION_TYPE  ) {
+            notificationBuilder.addAction(R.drawable.ic_close_gray_24dp, getApplicationContext().getString(android.R.string.cancel), null)
+                               .addAction(R.drawable.ic_send_gray_24dp, getApplicationContext().getString(android.R.string.ok), pendingIntent);
+        }
 
         if ( message.length() > 20 )
             notificationBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));

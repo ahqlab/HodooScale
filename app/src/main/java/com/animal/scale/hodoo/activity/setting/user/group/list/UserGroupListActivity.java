@@ -52,7 +52,6 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
     protected void onResume() {
         super.onResume();
         presenter.getInvitationList();
-        presenter.setPushCount();
         registerReceiver(receiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
     }
 
