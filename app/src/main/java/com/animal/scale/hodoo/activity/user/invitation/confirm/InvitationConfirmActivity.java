@@ -73,7 +73,7 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            finish();
+//            finish();
         }
     }
 

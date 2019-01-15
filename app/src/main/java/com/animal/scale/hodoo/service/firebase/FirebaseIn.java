@@ -18,5 +18,8 @@ public interface FirebaseIn {
         void getData ( Map<String, String> data );
         void countingBadge ( int type, int badgeCount );
         void saveBadgeCount ( int count );
+
+        void setInvitationUser ( int to, int from );
+        void getInvitationUsers();
     }
 }

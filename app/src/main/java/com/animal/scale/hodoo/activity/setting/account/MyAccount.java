@@ -26,6 +26,8 @@ public interface MyAccount {
 
         void showPopup(String message, CommonListener.PopupClickListener clickListener);
 
+        void singleShowPopup(String message, final CommonListener.PopupClickListener clickListener);
+
     }
 
     interface Presenter {

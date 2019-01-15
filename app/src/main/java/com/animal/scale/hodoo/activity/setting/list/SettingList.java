@@ -11,7 +11,10 @@ public interface SettingList {
     interface View {
 
         public void setListviewAdapter(int badgeCount, List<SettingMenu> menus);
+
         void goLoginPage();
+
+        void updateBadgeCount( int count );
     }
 
     interface Presenter {
@@ -21,6 +24,8 @@ public interface SettingList {
         public void getSttingListMenu();
 
         void logout();
+
+        void getInvitationCount();
 
     }
 }

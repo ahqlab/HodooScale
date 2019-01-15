@@ -219,6 +219,11 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 
+    @Override
+    public void setPassword(String pw) {
+        binding.password.editText.setText(pw);
+    }
+
 
     public void onClickForgotPasswordBtn(View view) {
         Intent intent = new Intent(getApplicationContext(), SendCertificationNumberActivity.class);

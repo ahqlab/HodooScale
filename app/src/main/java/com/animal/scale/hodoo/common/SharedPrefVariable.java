@@ -12,11 +12,13 @@ public class SharedPrefVariable {
     public static final String USER_PASSWORD = "USER_PASSWORD";
     public static final String USER_GROUP_ACCESS_TYPE = "USER_GROUP_ACCESS_TYPE";
 
-    public static final String BADGE_COUNT = "BADGE_COUNT";
+
     public static final String AUTO_LOGIN = "AUTO_LOGIN";
 
     /* notification (s) */
+    public static final String BADGE_COUNT = "BADGE_COUNT";
     public static final String FIREBASE_NOTI = "FIREBASE_NOTI";
+    public static final String INVITATION_USERS = "INVITATION_USERS";
     /* notification (e) */
 
     public static final String UPDATE_ACTIVITY_INTENT_NAME = "UPDATE_ACTIVITY_INTENT_NAME";

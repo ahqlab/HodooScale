@@ -22,9 +22,6 @@ public class UserGropManagerModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
         notificationData = CommonNotificationModel.getInstance(context);
     }
-    public int getBadgeCount () {
-        return notificationData.getInvitationBadgeCount();
-    }
     public List<SettingMenu> getSettingList() {
         final List<SettingMenu> settingMenus = new ArrayList<SettingMenu>();
         settingMenus.add(new SettingMenu(R.drawable.setting_user_icon_50_50, context.getString(R.string.istyle_setting_menu_management_user_group)));

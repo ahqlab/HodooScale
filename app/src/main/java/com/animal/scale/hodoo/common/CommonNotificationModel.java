@@ -29,68 +29,60 @@ public class CommonNotificationModel {
     public static CommonNotificationModel getInstance (Context context ) {
         return new CommonNotificationModel(context);
     }
-    public int getBadgeCount () {
-        if ( DEBUG ) Log.e(TAG, String.format("mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT) : %d", mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT)));
-        return mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
-    }
-    public void saveInvitationUsers(List<InvitationUser> users) {
-        Map<String, String> firebaseInfos = (Map<String, String>) VIewUtil.fromJson( mSharedPrefManager.getStringExtra(SharedPrefVariable.FIREBASE_NOTI), new TypeToken< Map<String,String>>(){}.getType());
-        Gson gson = new Gson();
-        List<InvitationUser> invitationUsers = new ArrayList<>();
-        if ( firebaseInfos != null ) {
-            String invitationStr = firebaseInfos.get( String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE) );
-            if ( invitationStr != null || !invitationStr.equals("") )
-                invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
-            invitationUsers.addAll(users);
-            firebaseInfos.put(String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE), gson.toJson(invitationUsers));
-            mSharedPrefManager.putStringExtra(SharedPrefVariable.FIREBASE_NOTI, gson.toJson(firebaseInfos));
-        } else {
-            firebaseInfos = new HashMap<>();
-            firebaseInfos.put(String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE), gson.toJson(users));
-            mSharedPrefManager.putStringExtra(SharedPrefVariable.FIREBASE_NOTI, gson.toJson(firebaseInfos));
-        }
-    }
-    public int getInvitationBadgeCount() {
-        Map<String, String> firebaseInfos = (Map<String, String>) VIewUtil.fromJson( mSharedPrefManager.getStringExtra(SharedPrefVariable.FIREBASE_NOTI), new TypeToken< Map<String,String>>(){}.getType());
-        List<InvitationUser> invitationUsers = new ArrayList<>();
-        if ( firebaseInfos != null ) {
-            String invitationStr = firebaseInfos.get( String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE) );
-            if ( invitationStr != null || !invitationStr.equals("") )
-                invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
 
-        }
-        if ( DEBUG ) Log.e(TAG, String.format("invitationUsers.size() : %d", invitationUsers.size()));
-        return invitationUsers.size();
-    }
-    public void removeInvitationData ( int to, int from ) {
-        Map<String, String> firebaseInfos = (Map<String, String>) VIewUtil.fromJson( mSharedPrefManager.getStringExtra(SharedPrefVariable.FIREBASE_NOTI), new TypeToken< Map<String,String>>(){}.getType());
-        List<InvitationUser> invitationUsers = new ArrayList<>();
-        Gson gson = new Gson();
-        if ( firebaseInfos != null ) {
-            String invitationStr = firebaseInfos.get(String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE));
-            if ( invitationStr != null || !invitationStr.equals("") ) {
-                invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
-                for (int i = 0; i < invitationUsers.size(); i++) {
-                    if ( invitationUsers.get(i).getToUserIdx() == to && invitationUsers.get(i).getFromUserIdx() == from ) {
-                        invitationUsers.remove(i);
-                    }
-                }
+    /* new code 2019.01.15 song (s) */
+    public void setInvitationData(int to, int from ) {
+        String usersStr = mSharedPrefManager.getStringExtra(SharedPrefVariable.INVITATION_USERS);
+        List<InvitationUser> users = new ArrayList<>();
+        InvitationUser user = InvitationUser.builder()
+                .toUserIdx(to)
+                .fromUserIdx(from)
+                .build();
+        if ( usersStr != null && !usersStr.equals("") ) {
+            users = (List<InvitationUser>) VIewUtil.fromJson(usersStr, new TypeToken<List<InvitationUser>>(){}.getType());
+            for (int i = 0; i < users.size(); i++) {
+                if ( users.get(i).getToUserIdx() == to && users.get(i).getFromUserIdx() == from )
+                    return;
             }
-            firebaseInfos.put(String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE), gson.toJson(invitationUsers));
-            mSharedPrefManager.putStringExtra(SharedPrefVariable.FIREBASE_NOTI, gson.toJson(firebaseInfos));
-            mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, getInvitationBadgeCount());
-            BadgeUtils.setBadge(mContext, getInvitationBadgeCount());
         }
+        Gson gson = new Gson();
+        users.add(user);
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.INVITATION_USERS, gson.toJson(users));
     }
-    public List<InvitationUser> getSavedinvitationUsers () {
-        Map<String, String> firebaseInfos = (Map<String, String>) VIewUtil.fromJson( mSharedPrefManager.getStringExtra(SharedPrefVariable.FIREBASE_NOTI), new TypeToken< Map<String,String>>(){}.getType());
-        List<InvitationUser> invitationUsers = new ArrayList<>();
-        if ( firebaseInfos != null ) {
-            String invitationStr = firebaseInfos.get( String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE) );
-            if ( invitationStr != null || !invitationStr.equals("") )
-                invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
+    public void setAllInvitationUsers ( List<InvitationUser> users ) {
+        Gson gson = new Gson();
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.INVITATION_USERS, gson.toJson(users));
+    }
+    public List<InvitationUser> getInvitationUsers() {
+        String usersStr = mSharedPrefManager.getStringExtra(SharedPrefVariable.INVITATION_USERS);
+        if ( usersStr != null || !usersStr.equals("") ) {
+            return (List<InvitationUser>) VIewUtil.fromJson(usersStr, new TypeToken<List<InvitationUser>>(){}.getType());
+        }
+        return null;
+    }
+    public int getInvitationCount() {
+        String usersStr = mSharedPrefManager.getStringExtra(SharedPrefVariable.INVITATION_USERS);
+        if ( usersStr != null && !usersStr.equals("") ) {
+            List<InvitationUser> users = (List<InvitationUser>) VIewUtil.fromJson(usersStr, new TypeToken<List<InvitationUser>>(){}.getType());
+            return users.size();
+        }
+        return 0;
+    }
+    public void removeInvitationUser( int to, int from ) {
+        List<InvitationUser> users = getInvitationUsers();
+        for (int i = 0; i < users.size(); i++)
+            if ( users.get(i).getToUserIdx() == to && users.get(i).getFromUserIdx() == from )
+                users.remove(i);
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.INVITATION_USERS, new Gson().toJson(users));
+    }
+    /* new code 2019.01.15 song (e) */
 
-        }
-        return invitationUsers;
-    }
+
+
+
+
+
+
+
+
 }

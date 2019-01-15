@@ -69,7 +69,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
 
                         @Override
                         public void onNegativeClick(DialogInterface dialog, int which) {
-
+                            dialog.dismiss();
                         }
                     });
                 }
@@ -109,7 +109,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
     }
 
     @Override
-    public void showPopup(String message, final CommonListener.PopupClickListener clickListener) {
+    public void singleShowPopup(String message, final CommonListener.PopupClickListener clickListener) {
         super.showBasicOneBtnPopup(getString(R.string.message), message)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
@@ -118,5 +118,22 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                             }
                         }
                 ).show();
+    }
+    @Override
+    public void showPopup(String message, final CommonListener.PopupClickListener clickListener) {
+        super.showBasicOneBtnPopup(getString(R.string.message), message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                clickListener.onPositiveClick(dialog, which);
+                            }
+                        }
+                )
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        clickListener.onNegativeClick(dialogInterface, i);
+                    }
+                }).show();
     }
 }

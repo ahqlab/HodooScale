@@ -37,7 +37,5 @@ public interface HomeActivityIn {
         void setCurcleImage(PetAllInfos info);
 
         void getInvitationToServer();
-
-        void setNotiCount();
     }
 }

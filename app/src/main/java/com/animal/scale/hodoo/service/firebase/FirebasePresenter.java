@@ -1,7 +1,9 @@
 package com.animal.scale.hodoo.service.firebase;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.util.VIewUtil;
@@ -13,10 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
+
 public class FirebasePresenter implements FirebaseIn.Presenter {
     private static final String TAG = FirebasePresenter.class.getSimpleName();
     private FirebaseIn.View mView;
     private FirebaseModel mModel;
+    private CommonNotificationModel notificationModel;
     FirebasePresenter ( FirebaseIn.View view ) {
         mView = view;
         mModel = new FirebaseModel();
@@ -25,6 +30,7 @@ public class FirebasePresenter implements FirebaseIn.Presenter {
     @Override
     public void initDate(Context context) {
         mModel.loadData(context);
+        notificationModel = CommonNotificationModel.getInstance(context);
     }
 
     @Override
@@ -100,6 +106,18 @@ public class FirebasePresenter implements FirebaseIn.Presenter {
     public void saveBadgeCount(int count) {
         mModel.saveBadge(count);
         mView.sendBroad();
+    }
+
+    @Override
+    public void setInvitationUser(int to, int from) {
+        notificationModel.setInvitationData(to, from);
+        getInvitationUsers();
+    }
+
+    @Override
+    public void getInvitationUsers() {
+        List<InvitationUser> users = notificationModel.getInvitationUsers();
+        if ( DEBUG ) Log.e(TAG, "debug");
     }
 
 

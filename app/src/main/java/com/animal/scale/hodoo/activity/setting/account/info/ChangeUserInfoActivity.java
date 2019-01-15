@@ -42,7 +42,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 
 
     private String[] country;
-    private int selectCountry = 0;
+    private int selectCountry = 1;
     private List<Country> countries;
 
     @Override
@@ -191,7 +191,12 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 
         binding.getDomain().setNickname(nickName);
         binding.getDomain().setCountry(selectCountry);
-        Log.e("HJLEE", binding.getDomain().toString());
+
+        for (int i = 0; i < binding.checkBoxWrap.getChildCount(); i++) {
+            CheckBox checkBox = (CheckBox) binding.checkBoxWrap.getChildAt(i);
+            if ( checkBox.isChecked() )
+                binding.getDomain().setSex(checkBox.getTag().toString());
+        }
         presenter.updateBasicInfo(binding.getDomain());
         /*Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
         startActivity(intent);

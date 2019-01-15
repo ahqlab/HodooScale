@@ -48,9 +48,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         public void onReceive(Context context, Intent intent) {
             String message = intent.getStringExtra("message");
             Log.e(TAG, "messageeeeeeeeeeeeeeeeeeeeeeeeee : " + message);
-            int count = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT);
-            menus.get(5).setBadgeCount(count);
-            Adapter.setData(menus);
+            presenter.getInvitationCount();
         }
     };
 
@@ -109,6 +107,12 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
 
         finishAffinity();
         finish();
+    }
+
+    @Override
+    public void updateBadgeCount( int count ) {
+        menus.get(5).setBadgeCount(count);
+        Adapter.setData(menus);
     }
 
     @Override
