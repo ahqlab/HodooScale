@@ -5,27 +5,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.MyAccountActivity;
 import com.animal.scale.hodoo.activity.setting.device.list.DeviceListActivity;
-import com.animal.scale.hodoo.activity.setting.device.setting.DeviceSettingActivity;
 import com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity;
-import com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity;
+import com.animal.scale.hodoo.activity.setting.user.group.manager.UserGroupManagerActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfSetting;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivitySettingListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.SettingMenu;
-import com.animal.scale.hodoo.util.BadgeUtils;
 
 import java.util.List;
 
@@ -75,11 +73,11 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     }
 
     @Override
-    public void setListviewAdapter(List<SettingMenu> menus) {
+    public void setListviewAdapter(int badgeCount, List<SettingMenu> menus) {
         this.menus = menus;
         for (int i = 0; i < menus.size(); i++) {
             if ( i == 5 ) {
-                menus.get(i).setBadgeCount(sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT));
+                menus.get(i).setBadgeCount(badgeCount);
             } else {
                 menus.get(i).setBadgeCount(0);
             }
@@ -96,17 +94,28 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                 }else if(position == PET_MANAGEMENT){
                     SettingListActivity.super.moveIntent(SettingListActivity.this, PetAccountsActivity.class, 0,0, false);
                 }else if(position == USER_MANAGEMENT){
-                    SettingListActivity.super.moveIntent(SettingListActivity.this, UserAccountActivity.class, 0,0, false);
+                    SettingListActivity.super.moveIntent(SettingListActivity.this, UserGroupManagerActivity.class, 0,0, false);
                 }
             }
         });
     }
 
     @Override
+    public void goLoginPage() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+
+        finishAffinity();
+        finish();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         presenter.getSttingListMenu();
-        registerReceiver(receiver, new IntentFilter("unique_name"));
+        registerReceiver(receiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
 
     }
 
@@ -114,5 +123,8 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+    }
+    public void logout ( View v ) {
+        presenter.logout();
     }
 }

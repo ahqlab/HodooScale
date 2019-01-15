@@ -43,6 +43,7 @@ import com.animal.scale.hodoo.databinding.ActivityHomeBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.animal.scale.hodoo.util.BadgeUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -262,6 +263,20 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     }
 
     @Override
+    public void refreshBadge() {
+        this.setBadge();
+    }
+
+    @Override
+    public void setPushCount(int count) {
+        if ( count <= 0 ) {
+            BadgeUtils.clearBadge(this);
+        } else {
+            BadgeUtils.setBadge(this, Math.min(count, 99));
+        }
+    }
+
+    @Override
     public void setListviewAdapter(List<SettingMenu> settingList) {
         //adapter = new AdapterOfSetting(HomeActivity.this, settingList);
         //binding.appBarNavigation.customSpinnerListView.setAdapter(adapter);
@@ -279,5 +294,11 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         super.onStart();
         presenter.loadCustomDropdownView();
         //Kcal 로리 표시
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.setNotiCount();
     }
 }

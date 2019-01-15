@@ -30,8 +30,9 @@ public class MyAccountModel {
 
     public List<SettingMenu> getSettingList() {
         final List<SettingMenu> settingMenus = new ArrayList<SettingMenu>();
-        settingMenus.add(new SettingMenu(context.getString(R.string.log_out)));
+//        settingMenus.add(new SettingMenu(context.getString(R.string.log_out)));
         settingMenus.add(new SettingMenu(context.getString(R.string.change_user_account_info)));
+        settingMenus.add(new SettingMenu(context.getString(R.string.withdraw)));
         return settingMenus;
     }
 
@@ -65,6 +66,22 @@ public class MyAccountModel {
             }
         }.execute(call);
     }
+    public void withdraw( int type, final CommonModel.DomainCallBackListner<Integer> callback ) {
+        int idx = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+        if ( idx > 0 ) {
+            Call<Integer> call = NetRetrofit.getInstance().getUserService().withdraw(idx, type);
+            new AbstractAsyncTask<Integer>() {
+                @Override
+                protected void doPostExecute(Integer result) {
+                    callback.doPostExecute(result);
+                }
 
+                @Override
+                protected void doPreExecute() {
+
+                }
+            }.execute(call);
+        }
+    }
 
 }

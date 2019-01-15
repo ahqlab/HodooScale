@@ -22,7 +22,7 @@ public class InvitationModel extends CommonModel {
         return mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL);
     }
     public void sendInvitation ( String to, String from, final InvitationModel.DomainCallBackListner<Integer> callback ) {
-        Call<Integer> call = NetRetrofit.getInstance().getInvitationService().sendInvitation(to, from);
+        Call<Integer> call = NetRetrofit.getInstance().getFcmService().sendInvitation(to, from);
         new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {

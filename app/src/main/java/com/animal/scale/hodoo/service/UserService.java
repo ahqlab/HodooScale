@@ -42,4 +42,13 @@ public interface UserService{
 
     @POST("user/invitation/approval")
     Call<Integer> invitationApproval(@Query("toUserIdx") int toUserIdx, @Query("fromUserIdx") int fromUserIdx);
+
+    @POST("user/invitation/refusal")
+    Call<Integer> invitationRefusal(@Query("toUserIdx") int toUserIdx, @Query("fromUserIdx") int fromUserIdx);
+
+    @POST("user/setUserCode")
+    Call<Integer> withdraw( @Query("idx") int idx, @Query("type") int type );
+
+    @POST("user/withdrawGroup")
+    Call<Integer> withdrawGroup( @Query("to") int to, @Query("from") int from );
 }

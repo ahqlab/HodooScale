@@ -11,8 +11,10 @@ import android.view.View;
 
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityInvitationBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -26,6 +28,7 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
     public static int NOT_TO_USER = -1;
     public static int ERROR = 0;
     public static int SUCESS = 1;
+    public static int EXISTENCE_USER = 2;
 
     private ActivityInvitationBinding binding;
     private Invitation.Presenter presenter;
@@ -97,8 +100,9 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
     }
 
     @Override
-    public void goLoginPage() {
-        Intent intent = new Intent(this, MainActivity.class);
+    public void goFinishPage() {
+        Intent intent = new Intent(this, InvitationFinishActivity.class);
+        intent.putExtra(HodooConstant.INVITATION_EMAIL_KEY, binding.email.editText.getText().toString());
         intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
         startActivity(intent);

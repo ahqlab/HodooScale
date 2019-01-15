@@ -31,13 +31,22 @@
         <include
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}" />
-
+        <TextView
+            android:layout_below="@+id/my_toolbar"
+            android:id="@+id/title"
+            android:paddingLeft="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="34sp"
+            android:text="Acoount"
+            android:textColor="@color/mainBlack"
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:id="@+id/email_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/my_toolbar"
+            android:layout_below="@+id/title"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="36dp"
             android:layout_marginRight="40dp"
@@ -46,44 +55,58 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/change_user_info_email"
-                    android:textColor="@color/labelColor"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@={domain.email}"
-                    android:textColor="@color/black"
-                    android:textSize="27sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_below="@+id/my_toolbar"
-                android:layout_marginTop="16dp"
                 android:orientation="vertical">
 
                 <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
-                    android:id="@+id/password"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:focusable="true"
                     android:enabled="false"
-                    app:editTextResourceId="@layout/password_edittext"
+                    app:editTextResourceId="@layout/email_edittext"
                     app:errorMessageSize="11"
-                    app:title="@string/current_password"
-                    app:titleSize="13" />
+                    app:title="@string/change_user_info_email"
+                    app:titleSize="13"
+                    />
+
+                <!-- app:editText="@={domain.email}" -->
+
+                <RelativeLayout
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:enabled="false"
+                        app:editTextResourceId="@layout/password_edittext"
+                        app:errorMessageSize="11"
+                        app:title="@string/current_password"
+                        app:titleSize="13" />
+                    <Button
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="13dp"
+                        android:paddingRight="13dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:text="Reset Password >"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:background="@drawable/rounded_rect_radius_4_with_border"
+                        android:textColor="@color/mainRed"
+                        android:textSize="11sp"/>
+
+                </RelativeLayout>
+
+
 
                 <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
                     android:id="@+id/nick_name"
@@ -95,15 +118,57 @@
                     app:title="@string/istyle_label_nickname"
                     app:titleSize="13" />
 
-                <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
-                    android:id="@+id/country"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:editTextResourceId="@layout/normal_edittext"
-                    app:errorMessageSize="11"
-                    app:title="@string/istyle_label_country"
-                    app:titleSize="13" />
+                    android:layout_height="wrap_content">
+
+                    <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
+                        android:id="@+id/country"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:editTextResourceId="@layout/normal_edittext"
+                        app:errorMessageSize="11"
+                        app:title="@string/istyle_label_country"
+                        app:titleSize="13" />
+
+                    <LinearLayout
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/istyle_label_sex"/>
+                        <LinearLayout
+                            android:id="@+id/checkBoxWrap"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <CheckBox
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/woman"
+                                android:checked='@{domain.sex.toUpperCase().equals("FEMALE")}'
+                                />
+                            <CheckBox
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/men"
+                                android:checked='@{domain.sex.toUpperCase().equals("MALE")}'/>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
 
                 <Button

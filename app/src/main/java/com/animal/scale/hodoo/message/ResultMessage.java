@@ -9,7 +9,8 @@ public enum ResultMessage {
     //USER 관련 ERROR MESSAGE
     NOT_FOUND_EMAIL(10),
     ID_PASSWORD_DO_NOT_MATCH(11),
-    DUPLICATE_EMAIL(12);
+    DUPLICATE_EMAIL(12),
+    WITHDRAW_USER(14);
 
     @Getter
     private final int name;

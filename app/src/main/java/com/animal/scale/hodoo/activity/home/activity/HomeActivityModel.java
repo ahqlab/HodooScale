@@ -3,10 +3,12 @@ package com.animal.scale.hodoo.activity.home.activity;
 import android.content.Context;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.user.invitation.Invitation;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.service.NetRetrofit;
@@ -26,7 +28,7 @@ public class HomeActivityModel extends CommonModel{
     public void loadData(Context context){
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
-    };
+    }
 
     public void setSpinner(final DomainListCallBackListner<PetAllInfos> domainListCallBackListner) {
         Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().aboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
@@ -53,5 +55,24 @@ public class HomeActivityModel extends CommonModel{
         settingMenus.add(new SettingMenu(R.drawable.setting_user_icon_50_50, "사용자 그룹 관리"));
         settingMenus.add(new SettingMenu(R.drawable.setting_pet_icon_50_50, "펫 관리"));
         return settingMenus;
+    }
+
+    public void getInvitationCount( final HomeActivityModel.DomainListCallBackListner<InvitationUser> callback ) {
+        int idx = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+        Call<List<InvitationUser>> call = NetRetrofit.getInstance().getInvitationService().getInvitationUser(idx);
+        new AbstractAsyncTaskOfList<InvitationUser>() {
+            @Override
+            protected void doPostExecute(List<InvitationUser> d) {
+                callback.doPostExecute(d);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
+    }
+    public void setNotiCount ( int count ) {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
     }
 }

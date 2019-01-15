@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import com.animal.scale.hodoo.R;
@@ -48,11 +50,15 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_change_user_info);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo(getString(R.string.change_user_info_title)));
+//        binding.setActivityInfo(new ActivityInfo(getString(R.string.change_user_info_title)));
         super.setToolbarColor();
         presenter = new ChangeUserInfoPresenter(this);
 
+        binding.email.editText.setFocusable(false);
+        binding.email.editText.setEnabled(false);
+
         binding.password.editText.setClickable(true);
+        binding.password.editText.setEnabled(false);
         binding.password.editText.setCursorVisible(false);
         binding.password.editText.setFocusable(false);
         binding.password.editText.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +103,26 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
                 onClickCountryEditTextClick(view);
             }
         });
+        for (int i = 0; i < binding.checkBoxWrap.getChildCount(); i++) {
+            CheckBox checkBox = (CheckBox) binding.checkBoxWrap.getChildAt(i);
+            final int position = i;
+            checkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (position) {
+                        case 0 :
+                            ((CheckBox)binding.checkBoxWrap.getChildAt(0)).setChecked(true);
+                            ((CheckBox)binding.checkBoxWrap.getChildAt(1)).setChecked(false);
+                            break;
+                        case 1:
+                            ((CheckBox)binding.checkBoxWrap.getChildAt(0)).setChecked(false);
+                            ((CheckBox)binding.checkBoxWrap.getChildAt(1)).setChecked(true);
+                            break;
+                    }
+                }
+            });
+        }
+
     }
 
 
@@ -195,6 +221,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         binding.password.editText.setText(user.getPassword());
         binding.nickName.editText.setText(user.getNickname());
         binding.country.editText.setText(country[user.getCountry() - 1]);
+        binding.email.editText.setText(user.getEmail());
         binding.setDomain(user);
     }
 
