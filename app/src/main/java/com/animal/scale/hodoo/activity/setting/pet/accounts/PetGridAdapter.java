@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.PetAccountGridBinding;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

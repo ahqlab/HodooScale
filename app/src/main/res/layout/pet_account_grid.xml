@@ -30,8 +30,8 @@
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
-            android:src="@drawable/pet_account_middle_male_icon_143_143"
-            app:loadPicasoImage="@{domain.profileFilePath}"
+            android:src="@drawable/icon_pet_profile"
+            app:loadPetPicasoImage="@{domain.profileFilePath}"
             app:civ_border_color="@color/hodoo_midle_pink"
             app:civ_border_width="2dp" />
 

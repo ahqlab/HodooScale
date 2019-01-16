@@ -22,6 +22,7 @@ import android.util.Log;
 
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.fcm.NotificationActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
@@ -142,8 +143,9 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
                 .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.transparent_logo))
-                .setSmallIcon(R.drawable.transparent_white_logo)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed))
+                .setColorized(true)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
@@ -154,7 +156,8 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         //&& !isAppIsInBackground(getApplicationContext())
         if ( notiType == HodooConstant.FIREBASE_INVITATION_TYPE  ) {
-            notificationBuilder.addAction(R.drawable.ic_close_gray_24dp, getApplicationContext().getString(android.R.string.cancel), null)
+            PendingIntent dismissIntent = NotificationActivity.getDismissIntent(pushIdx, getApplicationContext());
+            notificationBuilder.addAction(R.drawable.ic_close_gray_24dp, getApplicationContext().getString(android.R.string.cancel), dismissIntent)
                                .addAction(R.drawable.ic_send_gray_24dp, getApplicationContext().getString(android.R.string.ok), pendingIntent);
         }
 
@@ -176,7 +179,6 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
     @Override
     public void sendBroad() {
         Intent broadIntent = new Intent(HodooConstant.FCM_RECEIVER_NAME);
-        broadIntent.putExtra("message", "test");
         getApplicationContext().sendBroadcast(broadIntent);
     }
 

@@ -190,6 +190,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         }
         Picasso.with(BasicInformationRegistActivity.this)
                 .load(SharedPrefVariable.SERVER_ROOT + basicInfo.getProfileFilePath())
+                .error(R.drawable.icon_pet_profile)
                 .into(binding.profile);
 
         if (basicInfo.getSex().matches(GENDER_MALE)) {

@@ -346,5 +346,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 }
             }
         });
+        binding.collapse.setContent(getString(R.string.istyle_bcs_comment));
     }
 }

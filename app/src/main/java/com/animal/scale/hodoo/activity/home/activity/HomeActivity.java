@@ -261,6 +261,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public void setCurcleImage(PetAllInfos info) {
         Picasso.with(this)
                 .load(SharedPrefVariable.SERVER_ROOT + info.getPetBasicInfo().getProfileFilePath())
+                .error(R.drawable.icon_pet_profile)
                 .into(binding.appBarNavigation.petImage);
     }
 
