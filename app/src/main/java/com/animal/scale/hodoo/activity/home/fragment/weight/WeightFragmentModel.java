@@ -96,13 +96,14 @@ public class WeightFragmentModel extends CommonModel {
         chart.setData(data);
         chart.getLegend().setEnabled(false);
         chart.animateX(1000);
+        chart.setNoDataText(context.getString(R.string.weight_data_available));
+        chart.setNoDataTextColor(context.getResources().getColor(R.color.mainBlack));
 
         chart.invalidate();
 
         Highlight highlight = new Highlight((float) data.getEntryCount(), 0, -1);
         chart.highlightValue(highlight, false);
-        chart.setNoDataText(context.getString(R.string.weight_data_available));
-        chart.setNoDataTextColor(context.getResources().getColor(R.color.mainBlack));
+
     }
 
 
@@ -159,7 +160,7 @@ public class WeightFragmentModel extends CommonModel {
         return null;
     }
 
-    public void getDayData(String date,  String type, final DomainListCallBackListner<Statistics> domainListCallBackListner) {
+    public void getDayData(String date,  int type, final DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfTime(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), date, type);
         new AbstractAsyncTaskOfList<Statistics>() {
             @Override
@@ -174,7 +175,7 @@ public class WeightFragmentModel extends CommonModel {
         }.execute(call);
     }
 
-    public void getLastCollectionData(String date, String type, final DomainCallBackListner<RealTimeWeight> domainListCallBackListner) {
+    public void getLastCollectionData(String date, int type, final DomainCallBackListner<RealTimeWeight> domainListCallBackListner) {
         Call<RealTimeWeight> call = NetRetrofit.getInstance().getRealTimeWeightService().getLastCollectionData(date, mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type);
         new AbstractAsyncTask<RealTimeWeight>() {
             @Override

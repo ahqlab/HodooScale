@@ -178,13 +178,15 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         return ChangeUserInfoActivity.this;
     }
 
-    public void onChangePasswordBtn(View view) {
+    public void onClickResetPassword(View view){
         Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-        finish();
     }
 
+    /*public void onChangePasswordBtn(View view) {
+
+    }
+*/
     public void onConfirmBtn(View view) {
 
         String nickName =  binding.nickName.editText.getText().toString();

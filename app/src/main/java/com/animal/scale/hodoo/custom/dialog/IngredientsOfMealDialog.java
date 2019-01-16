@@ -43,9 +43,10 @@ public class IngredientsOfMealDialog  extends DialogFragment {
         Feed feed  = grubEditingFeed(savedInstanceState, grubOriginalFeed());
         binding = IngredientsOfMealDialogBinding.bind(view);
         binding.setDomain(feed);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), com.github.javiersantos.bottomdialogs.R.style.BottomDialogs);
+        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), com.github.javiersantos.bottomdialogs.R.style.BottomDialogs);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view)
-                .setPositiveButton("save", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

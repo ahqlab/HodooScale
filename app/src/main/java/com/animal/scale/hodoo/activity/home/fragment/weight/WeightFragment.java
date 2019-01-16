@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.TextManager;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -94,14 +96,21 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
         binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
 
+        binding.chartView.setNoDataText(getActivity().getString(R.string.weight_data_available));
+        binding.chartView.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
+
         presenter = new WeightFragmentPresenter(this, binding.chartView);
         presenter.loadData(getActivity());
 
+        binding.chart1.setNoDataText(getActivity().getString(R.string.weight_data_available));
+        binding.chart1.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
+
+
         statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
         statisicsPresenter.initLoadData(getContext());
-        statisicsPresenter.getDailyStatisticalData("weight");
+        statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
         ////Kcal 로리 표시
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), "weight");
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
         presenter.initWeekCalendar();
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
@@ -125,7 +134,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     /* Call from the Home Activity */
     //차트를 그린다.. 동적 로딩 OK
     public void drawChart(){
-        presenter.getDefaultData(DateUtil.getCurrentDatetime(), "weight");
+        presenter.getDefaultData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
     //BCS 를
     public void setBcsMessage(int basicIdx) {
@@ -194,7 +203,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
-        Log.e("HJLEE", "weightTip.getContent() : " + weightTip.getContent());
         binding.messageTitle.setText(weightTip.getTitle());
         binding.collapseContent.setText(weightTip.getContent());
     }
@@ -217,10 +225,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 if (now.toDateTime().toString().compareTo(date) < 0) {
 
                 }else{
-                    presenter.getDefaultData(date, "weight");
+                    presenter.getDefaultData(date, TextManager.WEIGHT_DATA);
                     //setBcsMessage(info.getPet().getBasic());
                     //weightFragment.drawChart();
-                    presenter.getLastCollectionData(date,"weight");
+                    presenter.getLastCollectionData(date,TextManager.WEIGHT_DATA);
                     presenter.setAnimationGaugeChart(bcs);
                     refreshData();
                 }
@@ -283,7 +291,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
         presenter.getBcs(mBasicIdx);
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),"weight");
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),TextManager.WEIGHT_DATA);
     }
     private void rotationStart( View v ) {
         RotateAnimation rotate = new RotateAnimation(
@@ -324,16 +332,16 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
                 switch ( radioId ) {
                     case R.id.chart_day :
-                        statisicsPresenter.getDailyStatisticalData("weight");
+                        statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
                         break;
                     case R.id.chart_week :
-                        statisicsPresenter.getWeeklyStatisticalData("weight");
+                        statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA);
                         break;
                     case R.id.chart_month :
-                        statisicsPresenter.getMonthlyStatisticalData("weight");
+                        statisicsPresenter.getMonthlyStatisticalData(TextManager.WEIGHT_DATA);
                         break;
                     case R.id.chart_year :
-                        statisicsPresenter.getStatisticalDataByYear("weight");
+                        statisicsPresenter.getStatisticalDataByYear(TextManager.WEIGHT_DATA);
                         break;
                 }
             }

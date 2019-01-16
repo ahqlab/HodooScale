@@ -260,8 +260,8 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="not_data">No Data</string>
     <string name="today_intake_kcal">오늘 섭취한 총 칼로리</string>
     <!-- Meal Detail Info Dialog -->
-    <string name="istyle_one_hundred_g_supply">100g 제공량</string>
-    <string name="istyle_kcal">칼로기</string>
+    <string name="istyle_one_hundred_g_supply">100g 제공 칼로리</string>
+    <string name="istyle_kcal">칼로리</string>
     <string name="istyle_one_hundred_g_nutrient_content">100g당 영양소 함유량</string>
 
     <!-- Pet Regist Dialog -->

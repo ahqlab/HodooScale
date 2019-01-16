@@ -25,4 +25,5 @@ public class SharedPrefVariable {
     public static final String SERVER_ROOT = "http://121.183.234.14:7171/";
     public static final String CURRENT_COUNTRY = "CURRENT_COUNTRY";
     //public static final String SERVER_ROOT = "http://192.168.10.104:9090/";
+
 }

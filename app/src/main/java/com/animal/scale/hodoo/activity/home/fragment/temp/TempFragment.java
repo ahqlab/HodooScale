@@ -28,6 +28,7 @@ import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.TextManager;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -90,15 +91,20 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
         //bcsArr = getResources().getStringArray(R.array.bcs_arr);
         //binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
         //binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
+        binding.chartView.setNoDataText(getActivity().getString(R.string.weight_data_available));
+        binding.chartView.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
 
         presenter = new WeightFragmentPresenter(this, binding.chartView);
         presenter.loadData(getActivity());
 
+        binding.chart1.setNoDataText(getActivity().getString(R.string.weight_data_available));
+        binding.chart1.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
+
         statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
         statisicsPresenter.initLoadData(getContext());
-        statisicsPresenter.getDailyStatisticalData("temp");
+        statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
         //Kcal 로리 표시
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),"temp");
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),TextManager.TEMP_DATA);
         presenter.initWeekCalendar();
         /*((HomeActivity)getActivity()).binding.appBarNavigation.petImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +127,7 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
     /* Call from the Home Activity */
     //차트를 그린다.. 동적 로딩 OK
     public void drawChart() {
-        presenter.getDefaultData(DateUtil.getCurrentDatetime(),"temp");
+        presenter.getDefaultData(DateUtil.getCurrentDatetime(),TextManager.TEMP_DATA);
     }
 
     //BCS 를
@@ -212,10 +218,10 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
                 if (now.toDateTime().toString().compareTo(date) < 0) {
 
                 } else {
-                    presenter.getDefaultData(date,"temp");
+                    presenter.getDefaultData(date,TextManager.TEMP_DATA);
                     //setBcsMessage(info.getPet().getBasic());
                     //weightFragment.drawChart();
-                    presenter.getLastCollectionData(date,"temp");
+                    presenter.getLastCollectionData(date,TextManager.TEMP_DATA);
                     presenter.setAnimationGaugeChart(bcs);
                     refreshData();
                 }
@@ -278,7 +284,7 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
         nowTime = System.currentTimeMillis();
         //binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
         //presenter.getBcs(mBasicIdx);
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),"temp");
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),TextManager.TEMP_DATA);
     }
 
     private void rotationStart(View v) {
@@ -321,16 +327,16 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
                 switch (radioId) {
                     case R.id.chart_day:
-                        statisicsPresenter.getDailyStatisticalData("temp");
+                        statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
                         break;
                     case R.id.chart_week:
-                        statisicsPresenter.getWeeklyStatisticalData("temp");
+                        statisicsPresenter.getWeeklyStatisticalData(TextManager.TEMP_DATA);
                         break;
                     case R.id.chart_month:
-                        statisicsPresenter.getMonthlyStatisticalData("temp");
+                        statisicsPresenter.getMonthlyStatisticalData(TextManager.TEMP_DATA);
                         break;
                     case R.id.chart_year:
-                        statisicsPresenter.getStatisticalDataByYear("temp");
+                        statisicsPresenter.getStatisticalDataByYear(TextManager.TEMP_DATA);
                         break;
                 }
             }
