@@ -46,10 +46,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            // Extract data included in the Intent
-            Log.e(TAG, "Base onReceive");
             setBadge();
-            //do other stuff here
         }
     };
 

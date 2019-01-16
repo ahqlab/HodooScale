@@ -46,8 +46,6 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String message = intent.getStringExtra("message");
-            Log.e(TAG, "messageeeeeeeeeeeeeeeeeeeeeeeeee : " + message);
             presenter.getInvitationCount();
         }
     };

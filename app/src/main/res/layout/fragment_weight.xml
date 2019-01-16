@@ -142,6 +142,7 @@
                     <!-- sync (e) -->
                 </com.animal.scale.hodoo.custom.view.TopImageLayout>
                 <com.animal.scale.hodoo.custom.view.CustomCollapse
+                    android:id="@+id/collapse"
                     android:layout_marginTop="1dp"
                     android:paddingLeft="38dp"
                     android:paddingRight="38dp"
@@ -182,7 +183,7 @@
                             android:textColor="#9b9b9b"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/istyle_bcs_comment"/>
+                            android:text=""/>
                     </LinearLayout>
                 </com.animal.scale.hodoo.custom.view.CustomCollapse>
 

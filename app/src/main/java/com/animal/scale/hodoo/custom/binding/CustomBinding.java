@@ -98,6 +98,20 @@ public class CustomBinding {
         }
 
     }
+    @BindingAdapter({"loadPetPicasoImage"})
+    public static void loadPetPicasoImage(ImageView imageView, String url) {
+        if (url.matches("add")) {
+            Picasso.with(imageView.getContext())
+                    .load(R.drawable.pet_account_midle_add_icon_143_143)
+                    .into(imageView);
+        } else {
+            Picasso.with(imageView.getContext())
+                    .load(SharedPrefVariable.SERVER_ROOT + url)
+                    .error(R.drawable.icon_pet_profile)
+                    .into(imageView);
+        }
+
+    }
 
     @BindingAdapter({"loadUserAccountImage"})
     public static void loadUserAccountImage(ImageView imageView, String sex) {

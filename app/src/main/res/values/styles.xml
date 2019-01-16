@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -12,6 +12,8 @@
         <!--Status Bar 글자색깔-->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:colorBackground">@color/hodoo_new_background_color</item>
+        <item name="colorPrimaryDark" tools:targetApi="23" tools:ignore="DuplicateDefinition">@color/colorPrimary</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23" tools:ignore="DuplicateDefinition">true</item>
 
     </style>
 

@@ -2,7 +2,9 @@ package com.animal.scale.hodoo.custom.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -12,6 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
+
+import org.w3c.dom.Text;
+
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class CustomCollapse extends RelativeLayout implements View.OnClickListener {
     private String TAG = CustomCollapse.class.getSimpleName();
@@ -23,10 +29,11 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
     private int initHeight = -1;
     private int openHeight = 0;
 
+
     private View header;
     private View content;
 
-    private boolean initState = false;
+    private boolean initState = true;
 
     public CustomCollapse(Context context) {
         this(context, null);
@@ -98,9 +105,12 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
         contentTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                openHeight = contentTextView.getMeasuredHeight();
                 LayoutParams params = (LayoutParams) content.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                content.setLayoutParams(params);
+                openHeight = contentTextView.getMeasuredHeight();
                 params.height = 0;
+
                 content.setLayoutParams(params);
                 contentTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
@@ -112,6 +122,29 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         initSize();
+    }
+    public void setContent( String content ) {
+        if ( this.content == null )
+            this.content = this.getChildAt(1);
+        final TextView contentTextView = new TextView(getContext());
+        contentTextView.setText(content);
+
+        if ( DEBUG ) Log.e(TAG, String.format("line operation height : %d", contentTextView.getLineCount() * contentTextView.getLineHeight()));
+
+
+
+        ((ViewGroup) this.content).removeAllViews();
+        contentTextView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+        ((ViewGroup) this.content).addView(contentTextView);
+
+        contentTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                openHeight = contentTextView.getLineCount() * contentTextView.getLineHeight();
+                contentTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
     }
 
 }
