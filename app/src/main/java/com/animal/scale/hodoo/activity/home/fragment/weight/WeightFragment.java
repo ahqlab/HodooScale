@@ -42,6 +42,8 @@ import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 import noman.weekcalendar.listener.OnWeekChangeListener;
 
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
+
 public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener , WeightFragmentIn.View, WeightStatistics.View{
 
     FragmentWeightBinding binding;
@@ -203,8 +205,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
-        binding.messageTitle.setText(weightTip.getTitle());
-        binding.collapseContent.setText(weightTip.getContent());
+        if ( DEBUG ) Log.e(TAG, "setTipMessageOfCountry");
+        binding.collapse.setTitle(weightTip.getTitle());
+        binding.collapse.setContent(weightTip.getContent());
+//        binding.collapseContent.setText(weightTip.getContent());
     }
 
     @Override
@@ -346,6 +350,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 }
             }
         });
-        binding.collapse.setContent(getString(R.string.istyle_bcs_comment));
+
     }
 }

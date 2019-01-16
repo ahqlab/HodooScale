@@ -217,13 +217,13 @@
                 <com.animal.scale.hodoo.custom.view.CustomCollapse
                     android:layout_marginTop="1dp"
                     android:paddingLeft="38dp"
-                    android:paddingRight="38dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white">
                     <LinearLayout
+                        android:paddingRight="38dp"
                         android:id="@+id/header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -245,6 +245,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:paddingLeft="29dp"
+                        android:paddingRight="38dp"
                         android:layout_below="@+id/header"
                         android:id="@+id/content"
                         android:layout_width="match_parent"

@@ -1,8 +1,11 @@
 package com.animal.scale.hodoo.custom.view;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +31,11 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
     private int flag = -1;
     private int initHeight = -1;
     private int openHeight = 0;
+
+    private int titleStart = 0;
+    private int titleEnd = 0;
+
+    private TextView title;
 
 
     private View header;
@@ -75,8 +83,39 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
             });
             tvAnim.setDuration(500);
             tvAnim.start();
+
+            if ( DEBUG ) Log.e(TAG, String.format("start : %d, end : %d", flag < 0 ? titleStart : titleEnd, flag < 0 ? titleEnd : titleStart));
+            if ( title != null ) {
+                tvAnim = ValueAnimator.ofInt(flag < 0 ? titleStart : titleEnd, flag < 0 ? titleEnd : titleStart);
+                tvAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        int val = (int) valueAnimator.getAnimatedValue();
+                        ViewGroup.LayoutParams params = title.getLayoutParams();
+                        params.height = val;
+                        title.setLayoutParams(params);
+                    }
+                });
+                tvAnim.setDuration(500);
+                tvAnim.start();
+                tvAnim.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        title.setSingleLine(flag > 0);
+                        flag = flag < 0 ? 1 : -1;
+                    }
+                });
+            }
+
+
             mIconView.animate().rotation(flag < 0 ? -180 : 0).withLayer();
-            flag = flag < 0 ? 1 : -1;
+            if ( title != null ){
+                if ( !(flag > 0) )
+                    title.setSingleLine(false);
+            } else {
+                flag = flag < 0 ? 1 : -1;
+            }
         }
     }
     private void initSize () {
@@ -87,7 +126,7 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
             LayoutParams iconParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             iconParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             iconParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            iconParams.setMargins(0, 0, 0, 0);
+            iconParams.setMargins(0, 0, 50, 0);
 
             mIconView = new ImageView(getContext());
             mIconView.setLayoutParams(iconParams);
@@ -129,10 +168,6 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
         final TextView contentTextView = new TextView(getContext());
         contentTextView.setText(content);
 
-        if ( DEBUG ) Log.e(TAG, String.format("line operation height : %d", contentTextView.getLineCount() * contentTextView.getLineHeight()));
-
-
-
         ((ViewGroup) this.content).removeAllViews();
         contentTextView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
         ((ViewGroup) this.content).addView(contentTextView);
@@ -144,6 +179,32 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
                 contentTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
+
+    }
+    public void setTitle ( String titleStr ) {
+        if ( title == null )
+            title = header.findViewById(R.id.message_title);
+        title.setSingleLine( false );
+        title.setText(titleStr);
+
+        title.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                title.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                titleStart = title.getLineHeight();
+                titleEnd = title.getLineCount() * title.getLineHeight();
+                if ( DEBUG ) Log.e(TAG, String.format("view observer line count : %d, line height : %d, result : %d", title.getLineCount(), title.getLineHeight(), title.getLineCount() * title.getLineHeight()));
+                title.setSingleLine(flag < 0);
+                title.setEllipsize(TextUtils.TruncateAt.END);
+                ViewGroup.LayoutParams params = title.getLayoutParams();
+                params.height = titleStart;
+                title.setLayoutParams(params);
+
+            }
+        });
+        
+        if ( DEBUG ) Log.e(TAG, String.format("line count : %d, line height : %d, result : %d", title.getLineCount(), title.getLineHeight(), title.getLineCount() * title.getLineHeight()));
+        
 
     }
 
