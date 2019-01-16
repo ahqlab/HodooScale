@@ -26,6 +26,7 @@ public class AutoCompleateFeed implements Serializable {
     private float phosphorus;
     private float omega3;
     private float omega6;
+    private String language;
     private String mainIngredient;
 
     @Override

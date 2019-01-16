@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.db.DBHandler;
 import com.animal.scale.hodoo.domain.SearchHistory;
 import com.animal.scale.hodoo.domain.SearchParam;
@@ -17,10 +19,16 @@ import retrofit2.Call;
 
 public class MealSearchModel extends CommonModel {
 
+    Context context;
+
+    public SharedPrefManager sharedPrefManager;
+
     private DBHandler dbHandler;
 
     @Override
     public void loadData(Context context) {
+        this.context = context;
+        sharedPrefManager = SharedPrefManager.getInstance(context);
         dbHandler = new DBHandler(context);
         super.loadData(context);
     }
@@ -41,7 +49,7 @@ public class MealSearchModel extends CommonModel {
     }
 
     public void getSearchFeed(String s ,final DomainListCallBackListner<AutoCompleateFeed> domainListCallBackListner) {
-        Call<List<AutoCompleateFeed>> call = NetRetrofit.getInstance().getFeedService().getSearchFeedList(new SearchParam(s));
+        Call<List<AutoCompleateFeed>> call = NetRetrofit.getInstance().getFeedService().getSearchFeedList(new SearchParam(s), sharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY));
         new AbstractAsyncTaskOfList<AutoCompleateFeed>() {
             @Override
             protected void doPostExecute(List<AutoCompleateFeed> d) {

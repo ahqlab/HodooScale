@@ -99,6 +99,7 @@
                         android:minHeight="0dp"
                         android:minWidth="0dp"
                         android:text="Reset Password >"
+                        android:onClick="@{activity::onClickResetPassword}"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:background="@drawable/rounded_rect_radius_4_with_border"
                         android:textColor="@color/mainRed"

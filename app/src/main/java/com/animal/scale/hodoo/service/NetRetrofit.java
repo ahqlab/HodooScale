@@ -40,6 +40,8 @@ public class NetRetrofit {
 
     MealHistoryService mealHistoryService = retrofit.create(MealHistoryService.class);
     ActivityService activityService = retrofit.create(ActivityService.class);
+    FeederService feederService = retrofit.create(FeederService.class);
+    WeightTipService weightTipService =  retrofit.create(WeightTipService.class);
 
     public UserService getUserService() {
         return service;
@@ -76,8 +78,16 @@ public class NetRetrofit {
         return countryService;
     }
 
+    public FeederService getFeederService() {
+        return feederService;
+    }
+
     public FcmService getFcmService() {
         return fcmService;
+    }
+
+    public WeightTipService getWeightTipService() {
+        return weightTipService;
     }
 }
 

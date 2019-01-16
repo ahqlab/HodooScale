@@ -14,6 +14,7 @@ import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealActivity;
 import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealModel;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.custom.dialog.IngredientsOfMealDialog;
 import com.animal.scale.hodoo.custom.view.seekbar.ProgressItem;
 import com.animal.scale.hodoo.databinding.ActivityMealUpdateBinding;
 import com.animal.scale.hodoo.db.DBHandler;
@@ -57,6 +58,8 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     private float rer;
 
     private DBHandler dbHandler;
+
+    IngredientsOfMealDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +169,8 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         progressItemList.add(mProgressItem);
 
         binding.seekBar.invalidate();
+
+
     }
 
     @Override
@@ -175,6 +180,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         setDecimalNumberPicker(binding.umsu);
         setStringNumberPicker(binding.unit, feed);
 
+        dialog = IngredientsOfMealDialog.newInstance(feed);
     }
 
     @Override
@@ -245,9 +251,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     }
 
     public void onClickDetailBtn(View view) {
-        Intent intent = new Intent(getApplicationContext(), IngredientsOfMealActivity.class);
-        intent.putExtra("feedId", feedId);
-        startActivity(intent);
+        dialog.show(getFragmentManager(), "dialog");
     }
 
     public void onClickSaveBtn(View view) {

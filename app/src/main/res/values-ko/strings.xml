@@ -257,7 +257,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <!-- WeightFragment -->
     <string name="istyle_bcs_comment">현재 귀하의 반려견은 BCS 4단계로 평균 체중에 비해 과다한 상태입니다. \n 균형잡힌 식단과 올바른 황동으로 반려견의 체중을 관리해주셔야 합니다.</string>
     <string name="istyle_weight_history_of_the_day">오늘의 체중 기록</string>
-    <string name="average_weight_for_today">AVERAGE WEIGHT FOR TODAY</string>
+    <string name="average_weight_for_today">일일 섭취 총 칼로리</string>
     <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
     <string name="weight_for_today">today\'s weight</string>
     <string name="temp_for_today">today\'s temp</string>
@@ -273,7 +273,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="one_year">년</string>
 
     <!-- Meal Detail Info Dialog -->
-    <string name="istyle_one_hundred_g_supply">100g 제공량</string>
+    <string name="istyle_one_hundred_g_supply">100g 제공 칼로리</string>
     <string name="istyle_kcal">칼로기</string>
     <string name="istyle_one_hundred_g_nutrient_content">100g당 영양소 함유량</string>
 
@@ -372,4 +372,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
 
     <string name="forgot_password_sub_scription">이메일로 임시비밀번호를 발송해드립니다.</string>
     <string name="send_mail_failed">메일 전송에 실패하였습니다.</string>
+    <string name="feed_order">급식하기</string>
+    <string name="pet_feeder">급식기</string>
+    <string name="weight_data_available">측정된 체중 데이터가 없습니다.</string>
 </resources>

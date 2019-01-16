@@ -158,6 +158,11 @@ public class CustomBinding {
         textView.setText(String.valueOf(value) + " Kcal");
     }
 
+    @BindingAdapter({"conOnlyFloatToStringPersent"})
+    public static void conOnlyFloatToStringPersent(TextView textView, float value) {
+        textView.setText(String.valueOf(value) + " %");
+    }
+
     @BindingAdapter({"dateTimeConverter"})
     public static void dateTimeConverter(TextView textView, String value) {
         Date date;

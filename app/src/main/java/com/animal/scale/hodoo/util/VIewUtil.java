@@ -15,6 +15,7 @@ import com.animal.scale.hodoo.R;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -70,6 +71,11 @@ public class VIewUtil {
             }
         }
         return result;
+    }
+    public static  String getMyLocationCode(Context context) {
+        Locale systemLocale = context.getApplicationContext().getResources().getConfiguration().locale;
+        String language = systemLocale.getLanguage();
+        return language;
     }
     public static Object fromJson(String jsonString, Type type) {
         return new Gson().fromJson(jsonString, type);

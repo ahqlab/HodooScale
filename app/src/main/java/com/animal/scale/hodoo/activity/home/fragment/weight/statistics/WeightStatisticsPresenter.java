@@ -33,7 +33,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         model.initLoadData(context);
     }
 
-    public void getDailyStatisticalData(String type) {
+    public void getDailyStatisticalData(int type) {
         model.getDailyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
@@ -67,7 +67,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     @Override
-    public void getWeeklyStatisticalData(String type) {
+    public void getWeeklyStatisticalData(int type) {
         model.getWeeklyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
@@ -88,7 +88,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     @Override
-    public void getMonthlyStatisticalData(String type) {
+    public void getMonthlyStatisticalData(int type) {
         model.getMonthlyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
@@ -109,7 +109,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     @Override
-    public void getStatisticalDataByYear(String type) {
+    public void getStatisticalDataByYear(int type) {
         model.getStatisticalDataByYear(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
@@ -129,7 +129,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         });
     }
 
-    private void setStatisticalData(List<Statistics> d, String type) {
+    private void setStatisticalData(List<Statistics> d, String  type) {
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < d.size(); i++) {
             yVals.add(new Entry(i, d.get(i).getAverage()));

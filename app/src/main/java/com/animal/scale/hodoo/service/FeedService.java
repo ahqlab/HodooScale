@@ -22,7 +22,7 @@ public interface FeedService {
     Call<List<AutoCompleateFeed>> getAllFeedList();
 
     @POST("feed/search/list")
-    Call<List<AutoCompleateFeed>> getSearchFeedList(@Body SearchParam searchParam);
+    Call<List<AutoCompleateFeed>> getSearchFeedList(@Body SearchParam searchParam, @Query("language") String language);
 
     @POST("feed/get/info")
     Call<Feed> getFeedInfo(@Query("feedId") int feedId);

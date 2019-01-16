@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.device.bowelplate.list.BowelPlateListActivity;
+import com.animal.scale.hodoo.activity.setting.device.feeder.FeederOrderActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityDeviceListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -27,6 +28,7 @@ public class DeviceListActivity extends BaseActivity<DeviceListActivity> {
         String[] values = new String[] {
                 this.getString(R.string.bowel_plate),
                 this.getString(R.string.pet_bed),
+                this.getString(R.string.pet_feeder),
                 this.getString(R.string.cushion),
                 this.getString(R.string.harness),
                 this.getString(R.string.pendant)
@@ -39,6 +41,8 @@ public class DeviceListActivity extends BaseActivity<DeviceListActivity> {
                 String device = (String) adapterView.getItemAtPosition(i);
                 if(device.matches(getString(R.string.bowel_plate))){
                     DeviceListActivity.super.moveIntent(DeviceListActivity.this, BowelPlateListActivity.class, 0,0, false);
+                }else if(device.matches(getString(R.string.pet_feeder))){
+                    DeviceListActivity.super.moveIntent(DeviceListActivity.this, FeederOrderActivity.class, 0,0, false);
                 }
             }
         });
