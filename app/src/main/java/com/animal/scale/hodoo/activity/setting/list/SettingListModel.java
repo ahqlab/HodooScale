@@ -36,4 +36,5 @@ public class SettingListModel extends CommonModel {
     public void logout() {
         sharedPrefManager.removeAllPreferences();
     }
+
 }

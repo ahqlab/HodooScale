@@ -41,7 +41,7 @@ public class WeightView extends LinearLayout {
         mFirstNum = new TickerView[MAX_COUNT];
 
         /* MAX_COUNT 배치 */
-        for (int j = 0; j < mFirstNum.length - 1; j++) {
+        for (int j = 0; j < mFirstNum.length; j++) {
             TickerView firstNumView = new TickerView(getContext());
             firstNumView.setAnimationDuration(2000);
             firstNumView.setCharacterLists(TickerUtils.provideNumberList());
@@ -102,8 +102,11 @@ public class WeightView extends LinearLayout {
         char[] number = new char[splitStr[0].length()];
         for(int i=0;i<number.length;i++){
             number[i]=(splitStr[0].charAt(i));
-            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++)
-                mFirstNum[i].setText(String.valueOf(j));
+            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++) {
+                if ( mFirstNum[i] != null )
+                    mFirstNum[i].setText(String.valueOf(j));
+            }
+
         }
         if ( mDisplayCount > 0 ) {
             number = new char[splitStr[1].length()];

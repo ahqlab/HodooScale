@@ -266,7 +266,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
             }
             binding.calorieBar.setProgress((int) mealHistory.getCalorie());
             //binding.calorieIntake.setText((int) mealHistory.getCalorie() + "kcal");
-            binding.calorieView.setNumber((int) mealHistory.getCalorie());
+            binding.calorieView.setNumber(mealHistory.getCalorie());
         } else {
             binding.calorieBar.setMax((int) rer);
             binding.rer.setText(String.valueOf(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");

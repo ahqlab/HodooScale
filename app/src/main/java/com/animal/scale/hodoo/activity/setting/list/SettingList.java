@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.domain.SettingMenu;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface SettingList {
@@ -11,6 +12,8 @@ public interface SettingList {
     interface View {
 
         public void setListviewAdapter(int badgeCount, List<SettingMenu> menus);
+
+        void setExpandableListAdapter (ArrayList<String> title, ArrayList<List<SettingMenu>> content);
 
         void goLoginPage();
 
@@ -22,6 +25,8 @@ public interface SettingList {
         void loadData(Context context);
 
         public void getSttingListMenu();
+
+        void getStringSettingList( Context context );
 
         void logout();
 
