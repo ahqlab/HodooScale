@@ -54,4 +54,51 @@
         <item>ch</item>
     </string-array>
 
+    <string-array name="setting_title">
+        <item>일반 설정</item>
+        <item>사용자</item>
+        <item>디바이스</item>
+        <item>함께관리</item>
+        <item>펫 관리</item>
+        <item>고객관리</item>
+    </string-array>
+
+    <string-array name="general_settings">
+        <item>공지사항</item>
+        <item>홈페이지</item>
+        <item>앱 버전</item>
+    </string-array>
+
+    <string-array name="user_settings">
+        <item>계정</item>
+        <item>알림</item>
+        <item>앱 버전</item>
+        <item>로그아웃</item>
+    </string-array>
+
+    <string-array name="device_settings">
+        <item>배변판</item>
+        <item>급식기</item>
+        <item>침대</item>
+        <item>방석</item>
+        <item>하네스</item>
+        <item>인식표</item>
+    </string-array>
+
+    <string-array name="hodoo_link_settings">
+        <item>그룹 멤버 리스트</item>
+        <item>멤버 요청 기록</item>
+    </string-array>
+
+    <string-array name="pet_settings">
+        <item>등록된 펫 리스트</item>
+    </string-array>
+
+    <string-array name="support_settings">
+        <item>오픈소스 라이선스</item>
+        <item>이용약관</item>
+        <item>오픈소스 라이선스</item>
+        <item>개인정보처리방침</item>
+    </string-array>
+
 </resources>

@@ -16,6 +16,7 @@
     </data>
 
     <RelativeLayout
+        android:background="@color/hodoo_new_background_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
@@ -25,7 +26,18 @@
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}"/>
 
+        <ExpandableListView
+            android:background="@android:color/transparent"
+            android:id="@+id/setting_list"
+            android:layout_below="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@android:color/transparent"
+            android:divider="@null"/>
+
+
         <LinearLayout
+            android:visibility="invisible"
             android:layout_below="@+id/my_toolbar"
             android:orientation="vertical"
             android:layout_width="match_parent"
