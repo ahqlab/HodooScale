@@ -1,9 +1,13 @@
 package com.animal.scale.hodoo.activity.pet.regist.weight;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +26,17 @@ import com.animal.scale.hodoo.databinding.ActivityWeightCheckBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.util.ViewFlipperAction;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> implements WeightCheckIn.View {
+public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCheckIn.View {
 
+    public static Context mContext;
     //뷰플리퍼
     //인덱스
     List<ImageView> indexes;
@@ -38,13 +47,15 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
 
     private int petIdx;
 
+    YouTubePlayer.OnInitializedListener listener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weight_check);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_check_title)));
-        super.setToolbarColor();
+        setToolbarColor();
         presenter = new WeightCheckPresenter(this);
         presenter.loadData(WeightCheckActivity.this);
         presenter.setNavigation();
@@ -53,11 +64,46 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
         presenter.getWeightInformation(petIdx);
+
+        binding.youtubePlayer.initialize("AIzaSyA55VHiduzK7x3noqovYgi7YKKa53xyTrM", new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                youTubePlayer.loadVideo("QEPkuGHlVx0");
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
     }
 
-    @Override
+    /*@Override
     protected BaseActivity<WeightCheckActivity> getActivityClass() {
         return WeightCheckActivity.this;
+    }*/
+
+    public void setToolbarColor() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.hodoo_pink), PorterDuff.Mode.SRC_ATOP);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+            }
+        });
+    }
+
+    public AlertDialog.Builder showBasicOneBtnPopup(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(WeightCheckActivity.this);
+        if(title != null){
+            builder.setTitle(title);
+        }
+        if(message != null){
+            builder.setMessage(message);
+        }
+        return builder;
     }
 
     @Override
@@ -106,11 +152,14 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
     @Override
     public void registResult(Integer integer) {
         if (integer != 0) {
-
-            Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
+           /* Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+            overridePendingTransition(R.anim.end_enter, R.anim.end_exit);*/
+
+            ((BasicInformationRegistActivity) BasicInformationRegistActivity.mContext).finish();
+            ((DiseaseInformationRegistActivity) DiseaseInformationRegistActivity.mContext).finish();
+            ((PhysiqueInformationRegistActivity) PhysiqueInformationRegistActivity.mContext).finish();
             finish();
             Toast.makeText(this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
         } else {
@@ -122,7 +171,7 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
         if (binding.getDomain().getBcs() > 0) {
             presenter.deleteWeightInfo(petIdx, binding.getDomain().getId());
         } else {
-            super.showBasicOneBtnPopup(null, getResources().getString(R.string.istyle_required_select_bcs_message))
+            showBasicOneBtnPopup(null, getResources().getString(R.string.istyle_required_select_bcs_message))
                     .setPositiveButton(getResources().getString(R.string.istyle_required_select_bcs_message), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -261,31 +310,31 @@ public class WeightCheckActivity extends BaseActivity<WeightCheckActivity> imple
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+                /*Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
         binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+                /*Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
         binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
+                /*Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
         /*binding.addPetNavigation.weightBtn.setOnClickListener(new View.OnClickListener() {

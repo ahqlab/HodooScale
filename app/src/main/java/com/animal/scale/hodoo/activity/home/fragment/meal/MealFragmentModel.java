@@ -7,7 +7,9 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.MealHistoryContent;
+import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
 import java.util.List;
@@ -23,9 +25,26 @@ public class MealFragmentModel extends CommonModel {
             protected void doPostExecute(Feed feed) {
                 feedDomainCallBackListner.doPostExecute(feed);
             }
+
             @Override
             protected void doPreExecute() {
 
+            }
+        }.execute(call);
+    }
+
+
+    public void getTipMessageOfCountry(MealTip mealTip, final DomainCallBackListner<MealTip> domainListCallBackListner) {
+        Call<MealTip> call = NetRetrofit.getInstance().getMealTipService().getTipOfCountry(mealTip);
+        new AbstractAsyncTask<MealTip>() {
+            @Override
+            protected void doPostExecute(MealTip tip) {
+                domainListCallBackListner.doPostExecute(tip);
+            }
+
+            @Override
+            protected void doPreExecute() {
+                domainListCallBackListner.doPreExecute();
             }
         }.execute(call);
     }

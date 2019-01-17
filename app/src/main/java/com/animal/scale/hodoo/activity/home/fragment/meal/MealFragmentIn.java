@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
+import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 
 import java.text.ParseException;
@@ -23,6 +24,8 @@ public interface MealFragmentIn {
         void setPetAllInfo(PetAllInfos petAllInfos);
 
         void setTodaySumCalorie(MealHistory mealHistory);
+
+        void setTipMessageOfCountry(MealTip tip);
     }
     interface Presenter{
 
@@ -35,6 +38,8 @@ public interface MealFragmentIn {
         void getPetAllInfo();
 
         void getTodaySumCalorie();
+
+        void getTipMessageOfCountry(MealTip mealTip);
     }
 
 }

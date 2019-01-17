@@ -28,6 +28,8 @@ import com.tistory.dwfox.dwrulerviewlibrary.view.ScrollingValuePicker;
 
 public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInformationRegistActivity> implements PhysiqueInformationRegistIn.View{
 
+    public static Context mContext;
+
     ActivityPhysiqueInformationRegistBinding binding;
 
     public int petId;
@@ -52,6 +54,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.physique_information_regist_title)));
         super.setToolbarColor();
+        mContext = this;
         presenter = new PhysiqueInformationRegistPresenter(this);
         presenter.loadData(PhysiqueInformationRegistActivity.this);
         presenter.setNavigation();
@@ -147,21 +150,21 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+              /*  Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
         binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+               /* Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
        /* binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {

@@ -27,7 +27,9 @@ import com.animal.scale.hodoo.custom.mpchart.RadarMarkerView;
 import com.animal.scale.hodoo.databinding.FragmentMealLayoutBinding;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
+import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.RER;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -71,6 +73,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     private float rer;
 
+    private String country;
+
     public MealFragment() {
     }
 
@@ -100,6 +104,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         tfRegular = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
         tfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
 
+        country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
+        presenter.getTipMessageOfCountry(new MealTip(country));
         //binding.calorieBar.setPro
 
         return binding.getRoot();
@@ -276,6 +282,12 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
             binding.calorieView.setNumber(0);
         }
         binding.calorieBar.setEnabled(true);
+    }
+
+    @Override
+    public void setTipMessageOfCountry(MealTip tip) {
+        //binding.collapse.setTitle(tip.getTitle());
+        //binding.collapse.setContent(tip.getContent());
     }
 
     public void onRefreshClick(View v) {
