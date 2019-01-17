@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFirstFragment;
+import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFourFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeHomeFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeSecondFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragment;
@@ -154,7 +155,7 @@ MainActivity extends AppCompatActivity implements Main.View {
     protected void onStart() {
         super.onStart();
         if (!isCreated) {
-            mSlideView.setFragments(getSupportFragmentManager(), WelcomeHomeFragment.newInstance(), WelcomeFirstFragment.newInstance(), WelcomeSecondFragment.newInstance(), WelcomeThirdFragment.newInstance());
+            mSlideView.setFragments(getSupportFragmentManager(), WelcomeHomeFragment.newInstance(), WelcomeFirstFragment.newInstance(), WelcomeSecondFragment.newInstance(), WelcomeThirdFragment.newInstance(), WelcomeFourFragment.newInstance());
             isCreated = true;
         }
     }

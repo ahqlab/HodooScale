@@ -86,6 +86,7 @@
     <string name="weight_content">スマート排便器を使って自動的に測定された体重と変化を一目で確認してください。</string>
     <string name="meal_content">健康な体重のための適正摂取カロリーと\n摂取した食べ物の影響均衡状態を分析してください差し上げますよ。</string>
     <string name="activity_content">快適な散歩のための天気情報と健康状態に\n合う散歩(運動量)分析をご覧ください。</string>
+    <string name="hodoo_link_content">함께 생활하는 가족,\n친구들과 같이 반려동물을 관리할 수 있어요</string>
     <!-- Login Activity -->
     <string name="istyle_forgot_password">パスワードをお忘れですか？</string>
 
@@ -99,6 +100,7 @@
     <string name="weight_title">体重管理</string>
     <string name="temp_title">体温管理</string>
     <string name="meal_title">食事管理</string>
+    <string name="hodoo_link_title">함께관리</string>
     <string name="wifi_list_title">WIFI設定</string>
     <string name="find_hodoo_title">スキャン</string>
     <string name="istyle_login_title">ログイン</string>

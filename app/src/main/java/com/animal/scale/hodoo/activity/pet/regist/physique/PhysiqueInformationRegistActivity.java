@@ -39,8 +39,8 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
     private ScrollingValuePicker myScrollingValuePicker;
     private DWRulerSeekbar dwRulerSeekbar;
 
-    private static final float MIN_VALUE = 5;
-    private static final float MAX_VALUE = 33;
+    private static final float MIN_VALUE = 0;
+    private static final float MAX_VALUE = 50;
     private static final float LINE_RULER_MULTIPLE_SIZE = 3.5f;
 
     PhysiqueInformationRegistIn.Presenter presenter;
@@ -103,7 +103,8 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         myScrollingValuePicker = (ScrollingValuePicker) customView.findViewById(R.id.myScrollingValuePicker);
         myScrollingValuePicker.setViewMultipleSize(LINE_RULER_MULTIPLE_SIZE);
         myScrollingValuePicker.setMaxValue(MIN_VALUE, MAX_VALUE);
-        myScrollingValuePicker.setValueTypeMultiple(5);
+        myScrollingValuePicker.setValueTypeMultiple(3);
+        //myScrollingValuePicker.setInitValue();
         myScrollingValuePicker.getScrollView().setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
