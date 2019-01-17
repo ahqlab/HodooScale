@@ -28,6 +28,8 @@ import com.tistory.dwfox.dwrulerviewlibrary.view.ScrollingValuePicker;
 
 public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInformationRegistActivity> implements PhysiqueInformationRegistIn.View{
 
+    public static Context mContext;
+
     ActivityPhysiqueInformationRegistBinding binding;
 
     public int petId;
@@ -37,8 +39,8 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
     private ScrollingValuePicker myScrollingValuePicker;
     private DWRulerSeekbar dwRulerSeekbar;
 
-    private static final float MIN_VALUE = 5;
-    private static final float MAX_VALUE = 33;
+    private static final float MIN_VALUE = 0;
+    private static final float MAX_VALUE = 50;
     private static final float LINE_RULER_MULTIPLE_SIZE = 3.5f;
 
     PhysiqueInformationRegistIn.Presenter presenter;
@@ -52,6 +54,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.physique_information_regist_title)));
         super.setToolbarColor();
+        mContext = this;
         presenter = new PhysiqueInformationRegistPresenter(this);
         presenter.loadData(PhysiqueInformationRegistActivity.this);
         presenter.setNavigation();
@@ -100,7 +103,8 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         myScrollingValuePicker = (ScrollingValuePicker) customView.findViewById(R.id.myScrollingValuePicker);
         myScrollingValuePicker.setViewMultipleSize(LINE_RULER_MULTIPLE_SIZE);
         myScrollingValuePicker.setMaxValue(MIN_VALUE, MAX_VALUE);
-        myScrollingValuePicker.setValueTypeMultiple(5);
+        myScrollingValuePicker.setValueTypeMultiple(3);
+        //myScrollingValuePicker.setInitValue();
         myScrollingValuePicker.getScrollView().setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -147,21 +151,21 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+              /*  Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
         binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+               /* Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
        /* binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {

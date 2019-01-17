@@ -48,6 +48,8 @@ import java.util.Calendar;
 
 public class BasicInformationRegistActivity extends BaseActivity<BasicInformationRegistActivity> implements BasicInformationRegistIn.View {
 
+    public static Context mContext;
+
     ActivityBasicInformaitonRegistBinding binding;
 
     private static final int CAMERA_REQUEST = 1888;
@@ -83,6 +85,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         binding = DataBindingUtil.setContentView(this, R.layout.activity_basic_informaiton_regist);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.basin_info_regist_title)));
+        mContext = this;
         progressDialog = new ProgressDialog(BasicInformationRegistActivity.this);
         super.setToolbarColor();
         presenter = new BasicInformationRegistPresenter(this);

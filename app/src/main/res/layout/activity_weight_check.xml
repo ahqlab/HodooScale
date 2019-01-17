@@ -40,14 +40,25 @@
                 android:id="@+id/add_pet_navigation"
                 layout="@layout/add_pet_nav"/>
 
-            <ImageView
+           <!-- <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="164dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/temp_rounded_youtube"/>
+                android:background="@drawable/temp_rounded_youtube"/>-->
+
+            <com.google.android.youtube.player.YouTubePlayerView
+                android:id="@+id/youtube_player"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp">
+
+            </com.google.android.youtube.player.YouTubePlayerView>
 
             <TextView
                 android:layout_width="match_parent"

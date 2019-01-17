@@ -6,7 +6,9 @@ import com.animal.scale.hodoo.activity.meal.regist.MealRegistrationModel;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
+import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.WeightTip;
 
 import java.util.List;
 
@@ -71,6 +73,21 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
             @Override
             public void doPostExecute(MealHistory mealHistory) {
                 view.setTodaySumCalorie(mealHistory);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
+
+    @Override
+    public void getTipMessageOfCountry(MealTip mealTip) {
+        model.getTipMessageOfCountry(mealTip, new CommonModel.DomainCallBackListner<MealTip>() {
+            @Override
+            public void doPostExecute(MealTip mealTip) {
+                view.setTipMessageOfCountry(mealTip);
             }
 
             @Override

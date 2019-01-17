@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@color/mainBlack"
-                android:text="@string/meal_title"/>
+                android:text="@string/hodoo_link_title"/>
             <TextView
                 app:scale_top="96"
                 app:scale_left="40"
@@ -37,14 +37,14 @@
                 android:textAlignment="center"
                 android:textColor="#4a4a4a"
                 android:textSize="15sp"
-                android:text="@string/meal_content"/>
+                android:text="@string/hodoo_link_content"/>
             <ImageView
                 app:scale_top="180"
                 app:scale_width="360"
                 app:scale_height="453"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/meal_mockup"/>
+                android:src="@drawable/link_mockup"/>
         </com.ssomai.android.scalablelayout.ScalableLayout>
 
     </LinearLayout>

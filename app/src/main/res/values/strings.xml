@@ -72,8 +72,8 @@
 
     <string name="log_out">로그아웃</string>
     <string name="change_user_account_info">사용자 계정 정보</string>
-    <string name="withdraw">회원탈퇴</string>
-    <string name="withdraw_subscript">탈퇴하시면 HODOO 서비스를 이용하실 수 없습니다.\n정말 탈퇴하시겠습니까?</string>
+    <string name="withdraw" translatable="false">회원탈퇴</string>
+    <string name="withdraw_subscript" translatable="false">탈퇴하시면 HODOO 서비스를 이용하실 수 없습니다.\n정말 탈퇴하시겠습니까?</string>
 
     <string name="excess">초과</string>
     <string name="recommend">권장</string>
@@ -93,6 +93,7 @@
     <string name="weight_title">체중관리</string>
     <string name="temp_title">체온관리</string>
     <string name="meal_title">식사관리</string>
+    <string name="hodoo_link_title">함께관리</string>
     <string name="wifi_list_title">와이파이 설정</string>
     <string name="find_hodoo_title">스캐닝</string>
     <string name="istyle_login_title">로그인</string>
@@ -358,9 +359,10 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
 
 
     <string name="activity_title">활동 관리</string>
-    <string name="weight_content">스마트 배변판을 통해 자동으로 측정된 체중과\n변화를 한눈에 확인하세요</string>
-    <string name="meal_content">건강한 체중을 위한 적정 섭취 칼로리와\n섭취한 음식의 영양균형 상태를 분석해드려요</string>
-    <string name="activity_content">쾌적한 산책을 위한 날씨정보와 건강상태에\n맞는 산책(운동량)분석을 만나보세요</string>
+    <string name="weight_content">스마트 배변판을 통해\n자동으로 측정된 체중과 변화를\n한눈에 확인할 수 있어요</string>
+    <string name="meal_content">건강한 체중을 위한 적정 섭취\n칼로리와 섭취한 음식의 영양균형\n상태를 분석해드려요</string>
+    <string name="activity_content">현재 산책지수를 확인할 수 있고,\n건강상태에 적절한 운동량(산책량)을\n확인 할 수 있어요</string>
+    <string name="hodoo_link_content">함께 생활하는 가족,\n친구들과 같이 반려동물을 관리할 수 있어요</string>
 
     <!-- ActivityFragment (s) -->
     <string name="wind_speed">풍속</string>
@@ -376,8 +378,8 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <!-- ActivityFragment (e) -->
 
     <string name="forgot_password_sub_scription">이메일로 임시비밀번호를 발송해드립니다.</string>
-    <string name="sign_up_finish_title">회원가입 완료</string>
-    <string name="sign_up_finish_sub_scription">등록하신 이메일로 인증메일을 발송드렸습니다.\n이메일 인증을 완료하면 HODOO의 서비스를 이용하실 수 있습니다.</string>
+    <string name="sign_up_finish_title" translatable="false">회원가입 완료</string>
+    <string name="sign_up_finish_sub_scription" translatable="false">등록하신 이메일로 인증메일을 발송드렸습니다.\n이메일 인증을 완료하면 HODOO의 서비스를 이용하실 수 있습니다.</string>
     <string name="send_mail_failed">메일 전송에 실패하였습니다.</string>
     <string name="feed_order">급식하기</string>
     <string name="pet_feeder">급식기</string>
