@@ -6,10 +6,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
@@ -79,20 +81,45 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         validation();
     }
 
-    public void onClickWidthEt(View view){
-        showRulerBottomDlg(binding.editWidth);
+    public void onClickWidthEt(PetPhysicalInfo petPhysicalInfo){
+        if(petPhysicalInfo != null){
+            if(petPhysicalInfo.getWidth() != null){
+                presenter.showRulerBottomDlg(binding.editWidth, petPhysicalInfo.getWidth());
+            }else{
+                presenter.showRulerBottomDlg(binding.editWidth, "0");
+            }
+        }else{
+            presenter.showRulerBottomDlg(binding.editWidth, "0");
+        }
     }
 
-    public void onClickHightEt(View view){
-        presenter.showRulerBottomDlg(binding.editHeight);
+    public void onClickHightEt(PetPhysicalInfo petPhysicalInfo){
+        if(petPhysicalInfo != null){
+            if(petPhysicalInfo.getHeight() != null){
+                presenter.showRulerBottomDlg(binding.editHeight, petPhysicalInfo.getHeight());
+            }else{
+                presenter.showRulerBottomDlg(binding.editHeight, "0");
+            }
+        }else{
+            presenter.showRulerBottomDlg(binding.editHeight, "0");
+        }
 
     }
-    public void onClickWeightEt(View view){
-        presenter.showRulerBottomDlg(binding.editWeight);
+    public void onClickWeightEt(PetPhysicalInfo petPhysicalInfo){
+        if(petPhysicalInfo != null){
+            if(petPhysicalInfo.getWeight() != null){
+                presenter.showRulerBottomDlg(binding.editWeight, petPhysicalInfo.getWeight());
+            }else{
+                presenter.showRulerBottomDlg(binding.editWeight,  "0");
+            }
+        }else{
+            presenter.showRulerBottomDlg(binding.editWeight, "0");
+        }
+
     }
 
     @Override
-    public void showRulerBottomDlg(final EditText editText){
+    public void showRulerBottomDlg(final EditText editText, String value){
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View customView = inflater.inflate(R.layout.dialog_custom_ruler_popup, null);
         builder =  new BottomDialog.Builder(this)
@@ -104,7 +131,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         myScrollingValuePicker.setViewMultipleSize(LINE_RULER_MULTIPLE_SIZE);
         myScrollingValuePicker.setMaxValue(MIN_VALUE, MAX_VALUE);
         myScrollingValuePicker.setValueTypeMultiple(3);
-        //myScrollingValuePicker.setInitValue();
+        myScrollingValuePicker.setInitValue(Integer.parseInt(value));
         myScrollingValuePicker.getScrollView().setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

@@ -42,8 +42,8 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
     }
 
     @Override
-    public void showRulerBottomDlg(EditText editText) {
-        view.showRulerBottomDlg(editText);
+    public void showRulerBottomDlg(EditText editText, String value) {
+        view.showRulerBottomDlg(editText, value);
     }
 
     @Override

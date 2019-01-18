@@ -13,7 +13,7 @@ public interface PhysiqueInformationRegistIn {
 
         void setDiseaseInfo(PetPhysicalInfo petPhysicalInfo);
 
-        void showRulerBottomDlg(final EditText editText);
+        void showRulerBottomDlg(final EditText editText, String value);
 
         void registPhysiqueInformation();
 
@@ -28,7 +28,7 @@ public interface PhysiqueInformationRegistIn {
 
         void loadData(Context context);
 
-        void showRulerBottomDlg(EditText editText);
+        void showRulerBottomDlg(EditText editText,  String value);
 
         void deletePhysiqueInformation(int petIdx, int id);
 

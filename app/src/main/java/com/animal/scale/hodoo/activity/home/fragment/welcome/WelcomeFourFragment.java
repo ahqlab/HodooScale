@@ -28,4 +28,5 @@ public class WelcomeFourFragment extends Fragment {
     public static Fragment newInstance() {
         return new WelcomeFourFragment();
     }
+
 }
