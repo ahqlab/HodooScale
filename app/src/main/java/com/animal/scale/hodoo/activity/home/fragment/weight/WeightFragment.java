@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
 import android.databinding.DataBindingUtil;
+import android.media.audiofx.LoudnessEnhancer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,7 +45,7 @@ import noman.weekcalendar.listener.OnWeekChangeListener;
 
 import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
-public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener , WeightFragmentIn.View, WeightStatistics.View{
+public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
 
     FragmentWeightBinding binding;
 
@@ -96,7 +97,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
         bcsArr = getResources().getStringArray(R.array.bcs_arr);
         binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
-        binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
+        binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
 
         binding.chartView.setNoDataText(getActivity().getString(R.string.weight_data_available));
         binding.chartView.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
@@ -117,27 +118,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
 
-        /*((HomeActivity)getActivity()).binding.appBarNavigation.petImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-               *//* Log.e("HJLEE", "height : " + ((HomeActivity)getActivity()).binding.appBarNavigation.petCustomSpinner.getHeight());
-                if(((HomeActivity)getActivity()).binding.appBarNavigation.petCustomSpinner.getHeight() == 0){
-                    Log.e("HJLEE", "DOWN");
-                    ((HomeActivity)getActivity()).showDropdown();
-                }else{
-                    Log.e("HJLEE", "UP");
-                    ((HomeActivity)getActivity()).showDropUp();
-                }*//*
-            }
-        });*/
         return binding.getRoot();
     }
+
     /* Call from the Home Activity */
     //차트를 그린다.. 동적 로딩 OK
-    public void drawChart(){
+    public void drawChart() {
         presenter.getDefaultData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
+
     //BCS 를
     public void setBcsMessage(int basicIdx) {
         mBasicIdx = basicIdx;
@@ -145,70 +134,61 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     @Override
-    public void setAnimationGaugeChart(int bcs){
+    public void setAnimationGaugeChart(int bcs) {
         this.bcs = bcs;
         int checkBCS = 0;
-        if(bcs < 3){
+        if (bcs < 3) {
             checkBCS = 0;
             //부족
-//            binding.graphBg.setBackgroundResource(R.drawable.weight_middle_thin_469_266);
-//            animation = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_one_step);
-        } else if(bcs > 3){
+        } else if (bcs > 3) {
             //초과
             checkBCS = 1;
-//            binding.graphBg.setBackgroundResource(R.drawable.weight_middle_overweight_469_266);
-//            animation = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_three_step);
         } else {
             checkBCS = 2;
             //적정
-//            binding.graphBg.setBackgroundResource(R.drawable.weight_middle_ideal_469_266);
-//            animation = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_two_step);
         }
 
-        if ( bcs > 0 ) {
+        if (bcs > 0) {
             binding.bcsSubscript.setText(bcsArr[checkBCS]);
-            binding.bcsStep.setText( String.valueOf(bcs) );
+            binding.bcsStep.setText(String.valueOf(bcs));
         } else {
             binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
-            binding.bcsStep.setText( String.valueOf(bcs) );
+            binding.bcsStep.setText(String.valueOf(bcs));
         }
     }
-
     //여기 날짜도 들어가야함..
     @Override
     public void setLastCollectionData(RealTimeWeight d) {
-        if(d != null){
-            Log.e("HJLEE", " >>>> "  + d.toString());
+        if (d != null) {
             DecimalFormat fmt = new DecimalFormat("0.##");
             binding.weightView.setNumber(d.getValue());
-        }else{
+        } else {
             binding.weightView.setNumber(0f);
         }
-
-        if ( refrashState )
+        Log.e("HJLEE", " refrashState : " + refrashState);
+        if (refrashState)
             rotationStop(rotationView);
     }
 
     @Override
     public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
-        if(d != null){
+        if (d != null) {
             DecimalFormat fmt = new DecimalFormat("0.##");
             binding.weightView.setNumber(d.getValue());
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
-        }else{
+        } else {
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
-        if ( refrashState )
+        if (refrashState)
             rotationStop(rotationView);
     }
 
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
-        if ( DEBUG ) Log.e(TAG, "setTipMessageOfCountry");
+        if (DEBUG) Log.e(TAG, "setTipMessageOfCountry");
         binding.collapse.setTitle(weightTip.getTitle());
         binding.collapse.setContent(weightTip.getContent());
-//        binding.collapseContent.setText(weightTip.getContent());
     }
 
     @Override
@@ -227,12 +207,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 DateTime now = new DateTime();
                 String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
                 if (now.toDateTime().toString().compareTo(date) < 0) {
-
-                }else{
+                } else {
                     presenter.getDefaultData(date, TextManager.WEIGHT_DATA);
                     //setBcsMessage(info.getPet().getBasic());
                     //weightFragment.drawChart();
-                    presenter.getLastCollectionData(date,TextManager.WEIGHT_DATA);
+                    presenter.getLastCollectionData(date, TextManager.WEIGHT_DATA);
                     presenter.setAnimationGaugeChart(bcs);
 //                    refreshData();
                 }
@@ -242,14 +221,13 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.weekCalendar.setOnWeekChangeListener(new OnWeekChangeListener() {
             @Override
             public void onWeekChange(DateTime firstDayOfTheWeek, boolean forward) {
-                Toast.makeText(getActivity(), "Week changed: " + firstDayOfTheWeek + " Forward: " + forward, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Week changed: " + firstDayOfTheWeek + " Forward: " + forward, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 
-
-    public void onClickResetGraph(View view){
+    public void onClickResetGraph(View view) {
 //        binding.clockHands.startAnimation(animation);
     }
 
@@ -258,15 +236,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         return false;
     }
 
-    public void onClickFloatingBtn(View view){
-        /*Log.e("HJLEE", "height : " + ((HomeActivity)getActivity()).binding.appBarNavigation.petCustomSpinner.getHeight());
-        if(((HomeActivity)getActivity()).binding.appBarNavigation.petCustomSpinner.getHeight() == 0){
-            Log.e("HJLEE", "DOWN");
-            ((HomeActivity)getActivity()).showDropdown();
-        }else{
-            Log.e("HJLEE", "UP");
-            ((HomeActivity)getActivity()).showDropUp();
-        }*/
+    public void onClickFloatingBtn(View view) {
     }
 
     @Override
@@ -275,29 +245,31 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
     }
 
-    public void onRootViewClick(View view){
+    public void onRootViewClick(View view) {
         /*((HomeActivity)getActivity()).showDropUp();*/
     }
+
     public void onRefreshClick(View v) {
-        if ( rotationView == null )
+        if (rotationView == null)
             rotationView = v;
-        if ( !refrashState ) {
+        if (!refrashState) {
             rotationStart(v);
             /* 새로고침에 대한 데이터 처리 (s) */
-
             refreshData();
             /* 새로고침에 대한 데이터 처리 (e) */
         } else {
             rotationStop(v);
         }
     }
-    private void refreshData () {
+
+    private void refreshData() {
         nowTime = System.currentTimeMillis();
-        binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
+        binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
         presenter.getBcs(mBasicIdx);
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),TextManager.WEIGHT_DATA);
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
-    private void rotationStart( View v ) {
+
+    private void rotationStart(View v) {
         RotateAnimation rotate = new RotateAnimation(
                 0, 360,
                 Animation.RELATIVE_TO_SELF, 0.5f,
@@ -309,7 +281,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         v.startAnimation(rotate);
         refrashState = true;
     }
-    private void rotationStop(final View v ) {
+
+    private void rotationStop(final View v) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -334,17 +307,17 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
-                switch ( radioId ) {
-                    case R.id.chart_day :
+                switch (radioId) {
+                    case R.id.chart_day:
                         statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
                         break;
-                    case R.id.chart_week :
+                    case R.id.chart_week:
                         statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA);
                         break;
-                    case R.id.chart_month :
+                    case R.id.chart_month:
                         statisicsPresenter.getMonthlyStatisticalData(TextManager.WEIGHT_DATA);
                         break;
-                    case R.id.chart_year :
+                    case R.id.chart_year:
                         statisicsPresenter.getStatisticalDataByYear(TextManager.WEIGHT_DATA);
                         break;
                 }
