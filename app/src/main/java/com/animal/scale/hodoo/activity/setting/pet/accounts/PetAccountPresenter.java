@@ -35,4 +35,10 @@ public class PetAccountPresenter implements PetAccounts.Presenter{
             }
         });
     }
+
+    @Override
+    public void saveCurrentIdx(int idx) {
+        model.saveCurrentIdx(idx);
+        view.reFreshData( model.getSelectedPetIdx() );
+    }
 }
