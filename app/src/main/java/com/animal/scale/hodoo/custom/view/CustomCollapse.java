@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Handler;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.util.VIewUtil;
 
 import org.w3c.dom.Text;
 
@@ -62,12 +64,14 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if ( v.equals(this) ) {
+
+            TextView contentTextView = (TextView) ((LinearLayout) content).getChildAt(0);
             int start = 0, end = 0;
             if ( flag < 0 ) {
                 start = 0;
-                end = openHeight;
+                end = contentTextView.getLineCount() * contentTextView.getLineHeight() + 100;
             } else {
-                start = openHeight;
+                start = contentTextView.getLineCount() * contentTextView.getLineHeight() + 100;
                 end = 0;
             }
 
@@ -147,7 +151,7 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
                 LayoutParams params = (LayoutParams) content.getLayoutParams();
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 content.setLayoutParams(params);
-                openHeight = contentTextView.getMeasuredHeight();
+                openHeight = contentTextView.getMeasuredHeight()  + VIewUtil.dpToPx(6);
                 params.height = 0;
 
                 content.setLayoutParams(params);
@@ -165,20 +169,21 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
     public void setContent( String content ) {
         if ( this.content == null )
             this.content = this.getChildAt(1);
-        final TextView contentTextView = new TextView(getContext());
+
+        TextView contentTextView = (TextView) ((LinearLayout) this.content).getChildAt(0);
+        contentTextView.setText(content);
+        if ( DEBUG ) return;
+        contentTextView = new TextView(getContext());
         contentTextView.setText(content);
 
         ((ViewGroup) this.content).removeAllViews();
         contentTextView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+
         ((ViewGroup) this.content).addView(contentTextView);
 
-        contentTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                openHeight = contentTextView.getLineCount() * contentTextView.getLineHeight();
-                contentTextView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
+        final MarginLayoutParams params = (MarginLayoutParams) contentTextView.getLayoutParams();
+        params.topMargin = VIewUtil.dpToPx(6);
+        contentTextView.setLayoutParams(params);
 
     }
     public void setTitle ( String titleStr ) {
@@ -186,20 +191,19 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
             title = header.findViewById(R.id.message_title);
         title.setSingleLine( false );
         title.setText(titleStr);
-
         title.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                title.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                titleStart = title.getLineHeight();
-                titleEnd = title.getLineCount() * title.getLineHeight();
-                if ( DEBUG ) Log.e(TAG, String.format("view observer line count : %d, line height : %d, result : %d", title.getLineCount(), title.getLineHeight(), title.getLineCount() * title.getLineHeight()));
-                title.setSingleLine(flag < 0);
-                title.setEllipsize(TextUtils.TruncateAt.END);
-                ViewGroup.LayoutParams params = title.getLayoutParams();
-                params.height = titleStart;
-                title.setLayoutParams(params);
-
+                if ( title.getLineCount() > 0 ) {
+                    title.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    titleStart = title.getLineHeight();
+                    titleEnd = title.getLineCount() > 0 ? title.getLineCount() * title.getLineHeight() : title.getLineHeight();
+                    title.setSingleLine(flag < 0);
+                    title.setEllipsize(TextUtils.TruncateAt.END);
+                    ViewGroup.LayoutParams params = title.getLayoutParams();
+                    params.height = titleStart;
+                    title.setLayoutParams(params);
+                }
             }
         });
         

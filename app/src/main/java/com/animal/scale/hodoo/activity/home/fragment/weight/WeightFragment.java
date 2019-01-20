@@ -213,7 +213,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                     //weightFragment.drawChart();
                     presenter.getLastCollectionData(date, TextManager.WEIGHT_DATA);
                     presenter.setAnimationGaugeChart(bcs);
-                    refreshData();
+//                    refreshData();
                 }
             }
         });

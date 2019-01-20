@@ -51,6 +51,12 @@ public class PetAccountModel {
         infos.setPetBasicInfo(info);
         data.add(0, infos);
     }
+    public int getSelectedPetIdx() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+    }
+    public void saveCurrentIdx(int idx) {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, idx);
+    }
 
     public interface asyncTaskListner {
         void doPostExecute(List<PetAllInfos> data);

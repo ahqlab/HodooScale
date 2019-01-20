@@ -223,7 +223,7 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
                     //weightFragment.drawChart();
                     presenter.getLastCollectionData(date,TextManager.TEMP_DATA);
                     presenter.setAnimationGaugeChart(bcs);
-                    refreshData();
+//                    refreshData();
                 }
             }
         });

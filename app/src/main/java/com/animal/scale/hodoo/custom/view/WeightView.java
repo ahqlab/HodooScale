@@ -99,6 +99,9 @@ public class WeightView extends LinearLayout {
         String numberStr = String.format(formatStr, num);
         String[] splitStr = numberStr.split("\\.");
 
+        for (int i = 0; i < mFirstNum.length; i++) {
+            mFirstNum[i].setText(null);
+        }
         char[] number = new char[splitStr[0].length()];
         for(int i=0;i<number.length;i++){
             number[i]=(splitStr[0].charAt(i));
