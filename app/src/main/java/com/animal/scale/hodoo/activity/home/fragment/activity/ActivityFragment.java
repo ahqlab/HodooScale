@@ -69,7 +69,10 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             // 권한 있음
             getWeather();
         }
-
+       /* String message = getString(R.string.wether_tip_title);
+        String content = getString(R.string.wether_tip_content);
+        binding.collapse.setTitle(message);
+        binding.collapse.setContent(message);*/
         return binding.getRoot();
     }
 
@@ -96,6 +99,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             binding.overlay.setVisibility(View.GONE);
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -195,6 +195,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void setRadarChartData(Feed feed) {
+        Log.e("HJLEE", "feed : " + feed);
         ArrayList<RadarEntry> entries1 = new ArrayList<>();
         ArrayList<RadarEntry> entries2 = new ArrayList<>();
 
@@ -288,6 +289,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     public void setTipMessageOfCountry(MealTip tip) {
         //binding.collapse.setTitle(tip.getTitle());
         //binding.collapse.setContent(tip.getContent());
+        binding.collapse.setTitle(tip.getTitle());
+        binding.collapse.setContent(tip.getContent());
     }
 
     public void onRefreshClick(View v) {
