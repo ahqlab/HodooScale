@@ -69,10 +69,10 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             // 권한 있음
             getWeather();
         }
-       /* String message = getString(R.string.wether_tip_title);
+        String message = getString(R.string.wether_tip_title);
         String content = getString(R.string.wether_tip_content);
         binding.collapse.setTitle(message);
-        binding.collapse.setContent(message);*/
+        binding.collapse.setContent(content);
         return binding.getRoot();
     }
 
