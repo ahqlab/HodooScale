@@ -44,6 +44,7 @@ import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.util.BadgeUtils;
+import com.animal.scale.hodoo.util.DateUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -248,7 +249,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     weightFragment.drawChart();
                 }else if(tf instanceof MealFragment){
                     MealFragment mealFragment = (MealFragment) tf;
-                    mealFragment.initRaderChart();
+                    mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
                 }else if(tf instanceof TempFragment){
                     TempFragment tempFragment = (TempFragment) tf;
                     tempFragment.drawChart();
