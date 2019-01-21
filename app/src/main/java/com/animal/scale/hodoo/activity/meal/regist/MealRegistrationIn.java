@@ -29,6 +29,6 @@ public interface MealRegistrationIn {
 
         void getPetAllInfo();
 
-        void getTodaySumCalorie();
+        void getTodaySumCalorie(String date);
     }
 }

@@ -195,7 +195,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-        presenter.getTodaySumCalorie();
+        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
     }
 
     @Override

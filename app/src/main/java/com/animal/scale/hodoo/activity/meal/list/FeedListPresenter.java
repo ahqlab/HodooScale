@@ -55,17 +55,17 @@ public class FeedListPresenter implements FeedListIn.Presenter {
 
     @Override
     public void getTodaySumCalorie() {
-//        mealRegistrationModel.getTodaySumCalorie(new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
-//            @Override
-//            public void doPostExecute(MealHistory mealHistory) {
-//                view.setTodaySumCalorie(mealHistory);
-//            }
-//
-//            @Override
-//            public void doPreExecute() {
-//
-//            }
-//        });
+       /* mealRegistrationModel.getTodaySumCalorie(new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
+            @Override
+            public void doPostExecute(MealHistory mealHistory) {
+                view.setTodaySumCalorie(mealHistory);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });*/
     }
 
     @Override
