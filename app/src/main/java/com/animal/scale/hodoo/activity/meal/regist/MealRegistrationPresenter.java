@@ -70,16 +70,16 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
 
     @Override
     public void getTodaySumCalorie() {
-        model.getTodaySumCalorie(new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
-            @Override
-            public void doPostExecute(MealHistory mealHistory) {
-                view.setTodaySumCalorie(mealHistory);
-            }
-
-            @Override
-            public void doPreExecute() {
-
-            }
-        });
+//        model.getTodaySumCalorie(new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
+//            @Override
+//            public void doPostExecute(MealHistory mealHistory) {
+//                view.setTodaySumCalorie(mealHistory);
+//            }
+//
+//            @Override
+//            public void doPreExecute() {
+//
+//            }
+//        });
     }
 }
