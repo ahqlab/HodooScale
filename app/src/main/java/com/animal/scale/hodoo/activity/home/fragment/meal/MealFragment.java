@@ -32,6 +32,7 @@ import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.MathUtil;
 import com.animal.scale.hodoo.util.RER;
 import com.animal.scale.hodoo.util.TextManager;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -270,11 +271,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         if (mealHistory != null) {
             if (rer > mealHistory.getCalorie()) {
                 binding.calorieBar.setMax((int) rer);
-                binding.rer.setText(String.valueOf(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
                 //initDataToSeekbar(rer);
             } else {
                 binding.calorieBar.setMax((int) mealHistory.getCalorie());
-                binding.rer.setText(String.valueOf(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
                 //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
             binding.calorieBar.setProgress((int) mealHistory.getCalorie());
@@ -283,8 +284,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
             binding.calorieView.setNumber(mealHistory.getCalorie());
         } else {
             binding.calorieBar.setMax((int) rer);
-            binding.rer.setText(String.valueOf(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-            //initDataToSeekbar(rer);
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
             binding.calorieBar.setProgress(0);
             //binding.calorieIntake.setText(0 + "kcal");
             binding.calorieView.setNumber(0);
