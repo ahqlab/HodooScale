@@ -28,7 +28,7 @@ public class UserAccountPresenter implements UserAccountIn.Presenter {
         model.getUserData(new UserAccountModel.asyncTaskListner() {
             @Override
             public void doPostExecute(List<User> data) {
-                model.addRegistBtn(data);
+//                model.addRegistBtn(data);
                 int idx = model.getUserIdx();
                 view.setAdapter(idx, data);
             }

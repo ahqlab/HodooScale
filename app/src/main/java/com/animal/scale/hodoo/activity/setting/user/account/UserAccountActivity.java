@@ -54,13 +54,12 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
 
     @Override
     public void setEditBtn() {
-        super.setSubBtn("편집", new OnSubBtnClickListener() {
+        super.setSubBtn(getString(R.string.edit_btn_text), new OnSubBtnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Button) v).setText(!editState ? "완료" : "편집");
+                ((Button) v).setText(!editState ? getString(R.string.compleate_btn_text) : getString(R.string.edit_btn_text));
                 editState = !editState;
                 adapter.setEditState(editState);
-                Log.e(TAG, "편집");
             }
         });
     }

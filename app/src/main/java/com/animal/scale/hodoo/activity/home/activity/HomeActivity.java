@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -33,6 +34,8 @@ import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
+import com.animal.scale.hodoo.adapter.HomeViewPagerAdapter;
+import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfPets;
@@ -73,6 +76,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     private List<PetAllInfos> data;
 
+    private ViewPager mViewPager;
+    private HomeViewPagerAdapter viePagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,12 +88,55 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
+        /* 이전 프레그먼트 (s) */
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        final BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//
+//        fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
+        /* 이전 프레그먼트 (e) */
 
-        fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
+        /* 뷰 페이저 (s) */
+        WeightFragment weightFragment = WeightFragment.newInstance();
+//        TempFragment tempFragment = TempFragment.newInstance();
+        MealFragment mealFragment = MealFragment.newInstance();
+        ActivityFragment activityFragment = ActivityFragment.newInstance();
+
+        Fragment[] fragments = new Fragment[]{
+                weightFragment,
+//                tempFragment,
+                mealFragment,
+                activityFragment
+        };
+
+        mViewPager = findViewById(R.id.main_viewpager);
+        viePagerAdapter = new HomeViewPagerAdapter(getSupportFragmentManager(), fragments);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                navigation.getMenu().getItem(position).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mViewPager.setAdapter(viePagerAdapter);
+
+        mViewPager.setCurrentItem(0);
+
+        /* 뷰 페이저 (e) */
+
+
+
         binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
         presenter.loadCustomDropdownView();
         presenter.getSttingListMenu();
@@ -161,20 +210,24 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             switch (item.getItemId()) {
                 case R.id.navigation_weight:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
-                    replaceFragment(WeightFragment.newInstance());
+//                    replaceFragment(WeightFragment.newInstance());
+                    mViewPager.setCurrentItem(0);
                     presenter.loadCustomDropdownView();
                     return true;
-                case R.id.navigation_temp:
-                    binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
-                    replaceFragment(TempFragment.newInstance());
-                    presenter.loadCustomDropdownView();
-                    return true;
+//                case R.id.navigation_temp:
+//                    binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
+////                    replaceFragment(TempFragment.newInstance());
+//                    mViewPager.setCurrentItem(1);
+//                    presenter.loadCustomDropdownView();
+//                    return true;
                 case R.id.navigation_meal:
-                    replaceFragment(MealFragment.newInstance());
+//                    replaceFragment(MealFragment.newInstance());
+                    mViewPager.setCurrentItem(1);
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
                     return true;
                 case R.id.navigation_activity :
-                    replaceFragment(ActivityFragment.newInstance());
+//                    replaceFragment(ActivityFragment.newInstance());
+                    mViewPager.setCurrentItem(2);
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.activity)));
                     return true;
             }
@@ -228,7 +281,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public void setCustomDropdownView(List<PetAllInfos> data) {
         this.data = data;
         presenter.setCurrentPetInfos(data);
-
     }
 
 
@@ -242,18 +294,37 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 //Curcle 이미지 셋팅
                 presenter.setCurcleImage(info);
                 //에니메이션 돌림 이미지 셋팅
+
+
                 android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                if(tf instanceof WeightFragment){
-                    WeightFragment weightFragment = (WeightFragment) tf;
-                    weightFragment.setBcsMessage(info.getPet().getBasic());
-                    weightFragment.drawChart();
-                }else if(tf instanceof MealFragment){
-                    MealFragment mealFragment = (MealFragment) tf;
-                    mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
-                }else if(tf instanceof TempFragment){
-                    TempFragment tempFragment = (TempFragment) tf;
-                    tempFragment.drawChart();
+
+                int itemIndex = mViewPager.getCurrentItem();
+                switch ( itemIndex ) {
+                    case 0 :
+                        WeightFragment weightFragment = (WeightFragment) viePagerAdapter.getItem(itemIndex);
+                        weightFragment.setBcsMessage(info.getPet().getBasic());
+                        weightFragment.drawChart();
+                        break;
+                    case 1 :
+                        MealFragment mealFragment = (MealFragment) viePagerAdapter.getItem(itemIndex);
+                        mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
+                        break;
+                    case 2 :
+                        break;
+
                 }
+
+//                if(tf instanceof WeightFragment){
+//                    WeightFragment weightFragment = (WeightFragment) tf;
+//                    weightFragment.setBcsMessage(info.getPet().getBasic());
+//                    weightFragment.drawChart();
+//                }else if(tf instanceof MealFragment){
+//                    MealFragment mealFragment = (MealFragment) tf;
+//                    mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
+//                }else if(tf instanceof TempFragment){
+//                    TempFragment tempFragment = (TempFragment) tf;
+//                    tempFragment.drawChart();
+//                }
             }
         }
     }

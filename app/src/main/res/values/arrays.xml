@@ -72,7 +72,6 @@
     <string-array name="user_settings">
         <item>계정</item>
         <item>알림</item>
-        <item>앱 버전</item>
         <item>로그아웃</item>
     </string-array>
 

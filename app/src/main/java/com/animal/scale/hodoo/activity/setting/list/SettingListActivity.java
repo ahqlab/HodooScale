@@ -59,8 +59,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     //general
     public final static int ACCOUNT = 0;
     public final static int NOTIFICATION = 1;
-    public final static int APP_VERSION = 2;
-    public final static int LOGOUT = 3;
+    public final static int LOGOUT = 2;
 
     //device
     public final static int POTTY = 0;

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Messenger;
 import android.util.Log;
@@ -98,12 +99,23 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
         mPopupView.setBackgroundColor(Color.argb(127, 0, 255, 255)); //텍스트뷰 배경 색
 
         //최상위 윈도우에 넣기 위한 설정
-        mParams = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,//항상 최 상위. 터치 이벤트 받을 수 있음.
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,  //포커스를 가지지 않음
-                PixelFormat.TRANSLUCENT);                                        //투명
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            mParams = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_PHONE,//항상 최 상위. 터치 이벤트 받을 수 있음.
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,  //포커스를 가지지 않음
+                    PixelFormat.TRANSLUCENT);
+        } else {
+            mParams = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,//항상 최 상위. 터치 이벤트 받을 수 있음.
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,  //포커스를 가지지 않음
+                    PixelFormat.TRANSLUCENT);
+        }
+                                               //투명
         mParams.gravity = Gravity.CENTER;
 
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);  //윈도우 매니저

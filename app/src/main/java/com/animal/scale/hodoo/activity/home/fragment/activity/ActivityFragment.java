@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.databinding.FragmentActivityLayoutBinding;
 import com.animal.scale.hodoo.domain.Weatherbit;
 import com.animal.scale.hodoo.util.VIewUtil;
@@ -35,7 +36,7 @@ import retrofit2.Response;
 import static android.support.constraint.Constraints.TAG;
 import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
-public class ActivityFragment extends Fragment implements ActivityFragmentIn.View, LocationListener {
+public class ActivityFragment extends BaseFragment implements ActivityFragmentIn.View, LocationListener {
 
     String TAG = ActivityFragment.class.getSimpleName();
     FragmentActivityLayoutBinding binding;

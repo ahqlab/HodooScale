@@ -48,7 +48,8 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
         model.getBcs(basicIdx, new WeightFragmentModel.DomainCallBackListner<PetWeightInfo>() {
             @Override
             public void doPostExecute(PetWeightInfo petWeightInfo) {
-                view.setBcs(petWeightInfo);
+                if ( petWeightInfo != null )
+                    view.setBcs(petWeightInfo);
             }
 
             @Override
