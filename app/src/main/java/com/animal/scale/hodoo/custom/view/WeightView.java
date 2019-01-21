@@ -14,6 +14,8 @@ import com.animal.scale.hodoo.R;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
+
 public class WeightView extends LinearLayout {
     private final String TAG = WeightView.class.getSimpleName();
     private int mDisplayCount = 0;
@@ -106,14 +108,62 @@ public class WeightView extends LinearLayout {
             mFirstNum[i].setText(null);
         }
         char[] number = new char[splitStr[0].length()];
-        for(int i=0;i<number.length;i++){
-            number[i]=(splitStr[0].charAt(i));
-            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++) {
+
+        int a = Integer.parseInt(String.valueOf(splitStr[0]));
+
+        int length = 1;
+        if ( a > 0 ) {
+            length = (int)(Math.log10(a)+1);
+        }
+
+        int startPosition = mFirstNum.length - length;
+        char[] array = new char[ startPosition ];
+
+
+        /* data settings (s) */
+        for (int i = 0; i < array.length; i++) {
+            array[i] = String.valueOf(0).charAt(0);
+        }
+
+        for(int i=0;i<number.length;i++) {
+            number[i] = (splitStr[0].charAt(i));
+        }
+        char[] hap = new char[ array.length + number.length ];
+        System.arraycopy(array, 0, hap, 0, array.length);
+        System.arraycopy(number, 0, hap, array.length, number.length);
+        /* data settings (e) */
+
+
+//
+//        for (int i = startPosition; i < mFirstNum.length; i++) {
+//            for(int j = 0; j < number.length; j++){
+//                number[j]=(splitStr[0].charAt(j));
+//                for (int k = 0; k <= Integer.parseInt(String.valueOf(number[j])); k++) {
+//                    if ( mFirstNum[i] != null ) {
+//                        mFirstNum[i].setText(String.valueOf(k));
+//                    }
+//
+//                }
+//            }
+//        }
+
+        for (int i = 0; i < hap.length; i++) {
+            if ( Integer.parseInt(String.valueOf(hap[i])) <= 0 && i != hap.length - 1 )
+                continue;
+            for (int j = 0; j <= Integer.parseInt(String.valueOf(hap[i])); j++) {
                 if ( mFirstNum[i] != null )
                     mFirstNum[i].setText(String.valueOf(j));
             }
-
         }
+
+
+//        for(int i=0;i<number.length;i++){
+//            number[i]=(splitStr[0].charAt(i));
+//            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++) {
+//                if ( mFirstNum[i] != null )
+//                    mFirstNum[i].setText(String.valueOf(j));
+//            }
+//        }
         if ( mDisplayCount > 0 ) {
             number = new char[splitStr[1].length()];
             if ( number.length < mDisplayCount) {

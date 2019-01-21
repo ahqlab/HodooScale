@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.meal.list.FeedListActivity;
+import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.mpchart.RadarMarkerView;
@@ -56,7 +57,7 @@ import java.util.Date;
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 
-public class MealFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, MealFragmentIn.View {
+public class MealFragment extends BaseFragment implements NavigationView.OnNavigationItemSelectedListener, MealFragmentIn.View {
 
     SharedPrefManager mSharedPrefManager;
 

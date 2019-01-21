@@ -21,6 +21,7 @@ import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragmentIn;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragmentPresenter;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
+import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentTempBinding;
@@ -41,7 +42,7 @@ import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 import noman.weekcalendar.listener.OnWeekChangeListener;
 
-public class TempFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
+public class TempFragment extends BaseFragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
 
     FragmentTempBinding binding;
 

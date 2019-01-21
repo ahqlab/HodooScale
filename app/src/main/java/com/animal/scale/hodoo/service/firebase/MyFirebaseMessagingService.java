@@ -6,12 +6,15 @@ package com.animal.scale.hodoo.service.firebase;
 
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -163,7 +166,36 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         if ( message.length() > 20 )
             notificationBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
+
+
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(HodooConstant.CHANNEL_ID, "HodooNotification", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("HodooNotification");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.GREEN);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setVibrationPattern(new long[]{100, 200, 100, 200});
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            notificationManager.createNotificationChannel(notificationChannel);
+
+
+            notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), HodooConstant.CHANNEL_ID)
+                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.transparent_logo))
+                    .setSmallIcon(R.drawable.ic_stat_name)
+                    .setColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed))
+                    .setColorized(true)
+                    .setContentTitle(title)
+                    .setContentText(message)
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setPriority(type)
+                    .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
+                    .setContentIntent(pendingIntent);
+
+        }
+
         notificationManager.notify(pushIdx /* ID of notification */, notificationBuilder.build());
 
         presenter.countingBadge( badgeType, badgeCount );

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
+import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
@@ -45,7 +46,7 @@ import noman.weekcalendar.listener.OnWeekChangeListener;
 
 import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
-public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
+public class WeightFragment extends BaseFragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
 
     FragmentWeightBinding binding;
 
@@ -114,7 +115,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
         ////Kcal 로리 표시
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
-        presenter.initWeekCalendar();
+
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
 
@@ -304,6 +305,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void onResume() {
         super.onResume();
+
+        presenter.getBcs(mBasicIdx);
+        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
+
+        presenter.initWeekCalendar();
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {

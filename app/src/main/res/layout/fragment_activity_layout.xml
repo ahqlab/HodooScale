@@ -16,17 +16,15 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <LinearLayout
-                    android:orientation="vertical"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white">
+                    android:layout_height="wrap_content">
+
                     <FrameLayout
                         android:id="@+id/overlay"
                         android:elevation="100dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#80000000"
                         android:visibility="gone"
                         >
                         <ProgressBar
@@ -34,186 +32,196 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/loader"
                             android:indeterminateTintMode="src_atop"
-                            android:indeterminateTint="@color/white"
+                            android:indeterminateTint="@color/mainRed"
                             android:layout_gravity="center"/>
                     </FrameLayout>
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_marginTop="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_alignParentRight="true"
-                            android:padding="10dp"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_my_location_black_24dp"
-                            android:tint="#bbbff8"
-                            android:onClick="@{fragment::refreshWeather}"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingLeft="40dp"
-                            android:paddingRight="40dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="32dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/temp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="0˚"
-                                    android:textColor="@color/mainBlack"
-                                    android:textSize="40sp" />
-
-                                <TextView
-                                    android:id="@+id/district"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="@color/labelColor"
-                                    android:textSize="13sp" />
-
-                                <TextView
-                                    android:id="@+id/city_name"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="@color/labelColor"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="25dp"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:src="@drawable/c02d"
-                                    android:id="@+id/weather_icon"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:adjustViewBounds="true"
-                                    android:scaleType="fitXY" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </RelativeLayout>
-
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="37dp">
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
+                        android:background="@color/white">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_gravity="center"
-                                android:id="@+id/wind_speed"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0m/s"
-                                android:textColor="@color/mainBlack"/>
+                            <ImageView
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_alignParentRight="true"
+                                android:padding="10dp"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ic_my_location_black_24dp"
+                                android:tint="#bbbff8"
+                                android:onClick="@{fragment::refreshWeather}"/>
                             <LinearLayout
-                                android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <TextView
-                                    android:layout_gravity="center"
-                                    android:id="@+id/wind_speed_str"
-                                    android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingLeft="40dp"
+                                android:paddingRight="40dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/labelColor"
-                                    android:text="보통"/>
-                                <TextView
-                                    android:textColor="@color/mainBlack"
-                                    android:layout_gravity="center"
-                                    android:id="@+id/wind_speed_dis"
-                                    android:layout_width="wrap_content"
+                                    android:layout_marginTop="32dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/temp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0˚"
+                                        android:textColor="@color/mainBlack"
+                                        android:textSize="40sp" />
+
+                                    <TextView
+                                        android:id="@+id/district"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/labelColor"
+                                        android:textSize="13sp" />
+
+                                    <TextView
+                                        android:id="@+id/city_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/labelColor"
+                                        android:textSize="13sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/wind_speed"/>
+                                    android:layout_marginTop="25dp"
+                                    android:layout_weight="1">
+
+                                    <ImageView
+                                        android:src="@drawable/c02d"
+                                        android:id="@+id/weather_icon"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="fitXY" />
+                                </LinearLayout>
                             </LinearLayout>
-                        </LinearLayout>
+                        </RelativeLayout>
 
                         <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_weight="1"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_gravity="center"
-                                android:id="@+id/uv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textColor="@color/mainBlack"/>
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="37dp">
                             <LinearLayout
                                 android:orientation="vertical"
+                                android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <TextView
                                     android:layout_gravity="center"
-                                    android:id="@+id/uv_str"
+                                    android:id="@+id/wind_speed"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="보통"
-                                    android:textColor="@color/labelColor"/>
-                                <TextView
-                                    android:layout_gravity="center"
-                                    android:id="@+id/uv_dis"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/uv_index"
+                                    android:text="0m/s"
                                     android:textColor="@color/mainBlack"/>
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:layout_gravity="center"
+                                        android:id="@+id/wind_speed_str"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/labelColor"
+                                        android:text="보통"/>
+                                    <TextView
+                                        android:textColor="@color/mainBlack"
+                                        android:layout_gravity="center"
+                                        android:id="@+id/wind_speed_dis"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/wind_speed"/>
+                                </LinearLayout>
                             </LinearLayout>
-                        </LinearLayout>
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_gravity="center"
-                                android:id="@+id/ozone"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0ppm"
-                                android:textColor="@color/mainBlack"/>
                             <LinearLayout
                                 android:orientation="vertical"
+                                android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <TextView
                                     android:layout_gravity="center"
-                                    android:id="@+id/ozone_str"
+                                    android:id="@+id/uv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="보통"
-                                    android:textColor="@color/labelColor"/>
+                                    android:text="0"
+                                    android:textColor="@color/mainBlack"/>
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:layout_gravity="center"
+                                        android:id="@+id/uv_str"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="보통"
+                                        android:textColor="@color/labelColor"/>
+                                    <TextView
+                                        android:layout_gravity="center"
+                                        android:id="@+id/uv_dis"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/uv_index"
+                                        android:textColor="@color/mainBlack"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
                                 <TextView
                                     android:layout_gravity="center"
-                                    android:id="@+id/ozone_dis"
+                                    android:id="@+id/ozone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/ozone_index"
+                                    android:text="0ppm"
                                     android:textColor="@color/mainBlack"/>
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:layout_gravity="center"
+                                        android:id="@+id/ozone_str"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="보통"
+                                        android:textColor="@color/labelColor"/>
+                                    <TextView
+                                        android:layout_gravity="center"
+                                        android:id="@+id/ozone_dis"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/ozone_index"
+                                        android:textColor="@color/mainBlack"/>
+                                </LinearLayout>
                             </LinearLayout>
+
                         </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
+
+                </FrameLayout>
+
                 <com.animal.scale.hodoo.custom.view.CustomCollapse
                     android:id="@+id/collapse"
                     android:layout_marginTop="1dp"
