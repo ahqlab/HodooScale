@@ -279,6 +279,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
             }
             binding.calorieBar.setProgress((int) mealHistory.getCalorie());
             //binding.calorieIntake.setText((int) mealHistory.getCalorie() + "kcal");
+
             binding.calorieView.setNumber(mealHistory.getCalorie());
         } else {
             binding.calorieBar.setMax((int) rer);
@@ -311,7 +312,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
                 } else {
                     //Toast.makeText(getActivity(), "date : " + date, Toast.LENGTH_LONG).show();
                     presenter.initRaderChart(date);
-
+                    presenter.getTodaySumCalorie(date);
                   /*  presenter.getDefaultData(date, TextManager.WEIGHT_DATA);
                     //setBcsMessage(info.getPet().getBasic());
                     //weightFragment.drawChart();

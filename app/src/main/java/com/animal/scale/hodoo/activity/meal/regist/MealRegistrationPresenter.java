@@ -69,8 +69,8 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
     }
 
     @Override
-    public void getTodaySumCalorie() {
-        model.getTodaySumCalorie(new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
+    public void getTodaySumCalorie(String date) {
+        model.getTodaySumCalorie(date, new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
             @Override
             public void doPostExecute(MealHistory mealHistory) {
                 view.setTodaySumCalorie(mealHistory);

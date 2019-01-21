@@ -35,7 +35,7 @@ public interface MealUpdateIn {
 
         void getPetAllInfo();
 
-        void getTodaySumCalorie();
+        void getTodaySumCalorie(String date);
 
         void getThisHistory(int historyIdx);
     }

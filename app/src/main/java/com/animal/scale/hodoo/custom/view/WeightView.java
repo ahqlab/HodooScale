@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -17,7 +18,7 @@ public class WeightView extends LinearLayout {
     private final String TAG = WeightView.class.getSimpleName();
     private int mDisplayCount = 0;
     private float mTextSize = 12;
-    private int MAX_COUNT = 4;
+    private int MAX_COUNT = 6;
     private String mSufFix = "";
     private TickerView[] mFirstNum;
     private TickerView[] mPointView;
@@ -98,6 +99,8 @@ public class WeightView extends LinearLayout {
         String formatStr = "%." + String.valueOf(mDisplayCount) + "f";
         String numberStr = String.format(formatStr, num);
         String[] splitStr = numberStr.split("\\.");
+
+        Log.e("HJLEE", "splitStr : " + splitStr.length);
 
         for (int i = 0; i < mFirstNum.length; i++) {
             mFirstNum[i].setText(null);
