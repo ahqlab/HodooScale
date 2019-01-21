@@ -65,7 +65,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Requestor"
+                        android:text="@string/requestor"
                         android:textSize="15sp"
                         android:textColor="@color/subscript_color"/>
                     <TextView
@@ -86,7 +86,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Date"
+                        android:text="@string/date"
                         android:textSize="15sp"/>
                     <TextView
                         android:id="@+id/request_date"
@@ -114,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_rect_radius_4_gray"
                             android:textColor="@color/mainRed"
-                            android:text="Decline"/>
+                            android:text="@string/decline"/>
                         <Button
                             android:id="@+id/accept_btn"
                             android:layout_marginLeft="16dp"
@@ -122,7 +122,7 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_rect_radius_4_red"
                             android:textColor="@color/white"
-                            android:text="Accept"/>
+                            android:text="@string/accept"/>
 
                     </LinearLayout>
 

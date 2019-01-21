@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.databinding.FragmentActivityLayoutBinding;
 import com.animal.scale.hodoo.domain.Weatherbit;
 import com.animal.scale.hodoo.util.VIewUtil;
@@ -33,8 +34,9 @@ import java.util.Date;
 import retrofit2.Response;
 
 import static android.support.constraint.Constraints.TAG;
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
-public class ActivityFragment extends Fragment implements ActivityFragmentIn.View, LocationListener {
+public class ActivityFragment extends BaseFragment implements ActivityFragmentIn.View, LocationListener {
 
     String TAG = ActivityFragment.class.getSimpleName();
     FragmentActivityLayoutBinding binding;
@@ -46,6 +48,13 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
     private long nowTime;
     private boolean rotationState = false, isActivity = false, isLocation = true;
     private int LIMIT_TIME = 20 * 1000; //20초 셋팅
+
+
+    private Location oldLocation;
+
+
+
+
 
     @Nullable
     @Override
@@ -148,6 +157,9 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
 
     @Override
     public void onLocationChanged(final Location location) {
+        if ( oldLocation == null )
+            oldLocation = location;
+
         if ( isLocation ) {
             double lon = location.getLongitude(); //경도
             double lat= location.getLatitude();   //위도
@@ -161,8 +173,13 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
                             Weatherbit weatherbit = (Weatherbit) response.body();
                             float uv = weatherbit.getData().get(0).getUv(),
                                     ozone = weatherbit.getData().get(0).getOzone(),
-                                    windspeed = weatherbit.getData().get(0).getWind_spd();
-                            binding.temp.setText(String.format("%.0f˚", weatherbit.getData().get(0).getTemp()));
+                                    windspeed = weatherbit.getData().get(0).getWind_spd(),
+                                    temp = weatherbit.getData().get(0).getTemp();
+
+                            String tempStr = temp == 0 ? "0" : String.format("%.0f˚", weatherbit.getData().get(0).getTemp());
+
+                            if ( DEBUG ) Log.e(TAG, String.format( "%.0f˚", weatherbit.getData().get(0).getTemp()) );
+                            binding.temp.setText( tempStr );
                             binding.cityName.setText(weatherbit.getCity_name());
                             binding.district.setText(weatherbit.getDistrict());
                             binding.windSpeed.setText(String.format("%.1fm/s", windspeed));

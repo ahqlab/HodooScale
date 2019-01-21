@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="34sp"
-            android:text="Acoount"
+            android:text="@string/istyle_my_account"
             android:textColor="@color/mainBlack"
             android:textStyle="bold"/>
 
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:minHeight="0dp"
                         android:minWidth="0dp"
-                        android:text="Reset Password >"
+                        android:text="@string/reset_password"
                         android:onClick="@{activity::onClickResetPassword}"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:background="@drawable/rounded_rect_radius_4_with_border"

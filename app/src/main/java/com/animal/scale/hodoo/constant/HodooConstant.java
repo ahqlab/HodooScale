@@ -26,5 +26,7 @@ public class HodooConstant {
 
     public static final int WITHDRAW = -1;
 
+    public static final String CHANNEL_ID = "HODOO_CHANNEL";
+
 
 }
