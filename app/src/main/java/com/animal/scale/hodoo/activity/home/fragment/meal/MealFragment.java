@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.meal.list.FeedListActivity;
@@ -32,6 +33,7 @@ import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.RER;
+import com.animal.scale.hodoo.util.TextManager;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.MarkerView;
@@ -43,11 +45,15 @@ import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import noman.weekcalendar.WeekCalendar;
+import noman.weekcalendar.listener.OnDateClickListener;
 
 public class MealFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, MealFragmentIn.View {
 
@@ -96,8 +102,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
         presenter = new MealFragmentPresenter(this);
         presenter.loadData(getActivity());
-        presenter.initRaderChart();
-
+        //presenter.initRaderChart(DateUtil.getCurrentDatetime());
+        presenter.initWeekCalendar();
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
 
@@ -131,7 +137,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     }
 
     @Override
-    public void initRaderChart() {
+    public void initRaderChart(String date) {
         chart = binding.chart1;
         chart.setBackgroundColor(Color.rgb(255, 255, 255));
         //chart.setScaleX(1.2f);
@@ -150,7 +156,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         mv.setChartView(chart); // For bounds control
         chart.setMarker(mv); // Set the marker to the chart
 
-        setData();
+        setData(date);
 
         //chart.animateXY(1400, 1400, com.animal.scale.hodoo.custom.animation.Easing.EaseInBack);
         XAxis xAxis = chart.getXAxis();
@@ -189,13 +195,12 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         l.setTextColor(Color.WHITE);*/
     }
 
-    public void setData() {
-        presenter.getRadarChartData(DateUtil.getCurrentDatetime());
+    public void setData(String date) {
+        presenter.getRadarChartData(date);
     }
 
     @Override
     public void setRadarChartData(Feed feed) {
-        Log.e("HJLEE", "feed : " + feed);
         ArrayList<RadarEntry> entries1 = new ArrayList<>();
         ArrayList<RadarEntry> entries2 = new ArrayList<>();
 
@@ -249,14 +254,15 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
         chart.setData(data);
         chart.invalidate();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
-        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)) , petAllInfos.getFactor()).getRER();
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         binding.calorieBar.invalidate();
-        presenter.getTodaySumCalorie();
+        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
     }
 
     @Override
@@ -293,6 +299,30 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         binding.collapse.setContent(tip.getContent());
     }
 
+    @Override
+    public void initWeekCalendar() {
+        binding.weekCalendar.setOnDateClickListener(new OnDateClickListener() {
+            @Override
+            public void onDateClick(DateTime dateTime) {
+                DateTime dt = dateTime;
+                DateTime now = new DateTime();
+                String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
+                if (now.toDateTime().toString().compareTo(date) < 0) {
+                } else {
+                    //Toast.makeText(getActivity(), "date : " + date, Toast.LENGTH_LONG).show();
+                    presenter.initRaderChart(date);
+
+                  /*  presenter.getDefaultData(date, TextManager.WEIGHT_DATA);
+                    //setBcsMessage(info.getPet().getBasic());
+                    //weightFragment.drawChart();
+                    presenter.getLastCollectionData(date, TextManager.WEIGHT_DATA);
+                    presenter.setAnimationGaugeChart(bcs);*/
+//                    refreshData();
+                }
+            }
+        });
+    }
+
     public void onRefreshClick(View v) {
         if (!refrashState) {
             rotationStart(v);
@@ -307,7 +337,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
             rotationStop(v);
         }
     }
-    private void refreshData () {
+
+    private void refreshData() {
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
     }
@@ -344,7 +375,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void onStart() {
-        presenter.initRaderChart();
+        presenter.initRaderChart(DateUtil.getCurrentDatetime());
         //calorie_view
         binding.calorieView.setNumber(0);
         super.onStart();

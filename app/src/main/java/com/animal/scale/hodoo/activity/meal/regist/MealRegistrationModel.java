@@ -68,8 +68,8 @@ public class MealRegistrationModel extends CommonModel {
         }.execute(call);
     }
 
-    public void getTodaySumCalorie(final DomainCallBackListner<MealHistory> domainCallBackListner) {
-        Call<MealHistory> call = NetRetrofit.getInstance().getMealHistoryService().getTodaySumCalorie(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
+    public void getTodaySumCalorie(String date, final DomainCallBackListner<MealHistory> domainCallBackListner) {
+      /*  Call<MealHistory> call = NetRetrofit.getInstance().getMealHistoryService().getTodaySumCalorie(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX), date);
         new AbstractAsyncTask<MealHistory>() {
             @Override
             protected void doPostExecute(MealHistory mealHistory) {
@@ -80,6 +80,6 @@ public class MealRegistrationModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call);*/
     }
 }

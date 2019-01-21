@@ -33,8 +33,8 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
     }
 
     @Override
-    public void initRaderChart() {
-        view.initRaderChart();
+    public void initRaderChart(String date) {
+        view.initRaderChart(date);
     }
 
     @Override
@@ -68,8 +68,8 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
     }
 
     @Override
-    public void getTodaySumCalorie() {
-        mealRegistrationModel.getTodaySumCalorie(new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
+    public void getTodaySumCalorie(String date) {
+        mealRegistrationModel.getTodaySumCalorie(date, new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
             @Override
             public void doPostExecute(MealHistory mealHistory) {
                 view.setTodaySumCalorie(mealHistory);
@@ -95,6 +95,11 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
 
             }
         });
+    }
+
+    @Override
+    public void initWeekCalendar() {
+        view.initWeekCalendar();
     }
 
 }
