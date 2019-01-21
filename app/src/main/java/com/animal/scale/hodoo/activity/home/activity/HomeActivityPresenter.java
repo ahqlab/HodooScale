@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.home.activity;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
@@ -10,7 +11,11 @@ import com.animal.scale.hodoo.domain.PetAllInfos;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
+
 public class HomeActivityPresenter implements HomeActivityIn.Presenter {
+
+    private String TAG = HomeActivityPresenter.class.getSimpleName();
 
     public HomeActivityIn.View view;
 
@@ -67,7 +72,6 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
             public void doPostExecute(List<InvitationUser> users) {
                 List<InvitationUser> saveUsers = notiModel.getInvitationUsers();
 
-
                 if ( saveUsers != null && users != null ) {
                     List<InvitationUser> big, small, tempUsers = new ArrayList<>();
                     if ( saveUsers.size() > users.size() ) {
@@ -85,7 +89,31 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
                             }
                         }
                     }
+
+                    /* 이미 초대가 완료된 회원 정리 (s) */
+                    for (int i = 0; i < users.size(); i++) {
+                        if ( users.get(i).getState() > 0 ) {
+                            for (int j = 0; j < saveUsers.size(); j++) {
+                                if (
+                                        users.get(i).getToUserIdx() == saveUsers.get(j).getToUserIdx() &&
+                                                users.get(i).getFromUserIdx() == saveUsers.get(j).getFromUserIdx() &&
+                                                users.get(i).getState() != saveUsers.get(j).getState()
+                                        ) {
+                                    saveUsers.remove(j);
+                                    notiModel.setAllInvitationUsers( saveUsers );
+                                }
+                            }
+                        }
+                    }
+                    /* 이미 초대가 완료된 회원 정리 (e) */
+
+                    if ( DEBUG ) Log.e(TAG, "");
                 } else if ( saveUsers == null ) {
+                    for (int i = 0; i < users.size(); i++) {
+                        if ( users.get(i).getState() > 0 )
+                            users.remove(i);
+                    }
+
                     notiModel.setAllInvitationUsers(users);
                 }
             }

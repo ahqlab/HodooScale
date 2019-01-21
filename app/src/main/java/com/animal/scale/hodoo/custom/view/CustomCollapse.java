@@ -187,6 +187,8 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
 
     }
     public void setTitle ( String titleStr ) {
+        if ( header == null )
+            header = this.getChildAt(0);
         if ( title == null )
             title = header.findViewById(R.id.message_title);
         title.setSingleLine( false );

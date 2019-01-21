@@ -59,7 +59,15 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         binding.petGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> adapterView, View view, final int position, long l) {
-                FragmentManager fm = getSupportFragmentManager();
+
+                if(position == ADD_PET){
+                    Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+                    intent.putExtra("petIdx", ADD_PET);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+                    return;
+//                    finish();
+                }
                 final BottomDialog dialog = BottomDialog.getInstance();
                 dialog.setOnclick(new BottomDialog.OnClickListener() {
                     @Override

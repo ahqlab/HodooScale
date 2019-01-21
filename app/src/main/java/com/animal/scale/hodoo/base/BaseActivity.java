@@ -185,14 +185,5 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
             }
         }
     }
-    public int getInvitationBadgeCount() {
-        Map<String, String> firebaseInfos = (Map<String, String>) VIewUtil.fromJson( mSharedPrefManager.getStringExtra(SharedPrefVariable.FIREBASE_NOTI), new TypeToken< Map<String,String>>(){}.getType());
-        List<InvitationUser> invitationUsers = new ArrayList<>();
-        if ( firebaseInfos != null ) {
-            String invitationStr = firebaseInfos.get( String.valueOf(HodooConstant.FIREBASE_INVITATION_TYPE) );
-            if ( invitationStr != null || !invitationStr.equals("") )
-                invitationUsers = (List<InvitationUser>) VIewUtil.fromJson(invitationStr, new TypeToken<List<InvitationUser>>(){}.getType());
-        }
-        return invitationUsers.size();
-    }
+
 }
