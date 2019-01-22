@@ -35,7 +35,7 @@ public interface FeedListIn {
 
         void initSeekbar();
 
-        void getTodaySumCalorie();
+        void getTodaySumCalorie(String date);
 
         void getPetAllInfo();
 

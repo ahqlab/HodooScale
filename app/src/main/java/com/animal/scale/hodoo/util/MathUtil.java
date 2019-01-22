@@ -28,13 +28,13 @@ public class MathUtil {
 	}
 
 	public static String DecimalCut(float value){
-		DecimalFormat fmt = new DecimalFormat("0.##");
+		DecimalFormat fmt = new DecimalFormat("0.#");
 		String decimal =  fmt.format(value);
 		return decimal;
 	}
 
 	public static String DecimalCut(double value){
-		DecimalFormat fmt = new DecimalFormat("0.##");
+		DecimalFormat fmt = new DecimalFormat("0.#");
 		String decimal =  fmt.format(value);
 		return decimal;
 	}
