@@ -259,7 +259,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <!-- WeightFragment -->
     <string name="istyle_bcs_comment">현재 귀하의 반려견은 BCS 4단계로 평균 체중에 비해 과다한 상태입니다. \n 균형잡힌 식단과 올바른 황동으로 반려견의 체중을 관리해주셔야 합니다.</string>
     <string name="istyle_weight_history_of_the_day">오늘의 체중 기록</string>
-    <string name="average_weight_for_today">일일 섭취 총 칼로리</string>
+    <string name="average_weight_for_today">일일 평균 체중</string>
     <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
     <string name="weight_for_today">today\'s weight</string>
     <string name="temp_for_today">today\'s temp</string>
@@ -267,7 +267,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="bcs_description_str">BCS DESCRIPTION</string>
     <string name="last_sync_refresh_str">Last refresh</string>
     <string name="not_data">No Data</string>
-    <string name="today_intake_kcal">오늘 섭취한 총 칼로리</string>
+    <string name="today_intake_kcal">일일 섭취 총 칼로리</string>
 
     <string name="one_day">하루</string>
     <string name="one_week">한주</string>

@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.meal.list.FeedListActivity;
-import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.mpchart.RadarMarkerView;
@@ -57,7 +56,7 @@ import java.util.Date;
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 
-public class MealFragment extends BaseFragment implements NavigationView.OnNavigationItemSelectedListener, MealFragmentIn.View {
+public class MealFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, MealFragmentIn.View {
 
     SharedPrefManager mSharedPrefManager;
 
@@ -82,6 +81,8 @@ public class MealFragment extends BaseFragment implements NavigationView.OnNavig
     private float rer;
 
     private String country;
+
+   private String focusDate =  DateUtil.getCurrentDatetime();
 
     public MealFragment() {
     }
@@ -311,18 +312,16 @@ public class MealFragment extends BaseFragment implements NavigationView.OnNavig
                 String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
                 if (now.toDateTime().toString().compareTo(date) < 0) {
                 } else {
-                    //Toast.makeText(getActivity(), "date : " + date, Toast.LENGTH_LONG).show();
+                    focusDate  = date;
                     presenter.initRaderChart(date);
                     presenter.getTodaySumCalorie(date);
-                  /*  presenter.getDefaultData(date, TextManager.WEIGHT_DATA);
-                    //setBcsMessage(info.getPet().getBasic());
-                    //weightFragment.drawChart();
-                    presenter.getLastCollectionData(date, TextManager.WEIGHT_DATA);
-                    presenter.setAnimationGaugeChart(bcs);*/
-//                    refreshData();
                 }
             }
         });
+    }
+
+    public void setTodaySumCalorie() {
+        presenter.getTodaySumCalorie(focusDate);
     }
 
     public void onRefreshClick(View v) {

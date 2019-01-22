@@ -56,10 +56,10 @@
                 android:id="@+id/find_hodoo_message2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/hodoo_gray"
+                android:textColor="@color/labelColor"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
-                android:textSize="9sp"
+                android:textSize="12sp"
                 android:text="@string/find_hodoo_message2"/>
 
         </LinearLayout>
@@ -110,7 +110,7 @@
                 android:layout_width="242dp"
                 android:layout_height="154dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/device_regist_scale_icon" />
+                android:src="@drawable/potty" />
 
             <TextView
                 android:id="@+id/device_info"
