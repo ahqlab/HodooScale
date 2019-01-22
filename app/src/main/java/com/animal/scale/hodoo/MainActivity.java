@@ -172,7 +172,7 @@ MainActivity extends AppCompatActivity implements Main.View {
     public void goHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
@@ -181,7 +181,7 @@ MainActivity extends AppCompatActivity implements Main.View {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.putExtra(SharedPrefVariable.AUTO_LOGIN, AUTO_LOGIN_SUCCESS);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 

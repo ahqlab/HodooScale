@@ -8,6 +8,10 @@ import java.util.Date;
 public class DateUtil {
 
     public static String getCurrentDatetime() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+    }
+
+    public static String getCurrentDate() {
         return new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
     }
     public static String getCurrentMonth() {

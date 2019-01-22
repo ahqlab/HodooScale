@@ -26,19 +26,21 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/hodoo_foot"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hodoo Scale -"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 체중 "/>
+
                 <TextView
                     android:id="@+id/alert_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="측정결과"/>
+                    android:layout_marginLeft="4dp"
+                    android:text="Hodoo Scale"/>
+
+                <TextView
+                    android:id="@+id/current_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="9dp"
+                    android:gravity="center_vertical|right"
+                    android:text="2018-00-00 00:00:00.0"/>
             </LinearLayout>
 
         </LinearLayout>
