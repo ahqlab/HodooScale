@@ -19,9 +19,11 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.BottomDialog;
 import com.animal.scale.hodoo.databinding.ActivityPetAccountsBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.IosStyleBottomAlert;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> implements PetAccounts.View {
@@ -69,6 +71,13 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
 //                    finish();
                 }
                 final BottomDialog dialog = BottomDialog.getInstance();
+                List<IosStyleBottomAlert> btns = new ArrayList<>();
+                btns.add( IosStyleBottomAlert.builder().btnName("메인 펫으로 선택").id(R.id.main_pet).build() );
+                btns.add( IosStyleBottomAlert.builder().btnName("프로필 이미지 보기").id(R.id.profile_image).build() );
+                btns.add( IosStyleBottomAlert.builder().btnName("펫 정보 수정").id(R.id.pet_info).build() );
+                btns.add( IosStyleBottomAlert.builder().btnName("펫 삭제").id(R.id.pet_delete).build() );
+
+
                 dialog.setOnclick(new BottomDialog.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -111,7 +120,7 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
                         dialog.dismiss();
                     }
                 });
-                dialog.setLayout(R.layout.bottom_alert);
+                dialog.setButton(btns);
                 dialog.show(getSupportFragmentManager(), TAG);
 
 //                PetAllInfos petAllInfos = (PetAllInfos) adapterView.getAdapter().getItem(position);

@@ -16,6 +16,10 @@ public class HodooConstant {
     /* fcm 관련 (s) */
     public static final String FCM_RECEIVER_NAME = "HodooFCMReceiver";
 
+    public static final String REMOVE_NOTI_KEY = "REMOVE_NOTI_KEY";
+    public static final String NOTI_TYPE_KEY = "NOTI_TYPE_KEY";
+    public static final String REMOVE_NOTI_ID_KEY = "REMOVE_NOTI_ID_KEY";
+
     public static final int FIREBASE_NORMAL_TYPE = 0;
     public static final int FIREBASE_WEIGHT_TYPE = 1;
     public static final int FIREBASE_FEED_TYPE = 2;

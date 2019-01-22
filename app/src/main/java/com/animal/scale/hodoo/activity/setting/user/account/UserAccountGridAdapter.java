@@ -75,19 +75,13 @@ public class UserAccountGridAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(activity).inflate(R.layout.user_account_grid, null);
             binding = DataBindingUtil.bind(convertView);
             binding.setDomain(data.get(position));
-            if ( position == 0 ) {
-                binding.placeholder.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#2eabf7")));
-            } else {
-                if (data.get(position).getUserIdx() == mIdx) {
-                    binding.placeholder.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(activity.getApplicationContext(), R.color.mainRed)));
-                }
+            if (data.get(position).getUserIdx() == mIdx) {
+                binding.placeholder.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(activity.getApplicationContext(), R.color.mainRed)));
             }
             convertView.setTag(binding);
         } else {
             binding = (UserAccountGridBinding) convertView.getTag();
-            if ( position == 0 ) {
-                binding.placeholder.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#2eabf7")));
-            } else {
+            if ( position != 0 ) {
                 if ( data.get(position).getUserIdx() == mIdx ) {
                     binding.placeholder.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(activity.getApplicationContext(), R.color.mainRed)));
                 } else {

@@ -2,7 +2,6 @@ package com.animal.scale.hodoo.activity.pet.regist.basic;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,12 +13,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -30,21 +26,22 @@ import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
-import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
-import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.custom.view.BottomDialog;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityBasicInformaitonRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.IosStyleBottomAlert;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.util.ValidationUtil;
-import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class BasicInformationRegistActivity extends BaseActivity<BasicInformationRegistActivity> implements BasicInformationRegistIn.View {
 
@@ -59,8 +56,6 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     public static final int STORAGE_PERMISSION_CODE = 101;
 
     ProgressDialog progressDialog;
-
-    BottomSheetDialog dialog;
 
     public static String REQUEST_URL = "";
 
@@ -78,6 +73,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     private Uri photoUri;
     private String imageFilePath;
+
+    private BottomDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -248,38 +245,65 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void onClickOpenBottomDlg(View view) {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        dialog = new BottomSheetDialog(this);
-        dialog.setContentView(R.layout.image_select_bottom_custom_view);
-        dialog.show();
-
-        Button camera = (Button) dialog.findViewById(R.id.camera);
-        camera.setOnClickListener(new View.OnClickListener() {
+        dialog = BottomDialog.getInstance();
+        List<IosStyleBottomAlert> btns = new ArrayList<>();
+        btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.camera)).id(R.id.camera).build() );
+        btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.gallery)).id(R.id.gallery).build() );
+        dialog.setButton(btns);
+        dialog.setOnclick(new BottomDialog.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
-                if (permissionCamera == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-                } else {
-                    Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
-                    presenter.openCamera();
+                switch (v.getId()) {
+                    case R.id.camera :
+                        int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+                        if (permissionCamera == PackageManager.PERMISSION_DENIED) {
+                            ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
+                            presenter.openCamera();
+                        }
+                        break;
+                    case R.id.gallery :
+                        int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+                        if (permissionStorage == PackageManager.PERMISSION_DENIED) {
+                            ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        } else {
+                            openGallery();
+                            dialog.dismiss();
+                        }
+                        break;
                 }
             }
         });
+        dialog.show(getSupportFragmentManager(), TAG);
 
-        Button gallery = (Button) dialog.findViewById(R.id.gallery);
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
-                if (permissionStorage == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-                } else {
-                    openGallery();
-                    dialog.dismiss();
-                }
-            }
-        });
+//        Button camera = (Button) dialog.findViewById(R.id.camera);
+//        camera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+//                if (permissionCamera == PackageManager.PERMISSION_DENIED) {
+//                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
+//                    presenter.openCamera();
+//                }
+//            }
+//        });
+//
+//        Button gallery = (Button) dialog.findViewById(R.id.gallery);
+//        gallery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+//                if (permissionStorage == PackageManager.PERMISSION_DENIED) {
+//                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+//                } else {
+//                    openGallery();
+//                    dialog.dismiss();
+//                }
+//            }
+//        });
     }
 
     @Override

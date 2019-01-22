@@ -170,9 +170,9 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
             binding.userGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                    if (position == USER_REGIST) {
-                        showPopup("+친구초대", "이메일");
-                    }
+//                    if (position == USER_REGIST) {
+//                        showPopup("+친구초대", "이메일");
+//                    }
                 }
             });
         } else {

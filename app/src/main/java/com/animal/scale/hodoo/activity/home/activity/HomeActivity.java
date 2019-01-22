@@ -36,6 +36,7 @@ import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.adapter.HomeViewPagerAdapter;
 import com.animal.scale.hodoo.base.BaseFragment;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfPets;
@@ -320,6 +321,21 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     protected void onResume() {
         super.onResume();
         presenter.getInvitationToServer();
+        setBadge();
+        int notitype = getIntent().getIntExtra(HodooConstant.NOTI_TYPE_KEY, -1);
+        if ( notitype >= 0 ) {
+            switch (notitype) {
+                case HodooConstant.FIREBASE_WEIGHT_TYPE :
+                    binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
+                    replaceFragment(WeightFragment.newInstance());
+                    presenter.loadCustomDropdownView();
+                    break;
+                case HodooConstant.FIREBASE_FEED_TYPE :
+                    replaceFragment(MealFragment.newInstance());
+                    binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
+                    break;
+            }
+        }
         if ( DEBUG ) Log.e(TAG, "onResume");
     }
 }

@@ -63,9 +63,9 @@ public class HomeActivityModel extends CommonModel{
         new AbstractAsyncTaskOfList<InvitationUser>() {
             @Override
             protected void doPostExecute(List<InvitationUser> users) {
-                for (int i = 0; i < users.size(); i++)
-                    if ( users.get(i).getState() > 0 )
-                        users.remove(i);
+//                for (int i = 0; i < users.size(); i++)
+//                    if ( users.get(i).getState() > 0 )
+//                        users.remove(i);
 
 
                 callback.doPostExecute(users);

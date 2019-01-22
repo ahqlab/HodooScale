@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_dialog_wrap"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:background="@drawable/ios_style_rounded"
+        android:clipChildren="true"
+        android:id="@+id/button_wrap"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--<Button-->
+            <!--android:id="@+id/main_pet"-->
+            <!--android:background="@null"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="메인 펫으로 선택"/>-->
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#dadade"/>-->
+        <!--<Button-->
+            <!--android:id="@+id/profile_image"-->
+            <!--android:background="@null"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="프로필 이미지 보기"/>-->
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#dadade"/>-->
+        <!--<Button-->
+            <!--android:id="@+id/pet_info"-->
+            <!--android:background="@null"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="펫 정보 수정"/>-->
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#dadade"/>-->
+        <!--<Button-->
+            <!--android:id="@+id/pet_delete"-->
+            <!--android:background="@null"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="펫 삭제"/>-->
+    </LinearLayout>
+    <Button
+        android:background="@drawable/ios_style_rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Cancel"
+        android:id="@+id/cancel"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
