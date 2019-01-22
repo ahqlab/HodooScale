@@ -17,7 +17,16 @@ public class HodooConstant {
     public static final String FCM_RECEIVER_NAME = "HodooFCMReceiver";
 
     public static final int FIREBASE_NORMAL_TYPE = 0;
-    public static final int FIREBASE_INVITATION_TYPE = 1;
+    public static final int FIREBASE_WEIGHT_TYPE = 1;
+    public static final int FIREBASE_FEED_TYPE = 2;
+    public static final int FIREBASE_INVITATION_TYPE = 3;
+
+    /* oreo version notification channel (s) */
+    public static final String NORMAL_CHANNEL = "notice_channel";
+    public static final String WEIGHT_CHECK_CHANNEL = "weight_check_channel";
+    public static final String FEED_CHECK_CHANNEL = "feed_check_channel";
+    public static final String INVITATION_GROUP_CHANNEL = "invitation_group_channel";
+    /* oreo version notification channel (e) */
     /* fcm 관련 (e) */
 
     public static final String AUTO_LOGIN_KEY = "";

@@ -74,7 +74,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         Intent intent = null;
         int type = NotificationCompat.PRIORITY_MAX, notiType = 0, badgeCount = sharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT), pushIdx = 0, badgeType = 0;
 
-        String notiTypeStr = data.get("notiType"), title = data.get("title"), message = data.get("content"), host = data.get("host");
+        String notiTypeStr = data.get("notiType"), title = data.get("title"), message = data.get("content"), host = data.get("host"), channelId = "";
         /* variable (e) */
 
         if ( notiTypeStr != null || !notiTypeStr.equals("") )
@@ -82,16 +82,27 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         switch (notiType) {
             case HodooConstant.FIREBASE_NORMAL_TYPE :
+            case HodooConstant.FIREBASE_WEIGHT_TYPE :
+            case HodooConstant.FIREBASE_FEED_TYPE :
                 Random random = new Random();
                 pushIdx = random.nextInt();
                 intent = new Intent(this, MainActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("message", message);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                badgeType = HodooConstant.FIREBASE_NORMAL_TYPE;
+                badgeType = notiType;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    if ( notiType == HodooConstant.FIREBASE_NORMAL_TYPE ) {
+                        channelId = HodooConstant.NORMAL_CHANNEL;
+                    } else if (notiType == HodooConstant.FIREBASE_WEIGHT_TYPE) {
+                        channelId = HodooConstant.WEIGHT_CHECK_CHANNEL;
+                    } else if (notiType == HodooConstant.FIREBASE_FEED_TYPE) {
+                        channelId = HodooConstant.FEED_CHECK_CHANNEL;
+                    }
+                }
+
                 break;
             case HodooConstant.FIREBASE_INVITATION_TYPE :
-
                 Gson gson = new Gson();
                 int idx = Integer.parseInt(data.get("toUserIdx"));
                 int fromUserIdx = Integer.parseInt(data.get("fromUserIdx"));
@@ -108,7 +119,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 message += "님의 초대입니다.";
                 badgeType = HodooConstant.FIREBASE_INVITATION_TYPE;
-
+                channelId = HodooConstant.INVITATION_GROUP_CHANNEL;
                 presenter.setInvitationUser(idx, fromUserIdx);
                 break;
         }
@@ -171,17 +182,17 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(HodooConstant.CHANNEL_ID, "HodooNotification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH);
             notificationChannel.setDescription("HodooNotification");
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.GREEN);
             notificationChannel.enableVibration(true);
             notificationChannel.setVibrationPattern(new long[]{100, 200, 100, 200});
-            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             notificationManager.createNotificationChannel(notificationChannel);
 
 
-            notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), HodooConstant.CHANNEL_ID)
+            notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
                     .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.transparent_logo))
                     .setSmallIcon(R.drawable.ic_stat_name)
                     .setColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed))
@@ -192,8 +203,8 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                     .setSound(defaultSoundUri)
                     .setPriority(type)
                     .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
-                    .setContentIntent(pendingIntent);
-
+                    .setContentIntent(pendingIntent)
+                    .setChannelId(channelId);
         }
 
         notificationManager.notify(pushIdx /* ID of notification */, notificationBuilder.build());
