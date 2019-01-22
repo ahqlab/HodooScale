@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.constant.HodooConstant;
+import com.animal.scale.hodoo.util.DateUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,6 +66,7 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
 
         TextView title = alert.findViewById(R.id.alert_title);
         TextView content = alert.findViewById(R.id.alert_content);
+        TextView date = alert.findViewById(R.id.current_date);
 
         host = intent.getStringExtra("host");
         data = intent.getStringExtra("data");
@@ -91,6 +93,7 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
 
         title.setText( intent.getStringExtra("title") );
         content.setText( message );
+        date.setText(DateUtil.getCurrentDatetime());
 
         mPopupView = new TextView(this);                                         //뷰 생성
         mPopupView.setText( intent.getStringExtra("title") );
