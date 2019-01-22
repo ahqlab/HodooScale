@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.activity.setting.user.group.list.UserGroupListModel;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -101,5 +102,21 @@ public class InvitationConfirmModel extends CommonModel {
     public void saveBadgeCount( int count ) {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
         BadgeUtils.setBadge(context, count);
+    }
+
+    public void getInvitationList (final UserGroupListModel.DomainListCallBackListner<InvitationUser> callback) {
+        int userIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+        Call<List<InvitationUser>> call = NetRetrofit.getInstance().getInvitationService().getInvitationUser(userIdx);
+        new AbstractAsyncTaskOfList<InvitationUser>() {
+            @Override
+            protected void doPostExecute(List<InvitationUser> users) {
+                callback.doPostExecute(users);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
     }
 }

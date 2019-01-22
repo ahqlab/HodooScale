@@ -125,12 +125,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     protected void onResume() {
         Log.v(TAG, "onResume");
         super.onResume();
-
-        setBadge();
-        if ( badgeState )
-            getApplicationContext().registerReceiver(mMessageReceiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
-        cancelNotification( this );
-
+//        cancelNotification( this );
         if ( mSharedPrefManager.getIntExtra(SharedPrefVariable.BADGE_COUNT) > 0 ) {
             mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, 0);
             BadgeUtils.clearBadge(this);
@@ -140,6 +135,11 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager notifManager = (NotificationManager) ctx.getSystemService(ns);
         notifManager.cancelAll();
+    }
+    public static void removeNotiWithId ( Context ctx, int id ) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager notifManager = (NotificationManager) ctx.getSystemService(ns);
+        notifManager.cancel(id);
     }
 
     @Override
@@ -170,7 +170,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
             if ( toolbar != null ) {
                 TextView settingBadge = toolbar.findViewById(R.id.setting_badge);
                 if ( settingBadge != null ) {
-                    badgeState = true;
+                    getApplicationContext().registerReceiver(mMessageReceiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
                     CommonNotificationModel notificationModel = CommonNotificationModel.getInstance(this);
                     int count = notificationModel.getInvitationCount();
                     if ( count <= 0 ) {

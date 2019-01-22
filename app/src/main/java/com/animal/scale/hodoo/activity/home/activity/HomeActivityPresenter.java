@@ -113,7 +113,6 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
                         if ( users.get(i).getState() > 0 )
                             users.remove(i);
                     }
-
                     notiModel.setAllInvitationUsers(users);
                 }
             }

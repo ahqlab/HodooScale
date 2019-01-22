@@ -25,6 +25,7 @@ import android.util.Log;
 
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.fcm.NotificationActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -86,9 +87,10 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
             case HodooConstant.FIREBASE_FEED_TYPE :
                 Random random = new Random();
                 pushIdx = random.nextInt();
-                intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("title", title);
                 intent.putExtra("message", message);
+                intent.putExtra(HodooConstant.NOTI_TYPE_KEY, notiType);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 badgeType = notiType;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -183,6 +185,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.setShowBadge(true);
             notificationChannel.setDescription("HodooNotification");
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.GREEN);
@@ -204,6 +207,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                     .setPriority(type)
                     .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
                     .setContentIntent(pendingIntent)
+                    .setNumber(badgeCount)
                     .setChannelId(channelId);
         }
 

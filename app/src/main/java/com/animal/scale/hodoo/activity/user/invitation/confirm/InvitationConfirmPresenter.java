@@ -3,16 +3,22 @@ package com.animal.scale.hodoo.activity.user.invitation.confirm;
 import android.content.Context;
 import android.content.DialogInterface;
 
+import com.animal.scale.hodoo.activity.setting.user.group.list.UserGroupListActivity;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
+import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.util.BadgeUtils;
+
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
     private InvitationConfirm.View mView;
     private InvitationConfirmModel mModel;
     private CommonNotificationModel notificationModel;
+
     public InvitationConfirmPresenter (InvitationConfirm.View view) {
         mView = view;
         mModel = new InvitationConfirmModel();
@@ -40,16 +46,37 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
         mModel.setInvitationState(HodooConstant.ACCEPT_TYPE, toUserIdx, fromUserIdx, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
-                if ( result > 0 ) {
+                if ( result != null ) {
                     if ( result > 0 ) {
-                        mView.showPopup("초대완료", "초대가 완료되었습니다.", new InvitationConfirmActivity.CustomDialogCallback() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int i) {
-                                mView.closeActivity();
-                            }
-                        });
+                        notificationModel.removeInvitationUser(toUserIdx, fromUserIdx);
+                        if ( UserGroupListActivity.ACCEPT_TYPE == HodooConstant.ACCEPT_TYPE ) {
+                            mModel.invitationApproval(toUserIdx, fromUserIdx, new CommonModel.DomainCallBackListner<Integer>() {
+                                @Override
+                                public void doPostExecute(Integer result) {
+                                    if ( result > 0 ) {
+                                        mView.showPopup("초대완료", "초대가 완료되었습니다.", new InvitationConfirmActivity.CustomDialogCallback() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int i) {
+                                                mView.closeActivity();
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void doPreExecute() {
+
+                                }
+                            });
+                        } else {
+
+                        }
+
+                    } else {
+
                     }
                 }
+
             }
 
             @Override
@@ -82,4 +109,6 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
     public void saveBadgeCount( int count ) {
         mModel.saveBadgeCount(count);
     }
+
+
 }
