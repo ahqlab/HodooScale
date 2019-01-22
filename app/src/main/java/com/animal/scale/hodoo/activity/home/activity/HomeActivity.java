@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -33,6 +34,8 @@ import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
+import com.animal.scale.hodoo.adapter.HomeViewPagerAdapter;
+import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfPets;
@@ -82,21 +85,12 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
 
-
-        /* 이전 프레그먼트 (s) */
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
-        /* 이전 프레그먼트 (e) */
-
-        /* 뷰 페이저 (s) */
-        /* 뷰 페이저 (e) */
-
-
-
         binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
         presenter.loadCustomDropdownView();
         presenter.getSttingListMenu();
@@ -175,7 +169,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     return true;
 //                case R.id.navigation_temp:
 //                    binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
-//                    replaceFragment(TempFragment.newInstance());
+////                    replaceFragment(TempFragment.newInstance());
+//                    mViewPager.setCurrentItem(1);
 //                    presenter.loadCustomDropdownView();
 //                    return true;
                 case R.id.navigation_meal:
@@ -237,7 +232,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public void setCustomDropdownView(List<PetAllInfos> data) {
         this.data = data;
         presenter.setCurrentPetInfos(data);
-
     }
 
 
@@ -299,6 +293,19 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         PetAllInfos info = (PetAllInfos) adapter.getItem(position);
         presenter.setCurcleImage(info);
         mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, info.getPet().getPetIdx());
+        android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if(tf instanceof WeightFragment){
+          /*  WeightFragment weightFragment = (WeightFragment) tf;
+            weightFragment.setBcsMessage(info.getPet().getBasic());
+            weightFragment.drawChart();*/
+        }else if(tf instanceof MealFragment){
+            MealFragment mealFragment = (MealFragment) tf;
+            mealFragment.setTodaySumCalorie();
+        }else if(tf instanceof TempFragment){
+           /* TempFragment tempFragment = (TempFragment) tf;
+            tempFragment.drawChart();*/
+        }
+
     }
 
 

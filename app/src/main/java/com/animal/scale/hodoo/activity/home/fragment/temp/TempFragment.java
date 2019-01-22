@@ -106,7 +106,7 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
         statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
         //Kcal 로리 표시
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),TextManager.TEMP_DATA);
-        presenter.initWeekCalendar();
+
         /*((HomeActivity)getActivity()).binding.appBarNavigation.petImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -323,6 +323,7 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
     @Override
     public void onResume() {
         super.onResume();
+        presenter.initWeekCalendar();
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {

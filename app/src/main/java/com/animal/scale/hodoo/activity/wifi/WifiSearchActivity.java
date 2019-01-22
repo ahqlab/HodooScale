@@ -35,6 +35,7 @@ import com.animal.scale.hodoo.adapter.AdapterOfWifiList;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityWifiSearchBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.util.WifiUtil;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -77,9 +78,9 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
         wifimanager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         // Log.d(TAG, "Setup WIfiManager getSystemService");
         // if WIFIEnabled
-        if (wifimanager.isWifiEnabled() == false) {
+    /*    if (wifimanager.isWifiEnabled() == false) {
             wifimanager.setWifiEnabled(true);
-        }
+        }*/
         int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION);
         if (permissionCamera == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(WifiSearchActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
@@ -156,7 +157,7 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
                 //Log.e("HJLEE", "SCAN_RESULTS_AVAILABLE_ACTION");
                 getWIFIScanResult(); // get WIFISCanResult
             } else if (action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
-                Log.e("HJLEE", "NETWORK_STATE_CHANGED_ACTION");
+                //Log.e("HJLEE", "NETWORK_STATE_CHANGED_ACTION");
                 //sendBroadcast(new Intent("wifi.ON_NETWORK_STATE_CHANGED"));
                 //wifimanager.startScan(); // for refresh
                 //getWIFIScanResult();
@@ -180,6 +181,9 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
             public void onClick(DialogInterface dialog, int which) {
                 String password = input.getText().toString();
                 dialog.dismiss();
+               /* WifiUtil wifiUtil = new WifiUtil(WifiSearchActivity.this);
+                boolean result = wifiUtil.connectWiFi(SSID, password, "WEB");
+                Log.e("HJLEE", "result : " + result);*/
                 Intent intent = new Intent(WifiSearchActivity.this, FindHodoosActivity.class);
                 intent.putExtra("ssid", SSID);
                 intent.putExtra("bssid", bSSID);

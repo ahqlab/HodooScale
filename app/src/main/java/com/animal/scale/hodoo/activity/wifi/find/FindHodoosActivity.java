@@ -165,7 +165,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
             @Override
             public void run() {
                 String text = result.getBssid() + " is connected to the wifi";
-                Toast.makeText(FindHodoosActivity.this, text, Toast.LENGTH_LONG).show();
+                //Toast.makeText(FindHodoosActivity.this, text, Toast.LENGTH_LONG).show();
             }
 
         });
@@ -316,7 +316,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
                                 .append(result.size() - count)
                                 .append(" more result(s) without showing\n");
                     }
-                    Toast.makeText(activity, sb.toString(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(activity, sb.toString(), Toast.LENGTH_LONG).show();
                     createSaveBtn(result.get(0).getBssid());
                     binding.deviceInfo.setText(sb);
                 } else {
