@@ -302,7 +302,6 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_REQUEST);
-        Toast.makeText(getApplicationContext(), "gallery", Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -33,6 +34,8 @@ import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
+import com.animal.scale.hodoo.adapter.HomeViewPagerAdapter;
+import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfPets;
@@ -164,11 +167,12 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     replaceFragment(WeightFragment.newInstance());
                     presenter.loadCustomDropdownView();
                     return true;
-             /*   case R.id.navigation_temp:
-                    binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
-                    replaceFragment(TempFragment.newInstance());
-                    presenter.loadCustomDropdownView();
-                    return true;*/
+//                case R.id.navigation_temp:
+//                    binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
+////                    replaceFragment(TempFragment.newInstance());
+//                    mViewPager.setCurrentItem(1);
+//                    presenter.loadCustomDropdownView();
+//                    return true;
                 case R.id.navigation_meal:
                     replaceFragment(MealFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
@@ -228,7 +232,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public void setCustomDropdownView(List<PetAllInfos> data) {
         this.data = data;
         presenter.setCurrentPetInfos(data);
-
     }
 
 
