@@ -96,10 +96,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Toast.makeText(BasicInformationRegistActivity.this, "YES", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BasicInformationRegistActivity.this, "YES", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("YES");
                 } else {
-                    Toast.makeText(BasicInformationRegistActivity.this, "NO", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BasicInformationRegistActivity.this, "NO", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("NO");
                 }
             }
@@ -173,7 +173,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     @Override
     public void showErrorToast() {
-        showToast("ERROR");
+//        showToast("ERROR");
     }
 
     @Override
@@ -259,7 +259,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                         if (permissionCamera == PackageManager.PERMISSION_DENIED) {
                             ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
                         } else {
-                            Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
                             presenter.openCamera();
                         }
                         break;

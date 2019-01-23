@@ -61,7 +61,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
             startActivity(intent);
             overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
             finish();
-            showToast(getString(R.string.success));
+//            showToast(getString(R.string.success));
         } else {
             binding.loginProgress.setVisibility(View.GONE);
         }

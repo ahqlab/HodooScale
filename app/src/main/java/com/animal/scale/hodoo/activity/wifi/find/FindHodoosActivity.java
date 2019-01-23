@@ -285,7 +285,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         protected void onPostExecute(List<IEsptouchResult> result) {
             FindHodoosActivity activity = mActivity.get();
             if (result == null) {
-                Toast.makeText(activity ,"Create Esptouch task failed, the esptouch port could be used by other thread", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(activity ,"Create Esptouch task failed, the esptouch port could be used by other thread", Toast.LENGTH_SHORT).show();
                 return;
             }
             IEsptouchResult firstResult = result.get(0);
@@ -320,7 +320,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
                     createSaveBtn(result.get(0).getBssid());
                     binding.deviceInfo.setText(sb);
                 } else {
-                    Toast.makeText(activity, "Esptouch fail", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(activity, "Esptouch fail", Toast.LENGTH_LONG).show();
                     createRetryBtn();
                 }
             }
