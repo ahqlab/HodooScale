@@ -254,6 +254,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 }else if(tf instanceof MealFragment){
                     MealFragment mealFragment = (MealFragment) tf;
                     mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
+                    mealFragment.setTip();
                 }else if(tf instanceof TempFragment){
                     TempFragment tempFragment = (TempFragment) tf;
                     tempFragment.drawChart();
@@ -302,6 +303,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         }else if(tf instanceof MealFragment){
             MealFragment mealFragment = (MealFragment) tf;
             mealFragment.setTodaySumCalorie();
+            mealFragment.setTip();
         }else if(tf instanceof TempFragment){
            /* TempFragment tempFragment = (TempFragment) tf;
             tempFragment.drawChart();*/

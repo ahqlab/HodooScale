@@ -165,7 +165,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         } else {
             binding.weightView.setNumber(0f);
         }
-        Log.e("HJLEE", " refrashState : " + refrashState);
         if (refrashState)
             rotationStop(rotationView);
     }
@@ -209,11 +208,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 if (now.toDateTime().toString().compareTo(date) < 0) {
                 } else {
                     presenter.getDefaultData(date, TextManager.WEIGHT_DATA);
-                    //setBcsMessage(info.getPet().getBasic());
-                    //weightFragment.drawChart();
                     presenter.getLastCollectionData(date, TextManager.WEIGHT_DATA);
                     presenter.setAnimationGaugeChart(bcs);
-//                    refreshData();
                 }
             }
         });

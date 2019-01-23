@@ -320,7 +320,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="istyle_crude_pat">조지방</string>
     <string name="istyle_crude_fiber">조섬유</string>
     <string name="istyle_crude_ash">조회분</string>
-    <string name="istyle_carbohydrate">조섬유</string>
+    <string name="istyle_carbohydrate">탄수화물</string>
 
     <!-- FindHodoosActivity -->
     <string name="istyle_regist">등록</string>

@@ -77,7 +77,7 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
                     getDayData(d);
                 }else{
                     chart.clear();
-                   // initChart();
+                    //initChart();
                 }
             }
             @Override
@@ -123,6 +123,7 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     @Override
     public void initChart() {
+
     }
 
     @Override
