@@ -7,7 +7,7 @@ import android.util.Log;
 import com.animal.scale.hodoo.activity.user.invitation.InvitationActivity;
 import com.animal.scale.hodoo.common.CommonModel;
 
-public class InvitationFinishPresenter implements InvitationFinish.Presenter{
+public class InvitationFinishPresenter implements InvitationFinish.Presenter {
     private InvitationFinish.View mView;
     private InvitationFinishModel mModel;
     public InvitationFinishPresenter (Context context, InvitationFinish.View view) {
@@ -30,6 +30,21 @@ public class InvitationFinishPresenter implements InvitationFinish.Presenter{
                 } else if ( result == InvitationActivity.NOT_TO_DEVICE ) {
                     mView.showPopup("사용자 초대 에러", "초대하신 회원이 디바이스를 가지고 있지 않습니다.");
                 }
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
+
+    @Override
+    public void cancel(String to) {
+        mModel.cancel(to, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer integer) {
+                mView.cancelFinish(integer);
             }
 
             @Override

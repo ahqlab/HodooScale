@@ -35,4 +35,23 @@ public class InvitationFinishModel extends CommonModel {
             }
         }.execute(call);
     }
+    public void cancel (String to, final InvitationFinishModel.DomainCallBackListner<Integer> callback ) {
+        int from = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+        Call<Integer> call = NetRetrofit.getInstance().getFcmService().cancelInvitation(to, from);
+        new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer integer) {
+                if ( integer > 0 ) {
+                    mSharedPrefManager.removePreference(SharedPrefVariable.INVITATION_STATE);
+                    mSharedPrefManager.removePreference(SharedPrefVariable.INVITATION_USER_EMAIL);
+                }
+                callback.doPostExecute(integer);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+        }.execute(call);
+    }
 }

@@ -40,6 +40,13 @@ public class DeviceRegistModel {
         }.execute(call);
     }
 
+    public boolean checkInvitation() {
+        return mSharedPrefManager.getBooleanExtra(SharedPrefVariable.INVITATION_STATE);
+    }
+    public String getInvitationUserEmail() {
+        return mSharedPrefManager.getStringExtra(SharedPrefVariable.INVITATION_USER_EMAIL);
+    }
+
     public interface TempRegistListener {
         void doPostExecute(Integer result);
         void doPreExecute();

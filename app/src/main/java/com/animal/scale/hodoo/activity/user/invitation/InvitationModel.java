@@ -21,6 +21,10 @@ public class InvitationModel extends CommonModel {
     public String getUserEmail () {
         return mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL);
     }
+    public void setInvitationUser ( String to ) {
+        mSharedPrefManager.putBooleanExtra(SharedPrefVariable.INVITATION_STATE, true);
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.INVITATION_USER_EMAIL, to);
+    }
     public void sendInvitation ( String to, String from, final InvitationModel.DomainCallBackListner<Integer> callback ) {
         Call<Integer> call = NetRetrofit.getInstance().getFcmService().sendInvitation(to, from);
         new AbstractAsyncTask<Integer>() {

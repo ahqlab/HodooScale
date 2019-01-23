@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.home.fragment.meal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -269,27 +270,30 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void setTodaySumCalorie(MealHistory mealHistory) {
-        if (mealHistory != null) {
-            if (rer > mealHistory.getCalorie()) {
+        if ( getActivity() != null ) {
+            if (mealHistory != null) {
+                if (rer > mealHistory.getCalorie()) {
+                    binding.calorieBar.setMax((int) rer);
+                    binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+                    //initDataToSeekbar(rer);
+                } else {
+                    binding.calorieBar.setMax((int) mealHistory.getCalorie());
+                    binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+                    //initDataToSeekbar(rer, mealHistory.getCalorie());
+                }
+                binding.calorieBar.setProgress((int) mealHistory.getCalorie());
+                //binding.calorieIntake.setText((int) mealHistory.getCalorie() + "kcal");
+
+                binding.calorieView.setNumber(mealHistory.getCalorie());
+            } else {
                 binding.calorieBar.setMax((int) rer);
                 binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-                //initDataToSeekbar(rer);
-            } else {
-                binding.calorieBar.setMax((int) mealHistory.getCalorie());
-                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-                //initDataToSeekbar(rer, mealHistory.getCalorie());
+                binding.calorieBar.setProgress(0);
+                //binding.calorieIntake.setText(0 + "kcal");
+                binding.calorieView.setNumber(0);
             }
-            binding.calorieBar.setProgress((int) mealHistory.getCalorie());
-            //binding.calorieIntake.setText((int) mealHistory.getCalorie() + "kcal");
-
-            binding.calorieView.setNumber(mealHistory.getCalorie());
-        } else {
-            binding.calorieBar.setMax((int) rer);
-            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-            binding.calorieBar.setProgress(0);
-            //binding.calorieIntake.setText(0 + "kcal");
-            binding.calorieView.setNumber(0);
         }
+
         binding.calorieBar.setEnabled(true);
     }
 

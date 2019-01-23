@@ -31,7 +31,7 @@
                 app:scale_width="360"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Link Request\nhas been sent!"
+                android:text="@string/invitation_finish_title"
                 app:scale_textsize="34"
                 android:textAlignment="center"
                 android:textColor="@color/mainBlack"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 app:scale_textsize="14"
                 android:textAlignment="center"
-                android:text="After the device holder accepts your\nrequest, you will automatically enter the\napp main page."
+                android:text="@string/invitation_finish_content"
                 android:textColor="@color/subscript_color"/>
             <ImageView
                 app:scale_top="230"
@@ -84,7 +84,8 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="발송 취소"/>
+                android:text="발송 취소"
+                android:onClick="@{activity::cancel }"/>
         </LinearLayout>
 
 

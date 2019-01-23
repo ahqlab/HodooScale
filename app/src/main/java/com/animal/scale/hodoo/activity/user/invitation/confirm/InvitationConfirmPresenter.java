@@ -92,10 +92,13 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
         mModel.setInvitationState(HodooConstant.DECLINE_TYPE, to, from, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
-                if ( result > 0 ) {
-                    notificationModel.removeInvitationUser(to, from);
-                    mView.closeActivity();
+                if ( result != null ) {
+                    if ( result > 0 ) {
+                        notificationModel.removeInvitationUser(to, from);
+                        mView.closeActivity();
+                    }
                 }
+
             }
 
             @Override

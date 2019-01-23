@@ -253,7 +253,7 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="istyle_weight_history_of_the_day">오늘의 체중 기록</string>
     <string name="average_weight_for_today">AVERAGE WEIGHT FOR TODAY</string>
     <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
-    <string name="weight_for_today">today\'s weight</string>
+    <string name="weight_for_today">오늘의 체중</string>
     <string name="temp_for_today">today\'s temp</string>
     <string name="bcs_step_str">BCS STEP</string>
     <string name="bcs_description_str">BCS DESCRIPTION</string>
@@ -403,8 +403,14 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
 
     <string name="edit_btn_text">편집</string>
 
-
-
     <!-- 2019.01.21 song new string (e) -->
+    
+    <!-- firebase (s) -->
+    <string name="invitation_subfix">님의 요청입니다.</string>
+    <!-- firebase (e) -->
+
+    <string name="invitation_finish_title">요청 링크를\n발송했습니다!</string>
+    <string name="invitation_finish_content">기기 소유자가 요청을 수락하면\n앱 메인 페이지로 이동할 수 있습니다.</string>
+
 
 </resources>
