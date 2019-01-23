@@ -100,7 +100,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     }
 
     public void showToast(String message) {
-        Toast.makeText(getActivityClass(), message, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivityClass(), message, Toast.LENGTH_SHORT).show();
     }
 
     public void moveIntent(Context packageContext, Class<?> cls, int enterAnim, int exitAnim, boolean kill){

@@ -161,7 +161,7 @@ public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCh
             ((DiseaseInformationRegistActivity) DiseaseInformationRegistActivity.mContext).finish();
             ((PhysiqueInformationRegistActivity) PhysiqueInformationRegistActivity.mContext).finish();
             finish();
-            Toast.makeText(this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
         } else {
             Log.e("HJLEE", "registResult ERROR");
         }
