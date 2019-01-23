@@ -93,7 +93,7 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
 
         title.setText( intent.getStringExtra("title") );
         content.setText( message );
-        date.setText(DateUtil.getCurrentDatetime());
+        date.setText(DateUtil.getCurrentDatetimeSecond());
 
         mPopupView = new TextView(this);                                         //뷰 생성
         mPopupView.setText( intent.getStringExtra("title") );

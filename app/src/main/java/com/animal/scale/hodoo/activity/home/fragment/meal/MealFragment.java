@@ -115,8 +115,6 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
         presenter.getTipMessageOfCountry(new MealTip(country));
-        //binding.calorieBar.setPro
-
         return binding.getRoot();
     }
 
@@ -141,6 +139,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void initRaderChart(String date) {
+        //메시지를 변경한다.
         chart = binding.chart1;
         chart.setBackgroundColor(Color.rgb(255, 255, 255));
         //chart.setScaleX(1.2f);
@@ -296,8 +295,6 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void setTipMessageOfCountry(MealTip tip) {
-        //binding.collapse.setTitle(tip.getTitle());
-        //binding.collapse.setContent(tip.getContent());
         binding.collapse.setTitle(tip.getTitle());
         binding.collapse.setContent(tip.getContent());
     }
@@ -384,8 +381,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void onResume() {
-//        binding.calorieScrollview
         presenter.getPetAllInfo();
         super.onResume();
+    }
+
+    public void setTip() {
+        presenter.getTipMessageOfCountry(new MealTip(country));
     }
 }
