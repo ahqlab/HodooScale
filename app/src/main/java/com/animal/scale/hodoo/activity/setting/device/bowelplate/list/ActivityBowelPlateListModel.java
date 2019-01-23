@@ -45,7 +45,7 @@ public class ActivityBowelPlateListModel extends CommonModel {
     }
 
     public void setChangeDeviceRegisted(int deviceIdx, boolean b, final DomainCallBackListner<Integer> domainCallBackListner) {
-        Call<Integer> call  = NetRetrofit.getInstance().getDeviceService().setChangeRegisted(deviceIdx, b);
+        Call<Integer> call  = NetRetrofit.getInstance().getDeviceService().setChangeRegisted(sharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), deviceIdx, b);
         new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {

@@ -257,6 +257,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     MealFragment mealFragment = (MealFragment) tf;
                     mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
                     mealFragment.setTip();
+                    mealFragment.setPetAllinfo();
                 }else if(tf instanceof TempFragment){
                     TempFragment tempFragment = (TempFragment) tf;
                     tempFragment.drawChart();

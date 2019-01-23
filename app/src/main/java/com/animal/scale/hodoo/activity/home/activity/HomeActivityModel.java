@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.home.activity;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.user.invitation.Invitation;

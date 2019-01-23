@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
@@ -54,6 +55,8 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSharedPrefManager = SharedPrefManager.getInstance(getActivityClass());
+        String countryCode = VIewUtil.getMyLocationCode(getActivityClass());
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.CURRENT_COUNTRY, countryCode);
     }
 
     protected abstract BaseActivity<D> getActivityClass();

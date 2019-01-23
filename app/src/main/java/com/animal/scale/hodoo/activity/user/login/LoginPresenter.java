@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Pet;
@@ -138,6 +140,7 @@ public class LoginPresenter implements Login.Presenter {
                     });
                 }else{
                     //디바이스 없음
+
                     loginView.goDeviceRegistActivity();
                 }
             }

@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.domain;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import java.io.Serializable;
 
@@ -32,12 +33,12 @@ public class PetAllInfos implements Serializable {
     @Setter
     public PetWeightInfo petWeightInfo;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public float getFactor() {
         double factor = 0;
         //나이 <= 4개월
-        if (petBasicInfo.currentMonth() != 0 && petBasicInfo.getNeutralization() != null && petWeightInfo.getBcs() != 0) {
-            if (petBasicInfo.currentMonth() <= 4) {
+        Log.e("HJLEE", "petBasicInfo.getCurrentMonth() : " + petBasicInfo.getCurrentMonth());
+        if (petBasicInfo.getCurrentMonth() != 0 && petBasicInfo.getNeutralization() != null && petWeightInfo.getBcs() != 0) {
+            if (petBasicInfo.getCurrentMonth() <= 4) {
                 //2 (중성화)
                 if (petBasicInfo.getNeutralization().matches("YES")) {
                     if (petWeightInfo.getBcs() <= 3) {
@@ -63,7 +64,7 @@ public class PetAllInfos implements Serializable {
                     }
                 }
                 //5 < 나이 <= 12개월
-            } else if (petBasicInfo.currentMonth() <= 12) {
+            } else if (petBasicInfo.getCurrentMonth() <= 12) {
                 if (petBasicInfo.getNeutralization().matches("YES")) {
                     if (petWeightInfo.getBcs() <= 3) {
                         //3-1
@@ -118,6 +119,8 @@ public class PetAllInfos implements Serializable {
         }else{
             factor = 0;
         }
+
+        Log.e("HJLEE", "factor : " + Float.parseFloat(String.valueOf(factor)));
         return Float.parseFloat(String.valueOf(factor));
     }
 

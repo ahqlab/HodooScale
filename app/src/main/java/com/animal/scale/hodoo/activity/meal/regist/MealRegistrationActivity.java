@@ -186,7 +186,6 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
             finish();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
@@ -239,6 +238,8 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
                 .groupId(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE))
                 .userIdx(mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID))
                 .build();
+
+        Log.e("HJLEE", "history > " + mealHistory.toString());
         presenter.saveMeal(mealHistory);
     }
 }

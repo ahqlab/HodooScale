@@ -20,6 +20,7 @@ import com.animal.scale.hodoo.activity.user.reset.password.send.SendCertificatio
 import com.animal.scale.hodoo.activity.user.signup.SignUpFinishActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityLoginBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -147,6 +148,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
 
     @Override
     public void goDeviceRegistActivity() {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
         Intent intent = new Intent(getApplicationContext(), DeviceRegistActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
