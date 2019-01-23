@@ -32,7 +32,7 @@
                 android:layout_below="@+id/common_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="사용자 초대"
+                android:text="그룹 참여 요청"
                 android:textSize="30sp"
                 android:textColor="@color/mainBlack"
                 />
@@ -40,7 +40,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="초대하실 회원의 이메일을 입력해주세요."
+                android:text="그룹에 참여하실 회원의 이메일을 입력해주세요."
                 android:textColor="@color/subscript_color"/>
 
             <com.animal.scale.hodoo.custom.view.input.CustomCommonEditText
@@ -65,7 +65,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="18dp"
             android:background="@drawable/rounded_pink_btn"
-            android:text="초대하기"
+            android:text="그룹 참여 요청하기"
             android:onClick="@{activity::sendInvition}"
             android:textColor="@color/white"
             android:textSize="18sp"

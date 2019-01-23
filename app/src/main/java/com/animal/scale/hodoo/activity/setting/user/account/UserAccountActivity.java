@@ -101,7 +101,7 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                showToast(input.getText().toString());
+//                                showToast(input.getText().toString());
                                 dialog.dismiss();
 
                             }
@@ -110,7 +110,7 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        showToast(input.getText().toString());
+//                        showToast(input.getText().toString());
                         dialog.dismiss();
                     }
                 }).show();
