@@ -77,6 +77,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     private List<PetAllInfos> data;
 
+    private BottomNavigationView navigation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +89,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter.loadData(HomeActivity.this);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -330,10 +332,12 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 case HodooConstant.FIREBASE_WEIGHT_TYPE :
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
                     replaceFragment(WeightFragment.newInstance());
+                    navigation.setSelectedItemId(R.id.navigation_weight);
                     presenter.loadCustomDropdownView();
                     break;
                 case HodooConstant.FIREBASE_FEED_TYPE :
                     replaceFragment(MealFragment.newInstance());
+                    navigation.setSelectedItemId(R.id.navigation_meal);
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
                     break;
             }

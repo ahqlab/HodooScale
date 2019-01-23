@@ -11,5 +11,6 @@ public interface Invitation {
     interface Presenter {
         void loadData (Context context);
         void sendInvitation( String to );
+        void setInvitationData ( String mail );
     }
 }

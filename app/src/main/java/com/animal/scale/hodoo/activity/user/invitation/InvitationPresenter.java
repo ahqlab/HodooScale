@@ -29,6 +29,7 @@ public class InvitationPresenter implements Invitation.Presenter {
             public void doPostExecute(Integer result) {
                 mView.setProgress(false);
                 if ( result == InvitationActivity.SUCESS ) {
+                    setInvitationData( to );
                     mView.goFinishPage();
 //                    Log.e(TAG, "전송 완료");
 //                    mView.showPopup("사용자 초대 완료", to + "님에게 초대 메세지를 발송했습니다.", new InvitationActivity.CustomDialogCallback() {
@@ -56,5 +57,10 @@ public class InvitationPresenter implements Invitation.Presenter {
 
             }
         });
+    }
+
+    @Override
+    public void setInvitationData(String mail) {
+        model.setInvitationUser(mail);
     }
 }

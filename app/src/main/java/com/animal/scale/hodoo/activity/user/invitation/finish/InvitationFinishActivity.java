@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityInvitationFinishBinding;
@@ -21,7 +22,6 @@ public class InvitationFinishActivity extends BaseActivity<InvitationFinishActiv
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         intent = getIntent();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invitation_finish);
         binding.setActivity(this);
@@ -37,6 +37,9 @@ public class InvitationFinishActivity extends BaseActivity<InvitationFinishActiv
     public void reSend ( View view ) {
         presenter.resend(intent.getStringExtra(HodooConstant.INVITATION_EMAIL_KEY));
     }
+    public void cancel ( View v ) {
+        presenter.cancel( intent.getStringExtra(HodooConstant.INVITATION_EMAIL_KEY) );
+    }
 
     @Override
     public void showPopup(String title, String content) {
@@ -51,4 +54,22 @@ public class InvitationFinishActivity extends BaseActivity<InvitationFinishActiv
                 }).create();
         dialog.show();
     }
+
+    @Override
+    public void cancelFinish(int result) {
+        if ( result > 0 ) {
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("요청 취소 완료")
+                    .setMessage("참여 요청을 취소하였습니다.")
+                    .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            finish();
+                            dialog.dismiss();
+                        }
+                    }).create();
+            dialog.show();
+        }
+    }
+
 }

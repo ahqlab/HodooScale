@@ -12,6 +12,9 @@ public class SharedPrefVariable {
     public static final String USER_PASSWORD = "USER_PASSWORD";
     public static final String USER_GROUP_ACCESS_TYPE = "USER_GROUP_ACCESS_TYPE";
 
+    public static final String INVITATION_STATE = "INVITATION_STATE";
+    public static final String INVITATION_USER_EMAIL = "INVITATION_USER_EMAIL";
+
 
     public static final String AUTO_LOGIN = "AUTO_LOGIN";
 
@@ -22,8 +25,8 @@ public class SharedPrefVariable {
     /* notification (e) */
 
     public static final String UPDATE_ACTIVITY_INTENT_NAME = "UPDATE_ACTIVITY_INTENT_NAME";
-    public static final String SERVER_ROOT = "http://121.183.234.14:7171/";
+//    public static final String SERVER_ROOT = "http://121.183.234.14:7171/";
     public static final String CURRENT_COUNTRY = "CURRENT_COUNTRY";
-//    public static final String SERVER_ROOT = "http://192.168.10.104:9090/";
+    public static final String SERVER_ROOT = "http://192.168.10.105:9090/";
 
 }

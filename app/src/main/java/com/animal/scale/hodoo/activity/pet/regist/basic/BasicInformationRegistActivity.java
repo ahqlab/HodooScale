@@ -272,6 +272,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                             dialog.dismiss();
                         }
                         break;
+                        default :
+                            dialog.dismiss();
+                            break;
                 }
             }
         });

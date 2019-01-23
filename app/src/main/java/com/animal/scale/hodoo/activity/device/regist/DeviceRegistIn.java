@@ -9,6 +9,8 @@ public interface DeviceRegistIn {
         void setProgress(boolean play);
 
         void moveWIFISetting();
+
+        void moveInvitationFinish( String email );
     }
 
     interface Presenter{
@@ -16,5 +18,7 @@ public interface DeviceRegistIn {
         void loadData(Context context);
 
         void tempRegist();
+
+        void checkInvitation();
     }
 }
