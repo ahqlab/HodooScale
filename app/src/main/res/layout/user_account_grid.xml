@@ -16,17 +16,21 @@
     </data>
 
     <RelativeLayout
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical|center_horizontal"
         android:clipChildren="false">
 
         <LinearLayout
+            android:clipChildren="false"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <FrameLayout
+                android:layout_marginTop="5dp"
+                android:clipChildren="false"
                 android:layout_centerInParent="true"
                 android:id="@+id/speaker_avatar_container"
                 android:layout_width="wrap_content"
@@ -69,6 +73,20 @@
                     android:id="@+id/squareAvatar"
                     android:layout_width="60dp"
                     android:layout_height="60dp" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_gravity="left|top"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginLeft="-5dp"
+                    android:padding="3dp"
+                    android:id="@+id/master_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10dp"
+                    android:text="master"
+                    android:textColor="@color/white"
+                    android:background="@color/mainRed"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/nick_name"

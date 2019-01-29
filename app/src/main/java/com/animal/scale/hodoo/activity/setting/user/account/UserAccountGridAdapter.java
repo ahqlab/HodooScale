@@ -75,44 +75,45 @@ public class UserAccountGridAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(activity).inflate(R.layout.user_account_grid, null);
             binding = DataBindingUtil.bind(convertView);
             binding.setDomain(data.get(position));
-            if (data.get(position).getUserIdx() == mIdx) {
-                binding.placeholder.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(activity.getApplicationContext(), R.color.mainRed)));
-            }
+
             convertView.setTag(binding);
         } else {
             binding = (UserAccountGridBinding) convertView.getTag();
-            if ( position != 0 ) {
-                if ( data.get(position).getUserIdx() == mIdx ) {
-                    binding.placeholder.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(activity.getApplicationContext(), R.color.mainRed)));
-                } else {
-                    // ( data.get(position).getUserIdx() != mIdx )
-                    if ( editState ) {
-                        binding.removeBtn.setVisibility(View.VISIBLE);
-                        binding.removeBtn.animate().scaleX(1).scaleY(1);
-                    } else {
-                        binding.removeBtn.animate().scaleX(0).scaleY(0).withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                for (int i = 0; i < removeBtns.length; i++) {
-                                    removeBtns[i].setVisibility(View.GONE);
-                                }
-                            }
-                        });
-                    }
-
-                }
-            }
-            removeBtns[position] = binding.removeBtn;
-
-            binding.removeBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if ( clickListener != null )
-                        clickListener.onClick(data.get(position));
-                }
-            });
             binding.setDomain(data.get(position));
         }
+
+        if ( data.get(position).getUserIdx() == mIdx ) {
+            binding.placeholder.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(activity.getApplicationContext(), R.color.mainRed)));
+        } else {
+            if ( editState ) {
+                binding.removeBtn.setVisibility(View.VISIBLE);
+                binding.removeBtn.animate().scaleX(1).scaleY(1);
+            } else {
+                binding.removeBtn.animate().scaleX(0).scaleY(0).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < removeBtns.length; i++) {
+                            removeBtns[i].setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+
+            if (data.get(position).getAccessType() == 1) {
+                binding.masterBadge.setVisibility(View.VISIBLE);
+            }
+        }
+
+        removeBtns[position] = binding.removeBtn;
+
+        binding.removeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ( clickListener != null )
+                    clickListener.onClick(data.get(position));
+            }
+        });
+
         return binding.getRoot();
     }
     private String matches ( String name ) {

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.User;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class UserAccountPresenter implements UserAccountIn.Presenter {
@@ -28,8 +29,26 @@ public class UserAccountPresenter implements UserAccountIn.Presenter {
         model.getUserData(new UserAccountModel.asyncTaskListner() {
             @Override
             public void doPostExecute(List<User> data) {
-//                model.addRegistBtn(data);
+
+                User master = null;
+                int index = 0;
                 int idx = model.getUserIdx();
+                for (int i = 0; i < data.size(); i++) {
+                    if ( data.get(i).getAccessType() == 1 ) {
+                        master = data.get(i);
+                        index = i;
+                    }
+                }
+                if ( master != null ) {
+                    if ( master.getUserIdx() != idx && index != 0 ) {
+                        Iterator<User> iterator = data.iterator();
+                        while (iterator.hasNext()) {
+                            if (iterator.next() == master)
+                                iterator.remove();
+                        }
+                        data.add(0, master);
+                    }
+                }
                 view.setAdapter(idx, data);
             }
             @Override
