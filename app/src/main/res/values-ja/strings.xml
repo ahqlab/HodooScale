@@ -1,29 +1,11 @@
 <resources>
-
     <string name="app_name">HodooScale</string>
     //common
-    <string name="not_connected_to_the_Internet">ネットに繋がっていません。</string>
-    <string name="title_activity_login">ログイン</string>
-
     <!-- Strings related to login -->
-    <string name="prompt_email">メールアドレス</string>
-    <string name="prompt_password">パスワード(8桁以上)</string>
-    <string name="prompt_password_check">パスワード(8桁以上)</string>
-    <string name="prompt_nicname">ニックネーム(9桁以内)</string>
-    <string name="prompt_from">居住地域を入力してください。</string>
-    <string name="action_sign_in">登録またはログインしてください</string>
     <string name="action_sign_in_short">ログイン</string>
-    <string name="error_invalid_email">このメールアドレスは使用できません。</string>
-    <string name="error_invalid_password">パスワードが短いです。</string>
-    <string name="error_incorrect_password">パスワードが正しくありません。</string>
-    <string name="error_field_required">入力されていないところがあります</string>
-    <string name="permission_rationale">"アクセス許可が必要です。メールをご確認ください"</string>
-    <string name="istyle_create_account">アカウント生成</string>
     <string name="istyle_lost_password">パスワードをお忘れですか？</string>
-
     <!-- SignUp -->
     <string name="istyle_label_email">メールアドレス</string>
-    <string name="istyle_label_password">パスワード</string>
     <string name="istyle_label_confirm_password">パスワード再確認</string>
     <string name="istyle_label_nickname">ニックネーム</string>
     <string name="istyle_label_country">国家</string>
@@ -33,29 +15,20 @@
     <string name="istyle_label_private"><u>個人情報収集及び利用案内</u></string>
     <string name="istyle_btn_text">アカウント生成</string>
     <!-- Validation -->
-    <string name="istyle_enter_the_email">メールアドレスを入力してください。</string>
     <string name="istyle_not_valid_email_format">正しいメールアドレスではありません。</string>
     <string name="istyle_enter_the_password">パスワードを入力してください。</string>
     <string name="istyle_enter_your_confirmation_password">確認パスワードを入力してください。</string>
     <string name="istyle_password_is_incorrect">正しいパスワードではありません。</string>
     <string name="istyle_enter_your_nik_name">ニックネームを入力してください。</string>
-    <string name="istyle_select_gender">性別を選択してください。</string>
-    <string name="istyle_enter_your_place_of_residence">居住地を入力してください。</string>
-
-
     <!-- COMMON TEXT -->
     <string name="men">男性</string>
     <string name="woman">女性</string>
-    <string name="year">生年</string>
-    <string name="month">月</string>
-    <string name="day">日</string>
     <string name="male">オス</string>
     <string name="femle">メス</string>
     <string name="pet_width">大きさ</string>
     <string name="pet_height">身長</string>
     <string name="pet_unit">単位</string>
     <string name="pet_weight">体重</string>
-    <string name="pet_temp">体温</string>
     <string name="pet_kg">Kg</string>
     <string name="compleate">完了</string>
     <string name="cancle">キャンセル</string>
@@ -65,40 +38,27 @@
     <string name="gallery">ギャラリー</string>
     <string name="camera">カメラ</string>
     <string name="failed">失敗</string>
-    <string name="success">成功</string>
     <string name="cup">カップ</string>
     <string name="ea">個</string>
     <string name="food">食べ物</string>
     <string name="edit_success">修正成功</string>
+    //setting - > user
     <string name="log_out">ログアウト</string>
     <string name="change_user_account_info">ユーザーアカウント情報</string>
+     <string name="withdraw" translatable="false">회원탈퇴</string>
+    <string name="withdraw_subscript" translatable="false">탈퇴하시면 HODOO 서비스를 이용하실 수 없습니다.\n정말 탈퇴하시겠습니까?</string>
     <string name="excess">超過</string>
     <string name="recommend">勧奨</string>
-    <string name="meal">食事</string>
-    <string name="activity">活動</string>
-    <string name="test_text">BCS 3단계 유의사항 컨텐츠가 들어가는 공간입니다. 현재 보여지는 텍스트는 테스트 텍스트입니다.</string>
-    <string name="time">時</string>
-
     <!-- MAIN Activity -->
     <string name="istyle_already_a_member">既にHodooに登録されてますか？</string>
-
-    <string name="activity_title">活動 管理</string>
-    <string name="weight_content">スマート排便器を使って自動的に測定された体重と変化を一目で確認してください。</string>
-    <string name="meal_content">健康な体重のための適正摂取カロリーと\n摂取した食べ物の影響均衡状態を分析してください差し上げますよ。</string>
-    <string name="activity_content">快適な散歩のための天気情報と健康状態に\n合う散歩(運動量)分析をご覧ください。</string>
-    <string name="hodoo_link_content">함께 생활하는 가족,\n친구들과 같이 반려동물을 관리할 수 있어요</string>
     <!-- Login Activity -->
     <string name="istyle_forgot_password">パスワードをお忘れですか？</string>
-
-
     <!-- PAGE TITLE -->
-    <string name="login_page_title">ログイン</string>
     <string name="basin_info_regist_title">ペット追加</string>
     <string name="disease_information_regist_title">ペットの病歴</string>
     <string name="physique_information_regist_title">ペットの体格</string>
     <string name="weight_check_title">体重状態チェック</string>
     <string name="weight_title">体重管理</string>
-    <string name="temp_title">体温管理</string>
     <string name="meal_title">食事管理</string>
     <string name="hodoo_link_title">함께관리</string>
     <string name="wifi_list_title">WIFI設定</string>
@@ -114,8 +74,6 @@
     <string name="istyle_management_pet">ペット管理</string>
     <string name="istyle_management_user">ユーザー管理</string>
     <string name="istyle_find_password">パスワードを探す</string>
-
-
     <!-- Setting List -->
     <string name="istyle_setting_menu_my_account">私のアカウント</string>
     <string name="istyle_setting_menu_notice">お知らせ</string>
@@ -124,15 +82,10 @@
     <string name="istyle_setting_menu_setting_device">機器設定</string>
     <string name="istyle_setting_menu_management_user_group">ユーザーグループ管理</string>
     <string name="istyle_setting_menu_management_pet">ペット管理</string>
-
     <!--ALERT MESSAGE-->
     <string name="message">メッセージ</string>
     <string name="vailed_email">メールアドレス形式が正しくありません。</string>
     <!-- COMMON MESSAGE -->
-    <string name="user_regist_failed_message">会員登録に失敗しました。</string>
-    <string name="user_login_failed_message">ログインに失敗しました。ID及びパスワードをご確認ください。 </string>
-
-
     //TermsOfServiceActivity
     <string name="signup_title">会員登録</string>
     <string name="agree_terms">約款同意</string>
@@ -140,14 +93,7 @@
     <string name="term_of_service">サービス利用約款</string>
     <string name="agree_of_service">利用約款に同意します。</string>
     <string name="istyle_agree_to_the_terms">約款に同意します。</string>
-
     <!-- LoginActivity -->
-    <string name="btn_login">ログイン</string>
-    <string name="login_message1">square </string>
-    <string name="login_message2">アカウントへ</string>
-    <string name="login_message3"> Hoodo Fit</string>
-    <string name="login_message4"> ログイン</string>
-
     <!-- Add Pet Activity -->
     <string name="add_pet_name">ペットの名前</string>
     <string name="add_pet_type">ペットの品種</string>
@@ -155,106 +101,54 @@
     <string name="add_pet_gender">性別</string>
     <string name="add_pet_neuter">中性化</string>
     <string name="add_pet_next_btn">次の段階</string>
-    <string name="add_pet_edit_hint">品種を入力してください。</string>
-
     <!-- DeseaseInformaionRegistActivity-->
-    <string name="required_chioce_disease">疾患がない場合、\「疾患なし」\を入力してください。</string>
     <!-- PhysiqueSecondInformationRegistActivity -->
     <string name="physique_information_guide_text1">ペットの正確な健康管理のために情報を必ず入力してください。</string>
     <string name="physique_information_guide_text2">大きさ:お尻から胸まで</string>
     <string name="physique_information_guide_text3">身長: 前足から首と背中の境界線まで </string>
-
-
     <!-- WeightSecondCheckActivity -->
-    <string name="self_check_bcs_info">Hodooは、BCS(Body Conditioning Score)技法を通じて、ペットの脂肪比率を測定できます。 </string>
-    <string name="fat_mass">脂肪量</string>
-    <string name="self_check_desc1">脂肪量と体重</string>
-    <string name="self_check_desc2">体脂肪率が少々高いです！待て！運動が足りないのですね！この状態で維持されると、糖尿病等の心血管疾患が発生する恐れがありますので、お気を付けてください！ </string>
-    <string name="self_check_desc3">ここに解決策があります</string>
-    <string name="self_check_desc4">私たち、一緒に運動しましょうか？週2～6回有酸素運動と筋力運動を並行し、基礎代謝量に合う食習慣に改善し、体脂肪を燃やしてみましょう！！</string>
-
     <!-- WIFI Search Activity -->
     <string name="wifi_connection">WIFI接続</string>
     <string name="wifi_connection_advice">WIFI信号の状態が最も良いネットを使用してください。 </string>
     <string name="wifi_connection_popup_password_hint">パスワードを入力してください。</string>
-
     <!-- FindHodooActivity -->
     <string name="find_hodoo_message1">Hodoo Scale</string>
     <string name="find_hodoo_message2">接続中です。プレミアム機器を共有器の近くに置いてください。 </string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_login2">Sign in</string>
-
     <!-- ChangePasswordActivity -->
     <string name="explanation_of_password_change">周期的なパスワード変更は個人情報を安全に保護し、個人情報盗用の被害を予防します。 </string>
     <string name="current_password">現在のパスワード</string>
-    <string name="new_password">新しいパスワード</string>
     <string name="password_entry_limit">8桁～20桁、英文、数字、特殊文字使用</string>
-    <string name="password_hint">現在のパスワード入力</string>
     <string name="new_password_hint">新しいパスワード入力</string>
     <string name="confirm">確認</string>
-
-
     <!-- UserAccountActivity -->
     <string name="plus_friend_popup_email_hint">メールアドレスを入力してください。</string>
     <string name="istyle_new_group_user">新しい構成員</string>
-
     <!-- DeviceSettingActivity -->
     <string name="device_setting_activity_title">機器変更</string>
     <string name="istyle_firmware_update">ファームウェアアップグレード1.2.0アップデート</string>
     <string name="istyle_update">アップグレード</string>
     <string name="istyle_change_wifi_setting">Wifi変更設定</string>
     <string name="istyle_remove_bowelplate">体重計接続解除</string>
-
     <!-- FeedListActivity -->
     <string name="istyle_calories_taken_today">今日摂取したカロリー</string>
     <string name="istyle_food_taken_today">今日摂取した食べ物</string>
-
     <!-- MealRegistrationActivity -->
-    <string name="istyle_check_components">成分確認</string>
-    <string name="istyle_select_components_and_units">成分と単位を選択してください </string>
-
     <!-- MealUpdateActivity -->
-
     <!-- SearchFailedActivity -->
     <string name="istyle_not_found_bowelplate">周辺のトイレトレーが見つかりません。 </string>
     <string name="istyle_retry">もう一度試す</string>
     <string name="istyle_buy">購入</string>
-    <string name="istyle_skip">スキップ</string>
-
-
     <!-- SendCertificationNumberActivity-->
     <string name="send_btn_text">認証番号伝送</string>
     <!-- ConfirmCertificationNumberActivity-->
     <string name="cofirm_btn_text">確認</string>
-    <string name="istyle_question_of_lost_password">パスワードをお忘れですか？</string>
-    <string name="istyle_answer_of_lost_password">大丈夫です。すぐ見つかります。</string>
-    <string name="istyle_email_hint">メールアドレスを入力してください。</string>
-    <string name="istyle_cerification_number_text">メールアドレスを入力してください。</string>
-
     <!-- WeightStatisticsActivity -->
     <string name="istyle_today">日刊</string>
     <string name="istyle_one_week">週刊</string>
     <string name="istyle_one_month">月刊</string>
     <string name="istyle_one_year">年刊</string>
-
     <!-- MealFragment -->
-    <string name="istyle_todays_word">今日の一言</string>
-    <string name="istyle_todays_word_contnet">大型犬にカロリー、タンパク質、脂肪が多く含有されている小型犬用の餌を与えると、カルシウム過剰で骨の成長が遅延され、股関節疾患に繋がる恐れがありますので、ご注意ください!</string>
-    <string name="istyle_eating_management">食事管理</string>
-    <string name="istyle_record_todays_meal">今日の食事を記録してください。</string>
-    <string name="istyle_todays_prescription">炭水化物の過剰摂取が疑われます。</string>
-    <string name="istyle_todays_prescription_desc">ビタミンは大きく脂溶性と水溶性ビタミンに分けられます。脂溶性ビタミンA、D、E、Kの４つがあり、水溶性ビタミンはC、B1、B2、B6、B12、葉酸、パントテン酸、ビオチンの8つがあります。犬は人と違ってビタミンCを体で自ら作られるため、必須栄養素ではありません。
-過剰なビタミンCは心臓、膀胱、結石と関連があるため、ビタミンCが含有されている食べ物は避けた方が良いです。ひょっとしてビタミンを過剰に与えてませんか？
-"</string>
-
     <!-- WeightFragment -->
-    <string name="istyle_bcs_comment">現在、あなたのペットはBCS 4段階に平均体重に比べて過剰な状態です。\nバランスの取れた献立と正しい行動でペットの体重を管理しなければいけません。 </string>
-    <string name="istyle_weight_history_of_the_day">今日の体重記録</string>
     <string name="average_weight_for_today">今日の平均体重</string>
     <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
     <string name="weight_for_today">今日の体重</string>
@@ -264,43 +158,24 @@
     <string name="last_sync_refresh_str">最後の同期化</string>
     <string name="not_data">データなし</string>
     <string name="today_intake_kcal">今日摂取した 総カロリー</string>
-
-    <string name="one_day">一日</string>
-    <string name="one_week">一週</string>
-    <string name="one_month">一ヶ月</string>
-    <string name="one_year">年</string>
-
     <!-- Meal Detail Info Dialog -->
     <string name="istyle_one_hundred_g_supply">100g提供量</string>
-    <string name="istyle_kcal">カロリー</string>
     <string name="istyle_one_hundred_g_nutrient_content">100g当たり栄養素含有量</string>
-
     <!-- Pet Regist Dialog -->
     <string name="istyle_add_pet">ペット追加</string>
-
     <!-- CreateNewPasswordActivity -->
     <string name="compleate_btn_text">完了</string>
     <string name="istyle_new_password_setting">新しいパスワード設定</string>
     <string name="istyle_new_password_setting_hint"> 新しいパスワード設定</string>
     <string name="istyle_enter_new_password"> 新しいパスワード入力</string>
-
     <!-- Custom_dialog -->
-
     <!-- DeviceRegistActivity -->
     <string name="title_device_regist">機器登録</string>
     <string name="message_device_regist1">トイレトレーと接続されていません。 </string>
     <string name="message_device_regist2">トイレトレーを登録してください。</string>
-
     <!-- ChangeUserInfoActivity -->
-    <string name="change_user_info_title">ユーザー情報変更</string>
     <string name="change_user_info_email">メールアドレス</string>
-    <string name="change_user_info_password">パスワード</string>
-    <string name="change_user_info_nickname">ニックネーム</string>
-    <string name="change_user_info_location">居住地域</string>
-    <string name="change_user_info_password_btn">パスワード変更</string>
-
     <!-- MealSearchActivity -->
-    <string name="title_meal_search">食事検索</string>
     <string name="tip">Tip</string>
     <string name="save">save</string>
     <string name="not_found_email">not found email</string>
@@ -313,49 +188,41 @@
     <string name="istyle_search_info">頻繁に記録された食べ物はここに自動保存され、より便利な検索と記録ができます。食べ物に入る材料を別に分けたり、より一般的な食べ物の名前に検索してください。</string>
     <string name="istyle_recent_search_word">最近検索語</string>
     <string name="istyle_search_list">検索リスト</string>
-
     <!-- DiseaseInformationRegistActivity -->
-    <string name="no_disease">疾患なし</string>
-    <string name="diabetes">糖尿</string>
-    <string name="allergy">アレルギー</string>
-    <string name="dementia">認知症</string>
-    <string name="arthritis">関節炎</string>
-    <string name="parboxylitis">腸炎</string>
-    <string name="obesity">肥満</string>
-    <string name="cancer">癌</string>
-
     <!-- BowelPlateListActivity -->
-    <string name="istyle_add_device">+ 機器追加</string>
-
+    <string name="istyle_add_device">+ 機器追加</string>\
     <!-- nutrient -->
     <string name="istyle_crude_protein">粗タンパク</string>
     <string name="istyle_crude_pat">粗脂肪</string>
     <string name="istyle_crude_fiber">粗繊維</string>
     <string name="istyle_crude_ash">粗灰分</string>
     <string name="istyle_carbohydrate">粗繊維</string>
-
     <!-- FindHodoosActivity -->
     <string name="istyle_regist">登録</string>
     <string name="istyle_plate_found_message">トイレトレーが見つかりました。接続ボタンを押してトイレトレーを登録してください。</string>
-
     <!--  AdapterOfWifiList -->
     <string name="istyle_use_the_current_wifi">現在の携帯に接続されたWIFI使用</string>
-    <string name="korea">大韓民國</string>
-    <string name="usa">美國</string>
-    <string name="japan">日本</string>
-    <string name="china">中國</string>
     <string name="choice_country">國家</string>
     <string name="bcs_watching_tv_desc">動画を見た後伴侶犬のBCS 段階を 選択してください。</string>
     <string name="select_bcs">Select BCS</string>
     <string name="istyle_required_select_bcs_message">BCSを選択してください。</string>
-    <string name="pet_breed">犬種</string>
     <string name="istyle_statistic_week">週</string>
     <string name="istyle_statistic_month">月</string>
     <string name="detail_meal_info">詳細成分</string>
     <string name="delete">削除</string>
     <string name="device_is_already_registered">既に登録された機器です。</string>
-
-    <string name="ecommended">(勧奨量)</string>
+    <string name="one_day">一日</string>
+    <string name="one_week">一週</string>
+    <string name="one_month">一ヶ月</string>
+    <string name="one_year">年</string>
+    <string name="meal">食事</string>
+    <string name="activity">活動</string>
+    <string name="time">時</string>
+    <string name="activity_title">活動 管理</string>
+    <string name="weight_content">スマート排便器を使って自動的に測定された体重と変化を一目で確認してください。</string>
+    <string name="meal_content">健康な体重のための適正摂取カロリーと\n摂取した食べ物の影響均衡状態を分析してください差し上げますよ。</string>
+    <string name="activity_content">快適な散歩のための天気情報と健康状態に\n合う散歩(運動量)分析をご覧ください。</string>
+    <string name="hodoo_link_content">함께 생활하는 가족,\n친구들과 같이 반려동물을 관리할 수 있어요</string>
     <!-- ActivityFragment (s) -->
     <string name="wind_speed">풍속</string>
     <string name="uv_index">자외선 지수</string>
@@ -367,14 +234,27 @@
     <string name="password_edit_success">비밀번호를 변경했습니다.</string>
     <string name="pet_name_empty_msg" >펫의 이름을 입력하세요.</string>
     <string name="pet_birthday_empty_msg">생년월일을 입력하세요</string>
-
-
+    <!-- ActivityFragment (e) -->
     <string name="forgot_password_sub_scription">이메일로 임시비밀번호를 발송해드립니다.</string>
+    <string name="sign_up_finish_title" translatable="false">회원가입 완료</string>
+    <string name="sign_up_finish_sub_scription" translatable="false">등록하신 이메일로 인증메일을 발송드렸습니다.\n이메일 인증을 완료하면 HODOO의 서비스를 이용하실 수 있습니다.</string>
     <string name="send_mail_failed">메일 전송에 실패하였습니다.</string>
     <string name="feed_order">급식하기</string>
     <string name="pet_feeder">급식기</string>
     <string name="weight_data_available">측정된 체중 데이터가 없습니다.</string>
     <string name="wether_tip_title">다이어트 할 때는 운동도 많이 시켜야 하나?</string>
     <string name="wether_tip_content">고도 비만 환자의 경우 바로 운동을 강요하지 않는 것이 좋습니다. 다이어트에 성공하고 싶으면 음식뿐만 아니라 운동도 중요하다고 이야기했지만 모든 동물에게 100% 적용되는 것은 아닙니다. 사람의 경우는 유산소 운동을 통해서 열량을 소모하고 지방을 줄이면서 꾸준히 근육을 키우면 기초 대사량이 증가하게 되어 다이어트에 성공할 수 있지만 강제로 운동을 시키기 어렵습니다. 특히 근력 운동을 할 수 없습니다. 반려동물이 고도 비만이 된 경우 무리하게 운동을 하면 관절과 심혈관 부담이 증가할 수 있고 결국 다이어트에 성공하기 전에 먼저 건강이 나빠질 수 있습니다. 제일 안전한 방식은 음식 관리로 살을 약간 빼고 나서 운동 능력을 되돌릴 때까지는 시키지 않는 것입니다. 연구 결과를 보면 살이 빠진 후에 반려동물의 활동 능력과 활동량이 스스로 증가할 수 있습니다. 그때부터 운동을 시작하기가 휠씬 더 쉽다. 반려동물의 경우 운동보다 음식을 통하여 관리하는 것이 다이어트에 성공할 수 있는 최고 원칙이랑 사실을 꼭 기억해야 합니다.</string>
-
+    <!-- 2019.01.21 song new string (s) -->
+    <string name="reset_password">비밀번호 변경 ></string>
+    <string name="requestor">요청자</string>
+    <string name="date">일자</string>
+    <string name="accept">승인</string>
+    <string name="decline">거절</string>
+    <string name="edit_btn_text">편집</string>
+    <!-- 2019.01.21 song new string (e) -->
+    <!-- firebase (s) -->
+    <string name="invitation_subfix">님의 요청입니다.</string>
+    <!-- firebase (e) -->
+    <string name="invitation_finish_title">요청 링크를\n발송했습니다!</string>
+    <string name="invitation_finish_content">기기 소유자가 요청을 수락하면\n앱 메인 페이지로 이동할 수 있습니다.</string>
 </resources>

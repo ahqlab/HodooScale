@@ -19,8 +19,6 @@
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="Edittext">
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
@@ -60,31 +58,9 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="edtStyle" parent="Edittext">
-        <item name="colorControlNormal">@color/edt_normal_color</item>
-        <item name="colorControlActivated">@color/labelColor</item>
-        <item name="colorControlHighlight">@color/mainRed</item>
-    </style>
-
     <style name="CalorieProgress" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:minHeight">10dp</item>
         <item name="android:maxHeight">10dp</item>
-    </style>
-
-    <style name="BottomDialogTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">false</item>
-    </style>
-    <style name="iosStyleBottomDialog" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:backgroundDimAmount">0.3</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
     </style>
 
 

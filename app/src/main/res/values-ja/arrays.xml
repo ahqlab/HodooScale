@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <string-array name="dummy_pets">
-        <item>Hoodo</item>
-        <item>Hoodo2</item>
-    </string-array>
     <string-array name="bcs_arr">
         <item>不足</item>
         <item>超過</item>
         <item>適正</item>
-    </string-array>
-
-    <string-array name="country">
-        <item>大韓民國</item>
-        <item>美國</item>
-        <item>日本</item>
-        <item>中國</item>
     </string-array>
 
 </resources>
