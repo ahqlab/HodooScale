@@ -70,6 +70,7 @@ MainActivity extends AppCompatActivity implements Main.View {
 
         mSlideView = findViewById(R.id.slide_view);
 
+
         systemAlertPermission();
 
 //        bar = (ProgressBar) findViewById(R.id.progress_loader);
