@@ -229,7 +229,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
                             binding.windSpeedStr.setText(windspeedDescription[windspeedState]);
                         }
                     } else {
-                        binding.district.setText("위치를 파악할 수 없음");
+                        binding.district.setText(R.string.activity_fragment__not_found_location_msg);
                     }
                     setProgress(false);
                     isLocation = false;

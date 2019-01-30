@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Pet;
@@ -56,7 +58,6 @@ public class LoginPresenter implements Login.Presenter {
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
                         loginView.showPopup(context.getString(R.string.failed));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
-                        Log.e("HJLEE", "LOGIN RESULT : " + resultMessageGroup.getDomain().toString().trim());
                         Gson gson = new Gson();
                         User user = resultMessageGroup.getDomain();
                         if ( user.getUserCode() <= 0 ) {
@@ -79,6 +80,7 @@ public class LoginPresenter implements Login.Presenter {
                     }
                 } else {
                     loginView.showPopup(context.getString(R.string.failed));
+                    loginView.setBtnState(true);
                 }
             }
 
@@ -138,6 +140,7 @@ public class LoginPresenter implements Login.Presenter {
                     });
                 }else{
                     //디바이스 없음
+
                     loginView.goDeviceRegistActivity();
                 }
             }
@@ -162,6 +165,9 @@ public class LoginPresenter implements Login.Presenter {
     @Override
     public void autoLogin() {
         User user = loginModel.getUser();
+        if ( loginModel.getAutoLoginState() == HodooConstant.AUTO_LOGIN_SUCCESS ) {
+            loginView.setAutoLogin(true);
+        }
         loginView.setPassword(user.getPassword());
         sendServer(user);
     }

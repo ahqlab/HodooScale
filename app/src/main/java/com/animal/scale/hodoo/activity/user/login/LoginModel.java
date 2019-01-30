@@ -64,12 +64,18 @@ public class LoginModel extends CommonModel {
     }
 
     public void saveUserSharedValue(User user){
+        removeSharedValue();
         mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_UNIQUE_ID, user.getUserIdx());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_EMAIL, user.getEmail());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.GROUP_CODE, user.getGroupCode());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_PASSWORD, user.getPassword());
         mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_GROUP_ACCESS_TYPE, user.getAccessType());
     }
+
+    public void removeSharedValue(){
+        mSharedPrefManager.removeAllPreferences();
+    }
+
 
     public void confirmDeviceRegistration(final DeviceRegistrationListener deviceRegistrationListener) {
         Call<List<Device>> call = NetRetrofit.getInstance().getDeviceService().getMyDeviceList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
@@ -123,6 +129,9 @@ public class LoginModel extends CommonModel {
         user.setPassword(mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_PASSWORD));
 
         return user;
+    }
+    public int getAutoLoginState() {
+        return mSharedPrefManager.getIntExtra( SharedPrefVariable.AUTO_LOGIN );
     }
 
 

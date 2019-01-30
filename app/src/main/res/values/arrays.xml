@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <string-array name="dummy_pets">
-        <item>Hoodo</item>
-        <item>Hoodo2</item>
-    </string-array>
     <string-array name="bcs_arr">
         <item>부족</item>
         <item>초과</item>
@@ -38,13 +34,6 @@
         <item>파보 장염</item>
         <item>비만</item>
         <item>암</item>
-    </string-array>
-
-    <string-array name="country">
-        <item>대한민국</item>
-        <item>미국</item>
-        <item>일본</item>
-        <item>중국</item>
     </string-array>
 
     <string-array name="language">
@@ -96,7 +85,6 @@
     <string-array name="support_settings">
         <item>오픈소스 라이선스</item>
         <item>이용약관</item>
-        <item>오픈소스 라이선스</item>
         <item>개인정보처리방침</item>
     </string-array>
 

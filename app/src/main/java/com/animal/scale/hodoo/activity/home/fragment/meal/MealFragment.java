@@ -260,9 +260,9 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
+        Log.e("HJLEE", "petAllInfos : " + petAllInfos.toString());
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         binding.calorieBar.invalidate();
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
@@ -387,6 +387,10 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     public void onResume() {
         presenter.getPetAllInfo();
         super.onResume();
+    }
+
+    public void setPetAllinfo(){
+        presenter.getPetAllInfo();
     }
 
     public void setTip() {

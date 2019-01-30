@@ -19,7 +19,9 @@ import com.animal.scale.hodoo.activity.user.agree.TermsOfServiceActivity;
 import com.animal.scale.hodoo.activity.user.reset.password.send.SendCertificationNumberActivity;
 import com.animal.scale.hodoo.activity.user.signup.SignUpFinishActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityLoginBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -147,6 +149,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
 
     @Override
     public void goDeviceRegistActivity() {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
         Intent intent = new Intent(getApplicationContext(), DeviceRegistActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
@@ -212,6 +215,12 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     }
 
     @Override
+    public void setAutoLogin(boolean state) {
+        binding.autoLogin.setChecked(state);
+        autoLoginState = state;
+    }
+
+    @Override
     public void goEmailCertified() {
         Intent intent = new Intent(getApplicationContext(), SignUpFinishActivity.class);
         intent.putExtra(SharedPrefVariable.USER_EMAIL, binding.email.getText());
@@ -222,6 +231,17 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     @Override
     public void setPassword(String pw) {
         binding.password.editText.setText(pw);
+    }
+
+    @Override
+    public void setBtnState(boolean state) {
+        if ( ValidationUtil.isValidEmail(binding.email.getText().toString()) ) {
+            emailState = true;
+        }
+        if ( !ValidationUtil.isEmpty( binding.password.getText().toString() ) ) {
+            pwState = true;
+        }
+        checkState();
     }
 
 

@@ -182,8 +182,9 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
                 String password = input.getText().toString();
                 dialog.dismiss();
                /* WifiUtil wifiUtil = new WifiUtil(WifiSearchActivity.this);
-                boolean result = wifiUtil.connectWiFi(SSID, password, "WEB");
+
                 Log.e("HJLEE", "result : " + result);*/
+                connect(SSID, password);
                 Intent intent = new Intent(WifiSearchActivity.this, FindHodoosActivity.class);
                 intent.putExtra("ssid", SSID);
                 intent.putExtra("bssid", bSSID);

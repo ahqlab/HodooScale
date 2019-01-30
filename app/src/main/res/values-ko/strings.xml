@@ -1,28 +1,13 @@
 <resources>
     <string name="app_name">HodooScale</string>
     //common
-    <string name="not_connected_to_the_Internet">You are not connected to the Internet.</string>
-    <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">이메일</string>
-    <string name="prompt_password">비밀번호(8자 이상)</string>
-    <string name="prompt_password_check">비밀번호(8자 이상)</string>
-    <string name="prompt_nicname">닉네임(9자 이내)</string>
-    <string name="prompt_from">거주지역을 입력해주세요.</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
-    <string name="istyle_create_account">계정생성</string>
     <string name="istyle_lost_password">비밀번호를 분실하셨습니까?</string>
 
     <!-- SignUp -->
     <string name="istyle_label_email">이메일</string>
-    <string name="istyle_label_password">비밀번호</string>
     <string name="istyle_label_confirm_password">비밀번호 재확인</string>
     <string name="istyle_label_nickname">닉네임</string>
     <string name="istyle_label_country">국가</string>
@@ -32,29 +17,22 @@
     <string name="istyle_label_private"><u>개인정보 수집 및 이용안내</u></string>
     <string name="istyle_btn_text">계정 생성</string>
     <!-- Validation -->
-    <string name="istyle_enter_the_email">이메일을 입력해주세요.</string>
     <string name="istyle_not_valid_email_format">이메일 형식에 맞지 않습니다.</string>
     <string name="istyle_enter_the_password">비밀번호를 입력하세요.</string>
     <string name="istyle_enter_your_confirmation_password">확인 비밀번호를 입력하세요.</string>
     <string name="istyle_password_is_incorrect">비밀번호가 맞지 않습니다.</string>
     <string name="istyle_enter_your_nik_name">닉네임을 입력하세요.</string>
-    <string name="istyle_select_gender">성별을 선택하세요.</string>
-    <string name="istyle_enter_your_place_of_residence">거주지를 입력하세요.</string>
 
 
     <!-- COMMON TEXT -->
     <string name="men">남성</string>
     <string name="woman">여성</string>
-    <string name="year">년도</string>
-    <string name="month">년도</string>
-    <string name="day">일</string>
     <string name="male">수컷</string>
     <string name="femle">암컷</string>
     <string name="pet_width">체장</string>
     <string name="pet_height">체고</string>
     <string name="pet_unit">단위</string>
     <string name="pet_weight">체중</string>
-    <string name="pet_temp">온도</string>
     <string name="pet_kg">Kg</string>
     <string name="compleate">완료</string>
     <string name="cancle">취소</string>
@@ -64,7 +42,6 @@
     <string name="gallery">갤러리</string>
     <string name="camera">카메라</string>
     <string name="failed">failed</string>
-    <string name="success">성공</string>
     <string name="cup">컵</string>
     <string name="ea">개</string>
     <string name="food">음식</string>
@@ -75,7 +52,6 @@
     <string name="recommend">권장</string>
     <string name="meal">식사</string>
     <string name="activity">활동</string>
-    <string name="test_text">BCS 3단계 유의사항 컨텐츠가 들어가는 공간입니다. 현재 보여지는 텍스트는 테스트 텍스트입니다.</string>
     <string name="time">시</string>
 
     <!-- MAIN Activity -->
@@ -91,13 +67,11 @@
 
 
     <!-- PAGE TITLE -->
-    <string name="login_page_title">LOGIN</string>
     <string name="basin_info_regist_title">펫 추가</string>
     <string name="disease_information_regist_title">펫의 병력</string>
     <string name="physique_information_regist_title">펫의 체격</string>
     <string name="weight_check_title">체중상태 체크</string>
     <string name="weight_title">체중관리</string>
-    <string name="temp_title">체온관리</string>
     <string name="meal_title">식사관리</string>
     <string name="hodoo_link_title">함께관리</string>
     <string name="wifi_list_title">와이파이 설정</string>
@@ -129,8 +103,6 @@
     <string name="message">Message</string>
     <string name="vailed_email">이메일 형식에 맞지 않습니다.</string>
     <!-- COMMON MESSAGE -->
-    <string name="user_regist_failed_message">회원가입에 실패했습니다.</string>
-    <string name="user_login_failed_message">로그인에 실패했습니다. 아이디 및 비밀번호를 확인하세요.</string>
 
 
     //TermsOfServiceActivity
@@ -142,11 +114,6 @@
     <string name="istyle_agree_to_the_terms">약관에 동의하세요.</string>
 
     <!-- LoginActivity -->
-    <string name="btn_login">Login</string>
-    <string name="login_message1">square </string>
-    <string name="login_message2">계정으로</string>
-    <string name="login_message3"> Hoodo Fit</string>
-    <string name="login_message4"> 로그인</string>
 
     <!-- Add Pet Activity -->
     <string name="add_pet_name">펫의 이름</string>
@@ -155,10 +122,8 @@
     <string name="add_pet_gender">설별</string>
     <string name="add_pet_neuter">중성화 여부</string>
     <string name="add_pet_next_btn">다음 단계</string>
-    <string name="add_pet_edit_hint">품종을 입력하세요</string>
 
     <!-- DeseaseInformaionRegistActivity-->
-    <string name="required_chioce_disease">질병이 없다면 \'질병없음\'을 선택하세요.</string>
     <!-- PhysiqueSecondInformationRegistActivity -->
     <string name="physique_information_guide_text1">펫의 정확한 건강관리를 위해 정보를 꼭 입력해주세요.</string>
     <string name="physique_information_guide_text2">체장 : 엉덩이부터 가슴까지</string>
@@ -166,12 +131,6 @@
 
 
     <!-- WeightSecondCheckActivity -->
-    <string name="self_check_bcs_info">호두는 BCS기법을 통해 반려동물의 지방 비율을 측정할 수 있습니다.</string>
-    <string name="fat_mass">지방량.</string>
-    <string name="self_check_desc1">지방량과 과체중</string>
-    <string name="self_check_desc2">체지방률이 조금 높아요! 잠까? 운동을 많이 안하셨순요! 이상태로 유지가 된다면 당뇨병, 고혈압 등 심혈관 질환이 발생할 수 있어 조심해야 해요!</string>
-    <string name="self_check_desc3">이곳에 해결책이 있어요</string>
-    <string name="self_check_desc4">우리같이 운동할까요? 주 2~6회 유산소 운동과 근력 운동을 병행하고 기초대사량에 맞는 식습관으로 개선해서 체지방을 불태워봅시다!!</string>
 
     <!-- WIFI Search Activity -->
     <string name="wifi_connection">WIFI 연결</string>
@@ -182,19 +141,10 @@
     <string name="find_hodoo_message1">Hodoo Scale</string>
     <string name="find_hodoo_message2">연결중입니다. 프리미엄 기기를 공유기에 가까이 놓아주세요.</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_login2">Sign in</string>
-
     <!-- ChangePasswordActivity -->
     <string name="explanation_of_password_change">주기적인 비밀번호 변경은 개인정보를 안전하게 보호하고, 개인정보도용 피해를 예방합니다.</string>
     <string name="current_password">현재 비밀번호</string>
-    <string name="new_password">새 비밀번호</string>
     <string name="password_entry_limit">8자~20자, 영문, 숫자, 특수문자 사용</string>
-    <string name="password_hint">현재비밀번호 입력</string>
     <string name="new_password_hint">새비밀번호 입력</string>
     <string name="confirm">확인</string>
 
@@ -216,8 +166,6 @@
     <string name="istyle_food_taken_today">오늘 섭취한 음식</string>
 
     <!-- MealRegistrationActivity -->
-    <string name="istyle_check_components">성분확인</string>
-    <string name="istyle_select_components_and_units">성분과 단위를 선택해주세요</string>
 
     <!-- MealUpdateActivity -->
 
@@ -225,17 +173,12 @@
     <string name="istyle_not_found_bowelplate">주변에 배변판을 찾을 수 없습니다.</string>
     <string name="istyle_retry">다시시도</string>
     <string name="istyle_buy">구입하기</string>
-    <string name="istyle_skip">Skip</string>
 
 
     <!-- SendCertificationNumberActivity-->
     <string name="send_btn_text">인증번호 전송</string>
     <!-- ConfirmCertificationNumberActivity-->
     <string name="cofirm_btn_text">확인</string>
-    <string name="istyle_question_of_lost_password">비밀번호를 잊으셨나요?</string>
-    <string name="istyle_answer_of_lost_password">괜찮아요, 바로찾을 수 있어요</string>
-    <string name="istyle_email_hint">이메일을 입력하세요.</string>
-    <string name="istyle_cerification_number_text">이메일을 입력하세요.</string>
 
     <!-- WeightStatisticsActivity -->
     <string name="istyle_today">하루</string>
@@ -244,21 +187,8 @@
     <string name="istyle_one_year">년</string>
 
     <!-- MealFragment -->
-    <string name="istyle_todays_word">오늘의 한마디</string>
-    <string name="istyle_todays_word_contnet">대형견에게 칼로리, 단백질, 지방이 많이 함유되어 있는 소형견용 사료를 먹이면 칼슘 과다로 뼈의 성장이 지연되고 고관절 질환으로 이어질 수 있으니 주의하세요!</string>
-    <string name="istyle_eating_management">식사관리</string>
-    <string name="istyle_record_todays_meal">오늘의 식사를 기록하세요.</string>
-    <string name="istyle_todays_prescription">비타민 수치가 과다입니다.</string>
-    <string name="istyle_todays_prescription_desc">비타민은 크게 지용성 비타민과 수용성 비타민으로 나눌 수 있습니다. 지용성 비타민은
-A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽산, 판토텐산, 비오틴의
-8가지가 있습니다. 개는 사람과 달리 비타민C를 몸에서 스스로 만들 수 있으므로 필수
-영양소가 아닙니다.
-과다한 비타민C는 신장, 방광, 결석과 관련이 있으므로 비타민C가 함유되어 있는 음식은
-피하는 것이 좋습니다. 혹시 과다하게 비타민을 주고 계신건 아닌가요?"</string>
 
     <!-- WeightFragment -->
-    <string name="istyle_bcs_comment">현재 귀하의 반려견은 BCS 4단계로 평균 체중에 비해 과다한 상태입니다. \n 균형잡힌 식단과 올바른 황동으로 반려견의 체중을 관리해주셔야 합니다.</string>
-    <string name="istyle_weight_history_of_the_day">오늘의 체중 기록</string>
     <string name="average_weight_for_today">일일 평균 체중</string>
     <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
     <string name="weight_for_today">today\'s weight</string>
@@ -276,7 +206,6 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
 
     <!-- Meal Detail Info Dialog -->
     <string name="istyle_one_hundred_g_supply">100g 제공 칼로리</string>
-    <string name="istyle_kcal">칼로기</string>
     <string name="istyle_one_hundred_g_nutrient_content">100g당 영양소 함유량</string>
 
     <!-- Pet Regist Dialog -->
@@ -296,15 +225,9 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="message_device_regist2">배변판을 등록해 주세요.</string>
 
     <!-- ChangeUserInfoActivity -->
-    <string name="change_user_info_title">사용자 정보 변경</string>
     <string name="change_user_info_email">이메일</string>
-    <string name="change_user_info_password">비밀번호</string>
-    <string name="change_user_info_nickname">닉네임</string>
-    <string name="change_user_info_location">거주지역</string>
-    <string name="change_user_info_password_btn">비밀번호변경</string>
 
     <!-- MealSearchActivity -->
-    <string name="title_meal_search">식사 검색</string>
     <string name="tip">Tip</string>
     <string name="save">save</string>
     <string name="not_found_email">not found email</string>
@@ -319,14 +242,6 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="istyle_search_list">검색목록</string>
 
     <!-- DiseaseInformationRegistActivity -->
-    <string name="no_disease">질병없음</string>
-    <string name="diabetes">당뇨</string>
-    <string name="allergy">알러지</string>
-    <string name="dementia">치매</string>
-    <string name="arthritis">관절염</string>
-    <string name="parboxylitis">파보 장염</string>
-    <string name="obesity">비만</string>
-    <string name="cancer">암</string>
 
     <!-- BowelPlateListActivity -->
     <string name="istyle_add_device">+ 기기추가</string>
@@ -344,15 +259,10 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
 
     <!--  AdapterOfWifiList -->
     <string name="istyle_use_the_current_wifi">현재폰에 연결된 WIFI 사용</string>
-    <string name="korea">대한민국</string>
-    <string name="usa">미국</string>
-    <string name="japan">일본</string>
-    <string name="china">중국</string>
     <string name="choice_country">국가</string>
     <string name="bcs_watching_tv_desc">동영상을 본 후 반려견의 BCS 단계를 선택하십시오.</string>
     <string name="select_bcs">Select BCS</string>
     <string name="istyle_required_select_bcs_message">BCS를 선택하세요.</string>
-    <string name="pet_breed">견종</string>
     <string name="istyle_statistic_week">주</string>
     <string name="istyle_statistic_month">월</string>
     <string name="detail_meal_info">상세 성분</string>
@@ -362,8 +272,6 @@ A, D, E, K의 4가지가 있고, 수용성 비타민은 C, B1, B2 ,B6 ,B12, 엽�
     <string name="confirm_new_password">새 비밀번호 확인</string>
     <string name="not_mathed_old_password">이전비밀번호와 동일하지 않습니다.</string>
     <string name="password_edit_success">비밀번호를 변경했습니다.</string>
-
-    <style name="ecommended">(권장량)</style>
 
     <string name="wind_speed">풍속</string>
     <string name="uv_index">자외선 지수</string>

@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.activity.ActivityFragment;
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
@@ -49,6 +50,7 @@ import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.util.BadgeUtils;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.VIewUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -97,6 +99,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
         presenter.loadCustomDropdownView();
         presenter.getSttingListMenu();
+        VIewUtil vIewUtil = new VIewUtil(HomeActivity.this);
+        VIewUtil.getLocationCode(HomeActivity.this);
     }
 
     public void onPetImageClick(View view) {
@@ -257,6 +261,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     MealFragment mealFragment = (MealFragment) tf;
                     mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
                     mealFragment.setTip();
+                    mealFragment.setPetAllinfo();
                 }else if(tf instanceof TempFragment){
                     TempFragment tempFragment = (TempFragment) tf;
                     tempFragment.drawChart();

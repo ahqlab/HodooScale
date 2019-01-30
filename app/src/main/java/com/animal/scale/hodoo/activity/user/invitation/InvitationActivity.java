@@ -101,6 +101,7 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
 
     @Override
     public void goFinishPage() {
+        mSharedPrefManager.removeAllPreferences();
         Intent intent = new Intent(this, InvitationFinishActivity.class);
         intent.putExtra(HodooConstant.INVITATION_EMAIL_KEY, binding.email.editText.getText().toString());
         intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
