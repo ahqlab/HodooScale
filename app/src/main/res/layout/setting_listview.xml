@@ -55,8 +55,8 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/setting_middle_data_reset_icon_50_50"
                             app:imgRes="@{setting.icon}"/>
+                        <!--android:src="@drawable/setting_middle_data_reset_icon_50_50"-->
                         <TextView
                             android:id="@+id/setting_badge"
                             android:layout_width="20dp"
