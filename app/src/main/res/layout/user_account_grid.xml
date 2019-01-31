@@ -97,32 +97,6 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_columnWeight="1"-->
-        <!--android:layout_gravity="center_vertical|center_horizontal"-->
-        <!--android:layout_margin="15dp"-->
-        <!--android:gravity="center_vertical|center_horizontal"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<de.hdodenhof.circleimageview.CircleImageView-->
-            <!--android:layout_width="60dp"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:src="@drawable/pet_account_middle_male_icon_143_143"-->
-            <!--app:loadUserAccountImage="@{domain.sex}"-->
-            <!--app:civ_border_color="@color/hodoo_midle_pink"-->
-            <!--app:civ_border_width="2dp" />-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@={domain.nickname}" />-->
-    <!--</LinearLayout>-->
 </layout>
 
 

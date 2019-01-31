@@ -57,7 +57,6 @@ public class UserGroupManagerActivity extends BaseActivity<UserGroupManagerActiv
         this.count = count;
         switch (type) {
             case UserGroupPresenter.INIT_TYPE :
-                presenter.getSttingListMenu();
                 break;
             case UserGroupPresenter.UPDATE_TYPE:
                 mMenu.get(1).setBadgeCount(count);

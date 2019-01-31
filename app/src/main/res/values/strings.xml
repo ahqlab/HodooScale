@@ -265,4 +265,7 @@
     <string name="pet_account__delete_btn">펫 삭제</string>
 
     <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
+
+    <string name="user_account__group_withdraw_title">탈퇴 완료</string>
+    <string name="user_account__group_withdraw_subfix">님을 그룹에서 탈퇴시켰습니다.</string>
 </resources>

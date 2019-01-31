@@ -13,6 +13,5 @@ public interface UserGropManager {
     }
     interface Presenter {
         void getBadgeCount(int type );
-        void getSttingListMenu();
     }
 }

@@ -156,7 +156,7 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
                     showPopup("그룹 탈퇴", user.getNickname() + "님을 그룹에서 탈퇴 하시겠습니까?", new CommonListener.PopupClickListener() {
                         @Override
                         public void onPositiveClick(DialogInterface dialog, int which) {
-                            presenter.withdrawGroup(user);
+                            presenter.withdrawGroup(UserAccountActivity.this, user);
                         }
 
                         @Override

@@ -149,6 +149,8 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
 
     @Override
     public void goDeviceRegistActivity() {
+
+        //token 등록
         mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
         Intent intent = new Intent(getApplicationContext(), DeviceRegistActivity.class);
         startActivity(intent);
@@ -242,6 +244,13 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
             pwState = true;
         }
         checkState();
+    }
+
+    @Override
+    public void saveFcmToken() {
+        User user = new User();
+        user.setEmail( binding.email.getText().toString() );
+        presenter.saveFCMToken(user);
     }
 
 

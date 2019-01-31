@@ -141,7 +141,7 @@ public class LoginPresenter implements Login.Presenter {
                 }else{
                     //디바이스 없음
 
-                    loginView.goDeviceRegistActivity();
+                    loginView.saveFcmToken();
                 }
             }
             @Override
@@ -153,6 +153,21 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void saveFCMToken(User user) {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        user.setPushToken(token);
+        loginModel.saveFCMToken(user, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer integer) {
+                if ( integer != null ) {
+                    loginView.goDeviceRegistActivity();
+                }
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
     }
 
     @Override
