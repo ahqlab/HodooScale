@@ -80,6 +80,7 @@ public class LoginPresenter implements Login.Presenter {
                     }
                 } else {
                     loginView.showPopup(context.getString(R.string.failed));
+                    loginView.setBtnState(true);
                 }
             }
 
@@ -164,6 +165,9 @@ public class LoginPresenter implements Login.Presenter {
     @Override
     public void autoLogin() {
         User user = loginModel.getUser();
+        if ( loginModel.getAutoLoginState() == HodooConstant.AUTO_LOGIN_SUCCESS ) {
+            loginView.setAutoLogin(true);
+        }
         loginView.setPassword(user.getPassword());
         sendServer(user);
     }

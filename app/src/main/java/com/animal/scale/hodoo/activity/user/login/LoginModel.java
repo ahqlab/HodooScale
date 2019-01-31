@@ -130,6 +130,9 @@ public class LoginModel extends CommonModel {
 
         return user;
     }
+    public int getAutoLoginState() {
+        return mSharedPrefManager.getIntExtra( SharedPrefVariable.AUTO_LOGIN );
+    }
 
 
     public interface LoginResultListener {

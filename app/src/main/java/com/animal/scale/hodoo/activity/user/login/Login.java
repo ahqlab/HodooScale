@@ -30,9 +30,13 @@ public interface Login {
 
         void setAutoLoginState();
 
+        void setAutoLogin( boolean state );
+
         void goEmailCertified();
 
         void setPassword( String pw );
+
+        void setBtnState( boolean state );
 
     }
 

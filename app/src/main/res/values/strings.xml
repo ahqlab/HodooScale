@@ -257,4 +257,12 @@
     <!-- firebase (e) -->
     <string name="invitation_finish_title">요청 링크를\n발송했습니다!</string>
     <string name="invitation_finish_content">기기 소유자가 요청을 수락하면\n앱 메인 페이지로 이동할 수 있습니다.</string>
+
+    <string name="invitation__state_msg">상태</string>
+    <string name="pet_account__main_pet_btn">메인 펫으로 선택</string>
+    <string name="pet_account__view_profile_btn">프로필 이미지 보기</string>
+    <string name="pet_account__edit_btn">펫 정보 수정</string>
+    <string name="pet_account__delete_btn">펫 삭제</string>
+
+    <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
 </resources>

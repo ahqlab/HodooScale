@@ -3,14 +3,11 @@ package com.animal.scale.hodoo.activity.setting.pet.accounts;
 import android.app.Dialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
@@ -72,10 +69,10 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
                 }
                 final BottomDialog dialog = BottomDialog.getInstance();
                 List<IosStyleBottomAlert> btns = new ArrayList<>();
-                btns.add( IosStyleBottomAlert.builder().btnName("메인 펫으로 선택").id(R.id.main_pet).build() );
-                btns.add( IosStyleBottomAlert.builder().btnName("프로필 이미지 보기").id(R.id.profile_image).build() );
-                btns.add( IosStyleBottomAlert.builder().btnName("펫 정보 수정").id(R.id.pet_info).build() );
-                btns.add( IosStyleBottomAlert.builder().btnName("펫 삭제").id(R.id.pet_delete).build() );
+                btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.pet_account__main_pet_btn)).id(R.id.main_pet).build() );
+                btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.pet_account__view_profile_btn)).id(R.id.profile_image).build() );
+                btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.pet_account__edit_btn)).id(R.id.pet_info).build() );
+                btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.pet_account__delete_btn)).id(R.id.pet_delete).build() );
 
 
                 dialog.setOnclick(new BottomDialog.OnClickListener() {

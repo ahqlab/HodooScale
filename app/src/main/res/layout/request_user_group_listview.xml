@@ -45,7 +45,6 @@
                     android:id="@+id/avatar"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/pet_account_middle_male_icon_143_143"
                     app:civ_border_color="@color/hodoo_midle_pink"
                     app:civ_border_width="2dp" />
                 <ImageView
@@ -136,7 +135,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="State"
+                            android:text="@string/invitation__state_msg"
                             android:textSize="15sp"/>
                         <TextView
                             android:id="@+id/state"
