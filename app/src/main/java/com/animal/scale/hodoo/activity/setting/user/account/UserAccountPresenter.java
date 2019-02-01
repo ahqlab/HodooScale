@@ -65,7 +65,7 @@ public class UserAccountPresenter implements UserAccountIn.Presenter {
             @Override
             public void doPostExecute(Integer result) {
                 if ( result > 0 ) {
-                    view.showSinglePopup(context.getString(R.string.user_account__group_withdraw_title), user.getNickname() + context.getString(R.string.user_account__group_withdraw_title));
+                    view.showSinglePopup(context.getString(R.string.user_account__group_withdraw_title_fin), user.getNickname() + context.getString(R.string.user_account__group_withdraw_title_fin));
                     getData();
                 }
             }

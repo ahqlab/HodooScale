@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -41,7 +40,7 @@ public class UserGroupManagerActivity extends BaseActivity<UserGroupManagerActiv
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_group_manager);
-        binding.setActivityInfo(new ActivityInfo("그룹 관리"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.user_group_manager__tool_bar_title)));
         super.setToolbarColor();
         presenter = new UserGroupPresenter(this,this);
 

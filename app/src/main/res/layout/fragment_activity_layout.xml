@@ -137,8 +137,7 @@
                                         android:id="@+id/wind_speed_str"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/labelColor"
-                                        android:text="보통"/>
+                                        android:textColor="@color/labelColor"/>
                                     <TextView
                                         android:textColor="@color/mainBlack"
                                         android:layout_gravity="center"
@@ -170,7 +169,6 @@
                                         android:id="@+id/uv_str"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="보통"
                                         android:textColor="@color/labelColor"/>
                                     <TextView
                                         android:layout_gravity="center"
@@ -203,7 +201,6 @@
                                         android:id="@+id/ozone_str"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="보통"
                                         android:textColor="@color/labelColor"/>
                                     <TextView
                                         android:layout_gravity="center"

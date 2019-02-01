@@ -75,7 +75,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_pink_btn"
-                android:text="재발송"
+                android:text="@string/invitation_finish__resend_btn"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -84,7 +84,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="발송 취소"
+                android:text="@string/invitation_finish__resend_cancel_btn"
                 android:onClick="@{activity::cancel }"/>
         </LinearLayout>
 

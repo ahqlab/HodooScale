@@ -88,4 +88,150 @@
         <item>개인정보처리방침</item>
     </string-array>
 
+    <string-array name="basic_info_activity__pet_breed">
+        <item>마스티프</item>
+        <item>보르도 마스티프</item>
+        <item>로트바일러</item>
+        <item>복서</item>
+        <item>자이언트 슈나우저</item>
+        <item>스탠더드 슈나우저</item>
+        <item>도베르만 핀셔</item>
+        <item>그레이트 데인</item>
+        <item>불 마스티프</item>
+        <item>저먼 셰퍼드</item>
+        <item>코몬도르</item>
+        <item>그레이트 피레니즈</item>
+        <item>콜리</item>
+        <item>캉갈</item>
+        <item>올드 잉글리시 시프도그</item>
+        <item>셔틀랜드 시프도그</item>
+        <item>비어디드 콜리</item>
+        <item>웰시 코기</item>
+        <item>오스트레일리안 켈피</item>
+        <item>벨지안 시프도그</item>
+        <item>피레니안 마스티프</item>
+        <item>보스롱</item>
+        <item>티베탄 마스티프</item>
+        <item>사모예드</item>
+        <item>시베리안 허스키</item>
+        <item>알래스칸 맬러뮤트</item>
+        <item>아메리칸 에스키모 도그</item>
+        <item>캐나디안 에스키모 도그</item>
+        <item>아프간 하운드</item>
+        <item>그레이하운드</item>
+        <item>아이리시 울프하운드</item>
+        <item>휘핏</item>
+        <item>보르조이</item>
+        <item>살루키</item>
+        <item>아자와크</item>
+        <item>닥스훈트</item>
+        <item>미니어처 닥스훈트</item>
+        <item>쿤 하운드</item>
+        <item>오터 하운드</item>
+        <item>노르위전 엘크하운드</item>
+        <item>잉글리시 폭스하운드</item>
+        <item>바셋하운드</item>
+        <item>아메리칸 폭스하운드</item>
+        <item>비글</item>
+        <item>던커</item>
+        <item>해리어</item>
+        <item>슈바이처 라우프훈트</item>
+        <item>스위스 하운드</item>
+        <item>아르투아 하운드</item>
+        <item>오가르 폴스키</item>
+        <item>포르셀렌</item>
+        <item>바센지</item>
+        <item>로디지안 리지백</item>
+        <item>치르네코 델레트나</item>
+        <item>이비전 하운드</item>
+        <item>파라오 하운드</item>
+        <item>포덴코 카나리오</item>
+        <item>저먼 와이어 헤어드 포인터</item>
+        <item>바이마라너</item>
+        <item>비즐라</item>
+        <item>저먼 쇼트 헤어드 포인터</item>
+        <item>잉글리시 포인터</item>
+        <item>골든 리트리버</item>
+        <item>래브라도 리트리버</item>
+        <item>체서피크 베이 리트리버</item>
+        <item>컬리 코티드 리트리버</item>
+        <item>플랫 코티드 리트리버</item>
+        <item>아이리시 세터</item>
+        <item>고든 세터</item>
+        <item>잉글리시 세터</item>
+        <item>서섹스 스패니얼</item>
+        <item>필드 스패니얼</item>
+        <item>아이리시 워터 스패니얼</item>
+        <item>클럼버 스패니얼</item>
+        <item>아메리칸 코커 스패니얼</item>
+        <item>아메리칸 워터 스패니얼</item>
+        <item>웰시 스프링어 스패니얼</item>
+        <item>잉글리시 스프링어 스패니얼</item>
+        <item>잉글리시 코커 스패니얼</item>
+        <item>폭스 테리어</item>
+        <item>케리 블루 테리어</item>
+        <item>맨체스터 테리어</item>
+        <item>베들링턴 테리어</item>
+        <item>스카이 테리어</item>
+        <item>실리햄 테리어</item>
+        <item>케언 테리어</item>
+        <item>불 테리어</item>
+        <item>웰시 테리어</item>
+        <item>아이리시 테리어</item>
+        <item>웨스트 하일랜드 화이트 테리어</item>
+        <item>스태퍼드셔 불 테리어</item>
+        <item>소프트 코티드 휘튼 테리어</item>
+        <item>댄디 딘몬트 테리어</item>
+        <item>미니어처 슈나우저</item>
+        <item>스코티시 테리어</item>
+        <item>오스트레일리안 테리어</item>
+        <item>노리치 테리어</item>
+        <item>에어데일 테리어</item>
+        <item>잭 러셀 테리어</item>
+        <item>핏불 테리어</item>
+        <item>샤페이</item>
+        <item>티베탄 테리어</item>
+        <item>티베탄 스패니얼</item>
+        <item>라사 압소</item>
+        <item>프렌치 불도그</item>
+        <item>보스턴 테리어</item>
+        <item>스키퍼키</item>
+        <item>키스혼드</item>
+        <item>불도그</item>
+        <item>비숑 프리제</item>
+        <item>일본 스피츠</item>
+        <item>차우차우</item>
+        <item>달마티안</item>
+        <item>스탠더드 푸들</item>
+        <item>미니어처 푸들</item>
+        <item>시바견</item>
+        <item>아키타견</item>
+        <item>삽살개</item>
+        <item>제주개</item>
+        <item>진돗개</item>
+        <item>풍산개</item>
+        <item>친</item>
+        <item>말티즈</item>
+        <item>일본 테리어</item>
+        <item>잉글리시 토이 스패니얼</item>
+        <item>파피용</item>
+        <item>차이니스 크레스티드</item>
+        <item>토이 맨체스터 테리어</item>
+        <item>이탈리안 그레이하운드</item>
+        <item>퍼그</item>
+        <item>미니어처 핀셔</item>
+        <item>페키니즈</item>
+        <item>포메라니안</item>
+        <item>아펜핀셔</item>
+        <item>토이 푸들</item>
+        <item>시추</item>
+        <item>치와와</item>
+        <item>요크셔 테리어</item>
+        <item>실키 테리어</item>
+        <item>브뤼셀 그리폰</item>
+        <item>독일 스피츠</item>
+        <item>미니어처 핀셔</item>
+        <item>카발리에 킹 찰스 스패니얼</item>
+    </string-array>
+
 </resources>

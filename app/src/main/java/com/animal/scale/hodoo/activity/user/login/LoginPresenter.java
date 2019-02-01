@@ -54,14 +54,14 @@ public class LoginPresenter implements Login.Presenter {
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.ID_PASSWORD_DO_NOT_MATCH)) {
                         loginView.showPopup(context.getString(R.string.id_password_do_not_match));
                     } else if ( resultMessageGroup.getResultMessage().equals(ResultMessage.WITHDRAW_USER) ) {
-                        loginView.showPopup("탈퇴한 회원입니다.");
+                        loginView.showPopup(context.getString(R.string.login__alert_withdraw_user_content));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
                         loginView.showPopup(context.getString(R.string.failed));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
                         Gson gson = new Gson();
                         User user = resultMessageGroup.getDomain();
                         if ( user.getUserCode() <= 0 ) {
-                            loginView.showPopup("이메일 인증을 진행해주세요.", new OnDialogClickListener() {
+                            loginView.showPopup(context.getString(R.string.login__alert_email_certified_content), new OnDialogClickListener() {
                                 @Override
                                 public void onPositiveClick(DialogInterface dialog, int which) {
                                     loginView.goEmailCertified();

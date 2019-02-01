@@ -85,7 +85,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="메일 재발송"/>
+                android:text="@string/sign_up__mail_resend"/>
         </LinearLayout>
 
 

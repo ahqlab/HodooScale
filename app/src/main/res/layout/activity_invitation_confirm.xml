@@ -29,7 +29,7 @@
                 android:layout_below="@+id/common_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="사용자 초대"
+                android:text="@string/invitation_confirm__title"
                 android:textSize="30sp"
                 android:textColor="@color/mainBlack"
                 />
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="아래 승인 버튼을 누르면 해당 유저의 초대가 완료됩니다."
+                android:text="@string/invitation_confirm__content"
                 android:textColor="@color/subscript_color"/>
             <LinearLayout
                 android:layout_marginTop="30dp"
@@ -66,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="58dp"
                     android:background="@drawable/rounded_gray_btn"
-                    android:text="거절"
+                    android:text="@string/decline"
                     android:textColor="@color/mainBlack"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -80,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="58dp"
                     android:background="@drawable/rounded_pink_btn"
-                    android:text="승인"
+                    android:text="@string/accept"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
