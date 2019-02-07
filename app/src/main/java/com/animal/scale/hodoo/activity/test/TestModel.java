@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.test;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
@@ -15,7 +16,7 @@ public class TestModel extends CommonModel {
     }
     public void sendNoti( String toUserEmail, final CommonModel.DomainCallBackListner<Integer> callback ) {
         Call<Integer> call = NetRetrofit.getInstance().getFcmService().normalPush("Test Notification", "testContent", toUserEmail);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 callback.doPostExecute(integer);
@@ -25,6 +26,6 @@ public class TestModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

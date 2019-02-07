@@ -29,12 +29,19 @@ import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityFindHodoosBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.util.VIewUtil;
-import com.espressif.iot.esptouch.EsptouchTask;
+import com.cmmakerclub.iot.esptouch.EsptouchTask;
+import com.cmmakerclub.iot.esptouch.IEsptouchListener;
+import com.cmmakerclub.iot.esptouch.IEsptouchResult;
+import com.cmmakerclub.iot.esptouch.IEsptouchTask;
+import com.cmmakerclub.iot.esptouch.activity.EspWifiAdminSimple;
+import com.cmmakerclub.iot.esptouch.activity.MainActivity;
+import com.cmmakerclub.iot.esptouch.task.__IEsptouchTask;
+/*import com.espressif.iot.esptouch.EsptouchTask;
 import com.espressif.iot.esptouch.IEsptouchListener;
 import com.espressif.iot.esptouch.IEsptouchResult;
 import com.espressif.iot.esptouch.IEsptouchTask;
 import com.espressif.iot.esptouch.util.ByteUtil;
-import com.espressif.iot.esptouch.util.EspNetUtil;
+import com.espressif.iot.esptouch.util.EspNetUtil;*/
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -45,7 +52,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
 
     public ActivityFindHodoosBinding binding;
 
-    private EsptouchAsyncTask4 mTask;
+   // private EsptouchAsyncTask4 mTask;
 
     String ssid;
 
@@ -57,6 +64,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
 
     WifiSearchActivity wifiSearchActivity;
 
+    Button connectBtn;
+
+    private EspWifiAdminSimple mWifiAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +76,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.find_hodoo_title)));
         wifiSearchActivity = (WifiSearchActivity) WifiSearchActivity.wifiSearchActivity;
+        mWifiAdmin = new EspWifiAdminSimple(this);
         presenter = new FindHodoosPresenter(this);
         presenter.loadData(FindHodoosActivity.this);
         presenter.loginModelData(FindHodoosActivity.this);
@@ -72,13 +84,37 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         ssid = intent.getStringExtra("ssid");
         bssid = intent.getStringExtra("bssid");
         password = intent.getStringExtra("password");
-        showEsptouchInfo(ssid , bssid, password);
+        createConnectBtn();
         super.setToolbarColor();
     }
 
     @Override
     protected BaseActivity<FindHodoosActivity> getActivityClass() {
         return FindHodoosActivity.this;
+    }
+
+    public void createConnectBtn(){
+        VIewUtil vIewUtil = new VIewUtil(this);
+        final int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 58, getResources().getDisplayMetrics());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+        params.setMargins(vIewUtil.numberToDP(40),vIewUtil.numberToDP(0),vIewUtil.numberToDP(40),vIewUtil.numberToDP(31));
+        connectBtn = new Button(this);
+        connectBtn.setText(getString(R.string.wifi_connection));
+        connectBtn.setTypeface(Typeface.DEFAULT_BOLD);
+        connectBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f);
+        connectBtn.setTextColor(Color.WHITE);
+        connectBtn.setLayoutParams(params);
+        connectBtn.setBackground( getResources().getDrawable(R.drawable.rounded_pink_btn));
+        connectBtn.setStateListAnimator(null);
+        ViewCompat.setElevation(connectBtn, vIewUtil.numberToDP(1));
+        connectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEsptouchInfo(ssid , bssid, password);
+                connectBtn.setVisibility(View.GONE);
+            }
+        });
+        binding.btnArea.addView(connectBtn);
     }
 
 
@@ -137,38 +173,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
 
 
     private void showEsptouchInfo(String pSsid, String pBssid, String pPassword) {
-        byte[] ssid = ByteUtil.getBytesByString(pSsid);
-        byte[] password = ByteUtil.getBytesByString(pPassword);
-        byte[] bssid = EspNetUtil.parseBssid2bytes(pBssid);
-
-        byte[] deviceCount = "1".getBytes();
-        byte[] broadcast = {(byte) (1)};
-
-        if (mTask != null) {
-            mTask.cancelEsptouch();
-        }
-        mTask = new EsptouchAsyncTask4(FindHodoosActivity.this);
-        mTask.execute(ssid, bssid, password, deviceCount, broadcast);
-    }
-
-    private IEsptouchListener myListener = new IEsptouchListener() {
-
-        @Override
-        public void onEsptouchResultAdded(final IEsptouchResult result) {
-            onEsptoucResultAddedPerform(result);
-        }
-    };
-
-    private void onEsptoucResultAddedPerform(final IEsptouchResult result) {
-        runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                String text = result.getBssid() + " is connected to the wifi";
-                //Toast.makeText(FindHodoosActivity.this, text, Toast.LENGTH_LONG).show();
-            }
-
-        });
+        String isSsidHiddenStr = "NO";
+        String taskResultCountStr = "1";
+        new EsptouchAsyncTask3().execute(pSsid, pBssid, pPassword,
+                isSsidHiddenStr, taskResultCountStr);
     }
 
     @Override
@@ -232,7 +240,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         finish();
     }
 
-    public class EsptouchAsyncTask4 extends AsyncTask<byte[], Void, List<IEsptouchResult>> {
+    /*public class EsptouchAsyncTask4 extends AsyncTask<byte[], Void, List<IEsptouchResult>> {
         private WeakReference<FindHodoosActivity> mActivity;
 
         // without the lock, if the user tap confirm and cancel quickly enough,
@@ -327,5 +335,135 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
             activity.mTask = null;
             binding.circleView.stopSpinning();
         }
+    }*/
+
+    private void onEsptoucResultAddedPerform(final IEsptouchResult result) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                String text = result.getBssid() + " is connected to the wifi";
+                /*Answers.getInstance().logCustom(new CustomEvent("ESPTOUCH wifi connected"));*/
+                Toast.makeText(FindHodoosActivity.this, text,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+    private IEsptouchListener myListener = new IEsptouchListener() {
+
+        @Override
+        public void onEsptouchResultAdded(final IEsptouchResult result) {
+            onEsptoucResultAddedPerform(result);
+        }
+    };
+
+    private class EsptouchAsyncTask3 extends AsyncTask<String, Void, List<IEsptouchResult>> {
+
+        private IEsptouchTask mEsptouchTask;
+        // without the lock, if the user tap confirm and cancel quickly enough,
+        // the bug will arise. the reason is follows:
+        // 0. task is starting created, but not finished
+        // 1. the task is cancel for the task hasn't been created, it do nothing
+        // 2. task is created
+        // 3. Oops, the task should be cancelled, but it is running
+        private final Object mLock = new Object();
+
+        @Override
+        protected void onPreExecute() {
+            binding.circleView.spin();
+            /*mProgressDialog = new ProgressDialog(FindHodoosActivity.this);
+            mProgressDialog
+                    .setMessage("Esptouch is configuring, please wait for a moment...");
+            mProgressDialog.setCanceledOnTouchOutside(false);
+            mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    synchronized (mLock) {
+                        if (__IEsptouchTask.DEBUG) {
+                            Log.i(TAG, "progress dialog is canceled");
+                        }
+                        if (mEsptouchTask != null) {
+                            mEsptouchTask.interrupt();
+                        }
+                    }
+                }
+            });
+            mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+                    "Waiting...", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            mProgressDialog.show();
+            mProgressDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                    .setEnabled(false);*/
+        }
+
+        @Override
+        protected List<IEsptouchResult> doInBackground(String... params) {
+            int taskResultCount = -1;
+            synchronized (mLock) {
+                String apSsid = params[0];
+                String apBssid = params[1];
+                String apPassword = params[2];
+                String isSsidHiddenStr = params[3];
+                String taskResultCountStr = params[4];
+                boolean isSsidHidden = false;
+                if (isSsidHiddenStr.equals("YES")) {
+                    isSsidHidden = true;
+                }
+                taskResultCount = Integer.parseInt(taskResultCountStr);
+                mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword,
+                        isSsidHidden, FindHodoosActivity.this);
+                mEsptouchTask.setEsptouchListener(myListener);
+
+            }
+            List<IEsptouchResult> resultList = mEsptouchTask.executeForResults(taskResultCount);
+            return resultList;
+        }
+
+        @Override
+        protected void onPostExecute(List<IEsptouchResult> result) {
+            IEsptouchResult firstResult = result.get(0);
+            // check whether the task is cancelled and no results received
+            if (!firstResult.isCancelled()) {
+                int count = 0;
+                // max results to be displayed, if it is more than maxDisplayCount,
+                // just show the count of redundant ones
+                final int maxDisplayCount = 5;
+                // the task received some results including cancelled while
+                // executing before receiving enough results
+                if (firstResult.isSuc()) {
+                    StringBuilder sb = new StringBuilder();
+                   /* Answers.getInstance()
+                            .logCustom(new CustomEvent("ESPTOUCH[] success")
+                                    .putCustomAttribute("SIZE", result.size()));*/
+                    for (IEsptouchResult resultInList : result) {
+                        sb.append("Esptouch success, bssid = "
+                                + resultInList.getBssid()
+                                + ",InetAddress = "
+                                + resultInList.getInetAddress()
+                                .getHostAddress() + "\n");
+                        count++;
+                        if (count >= maxDisplayCount) {
+                            break;
+                        }
+                    }
+                    if (count < result.size()) {
+                        sb.append("\nthere's " + (result.size() - count)
+                                + " more result(s) without showing\n");
+                    }
+                    //mProgressDialog.setMessage(sb.toString());
+                    createSaveBtn(result.get(0).getBssid());
+                    binding.deviceInfo.setText(sb);
+                } else {
+                    //mProgressDialog.setMessage("Esptouch fail");
+                    createRetryBtn();
+                }
+            }
+            //activity.mTask = null;
+            binding.circleView.stopSpinning();
+        }
+    }
+
 }

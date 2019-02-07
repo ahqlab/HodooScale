@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.wifi.find;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Device;
@@ -16,7 +17,7 @@ public class FindHodoosModel extends CommonModel {
         device.setGroupCode(sharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         device.setSerialNumber(bssid);
         Call<Integer> call = NetRetrofit.getInstance().getDeviceService().insertDevice(device);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer result) {
                 domainCallBackListner.doPostExecute(result);
@@ -25,6 +26,6 @@ public class FindHodoosModel extends CommonModel {
             protected void doPreExecute() {
                 domainCallBackListner.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

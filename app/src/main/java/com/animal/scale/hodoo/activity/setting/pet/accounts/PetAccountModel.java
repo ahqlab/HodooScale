@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.PetAllInfos;
@@ -16,7 +18,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class PetAccountModel {
+public class PetAccountModel extends CommonModel {
 
     Context context;
 
@@ -29,7 +31,7 @@ public class PetAccountModel {
 
     public void getPetData(final asyncTaskListner asyncTaskListner) {
         Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().aboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
-        new AbstractAsyncTaskOfList<PetAllInfos>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetAllInfos>() {
             @Override
             protected void doPostExecute(List<PetAllInfos> data) {
                 if(data.size() > 0){
@@ -40,7 +42,7 @@ public class PetAccountModel {
             protected void doPreExecute() {
                 asyncTaskListner.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void addRegistBtn(List<PetAllInfos> data) {
@@ -62,4 +64,6 @@ public class PetAccountModel {
         void doPostExecute(List<PetAllInfos> data);
         void doPreExecute();
     }
+
+
 }

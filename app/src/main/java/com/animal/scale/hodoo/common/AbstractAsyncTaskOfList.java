@@ -18,6 +18,11 @@ public abstract class AbstractAsyncTaskOfList<D> extends AsyncTask<Call, Void, L
     protected abstract void doPreExecute();
 
     @Override
+    protected void onCancelled() {
+        super.onCancelled();
+    }
+
+    @Override
     protected List<D> doInBackground(Call... params) {
         try {
             Call<List<D>> call = params[0];

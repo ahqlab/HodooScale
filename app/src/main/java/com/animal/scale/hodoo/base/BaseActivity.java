@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -162,8 +163,6 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         try{
             getApplicationContext().unregisterReceiver(mMessageReceiver);
         } catch(IllegalArgumentException e){}
-
-
     }
 
     @Override
@@ -177,6 +176,13 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         Log.v(TAG, "onDestroy");
         super.onDestroy();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        return super.onKeyDown(keyCode, event);
+    }
+
     public void setBadge () {
         if ( findViewById(R.id.my_toolbar) instanceof Toolbar ) {
             Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -194,9 +200,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
                         settingBadge.setText(String.valueOf(Math.min(count, 99)));
                     }
                 }
-
             }
         }
     }
-
 }

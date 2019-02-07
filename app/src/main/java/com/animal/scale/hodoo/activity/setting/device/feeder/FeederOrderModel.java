@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -26,7 +27,7 @@ public class FeederOrderModel extends CommonModel {
 
     public void getPetAllInfo(final DomainCallBackListner<PetAllInfos> domainCallBackListner) {
         Call<PetAllInfos> call = NetRetrofit.getInstance().getPetService().petAllInfos(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
-        new AbstractAsyncTask<PetAllInfos>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetAllInfos>() {
             @Override
             protected void doPostExecute(PetAllInfos petAllInfos) {
                 domainCallBackListner.doPostExecute(petAllInfos);
@@ -35,7 +36,7 @@ public class FeederOrderModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void insertOrder(float rer, final DomainCallBackListner<Integer> domainCallBackListner) {
@@ -52,7 +53,7 @@ public class FeederOrderModel extends CommonModel {
         feedOrders.setRer(rer);
 
         Call<Integer> call = NetRetrofit.getInstance().getFeederService().insert(feedOrders);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 domainCallBackListner.doPostExecute(integer);
@@ -61,6 +62,7 @@ public class FeederOrderModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
+
     }
 }

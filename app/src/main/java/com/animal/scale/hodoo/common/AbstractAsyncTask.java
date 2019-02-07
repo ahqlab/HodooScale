@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.common;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -17,6 +18,11 @@ public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTas
     protected abstract void doPostExecute(D d);
 
     protected abstract void doPreExecute();
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+    }
 
     @Override
     protected D doInBackground(Call... params) {
@@ -41,7 +47,9 @@ public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTas
 
     @Override
     protected void onPostExecute(D d) {
-        doPostExecute(d);
+        if(d != null){
+            doPostExecute(d);
+        }
         super.onPostExecute(d);
     }
 }

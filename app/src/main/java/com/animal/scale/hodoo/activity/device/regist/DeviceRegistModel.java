@@ -1,8 +1,11 @@
 package com.animal.scale.hodoo.activity.device.regist;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Device;
@@ -11,7 +14,7 @@ import com.animal.scale.hodoo.util.MathUtil;
 
 import retrofit2.Call;
 
-public class DeviceRegistModel {
+public class DeviceRegistModel extends CommonModel {
 
     Context context;
 
@@ -28,7 +31,7 @@ public class DeviceRegistModel {
         device.setGroupCode(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         device.setSerialNumber(MathUtil.getGroupId());
         Call<Integer> call = NetRetrofit.getInstance().getDeviceService().insertDevice(device);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer result) {
                 tempRegistListener.doPostExecute(result);
@@ -37,7 +40,7 @@ public class DeviceRegistModel {
             protected void doPreExecute() {
                 tempRegistListener.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public boolean checkInvitation() {

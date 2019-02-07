@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -93,6 +95,15 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     @Override
     protected BaseActivity<LoginActivity> getActivityClass() {
         return LoginActivity.this;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)){
+            setProgress(false);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     //onClick

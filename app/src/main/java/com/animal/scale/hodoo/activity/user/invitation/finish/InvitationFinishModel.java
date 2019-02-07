@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.user.invitation.finish;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -27,7 +28,7 @@ public class InvitationFinishModel extends CommonModel {
 
 
         Call<Integer> call = NetRetrofit.getInstance().getFcmService().sendInvitation(to, from);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 callback.doPostExecute(integer);
@@ -37,12 +38,12 @@ public class InvitationFinishModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
     public void cancel (String to, final InvitationFinishModel.DomainCallBackListner<Integer> callback ) {
         int from = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
         Call<Integer> call = NetRetrofit.getInstance().getFcmService().cancelInvitation(to, from);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 if ( integer > 0 ) {
@@ -56,6 +57,6 @@ public class InvitationFinishModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 }
