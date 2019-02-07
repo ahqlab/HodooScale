@@ -1,3 +1,3 @@
-include ':app', ':weekcalendar2', ':library', ':esptouch'
+include ':app', ':weekcalendar2', ':library', ':esp8266'
 project(':weekcalendar2').projectDir = new File('weekcalendar')
 project(':library').projectDir = new File('library')

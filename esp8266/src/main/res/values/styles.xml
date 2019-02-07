@@ -1,0 +1,37 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+        <item name="android:textAppearance">@style/custom_text</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/text_accent</item>
+        <item name="colorPrimary">@color/text_white</item>
+        <item name="colorPrimaryDark">@color/text_accent</item>
+        <item name="colorControlNormal">@color/text_white</item>
+        <item name="colorControlActivated">@color/text_accent</item>
+        <item name="colorControlHighlight">@color/text_accent</item>
+        <item name="android:spinnerItemStyle">@style/MooSpinnerItem</item>
+    </style>
+
+    <style name="custom_text">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="MooSpinnerItem" parent="Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/MooTextAppearanceSpinnerItem</item>
+    </style>
+
+    <style name="MooTextAppearanceSpinnerItem" parent="TextAppearance.AppCompat.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">#F00</item>
+    </style>
+
+</resources>
