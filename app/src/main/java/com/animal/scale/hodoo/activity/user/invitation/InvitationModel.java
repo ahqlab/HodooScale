@@ -39,4 +39,7 @@ public class InvitationModel extends CommonModel {
             }
         }.execute(call);
     }
+    public void removeAutoLogin() {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
+    }
 }

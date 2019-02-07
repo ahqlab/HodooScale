@@ -28,6 +28,7 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
     public static int ERROR = 0;
     public static int SUCESS = 1;
     public static int EXISTENCE_USER = 2;
+    public static int OVERLAB_INVITATION = 3;
 
     private ActivityInvitationBinding binding;
     private Invitation.Presenter presenter;
@@ -116,10 +117,10 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
 
     @Override
     public void goFinishPage() {
-        mSharedPrefManager.removeAllPreferences();
+//        mSharedPrefManager.removeAllPreferences();
+        presenter.removeAutoLogin();
         Intent intent = new Intent(this, InvitationFinishActivity.class);
         intent.putExtra(HodooConstant.INVITATION_EMAIL_KEY, binding.email.editText.getText().toString());
-        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
         startActivity(intent);
         finish();

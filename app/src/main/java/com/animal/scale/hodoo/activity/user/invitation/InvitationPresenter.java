@@ -43,6 +43,8 @@ public class InvitationPresenter implements Invitation.Presenter {
                     mView.showPopup(R.string.invitation__invitation_error_title, R.string.invitation__error_not_user, null);
                 } else if ( result == InvitationActivity.NOT_TO_DEVICE ) {
                     mView.showPopup(R.string.invitation__invitation_error_title, R.string.invitation__error_not_device, null);
+                } else if ( result == InvitationActivity.OVERLAB_INVITATION ) {
+                    mView.showPopup(R.string.invitation__invitation_error_title, R.string.invitation__error_overlab_invitation, null);
                 }
             }
 
@@ -56,5 +58,10 @@ public class InvitationPresenter implements Invitation.Presenter {
     @Override
     public void setInvitationData(String mail) {
         model.setInvitationUser(mail);
+    }
+
+    @Override
+    public void removeAutoLogin() {
+        model.removeAutoLogin();
     }
 }

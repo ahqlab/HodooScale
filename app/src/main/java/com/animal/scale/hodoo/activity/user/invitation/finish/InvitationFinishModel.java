@@ -22,6 +22,10 @@ public class InvitationFinishModel extends CommonModel {
     }
     public void resend( String to, final InvitationFinishModel.DomainCallBackListner<Integer> callback ) {
         String from = mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL);
+
+
+
+
         Call<Integer> call = NetRetrofit.getInstance().getFcmService().sendInvitation(to, from);
         new AbstractAsyncTask<Integer>() {
             @Override

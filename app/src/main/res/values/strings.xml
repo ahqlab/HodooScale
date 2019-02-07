@@ -316,9 +316,7 @@
     <string name="invitation__error_existence_user">이미 그룹에 참여되었습니다.\n로그인창으로 이동합니다.</string>
     <string name="invitation__error_not_user">참여하실 그룹이 없습니다.</string>
     <string name="invitation__error_not_device">요청한 그룹이 디바이스를 가지고 있지 않습니다.</string>
-
-
-
+    <string name="invitation__error_overlab_invitation">이미 해당 그룹에 참여를 요청했습니다.</string>
 
     <!-- 2019-01-30 new code (e) -->
 </resources>
