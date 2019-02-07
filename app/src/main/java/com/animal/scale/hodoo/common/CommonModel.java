@@ -7,6 +7,9 @@ import java.util.List;
 
 public class CommonModel {
 
+    public static final int limitedTime = 10000;
+    public static final int interval = 1000;
+
     Context context;
 
     public SharedPrefManager sharedPrefManager;

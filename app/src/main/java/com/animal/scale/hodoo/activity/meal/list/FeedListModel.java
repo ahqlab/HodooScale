@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.activity.meal.search.AutoCompleateFeed;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -31,7 +32,7 @@ public class FeedListModel extends CommonModel {
 
     public void getList(String date, final DomainListCallBackListner<MealHistoryContent> domainListCallBackListner) {
         Call<List<MealHistoryContent>> call = NetRetrofit.getInstance().getMealHistoryService().getList(date, sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
-        new AbstractAsyncTaskOfList<MealHistoryContent>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<MealHistoryContent>() {
             @Override
             protected void doPostExecute(List<MealHistoryContent> d) {
                 domainListCallBackListner.doPostExecute(d);
@@ -41,12 +42,12 @@ public class FeedListModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void getPetAllInfo(final DomainCallBackListner<PetAllInfos> domainCallBackListner) {
         Call<PetAllInfos> call = NetRetrofit.getInstance().getPetService().petAllInfos(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
-        new AbstractAsyncTask<PetAllInfos>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetAllInfos>() {
             @Override
             protected void doPostExecute(PetAllInfos petAllInfos) {
                 domainCallBackListner.doPostExecute(petAllInfos);
@@ -55,12 +56,12 @@ public class FeedListModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void deleteMealHistory(int historyIdx, final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getMealHistoryService().deleteMealHistory(historyIdx);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 domainCallBackListner.doPostExecute(integer);
@@ -70,6 +71,6 @@ public class FeedListModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.setting.account.info;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -26,7 +27,7 @@ public class ChangeUserInfoModel extends CommonModel {
 
     public void initUserData(final DomainCallBackListner<User> domainCallBackListner) {
         Call<User> call = NetRetrofit.getInstance().getUserService().get(sharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID));
-        new AbstractAsyncTask<User>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<User>() {
             @Override
             protected void doPostExecute(User user) {
                 domainCallBackListner.doPostExecute(user);
@@ -35,12 +36,12 @@ public class ChangeUserInfoModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void updateBasicInfo(User user, final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().updateBasicInfo(user);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer result) {
                 domainCallBackListner.doPostExecute(result);
@@ -50,6 +51,6 @@ public class ChangeUserInfoModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

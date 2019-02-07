@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.user.login.LoginModel;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -17,7 +18,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class MyAccountModel {
+public class MyAccountModel extends CommonModel{
 
     public SharedPrefManager mSharedPrefManager;
 
@@ -41,7 +42,7 @@ public class MyAccountModel {
     }
     public void saveFCMToken (User user, final LoginModel.DomainCallBackListner<Integer> callback) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().saveFCMToken(user);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 callback.doPostExecute(integer);
@@ -51,11 +52,12 @@ public class MyAccountModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
+
     }
     public void initUserData(final CommonModel.DomainCallBackListner<User> domainCallBackListner) {
         Call<User> call = NetRetrofit.getInstance().getUserService().get(mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID));
-        new AbstractAsyncTask<User>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<User>() {
             @Override
             protected void doPostExecute(User user) {
                 domainCallBackListner.doPostExecute(user);
@@ -64,13 +66,13 @@ public class MyAccountModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
     public void withdraw( int type, final CommonModel.DomainCallBackListner<Integer> callback ) {
         int idx = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
         if ( idx > 0 ) {
             Call<Integer> call = NetRetrofit.getInstance().getUserService().withdraw(idx, type);
-            new AbstractAsyncTask<Integer>() {
+            new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
                 @Override
                 protected void doPostExecute(Integer result) {
                     callback.doPostExecute(result);
@@ -80,7 +82,8 @@ public class MyAccountModel {
                 protected void doPreExecute() {
 
                 }
-            }.execute(call);
+            }.execute(call), limitedTime, interval, true).start();
+
         }
     }
 

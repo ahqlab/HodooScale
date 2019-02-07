@@ -6,6 +6,7 @@ import android.graphics.Color;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.chart.MyMarkerView;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -117,7 +118,7 @@ public class WeightStatisticsModel extends CommonModel{
 
     public void getDailyStatisticalData(int type , final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfDay(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
@@ -126,12 +127,12 @@ public class WeightStatisticsModel extends CommonModel{
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void getWeeklyStatisticalData(int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfWeek(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), DateUtil.getCurrentMonth(), type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
@@ -140,11 +141,11 @@ public class WeightStatisticsModel extends CommonModel{
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
     public void getMonthlyStatisticalData( int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfMonth(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), DateUtil.getCurrentYear(),type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
@@ -153,11 +154,11 @@ public class WeightStatisticsModel extends CommonModel{
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
     public void getStatisticalDataByYear( int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfYear(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
@@ -166,6 +167,6 @@ public class WeightStatisticsModel extends CommonModel{
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

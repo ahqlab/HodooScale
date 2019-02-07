@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.home.fragment.meal;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Feed;
@@ -20,7 +21,7 @@ public class MealFragmentModel extends CommonModel {
 
     public void getRadarChartData(String currentDatetime, final DomainCallBackListner<Feed> feedDomainCallBackListner) {
         Call<Feed> call = NetRetrofit.getInstance().getFeedService().getRadarChartData(currentDatetime, sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
-        new AbstractAsyncTask<Feed>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Feed>() {
             @Override
             protected void doPostExecute(Feed feed) {
                 feedDomainCallBackListner.doPostExecute(feed);
@@ -30,13 +31,13 @@ public class MealFragmentModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
 
     public void getTipMessageOfCountry(MealTip mealTip, final DomainCallBackListner<MealTip> domainListCallBackListner) {
         Call<MealTip> call = NetRetrofit.getInstance().getMealTipService().getTipOfCountry(mealTip);
-        new AbstractAsyncTask<MealTip>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<MealTip>() {
             @Override
             protected void doPostExecute(MealTip tip) {
                 domainListCallBackListner.doPostExecute(tip);
@@ -46,6 +47,6 @@ public class MealFragmentModel extends CommonModel {
             protected void doPreExecute() {
                 domainListCallBackListner.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

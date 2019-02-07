@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -51,7 +52,7 @@ public class LoginModel extends CommonModel {
 
     public void sendServer(User user, final DomainCallBackListner<CommonResponce<User>> domainCallBackListner) {
         Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().login(user);
-        new AbstractAsyncTask<CommonResponce<User>>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<User>>() {
             @Override
             protected void doPostExecute(CommonResponce<User> resultMessageGroup) {
                 domainCallBackListner.doPostExecute(resultMessageGroup);
@@ -60,7 +61,9 @@ public class LoginModel extends CommonModel {
             protected void doPreExecute() {
                 domainCallBackListner.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
+
+
     }
 
     public void saveUserSharedValue(User user){
@@ -79,7 +82,7 @@ public class LoginModel extends CommonModel {
 
     public void confirmDeviceRegistration(final DeviceRegistrationListener deviceRegistrationListener) {
         Call<List<Device>> call = NetRetrofit.getInstance().getDeviceService().getMyDeviceList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
-        new AbstractAsyncTaskOfList<Device>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Device>() {
             @Override
             protected void doPostExecute(List<Device> devices) {
                 deviceRegistrationListener.doPostExecute(devices);
@@ -88,12 +91,12 @@ public class LoginModel extends CommonModel {
             protected void doPreExecute() {
                 deviceRegistrationListener.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void confirmPetRegistration(final PetRegistrationListener petRegistrationListener) {
         Call<List<Pet>> call = NetRetrofit.getInstance().getPetService().getMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
-        new AbstractAsyncTaskOfList<Pet>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Pet>() {
             @Override
             protected void doPostExecute(List<Pet> pets) {
                 petRegistrationListener.doPostExecute(pets);
@@ -102,11 +105,11 @@ public class LoginModel extends CommonModel {
             protected void doPreExecute() {
                 petRegistrationListener.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
     public void saveFCMToken (User user, final LoginModel.DomainCallBackListner<Integer> callback) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().saveFCMToken(user);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 callback.doPostExecute(integer);
@@ -116,7 +119,7 @@ public class LoginModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void saveAutoLogin() {

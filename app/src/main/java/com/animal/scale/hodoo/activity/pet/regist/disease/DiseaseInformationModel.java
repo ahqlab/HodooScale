@@ -3,6 +3,8 @@ package com.animal.scale.hodoo.activity.pet.regist.disease;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
@@ -13,7 +15,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class DiseaseInformationModel {
+public class DiseaseInformationModel extends CommonModel {
 
     public Context context;
 
@@ -28,7 +30,7 @@ public class DiseaseInformationModel {
 
     public void getDiseaseformation(int petIdx, final PetDiseaseInformationResultListner petDiseaseInformationResultListner) {
         Call<PetChronicDisease> call = NetRetrofit.getInstance().getPetChronicDiseaseService().getDiseaseformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
-        new AbstractAsyncTask<PetChronicDisease>(){
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetChronicDisease>(){
             @Override
             protected void doPostExecute(PetChronicDisease petChronicDisease) {
                 petDiseaseInformationResultListner.doPostExecute(petChronicDisease);
@@ -38,7 +40,7 @@ public class DiseaseInformationModel {
             protected void doPreExecute() {
                 petDiseaseInformationResultListner.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public List<PetChronicDisease> stringToListConversion(String diseaseName) {
@@ -54,7 +56,7 @@ public class DiseaseInformationModel {
 
     public void deleteDiseaseformation(int petIdx, int diseaseIdx, final deleteInfoResultListner deleteInfoResultListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetChronicDiseaseService().delete(petIdx, diseaseIdx);
-        new AbstractAsyncTask<Integer>(){
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
 
             @Override
             protected void doPostExecute(Integer result) {
@@ -65,11 +67,11 @@ public class DiseaseInformationModel {
             protected void doPreExecute() {
                 deleteInfoResultListner.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
     public void registDiseaseformation(PetChronicDisease domain, int petIdx, final registResultListner registResultListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetChronicDiseaseService().registDiseaseformation(domain, petIdx);
-        new AbstractAsyncTask<Integer>(){
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
 
             @Override
             protected void doPostExecute(Integer result) {
@@ -80,7 +82,7 @@ public class DiseaseInformationModel {
             protected void doPreExecute() {
                 registResultListner.doPreExecute();
             }
-        }.execute(call);
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public interface PetDiseaseInformationResultListner {
