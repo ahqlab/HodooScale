@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_app">#383e6a</color>
+    <color name="btn_blue">#5466af</color>
+
+    <color name="text_white">#ffffff</color>
+    <color name="text_accent">#6a7ef0</color>
+
+    <color name="border_blue">#525d9b</color>
+</resources>
