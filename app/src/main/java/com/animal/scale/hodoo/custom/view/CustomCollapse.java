@@ -197,9 +197,10 @@ public class CustomCollapse extends RelativeLayout implements View.OnClickListen
             @Override
             public void onGlobalLayout() {
                 if ( title.getLineCount() > 0 ) {
+                    int additionTitleHeight = 20;
                     title.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    titleStart = title.getLineHeight();
-                    titleEnd = title.getLineCount() > 0 ? title.getLineCount() * title.getLineHeight() : title.getLineHeight();
+                    titleStart = title.getLineHeight() + additionTitleHeight;
+                    titleEnd = title.getLineCount() > 0 ? title.getLineCount() * title.getLineHeight() + additionTitleHeight : title.getLineHeight() + additionTitleHeight;
                     title.setSingleLine(flag < 0);
                     title.setEllipsize(TextUtils.TruncateAt.END);
                     ViewGroup.LayoutParams params = title.getLayoutParams();

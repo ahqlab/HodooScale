@@ -100,7 +100,7 @@
                                 android:layout_gravity="right"
                                 android:gravity="right"
                                 android:textStyle="bold"
-                                android:text="700kcal\n(권장량)"/>
+                                android:text="@string/common__recommend_calorie"/>
 
                         </LinearLayout>
 

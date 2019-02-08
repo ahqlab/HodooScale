@@ -226,7 +226,7 @@
     <string name="hodoo_link_content">Share states of pet with family and friends who live together</string>
     <!-- ActivityFragment (s) -->
     <string name="wind_speed">WIND</string>
-    <string name="uv_index">자외선 지수</string>
+    <string name="uv_index">UV INDEX</string>
     <string name="ozone_index">OZONE</string>
     <string name="today_all_calroie">CALORIES PET CONSUMED TODAY</string>
     <string name="question_of_change_the_password">Reset Password?</string>
@@ -268,4 +268,6 @@
     <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
     <!-- 2019.02.07 추가 -->
     <string name="auto_login">Remember Me</string>
+
+    <string name="common__recommend_calorie">700kcal\n(recommend quantity)</string>
 </resources>

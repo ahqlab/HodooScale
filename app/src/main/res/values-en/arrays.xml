@@ -2,9 +2,28 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string-array name="bcs_arr">
-        <item>부족</item>
-        <item>초과</item>
-        <item>적정</item>
+        <item>Lack</item>
+        <item>Excess</item>
+        <item>Optimal</item>
+    </string-array>
+    <string-array name="uv_description_arr">
+        <item>low</item>
+        <item>normal</item>
+        <item>high</item>
+        <item>very high</item>
+        <item>danger</item>
+    </string-array>
+    <string-array name="ozone_description_arr">
+        <item>good</item>
+        <item>normal</item>
+        <item>bad</item>
+        <item>very bad</item>
+    </string-array>
+    <string-array name="wind_speed_description_arr">
+        <item>weak</item>
+        <item>a bit strong</item>
+        <item>strong</item>
+        <item>very strong</item>
     </string-array>
 
 </resources>
