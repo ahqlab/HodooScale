@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
-import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
@@ -44,7 +43,7 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
         presenter = new InvitationPresenter(this);
         presenter.loadData(this);
 
-        binding.setActivityInfo(new ActivityInfo("회원 초대"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.invitation__tool_bar_title)));
         binding.email.editText.addTextChangedListener(new CommonTextWatcher(
                 binding.email,
                 this,
@@ -80,6 +79,22 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
 
     @Override
     public void showPopup(String title, String content, final CustomDialogCallback callback) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(content)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        if (callback != null)
+                            callback.onClick(dialog,i);
+                        dialog.dismiss();
+                    }
+                }).create();
+        dialog.show();
+    }
+
+    @Override
+    public void showPopup(int title, int content, final CustomDialogCallback callback) {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(content)

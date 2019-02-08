@@ -70,7 +70,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/auto_login"/>
+                    android:text="@string/login__auto_login_btn"/>
 
                 <Button
                     android:id="@+id/signup_btn"

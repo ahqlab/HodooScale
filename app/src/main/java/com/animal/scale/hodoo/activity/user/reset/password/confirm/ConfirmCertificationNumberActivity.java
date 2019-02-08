@@ -30,7 +30,7 @@ public class ConfirmCertificationNumberActivity extends BaseActivity<ConfirmCert
 
         super.setToolbarColor();
 
-        String email = getIntent().getStringExtra("email") + "로 임시 비밀번호를 발송하였습니다.";
+        String email = getIntent().getStringExtra("email") + getString(R.string.confirm_certification_number__send_email_suffix);
         String[] split = email.split("@");
 
         SpannableStringBuilder ssb = new SpannableStringBuilder(email);

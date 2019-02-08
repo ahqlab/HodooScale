@@ -29,7 +29,7 @@ public interface UserAccountIn {
 
         void getData();
 
-        void withdrawGroup( User user );
+        void withdrawGroup( Context context, User user );
 
         void getAccessType();
     }

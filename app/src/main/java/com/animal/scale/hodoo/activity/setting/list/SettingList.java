@@ -24,8 +24,6 @@ public interface SettingList {
 
         void loadData(Context context);
 
-        public void getSttingListMenu();
-
         void getStringSettingList( Context context );
 
         void logout();

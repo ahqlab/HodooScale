@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.setting.user.account;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.User;
 
@@ -64,12 +65,12 @@ public class UserAccountPresenter implements UserAccountIn.Presenter {
     }
 
     @Override
-    public void withdrawGroup(final User user) {
+    public void withdrawGroup(final Context context, final User user) {
         model.withdrawGroup(user.getUserIdx(), new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
                 if ( result > 0 ) {
-                    view.showSinglePopup("탈퇴 완료", user.getNickname() + "님을 그룹에서 탈퇴시켰습니다.");
+                    view.showSinglePopup(context.getString(R.string.user_account__group_withdraw_title_fin), user.getNickname() + context.getString(R.string.user_account__group_withdraw_title_fin));
                     getData();
                 }
             }

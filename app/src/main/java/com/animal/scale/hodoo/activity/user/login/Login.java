@@ -38,6 +38,8 @@ public interface Login {
 
         void setBtnState( boolean state );
 
+        void saveFcmToken();
+
     }
 
     interface Presenter {

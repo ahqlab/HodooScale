@@ -90,17 +90,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        presenter.checkLogin();
 
-        fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
-        binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
-        presenter.loadCustomDropdownView();
-        presenter.getSttingListMenu();
-        VIewUtil vIewUtil = new VIewUtil(HomeActivity.this);
-        VIewUtil.getLocationCode(HomeActivity.this);
+
     }
 
     public void onPetImageClick(View view) {
@@ -290,6 +282,29 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         } else {
             BadgeUtils.setBadge(this, Math.min(count, 99));
         }
+    }
+
+    @Override
+    public void moveLoginActivity() {
+        Intent intent = new Intent( this, MainActivity.class );
+        intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
+        startActivity(intent);
+        finish();
+
+    }
+
+    @Override
+    public void setFragment() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
+        presenter.loadCustomDropdownView();
+        VIewUtil vIewUtil = new VIewUtil(HomeActivity.this);
+        VIewUtil.getLocationCode(HomeActivity.this);
     }
 
     @Override

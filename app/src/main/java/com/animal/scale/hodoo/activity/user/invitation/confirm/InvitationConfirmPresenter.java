@@ -3,16 +3,11 @@ package com.animal.scale.hodoo.activity.user.invitation.confirm;
 import android.content.Context;
 import android.content.DialogInterface;
 
+import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.user.group.list.UserGroupListActivity;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
-import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
-import com.animal.scale.hodoo.domain.InvitationUser;
-import com.animal.scale.hodoo.util.BadgeUtils;
-
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
     private InvitationConfirm.View mView;
@@ -54,7 +49,7 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
                                 @Override
                                 public void doPostExecute(Integer result) {
                                     if ( result > 0 ) {
-                                        mView.showPopup("초대완료", "초대가 완료되었습니다.", new InvitationConfirmActivity.CustomDialogCallback() {
+                                        mView.showPopup(R.string.invitation_confirm__fin_title, R.string.invitation_confirm__fin_suffix, new InvitationConfirmActivity.CustomDialogCallback() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int i) {
                                                 mView.closeActivity();
