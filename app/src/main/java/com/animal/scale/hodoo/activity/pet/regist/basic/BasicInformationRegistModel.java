@@ -27,10 +27,12 @@ public class BasicInformationRegistModel extends CommonModel {
 
     public SharedPrefManager mSharedPrefManager;
 
-    public void loadData(Context context){
+    public void loadData(Context context) {
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
-    };
+    }
+
+    ;
 
     public View onClickOpenBottomDlg() {
         return null;
@@ -40,19 +42,21 @@ public class BasicInformationRegistModel extends CommonModel {
 
     }
 
-    public void registBasicInfo(final String requestUrl, final PetBasicInfo info, final CircleImageView profile, final BasicInfoRegistListner basicInfoRegistListner) {
+    public void registBasicInfo(final String requestUrl, final PetBasicInfo info, final CircleImageView profile, final DomainCallBackListner<Pet> domainCallBackListner) {
         new AsyncTaskCancelTimerTask(new AsyncTask<Void, String, Pet>() {
             @Override
             protected Pet doInBackground(Void... voids) {
-                return HttpUtill.HttpFileRegist(requestUrl , mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), info, profile);
+                return HttpUtill.HttpFileRegist(requestUrl, mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), info, profile);
             }
+
             @Override
             protected void onPostExecute(Pet pet) {
-                basicInfoRegistListner.doPostExecute(pet);
+                domainCallBackListner.doPostExecute(pet);
             }
+
             @Override
             protected void onPreExecute() {
-                basicInfoRegistListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
             }
 
 
@@ -63,7 +67,7 @@ public class BasicInformationRegistModel extends CommonModel {
         new AsyncTaskCancelTimerTask(new AsyncTask<Void, String, String>() {
             @Override
             protected String doInBackground(Void... voids) {
-                return HttpUtill.HttpFileUpdate(requestUrl , info, profile);
+                return HttpUtill.HttpFileUpdate(requestUrl, info, profile);
             }
 
             @Override
@@ -78,18 +82,23 @@ public class BasicInformationRegistModel extends CommonModel {
         }.execute(), limitedTime, interval, true).start();
     }
 
-    public void getPetBasicInformation(int petIdx, final PetBasicInformationResultListner petBasicInformationResultListner) {
+    public void getPetBasicInformation(int petIdx, final DomainCallBackListner<PetBasicInfo> domainCallBackListner) {
         Call<PetBasicInfo> call = NetRetrofit.getInstance().getPetService().getBasicInformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetBasicInfo>(){
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetBasicInfo>() {
 
             @Override
             protected void doPostExecute(PetBasicInfo basicInfo) {
-                petBasicInformationResultListner.doPostExecute(basicInfo);
+                domainCallBackListner.doPostExecute(basicInfo);
             }
 
             @Override
             protected void doPreExecute() {
-                petBasicInformationResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }
@@ -97,15 +106,19 @@ public class BasicInformationRegistModel extends CommonModel {
 
     public interface BasicInfoRegistListner {
         void doPostExecute(Pet pet);
+
         void doPreExecute();
     }
+
     public interface BasicInfoUpdateListner {
         void doPostExecute();
+
         void doPreExecute();
     }
 
     public interface PetBasicInformationResultListner {
         void doPostExecute(PetBasicInfo basicInfo);
+
         void doPreExecute();
     }
 }

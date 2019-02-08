@@ -127,6 +127,11 @@ public class WeightStatisticsModel extends CommonModel{
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -139,6 +144,11 @@ public class WeightStatisticsModel extends CommonModel{
             }
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();
@@ -154,6 +164,11 @@ public class WeightStatisticsModel extends CommonModel{
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
     public void getStatisticalDataByYear( int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
@@ -165,6 +180,11 @@ public class WeightStatisticsModel extends CommonModel{
             }
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

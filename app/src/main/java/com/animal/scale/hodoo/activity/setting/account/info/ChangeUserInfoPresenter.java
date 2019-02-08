@@ -32,7 +32,7 @@ public class ChangeUserInfoPresenter implements ChangeUserInfoIn.Presenter{
 
     @Override
     public void initUserData() {
-        model.initUserData(new ChangeUserInfoModel.DomainCallBackListner<User>() {
+        model.initUserData(new CommonModel.DomainCallBackListner<User>() {
             @Override
             public void doPostExecute(User user) {
                 view.setUserInfo(user);
@@ -42,12 +42,17 @@ public class ChangeUserInfoPresenter implements ChangeUserInfoIn.Presenter{
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void updateBasicInfo(User user) {
-        model.updateBasicInfo(user, new ChangeUserInfoModel.DomainCallBackListner<Integer>() {
+        model.updateBasicInfo(user, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
                 view.showResultPopup(integer);
@@ -55,6 +60,11 @@ public class ChangeUserInfoPresenter implements ChangeUserInfoIn.Presenter{
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -70,6 +80,11 @@ public class ChangeUserInfoPresenter implements ChangeUserInfoIn.Presenter{
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

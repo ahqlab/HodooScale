@@ -44,6 +44,11 @@ public class HomeActivityModel extends CommonModel{
             protected void doPreExecute() {
                 domainListCallBackListner.doPreExecute();
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -75,6 +80,11 @@ public class HomeActivityModel extends CommonModel{
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

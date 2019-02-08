@@ -56,6 +56,11 @@ public class InvitationPresenter implements Invitation.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 

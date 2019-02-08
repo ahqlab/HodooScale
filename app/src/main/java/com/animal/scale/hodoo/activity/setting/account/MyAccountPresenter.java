@@ -54,6 +54,11 @@ public class MyAccountPresenter implements MyAccount.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -67,6 +72,11 @@ public class MyAccountPresenter implements MyAccount.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -94,6 +104,11 @@ public class MyAccountPresenter implements MyAccount.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

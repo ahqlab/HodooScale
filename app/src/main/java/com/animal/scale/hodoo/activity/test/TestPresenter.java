@@ -29,6 +29,11 @@ public class TestPresenter implements Test.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 }

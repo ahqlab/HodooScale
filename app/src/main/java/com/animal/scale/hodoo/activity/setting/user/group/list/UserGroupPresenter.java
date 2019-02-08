@@ -37,6 +37,11 @@ public class UserGroupPresenter implements UserGroupList.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -61,6 +66,11 @@ public class UserGroupPresenter implements UserGroupList.Presenter {
                                 public void doPreExecute() {
 
                                 }
+
+                                @Override
+                                public void doCancelled() {
+
+                                }
                             });
                         } else {
                             getInvitationList();
@@ -75,6 +85,11 @@ public class UserGroupPresenter implements UserGroupList.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

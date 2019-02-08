@@ -265,4 +265,6 @@
     <string name="pet_account__delete_btn">펫 삭제</string>
 
     <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
+    <!-- 2019.02.07 추가 -->
+    <string name="auto_login">자동 로그인</string>
 </resources>

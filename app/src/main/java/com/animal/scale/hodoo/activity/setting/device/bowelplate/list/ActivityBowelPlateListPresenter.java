@@ -36,6 +36,11 @@ public class ActivityBowelPlateListPresenter implements ActivityBowelPlateListIn
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -51,6 +56,11 @@ public class ActivityBowelPlateListPresenter implements ActivityBowelPlateListIn
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -64,6 +74,11 @@ public class ActivityBowelPlateListPresenter implements ActivityBowelPlateListIn
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

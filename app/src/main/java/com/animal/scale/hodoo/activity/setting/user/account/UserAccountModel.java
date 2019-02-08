@@ -27,18 +27,23 @@ public class UserAccountModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    public void getUserData(final UserAccountModel.asyncTaskListner asyncTaskListner) {
+    public void getUserData(final DomainListCallBackListner<User> domainCallBackListner) {
         Call<List<User>> call = NetRetrofit.getInstance().getUserService().getGroupMemner(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<User>() {
             @Override
             protected void doPostExecute(List<User> data) {
                 if (data.size() > 0) {
-                    asyncTaskListner.doPostExecute(data);
+                    domainCallBackListner.doPostExecute(data);
                 }
             }
             @Override
             protected void doPreExecute() {
-                asyncTaskListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
 
@@ -66,6 +71,11 @@ public class UserAccountModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

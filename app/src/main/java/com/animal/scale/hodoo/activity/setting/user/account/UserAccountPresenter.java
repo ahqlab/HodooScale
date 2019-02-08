@@ -26,7 +26,7 @@ public class UserAccountPresenter implements UserAccountIn.Presenter {
 
     @Override
     public void getData() {
-        model.getUserData(new UserAccountModel.asyncTaskListner() {
+        model.getUserData(new CommonModel.DomainListCallBackListner<User>() {
             @Override
             public void doPostExecute(List<User> data) {
 
@@ -55,6 +55,11 @@ public class UserAccountPresenter implements UserAccountIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -71,6 +76,11 @@ public class UserAccountPresenter implements UserAccountIn.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

@@ -40,6 +40,11 @@ public class DeviceRegistModel extends CommonModel {
             protected void doPreExecute() {
                 tempRegistListener.doPreExecute();
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 

@@ -26,6 +26,11 @@ public class FindHodoosModel extends CommonModel {
             protected void doPreExecute() {
                 domainCallBackListner.doPreExecute();
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 }

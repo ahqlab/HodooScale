@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.meal.search;
 import android.content.Context;
 
 import com.animal.scale.hodoo.activity.meal.list.FeedListModel;
+import com.animal.scale.hodoo.common.CommonModel;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MeaAdapterlSearchPresenter implements MealSearchIn.AdapterPresenter
 
     @Override
     public void getSearchFeed(String s) {
-        model.getSearchFeed(s, new MealSearchModel.DomainListCallBackListner<AutoCompleateFeed>() {
+        model.getSearchFeed(s, new CommonModel.DomainListCallBackListner<AutoCompleateFeed>() {
             @Override
             public void doPostExecute(List<AutoCompleateFeed> d) {
                 view.setFeedList(d);
@@ -32,6 +33,11 @@ public class MeaAdapterlSearchPresenter implements MealSearchIn.AdapterPresenter
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

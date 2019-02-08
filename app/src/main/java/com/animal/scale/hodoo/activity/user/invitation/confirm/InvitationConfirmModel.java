@@ -44,6 +44,11 @@ public class InvitationConfirmModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
     public void invitationApproval ( int toUserIdx, int fromUserIdx, final InvitationConfirmModel.DomainCallBackListner<Integer> callback ) {
@@ -58,6 +63,11 @@ public class InvitationConfirmModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
     public void invitationRefusal ( int to, int from, final InvitationConfirmModel.DomainCallBackListner<Integer> callback ) {
@@ -70,6 +80,11 @@ public class InvitationConfirmModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();
@@ -116,6 +131,11 @@ public class InvitationConfirmModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

@@ -45,7 +45,7 @@ public class LoginPresenter implements Login.Presenter {
     public void sendServer(User user) {
         String token = FirebaseInstanceId.getInstance().getToken();
         user.setPushToken(token);
-        loginModel.sendServer(user, new LoginModel.DomainCallBackListner<CommonResponce<User>>() {
+        loginModel.sendServer(user, new CommonModel.DomainCallBackListner<CommonResponce<User>>() {
             @Override
             public void doPostExecute(CommonResponce<User> resultMessageGroup) {
                 if ( resultMessageGroup != null ) {
@@ -88,6 +88,11 @@ public class LoginPresenter implements Login.Presenter {
             public void doPreExecute() {
                 loginView.setProgress(true);
             }
+
+            @Override
+            public void doCancelled() {
+                loginView.setProgress(false);
+            }
         });
     }
 
@@ -103,12 +108,12 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void checkRegistrationStatus() {
-        loginModel.confirmDeviceRegistration(new LoginModel.DeviceRegistrationListener() {
+        loginModel.confirmDeviceRegistration(new CommonModel.DomainListCallBackListner<Device>() {
             @Override
             public void doPostExecute(List<Device> devices) {
                 if(!devices.isEmpty()){
                     //디바이스 등록됨.
-                    loginModel.confirmPetRegistration(new LoginModel.PetRegistrationListener() {
+                    loginModel.confirmPetRegistration(new CommonModel.DomainListCallBackListner<Pet>() {
                         @Override
                         public void doPostExecute(List<Pet> pets) {
                             if(!pets.isEmpty()){
@@ -137,6 +142,11 @@ public class LoginPresenter implements Login.Presenter {
                         public void doPreExecute() {
 
                         }
+
+                        @Override
+                        public void doCancelled() {
+
+                        }
                     });
                 }else{
                     //디바이스 없음
@@ -147,6 +157,11 @@ public class LoginPresenter implements Login.Presenter {
             @Override
             public void doPreExecute() {
                 loginView.setProgress(true);
+            }
+
+            @Override
+            public void doCancelled() {
+
             }
         });
     }

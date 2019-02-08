@@ -24,18 +24,22 @@ public class WeightCheckModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     };
 
-    public void getWeightInformation(int petIdx, final ResultListner resultListner) {
+    public void getWeightInformation(int petIdx, final DomainCallBackListner<PetWeightInfo> domainCallBackListner) {
         Call<PetWeightInfo> call = NetRetrofit.getInstance().getPetWeightInfoService().getPetWeightInformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetWeightInfo>() {
             @Override
             protected void doPostExecute(PetWeightInfo petWeightInfo) {
-                Log.e("HJLEE", "model  doPostExecute ");
-                resultListner.doPostExecute(petWeightInfo);
+                domainCallBackListner.doPostExecute(petWeightInfo);
             }
 
             @Override
             protected void doPreExecute() {
-                resultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }
@@ -53,6 +57,11 @@ public class WeightCheckModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -67,6 +76,11 @@ public class WeightCheckModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

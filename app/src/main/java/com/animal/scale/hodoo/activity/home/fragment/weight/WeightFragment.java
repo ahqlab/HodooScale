@@ -113,7 +113,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         statisicsPresenter.initLoadData(getContext());
         statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
         ////Kcal 로리 표시
+        Log.e("HJLEE", "WEIGHT_DATA : " + TextManager.WEIGHT_DATA);
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
+        Log.e("HJLEE", "asdasda");
         presenter.initWeekCalendar();
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
@@ -159,18 +161,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     //여기 날짜도 들어가야함..
     @Override
     public void setLastCollectionData(RealTimeWeight d) {
-        if (d != null) {
-            DecimalFormat fmt = new DecimalFormat("0.##");
-            binding.weightView.setNumber(d.getValue());
-        } else {
-            binding.weightView.setNumber(0f);
-        }
-        if (refrashState)
-            rotationStop(rotationView);
-    }
-
-    @Override
-    public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
+        Log.e("HJLEE", "RealTimeWeight  1 : " + d.toString());
         if (d != null) {
             DecimalFormat fmt = new DecimalFormat("0.##");
             binding.weightView.setNumber(d.getValue());
@@ -179,6 +170,25 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
+        Log.e("HJLEE", "TODAY_AVERAGE_WEIGHT 1 : " + mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT));
+
+        if (refrashState)
+            rotationStop(rotationView);
+    }
+
+    @Override
+    public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
+        Log.e("HJLEE", "RealTimeWeight : " + d.toString());
+        if (d != null) {
+            DecimalFormat fmt = new DecimalFormat("0.##");
+            binding.weightView.setNumber(d.getValue());
+            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+        } else {
+            binding.weightView.setNumber(0f);
+            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
+        }
+        Log.e("HJLEE", "TODAY_AVERAGE_WEIGHT : " + mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT));
+
         if (refrashState)
             rotationStop(rotationView);
     }

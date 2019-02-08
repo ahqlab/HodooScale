@@ -61,6 +61,11 @@ public class LoginModel extends CommonModel {
             protected void doPreExecute() {
                 domainCallBackListner.doPreExecute();
             }
+
+            @Override
+            protected void doCancelled() {
+                domainCallBackListner.doCancelled();
+            }
         }.execute(call), limitedTime, interval, true).start();
 
 
@@ -80,30 +85,40 @@ public class LoginModel extends CommonModel {
     }
 
 
-    public void confirmDeviceRegistration(final DeviceRegistrationListener deviceRegistrationListener) {
+    public void confirmDeviceRegistration(final DomainListCallBackListner<Device> domainCallBackListner) {
         Call<List<Device>> call = NetRetrofit.getInstance().getDeviceService().getMyDeviceList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Device>() {
             @Override
             protected void doPostExecute(List<Device> devices) {
-                deviceRegistrationListener.doPostExecute(devices);
+                domainCallBackListner.doPostExecute(devices);
             }
             @Override
             protected void doPreExecute() {
-                deviceRegistrationListener.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void confirmPetRegistration(final PetRegistrationListener petRegistrationListener) {
+    public void confirmPetRegistration(final DomainListCallBackListner<Pet> domainCallBackListner) {
         Call<List<Pet>> call = NetRetrofit.getInstance().getPetService().getMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Pet>() {
             @Override
             protected void doPostExecute(List<Pet> pets) {
-                petRegistrationListener.doPostExecute(pets);
+                domainCallBackListner.doPostExecute(pets);
             }
             @Override
             protected void doPreExecute() {
-                petRegistrationListener.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }
@@ -117,6 +132,11 @@ public class LoginModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

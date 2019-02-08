@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.pet.regist.physique;
 import android.content.Context;
 import android.widget.EditText;
 
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 
 public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRegistIn.Presenter{
@@ -23,7 +24,7 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
 
     @Override
     public void getPhysiqueInformation(int petIdx) {
-        model.getPhysiqueInformation(petIdx, new PhysiqueInformationRegistModel.getPhysiqueInformationResultListner() {
+        model.getPhysiqueInformation(petIdx, new CommonModel.DomainCallBackListner<PetPhysicalInfo>() {
             @Override
             public void doPostExecute(PetPhysicalInfo petPhysicalInfo) {
                 view.setDiseaseInfo(petPhysicalInfo);
@@ -31,6 +32,11 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -48,7 +54,7 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
 
     @Override
     public void deletePhysiqueInformation(int petIdx, int id) {
-        model.deletePhysiqueInformation(petIdx, id, new PhysiqueInformationRegistModel.deleteInfoResultListner() {
+        model.deletePhysiqueInformation(petIdx, id, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
                 view.registPhysiqueInformation();
@@ -58,12 +64,17 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain) {
-        model.registPhysiqueInformation(petIdx, domain, new PhysiqueInformationRegistModel.registResultListner() {
+        model.registPhysiqueInformation(petIdx, domain, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
                 view.registResult(result);
@@ -71,6 +82,11 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

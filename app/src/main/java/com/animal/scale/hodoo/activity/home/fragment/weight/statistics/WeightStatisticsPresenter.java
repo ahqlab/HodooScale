@@ -63,6 +63,11 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
             @Override
             public void doPreExecute() {
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -83,6 +88,11 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
             }
             @Override
             public void doPreExecute() {
+            }
+
+            @Override
+            public void doCancelled() {
+
             }
         });
     }
@@ -105,6 +115,11 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
             @Override
             public void doPreExecute() {
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -125,6 +140,11 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
             }
             @Override
             public void doPreExecute() {
+            }
+
+            @Override
+            public void doCancelled() {
+
             }
         });
     }

@@ -67,6 +67,11 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
                                 public void doPreExecute() {
 
                                 }
+
+                                @Override
+                                public void doCancelled() {
+
+                                }
                             });
                         } else {
 
@@ -81,6 +86,11 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -103,6 +113,11 @@ public class InvitationConfirmPresenter implements InvitationConfirm.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

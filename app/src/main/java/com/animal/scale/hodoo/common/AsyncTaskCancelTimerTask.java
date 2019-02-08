@@ -39,7 +39,7 @@ public class AsyncTaskCancelTimerTask extends CountDownTimer {
 
     @Override
     public void onFinish() {
-       // Log.e(TAG, "onTick..");
+        // Log.e(TAG, "onTick..");
         if (asyncTask == null || asyncTask.isCancelled()){
             return;
         }

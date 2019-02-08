@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.common.CommonModel;
@@ -45,7 +46,7 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     @Override
     public void getBcs(int basicIdx) {
-        model.getBcs(basicIdx, new WeightFragmentModel.DomainCallBackListner<PetWeightInfo>() {
+        model.getBcs(basicIdx, new CommonModel.DomainCallBackListner<PetWeightInfo>() {
             @Override
             public void doPostExecute(PetWeightInfo petWeightInfo) {
                 if ( petWeightInfo != null )
@@ -54,6 +55,11 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -66,7 +72,7 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     @Override
     public void getDefaultData(String date, int type) {
-        model.getDayData(date, type, new WeightFragmentModel.DomainListCallBackListner<Statistics>() {
+        model.getDayData(date, type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if(d.size() > 0){
@@ -82,6 +88,11 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
             }
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -101,7 +112,7 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     @Override
     public void getLastCollectionData(final String date, int type) {
-        model.getLastCollectionData(date, type , new WeightFragmentModel.DomainCallBackListner<RealTimeWeight>() {
+        model.getLastCollectionData(date, type , new CommonModel.DomainCallBackListner<RealTimeWeight>() {
             @Override
             public void doPostExecute(RealTimeWeight d) {
                 if(date.matches(DateUtil.getCurrentDatetime())){
@@ -112,6 +123,11 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
             }
             @Override
             public void doPreExecute() {
+            }
+
+            @Override
+            public void doCancelled() {
+
             }
         });
     }
@@ -136,6 +152,11 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

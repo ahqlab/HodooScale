@@ -23,49 +23,64 @@ public class PhysiqueInformationRegistModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    public void getPhysiqueInformation(int petIdx, final getPhysiqueInformationResultListner getPhysiqueInformationResultListner) {
+    public void getPhysiqueInformation(int petIdx, final DomainCallBackListner<PetPhysicalInfo> domainCallBackListner) {
         Call<PetPhysicalInfo> call = NetRetrofit.getInstance().getPetPhysicalInfoService().getPhysicalIformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetPhysicalInfo>(){
             @Override
             protected void doPostExecute(PetPhysicalInfo petPhysicalInfo) {
-                getPhysiqueInformationResultListner.doPostExecute(petPhysicalInfo);
+                domainCallBackListner.doPostExecute(petPhysicalInfo);
             }
 
             @Override
             protected void doPreExecute() {
-                getPhysiqueInformationResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void deletePhysiqueInformation(int petIdx, int id, final deleteInfoResultListner deleteInfoResultListner) {
+    public void deletePhysiqueInformation(int petIdx, int id, final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetPhysicalInfoService().delete(petIdx, id);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
 
             @Override
             protected void doPostExecute(Integer result) {
-                deleteInfoResultListner.doPostExecute(result);
+                domainCallBackListner.doPostExecute(result);
             }
 
             @Override
             protected void doPreExecute() {
-                deleteInfoResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain, final registResultListner registResultListner) {
+    public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain, final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetPhysicalInfoService().regist(petIdx, domain);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
 
             @Override
             protected void doPostExecute(Integer result) {
-                registResultListner.doPostExecute(result);
+                domainCallBackListner.doPostExecute(result);
             }
 
             @Override
             protected void doPreExecute() {
-                registResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }

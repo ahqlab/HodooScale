@@ -40,7 +40,7 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
     @Override
     public void loadCustomDropdownView() {
-        model.setSpinner(new HomeActivityModel.DomainListCallBackListner<PetAllInfos>() {
+        model.setSpinner(new CommonModel.DomainListCallBackListner<PetAllInfos>() {
             @Override
             public void doPostExecute(List<PetAllInfos> petAllInfos) {
                 view.setCustomDropdownView(petAllInfos);
@@ -48,6 +48,11 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -204,6 +209,11 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

@@ -29,18 +29,23 @@ public class PetAccountModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    public void getPetData(final asyncTaskListner asyncTaskListner) {
+    public void getPetData(final CommonModel.DomainListCallBackListner<PetAllInfos> domainListCallBackListner) {
         Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().aboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetAllInfos>() {
             @Override
             protected void doPostExecute(List<PetAllInfos> data) {
                 if(data.size() > 0){
-                    asyncTaskListner.doPostExecute(data);
+                    domainListCallBackListner.doPostExecute(data);
                 }
             }
             @Override
             protected void doPreExecute() {
-                asyncTaskListner.doPreExecute();
+                domainListCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }

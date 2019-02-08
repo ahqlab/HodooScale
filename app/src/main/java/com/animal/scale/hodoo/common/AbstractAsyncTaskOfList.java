@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.common;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.github.mikephil.charting.data.Entry;
 
@@ -17,10 +18,15 @@ public abstract class AbstractAsyncTaskOfList<D> extends AsyncTask<Call, Void, L
 
     protected abstract void doPreExecute();
 
+    protected abstract void doCancelled();
+
     @Override
     protected void onCancelled() {
+        Log.e("HJLEE", "onCancelled");
+        doCancelled();
         super.onCancelled();
     }
+
 
     @Override
     protected List<D> doInBackground(Call... params) {
