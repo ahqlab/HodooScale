@@ -182,6 +182,11 @@ public class LoginPresenter implements Login.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+                loginView.setProgress(false);
+            }
         });
     }
 

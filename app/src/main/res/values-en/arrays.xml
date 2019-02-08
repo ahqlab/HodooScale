@@ -2,9 +2,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string-array name="bcs_arr">
-        <item>부족</item>
-        <item>초과</item>
-        <item>적정</item>
+        <item>VERY THIN</item>
+        <item>UNDER WEIGHT</item>
+        <item>IDEAL</item>
+        <item>OVER WEIGHT</item>
+        <item>OBESE</item>
     </string-array>
 
 </resources>

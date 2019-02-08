@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityInvitationFinishBinding;
@@ -25,7 +24,6 @@ public class InvitationFinishActivity extends BaseActivity<InvitationFinishActiv
         intent = getIntent();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invitation_finish);
         binding.setActivity(this);
-
         presenter = new InvitationFinishPresenter(this, this);
     }
 

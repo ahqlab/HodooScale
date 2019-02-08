@@ -34,8 +34,6 @@ public class HodooConstant {
     public static final String INVITATION_ACCEPT_CHANNEL = "invitation_accept_channel";
     /* oreo version notification channel (e) */
     /* fcm 관련 (e) */
-
-    public static final String AUTO_LOGIN_KEY = "";
     public static final int AUTO_LOGIN_SUCCESS = 1;
 
 

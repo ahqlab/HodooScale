@@ -13,5 +13,6 @@ public interface Invitation {
         void loadData (Context context);
         void sendInvitation( String to );
         void setInvitationData ( String mail );
+        void removeAutoLogin();
     }
 }

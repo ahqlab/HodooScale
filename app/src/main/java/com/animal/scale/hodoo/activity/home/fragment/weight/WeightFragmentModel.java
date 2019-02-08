@@ -201,7 +201,6 @@ public class WeightFragmentModel extends CommonModel {
 
             @Override
             protected void doCancelled() {
-
             }
         }.execute(call), limitedTime, interval, true).start();
     }

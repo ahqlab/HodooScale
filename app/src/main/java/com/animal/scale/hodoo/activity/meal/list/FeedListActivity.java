@@ -143,6 +143,7 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         binding.seekBar.invalidate();
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
 
