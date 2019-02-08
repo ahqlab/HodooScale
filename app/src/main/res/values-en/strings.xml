@@ -87,7 +87,7 @@
     <string name="vailed_email">Email is not correct</string>
     <!-- COMMON MESSAGE -->
     //TermsOfServiceActivity
-    <string name="signup_title">Sign In</string>
+    <string name="signup_title">Sign Up</string>
     <string name="agree_terms">Agree</string>
     <string name="agree_terms_message">I agree to Terms and Policy</string>
     <string name="term_of_service">Terms of Service</string>
@@ -142,7 +142,7 @@
     <!-- SendCertificationNumberActivity-->
     <string name="send_btn_text">인증번호 전송</string>
     <!-- ConfirmCertificationNumberActivity-->
-    <string name="cofirm_btn_text">확인</string>
+    <string name="cofirm_btn_text">Confirm</string>
     <!-- WeightStatisticsActivity -->
     <string name="istyle_today">하루</string>
     <string name="istyle_one_week">한주</string>
@@ -163,7 +163,7 @@
     <string name="istyle_one_hundred_g_supply">100g 제공 칼로리</string>
     <string name="istyle_one_hundred_g_nutrient_content">100g당 영양소 함유량</string>
     <!-- Pet Regist Dialog -->
-    <string name="istyle_add_pet">펫추가</string>
+    <string name="istyle_add_pet">Add Pet</string>
     <!-- CreateNewPasswordActivity -->
     <string name="compleate_btn_text">완료</string>
     <string name="istyle_new_password_setting">새로운 비밀번호 설정</string>
@@ -175,7 +175,7 @@
     <string name="message_device_regist1">배변판관 연결되어 있지 않습니다.</string>
     <string name="message_device_regist2">배변판을 등록해 주세요.</string>
     <!-- ChangeUserInfoActivity -->
-    <string name="change_user_info_email">이메일</string>
+    <string name="change_user_info_email">Email</string>
     <!-- MealSearchActivity -->
     <string name="tip">Tip</string>
     <string name="save">save</string>
@@ -236,12 +236,12 @@
     <string name="pet_name_empty_msg" >Enter pet\'s name</string>
     <string name="pet_birthday_empty_msg">Enter pet\'s birthday</string>
     <!-- ActivityFragment (e) -->
-    <string name="forgot_password_sub_scription">이메일로 임시비밀번호를 발송해드립니다.</string>
+    <string name="forgot_password_sub_scription">We will send you a temporary password by email.</string>
     <string name="sign_up_finish_title">Sign Up Completed</string>
     <string name="sign_up_finish_sub_scription">Please check and confirm email then we are good to go</string>
     <string name="send_mail_failed">Failed to send email</string>
-    <string name="feed_order">급식하기</string>
-    <string name="pet_feeder">급식기</string>
+    <string name="feed_order">To Feed</string>
+    <string name="pet_feeder">Feeder</string>
     <string name="weight_data_available">No data available</string>
     <string name="wether_tip_title">Is excersice neccessary during going on a diet?</string>
     <string name="wether_tip_content">For highly obese patients, it is not recommended to force exercise immediately. If you want to succeed in dieting, not only food but exercise is important, but it doesn\'t apply 100% to all animals. In humans, if you burn calories through aerobic exercise, reduce fat, and build muscles steadily, the basic metabolic rate increases, so you can succeed in dieting, but it is difficult to force them to exercise. Especially, I can\'t do muscle exercise. If pets become highly obese, excessive exercise can increase the joint and cardiovascular burden and eventually lead to poor health before successful weight loss. The safest way to do this is to lose a little weight with food management and then not make them do it until you get back on track. Studies show that pets can become more active and active after losing weight. It\'s much easier to start exercising since then. For pets, it is important to remember that managing food rather than exercising is the best principle for successful diet.</string>
@@ -264,6 +264,21 @@
     <string name="pet_account__view_profile_btn">Show profile image</string>
     <string name="pet_account__edit_btn">Edit pet information</string>
     <string name="pet_account__delete_btn">Delete pet</string>
+
+    <!-- 2019-01-30 new code (s) -->
+
+    <string name="common__invitation_title">Group Participation Request</string>
+
+    <string name="login__auto_login_btn">AutoLogin</string>
+
+    <string name="user_acoount__group_withdraw_title">Withdrawal from Group</string>
+    <string name="user_account__group_withdraw_suffix">Are you sure you want to leave the group?</string>
+    <string name="user_account__group_withdraw_title_fin">Withdrawal Success</string>
+    <string name="user_account__group_withdraw_fin_suffix">You have removed from the group.</string>
+
+    <string name="sign_up__password_hint">Password(8word more)</string>
+    <string name="sign_up__nick_name_hint">Nickname(9word more)</string>
+    <string name="sign_up__mail_resend">Mail resend</string>
 
     <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
     <!-- 2019.02.07 추가 -->
