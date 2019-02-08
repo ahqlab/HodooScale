@@ -25,6 +25,11 @@ public class MealUpdateModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -40,6 +45,11 @@ public class MealUpdateModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -52,6 +62,11 @@ public class MealUpdateModel extends CommonModel {
             }
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();
@@ -69,6 +84,11 @@ public class MealUpdateModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -84,6 +104,11 @@ public class MealUpdateModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -97,6 +122,11 @@ public class MealUpdateModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

@@ -19,8 +19,12 @@ public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTas
 
     protected abstract void doPreExecute();
 
+    protected abstract void doCancelled();
+
     @Override
     protected void onCancelled() {
+        Log.e("HJLEE", "onCancelled");
+        doCancelled();
         super.onCancelled();
     }
 

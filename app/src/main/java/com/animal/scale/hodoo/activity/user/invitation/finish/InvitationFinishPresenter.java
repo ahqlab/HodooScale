@@ -35,6 +35,11 @@ public class InvitationFinishPresenter implements InvitationFinish.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -48,6 +53,11 @@ public class InvitationFinishPresenter implements InvitationFinish.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

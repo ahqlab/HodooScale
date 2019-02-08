@@ -263,6 +263,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         Log.e("HJLEE", "petAllInfos : " + petAllInfos.toString());
+        Log.e("HJLEE", "TODAY_AVERAGE_WEIGHT : " + mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT));
+        Log.e("HJLEE", "factor : " + petAllInfos.getFactor());
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         binding.calorieBar.invalidate();
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());

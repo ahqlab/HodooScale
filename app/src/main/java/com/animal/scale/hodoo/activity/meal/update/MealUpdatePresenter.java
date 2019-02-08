@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragmentModel;
 import com.animal.scale.hodoo.activity.meal.regist.MealRegistrationModel;
 import com.animal.scale.hodoo.activity.meal.search.MealSearchIn;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.PetAllInfos;
@@ -27,7 +28,7 @@ class MealUpdatePresenter implements MealUpdateIn.Presenter {
 
     @Override
     public void getFeedInfo(int feedId) {
-        model.getFeedInfo(feedId, new MealRegistrationModel.DomainCallBackListner<Feed>() {
+        model.getFeedInfo(feedId, new CommonModel.DomainCallBackListner<Feed>() {
             @Override
             public void doPostExecute(Feed feed) {
                 view.setFeedInfo(feed);
@@ -37,12 +38,17 @@ class MealUpdatePresenter implements MealUpdateIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void saveMeal(MealHistory mealHistory) {
-        model.saveMeal(mealHistory, new MealRegistrationModel.DomainCallBackListner<Integer>() {
+        model.saveMeal(mealHistory, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
                 view.setInsertResult(integer);
@@ -52,12 +58,17 @@ class MealUpdatePresenter implements MealUpdateIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void updateMeal(MealHistory mealHistory) {
-        model.updateMeal(mealHistory, new MealRegistrationModel.DomainCallBackListner<Integer>() {
+        model.updateMeal(mealHistory, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
                 view.setUpdateResult(integer);
@@ -67,12 +78,17 @@ class MealUpdatePresenter implements MealUpdateIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void getPetAllInfo() {
-        model.getPetAllInfo(new MealFragmentModel.DomainCallBackListner<PetAllInfos>() {
+        model.getPetAllInfo(new CommonModel.DomainCallBackListner<PetAllInfos>() {
             @Override
             public void doPostExecute(PetAllInfos petAllInfos) {
                 view.setPetAllInfo(petAllInfos);
@@ -82,12 +98,17 @@ class MealUpdatePresenter implements MealUpdateIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void getTodaySumCalorie(String date) {
-        model.getTodaySumCalorie(date, new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
+        model.getTodaySumCalorie(date, new CommonModel.DomainCallBackListner<MealHistory>() {
             @Override
             public void doPostExecute(MealHistory mealHistory) {
                 view.setTodaySumCalorie(mealHistory);
@@ -97,12 +118,17 @@ class MealUpdatePresenter implements MealUpdateIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void getThisHistory(int historyIdx) {
-        model.getThisHistory(historyIdx, new MealUpdateModel.DomainCallBackListner<MealHistory>() {
+        model.getThisHistory(historyIdx, new CommonModel.DomainCallBackListner<MealHistory>() {
             @Override
             public void doPostExecute(MealHistory mealHistory) {
                 view.setThisHistory(mealHistory);
@@ -111,6 +137,11 @@ class MealUpdatePresenter implements MealUpdateIn.Presenter {
             @Override
             public void doPreExecute() {
 
+            }
+
+            @Override
+            public void doCancelled() {
+                
             }
         });
     }

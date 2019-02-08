@@ -46,6 +46,11 @@ public class MealSearchModel extends CommonModel {
             protected void doPreExecute() {
                 domainListCallBackListner.doPreExecute();
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -60,6 +65,11 @@ public class MealSearchModel extends CommonModel {
             @Override
             protected void doPreExecute() {
                 domainListCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }

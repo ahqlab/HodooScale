@@ -52,6 +52,11 @@ public class MyAccountModel extends CommonModel{
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
 
     }
@@ -64,6 +69,11 @@ public class MyAccountModel extends CommonModel{
             }
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();
@@ -80,6 +90,11 @@ public class MyAccountModel extends CommonModel{
 
                 @Override
                 protected void doPreExecute() {
+
+                }
+
+                @Override
+                protected void doCancelled() {
 
                 }
             }.execute(call), limitedTime, interval, true).start();

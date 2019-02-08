@@ -38,7 +38,7 @@ class SignUpPresenter implements SignUpIn.Presenter {
 
     @Override
     public void registUser(final User user) {
-        model.registUser(user, new SignUpModel.DomainCallBackListner<ResultMessageGroup>() {
+        model.registUser(user, new CommonModel.DomainCallBackListner<ResultMessageGroup>() {
             @Override
             public void doPostExecute(ResultMessageGroup resultMessageGroup) {
                 if(resultMessageGroup.getResultMessage().equals(ResultMessage.DUPLICATE_EMAIL)){
@@ -55,12 +55,17 @@ class SignUpPresenter implements SignUpIn.Presenter {
             public void doPreExecute() {
                 view.setProgress(true);
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void userCertifiedMailSend(String toMail) {
-        model.userCertifiedMailSend(toMail, new SignUpModel.DomainCallBackListner<Integer>() {
+        model.userCertifiedMailSend(toMail, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
                 if ( result != null || result > 0 )
@@ -69,6 +74,11 @@ class SignUpPresenter implements SignUpIn.Presenter {
             }
             @Override
             public void doPreExecute() {}
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -83,6 +93,11 @@ class SignUpPresenter implements SignUpIn.Presenter {
             @Override
             public void doPreExecute() {
 
+            }
+
+            @Override
+            public void doCancelled() {
+                
             }
         });
     }

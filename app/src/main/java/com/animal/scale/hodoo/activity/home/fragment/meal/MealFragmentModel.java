@@ -31,6 +31,11 @@ public class MealFragmentModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -46,6 +51,11 @@ public class MealFragmentModel extends CommonModel {
             @Override
             protected void doPreExecute() {
                 domainListCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }

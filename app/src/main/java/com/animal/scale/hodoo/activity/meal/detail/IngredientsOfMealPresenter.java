@@ -37,6 +37,11 @@ public class IngredientsOfMealPresenter implements IngredientsOfMealIn.Presenter
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 }

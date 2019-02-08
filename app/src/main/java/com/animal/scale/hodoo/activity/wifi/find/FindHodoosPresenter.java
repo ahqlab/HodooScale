@@ -31,7 +31,7 @@ public class FindHodoosPresenter implements  FindHodoosIn.Presenter {
 
     @Override
     public void registDevice(String bssid) {
-        model.registDevice(bssid, new FindHodoosModel.DomainCallBackListner<Integer>() {
+        model.registDevice(bssid, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
                 view.registDeviceResult(result);
@@ -40,12 +40,17 @@ public class FindHodoosPresenter implements  FindHodoosIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void confirmPetRegistration() {
-        loginModel.confirmPetRegistration(new LoginModel.PetRegistrationListener() {
+        loginModel.confirmPetRegistration(new CommonModel.DomainListCallBackListner<Pet>() {
             @Override
             public void doPostExecute(List<Pet> pets) {
                 if(!pets.isEmpty()){
@@ -72,6 +77,11 @@ public class FindHodoosPresenter implements  FindHodoosIn.Presenter {
             }
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

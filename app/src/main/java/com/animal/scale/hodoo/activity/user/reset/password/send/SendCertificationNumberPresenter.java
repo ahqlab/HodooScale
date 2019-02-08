@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.user.reset.password.send;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.User;
 
@@ -26,7 +27,7 @@ public class SendCertificationNumberPresenter implements SendCertificationNumber
 
     @Override
     public void sendTempPassword(User user) {
-        model.sendTempPassword(user, new SendCertificationNumberModel.DomainCallBackListner<CommonResponce<User>>(){
+        model.sendTempPassword(user, new CommonModel.DomainCallBackListner<CommonResponce<User>>(){
             @Override
             public void doPostExecute(CommonResponce<User> resultMessageGroup) {
                 view.sendResult(resultMessageGroup);
@@ -36,6 +37,11 @@ public class SendCertificationNumberPresenter implements SendCertificationNumber
             @Override
             public void doPreExecute() {
                 view.setProgress(true);
+            }
+
+            @Override
+            public void doCancelled() {
+
             }
         });
     }

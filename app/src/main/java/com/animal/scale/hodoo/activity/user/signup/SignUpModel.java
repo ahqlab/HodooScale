@@ -27,6 +27,11 @@ class SignUpModel extends CommonModel {
             @Override
             protected void doPreExecute() {
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
 
 
@@ -60,6 +65,11 @@ class SignUpModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

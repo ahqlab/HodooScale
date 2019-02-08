@@ -39,7 +39,7 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
 
     @Override
     public void getRadarChartData(String currentDatetime) {
-        model.getRadarChartData(currentDatetime, new MealFragmentModel.DomainCallBackListner<Feed>() {
+        model.getRadarChartData(currentDatetime, new CommonModel.DomainCallBackListner<Feed>() {
             @Override
             public void doPostExecute(Feed feed) {
                 view.setRadarChartData(feed);
@@ -49,12 +49,17 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void getPetAllInfo() {
-        mealRegistrationModel.getPetAllInfo(new MealFragmentModel.DomainCallBackListner<PetAllInfos>() {
+        mealRegistrationModel.getPetAllInfo(new CommonModel.DomainCallBackListner<PetAllInfos>() {
             @Override
             public void doPostExecute(PetAllInfos petAllInfos) {
                 view.setPetAllInfo(petAllInfos);
@@ -64,12 +69,17 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void getTodaySumCalorie(String date) {
-        mealRegistrationModel.getTodaySumCalorie(date, new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
+        mealRegistrationModel.getTodaySumCalorie(date, new CommonModel.DomainCallBackListner<MealHistory>() {
             @Override
             public void doPostExecute(MealHistory mealHistory) {
                 view.setTodaySumCalorie(mealHistory);
@@ -77,6 +87,11 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -92,6 +107,11 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

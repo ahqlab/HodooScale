@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.setting.account.change.password;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.User;
 
 public class ChangePasswordPresenter implements ChangePassword.Presenter {
@@ -17,7 +18,7 @@ public class ChangePasswordPresenter implements ChangePassword.Presenter {
 
     @Override
     public void changeUserPassword(User user) {
-        model.changeUserPassword(user, new ChangePasswordModel.DomainCallBackListner<Integer>() {
+        model.changeUserPassword(user, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
                 view.userPasswordUpdateResult(integer);
@@ -25,6 +26,11 @@ public class ChangePasswordPresenter implements ChangePassword.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

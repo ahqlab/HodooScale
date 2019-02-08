@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.pet.regist.weight;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 
 public class WeightCheckPresenter implements WeightCheckIn.Presenter{
@@ -27,7 +28,7 @@ public class WeightCheckPresenter implements WeightCheckIn.Presenter{
 
     @Override
     public void getWeightInformation(int petIdx) {
-        model.getWeightInformation(petIdx, new WeightCheckModel.ResultListner() {
+        model.getWeightInformation(petIdx, new CommonModel.DomainCallBackListner<PetWeightInfo>() {
             @Override
             public void doPostExecute(PetWeightInfo petWeightInfo) {
                 view.setDomain(petWeightInfo);
@@ -37,12 +38,17 @@ public class WeightCheckPresenter implements WeightCheckIn.Presenter{
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void deleteWeightInfo(int petIdx, int id) {
-        model.deleteWeightInformation(petIdx, id, new WeightCheckModel.DomainCallBackListner<Integer>() {
+        model.deleteWeightInformation(petIdx, id, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
                 view.registWeightInformation();
@@ -52,12 +58,17 @@ public class WeightCheckPresenter implements WeightCheckIn.Presenter{
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void registWeightInfo(int petIdx, PetWeightInfo domain) {
-        model.registWeightInformation(petIdx, domain, new WeightCheckModel.DomainCallBackListner<Integer>() {
+        model.registWeightInformation(petIdx, domain, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
                 view.registResult(integer);
@@ -65,6 +76,11 @@ public class WeightCheckPresenter implements WeightCheckIn.Presenter{
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

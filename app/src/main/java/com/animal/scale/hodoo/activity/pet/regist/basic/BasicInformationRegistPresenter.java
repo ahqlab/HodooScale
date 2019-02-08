@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 
@@ -61,7 +62,7 @@ public class BasicInformationRegistPresenter implements BasicInformationRegistIn
 
     @Override
     public void registBasicInfo(String requestUrl, PetBasicInfo info, CircleImageView profile) {
-        model.registBasicInfo(requestUrl, info, profile, new BasicInformationRegistModel.BasicInfoRegistListner() {
+        model.registBasicInfo(requestUrl, info, profile, new CommonModel.DomainCallBackListner<Pet>() {
             @Override
             public void doPostExecute(Pet pet) {
                 Log.e("HJLEE", pet.toString());
@@ -72,6 +73,11 @@ public class BasicInformationRegistPresenter implements BasicInformationRegistIn
             @Override
             public void doPreExecute() {
                 view.setProgress(true);
+            }
+
+            @Override
+            public void doCancelled() {
+
             }
         });
     }
@@ -94,7 +100,7 @@ public class BasicInformationRegistPresenter implements BasicInformationRegistIn
 
     @Override
     public void getPetBasicInformation(int petIdx) {
-        model.getPetBasicInformation(petIdx, new BasicInformationRegistModel.PetBasicInformationResultListner() {
+        model.getPetBasicInformation(petIdx, new CommonModel.DomainCallBackListner<PetBasicInfo>() {
             @Override
             public void doPostExecute(PetBasicInfo basicInfo) {
                 view.setBasicInfo(basicInfo);
@@ -103,6 +109,10 @@ public class BasicInformationRegistPresenter implements BasicInformationRegistIn
             @Override
             public void doPreExecute() {
                 //view.showErrorToast();
+            }
+            @Override
+            public void doCancelled() {
+
             }
         });
     }

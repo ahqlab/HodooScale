@@ -25,6 +25,11 @@ public class SendCertificationNumberModel extends CommonModel {
                 commonResponceDomainCallBackListner.doPreExecute();
             }
 
+            @Override
+            protected void doCancelled() {
+
+            }
+
 
         }.execute(call), limitedTime, interval, true).start();
     }

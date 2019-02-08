@@ -34,6 +34,11 @@ public class FeederOrderPresenter implements FeederOrderIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -46,6 +51,11 @@ public class FeederOrderPresenter implements FeederOrderIn.Presenter {
             }
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

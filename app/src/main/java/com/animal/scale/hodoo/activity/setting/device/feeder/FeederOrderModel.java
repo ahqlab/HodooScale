@@ -36,6 +36,11 @@ public class FeederOrderModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -60,6 +65,11 @@ public class FeederOrderModel extends CommonModel {
             }
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

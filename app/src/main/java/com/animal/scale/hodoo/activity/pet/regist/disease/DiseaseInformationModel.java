@@ -28,17 +28,22 @@ public class DiseaseInformationModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     };
 
-    public void getDiseaseformation(int petIdx, final PetDiseaseInformationResultListner petDiseaseInformationResultListner) {
+    public void getDiseaseformation(int petIdx, final DomainCallBackListner<PetChronicDisease> domainCallBackListner) {
         Call<PetChronicDisease> call = NetRetrofit.getInstance().getPetChronicDiseaseService().getDiseaseformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetChronicDisease>(){
             @Override
             protected void doPostExecute(PetChronicDisease petChronicDisease) {
-                petDiseaseInformationResultListner.doPostExecute(petChronicDisease);
+                domainCallBackListner.doPostExecute(petChronicDisease);
             }
 
             @Override
             protected void doPreExecute() {
-                petDiseaseInformationResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }
@@ -54,33 +59,43 @@ public class DiseaseInformationModel extends CommonModel {
         return petChronicDiseases;
     }
 
-    public void deleteDiseaseformation(int petIdx, int diseaseIdx, final deleteInfoResultListner deleteInfoResultListner) {
+    public void deleteDiseaseformation(int petIdx, int diseaseIdx,  final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetChronicDiseaseService().delete(petIdx, diseaseIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
 
             @Override
             protected void doPostExecute(Integer result) {
-                deleteInfoResultListner.doPostExecute(result);
+                domainCallBackListner.doPostExecute(result);
             }
 
             @Override
             protected void doPreExecute() {
-                deleteInfoResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }
-    public void registDiseaseformation(PetChronicDisease domain, int petIdx, final registResultListner registResultListner) {
+    public void registDiseaseformation(PetChronicDisease domain, int petIdx,  final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetChronicDiseaseService().registDiseaseformation(domain, petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
 
             @Override
             protected void doPostExecute(Integer result) {
-                registResultListner.doPostExecute(result);
+                domainCallBackListner.doPostExecute(result);
             }
 
             @Override
             protected void doPreExecute() {
-                registResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }

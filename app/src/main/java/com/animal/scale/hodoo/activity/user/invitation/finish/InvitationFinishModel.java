@@ -38,6 +38,11 @@ public class InvitationFinishModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
     public void cancel (String to, final InvitationFinishModel.DomainCallBackListner<Integer> callback ) {
@@ -55,6 +60,11 @@ public class InvitationFinishModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
 
             }
         }.execute(call), limitedTime, interval, true).start();

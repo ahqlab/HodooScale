@@ -65,6 +65,11 @@ public class WeightFragmentModel extends CommonModel {
             protected void doPreExecute() {
                 domainCallBackListner.doPreExecute();
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -173,6 +178,11 @@ public class WeightFragmentModel extends CommonModel {
             protected void doPreExecute() {
 
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -188,6 +198,11 @@ public class WeightFragmentModel extends CommonModel {
             protected void doPreExecute() {
                 domainListCallBackListner.doPreExecute();
             }
+
+            @Override
+            protected void doCancelled() {
+
+            }
         }.execute(call), limitedTime, interval, true).start();
     }
 
@@ -202,6 +217,11 @@ public class WeightFragmentModel extends CommonModel {
             @Override
             protected void doPreExecute() {
                 domainListCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
             }
         }.execute(call), limitedTime, interval, true).start();
     }

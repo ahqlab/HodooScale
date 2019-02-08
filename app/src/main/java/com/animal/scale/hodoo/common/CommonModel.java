@@ -22,11 +22,13 @@ public class CommonModel {
     public interface DomainCallBackListner<D extends Serializable> {
         void doPostExecute(D d);
         void doPreExecute();
+        void doCancelled();
 
     }
 
     public interface DomainListCallBackListner<D extends Serializable> {
         void doPostExecute(List<D> d);
         void doPreExecute();
+        void doCancelled();
     }
 }
