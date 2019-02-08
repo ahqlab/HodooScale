@@ -5,6 +5,7 @@ import android.content.Context;
 public interface Invitation {
     interface View {
         void showPopup(String title, String content, InvitationActivity.CustomDialogCallback callback);
+        void showPopup(int title, int content, InvitationActivity.CustomDialogCallback callback);
         void setProgress( boolean state );
         void goFinishPage();
     }

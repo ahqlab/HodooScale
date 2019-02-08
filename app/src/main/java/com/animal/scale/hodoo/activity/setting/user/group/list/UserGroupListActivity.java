@@ -44,7 +44,7 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_group_list);
         presenter = new UserGroupPresenter(this, this);
 
-        binding.setActivityInfo(new ActivityInfo("그룹 참여 요청"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.common__invitation_title)));
         super.setToolbarColor();
     }
 

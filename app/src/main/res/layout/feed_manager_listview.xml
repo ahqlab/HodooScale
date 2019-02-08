@@ -42,7 +42,6 @@
                     android:layout_margin="16dp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:text="형"
                     android:textSize="20dp"
                     android:background="@drawable/circle_pink"/>
 
@@ -50,7 +49,6 @@
                     android:id="@+id/user_last_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="형"
                     android:textSize="16sp"
                     android:textColor="@color/white"
                     android:textStyle="bold"

@@ -99,6 +99,16 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         }
         return builder;
     }
+    public AlertDialog.Builder showBasicOneBtnPopup(int title, int message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivityClass());
+        if(title != 0){
+            builder.setTitle(title);
+        }
+        if(message != 0){
+            builder.setMessage(message);
+        }
+        return builder;
+    }
 
     public void showToast(String message) {
 //        Toast.makeText(getActivityClass(), message, Toast.LENGTH_SHORT).show();

@@ -113,23 +113,6 @@ public class CustomBinding {
 
     }
 
-//    @BindingAdapter({"loadUserAccountImage"})
-//    public static void loadUserAccountImage(ImageView imageView, String sex) {weight_bottom_chart_icon_121_121
-//        if (sex.matches(imageView.getContext().getString(R.string.woman))) {
-//            Picasso.with(imageView.getContext())
-//                    .load(R.drawable.user_middle_hodoo_profile_icon_143_143)
-//                    .into(imageView);
-//        } else if (sex.matches(imageView.getContext().getString(R.string.men))) {
-//            Picasso.with(imageView.getContext())
-//                    .load(R.drawable.user_middle_jehoo_profile_icon_143_143)
-//                    .into(imageView);
-//        } else if (sex.matches(imageView.getContext().getString(R.string.istyle_new_group_user))) {
-//            Picasso.with(imageView.getContext())
-//                    .load(R.drawable.pet_account_midle_add_icon_143_143)
-//                    .into(imageView);
-//        }
-//    }
-
 
     @BindingAdapter({"changeLinearBg"})
     public static void LinearLayoutChangeBackgound(LinearLayout leLinearLayout, int position) {

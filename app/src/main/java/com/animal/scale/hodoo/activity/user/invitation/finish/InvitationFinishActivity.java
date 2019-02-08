@@ -35,7 +35,7 @@ public class InvitationFinishActivity extends BaseActivity<InvitationFinishActiv
     }
 
     public void reSend ( View view ) {
-        presenter.resend(intent.getStringExtra(HodooConstant.INVITATION_EMAIL_KEY));
+        presenter.resend(this, intent.getStringExtra(HodooConstant.INVITATION_EMAIL_KEY));
     }
     public void cancel ( View v ) {
         presenter.cancel( intent.getStringExtra(HodooConstant.INVITATION_EMAIL_KEY) );
@@ -59,8 +59,8 @@ public class InvitationFinishActivity extends BaseActivity<InvitationFinishActiv
     public void cancelFinish(int result) {
         if ( result > 0 ) {
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle("요청 취소 완료")
-                    .setMessage("참여 요청을 취소하였습니다.")
+                    .setTitle(R.string.invitation_finish__alert_cancel_title)
+                    .setMessage(R.string.invitation_finish__alert_cancel_content)
                     .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {

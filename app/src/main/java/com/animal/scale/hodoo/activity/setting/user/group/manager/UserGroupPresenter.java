@@ -26,8 +26,4 @@ public class UserGroupPresenter implements UserGropManager.Presenter {
         mView.setBadgeCount( type, notificationModel.getInvitationCount() );
     }
 
-    @Override
-    public void getSttingListMenu() {
-        mView.setListviewAdapter(mModel.getSettingList());
-    }
 }

@@ -23,9 +23,9 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
-import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.fcm.NotificationActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -124,6 +124,13 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 channelId = HodooConstant.INVITATION_GROUP_CHANNEL;
                 presenter.setInvitationUser(idx, fromUserIdx);
                 break;
+            case HodooConstant.FIREBASE_INVITATION_ACCEPT :
+                intent = new Intent(this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                badgeType = HodooConstant.FIREBASE_INVITATION_ACCEPT;
+                channelId = HodooConstant.INVITATION_GROUP_CHANNEL;
+                break;
         }
 
         /* device wake (s) */
@@ -159,7 +166,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
                 .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.transparent_logo))
-                .setSmallIcon(R.drawable.ic_stat_name)
+                .setSmallIcon(R.drawable.noti__status_icon)
                 .setColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed))
                 .setColorized(true)
                 .setContentTitle(title)
@@ -197,7 +204,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
             notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
                     .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.transparent_logo))
-                    .setSmallIcon(R.drawable.ic_stat_name)
+                    .setSmallIcon(R.drawable.noti__status_icon)
                     .setColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed))
                     .setColorized(true)
                     .setContentTitle(title)

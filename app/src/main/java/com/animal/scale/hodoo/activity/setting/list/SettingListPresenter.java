@@ -28,11 +28,6 @@ public class SettingListPresenter implements SettingList.Presenter {
     }
 
     @Override
-    public void getSttingListMenu() {
-        settingListView.setListviewAdapter(notificationModel.getInvitationCount(), settingListModel.getSettingList());
-    }
-
-    @Override
     public void getStringSettingList( Context context ) {
         ArrayList<String> titleList = new ArrayList<>( Arrays.asList( context.getResources().getStringArray(R.array.setting_title) ) );
 

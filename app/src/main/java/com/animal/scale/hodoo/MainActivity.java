@@ -7,9 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ViewUtils;
 import android.util.Log;
 import android.widget.ProgressBar;
 
@@ -22,13 +20,8 @@ import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragmen
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
-import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.WelcomeViewPager;
 import com.animal.scale.hodoo.util.VIewUtil;
-import com.google.firebase.iid.FirebaseInstanceId;
-
-import java.security.Permission;
-import java.util.List;
 
 import static com.animal.scale.hodoo.constant.HodooConstant.ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE;
 import static com.animal.scale.hodoo.constant.HodooConstant.AUTO_LOGIN_SUCCESS;
@@ -192,8 +185,8 @@ MainActivity extends AppCompatActivity implements Main.View {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
                 AlertDialog builder = new AlertDialog.Builder(this)
-                        .setTitle("권한 확인")
-                        .setMessage("해당 권한이 있어야 알림을 받아보실 수 있습니다.\n권한 : SystemAlert")
+                        .setTitle(R.string.main_activity__permission_check_title)
+                        .setMessage(R.string.main_activity__permission_check_suffix)
                         .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

@@ -54,11 +54,6 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
     }
 
     @Override
-    public void getSttingListMenu() {
-        view.setListviewAdapter(model.getSettingList());
-    }
-
-    @Override
     public void setCurrentPetInfos(List<PetAllInfos> data) {
         view.setCurrentPetInfos(data);
     }
@@ -207,6 +202,15 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
             }
         });
+    }
+
+    @Override
+    public void checkLogin() {
+        int idx = model.getUserIdx();
+        if ( idx == 0 )
+            view.moveLoginActivity();
+        else
+            view.setFragment();
     }
 
 

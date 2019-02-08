@@ -264,5 +264,61 @@
     <string name="pet_account__edit_btn">펫 정보 수정</string>
     <string name="pet_account__delete_btn">펫 삭제</string>
 
+
+    <!-- 2019-01-30 new code (s) -->
+
+    <string name="common__invitation_title">그룹 참여 요청</string>
+
+    <string name="main_activity__permission_check_title">권한 확인</string>
+    <string name="main_activity__permission_check_suffix">해당 권한이 있어야 알림을 받아보실 수 있습니다.\n권한 : SystemAlert</string>
+
+    <string name="login__auto_login_btn">자동로그인</string>
+    <string name="login__alert_withdraw_user_content">탈퇴한 회원입니다.</string>
+    <string name="login__alert_email_certified_content">이메일 인증을 진행해주세요.</string>
+
+    <string name="sign_up__password_hint">비밀번호(8자 이상)</string>
+    <string name="sign_up__nick_name_hint">닉네임(9자 이상)</string>
+    <string name="sign_up__mail_resend">메일 재발송</string>
+
+
+    <string name="confirm_certification_number__send_email_suffix">로 임시 비밀번호를 발송하였습니다.</string>
+
+
+    <string name="user_group_manager__tool_bar_title">그룹 관리</string>
+
+    <string name="invitation__tool_bar_title">회원 초대</string>
+    <string name="invitation__content">그룹에 참여하실 회원의 이메일을 입력해주세요.</string>
+    <string name="invitation__send_btn">그룹 참여 요청하기</string>
+
     <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
+
+    <string name="user_acoount__group_withdraw_title">그룹 탈퇴</string>
+    <string name="user_account__group_withdraw_suffix">님을 그룹에서 탈퇴 하시겠습니까?</string>
+    <string name="user_account__group_withdraw_title_fin">탈퇴 완료</string>
+    <string name="user_account__group_withdraw_fin_suffix">님을 그룹에서 탈퇴시켰습니다.</string>
+
+    <string name="invitation_confirm__title">사용자 초대</string>
+    <string name="invitation_confirm__content">사용자 초대</string>
+    <string name="invitation_confirm__suffix">님의 초대입니다.</string>
+    <string name="invitation_confirm__fin_title">초대완료</string>
+    <string name="invitation_confirm__fin_suffix">초대가 완료되었습니다.</string>
+
+    <string name="invitation_finish__alert_cancel_title">요청 취소 완료</string>
+    <string name="invitation_finish__alert_cancel_content">참여 요청을 취소하였습니다.</string>
+
+    <string name="invitation_finish__resend_alert_success_title">그룹 참여 요청 완료</string>
+    <string name="invitation_finish__resend_alert_success_suffix">님에게 초대 메세지를 발송했습니다.</string>
+    <string name="invitation_finish__resend_alert_error_title">그룹 참여 요청 에러</string>
+    <string name="invitation_finish__resend_btn">재발송</string>
+    <string name="invitation_finish__resend_cancel_btn">발송 취소</string>
+
+    <string name="invitation__invitation_error_title">그룹 참여 에러</string>
+    <string name="invitation__error_existence_user">이미 그룹에 참여되었습니다.\n로그인창으로 이동합니다.</string>
+    <string name="invitation__error_not_user">참여하실 그룹이 없습니다.</string>
+    <string name="invitation__error_not_device">요청한 그룹이 디바이스를 가지고 있지 않습니다.</string>
+
+
+
+
+    <!-- 2019-01-30 new code (e) -->
 </resources>

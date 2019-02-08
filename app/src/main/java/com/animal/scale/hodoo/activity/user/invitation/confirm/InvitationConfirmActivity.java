@@ -8,25 +8,17 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.user.invitation.InvitationActivity;
-import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
-import com.animal.scale.hodoo.common.SharedPrefManager;
-import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityInvitationConfirmBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.util.BadgeUtils;
-import com.animal.scale.hodoo.util.VIewUtil;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> implements InvitationConfirm.View {
     private String TAG = InvitationConfirmActivity.class.getSimpleName();
@@ -48,7 +40,7 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invitation_confirm);
         presenter = new InvitationConfirmPresenter(this);
 
-        binding.setActivityInfo(new ActivityInfo("회원 초대"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.invitation__tool_bar_title)));
         binding.setActivity(this);
         presenter.loadData(this);
 
@@ -92,6 +84,11 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
     }
 
     @Override
+    public void showPopup(int title, int content, CustomDialogCallback callback) {
+        showPopup( getString(title), getString(content), callback );
+    }
+
+    @Override
     public void clearBadge() {
         BadgeUtils.clearBadge(this);
         presenter.saveBadgeCount(0);
@@ -110,7 +107,7 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
         if(extras != null){
             try {
                 data = new JSONObject(extras.getString("data"));
-                binding.toUserEmailInfo.setText(data.getString("fromUserEmail") + "님의 초대입니다.");
+                binding.toUserEmailInfo.setText(data.getString("fromUserEmail") + getString(R.string.invitation_confirm__suffix));
                 presenter.updateBadgeCount(data.getInt("toUserIdx"), data.getInt("fromUserIdx"));
 
             } catch (JSONException e) {

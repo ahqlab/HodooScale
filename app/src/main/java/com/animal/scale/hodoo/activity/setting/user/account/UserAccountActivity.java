@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -145,6 +144,22 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
                     }
                 }).show();
     }
+    public void showPopup(int title, int message, final CommonListener.PopupClickListener listener) {
+        super.showBasicOneBtnPopup(title, message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                listener.onPositiveClick(dialog, which);
+                            }
+                        }
+                )
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
 
     @Override
     public void setAdapter(int idx, List<User> data) {
@@ -153,10 +168,10 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
             adapter.setClickListener(new UserAccountGridAdapter.EditBtnClickListener() {
                 @Override
                 public void onClick(final User user) {
-                    showPopup("그룹 탈퇴", user.getNickname() + "님을 그룹에서 탈퇴 하시겠습니까?", new CommonListener.PopupClickListener() {
+                    showPopup(getString(R.string.user_acoount__group_withdraw_title), user.getNickname() + getString(R.string.user_account__group_withdraw_suffix), new CommonListener.PopupClickListener() {
                         @Override
                         public void onPositiveClick(DialogInterface dialog, int which) {
-                            presenter.withdrawGroup(user);
+                            presenter.withdrawGroup(UserAccountActivity.this, user);
                         }
 
                         @Override
