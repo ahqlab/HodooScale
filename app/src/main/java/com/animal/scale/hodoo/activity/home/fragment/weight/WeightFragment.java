@@ -153,7 +153,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         }*/
 
         if (bcs > 0) {
-            binding.bcsSubscript.setText(bcsArr[bcs]);
+            binding.bcsSubscript.setText(bcsArr[bcs - 1]);
             binding.bcsStep.setText(String.valueOf(bcs));
         } else {
             binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
