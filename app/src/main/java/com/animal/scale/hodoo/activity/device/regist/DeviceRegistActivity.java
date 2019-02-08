@@ -10,7 +10,6 @@ import com.animal.scale.hodoo.activity.user.invitation.InvitationActivity;
 import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
-import com.animal.scale.hodoo.activity.wifi.find.FindHodoosActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;

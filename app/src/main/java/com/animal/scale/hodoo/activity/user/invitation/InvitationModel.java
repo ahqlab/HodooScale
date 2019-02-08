@@ -49,4 +49,7 @@ public class InvitationModel extends CommonModel {
         //new AsyncTaskCancelTimerTask(, limitedTime, interval, true).start();
 
     }
+    public void removeAutoLogin() {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
+    }
 }
