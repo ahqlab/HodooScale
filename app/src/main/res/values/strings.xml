@@ -320,5 +320,7 @@
     <string name="invitation__error_not_device">요청한 그룹이 디바이스를 가지고 있지 않습니다.</string>
     <string name="invitation__error_overlab_invitation">이미 해당 그룹에 참여를 요청했습니다.</string>
 
+    <string name="common__recommend_calorie">700kcal\n(권장량)</string>
+
     <!-- 2019-01-30 new code (e) -->
 </resources>
