@@ -5,15 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="activity"
             type="com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity" />
-
         <variable
             name="activityInfo"
             type="com.animal.scale.hodoo.domain.ActivityInfo" />
-
         <variable
             name="domain"
             type="com.animal.scale.hodoo.domain.User" />
@@ -68,7 +65,7 @@
                     app:editTextResourceId="@layout/email_edittext"
                     app:errorMessageSize="11"
                     app:title="@string/change_user_info_email"
-                    app:titleSize="13"
+                    app:titleSize="12"
                     />
 
                 <!-- app:editText="@={domain.email}" -->
@@ -86,7 +83,7 @@
                         app:editTextResourceId="@layout/password_edittext"
                         app:errorMessageSize="11"
                         app:title="@string/current_password"
-                        app:titleSize="13" />
+                        app:titleSize="12" />
                     <Button
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
@@ -117,7 +114,7 @@
                     app:editTextResourceId="@layout/normal_edittext"
                     app:errorMessageSize="11"
                     app:title="@string/istyle_label_nickname"
-                    app:titleSize="13" />
+                    app:titleSize="12" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -133,7 +130,7 @@
                         app:editTextResourceId="@layout/normal_edittext"
                         app:errorMessageSize="11"
                         app:title="@string/istyle_label_country"
-                        app:titleSize="13" />
+                        app:titleSize="12" />
 
                     <LinearLayout
                         android:layout_marginTop="16dp"
@@ -155,6 +152,7 @@
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="12sp"
                                 android:text="@string/woman"
                                 android:checked='@{domain.sex.toUpperCase().equals("FEMALE")}'
                                 android:tag="FEMALE"
@@ -164,6 +162,7 @@
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="12sp"
                                 android:text="@string/men"
                                 android:checked='@{domain.sex.toUpperCase().equals("MALE")}'
                                 android:tag="MALE"/>
@@ -186,7 +185,7 @@
                     android:layout_marginTop="24dp"
                     android:background="@drawable/rounded_pink_btn"
                     android:onClick="@{activity::onConfirmBtn}"
-                    android:text="@string/cofirm_btn_text"
+                    android:text="@string/save"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />

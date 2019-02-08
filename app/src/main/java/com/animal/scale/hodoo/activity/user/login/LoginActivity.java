@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
@@ -40,6 +41,8 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     private boolean pwState = false;
     private boolean autoLoginState = false;
 
+    SharedPrefManager sharedPrefManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,9 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         super.setToolbarColor();
         presenter = new LoginPresenter(this);
         presenter.initUserData(binding.getUser(), getApplicationContext());
+
+        String countryCode = VIewUtil.getMyLocationCode(LoginActivity.this);
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.CURRENT_COUNTRY, countryCode);
 
         if ( getIntent().getIntExtra(SharedPrefVariable.AUTO_LOGIN, 0) > 0 ) {
             presenter.autoLogin();

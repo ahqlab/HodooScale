@@ -23,7 +23,6 @@ public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTas
 
     @Override
     protected void onCancelled() {
-        Log.e("HJLEE", "onCancelled");
         doCancelled();
         super.onCancelled();
     }
@@ -51,9 +50,7 @@ public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTas
 
     @Override
     protected void onPostExecute(D d) {
-        if(d != null){
-            doPostExecute(d);
-        }
+        doPostExecute(d);
         super.onPostExecute(d);
     }
 }

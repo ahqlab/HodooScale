@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -82,6 +83,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         binding = DataBindingUtil.setContentView(this, R.layout.activity_basic_informaiton_regist);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.basin_info_regist_title)));
+
         mContext = this;
         progressDialog = new ProgressDialog(BasicInformationRegistActivity.this);
         super.setToolbarColor();
