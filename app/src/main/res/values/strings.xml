@@ -264,6 +264,32 @@
     <string name="pet_account__edit_btn">펫 정보 수정</string>
     <string name="pet_account__delete_btn">펫 삭제</string>
 
+
+    <!-- 2019-01-30 new code (s) -->
+
+    <string name="common__invitation_title">그룹 참여 요청</string>
+
+    <string name="main_activity__permission_check_title">권한 확인</string>
+    <string name="main_activity__permission_check_suffix">해당 권한이 있어야 알림을 받아보실 수 있습니다.\n권한 : SystemAlert</string>
+
+    <string name="login__auto_login_btn">자동로그인</string>
+    <string name="login__alert_withdraw_user_content">탈퇴한 회원입니다.</string>
+    <string name="login__alert_email_certified_content">이메일 인증을 진행해주세요.</string>
+
+    <string name="sign_up__password_hint">비밀번호(8자 이상)</string>
+    <string name="sign_up__nick_name_hint">닉네임(9자 이상)</string>
+    <string name="sign_up__mail_resend">메일 재발송</string>
+
+
+    <string name="confirm_certification_number__send_email_suffix">로 임시 비밀번호를 발송하였습니다.</string>
+
+
+    <string name="user_group_manager__tool_bar_title">그룹 관리</string>
+
+    <string name="invitation__tool_bar_title">회원 초대</string>
+    <string name="invitation__content">그룹에 참여하실 회원의 이메일을 입력해주세요.</string>
+    <string name="invitation__send_btn">그룹 참여 요청하기</string>
+
     <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
     <!-- 2019.02.07 추가 -->
     <string name="auto_login">자동 로그인</string>
