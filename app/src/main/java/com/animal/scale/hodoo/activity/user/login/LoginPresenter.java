@@ -185,7 +185,7 @@ public class LoginPresenter implements Login.Presenter {
 
             @Override
             public void doCancelled() {
-
+                loginView.setProgress(false);
             }
         });
     }

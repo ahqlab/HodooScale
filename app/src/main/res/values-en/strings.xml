@@ -59,7 +59,7 @@
     <string name="physique_information_regist_title">Pet Info</string>
     <string name="weight_check_title">BCS Check</string>
     <string name="weight_title">Weight</string>
-    <string name="meal_title">Manage Diet</string>
+    <string name="meal_title">Diet</string>
     <string name="hodoo_link_title">Members</string>
     <string name="wifi_list_title">Wi-Fi Setting</string>
     <string name="find_hodoo_title">Scanning</string>
@@ -131,8 +131,8 @@
     <string name="istyle_change_wifi_setting">Wifi 변경 설정</string>
     <string name="istyle_remove_bowelplate">체중계 연결 해지</string>
     <!-- FeedListActivity -->
-    <string name="istyle_calories_taken_today">오늘 섭취한 칼로리</string>
-    <string name="istyle_food_taken_today">오늘 섭취한 음식</string>
+    <string name="istyle_calories_taken_today">TOTAL CALORIES FOR TODAY</string>
+    <string name="istyle_food_taken_today">TOTAL FOOD FOR TODAY</string>
     <!-- MealRegistrationActivity -->
     <!-- MealUpdateActivity -->
     <!-- SearchFailedActivity -->
@@ -152,13 +152,13 @@
     <!-- WeightFragment -->
     <string name="average_weight_for_today">AVERAGE WEIGHT FOR TODAY</string>
     <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
-    <string name="weight_for_today">오늘의 체중</string>
+    <string name="weight_for_today">today\'s weight</string>
     <string name="temp_for_today">today\'s temp</string>
     <string name="bcs_step_str">BCS STEP</string>
     <string name="bcs_description_str">BCS DESCRIPTION</string>
     <string name="last_sync_refresh_str">Last refresh</string>
     <string name="not_data">No Data</string>
-    <string name="today_intake_kcal">일일 섭취 총 칼로리</string>
+    <string name="today_intake_kcal">TOTAL CALORIES FOR TODAY</string>
     <!-- Meal Detail Info Dialog -->
     <string name="istyle_one_hundred_g_supply">100g 제공 칼로리</string>
     <string name="istyle_one_hundred_g_nutrient_content">100g당 영양소 함유량</string>

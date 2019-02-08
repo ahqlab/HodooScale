@@ -70,7 +70,7 @@
                         android:id="@+id/calorie_intake"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="123"
+                        android:text=""
                         android:textColor="@color/mainRed"
                         android:textSize="13sp" />
 
@@ -78,7 +78,7 @@
                         android:id="@+id/rer2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="/700Kcal"
+                        android:text=""
                         android:textColor="@color/mainBlack"
                         android:textSize="13sp" />
 
@@ -98,7 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="10dp"
                         android:max="100"
-                        android:progress="50"
+                        android:progress="0"
                         android:progressBackgroundTint="#f1f1f1"
                         android:progressTint="@color/mainRed" />
 
@@ -130,7 +130,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:letterSpacing="0.01"
-                        android:text="700kcal"
+                        android:text="0kcal"
                         android:textColor="#4a4a4a"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -169,7 +169,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="236Kcal"
+                        android:text="0Kcal"
                         android:textColor="@color/mainRed"
                         android:textSize="30sp"
                         app:conOnlyFloatToString="@{domain.calculationCalories}" />

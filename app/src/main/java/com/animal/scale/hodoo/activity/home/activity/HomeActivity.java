@@ -247,8 +247,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
                 if(tf instanceof WeightFragment){
                     WeightFragment weightFragment = (WeightFragment) tf;
-                    weightFragment.setBcsMessage(info.getPet().getBasic());
-                    weightFragment.drawChart();
+                    weightFragment.setKg();
+                    weightFragment.setBcsOrBscDescAndTip(info.getPet().getBasic());
+                    weightFragment.serChartOfDay();
                 }else if(tf instanceof MealFragment){
                     MealFragment mealFragment = (MealFragment) tf;
                     mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
@@ -319,9 +320,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, info.getPet().getPetIdx());
         android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if(tf instanceof WeightFragment){
-          /*  WeightFragment weightFragment = (WeightFragment) tf;
-            weightFragment.setBcsMessage(info.getPet().getBasic());
-            weightFragment.drawChart();*/
+            WeightFragment weightFragment = (WeightFragment) tf;
+            weightFragment.setKg();
+            weightFragment.setBcsOrBscDescAndTip(info.getPet().getBasic());
+            weightFragment.serChartOfDay();
         }else if(tf instanceof MealFragment){
             MealFragment mealFragment = (MealFragment) tf;
             mealFragment.setTodaySumCalorie();
