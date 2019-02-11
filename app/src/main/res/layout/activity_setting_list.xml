@@ -16,9 +16,9 @@
     </data>
 
     <RelativeLayout
+        android:background="@color/hodoo_new_background_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/hodoo_background_color"
         android:gravity="center_horizontal"
         tools:context=".activity.setting.list.SettingListActivity">
 
@@ -26,12 +26,43 @@
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}"/>
 
-        <ListView
+        <ExpandableListView
+            android:background="@android:color/transparent"
+            android:id="@+id/setting_list"
             android:layout_below="@+id/my_toolbar"
-            android:id="@+id/setting_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@android:color/transparent"
+            android:divider="@null"/>
+
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:layout_below="@+id/my_toolbar"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </ListView>
+
+            <ListView
+                android:id="@+id/setting_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:stateListAnimator="@null"
+                android:padding="16dp"
+                android:layout_marginTop="@dimen/form_top_margin"
+                android:id="@+id/logout_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/log_out"
+                android:textAlignment="textStart"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:background="@color/white"
+                android:onClick="@{activity::logout}"/>
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 

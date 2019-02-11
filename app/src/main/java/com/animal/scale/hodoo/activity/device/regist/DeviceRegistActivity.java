@@ -7,12 +7,16 @@ import android.view.View;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.user.invitation.InvitationActivity;
+import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
-import com.animal.scale.hodoo.activity.wifi.find.FindHodoosActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityDeviceRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> implements DeviceRegistIn.View {
 
@@ -29,7 +33,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         super.setToolbarColor();
         presenter = new DeviceRegistPresenter(this);
         presenter.loadData(getApplicationContext());
-
+        presenter.checkInvitation();
     }
 
     @Override
@@ -56,7 +60,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
             startActivity(intent);
             overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
             finish();
-            showToast(getString(R.string.success));
+//            showToast(getString(R.string.success));
         } else {
             binding.loginProgress.setVisibility(View.GONE);
         }
@@ -70,9 +74,20 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
 //        finish();
     }
 
+    @Override
+    public void moveInvitationFinish(String email) {
+        Intent intent = new Intent(this, InvitationFinishActivity.class);
+        intent.putExtra(HodooConstant.INVITATION_EMAIL_KEY, email);
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
+        startActivity(intent);
+        finish();
+    }
+
     public void moveInvitation( View v ) {
         Intent intent = new Intent(getApplicationContext(), InvitationActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
+
 }

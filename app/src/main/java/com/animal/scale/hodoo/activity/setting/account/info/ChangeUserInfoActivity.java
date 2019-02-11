@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import com.animal.scale.hodoo.R;
@@ -38,9 +40,8 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
             ninkState = false,
             countryState = false;
 
-
     private String[] country;
-    private int selectCountry = 0;
+    private int selectCountry = 1;
     private List<Country> countries;
 
     @Override
@@ -48,11 +49,15 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_change_user_info);
         binding.setActivity(this);
-        binding.setActivityInfo(new ActivityInfo(getString(R.string.change_user_info_title)));
+//        binding.setActivityInfo(new ActivityInfo(getString(R.string.change_user_info_title)));
         super.setToolbarColor();
         presenter = new ChangeUserInfoPresenter(this);
 
+        binding.email.editText.setFocusable(false);
+        binding.email.editText.setEnabled(false);
+
         binding.password.editText.setClickable(true);
+        binding.password.editText.setEnabled(false);
         binding.password.editText.setCursorVisible(false);
         binding.password.editText.setFocusable(false);
         binding.password.editText.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +102,26 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
                 onClickCountryEditTextClick(view);
             }
         });
+        for (int i = 0; i < binding.checkBoxWrap.getChildCount(); i++) {
+            CheckBox checkBox = (CheckBox) binding.checkBoxWrap.getChildAt(i);
+            final int position = i;
+            checkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (position) {
+                        case 0 :
+                            ((CheckBox)binding.checkBoxWrap.getChildAt(0)).setChecked(true);
+                            ((CheckBox)binding.checkBoxWrap.getChildAt(1)).setChecked(false);
+                            break;
+                        case 1:
+                            ((CheckBox)binding.checkBoxWrap.getChildAt(0)).setChecked(false);
+                            ((CheckBox)binding.checkBoxWrap.getChildAt(1)).setChecked(true);
+                            break;
+                    }
+                }
+            });
+        }
+
     }
 
 
@@ -153,19 +178,27 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         return ChangeUserInfoActivity.this;
     }
 
-    public void onChangePasswordBtn(View view) {
+    public void onClickResetPassword(View view){
         Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-        finish();
     }
 
-    public void onConfirmBtn(View view) {
-        String nickName =  binding.nickName.editText.getText().toString();
+    /*public void onChangePasswordBtn(View view) {
 
+    }
+*/
+    public void onConfirmBtn(View view) {
+
+        String nickName =  binding.nickName.editText.getText().toString();
         binding.getDomain().setNickname(nickName);
         binding.getDomain().setCountry(selectCountry);
-        Log.e("HJLEE", binding.getDomain().toString());
+        //Log.e("HJLEE", binding.getDomain().toString());
+
+        for (int i = 0; i < binding.checkBoxWrap.getChildCount(); i++) {
+            CheckBox checkBox = (CheckBox) binding.checkBoxWrap.getChildAt(i);
+            if ( checkBox.isChecked() )
+                binding.getDomain().setSex(checkBox.getTag().toString());
+        }
         presenter.updateBasicInfo(binding.getDomain());
         /*Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
         startActivity(intent);
@@ -195,6 +228,8 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         binding.password.editText.setText(user.getPassword());
         binding.nickName.editText.setText(user.getNickname());
         binding.country.editText.setText(country[user.getCountry() - 1]);
+        selectCountry = user.getCountry();
+        binding.email.editText.setText(user.getEmail());
         binding.setDomain(user);
     }
 

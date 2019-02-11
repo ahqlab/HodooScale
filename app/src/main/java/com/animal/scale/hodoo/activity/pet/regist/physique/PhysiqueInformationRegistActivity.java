@@ -6,10 +6,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
@@ -28,6 +30,8 @@ import com.tistory.dwfox.dwrulerviewlibrary.view.ScrollingValuePicker;
 
 public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInformationRegistActivity> implements PhysiqueInformationRegistIn.View{
 
+    public static Context mContext;
+
     ActivityPhysiqueInformationRegistBinding binding;
 
     public int petId;
@@ -37,8 +41,8 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
     private ScrollingValuePicker myScrollingValuePicker;
     private DWRulerSeekbar dwRulerSeekbar;
 
-    private static final float MIN_VALUE = 5;
-    private static final float MAX_VALUE = 33;
+    private static final float MIN_VALUE = 0;
+    private static final float MAX_VALUE = 50;
     private static final float LINE_RULER_MULTIPLE_SIZE = 3.5f;
 
     PhysiqueInformationRegistIn.Presenter presenter;
@@ -52,6 +56,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.physique_information_regist_title)));
         super.setToolbarColor();
+        mContext = this;
         presenter = new PhysiqueInformationRegistPresenter(this);
         presenter.loadData(PhysiqueInformationRegistActivity.this);
         presenter.setNavigation();
@@ -76,20 +81,45 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         validation();
     }
 
-    public void onClickWidthEt(View view){
-        showRulerBottomDlg(binding.editWidth);
+    public void onClickWidthEt(PetPhysicalInfo petPhysicalInfo){
+        if(petPhysicalInfo != null){
+            if(petPhysicalInfo.getWidth() != null){
+                presenter.showRulerBottomDlg(binding.editWidth, petPhysicalInfo.getWidth());
+            }else{
+                presenter.showRulerBottomDlg(binding.editWidth, "0");
+            }
+        }else{
+            presenter.showRulerBottomDlg(binding.editWidth, "0");
+        }
     }
 
-    public void onClickHightEt(View view){
-        presenter.showRulerBottomDlg(binding.editHeight);
+    public void onClickHightEt(PetPhysicalInfo petPhysicalInfo){
+        if(petPhysicalInfo != null){
+            if(petPhysicalInfo.getHeight() != null){
+                presenter.showRulerBottomDlg(binding.editHeight, petPhysicalInfo.getHeight());
+            }else{
+                presenter.showRulerBottomDlg(binding.editHeight, "0");
+            }
+        }else{
+            presenter.showRulerBottomDlg(binding.editHeight, "0");
+        }
 
     }
-    public void onClickWeightEt(View view){
-        presenter.showRulerBottomDlg(binding.editWeight);
+    public void onClickWeightEt(PetPhysicalInfo petPhysicalInfo){
+        if(petPhysicalInfo != null){
+            if(petPhysicalInfo.getWeight() != null){
+                presenter.showRulerBottomDlg(binding.editWeight, petPhysicalInfo.getWeight());
+            }else{
+                presenter.showRulerBottomDlg(binding.editWeight,  "0");
+            }
+        }else{
+            presenter.showRulerBottomDlg(binding.editWeight, "0");
+        }
+
     }
 
     @Override
-    public void showRulerBottomDlg(final EditText editText){
+    public void showRulerBottomDlg(final EditText editText, String value){
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View customView = inflater.inflate(R.layout.dialog_custom_ruler_popup, null);
         builder =  new BottomDialog.Builder(this)
@@ -100,7 +130,8 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         myScrollingValuePicker = (ScrollingValuePicker) customView.findViewById(R.id.myScrollingValuePicker);
         myScrollingValuePicker.setViewMultipleSize(LINE_RULER_MULTIPLE_SIZE);
         myScrollingValuePicker.setMaxValue(MIN_VALUE, MAX_VALUE);
-        myScrollingValuePicker.setValueTypeMultiple(5);
+        myScrollingValuePicker.setValueTypeMultiple(3);
+        myScrollingValuePicker.setInitValue(Integer.parseInt(value));
         myScrollingValuePicker.getScrollView().setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -147,21 +178,21 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+              /*  Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
         binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+               /* Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
        /* binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {

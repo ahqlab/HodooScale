@@ -2,7 +2,6 @@ package com.animal.scale.hodoo.activity.pet.regist.basic;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,12 +13,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -30,23 +27,26 @@ import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
-import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
-import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.custom.view.BottomDialog;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityBasicInformaitonRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.IosStyleBottomAlert;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.util.ValidationUtil;
-import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class BasicInformationRegistActivity extends BaseActivity<BasicInformationRegistActivity> implements BasicInformationRegistIn.View {
+
+    public static Context mContext;
 
     ActivityBasicInformaitonRegistBinding binding;
 
@@ -57,8 +57,6 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     public static final int STORAGE_PERMISSION_CODE = 101;
 
     ProgressDialog progressDialog;
-
-    BottomSheetDialog dialog;
 
     public static String REQUEST_URL = "";
 
@@ -77,12 +75,16 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     private Uri photoUri;
     private String imageFilePath;
 
+    private BottomDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_basic_informaiton_regist);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.basin_info_regist_title)));
+
+        mContext = this;
         progressDialog = new ProgressDialog(BasicInformationRegistActivity.this);
         super.setToolbarColor();
         presenter = new BasicInformationRegistPresenter(this);
@@ -96,10 +98,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Toast.makeText(BasicInformationRegistActivity.this, "YES", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BasicInformationRegistActivity.this, "YES", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("YES");
                 } else {
-                    Toast.makeText(BasicInformationRegistActivity.this, "NO", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BasicInformationRegistActivity.this, "NO", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("NO");
                 }
             }
@@ -173,7 +175,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     @Override
     public void showErrorToast() {
-        showToast("ERROR");
+//        showToast("ERROR");
     }
 
     @Override
@@ -190,6 +192,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         }
         Picasso.with(BasicInformationRegistActivity.this)
                 .load(SharedPrefVariable.SERVER_ROOT + basicInfo.getProfileFilePath())
+                .error(R.drawable.icon_pet_profile)
                 .into(binding.profile);
 
         if (basicInfo.getSex().matches(GENDER_MALE)) {
@@ -244,38 +247,68 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void onClickOpenBottomDlg(View view) {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        dialog = new BottomSheetDialog(this);
-        dialog.setContentView(R.layout.image_select_bottom_custom_view);
-        dialog.show();
-
-        Button camera = (Button) dialog.findViewById(R.id.camera);
-        camera.setOnClickListener(new View.OnClickListener() {
+        dialog = BottomDialog.getInstance();
+        List<IosStyleBottomAlert> btns = new ArrayList<>();
+        btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.camera)).id(R.id.camera).build() );
+        btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.gallery)).id(R.id.gallery).build() );
+        dialog.setButton(btns);
+        dialog.setOnclick(new BottomDialog.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
-                if (permissionCamera == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-                } else {
-                    Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
-                    presenter.openCamera();
+                switch (v.getId()) {
+                    case R.id.camera :
+                        int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+                        if (permissionCamera == PackageManager.PERMISSION_DENIED) {
+                            ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+                        } else {
+//                            Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
+                            presenter.openCamera();
+                        }
+                        break;
+                    case R.id.gallery :
+                        int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+                        if (permissionStorage == PackageManager.PERMISSION_DENIED) {
+                            ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        } else {
+                            openGallery();
+                            dialog.dismiss();
+                        }
+                        break;
+                        default :
+                            dialog.dismiss();
+                            break;
                 }
             }
         });
+        dialog.show(getSupportFragmentManager(), TAG);
 
-        Button gallery = (Button) dialog.findViewById(R.id.gallery);
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
-                if (permissionStorage == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-                } else {
-                    openGallery();
-                    dialog.dismiss();
-                }
-            }
-        });
+//        Button camera = (Button) dialog.findViewById(R.id.camera);
+//        camera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+//                if (permissionCamera == PackageManager.PERMISSION_DENIED) {
+//                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
+//                    presenter.openCamera();
+//                }
+//            }
+//        });
+//
+//        Button gallery = (Button) dialog.findViewById(R.id.gallery);
+//        gallery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+//                if (permissionStorage == PackageManager.PERMISSION_DENIED) {
+//                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+//                } else {
+//                    openGallery();
+//                    dialog.dismiss();
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -298,7 +331,6 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_REQUEST);
-        Toast.makeText(getApplicationContext(), "gallery", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -430,152 +462,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void onClickSelectEditText(View view) {
-        final String[] values = new String[]{
-                "마스티프",
-                "보르도 마스티프",
-                "로트바일러",
-                "복서",
-                "자이언트 슈나우저",
-                "스탠더드 슈나우저",
-                "도베르만 핀셔",
-                "그레이트 데인",
-                "불 마스티프",
-                "저먼 셰퍼드",
-                "코몬도르",
-                "그레이트 피레니즈",
-                "콜리",
-                "캉갈",
-                "올드 잉글리시 시프도그",
-                "셔틀랜드 시프도그",
-                "비어디드 콜리",
-                "웰시 코기",
-                "오스트레일리안 켈피",
-                "벨지안 시프도그",
-                "피레니안 마스티프",
-                "보스롱",
-                "티베탄 마스티프",
-                "사모예드",
-                "시베리안 허스키",
-                "알래스칸 맬러뮤트",
-                "아메리칸 에스키모 도그",
-                "캐나디안 에스키모 도그",
-                "아프간 하운드",
-                "그레이하운드",
-                "아이리시 울프하운드",
-                "휘핏",
-                "보르조이",
-                "살루키",
-                "아자와크",
-                "닥스훈트",
-                "미니어처 닥스훈트",
-                "쿤 하운드",
-                "오터 하운드",
-                "노르위전 엘크하운드",
-                "잉글리시 폭스하운드",
-                "바셋하운드",
-                "아메리칸 폭스하운드",
-                "비글",
-                "던커",
-                "해리어",
-                "슈바이처 라우프훈트",
-                "스위스 하운드",
-                "아르투아 하운드",
-                "오가르 폴스키",
-                "포르셀렌",
-                "바센지",
-                "로디지안 리지백",
-                "치르네코 델레트나",
-                "이비전 하운드",
-                "파라오 하운드",
-                "포덴코 카나리오",
-                "저먼 와이어 헤어드 포인터",
-                "바이마라너",
-                "비즐라",
-                "저먼 쇼트 헤어드 포인터",
-                "잉글리시 포인터",
-                "골든 리트리버",
-                "래브라도 리트리버",
-                "체서피크 베이 리트리버",
-                "컬리 코티드 리트리버",
-                "플랫 코티드 리트리버",
-                "아이리시 세터",
-                "고든 세터",
-                "잉글리시 세터",
-                "서섹스 스패니얼",
-                "필드 스패니얼",
-                "아이리시 워터 스패니얼",
-                "클럼버 스패니얼",
-                "아메리칸 코커 스패니얼",
-                "아메리칸 워터 스패니얼",
-                "웰시 스프링어 스패니얼",
-                "잉글리시 스프링어 스패니얼",
-                "잉글리시 코커 스패니얼",
-                "폭스 테리어",
-                "케리 블루 테리어",
-                "맨체스터 테리어",
-                "베들링턴 테리어",
-                "스카이 테리어",
-                "실리햄 테리어",
-                "케언 테리어",
-                "불 테리어",
-                "웰시 테리어",
-                "아이리시 테리어",
-                "웨스트 하일랜드 화이트 테리어",
-                "스태퍼드셔 불 테리어",
-                "소프트 코티드 휘튼 테리어",
-                "댄디 딘몬트 테리어",
-                "미니어처 슈나우저",
-                "스코티시 테리어",
-                "오스트레일리안 테리어",
-                "노리치 테리어",
-                "에어데일 테리어",
-                "잭 러셀 테리어",
-                "핏불 테리어",
-                "샤페이",
-                "티베탄 테리어",
-                "티베탄 스패니얼",
-                "라사 압소",
-                "프렌치 불도그",
-                "보스턴 테리어",
-                "스키퍼키",
-                "키스혼드",
-                "불도그",
-                "비숑 프리제",
-                "일본 스피츠",
-                "차우차우",
-                "달마티안",
-                "스탠더드 푸들",
-                "미니어처 푸들",
-                "시바견",
-                "아키타견",
-                "삽살개",
-                "제주개",
-                "진돗개",
-                "풍산개",
-                "친",
-                "말티즈",
-                "일본 테리어",
-                "잉글리시 토이 스패니얼",
-                "파피용",
-                "차이니스 크레스티드",
-                "토이 맨체스터 테리어",
-                "이탈리안 그레이하운드",
-                "퍼그",
-                "미니어처 핀셔",
-                "페키니즈",
-                "포메라니안",
-                "아펜핀셔",
-                "토이 푸들",
-                "시추",
-                "치와와",
-                "요크셔 테리어",
-                "실키 테리어",
-                "브뤼셀 그리폰",
-                "독일 스피츠",
-                "미니어처 핀셔",
-                "카발리에 킹 찰스 스패니얼"
-
-        };
+        final String[] values = getResources().getStringArray(R.array.basic_info_activity__pet_breed);
         super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null)
                 .setItems(values, new DialogInterface.OnClickListener() {
                     @Override

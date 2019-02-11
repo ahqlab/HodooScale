@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.setting.account.change.password;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.domain.User;
@@ -23,7 +24,7 @@ public class ChangePasswordModel extends CommonModel {
 
     public void changeUserPassword(User user, final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().updateUsetPassword(user);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 domainCallBackListner.doPostExecute(integer);
@@ -33,6 +34,11 @@ public class ChangePasswordModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

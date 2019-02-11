@@ -2,7 +2,7 @@ package com.animal.scale.hodoo.activity.device.regist;
 
 import android.content.Context;
 
-public class DeviceRegistPresenter implements DeviceRegistIn.Presenter{
+public class DeviceRegistPresenter implements DeviceRegistIn.Presenter {
 
     DeviceRegistIn.View view;
     DeviceRegistModel model;
@@ -31,5 +31,14 @@ public class DeviceRegistPresenter implements DeviceRegistIn.Presenter{
             }
         });*/
         view.moveWIFISetting();
+    }
+
+    @Override
+    public void checkInvitation() {
+        if ( model.checkInvitation() ) {
+            String invitationUser = model.getInvitationUserEmail();
+            if ( invitationUser != null && !invitationUser.equals("") )
+                view.moveInvitationFinish( invitationUser );
+        }
     }
 }

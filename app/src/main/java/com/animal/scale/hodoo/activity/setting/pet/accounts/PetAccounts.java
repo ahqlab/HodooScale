@@ -10,6 +10,8 @@ public interface PetAccounts {
 
     interface View {
         public void setAdapter(List<PetAllInfos> data);
+
+        void reFreshData( int idx );
     }
 
     interface Presenter {
@@ -17,5 +19,7 @@ public interface PetAccounts {
         void initUserData(Context context);
 
         void getData();
+
+        void saveCurrentIdx( int idx );
     }
 }

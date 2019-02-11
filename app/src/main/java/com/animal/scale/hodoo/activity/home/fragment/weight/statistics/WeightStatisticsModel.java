@@ -2,16 +2,20 @@ package com.animal.scale.hodoo.activity.home.fragment.weight.statistics;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.chart.MyMarkerView;
+import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Statistics;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.VIewUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -26,14 +30,14 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class WeightStatisticsModel extends CommonModel{
+public class WeightStatisticsModel extends CommonModel {
 
     Context context;
 
     public SharedPrefManager mSharedPrefManager;
 
     public void initLoadData(Context context) {
-        this.context  = context;
+        this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
@@ -45,7 +49,7 @@ public class WeightStatisticsModel extends CommonModel{
         chart.setScaleEnabled(false);
         chart.setPinchZoom(false);
 
-        MyMarkerView mv  = new MyMarkerView(context, R.layout.mpchart_market_layout);
+        MyMarkerView mv = new MyMarkerView(context, R.layout.mpchart_market_layout);
         mv.setChartView(chart); // For bounds control
         chart.setMarker(mv); // Set the marker to the chart
 //        chart.setBackgroundColor(Color.parseColor("#f7f7f7"));
@@ -59,13 +63,13 @@ public class WeightStatisticsModel extends CommonModel{
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                if(type.matches("Day")){
+                if (type.matches("Day")) {
                     return setDayXValueFormatted(value, axis, xValues);
-                }else if(type.matches("Week")){
+                } else if (type.matches("Week")) {
                     return setWeekXValueFormatted(value, axis, xValues);
-                }else if(type.matches("Month")){
+                } else if (type.matches("Month")) {
                     return setMonthXValueFormatted(value, axis, xValues);
-                }else if(type.matches("Year")){
+                } else if (type.matches("Year")) {
                     return setYearXValueFormatted(value, axis, xValues);
                 }
                 return "0";
@@ -78,21 +82,23 @@ public class WeightStatisticsModel extends CommonModel{
 
         Highlight highlight = new Highlight((float) data.getEntryCount(), 0, -1);
         chart.highlightValue(highlight, false);
+        chart.setNoDataText(context.getString(R.string.weight_data_available));
+        chart.setNoDataTextColor(context.getResources().getColor(R.color.mainBlack));
     }
 
-    public String setDayXValueFormatted(float value, AxisBase axis, List<Statistics> xValues){
+    public String setDayXValueFormatted(float value, AxisBase axis, List<Statistics> xValues) {
         return xValues.get((int) value % xValues.size()).getTheDay();
     }
 
-    public String setWeekXValueFormatted(float value, AxisBase axis, List<Statistics> xValues){
+    public String setWeekXValueFormatted(float value, AxisBase axis, List<Statistics> xValues) {
         return xValues.get((int) value % xValues.size()).getTheWeek() + context.getString(R.string.istyle_statistic_week);
     }
 
-    public String setMonthXValueFormatted(float value, AxisBase axis, List<Statistics> xValues){
+    public String setMonthXValueFormatted(float value, AxisBase axis, List<Statistics> xValues) {
         return xValues.get((int) value % xValues.size()).getTheMonth() + context.getString(R.string.istyle_statistic_month);
     }
 
-    public String setYearXValueFormatted(float value, AxisBase axis, List<Statistics> xValues){
+    public String setYearXValueFormatted(float value, AxisBase axis, List<Statistics> xValues) {
         return xValues.get((int) value % xValues.size()).getTheYear() + context.getString(R.string.istyle_one_year);
     }
 
@@ -113,57 +119,83 @@ public class WeightStatisticsModel extends CommonModel{
         return new LineData(set1);
     }
 
-    public void getDailyStatisticalData(String type , final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
+    public void getDailyStatisticalData(int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfDay(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
             }
+
             @Override
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void getWeeklyStatisticalData(String type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
+    public void getWeeklyStatisticalData(int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfWeek(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), DateUtil.getCurrentMonth(), type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
             }
+
             @Override
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
-    public void getMonthlyStatisticalData( String type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
-        Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfMonth(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), DateUtil.getCurrentYear(),type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+
+    public void getMonthlyStatisticalData(int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
+        Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfMonth(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), DateUtil.getCurrentYear(), type);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
             }
+
             @Override
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
-    public void getStatisticalDataByYear( String type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
+
+    public void getStatisticalDataByYear(int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfYear(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
             }
+
             @Override
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

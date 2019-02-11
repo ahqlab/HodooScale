@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.pet.regist.disease;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ import java.util.Locale;
 
 public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInformationRegistActivity> implements DiseaseInformationIn.View{
 
+    public static Context mContext;
+
     public int petId = 0;
 
     ActivityDiseaseInformationRegistBinding binding;
@@ -50,6 +53,7 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         binding = DataBindingUtil.setContentView(this, R.layout.activity_disease_information_regist);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.disease_information_regist_title)));
+        mContext = this;
         super.setToolbarColor();
         presenter = new DiseaseInformationPresenter(this);
         presenter.loadData(DiseaseInformationRegistActivity.this);
@@ -156,11 +160,11 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+               /* Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
                 intent.putExtra("petIdx", petIdx);
                 startActivity(intent);
                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();
+                finish();*/
             }
         });
         /*binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {

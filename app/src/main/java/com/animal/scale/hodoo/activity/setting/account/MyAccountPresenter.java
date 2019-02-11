@@ -1,8 +1,12 @@
 package com.animal.scale.hodoo.activity.setting.account;
 
 import android.content.Context;
+import android.content.DialogInterface;
 
+import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.CommonListener;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.User;
 
 public class MyAccountPresenter implements MyAccount.Presenter {
@@ -50,6 +54,11 @@ public class MyAccountPresenter implements MyAccount.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -63,6 +72,43 @@ public class MyAccountPresenter implements MyAccount.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+
+
+    @Override
+    public void withdraw() {
+        myAccountModel.withdraw(HodooConstant.WITHDRAW, new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer integer) {
+                myAccountView.showPopup("탈퇴되었습니다.", new CommonListener.PopupClickListener() {
+                    @Override
+                    public void onPositiveClick(DialogInterface dialog, int which) {
+                        myAccountModel.logout();
+                        myAccountView.goLoginPage();
+                    }
+
+                    @Override
+                    public void onNegativeClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

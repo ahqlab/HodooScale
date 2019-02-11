@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Weatherbit;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
@@ -40,7 +41,7 @@ public class ActivityFragmentPresenter implements ActivityFragmentIn.Presenter {
     @Override
     public void getWeather(double lat, double lon, final WeatherCallback callback) {
 //        ?lat=37.376385&amp;lon=126.635564
-        final Call<Weatherbit> call = NetRetrofit.getInstance().getActivityService().getWeather(mContext.getString(R.string.get_weather_url), String.valueOf(lat), String.valueOf(lon));
+        final Call<Weatherbit> call = NetRetrofit.getInstance().getActivityService().getWeather(SharedPrefVariable.SERVER_ROOT + mContext.getString(R.string.get_weather_url), String.valueOf(lat), String.valueOf(lon));
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
@@ -91,4 +92,5 @@ public class ActivityFragmentPresenter implements ActivityFragmentIn.Presenter {
                 break;
         }
     }
+
 }

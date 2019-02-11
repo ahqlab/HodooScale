@@ -53,7 +53,7 @@ public class AdapterOfSetting extends BaseAdapter {
 
             binding.settingBadge.setVisibility(data.get(position).getBadgeCount() > 0 ? View.VISIBLE : View.GONE);
             binding.settingBadge.setText( String.valueOf(Math.min(data.get(position).getBadgeCount(), 99)) );
-                    //data.get(position).getBadgeCount() > 0
+                    //data.get(position).getInvitationBadgeCount() > 0
 
             convertView.setTag(binding);
         } else {

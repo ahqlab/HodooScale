@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface CountryService {
-    @GET("country/{country}/getAllCountry")
+    @GET("country/{country}/getAllCountry.do")
     Call<List<Country>> getAllCountry(@Path(value = "country") int country);
 }

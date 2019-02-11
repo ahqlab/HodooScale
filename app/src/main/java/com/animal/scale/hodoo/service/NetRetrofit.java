@@ -34,11 +34,15 @@ public class NetRetrofit {
     PetService getPetService = retrofit.create(PetService.class);
     CountryService countryService = retrofit.create(CountryService.class);
     InvitationService invitationService = retrofit.create(InvitationService.class);
+    FcmService fcmService = retrofit.create(FcmService.class);
 
     FeedService feedService = retrofit.create(FeedService.class);
 
     MealHistoryService mealHistoryService = retrofit.create(MealHistoryService.class);
     ActivityService activityService = retrofit.create(ActivityService.class);
+    FeederService feederService = retrofit.create(FeederService.class);
+    WeightTipService weightTipService =  retrofit.create(WeightTipService.class);
+    MealTipService mealTipService =  retrofit.create(MealTipService.class);
 
     public UserService getUserService() {
         return service;
@@ -73,6 +77,22 @@ public class NetRetrofit {
 
     public CountryService getCountryService() {
         return countryService;
+    }
+
+    public FeederService getFeederService() {
+        return feederService;
+    }
+
+    public FcmService getFcmService() {
+        return fcmService;
+    }
+
+    public WeightTipService getWeightTipService() {
+        return weightTipService;
+    }
+
+    public MealTipService getMealTipService() {
+        return mealTipService;
     }
 }
 

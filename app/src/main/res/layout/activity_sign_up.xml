@@ -81,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="@string/password"
-                    app:hint="비밀번호(8자 이상)"
+                    app:hint="@string/sign_up__password_hint"
                     app:editTextResourceId="@layout/password_edittext"
                     app:titleSize="13"
                     app:errorMessageSize="11"/>
@@ -92,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="@string/istyle_label_confirm_password"
-                    app:hint="비밀번호(8자 이상)"
+                    app:hint="@string/sign_up__password_hint"
                     app:editTextResourceId="@layout/password_edittext"
                     app:titleSize="13"
                     app:errorMessageSize="11"/>
@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="@string/istyle_label_nickname"
-                    app:hint="닉네임(9자 이상)"
+                    app:hint="@string/sign_up__nick_name_hint"
                     app:editTextResourceId="@layout/normal_edittext"
                     app:titleSize="13"
                     app:errorMessageSize="11"/>

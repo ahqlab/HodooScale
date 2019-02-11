@@ -5,15 +5,12 @@
     <color name="colorAccent">#faa0a0</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="transparent">#00000000</color>
 
     <color name="hodoo_new_background_color">#f1f1f1</color>
-    <color name="hodoo_card_background_color">#ffffff</color>
 
     <color name="hodoo_background_color">#ffffff</color>
     <color name="hodoo_pink">#ee605b</color>
     <color name="hodoo_midle_pink">#ee6156</color>
-    <color name="hodoo_light_pink">#f5d9d7</color>
     <color name="hodoo_light_light_pink">#f8dadc</color>
     <color name="hodoo_light_message_pink">#fbe7e8</color>
     <color name="hodoo_text_black">#393939</color>
@@ -33,9 +30,6 @@
 
 
     <color name="red">#FA5858</color>
-    <color name="green">#74DF00</color>
-    <color name="blue">#58ACFA</color>
-    <color name="yellow">#D7DF01</color>
     <color name="grey">#6E6E6E</color>
 
     <color name="seek_bar_gray">#aaaaaa</color>
@@ -44,6 +38,7 @@
     <color name="subscript_color">#4a4a4a</color>
     <color name="edt_normal_color">#80c7c7cd</color>
 
+    <color name="overlay_color">#80000000</color>
 
 
 </resources>

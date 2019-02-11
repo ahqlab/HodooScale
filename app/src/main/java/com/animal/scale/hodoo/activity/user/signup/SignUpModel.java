@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
@@ -18,7 +19,7 @@ class SignUpModel extends CommonModel {
 
     public void registUser(User user, final DomainCallBackListner<ResultMessageGroup> domainCallBackListner) {
         Call<ResultMessageGroup> call = NetRetrofit.getInstance().getUserService().registUser(user);
-        new AbstractAsyncTask<ResultMessageGroup>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<ResultMessageGroup>() {
             @Override
             protected void doPostExecute(ResultMessageGroup resultMessageGroup) {
                 domainCallBackListner.doPostExecute(resultMessageGroup);
@@ -26,7 +27,12 @@ class SignUpModel extends CommonModel {
             @Override
             protected void doPreExecute() {
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
 
 
         /*result.enqueue(new Callback<ResultMessageGroup>() {
@@ -51,7 +57,7 @@ class SignUpModel extends CommonModel {
     }
     public void userCertifiedMailSend (String toMailAddr, final DomainCallBackListner callback ) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().userCertifiedMailSend(toMailAddr);
-        new AbstractAsyncTask<Integer>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
                 callback.doPostExecute(integer);
@@ -61,6 +67,11 @@ class SignUpModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

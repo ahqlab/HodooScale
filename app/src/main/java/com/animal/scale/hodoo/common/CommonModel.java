@@ -7,6 +7,9 @@ import java.util.List;
 
 public class CommonModel {
 
+    public static final int limitedTime = 10000;
+    public static final int interval = 1000;
+
     Context context;
 
     public SharedPrefManager sharedPrefManager;
@@ -19,11 +22,13 @@ public class CommonModel {
     public interface DomainCallBackListner<D extends Serializable> {
         void doPostExecute(D d);
         void doPreExecute();
+        void doCancelled();
 
     }
 
     public interface DomainListCallBackListner<D extends Serializable> {
         void doPostExecute(List<D> d);
         void doPreExecute();
+        void doCancelled();
     }
 }

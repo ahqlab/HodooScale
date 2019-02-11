@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 
+import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonModel;
 
 public class InvitationPresenter implements Invitation.Presenter {
@@ -29,17 +30,21 @@ public class InvitationPresenter implements Invitation.Presenter {
             public void doPostExecute(Integer result) {
                 mView.setProgress(false);
                 if ( result == InvitationActivity.SUCESS ) {
-                    Log.e(TAG, "전송 완료");
-                    mView.showPopup("사용자 초대 완료", to + "님에게 초대 메세지를 발송했습니다.", new InvitationActivity.CustomDialogCallback() {
+                    setInvitationData( to );
+                    mView.goFinishPage();
+                } else if (result == InvitationActivity.EXISTENCE_USER) {
+                    mView.showPopup(R.string.invitation__invitation_error_title,  R.string.invitation__error_existence_user, new InvitationActivity.CustomDialogCallback() {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {
-//                            mView.goLoginPage();
+                            mView.goFinishPage();
                         }
                     });
                 } else if ( result == InvitationActivity.NOT_TO_USER ) {
-                    mView.showPopup("사용자 초대 에러", "초대하실 회원이 없습니다.", null);
+                    mView.showPopup(R.string.invitation__invitation_error_title, R.string.invitation__error_not_user, null);
                 } else if ( result == InvitationActivity.NOT_TO_DEVICE ) {
-                    mView.showPopup("사용자 초대 에러", "초대하신 회원이 디바이스를 가지고 있지 않습니다.", null);
+                    mView.showPopup(R.string.invitation__invitation_error_title, R.string.invitation__error_not_device, null);
+                } else if ( result == InvitationActivity.OVERLAB_INVITATION ) {
+                    mView.showPopup(R.string.invitation__invitation_error_title, R.string.invitation__error_overlab_invitation, null);
                 }
             }
 
@@ -47,6 +52,21 @@ public class InvitationPresenter implements Invitation.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
+    }
+
+    @Override
+    public void setInvitationData(String mail) {
+        model.setInvitationUser(mail);
+    }
+
+    @Override
+    public void removeAutoLogin() {
+        model.removeAutoLogin();
     }
 }

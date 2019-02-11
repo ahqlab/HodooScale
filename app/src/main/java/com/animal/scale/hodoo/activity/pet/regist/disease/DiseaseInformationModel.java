@@ -3,6 +3,8 @@ package com.animal.scale.hodoo.activity.pet.regist.disease;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
@@ -13,7 +15,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class DiseaseInformationModel {
+public class DiseaseInformationModel extends CommonModel {
 
     public Context context;
 
@@ -26,19 +28,24 @@ public class DiseaseInformationModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     };
 
-    public void getDiseaseformation(int petIdx, final PetDiseaseInformationResultListner petDiseaseInformationResultListner) {
+    public void getDiseaseformation(int petIdx, final DomainCallBackListner<PetChronicDisease> domainCallBackListner) {
         Call<PetChronicDisease> call = NetRetrofit.getInstance().getPetChronicDiseaseService().getDiseaseformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
-        new AbstractAsyncTask<PetChronicDisease>(){
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetChronicDisease>(){
             @Override
             protected void doPostExecute(PetChronicDisease petChronicDisease) {
-                petDiseaseInformationResultListner.doPostExecute(petChronicDisease);
+                domainCallBackListner.doPostExecute(petChronicDisease);
             }
 
             @Override
             protected void doPreExecute() {
-                petDiseaseInformationResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public List<PetChronicDisease> stringToListConversion(String diseaseName) {
@@ -52,35 +59,45 @@ public class DiseaseInformationModel {
         return petChronicDiseases;
     }
 
-    public void deleteDiseaseformation(int petIdx, int diseaseIdx, final deleteInfoResultListner deleteInfoResultListner) {
+    public void deleteDiseaseformation(int petIdx, int diseaseIdx,  final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetChronicDiseaseService().delete(petIdx, diseaseIdx);
-        new AbstractAsyncTask<Integer>(){
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
 
             @Override
             protected void doPostExecute(Integer result) {
-                deleteInfoResultListner.doPostExecute(result);
+                domainCallBackListner.doPostExecute(result);
             }
 
             @Override
             protected void doPreExecute() {
-                deleteInfoResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
-    public void registDiseaseformation(PetChronicDisease domain, int petIdx, final registResultListner registResultListner) {
+    public void registDiseaseformation(PetChronicDisease domain, int petIdx,  final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetChronicDiseaseService().registDiseaseformation(domain, petIdx);
-        new AbstractAsyncTask<Integer>(){
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
 
             @Override
             protected void doPostExecute(Integer result) {
-                registResultListner.doPostExecute(result);
+                domainCallBackListner.doPostExecute(result);
             }
 
             @Override
             protected void doPreExecute() {
-                registResultListner.doPreExecute();
+                domainCallBackListner.doPreExecute();
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public interface PetDiseaseInformationResultListner {

@@ -13,25 +13,25 @@ import retrofit2.http.Query;
 
 public interface MealHistoryService {
 
-    @POST("history/meal/insert")
+    @POST("history/meal/insert.do")
     Call<Integer> insert(@Body MealHistory mealHistory);
 
 
-    @POST("history/meal/get/list")
+    @POST("history/meal/get/list.do")
     Call<List<MealHistoryContent>> getList(@Query("date") String date, @Query("petIdx") int petIdx);
 
 
-    @POST("history/meal/get/today/sum/calorie")
-    Call<MealHistory> getTodaySumCalorie(@Query("petIdx") int petIdx);
+    @POST("history/meal/get/today/sum/calorie.do")
+    Call<MealHistory> getTodaySumCalorie(@Query("petIdx") int petIdx, @Query("date") String date);
 
 
-    @POST("history/meal/get/this/history")
+    @POST("history/meal/get/this/history.do")
     Call<MealHistory> getThisHistory(@Query("historyIdx") int historyIdx);
 
-    @POST("history/meal/update")
+    @POST("history/meal/update.do")
     Call<Integer> update(@Body MealHistory mealHistory);
 
 
-    @POST("history/meal/delete")
+    @POST("history/meal/delete.do")
     Call<Integer> deleteMealHistory(@Query("historyIdx") int historyIdx);
 }

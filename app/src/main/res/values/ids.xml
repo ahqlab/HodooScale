@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="main_pet" type="id"/>
+    <item name="profile_image" type="id"/>
+    <item name="pet_info" type="id"/>
+    <item name="pet_delete" type="id"/>
+
+    <item name="camera" type="id"/>
+    <item name="gallery" type="id"/>
+</resources>

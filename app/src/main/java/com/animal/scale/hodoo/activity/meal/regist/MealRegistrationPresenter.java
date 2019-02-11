@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.meal.regist;
 import android.content.Context;
 
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragmentModel;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.PetAllInfos;
@@ -25,7 +26,7 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
 
     @Override
     public void getFeedInfo(int feedId) {
-        model.getFeedInfo(feedId, new MealRegistrationModel.DomainCallBackListner<Feed>() {
+        model.getFeedInfo(feedId, new CommonModel.DomainCallBackListner<Feed>() {
             @Override
             public void doPostExecute(Feed feed) {
                 view.setFeedInfo(feed);
@@ -35,12 +36,17 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void saveMeal(MealHistory mealHistory) {
-        model.saveMeal(mealHistory, new MealRegistrationModel.DomainCallBackListner<Integer>() {
+        model.saveMeal(mealHistory, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
                 view.setInsertResult(integer);
@@ -50,12 +56,17 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void getPetAllInfo() {
-        model.getPetAllInfo(new MealFragmentModel.DomainCallBackListner<PetAllInfos>() {
+        model.getPetAllInfo(new CommonModel.DomainCallBackListner<PetAllInfos>() {
             @Override
             public void doPostExecute(PetAllInfos petAllInfos) {
                 view.setPetAllInfo(petAllInfos);
@@ -65,12 +76,17 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
-    public void getTodaySumCalorie() {
-        model.getTodaySumCalorie(new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
+    public void getTodaySumCalorie(String date) {
+        model.getTodaySumCalorie(date, new CommonModel.DomainCallBackListner<MealHistory>() {
             @Override
             public void doPostExecute(MealHistory mealHistory) {
                 view.setTodaySumCalorie(mealHistory);
@@ -78,6 +94,11 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

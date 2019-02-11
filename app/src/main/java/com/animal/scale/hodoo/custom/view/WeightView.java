@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -13,11 +14,13 @@ import com.animal.scale.hodoo.R;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
+
 public class WeightView extends LinearLayout {
     private final String TAG = WeightView.class.getSimpleName();
     private int mDisplayCount = 0;
     private float mTextSize = 12;
-    private int MAX_COUNT = 4;
+    private int MAX_COUNT = 6;
     private String mSufFix = "";
     private TickerView[] mFirstNum;
     private TickerView[] mPointView;
@@ -41,7 +44,7 @@ public class WeightView extends LinearLayout {
         mFirstNum = new TickerView[MAX_COUNT];
 
         /* MAX_COUNT 배치 */
-        for (int j = 0; j < mFirstNum.length - 1; j++) {
+        for (int j = 0; j < mFirstNum.length; j++) {
             TickerView firstNumView = new TickerView(getContext());
             firstNumView.setAnimationDuration(2000);
             firstNumView.setCharacterLists(TickerUtils.provideNumberList());
@@ -99,12 +102,68 @@ public class WeightView extends LinearLayout {
         String numberStr = String.format(formatStr, num);
         String[] splitStr = numberStr.split("\\.");
 
-        char[] number = new char[splitStr[0].length()];
-        for(int i=0;i<number.length;i++){
-            number[i]=(splitStr[0].charAt(i));
-            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++)
-                mFirstNum[i].setText(String.valueOf(j));
+        Log.e("HJLEE", "splitStr : " + splitStr.length);
+
+        for (int i = 0; i < mFirstNum.length; i++) {
+            mFirstNum[i].setText(null);
         }
+        char[] number = new char[splitStr[0].length()];
+
+        int a = Integer.parseInt(String.valueOf(splitStr[0]));
+
+        int length = 1;
+        if ( a > 0 ) {
+            length = (int)(Math.log10(a)+1);
+        }
+
+        int startPosition = mFirstNum.length - length;
+        char[] array = new char[ startPosition ];
+
+
+        /* data settings (s) */
+        for (int i = 0; i < array.length; i++) {
+            array[i] = String.valueOf(0).charAt(0);
+        }
+
+        for(int i=0;i<number.length;i++) {
+            number[i] = (splitStr[0].charAt(i));
+        }
+        char[] hap = new char[ array.length + number.length ];
+        System.arraycopy(array, 0, hap, 0, array.length);
+        System.arraycopy(number, 0, hap, array.length, number.length);
+        /* data settings (e) */
+
+
+//
+//        for (int i = startPosition; i < mFirstNum.length; i++) {
+//            for(int j = 0; j < number.length; j++){
+//                number[j]=(splitStr[0].charAt(j));
+//                for (int k = 0; k <= Integer.parseInt(String.valueOf(number[j])); k++) {
+//                    if ( mFirstNum[i] != null ) {
+//                        mFirstNum[i].setText(String.valueOf(k));
+//                    }
+//
+//                }
+//            }
+//        }
+
+        for (int i = 0; i < hap.length; i++) {
+            if ( Integer.parseInt(String.valueOf(hap[i])) <= 0 && i != hap.length - 1 )
+                continue;
+            for (int j = 0; j <= Integer.parseInt(String.valueOf(hap[i])); j++) {
+                if ( mFirstNum[i] != null )
+                    mFirstNum[i].setText(String.valueOf(j));
+            }
+        }
+
+
+//        for(int i=0;i<number.length;i++){
+//            number[i]=(splitStr[0].charAt(i));
+//            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++) {
+//                if ( mFirstNum[i] != null )
+//                    mFirstNum[i].setText(String.valueOf(j));
+//            }
+//        }
         if ( mDisplayCount > 0 ) {
             number = new char[splitStr[1].length()];
             if ( number.length < mDisplayCount) {

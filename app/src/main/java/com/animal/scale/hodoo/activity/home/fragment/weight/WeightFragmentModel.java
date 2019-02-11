@@ -10,12 +10,14 @@ import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.chart.MyMarkerView;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.github.mikephil.charting.charts.LineChart;
@@ -53,7 +55,7 @@ public class WeightFragmentModel extends CommonModel {
 
     public void getBcs(int basicIdx, final DomainCallBackListner<PetWeightInfo> domainCallBackListner) {
         Call<PetWeightInfo> call = NetRetrofit.getInstance().getPetWeightInfoService().getBcs(basicIdx);
-        new AbstractAsyncTask<PetWeightInfo>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetWeightInfo>() {
             @Override
             protected void doPostExecute(PetWeightInfo petWeightInfo) {
                 domainCallBackListner.doPostExecute(petWeightInfo);
@@ -63,7 +65,12 @@ public class WeightFragmentModel extends CommonModel {
             protected void doPreExecute() {
                 domainCallBackListner.doPreExecute();
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void setupChart(LineChart chart, LineData data, final List<Statistics> xValues) {
@@ -95,12 +102,14 @@ public class WeightFragmentModel extends CommonModel {
         chart.setData(data);
         chart.getLegend().setEnabled(false);
         chart.animateX(1000);
+        chart.setNoDataText(context.getString(R.string.weight_data_available));
+        chart.setNoDataTextColor(context.getResources().getColor(R.color.mainBlack));
 
         chart.invalidate();
 
         Highlight highlight = new Highlight((float) data.getEntryCount(), 0, -1);
         chart.highlightValue(highlight, false);
-        chart.setNoDataText("Description that you want");
+
     }
 
 
@@ -157,9 +166,9 @@ public class WeightFragmentModel extends CommonModel {
         return null;
     }
 
-    public void getDayData(String date,  String type, final DomainListCallBackListner<Statistics> domainListCallBackListner) {
+    public void getDayData(String date,  int type, final DomainListCallBackListner<Statistics> domainListCallBackListner) {
         Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfTime(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), date, type);
-        new AbstractAsyncTaskOfList<Statistics>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
                 domainListCallBackListner.doPostExecute(d);
@@ -169,12 +178,17 @@ public class WeightFragmentModel extends CommonModel {
             protected void doPreExecute() {
 
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void getLastCollectionData(String date, String type, final DomainCallBackListner<RealTimeWeight> domainListCallBackListner) {
+    public void getLastCollectionData(String date, int type, final DomainCallBackListner<RealTimeWeight> domainListCallBackListner) {
         Call<RealTimeWeight> call = NetRetrofit.getInstance().getRealTimeWeightService().getLastCollectionData(date, mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type);
-        new AbstractAsyncTask<RealTimeWeight>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<RealTimeWeight>() {
             @Override
             protected void doPostExecute(RealTimeWeight realTimeWeight) {
                 domainListCallBackListner.doPostExecute(realTimeWeight);
@@ -184,6 +198,30 @@ public class WeightFragmentModel extends CommonModel {
             protected void doPreExecute() {
                 domainListCallBackListner.doPreExecute();
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
+    public void getTipMessageOfCountry(WeightTip weightTip, final DomainCallBackListner<WeightTip> domainListCallBackListner) {
+        Call<WeightTip> call = NetRetrofit.getInstance().getWeightTipService().getWeightTipOfCountry(weightTip);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<WeightTip>() {
+            @Override
+            protected void doPostExecute(WeightTip tip) {
+                domainListCallBackListner.doPostExecute(tip);
+            }
+
+            @Override
+            protected void doPreExecute() {
+                domainListCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

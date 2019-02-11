@@ -31,6 +31,7 @@ import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SearchHistory;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.MathUtil;
 import com.animal.scale.hodoo.util.RER;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 
@@ -185,11 +186,11 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
             finish();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-        presenter.getTodaySumCalorie();
+        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
     @Override
@@ -197,21 +198,21 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         if (mealHistory != null) {
             if (rer > mealHistory.getCalorie()) {
                 binding.seekBar.setMax((int) rer);
-                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/" + MathUtil.DecimalCut(rer) + "kcal");
                 //initDataToSeekbar(rer);
             } else {
                 binding.seekBar.setMax((int) mealHistory.getCalorie());
-                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/" + MathUtil.DecimalCut(rer) + "kcal");
                 //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
             binding.seekBar.setProgress((int) mealHistory.getCalorie());
-            binding.calorieIntake.setText(String.valueOf(mealHistory.getCalorie()));
+            binding.calorieIntake.setText(MathUtil.DecimalCut(mealHistory.getCalorie()));
         } else {
             binding.seekBar.setMax((int) rer);
-            binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-            binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+            binding.rer2.setText("/" + MathUtil.DecimalCut(rer) + "kcal");
             //initDataToSeekbar(rer);
             binding.seekBar.setProgress(0);
             binding.calorieIntake.setText("0");
@@ -238,6 +239,8 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
                 .groupId(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE))
                 .userIdx(mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID))
                 .build();
+
+        Log.e("HJLEE", "history > " + mealHistory.toString());
         presenter.saveMeal(mealHistory);
     }
 }

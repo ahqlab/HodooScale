@@ -6,13 +6,17 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Handler;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 
 import com.animal.scale.hodoo.R;
+import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -68,5 +72,13 @@ public class VIewUtil {
             }
         }
         return result;
+    }
+    public static  String getMyLocationCode(Context context) {
+        Locale systemLocale = context.getApplicationContext().getResources().getConfiguration().locale;
+        String language = systemLocale.getLanguage();
+        return language;
+    }
+    public static Object fromJson(String jsonString, Type type) {
+        return new Gson().fromJson(jsonString, type);
     }
 }

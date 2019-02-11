@@ -18,6 +18,14 @@ public interface HomeActivityIn {
         void setCurrentPetInfos(List<PetAllInfos> data);
 
         void setCurcleImage(PetAllInfos info);
+
+        void refreshBadge();
+
+        void setPushCount ( int count );
+
+        void moveLoginActivity ();
+
+        void setFragment();
     }
 
     interface Presenter{
@@ -26,10 +34,12 @@ public interface HomeActivityIn {
 
         void loadCustomDropdownView();
 
-        void getSttingListMenu();
-
         void setCurrentPetInfos(List<PetAllInfos> data);
 
         void setCurcleImage(PetAllInfos info);
+
+        void getInvitationToServer();
+
+        void checkLogin();
     }
 }

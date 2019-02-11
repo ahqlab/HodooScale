@@ -1,13 +1,16 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.ArrayListDevice;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -43,14 +46,20 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     @Override
     public void getBcs(int basicIdx) {
-        model.getBcs(basicIdx, new WeightFragmentModel.DomainCallBackListner<PetWeightInfo>() {
+        model.getBcs(basicIdx, new CommonModel.DomainCallBackListner<PetWeightInfo>() {
             @Override
             public void doPostExecute(PetWeightInfo petWeightInfo) {
-                view.setBcs(petWeightInfo);
+                if ( petWeightInfo != null )
+                    view.setBcs(petWeightInfo);
             }
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -62,8 +71,8 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
     }
 
     @Override
-    public void getDefaultData(String date, String type) {
-        model.getDayData(date, type, new WeightFragmentModel.DomainListCallBackListner<Statistics>() {
+    public void getDefaultData(String date, int type) {
+        model.getDayData(date, type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if(d.size() > 0){
@@ -74,11 +83,16 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
                     getDayData(d);
                 }else{
                     chart.clear();
-                   // initChart();
+                    //initChart();
                 }
             }
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -97,8 +111,8 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
     }
 
     @Override
-    public void getLastCollectionData(final String date, String type) {
-        model.getLastCollectionData(date, type , new WeightFragmentModel.DomainCallBackListner<RealTimeWeight>() {
+    public void getLastCollectionData(final String date, int type) {
+        model.getLastCollectionData(date, type , new CommonModel.DomainCallBackListner<RealTimeWeight>() {
             @Override
             public void doPostExecute(RealTimeWeight d) {
                 if(date.matches(DateUtil.getCurrentDatetime())){
@@ -110,6 +124,11 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
             @Override
             public void doPreExecute() {
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
@@ -120,5 +139,26 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
     @Override
     public void initChart() {
+
+    }
+
+    @Override
+    public void getTipMessageOfCountry(WeightTip weightTip) {
+        model.getTipMessageOfCountry(weightTip, new CommonModel.DomainCallBackListner<WeightTip>() {
+            @Override
+            public void doPostExecute(WeightTip weightTip) {
+                view.setTipMessageOfCountry(weightTip);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
     }
 }

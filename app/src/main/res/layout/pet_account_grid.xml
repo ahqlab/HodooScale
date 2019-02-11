@@ -24,16 +24,36 @@
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/petIcon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:src="@drawable/pet_account_middle_male_icon_143_143"
-            app:loadPicasoImage="@{domain.profileFilePath}"
-            app:civ_border_color="@color/hodoo_midle_pink"
-            app:civ_border_width="2dp" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/petIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:src="@drawable/icon_pet_profile"
+                app:loadPetPicasoImage="@{domain.profileFilePath}"
+                app:civ_border_color="@color/hodoo_midle_pink"
+                app:civ_border_width="2dp" />
+
+            <ImageView
+                android:visibility="gone"
+                android:padding="5dp"
+                android:layout_gravity="top|right"
+                android:id="@+id/selected_icon"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/istyle_checkbox_checked_ver2"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/mainRed"
+                android:tint="@color/white"
+/>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/petName"

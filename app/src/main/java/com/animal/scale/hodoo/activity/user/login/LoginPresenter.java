@@ -1,10 +1,13 @@
 package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Pet;
@@ -22,6 +25,11 @@ public class LoginPresenter implements Login.Presenter {
     LoginModel loginModel;
     Context context;
 
+    public interface OnDialogClickListener {
+        void onPositiveClick(DialogInterface dialog, int which );
+        void onNegativeClick(DialogInterface dialog, int which);
+    }
+
     public LoginPresenter(Login.View loginView) {
         this.loginView = loginView;
         this.loginModel = new LoginModel();
@@ -35,7 +43,9 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void sendServer(User user) {
-        loginModel.sendServer(user, new LoginModel.DomainCallBackListner<CommonResponce<User>>() {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        user.setPushToken(token);
+        loginModel.sendServer(user, new CommonModel.DomainCallBackListner<CommonResponce<User>>() {
             @Override
             public void doPostExecute(CommonResponce<User> resultMessageGroup) {
                 if ( resultMessageGroup != null ) {
@@ -43,27 +53,45 @@ public class LoginPresenter implements Login.Presenter {
                         loginView.showPopup(context.getString(R.string.not_found_email));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.ID_PASSWORD_DO_NOT_MATCH)) {
                         loginView.showPopup(context.getString(R.string.id_password_do_not_match));
+                    } else if ( resultMessageGroup.getResultMessage().equals(ResultMessage.WITHDRAW_USER) ) {
+                        loginView.showPopup(context.getString(R.string.login__alert_withdraw_user_content));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
                         loginView.showPopup(context.getString(R.string.failed));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
-                        Log.e("HJLEE", "LOGIN RESULT : " + resultMessageGroup.getDomain().toString().trim());
-                        /*Gson gson = new Gson();
-                        User user = gson.fromJson(resultMessageGroup.getDomain().toString().trim(), User.class);*/
-                        if ( resultMessageGroup.getDomain().getUserCode() <= 0 ) {
-                            loginView.showPopup("이메일 인증을 진행해주세요.");
+                        Gson gson = new Gson();
+                        User user = resultMessageGroup.getDomain();
+                        if ( user.getUserCode() <= 0 ) {
+                            loginView.showPopup(context.getString(R.string.login__alert_email_certified_content), new OnDialogClickListener() {
+                                @Override
+                                public void onPositiveClick(DialogInterface dialog, int which) {
+                                    loginView.goEmailCertified();
+                                    dialog.dismiss();
+                                }
+
+                                @Override
+                                public void onNegativeClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
                             return;
                         }
                         saveUserSharedValue(resultMessageGroup.getDomain());
-                        saveFCMToken( resultMessageGroup.getDomain() );
+                        checkRegistrationStatus();
                     }
                 } else {
                     loginView.showPopup(context.getString(R.string.failed));
+                    loginView.setBtnState(true);
                 }
             }
 
             @Override
             public void doPreExecute() {
                 loginView.setProgress(true);
+            }
+
+            @Override
+            public void doCancelled() {
+                loginView.setProgress(false);
             }
         });
     }
@@ -80,12 +108,12 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void checkRegistrationStatus() {
-        loginModel.confirmDeviceRegistration(new LoginModel.DeviceRegistrationListener() {
+        loginModel.confirmDeviceRegistration(new CommonModel.DomainListCallBackListner<Device>() {
             @Override
             public void doPostExecute(List<Device> devices) {
                 if(!devices.isEmpty()){
                     //디바이스 등록됨.
-                    loginModel.confirmPetRegistration(new LoginModel.PetRegistrationListener() {
+                    loginModel.confirmPetRegistration(new CommonModel.DomainListCallBackListner<Pet>() {
                         @Override
                         public void doPostExecute(List<Pet> pets) {
                             if(!pets.isEmpty()){
@@ -100,10 +128,10 @@ public class LoginPresenter implements Login.Presenter {
                                     }else if(pets.get(0).getWeight() == 0){
                                         loginView.goWeightRegistActivity(pets.get(0).getPetIdx());
                                     }else{
-                                        loginView.goHomeActivity();
+                                        loginView.setAutoLoginState();
                                     }
                                 }else{
-                                    loginView.goHomeActivity();
+                                    loginView.setAutoLoginState();
                                 }
                             }else{
                                 //PET 등록페이지 이동
@@ -114,15 +142,26 @@ public class LoginPresenter implements Login.Presenter {
                         public void doPreExecute() {
 
                         }
+
+                        @Override
+                        public void doCancelled() {
+
+                        }
                     });
                 }else{
                     //디바이스 없음
-                    loginView.goDeviceRegistActivity();
+
+                    loginView.saveFcmToken();
                 }
             }
             @Override
             public void doPreExecute() {
                 loginView.setProgress(true);
+            }
+
+            @Override
+            public void doCancelled() {
+
             }
         });
     }
@@ -134,16 +173,37 @@ public class LoginPresenter implements Login.Presenter {
         loginModel.saveFCMToken(user, new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
-
+                if ( integer != null ) {
+                    loginView.goDeviceRegistActivity();
+                }
             }
 
             @Override
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+                loginView.setProgress(false);
+            }
         });
+    }
 
+    @Override
+    public void setAutoLogin(boolean state) {
+        if ( state )
+            loginModel.saveAutoLogin();
+        loginView.goHomeActivity();
+    }
 
-        checkRegistrationStatus();
+    @Override
+    public void autoLogin() {
+        User user = loginModel.getUser();
+        if ( loginModel.getAutoLoginState() == HodooConstant.AUTO_LOGIN_SUCCESS ) {
+            loginView.setAutoLogin(true);
+        }
+        loginView.setPassword(user.getPassword());
+        sendServer(user);
     }
 }

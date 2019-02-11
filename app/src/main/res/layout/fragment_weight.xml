@@ -18,7 +18,6 @@
         android:onClick="@{activity::onRootViewClick}"
         tools:context=".activity.home.fragment.weight.WeightFragment">
 
-
         <noman.weekcalendar.WeekCalendar
             android:id="@+id/weekCalendar"
             android:layout_width="match_parent"
@@ -142,15 +141,16 @@
                     <!-- sync (e) -->
                 </com.animal.scale.hodoo.custom.view.TopImageLayout>
                 <com.animal.scale.hodoo.custom.view.CustomCollapse
+                    android:id="@+id/collapse"
                     android:layout_marginTop="1dp"
                     android:paddingLeft="38dp"
-                    android:paddingRight="38dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white">
                     <LinearLayout
+                        android:paddingRight="38dp"
                         android:id="@+id/header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -162,27 +162,29 @@
                             android:layout_height="wrap_content"
                             android:text="TIP"
                             android:textColor="@color/mainBlack"
-                            android:gravity="center_vertical"/>
+                            android:layout_gravity="top"/>
                         <TextView
+                            android:id="@+id/message_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="title"
                             android:textColor="@color/subscript_color"
                             android:gravity="center_vertical"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:paddingLeft="29dp"
+                        android:paddingLeft="24dp"
+                        android:paddingRight="38dp"
                         android:layout_below="@+id/header"
                         android:id="@+id/content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:layout_marginTop="6dp"
+                            android:paddingTop="8dp"
                             android:paddingRight="15dp"
                             android:id="@+id/collapse_content"
                             android:textColor="#9b9b9b"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/istyle_bcs_comment"/>
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                 </com.animal.scale.hodoo.custom.view.CustomCollapse>
 
@@ -289,7 +291,6 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="bottom|end"
             android:layout_margin="15sp"
-            android:src="@drawable/weight_bottom_chart_icon_121_121"
             android:onClick="@{activity::onClickFloatingBtn}"
             app:fabSize="normal" />
 

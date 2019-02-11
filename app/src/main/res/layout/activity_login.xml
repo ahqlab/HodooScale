@@ -37,6 +37,8 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,9 +49,7 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="24dp"
-                    android:layout_marginRight="40dp"
                     app:title="@string/istyle_label_email"
                     app:editTextResourceId="@layout/email_edittext"
                     app:titleSize="13"
@@ -59,13 +59,18 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="24dp"
-                    android:layout_marginRight="40dp"
                     app:title="@string/password"
                     app:editTextResourceId="@layout/password_edittext"
                     app:titleSize="13"
                     app:errorMessageSize="11"/>
+
+                <CheckBox
+                    android:id="@+id/auto_login"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login__auto_login_btn"/>
 
                 <Button
                     android:id="@+id/signup_btn"
@@ -76,8 +81,6 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_marginTop="32dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
                     android:text="@string/istyle_login_title"
                     android:onClick="@{activity::onClickLoginBtn}"/>
 

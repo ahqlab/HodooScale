@@ -33,6 +33,7 @@ import java.util.Date;
 import retrofit2.Response;
 
 import static android.support.constraint.Constraints.TAG;
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class ActivityFragment extends Fragment implements ActivityFragmentIn.View, LocationListener {
 
@@ -46,6 +47,13 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
     private long nowTime;
     private boolean rotationState = false, isActivity = false, isLocation = true;
     private int LIMIT_TIME = 20 * 1000; //20초 셋팅
+
+
+    private Location oldLocation;
+
+
+
+
 
     @Nullable
     @Override
@@ -69,7 +77,10 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             // 권한 있음
             getWeather();
         }
-
+        String message = getString(R.string.wether_tip_title);
+        String content = getString(R.string.wether_tip_content);
+        binding.collapse.setTitle(message);
+        binding.collapse.setContent(content);
         return binding.getRoot();
     }
 
@@ -96,6 +107,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             binding.overlay.setVisibility(View.GONE);
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -137,13 +149,16 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
                     this);
         }
 
-        binding.kcalView.setNumber(236);
+        binding.kcalView.setNumber(0);
         presenter = new ActivityFragmentPresenter(getContext(), this);
         setProgress(true);
     }
 
     @Override
     public void onLocationChanged(final Location location) {
+        if ( oldLocation == null )
+            oldLocation = location;
+
         if ( isLocation ) {
             double lon = location.getLongitude(); //경도
             double lat= location.getLatitude();   //위도
@@ -157,8 +172,13 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
                             Weatherbit weatherbit = (Weatherbit) response.body();
                             float uv = weatherbit.getData().get(0).getUv(),
                                     ozone = weatherbit.getData().get(0).getOzone(),
-                                    windspeed = weatherbit.getData().get(0).getWind_spd();
-                            binding.temp.setText(String.format("%.0f˚", weatherbit.getData().get(0).getTemp()));
+                                    windspeed = weatherbit.getData().get(0).getWind_spd(),
+                                    temp = weatherbit.getData().get(0).getTemp();
+
+                            String tempStr = temp == 0 ? "0" : String.format("%.0f˚", weatherbit.getData().get(0).getTemp());
+
+                            if ( DEBUG ) Log.e(TAG, String.format( "%.0f˚", weatherbit.getData().get(0).getTemp()) );
+                            binding.temp.setText( tempStr );
                             binding.cityName.setText(weatherbit.getCity_name());
                             binding.district.setText(weatherbit.getDistrict());
                             binding.windSpeed.setText(String.format("%.1fm/s", windspeed));
@@ -209,7 +229,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
                             binding.windSpeedStr.setText(windspeedDescription[windspeedState]);
                         }
                     } else {
-                        binding.district.setText("위치를 파악할 수 없음");
+                        binding.district.setText(R.string.activity_fragment__not_found_location_msg);
                     }
                     setProgress(false);
                     isLocation = false;
@@ -245,7 +265,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
     public void onResume() {
         super.onResume();
         isActivity = true;
-        getWeather();
+        //getWeather();
     }
 
     @Override

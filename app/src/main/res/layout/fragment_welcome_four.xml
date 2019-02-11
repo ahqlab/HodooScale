@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:background="#f1f1f1">
+        <com.ssomai.android.scalablelayout.ScalableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:scale_base_width="360"
+            app:scale_base_height="640">
+            <TextView
+                app:scale_top="41"
+                app:scale_left="40"
+                app:scale_width="280"
+                app:scale_textsize="32"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/mainBlack"
+                android:text="@string/hodoo_link_title"/>
+            <TextView
+                app:scale_top="96"
+                app:scale_left="40"
+                app:scale_width="280"
+                app:scale_textsize="14"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#4a4a4a"
+                android:textSize="15sp"
+                android:text="@string/hodoo_link_content"/>
+            <ImageView
+                app:scale_top="180"
+                app:scale_width="360"
+                app:scale_height="453"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/link_mockup"/>
+        </com.ssomai.android.scalablelayout.ScalableLayout>
+
+    </LinearLayout>
+
+</layout>

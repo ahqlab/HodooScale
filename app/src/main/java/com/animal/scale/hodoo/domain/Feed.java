@@ -28,5 +28,6 @@ public class Feed implements Serializable {
 	private float omega3;
 	private float omega6;
 	private String mainIngredient;
+	private String language;
 
 }

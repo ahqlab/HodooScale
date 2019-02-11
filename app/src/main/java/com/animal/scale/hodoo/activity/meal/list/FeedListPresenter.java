@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragmentModel;
 import com.animal.scale.hodoo.activity.meal.regist.MealRegistrationModel;
 import com.animal.scale.hodoo.activity.meal.search.AutoCompleateFeed;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.MealHistoryContent;
@@ -35,7 +36,7 @@ public class FeedListPresenter implements FeedListIn.Presenter {
 
     @Override
     public void getList(String date) {
-        model.getList(date, new FeedListModel.DomainListCallBackListner<MealHistoryContent>() {
+        model.getList(date, new CommonModel.DomainListCallBackListner<MealHistoryContent>() {
             @Override
             public void doPostExecute(List<MealHistoryContent> d) {
                 view.setListView(d);
@@ -43,6 +44,11 @@ public class FeedListPresenter implements FeedListIn.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });
@@ -54,8 +60,8 @@ public class FeedListPresenter implements FeedListIn.Presenter {
     }
 
     @Override
-    public void getTodaySumCalorie() {
-        mealRegistrationModel.getTodaySumCalorie(new MealRegistrationModel.DomainCallBackListner<MealHistory>() {
+    public void getTodaySumCalorie(String date) {
+        mealRegistrationModel.getTodaySumCalorie(date, new CommonModel.DomainCallBackListner<MealHistory>() {
             @Override
             public void doPostExecute(MealHistory mealHistory) {
                 view.setTodaySumCalorie(mealHistory);
@@ -65,12 +71,17 @@ public class FeedListPresenter implements FeedListIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void getPetAllInfo() {
-        mealRegistrationModel.getPetAllInfo(new MealFragmentModel.DomainCallBackListner<PetAllInfos>() {
+        mealRegistrationModel.getPetAllInfo(new CommonModel.DomainCallBackListner<PetAllInfos>() {
             @Override
             public void doPostExecute(PetAllInfos petAllInfos) {
                 view.setPetAllInfo(petAllInfos);
@@ -80,12 +91,17 @@ public class FeedListPresenter implements FeedListIn.Presenter {
             public void doPreExecute() {
 
             }
+
+            @Override
+            public void doCancelled() {
+
+            }
         });
     }
 
     @Override
     public void deleteMealHistory(int historyIdx) {
-        model.deleteMealHistory(historyIdx, new FeedListModel.DomainCallBackListner<Integer>(){
+        model.deleteMealHistory(historyIdx, new CommonModel.DomainCallBackListner<Integer>(){
 
             @Override
             public void doPostExecute(Integer integer) {
@@ -94,6 +110,11 @@ public class FeedListPresenter implements FeedListIn.Presenter {
 
             @Override
             public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
 
             }
         });

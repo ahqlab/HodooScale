@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
@@ -16,8 +20,11 @@ import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRe
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.activity.user.agree.TermsOfServiceActivity;
 import com.animal.scale.hodoo.activity.user.reset.password.send.SendCertificationNumberActivity;
+import com.animal.scale.hodoo.activity.user.signup.SignUpFinishActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityLoginBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -30,7 +37,12 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     ActivityLoginBinding binding;
 
     Login.Presenter presenter;
-    private boolean emailState = false, pwState = false;
+    private boolean emailState = false;
+    private boolean pwState = false;
+    private boolean autoLoginState = false;
+
+    SharedPrefManager sharedPrefManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,14 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         super.setToolbarColor();
         presenter = new LoginPresenter(this);
         presenter.initUserData(binding.getUser(), getApplicationContext());
+
+        String countryCode = VIewUtil.getMyLocationCode(LoginActivity.this);
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.CURRENT_COUNTRY, countryCode);
+
+        if ( getIntent().getIntExtra(SharedPrefVariable.AUTO_LOGIN, 0) > 0 ) {
+            presenter.autoLogin();
+        }
+
         User user = new User(mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL));
         if(user != null){
             binding.email.editText.setText(user.getEmail());
@@ -69,6 +89,12 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
                 checkState();
             }
         }));
+        binding.autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean state) {
+                autoLoginState = state;
+            }
+        });
         setBtnEnable(false);
     }
 
@@ -77,12 +103,22 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         return LoginActivity.this;
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)){
+            setProgress(false);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     //onClick
     public void onClickLoginBtn(View view) {
         User user = new User();
         user.setEmail(binding.email.getText());
         user.setPassword(binding.password.getText());
         user.setPasswordCheck(binding.password.getText());
+
         if (ValidationUtil.isValidEmail(binding.email.getText().toString()) && !ValidationUtil.isEmpty(binding.password.getText())) {
             presenter.userValidationCheck(user);
         }
@@ -107,6 +143,19 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     }
 
     @Override
+    public void showPopup(String message, final LoginPresenter.OnDialogClickListener callback) {
+        super.showBasicOneBtnPopup(null, message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                callback.onPositiveClick(dialog, which);
+                            }
+                        }
+                ).show();
+        setProgress(false);
+    }
+
+    @Override
     public void setProgress(Boolean play) {
         if (play) {
             binding.loginProgress.setVisibility(View.VISIBLE);
@@ -117,6 +166,9 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
 
     @Override
     public void goDeviceRegistActivity() {
+
+        //token 등록
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
         Intent intent = new Intent(getApplicationContext(), DeviceRegistActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
@@ -174,6 +226,48 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
+    }
+
+    @Override
+    public void setAutoLoginState() {
+        presenter.setAutoLogin( autoLoginState );
+    }
+
+    @Override
+    public void setAutoLogin(boolean state) {
+        binding.autoLogin.setChecked(state);
+        autoLoginState = state;
+    }
+
+    @Override
+    public void goEmailCertified() {
+        Intent intent = new Intent(getApplicationContext(), SignUpFinishActivity.class);
+        intent.putExtra(SharedPrefVariable.USER_EMAIL, binding.email.getText());
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+    }
+
+    @Override
+    public void setPassword(String pw) {
+        binding.password.editText.setText(pw);
+    }
+
+    @Override
+    public void setBtnState(boolean state) {
+        if ( ValidationUtil.isValidEmail(binding.email.getText().toString()) ) {
+            emailState = true;
+        }
+        if ( !ValidationUtil.isEmpty( binding.password.getText().toString() ) ) {
+            pwState = true;
+        }
+        checkState();
+    }
+
+    @Override
+    public void saveFcmToken() {
+        User user = new User();
+        user.setEmail( binding.email.getText().toString() );
+        presenter.saveFCMToken(user);
     }
 
 

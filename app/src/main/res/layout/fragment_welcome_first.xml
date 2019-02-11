@@ -9,27 +9,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:background="@android:color/white">
+        android:background="#f1f1f1">
         <com.ssomai.android.scalablelayout.ScalableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:scale_base_width="360"
             app:scale_base_height="640">
             <TextView
-                app:scale_top="40"
+                app:scale_top="41"
                 app:scale_left="40"
                 app:scale_width="280"
-                app:scale_textsize="20"
+                app:scale_textsize="32"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@color/mainBlack"
                 android:text="@string/weight_title"/>
             <TextView
-                app:scale_top="83"
+                app:scale_top="96"
                 app:scale_left="40"
                 app:scale_width="280"
-                app:scale_textsize="15"
+                app:scale_textsize="14"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,11 +41,10 @@
             <ImageView
                 app:scale_top="180"
                 app:scale_width="360"
-                app:scale_height="410"
-                android:layout_marginTop="32dp"
+                app:scale_height="453"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/mockup"/>
+                android:src="@drawable/weight_mockup"/>
         </com.ssomai.android.scalablelayout.ScalableLayout>
 
     </LinearLayout>

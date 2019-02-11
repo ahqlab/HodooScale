@@ -14,6 +14,7 @@ import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealActivity;
 import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealModel;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.custom.dialog.IngredientsOfMealDialog;
 import com.animal.scale.hodoo.custom.view.seekbar.ProgressItem;
 import com.animal.scale.hodoo.databinding.ActivityMealUpdateBinding;
 import com.animal.scale.hodoo.db.DBHandler;
@@ -24,6 +25,7 @@ import com.animal.scale.hodoo.domain.MealHistoryContent;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SearchHistory;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.MathUtil;
 import com.animal.scale.hodoo.util.RER;
 
 import java.util.ArrayList;
@@ -57,6 +59,8 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     private float rer;
 
     private DBHandler dbHandler;
+
+    IngredientsOfMealDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +170,8 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         progressItemList.add(mProgressItem);
 
         binding.seekBar.invalidate();
+
+
     }
 
     @Override
@@ -175,6 +181,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         setDecimalNumberPicker(binding.umsu);
         setStringNumberPicker(binding.unit, feed);
 
+        dialog = IngredientsOfMealDialog.newInstance(feed);
     }
 
     @Override
@@ -189,7 +196,8 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-        presenter.getTodaySumCalorie();
+        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
     @Override
@@ -197,21 +205,21 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         if (mealHistory != null) {
             if (rer > mealHistory.getCalorie()) {
                 binding.seekBar.setMax((int) rer);
-                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/" + MathUtil.DecimalCut(rer) + "kcal");
                 //initDataToSeekbar(rer);
             } else {
                 binding.seekBar.setMax((int) mealHistory.getCalorie());
-                binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-                binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+                binding.rer2.setText("/" + MathUtil.DecimalCut(rer) + "kcal");
                 //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
             binding.seekBar.setProgress((int) mealHistory.getCalorie());
-            binding.calorieIntake.setText(String.valueOf(mealHistory.getCalorie()));
+            binding.calorieIntake.setText(MathUtil.DecimalCut(mealHistory.getCalorie()));
         } else {
             binding.seekBar.setMax((int) rer);
-            binding.rer.setText(String.valueOf(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
-            binding.rer2.setText("/" + String.valueOf(rer) + "kcal");
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
+            binding.rer2.setText("/" + MathUtil.DecimalCut(rer) + "kcal");
             //initDataToSeekbar(rer);
             binding.seekBar.setProgress(0);
             binding.calorieIntake.setText("0");
@@ -245,9 +253,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     }
 
     public void onClickDetailBtn(View view) {
-        Intent intent = new Intent(getApplicationContext(), IngredientsOfMealActivity.class);
-        intent.putExtra("feedId", feedId);
-        startActivity(intent);
+        dialog.show(getFragmentManager(), "dialog");
     }
 
     public void onClickSaveBtn(View view) {

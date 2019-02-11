@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="activityInfo"
+            type="com.animal.scale.hodoo.domain.ActivityInfo" />
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <include
+            layout="@layout/common_toolbar"
+            bind:activityInfo="@{activityInfo}" />
+
+        <com.ssomai.android.scalablelayout.ScalableLayout
+            android:layout_below="@+id/my_toolbar"
+            android:layout_centerInParent="true"
+            app:scale_base_width="360"
+            app:scale_base_height="640"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_below="@+id/common_toolbar"
+                app:scale_width="360"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/invitation_finish_title"
+                app:scale_textsize="34"
+                android:textAlignment="center"
+                android:textColor="@color/mainBlack"
+                />
+            <TextView
+                app:scale_top="110"
+                app:scale_width="360"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:scale_textsize="14"
+                android:textAlignment="center"
+                android:text="@string/invitation_finish_content"
+                android:textColor="@color/subscript_color"/>
+            <ImageView
+                app:scale_top="230"
+                app:scale_left="70"
+                app:scale_width="220"
+                app:scale_height="347"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </com.ssomai.android.scalablelayout.ScalableLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/re_send"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_pink_btn"
+                android:text="@string/invitation_finish__resend_btn"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:onClick="@{activity::reSend}"/>
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/invitation_finish__resend_cancel_btn"
+                android:onClick="@{activity::cancel }"/>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</layout>

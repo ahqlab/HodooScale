@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
+import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.PetAllInfos;
@@ -16,7 +18,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class PetAccountModel {
+public class PetAccountModel extends CommonModel {
 
     Context context;
 
@@ -27,20 +29,25 @@ public class PetAccountModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    public void getPetData(final asyncTaskListner asyncTaskListner) {
+    public void getPetData(final CommonModel.DomainListCallBackListner<PetAllInfos> domainListCallBackListner) {
         Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().aboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
-        new AbstractAsyncTaskOfList<PetAllInfos>() {
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetAllInfos>() {
             @Override
             protected void doPostExecute(List<PetAllInfos> data) {
                 if(data.size() > 0){
-                    asyncTaskListner.doPostExecute(data);
+                    domainListCallBackListner.doPostExecute(data);
                 }
             }
             @Override
             protected void doPreExecute() {
-                asyncTaskListner.doPreExecute();
+                domainListCallBackListner.doPreExecute();
             }
-        }.execute(call);
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 
     public void addRegistBtn(List<PetAllInfos> data) {
@@ -51,9 +58,17 @@ public class PetAccountModel {
         infos.setPetBasicInfo(info);
         data.add(0, infos);
     }
+    public int getSelectedPetIdx() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+    }
+    public void saveCurrentIdx(int idx) {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, idx);
+    }
 
     public interface asyncTaskListner {
         void doPostExecute(List<PetAllInfos> data);
         void doPreExecute();
     }
+
+
 }

@@ -9,10 +9,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
-import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityInvitationBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -26,6 +27,8 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
     public static int NOT_TO_USER = -1;
     public static int ERROR = 0;
     public static int SUCESS = 1;
+    public static int EXISTENCE_USER = 2;
+    public static int OVERLAB_INVITATION = 3;
 
     private ActivityInvitationBinding binding;
     private Invitation.Presenter presenter;
@@ -41,7 +44,7 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
         presenter = new InvitationPresenter(this);
         presenter.loadData(this);
 
-        binding.setActivityInfo(new ActivityInfo("회원 초대"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.invitation__tool_bar_title)));
         binding.email.editText.addTextChangedListener(new CommonTextWatcher(
                 binding.email,
                 this,
@@ -92,14 +95,32 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
     }
 
     @Override
+    public void showPopup(int title, int content, final CustomDialogCallback callback) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(content)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        if (callback != null)
+                            callback.onClick(dialog,i);
+                        dialog.dismiss();
+                    }
+                }).create();
+        dialog.show();
+    }
+
+    @Override
     public void setProgress(boolean state) {
         binding.progress.setVisibility(state ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void goLoginPage() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+    public void goFinishPage() {
+//        mSharedPrefManager.removeAllPreferences();
+        presenter.removeAutoLogin();
+        Intent intent = new Intent(this, InvitationFinishActivity.class);
+        intent.putExtra(HodooConstant.INVITATION_EMAIL_KEY, binding.email.editText.getText().toString());
         intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
         startActivity(intent);
         finish();

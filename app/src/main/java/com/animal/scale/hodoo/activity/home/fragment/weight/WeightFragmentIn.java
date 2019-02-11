@@ -6,6 +6,7 @@ import com.animal.scale.hodoo.domain.ArrayListDevice;
 import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 
@@ -24,6 +25,8 @@ public interface WeightFragmentIn {
         void initWeekCalendar();
 
         void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d);
+
+        void setTipMessageOfCountry(WeightTip weightTip);
     }
 
     interface Presenter{
@@ -34,14 +37,16 @@ public interface WeightFragmentIn {
 
         void setAnimationGaugeChart(int bcs);
 
-        void getDefaultData(String date, String type);
+        void getDefaultData(String date, int type);
 
         void setupDefaultChart();
 
-        void getLastCollectionData(String date, String type);
+        void getLastCollectionData(String date, int type);
 
         void initWeekCalendar();
 
         void initChart();
+
+        void getTipMessageOfCountry(WeightTip weightTip);
     }
 }

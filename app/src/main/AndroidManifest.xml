@@ -6,7 +6,7 @@
     <uses-sdk tools:overrideLibrary="com.tistory.dwfox.dwrulerviewlibrary" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -17,15 +17,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <!-- CAMERA -->
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- espressif -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -33,12 +33,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:theme">
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/main_logo" />
@@ -97,10 +97,18 @@
         <activity android:name=".activity.setting.device.bowelplate.list.BowelPlateListActivity" />
         <activity android:name=".test.ActivityCustomEditTextTest" />
         <activity android:name=".activity.user.invitation.InvitationActivity" />
+        <activity android:name=".activity.setting.user.group.manager.UserGroupManagerActivity" />
+        <activity android:name=".activity.setting.user.group.list.UserGroupListActivity" />
+        <activity android:name=".activity.user.invitation.finish.InvitationFinishActivity" />
+        <activity
+            android:name=".fcm.NotificationActivity"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
         <activity android:name=".activity.user.invitation.confirm.InvitationConfirmActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.user.invitation.confirm.InvitationConfirmActivity"/>
+                android:value=".activity.user.invitation.confirm.InvitationConfirmActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -113,7 +121,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.MyFirebaseMessagingService">
+        <service android:name=".service.firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -123,7 +131,8 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".service.AlwaysOnTopService"/>
+        <service android:name=".service.AlwaysOnTopService" />
+
         <receiver
             android:name=".receiver.FirebaseDataReceiver.FirebaseDataReceiver"
             android:exported="true"
@@ -132,9 +141,10 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </receiver>
-        <activity android:name=".activity.intro.IntroActivity" />
-        <activity android:name=".fcm.AlertActivity"></activity>
 
+        <activity android:name=".activity.intro.IntroActivity" />
+        <activity android:name=".fcm.AlertActivity" />
+        <activity android:name=".activity.setting.device.feeder.FeederOrderActivity"></activity>
     </application>
 
 </manifest>

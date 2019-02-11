@@ -2,11 +2,16 @@ package com.animal.scale.hodoo.domain;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -28,27 +33,11 @@ public class PetBasicInfo implements Serializable{
 	//생일
 	private String birthday;
 
-	//return 나이
-	@RequiresApi(api = Build.VERSION_CODES.O)
-	public int currentYear(){
-		return getPeriod().getYears();
-	}
+	private int currentYear;
 
-	//return 개월수
-	@RequiresApi(api = Build.VERSION_CODES.O)
-	public int currentMonth(){
-		return getPeriod().getMonths();
-	}
+	private int currentMonth;
 
-	@RequiresApi(api = Build.VERSION_CODES.O)
-	private Period getPeriod(){
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
-		LocalDate today = LocalDate.now();
-		LocalDate birthday = LocalDate.parse(getBirthday(), formatter);
-
-		Period p = Period.between(birthday, today);
-		return p;
-	}
+	
 	//중성화 여부 (YES || NO)
 	private String neutralization;
 }
