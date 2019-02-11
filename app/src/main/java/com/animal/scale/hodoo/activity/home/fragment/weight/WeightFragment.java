@@ -132,7 +132,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         mBasicIdx = basicIdx;
         presenter.getBcs(basicIdx);
     }
-
     public void setKg() {
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
@@ -164,6 +163,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void setLastCollectionData(RealTimeWeight d) {
         if ( d != null ) {
+            DecimalFormat fmt = new DecimalFormat("0.##");
+            binding.weightView.setNumber(d.getValue());
+            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            /*
             if (!String.valueOf(d.getValue()).matches("")) {
                 DecimalFormat fmt = new DecimalFormat("0.##");
                 binding.weightView.setNumber(d.getValue());
@@ -171,7 +174,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             } else {
                 binding.weightView.setNumber(0f);
                 mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
-            }
+            }*/
+
         } else {
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
@@ -183,14 +187,25 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
-        if (!String.valueOf(d.getValue()).matches("")) {
+        if ( d != null ) {
             DecimalFormat fmt = new DecimalFormat("0.##");
             binding.weightView.setNumber(d.getValue());
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            /*
+            if (!String.valueOf(d.getValue()).matches("")) {
+                DecimalFormat fmt = new DecimalFormat("0.##");
+                binding.weightView.setNumber(d.getValue());
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            } else {
+                binding.weightView.setNumber(0f);
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
+            }*/
+
         } else {
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
+
         if (refrashState)
             rotationStop(rotationView);
     }
@@ -335,6 +350,5 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 }
             }
         });
-
     }
 }

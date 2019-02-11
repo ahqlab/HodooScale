@@ -270,7 +270,7 @@
     <string name="main_activity__permission_check_title">권한 확인</string>
     <string name="main_activity__permission_check_suffix">해당 권한이 있어야 알림을 받아보실 수 있습니다.\n권한 : SystemAlert</string>
 
-    <string name="login__auto_login_btn">AutoLogin</string>
+    <string name="login__auto_login_btn">Remember Me</string>
     <string name="login__alert_withdraw_user_content">탈퇴한 회원입니다.</string>
     <string name="login__alert_email_certified_content">이메일 인증을 진행해주세요.</string>
 
