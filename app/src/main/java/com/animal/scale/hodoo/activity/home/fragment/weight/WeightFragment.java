@@ -183,10 +183,16 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
-        if (!String.valueOf(d.getValue()).matches("")) {
-            DecimalFormat fmt = new DecimalFormat("0.##");
-            binding.weightView.setNumber(d.getValue());
-            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+
+        if ( d != null ) {
+            if (!String.valueOf(d.getValue()).matches("")) {
+                DecimalFormat fmt = new DecimalFormat("0.##");
+                binding.weightView.setNumber(d.getValue());
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            } else {
+                binding.weightView.setNumber(0f);
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
+            }
         } else {
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));

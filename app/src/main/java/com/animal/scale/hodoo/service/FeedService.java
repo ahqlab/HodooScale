@@ -18,19 +18,19 @@ import retrofit2.http.Query;
 
 public interface FeedService {
 
-    @POST("feed/all/list")
+    @POST("feed/all/list.do")
     Call<List<AutoCompleateFeed>> getAllFeedList();
 
-    @POST("feed/search/list")
+    @POST("feed/search/list.do")
     Call<List<AutoCompleateFeed>> getSearchFeedList(@Body SearchParam searchParam, @Query("language") String language);
 
-    @POST("feed/get/info")
+    @POST("feed/get/info.do")
     Call<Feed> getFeedInfo(@Query("feedId") int feedId);
 
-    @POST("feed/insert")
+    @POST("feed/insert.do")
     Call<Integer> insertFeed(@Body MealHistory mealHistory);
 
 
-    @POST("feed/get/radar/chart/data")
+    @POST("feed/get/radar/chart/data.do")
     Call<Feed> getRadarChartData(@Query("date") String date, @Query("petIdx") int petIdx);
 }

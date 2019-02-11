@@ -8,6 +8,6 @@ import retrofit2.http.POST;
 
 public interface MealTipService {
 
-    @POST("tip/meal/get/county/message")
+    @POST("tip/meal/get/county/message.do")
     Call<MealTip> getTipOfCountry(@Body MealTip mealTip);
 }

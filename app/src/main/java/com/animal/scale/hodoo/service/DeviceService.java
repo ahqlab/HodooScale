@@ -13,18 +13,18 @@ import retrofit2.http.Query;
 
 public interface DeviceService {
 
-    @POST("device/my/device/list")
+    @POST("device/my/device/list.do")
     Call<List<Device>> getMyDeviceList(@Query("groupCode") String groupCode);
 
-    @POST("device/insert/device")
+    @POST("device/insert/device.do")
     Call<Integer> insertDevice(@Body Device device);
 
-    @POST("device/get/last/collection/data")
+    @POST("device/get/last/collection/data.do")
     Call<List<Device>> getLastCollectionData(@Query("device[]") List<Device> list);
 
-    @POST("device/change/connect/status")
+    @POST("device/change/connect/status.do")
     Call<Integer> setChangeSwithStatus(@Query("deviceIdx") int deviceIdx , @Query("connect") boolean b);
 
-    @POST("device/change/connection")
+    @POST("device/change/connection.do")
     Call<Integer> setChangeRegisted(@Query("groupCode") String groupCode, @Query("deviceIdx") int deviceIdx , @Query("isDel") boolean isDel);
 }

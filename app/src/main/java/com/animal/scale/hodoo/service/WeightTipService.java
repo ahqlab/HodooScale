@@ -10,6 +10,6 @@ import retrofit2.http.POST;
 
 public interface  WeightTipService {
 
-    @POST("tip/get/county/message")
+    @POST("tip/get/county/message.do")
     Call<WeightTip> getWeightTipOfCountry(@Body WeightTip weightTip);
 }

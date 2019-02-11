@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface FeederService {
 
-    @POST("feeder/insert")
+    @POST("feeder/insert.do")
     Call<Integer> insert(@Body FeedOrders feedOrders);
 
 }
