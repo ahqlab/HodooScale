@@ -12,13 +12,13 @@ import retrofit2.http.Query;
 
 public interface PetService {
 
-    @POST("pet/my/pet/list")
+    @POST("pet/my/pet/list.do")
     Call<List<Pet>> getMyPetList(@Query("groupCode") String groupCode);
 
 
-    @POST("pet/basic/get")
+    @POST("pet/basic/get.do")
     Call<PetBasicInfo> getBasicInformation(@Query("groupCode") String groupCode, @Query("petIdx") int petIdx);
 
-    @POST("pet/all/infos")
+    @POST("pet/all/infos.do")
     Call<PetAllInfos> petAllInfos(@Query("petIdx") int petIdx);
 }

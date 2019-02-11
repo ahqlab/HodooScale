@@ -28,4 +28,60 @@
         <item>very strong</item>
     </string-array>
 
+    <string-array name="disease">
+        <item>No Disease</item>
+        <item>Diabetes</item>
+        <item>Allergy</item>
+        <item>Dementia</item>
+        <item>Arthritis</item>
+        <item>Canine Parvovirus</item>
+        <item>Obesity</item>
+        <item>Cancer</item>
+    </string-array>
+
+    <string-array name="setting_title">
+        <item>GENERAL</item>
+        <item>USER</item>
+        <item>DEVICE</item>
+        <item>HODOO LINK</item>
+        <item>PET</item>
+        <item>SUPPORT</item>
+    </string-array>
+
+    <string-array name="general_settings">
+        <item>Notice</item>
+        <item>Homepage</item>
+        <item>Version</item>
+    </string-array>
+
+    <string-array name="user_settings">
+        <item>Account</item>
+        <item>Notification</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="device_settings">
+        <item>Potty</item>
+        <item>Feeder</item>
+        <item>Bed</item>
+        <item>Cushion</item>
+        <item>Harness</item>
+        <item>Tag</item>
+    </string-array>
+
+    <string-array name="hodoo_link_settings">
+        <item>Group User List</item>
+        <item>Request Log</item>
+    </string-array>
+
+    <string-array name="pet_settings">
+        <item>Pet List</item>
+    </string-array>
+
+    <string-array name="support_settings">
+        <item>Open Source</item>
+        <item>Terms of Use</item>
+        <item>Privacy Policy</item>
+    </string-array>
+
 </resources>

@@ -190,6 +190,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
     @Override

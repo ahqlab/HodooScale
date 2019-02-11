@@ -229,7 +229,7 @@
 
     <!-- MealSearchActivity -->
     <string name="tip">Tip</string>
-    <string name="save">save</string>
+    <string name="save">확인</string>
     <string name="not_found_email">not found email</string>
     <string name="id_password_do_not_match">id password do not match</string>
     <string name="bowel_plate">배변판</string>

@@ -36,7 +36,6 @@ public class PetAllInfos implements Serializable {
     public float getFactor() {
         double factor = 0;
         //나이 <= 4개월
-        Log.e("HJLEE", "petBasicInfo.getCurrentMonth() : " + petBasicInfo.getCurrentMonth());
         if (petBasicInfo.getCurrentMonth() != 0 && petBasicInfo.getNeutralization() != null && petWeightInfo.getBcs() != 0) {
             if (petBasicInfo.getCurrentMonth() <= 4) {
                 //2 (중성화)

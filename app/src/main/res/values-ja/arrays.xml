@@ -3,7 +3,9 @@
 
     <string-array name="bcs_arr">
         <item>不足</item>
+        <item>不足</item>
         <item>超過</item>
+        <item>適正</item>
         <item>適正</item>
     </string-array>
 

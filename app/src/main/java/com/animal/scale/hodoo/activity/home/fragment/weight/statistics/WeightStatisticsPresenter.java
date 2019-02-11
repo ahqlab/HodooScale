@@ -38,19 +38,33 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if (d.size() > 0) {
-
                     /* 임시 일본어 처리(s) */
-                    String[] ko = { "월", "화", "수", "목", "금", "토", "일" };
-                    String[] ja = { "月", "火", "水", "木", "金", "土", "日" };
+                    String[] ko = {"월", "화", "수", "목", "금", "토", "일"};
+                    String[] ja = {"月", "火", "水", "木", "金", "土", "日"};
+                    String[] en = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
                     Locale locale = mContext.getResources().getConfiguration().locale;
                     String localeStr = locale.getLanguage();
-                    if ( localeStr.equals("ja") )
-                        for ( Statistics value : d )
-                            for (int i = 0; i < ko.length; i++)
-                                if ( value.getTheDay().equals(ko[i]) )
-                                    value.setTheDay(ja[i]);
                     /* 임시 일본어 처리(e) */
+                    if (localeStr.equals("ja")) {
+                        for (Statistics value : d) {
+                            for (int i = 0; i < ko.length; i++) {
+                                if (value.getTheDay().equals(ko[i])) {
+                                    value.setTheDay(ja[i]);
+                                }
+                            }
+                        }
 
+                    }else if(localeStr.equals("ko")){
+
+                    }else if(localeStr.equals("en")){
+                        for (Statistics value : d) {
+                            for (int i = 0; i < ko.length; i++) {
+                                if (value.getTheDay().equals(ko[i])) {
+                                    value.setTheDay(en[i]);
+                                }
+                            }
+                        }
+                    }
                     if (chart.getData() != null) {
                         chart.getData().notifyDataChanged();
                     }
@@ -60,6 +74,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                     chart.clear();
                 }
             }
+
             @Override
             public void doPreExecute() {
             }
@@ -86,6 +101,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                     chart.clear();
                 }
             }
+
             @Override
             public void doPreExecute() {
             }
@@ -112,6 +128,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                     chart.clear();
                 }
             }
+
             @Override
             public void doPreExecute() {
             }
@@ -138,6 +155,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                     chart.clear();
                 }
             }
+
             @Override
             public void doPreExecute() {
             }
@@ -149,7 +167,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         });
     }
 
-    private void setStatisticalData(List<Statistics> d, String  type) {
+    private void setStatisticalData(List<Statistics> d, String type) {
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < d.size(); i++) {
             yVals.add(new Entry(i, d.get(i).getAverage()));

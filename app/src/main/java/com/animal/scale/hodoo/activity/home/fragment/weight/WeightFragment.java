@@ -132,7 +132,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         mBasicIdx = basicIdx;
         presenter.getBcs(basicIdx);
     }
-
     public void setKg() {
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
@@ -153,7 +152,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         }*/
 
         if (bcs > 0) {
-            binding.bcsSubscript.setText(bcsArr[bcs]);
+            binding.bcsSubscript.setText(bcsArr[bcs - 1]);
             binding.bcsStep.setText(String.valueOf(bcs));
         } else {
             binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
@@ -163,28 +162,50 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     //여기 날짜도 들어가야함..
     @Override
     public void setLastCollectionData(RealTimeWeight d) {
-        if (!String.valueOf(d.getValue()).matches("")) {
+        if ( d != null ) {
             DecimalFormat fmt = new DecimalFormat("0.##");
             binding.weightView.setNumber(d.getValue());
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            /*
+            if (!String.valueOf(d.getValue()).matches("")) {
+                DecimalFormat fmt = new DecimalFormat("0.##");
+                binding.weightView.setNumber(d.getValue());
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            } else {
+                binding.weightView.setNumber(0f);
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
+            }*/
+
         } else {
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
+
         if (refrashState)
             rotationStop(rotationView);
     }
 
     @Override
     public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
-        if (!String.valueOf(d.getValue()).matches("")) {
+        if ( d != null ) {
             DecimalFormat fmt = new DecimalFormat("0.##");
             binding.weightView.setNumber(d.getValue());
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            /*
+            if (!String.valueOf(d.getValue()).matches("")) {
+                DecimalFormat fmt = new DecimalFormat("0.##");
+                binding.weightView.setNumber(d.getValue());
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            } else {
+                binding.weightView.setNumber(0f);
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
+            }*/
+
         } else {
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
+
         if (refrashState)
             rotationStop(rotationView);
     }
@@ -329,6 +350,5 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 }
             }
         });
-
     }
 }

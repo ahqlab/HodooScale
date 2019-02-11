@@ -9,9 +9,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface InvitationService {
-    @POST("user/invitation/getInvitationUser")
+    @POST("user/invitation/getInvitationUser.do")
     Call<List<InvitationUser>> getInvitationUser(@Query("userIdx") int userIdx );
 
-    @POST("user/invitation/setInvitationType")
+    @POST("user/invitation/setInvitationType.do")
     Call<Integer> setInvitationType(@Query("type") int type, @Query("toUserIdx") int toUserIdx, @Query("fromUserIdx") int fromUserIdx );
 }

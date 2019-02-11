@@ -10,13 +10,13 @@ import retrofit2.http.POST;
 
 public interface GroupsService {
 
-    @POST("groups/get")
+    @POST("groups/get.do")
     Call<Groups> get(@Body Groups groups);
 
-    @POST("groups/get/list")
+    @POST("groups/get/list.do")
     Call<List<Groups>> getGroupLists(@Body Groups groups);
 
-    @POST("groups/is/regist")
+    @POST("groups/is/regist.do")
     Call<Groups> isRegist(@Body Groups groups);
 
 
