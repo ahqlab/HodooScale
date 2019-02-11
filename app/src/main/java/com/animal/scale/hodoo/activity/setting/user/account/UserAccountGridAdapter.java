@@ -124,6 +124,9 @@ public class UserAccountGridAdapter extends BaseAdapter{
         } else if ( Pattern.matches("^[a-zA-Z]*$", name) ) {
             name = name.toUpperCase(); //세로 가운데 정렬을 위한 대문자 처리
             endNum = 1;
+        } else {
+            name = name.toUpperCase(); //세로 가운데 정렬을 위한 대문자 처리
+            endNum = 1;
         }
         convertName = name.substring(0, endNum);
         return convertName;
@@ -143,7 +146,7 @@ public class UserAccountGridAdapter extends BaseAdapter{
     public void setConvertNicName( List<User> data ) {
         for (int i = 0; i < data.size(); i++) {
             if ( i == 0 ) {
-                data.get(i).setConvertNickname( data.get(i).getNickname() );
+                data.get(i).setConvertNickname( matches(data.get(i).getNickname()) );
                 data.get(i).setNickname("");
                 continue;
             }
