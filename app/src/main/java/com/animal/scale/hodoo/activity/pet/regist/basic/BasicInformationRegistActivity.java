@@ -159,7 +159,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         if (basicInfo != null) {
             binding.setInfo(basicInfo);
             REQUEST_MODE = true;
-            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/update";
+            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/update.do";
             presenter.setView(basicInfo);
         } else {
             binding.setInfo(new PetBasicInfo());
@@ -169,7 +169,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 binding.getInfo().setNeutralization("NO");
             }
             REQUEST_MODE = false;
-            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist";
+            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist.do";
         }
     }
 

@@ -26,6 +26,13 @@ public class HodooConstant {
     public static final int FIREBASE_INVITATION_TYPE = 3;
     public static final int FIREBASE_INVITATION_ACCEPT = 4;
 
+
+    public static final int FAIL_CODE = -1;
+    public static final int SUCCESS_CODE = 1;
+
+    public static final int MEMBER_EXIST = -2;
+    public static final int NOT_GROUP_MASTER = 2;
+
     /* oreo version notification channel (s) */
     public static final String NORMAL_CHANNEL = "notice_channel";
     public static final String WEIGHT_CHECK_CHANNEL = "weight_check_channel";
