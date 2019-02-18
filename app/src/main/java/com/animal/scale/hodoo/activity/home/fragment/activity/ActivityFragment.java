@@ -121,7 +121,6 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         if ( !isLocation ) isLocation = true;
 
-        if ( oldLocation == null ) {
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -151,11 +150,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             if (presenter == null)
                 presenter = new ActivityFragmentPresenter(getContext(), this);
             setProgress(true);
-        } else {
-            setProgress(true);
-            setWeather(oldLocation);
         }
-    }
 
     @Override
     public void onLocationChanged(final Location location) {
@@ -282,6 +277,11 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
                     }
                     isLocation = false;
                     setProgress(false);
+
+                    if ( lm != null ) {
+                        lm.removeUpdates(ActivityFragment.this);
+                        lm = null;
+                    }
                 }
             });
         }
