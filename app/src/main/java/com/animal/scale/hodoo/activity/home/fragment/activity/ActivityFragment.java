@@ -161,17 +161,14 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
-        if ( DEBUG ) Log.e(TAG, "onStatusChanged");
     }
 
     @Override
     public void onProviderEnabled(String s) {
-        if ( DEBUG ) Log.e(TAG, "onProviderEnabled");
     }
 
     @Override
     public void onProviderDisabled(String s) {
-        if ( DEBUG ) Log.e(TAG, "onProviderDisabled");
     }
     public void onRefresh ( View v ) {
         rotationState = rotationState ? VIewUtil.rotationStop(v) : VIewUtil.rotationStart(v);
