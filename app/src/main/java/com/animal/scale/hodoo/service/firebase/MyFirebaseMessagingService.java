@@ -151,7 +151,10 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
             Gson gson = new Gson();
             bacckgroundIntent.putExtra("data", gson.toJson(data));
             if ( !isServiceRunning() ) {
-                getApplicationContext().startService(bacckgroundIntent);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                } else {
+                    getApplicationContext().startService(bacckgroundIntent);
+                }
             } else {
                 getApplicationContext().stopService(bacckgroundIntent);
                 getApplicationContext().startService(bacckgroundIntent);

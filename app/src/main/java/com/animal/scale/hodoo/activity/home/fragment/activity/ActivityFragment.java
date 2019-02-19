@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -50,10 +51,6 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
 
 
     private Location oldLocation;
-
-
-
-
 
     @Nullable
     @Override
@@ -124,41 +121,85 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
             lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         if ( !isLocation ) isLocation = true;
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        boolean statusOfGPS = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        boolean statusOfNetwork = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        if ( statusOfGPS ) {
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    0,
-                    0,
-                    this);
-        }
-        if ( statusOfNetwork ) {
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                    0,
-                    0,
-                    this);
-        }
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            boolean statusOfGPS = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean statusOfNetwork = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            if (statusOfGPS) {
+                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        0,
+                        0,
+                        this);
+            }
+            if (statusOfNetwork) {
+                lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                        0,
+                        0,
+                        this);
+            }
 
-        binding.kcalView.setNumber(0);
-        presenter = new ActivityFragmentPresenter(getContext(), this);
-        setProgress(true);
-    }
+            binding.kcalView.setNumber(0);
+            if (presenter == null)
+                presenter = new ActivityFragmentPresenter(getContext(), this);
+            setProgress(true);
+        }
 
     @Override
     public void onLocationChanged(final Location location) {
-        if ( oldLocation == null )
-            oldLocation = location;
+        isLocation = true;
+        oldLocation = location;
+        setWeather(location);
+    }
 
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+    }
+    public void onRefresh ( View v ) {
+        rotationState = rotationState ? VIewUtil.rotationStop(v) : VIewUtil.rotationStart(v);
+        if ( rotationState ) {
+            nowTime = System.currentTimeMillis();
+            binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
+            rotationState = VIewUtil.rotationStop(v);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isActivity = true;
+        //getWeather();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        isActivity = false;
+        if ( lm != null ) {
+            lm.removeUpdates(this);
+            lm = null;
+        }
+
+    }
+    public void refreshWeather( View view ) {
+        getWeather();
+    }
+    public void setWeather( Location location ) {
         if ( isLocation ) {
             double lon = location.getLongitude(); //경도
             double lat= location.getLatitude();   //위도
@@ -231,54 +272,15 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
                     } else {
                         binding.district.setText(R.string.activity_fragment__not_found_location_msg);
                     }
-                    setProgress(false);
                     isLocation = false;
+                    setProgress(false);
+
+                    if ( lm != null ) {
+                        lm.removeUpdates(ActivityFragment.this);
+                        lm = null;
+                    }
                 }
             });
         }
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
-    public void onRefresh ( View v ) {
-        rotationState = rotationState ? VIewUtil.rotationStop(v) : VIewUtil.rotationStart(v);
-        if ( rotationState ) {
-            nowTime = System.currentTimeMillis();
-            binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
-            rotationState = VIewUtil.rotationStop(v);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        isActivity = true;
-        //getWeather();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        isActivity = false;
-        if ( lm != null ) {
-            lm.removeUpdates(this);
-            lm = null;
-        }
-
-    }
-    public void refreshWeather( View view ) {
-        getWeather();
     }
 }
