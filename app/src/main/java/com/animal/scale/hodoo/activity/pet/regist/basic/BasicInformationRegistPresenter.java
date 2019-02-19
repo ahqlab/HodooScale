@@ -16,11 +16,13 @@ import android.widget.EditText;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.PetBreed;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -98,8 +100,8 @@ public class BasicInformationRegistPresenter implements BasicInformationRegistIn
     }
 
     @Override
-    public void getPetBasicInformation(int petIdx) {
-        model.getPetBasicInformation(petIdx, new CommonModel.DomainCallBackListner<PetBasicInfo>() {
+    public void getPetBasicInformation(String location, int petIdx) {
+        model.getPetBasicInformation(location, petIdx, new CommonModel.DomainCallBackListner<PetBasicInfo>() {
             @Override
             public void doPostExecute(PetBasicInfo basicInfo) {
                 view.setBasicInfo(basicInfo);
@@ -178,6 +180,26 @@ public class BasicInformationRegistPresenter implements BasicInformationRegistIn
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
         bitmap = resizeBitmap(bitmap);
         view.setSaveImageFile(bitmap);
+    }
+
+    @Override
+    public void getAllPetBreed( String location ) {
+        model.getAllPetBreed(location, new CommonModel.DomainListCallBackListner<PetBreed>() {
+            @Override
+            public void doPostExecute(List<PetBreed> d) {
+                view.getAllPetBreed(d);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
     }
 
     public Bitmap resizeBitmap(Bitmap original) {

@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.service;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.PetBreed;
 
 import java.util.List;
 
@@ -17,8 +18,11 @@ public interface PetService {
 
 
     @POST("pet/basic/get.do")
-    Call<PetBasicInfo> getBasicInformation(@Query("groupCode") String groupCode, @Query("petIdx") int petIdx);
+    Call<PetBasicInfo> getBasicInformation(@Query("groupCode") String groupCode, @Query("petIdx") int petIdx, @Query("location") String location);
 
     @POST("pet/all/infos.do")
     Call<PetAllInfos> petAllInfos(@Query("petIdx") int petIdx);
+
+    @POST("pet/all/getBreed.do")
+    Call<List<PetBreed>> getAllBreed( @Query("location") String location );
 }

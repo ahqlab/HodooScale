@@ -36,6 +36,8 @@ import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.IosStyleBottomAlert;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.PetBreed;
+import com.animal.scale.hodoo.util.VIewUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
 import com.squareup.picasso.Picasso;
 
@@ -43,6 +45,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class BasicInformationRegistActivity extends BaseActivity<BasicInformationRegistActivity> implements BasicInformationRegistIn.View {
 
@@ -55,6 +59,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     public static final int CAMERA_PERMISSION_CODE = 100;
     public static final int STORAGE_PERMISSION_CODE = 101;
+
+    private int breedIndex;
 
     ProgressDialog progressDialog;
 
@@ -77,6 +83,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     private BottomDialog dialog;
 
+    private List<PetBreed> breeds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +100,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         presenter.setNavigation();
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
-        presenter.getPetBasicInformation(petIdx);
+        String location = VIewUtil.getMyLocationCode(this);
+        presenter.getPetBasicInformation(location, petIdx);
 
         binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -152,6 +161,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 validation();
             }
         }));
+
+        presenter.getAllPetBreed( location );
     }
 
     @Override
@@ -224,6 +235,11 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     @Override
     public void setSaveImageFile(Bitmap image) {
         binding.profile.setImageBitmap(image);
+    }
+
+    @Override
+    public void getAllPetBreed(List<PetBreed> breeds) {
+        this.breeds = breeds;
     }
 
     @Override
@@ -410,10 +426,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     public void goDiseaseActivity(View view) {
         setBasicInfo();
+        PetBasicInfo info = binding.getInfo();
+        info.setPetBreed(String.valueOf(breedIndex));
         if (REQUEST_MODE) {
-            presenter.updateBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
+            presenter.updateBasicInfo(REQUEST_URL, info, binding.profile);
         } else {
-            presenter.registBasicInfo(REQUEST_URL, binding.getInfo(), binding.profile);
+            presenter.registBasicInfo(REQUEST_URL, info, binding.profile);
         }
     }
 
@@ -462,12 +480,16 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void onClickSelectEditText(View view) {
-        final String[] values = getResources().getStringArray(R.array.basic_info_activity__pet_breed);
+        final String[] values = new String[breeds.size()];
+        for (int i = 0; i < breeds.size(); i++)
+            values[i] = breeds.get(i).getName();
+
         super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null)
                 .setItems(values, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        binding.petBreed.editText.setText(values[which]);
+                        binding.petBreed.editText.setText(breeds.get(which).getName());
+                        breedIndex = breeds.get(which).getId();
                         dialog.dismiss();
                     }
                 }).show();

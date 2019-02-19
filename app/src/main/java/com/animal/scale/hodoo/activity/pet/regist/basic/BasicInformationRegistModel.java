@@ -6,15 +6,19 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.PetBreed;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.HttpUtill;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -82,8 +86,8 @@ public class BasicInformationRegistModel extends CommonModel {
         }.execute(), limitedTime, interval, true).start();
     }
 
-    public void getPetBasicInformation(int petIdx, final DomainCallBackListner<PetBasicInfo> domainCallBackListner) {
-        Call<PetBasicInfo> call = NetRetrofit.getInstance().getPetService().getBasicInformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
+    public void getPetBasicInformation(String location, int petIdx, final DomainCallBackListner<PetBasicInfo> domainCallBackListner) {
+        Call<PetBasicInfo> call = NetRetrofit.getInstance().getPetService().getBasicInformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx, location);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetBasicInfo>() {
 
             @Override
@@ -94,6 +98,26 @@ public class BasicInformationRegistModel extends CommonModel {
             @Override
             protected void doPreExecute() {
                 domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
+    public void getAllPetBreed(String location, final DomainListCallBackListner<PetBreed> callback) {
+        final Call<List<PetBreed>> call = NetRetrofit.getInstance().getPetService().getAllBreed( location );
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetBreed>() {
+            @Override
+            protected void doPostExecute(List<PetBreed> d) {
+                callback.doPostExecute(d);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
             }
 
             @Override
