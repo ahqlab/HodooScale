@@ -267,12 +267,12 @@
 
     <string name="common__invitation_title">Requested Log</string>
 
-    <string name="main_activity__permission_check_title">권한 확인</string>
-    <string name="main_activity__permission_check_suffix">해당 권한이 있어야 알림을 받아보실 수 있습니다.\n권한 : SystemAlert</string>
+    <string name="main_activity__permission_check_title">Permission Check</string>
+    <string name="main_activity__permission_check_suffix">You must have the appropriate permissions to receive notifications.\npermission : SystemAlert</string>
 
     <string name="login__auto_login_btn">Remember Me</string>
-    <string name="login__alert_withdraw_user_content">탈퇴한 회원입니다.</string>
-    <string name="login__alert_email_certified_content">이메일 인증을 진행해주세요.</string>
+    <string name="login__alert_withdraw_user_content">a member who has left.</string>
+    <string name="login__alert_email_certified_content">Please proceed with the email authentication.</string>
 
     <string name="sign_up__password_hint">Password(8word more)</string>
     <string name="sign_up__nick_name_hint">Nickname(9word more)</string>
@@ -284,36 +284,38 @@
     <string name="user_account__group_withdraw_fin_suffix">You have removed from the group.</string>
 
 
-    <string name="invitation_confirm__title">사용자 초대</string>
-    <string name="invitation_confirm__content">사용자 초대</string>
-    <string name="invitation_confirm__suffix">님의 초대입니다.</string>
-    <string name="invitation_confirm__fin_title">초대완료</string>
-    <string name="invitation_confirm__fin_suffix">초대가 완료되었습니다.</string>
+    <string name="invitation_confirm__title">Invite Users</string>
+    <string name="invitation_confirm__content">Invite Users</string>
+    <string name="invitation_confirm__suffix">It\'s an invitation.</string>
+    <string name="invitation_confirm__fin_title">Invitation Completed</string>
+    <string name="invitation_confirm__fin_suffix">Your invitation is complete..</string>
 
-    <string name="invitation_finish__alert_cancel_title">요청 취소 완료</string>
-    <string name="invitation_finish__alert_cancel_content">참여 요청을 취소하였습니다.</string>
+    <string name="invitation_finish__alert_cancel_title">Request Cancellation</string>
+    <string name="invitation_finish__alert_cancel_content">Your request to participate has been canceled.</string>
 
-    <string name="invitation_finish__resend_alert_success_title">그룹 참여 요청 완료</string>
-    <string name="invitation_finish__resend_alert_success_suffix">님에게 초대 메세지를 발송했습니다.</string>
-    <string name="invitation_finish__resend_alert_error_title">그룹 참여 요청 에러</string>
-    <string name="invitation_finish__resend_btn">재발송</string>
-    <string name="invitation_finish__resend_cancel_btn">발송 취소</string>
+    <string name="invitation_finish__resend_alert_success_title">Completion of group participation request</string>
+    <string name="invitation_finish__resend_alert_success_suffix">I sent you an invitation..</string>
+    <string name="invitation_finish__resend_alert_error_title">Error requesting group participation</string>
+    <string name="invitation_finish__resend_btn">Resend</string>
+    <string name="invitation_finish__resend_cancel_btn">Cancel Request</string>
 
-    <string name="invitation__invitation_error_title">그룹 참여 에러</string>
-    <string name="invitation__error_existence_user">이미 그룹에 참여되었습니다.\n로그인창으로 이동합니다.</string>
-    <string name="invitation__error_not_user">참여하실 그룹이 없습니다.</string>
-    <string name="invitation__error_not_device">요청한 그룹이 디바이스를 가지고 있지 않습니다.</string>
-    <string name="invitation__error_overlab_invitation">이미 해당 그룹에 참여를 요청했습니다.</string>
+    <string name="invitation__invitation_error_title">Group Engagement Error</string>
+    <string name="invitation__error_existence_user">You have already joined the group.\nGo to the login page.</string>
+    <string name="invitation__error_not_user">There are no groups to join.</string>
+    <string name="invitation__error_not_device">The requested group does not have a device.</string>
+    <string name="invitation__error_overlab_invitation">You have already requested to join that group.</string>
+
+    <string name="basic_infomation_regist__pet_breed_title">Breed</string>
 
 
 
-    <string name="user_group_manager__tool_bar_title">그룹 관리</string>
+    <string name="user_group_manager__tool_bar_title">Group management</string>
 
-    <string name="invitation__tool_bar_title">회원 초대</string>
-    <string name="invitation__content">그룹에 참여하실 회원의 이메일을 입력해주세요.</string>
-    <string name="invitation__send_btn">그룹 참여 요청하기</string>
+    <string name="invitation__tool_bar_title">Invitation Member</string>
+    <string name="invitation__content">Please enter the e-mail of the members who will be joining the group.</string>
+    <string name="invitation__send_btn">request group participation</string>
 
-    <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
+    <string name="activity_fragment__not_found_location_msg">Unable to locate</string>
     <!-- 2019.02.07 추가 -->
     <string name="auto_login">Remember Me</string>
 
