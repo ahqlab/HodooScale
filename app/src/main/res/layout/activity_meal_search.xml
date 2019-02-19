@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="activity"
             type="com.animal.scale.hodoo.activity.meal.search.MealSearchActivity" />
@@ -44,7 +45,7 @@
                     android:layout_margin="16dp"
                     android:background="@drawable/rounded_rect_radius_10"
                     android:drawableLeft="@drawable/search_meal_m_glass"
-                    android:paddingLeft="8dp"/>
+                    android:paddingLeft="8dp" />
 
                 <TextView
                     android:id="@+id/list_title"
@@ -52,15 +53,14 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
                     android:paddingBottom="5dp"
+                    android:text="@string/istyle_recent_search_word"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="@string/istyle_recent_search_word"/>
+                    android:textStyle="bold" />
 
                 <ListView
                     android:id="@+id/feed_listview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </ListView>
+                    android:layout_height="wrap_content"></ListView>
 
             </LinearLayout>
 
@@ -70,10 +70,10 @@
                 android:background="@color/hodoo_deep_gray"
                 android:gravity="center_vertical|center_horizontal"
                 android:orientation="horizontal"
-                android:paddingBottom="18dp"
                 android:paddingLeft="16dp"
+                android:paddingTop="18dp"
                 android:paddingRight="16dp"
-                android:paddingTop="18dp">
+                android:paddingBottom="18dp">
 
                 <TextView
                     android:layout_width="24dp"
@@ -95,7 +95,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
     </RelativeLayout>
 

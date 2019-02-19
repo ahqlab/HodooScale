@@ -144,28 +144,30 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={domain.name}"
+                    android:gravity="center_horizontal|center_vertical"
                     android:textSize="20dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal|center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="236Kcal"
+                        android:text="0Kcal"
                         android:textColor="@color/mainRed"
                         android:textSize="30sp"
                         app:conOnlyFloatToString="@{domain.calculationCalories}" />

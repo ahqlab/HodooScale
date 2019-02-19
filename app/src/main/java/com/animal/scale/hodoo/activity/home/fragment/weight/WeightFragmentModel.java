@@ -167,7 +167,8 @@ public class WeightFragmentModel extends CommonModel {
     }
 
     public void getDayData(String date,  int type, final DomainListCallBackListner<Statistics> domainListCallBackListner) {
-        Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfTime(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), date, type);
+        Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfTime(
+                mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), date, type, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
             protected void doPostExecute(List<Statistics> d) {
@@ -187,7 +188,7 @@ public class WeightFragmentModel extends CommonModel {
     }
 
     public void getLastCollectionData(String date, int type, final DomainCallBackListner<RealTimeWeight> domainListCallBackListner) {
-        Call<RealTimeWeight> call = NetRetrofit.getInstance().getRealTimeWeightService().getLastCollectionData(date, mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type);
+        Call<RealTimeWeight> call = NetRetrofit.getInstance().getRealTimeWeightService().getLastCollectionData(date, mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<RealTimeWeight>() {
             @Override
             protected void doPostExecute(RealTimeWeight realTimeWeight) {

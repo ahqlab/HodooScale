@@ -65,7 +65,6 @@ public class BasicInformationRegistPresenter implements BasicInformationRegistIn
         model.registBasicInfo(requestUrl, info, profile, new CommonModel.DomainCallBackListner<Pet>() {
             @Override
             public void doPostExecute(Pet pet) {
-                Log.e("HJLEE", pet.toString());
                 view.setProgress(false);
                 view.goNextPage(pet);
             }

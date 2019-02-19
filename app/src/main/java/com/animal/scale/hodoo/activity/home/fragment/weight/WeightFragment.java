@@ -132,6 +132,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         mBasicIdx = basicIdx;
         presenter.getBcs(basicIdx);
     }
+    //오늘의 평균 체중
     public void setKg() {
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
