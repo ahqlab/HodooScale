@@ -113,4 +113,44 @@ public class MyAccountPresenter implements MyAccount.Presenter {
             }
         });
     }
+
+    @Override
+    public void checkGroupCount(final Context context) {
+        myAccountModel.checkGroupCount(new CommonModel.DomainCallBackListner<Integer>() {
+            @Override
+            public void doPostExecute(Integer result) {
+                switch ( result ) {
+                    case HodooConstant.SUCCESS_CODE :
+                    case HodooConstant.NOT_GROUP_MASTER :
+                        myAccountView.showPopup(context.getString(R.string.withdraw_subscript), new CommonListener.PopupClickListener() {
+                            @Override
+                            public void onPositiveClick(DialogInterface dialog, int which) {
+                                withdraw();
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onNegativeClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        break;
+                    case HodooConstant.MEMBER_EXIST :
+                        myAccountView.showPopup(context.getString(R.string.myaccount__member_exist_error_msg));
+                        break;
+
+                }
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
 }

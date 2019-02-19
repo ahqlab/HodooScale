@@ -322,5 +322,8 @@
 
     <string name="common__recommend_calorie">700kcal\n(권장량)</string>
 
+
+    <string name="myaccount__member_exist_error_msg">그룹의 멤버들이 존재합니다.\n멤버들을 탈퇴 후 진행하실 수 있습니다.</string>
+
     <!-- 2019-01-30 new code (e) -->
 </resources>

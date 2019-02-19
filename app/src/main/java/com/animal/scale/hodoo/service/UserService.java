@@ -51,4 +51,7 @@ public interface UserService{
 
     @POST("user/withdrawGroup.do")
     Call<Integer> withdrawGroup( @Query("to") int to, @Query("from") int from );
+
+    @POST("user/checkGroupCount.do")
+    Call<Integer> checkGroupCount( @Query("idx") int idx );
 }
