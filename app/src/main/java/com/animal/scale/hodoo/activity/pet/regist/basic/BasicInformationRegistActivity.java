@@ -484,7 +484,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         for (int i = 0; i < breeds.size(); i++)
             values[i] = breeds.get(i).getName();
 
-        super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null)
+        super.showBasicOneBtnPopup(getResources().getString(R.string.basic_infomation_regist__pet_breed_title), null)
                 .setItems(values, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
