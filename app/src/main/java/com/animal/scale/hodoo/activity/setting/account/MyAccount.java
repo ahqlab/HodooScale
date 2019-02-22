@@ -45,5 +45,7 @@ public interface MyAccount {
         void saveFCMToken ( User user );
 
         void withdraw();
+
+        void checkGroupCount(final Context context);
     }
 }

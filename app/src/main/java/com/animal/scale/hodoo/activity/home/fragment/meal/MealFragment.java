@@ -265,7 +265,9 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         binding.calorieBar.invalidate();
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
-        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        Activity activity = getActivity();
+        if ( activity != null )
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
     @Override

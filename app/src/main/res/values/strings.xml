@@ -203,6 +203,7 @@
     <!--  AdapterOfWifiList -->
     <string name="istyle_use_the_current_wifi">현재폰에 연결된 WIFI 사용</string>
     <string name="choice_country">국가</string>
+
     <string name="bcs_watching_tv_desc">동영상을 본 후 반려견의 BCS 단계를 선택하십시오.</string>
     <string name="select_bcs">Select BCS</string>
     <string name="istyle_required_select_bcs_message">BCS를 선택하세요.</string>
@@ -321,6 +322,11 @@
     <string name="invitation__error_overlab_invitation">이미 해당 그룹에 참여를 요청했습니다.</string>
 
     <string name="common__recommend_calorie">700kcal\n(권장량)</string>
+
+
+    <string name="myaccount__member_exist_error_msg">그룹의 멤버들이 존재합니다.\n멤버들을 탈퇴 후 진행하실 수 있습니다.</string>
+
+    <string name="basic_infomation_regist__pet_breed_title">품종</string>
 
     <!-- 2019-01-30 new code (e) -->
 </resources>

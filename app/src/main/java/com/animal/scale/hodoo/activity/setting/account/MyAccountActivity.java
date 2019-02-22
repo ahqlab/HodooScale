@@ -60,18 +60,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                 } else if(position == MyAccount.CHANGE_USER_INFO){
                     presenter.changePassword();
                 }  else if ( position == MyAccount.WITHDRAW ) {
-                    showPopup(getApplicationContext().getString(R.string.withdraw_subscript), new CommonListener.PopupClickListener() {
-                        @Override
-                        public void onPositiveClick(DialogInterface dialog, int which) {
-                            presenter.withdraw();
-                            dialog.dismiss();
-                        }
-
-                        @Override
-                        public void onNegativeClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                    presenter.checkGroupCount(getApplicationContext());
                 }
             }
         });

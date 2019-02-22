@@ -101,5 +101,25 @@ public class MyAccountModel extends CommonModel{
 
         }
     }
+    public void checkGroupCount( final CommonModel.DomainCallBackListner<Integer> callback ) {
+        int idx = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+        Call<Integer> call = NetRetrofit.getInstance().getUserService().checkGroupCount(idx);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
+            @Override
+            protected void doPostExecute(Integer integer) {
+                callback.doPostExecute(integer);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
 
 }
