@@ -168,6 +168,8 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
 
 
     public void showPopup(final String SSID, final String bSSID) {
+        Log.e("HJLEE", "SSID : "+ SSID);
+        Log.e("HJLEE", "bSSID : "+ bSSID);
         AlertDialog.Builder builder = new AlertDialog.Builder(WifiSearchActivity.this);
         builder.setTitle(SSID);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -184,7 +186,7 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
                /* WifiUtil wifiUtil = new WifiUtil(WifiSearchActivity.this);
 
                 Log.e("HJLEE", "result : " + result);*/
-                connect(SSID, password);
+                //connect(SSID, password);
                 Intent intent = new Intent(WifiSearchActivity.this, FindHodoosActivity.class);
                 intent.putExtra("ssid", SSID);
                 intent.putExtra("bssid", bSSID);
