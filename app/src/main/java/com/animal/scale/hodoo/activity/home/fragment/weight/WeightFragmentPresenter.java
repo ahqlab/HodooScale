@@ -1,12 +1,9 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.common.CommonModel;
-import com.animal.scale.hodoo.domain.ArrayListDevice;
-import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
@@ -14,7 +11,6 @@ import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +56,6 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
             @Override
             public void doCancelled() {
-
             }
         });
     }
@@ -127,7 +122,6 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
             @Override
             public void doCancelled() {
-
             }
         });
     }
