@@ -24,6 +24,7 @@ import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistAc
 import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
+import com.animal.scale.hodoo.activity.setting.device.bowelplate.list.BowelPlateListActivity;
 import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.constant.HodooConstant;
@@ -206,6 +207,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         wifiSearchActivity.finish();
         if ( !inAppSettingState ) {
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), BowelPlateListActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         }
