@@ -48,5 +48,11 @@ public class HodooConstant {
 
     public static final String CHANNEL_ID = "HODOO_CHANNEL";
 
+    /* Retrofit 관련 (s) */
+    public static final int LIMITED_TIME = 30000;
+    public static final int INTERVAL = 1000;
+    /* Retrofit 관련 (e) */
+
+
 
 }

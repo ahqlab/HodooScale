@@ -1,7 +1,6 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
 import android.databinding.DataBindingUtil;
-import android.media.audiofx.LoudnessEnhancer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,8 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
@@ -42,8 +38,6 @@ import java.util.Date;
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 import noman.weekcalendar.listener.OnWeekChangeListener;
-
-import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
 
@@ -266,6 +260,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public void setBcs(PetWeightInfo petWeightInfo) {
         presenter.setAnimationGaugeChart(petWeightInfo.getBcs());
         presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
+        setKg();
     }
 
     public void setBcs() {
@@ -324,7 +319,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void onStart() {
         //Kcal 로리 표시
-//        presenter.getLastCollectionData(DateUtil.getCurrentDatetime());
 //        presenter.initWeekCalendar();
         super.onStart();
     }
@@ -351,5 +345,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 }
             }
         });
+
     }
 }

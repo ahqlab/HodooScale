@@ -2,13 +2,15 @@ package com.animal.scale.hodoo.common;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.constant.HodooConstant;
+
 import java.io.Serializable;
 import java.util.List;
 
 public class CommonModel {
 
-    public static final int limitedTime = 10000;
-    public static final int interval = 1000;
+    public static final int limitedTime = HodooConstant.LIMITED_TIME;
+    public static final int interval = HodooConstant.INTERVAL;
 
     Context context;
 

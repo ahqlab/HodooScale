@@ -1,9 +1,13 @@
 package com.animal.scale.hodoo.service;
 
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -17,9 +21,15 @@ public class NetRetrofit {
     private NetRetrofit() {
 
     }
+    OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+            .connectTimeout(HodooConstant.LIMITED_TIME, TimeUnit.SECONDS)
+            .readTimeout(HodooConstant.LIMITED_TIME, TimeUnit.SECONDS)
+            .writeTimeout(HodooConstant.LIMITED_TIME, TimeUnit.SECONDS)
+            .build();
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(SharedPrefVariable.SERVER_ROOT)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create()) // 파싱등록
             .build();
 

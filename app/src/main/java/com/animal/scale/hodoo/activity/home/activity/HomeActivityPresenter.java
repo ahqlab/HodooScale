@@ -3,14 +3,12 @@ package com.animal.scale.hodoo.activity.home.activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.animal.scale.hodoo.activity.user.invitation.Invitation;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,7 +51,6 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
             @Override
             public void doCancelled() {
-
             }
         });
     }

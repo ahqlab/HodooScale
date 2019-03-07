@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.base;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -10,6 +11,7 @@ import android.content.IntentFilter;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,23 +19,18 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
-import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.util.BadgeUtils;
 import com.animal.scale.hodoo.util.VIewUtil;
-import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 
 public abstract class BaseActivity<D extends Activity> extends AppCompatActivity {
 
@@ -49,6 +46,22 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         @Override
         public void onReceive(Context context, Intent intent) {
             setBadge();
+
+
+            ActivityManager mActivityManager = (ActivityManager) BaseActivity.this.getSystemService(Context.ACTIVITY_SERVICE);
+            List<ActivityManager.RunningTaskInfo> rt = mActivityManager.getRunningTasks(1);
+
+            /* 열려있는 액티비티가 홈 액티비티일 경우 (s) */
+            if ( rt.get(0).topActivity.getClassName().equals(HomeActivity.class.getName()) ) {
+                for (Fragment fragment: getSupportFragmentManager().getFragments()) {
+                    if (fragment.isVisible())
+                        /* 활동중인 프래그먼트가 체중 프래그먼트일경우 (s) */
+                        if ( fragment instanceof WeightFragment )
+                            ((WeightFragment) fragment).setKg();
+                        /* 활동중인 프래그먼트가 체중 프래그먼트일경우 (e) */
+                }
+            }
+            /* 열려있는 액티비티가 홈 액티비티일 경우 (e) */
         }
     };
 
