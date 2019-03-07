@@ -17,7 +17,6 @@ import lombok.Data;
 
 @Data
 public class PetBasicInfo implements Serializable{
-
 	//구분자
 	private int id;
 	//이미지 경로
@@ -37,7 +36,6 @@ public class PetBasicInfo implements Serializable{
 
 	private int currentMonth;
 
-	
 	//중성화 여부 (YES || NO)
 	private String neutralization;
 }
