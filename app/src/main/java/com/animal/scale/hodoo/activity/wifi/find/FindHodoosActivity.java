@@ -76,7 +76,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.find_hodoo_title)));
         wifiSearchActivity = (WifiSearchActivity) WifiSearchActivity.wifiSearchActivity;
-        mWifiAdmin = new EspWifiAdminSimple(this);
+        //mWifiAdmin = new EspWifiAdminSimple(this);
         presenter = new FindHodoosPresenter(this);
         presenter.loadData(FindHodoosActivity.this);
         presenter.loginModelData(FindHodoosActivity.this);
@@ -144,7 +144,6 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         binding.findDeviceLayout.setVisibility(View.VISIBLE);
         binding.btnArea.removeAllViews();
         binding.btnArea.addView(btn);
-
     }
 
     public void createRetryBtn(){

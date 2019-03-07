@@ -19,7 +19,9 @@ import java.util.List;
 public class LoginPresenter implements Login.Presenter {
 
     Login.View loginView;
+
     LoginModel loginModel;
+
     Context context;
 
     public interface OnDialogClickListener {
