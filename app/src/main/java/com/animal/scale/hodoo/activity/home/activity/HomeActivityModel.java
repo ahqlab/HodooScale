@@ -11,6 +11,7 @@ import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.InvitationUser;
+import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.service.NetRetrofit;

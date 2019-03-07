@@ -1,7 +1,6 @@
 package com.animal.scale.hodoo.activity.home.activity;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -15,7 +14,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -35,19 +33,18 @@ import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
-import com.animal.scale.hodoo.adapter.HomeViewPagerAdapter;
-import com.animal.scale.hodoo.base.BaseFragment;
-import com.animal.scale.hodoo.constant.HodooConstant;
-import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfPets;
 import com.animal.scale.hodoo.adapter.AdapterSpinner;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityHomeBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.util.BadgeUtils;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.VIewUtil;
@@ -94,6 +91,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
 
     }
+
+
 
     public void onPetImageClick(View view) {
         adapter = new AdapterOfPets(HomeActivity.this, HomeActivity.this ,data, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
@@ -233,7 +232,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter.setCurrentPetInfos(data);
     }
 
-
     @Override
     public void setCurrentPetInfos(List<PetAllInfos> data) {
         for (PetAllInfos info : data) {
@@ -247,7 +245,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
                 if(tf instanceof WeightFragment){
                     WeightFragment weightFragment = (WeightFragment) tf;
-                    weightFragment.setKg();
+//                    weightFragment.setKg();
                     weightFragment.setBcsOrBscDescAndTip(info.getPet().getBasic());
                     weightFragment.serChartOfDay();
                 }else if(tf instanceof MealFragment){
@@ -339,7 +337,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     public void onStart() {
         super.onStart();
-        presenter.loadCustomDropdownView();
+//        presenter.loadCustomDropdownView();
         //Kcal 로리 표시
     }
 

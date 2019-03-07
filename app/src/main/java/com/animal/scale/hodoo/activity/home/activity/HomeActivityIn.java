@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.home.activity;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 
@@ -41,5 +42,7 @@ public interface HomeActivityIn {
         void getInvitationToServer();
 
         void checkLogin();
+
+
     }
 }
