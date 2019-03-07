@@ -345,6 +345,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 }
             }
         });
-
+        setKg();
     }
 }
