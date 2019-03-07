@@ -26,8 +26,7 @@ import com.animal.scale.hodoo.util.VIewUtil;
 import static com.animal.scale.hodoo.constant.HodooConstant.ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE;
 import static com.animal.scale.hodoo.constant.HodooConstant.AUTO_LOGIN_SUCCESS;
 
-public class
-MainActivity extends AppCompatActivity implements Main.View {
+public class MainActivity extends AppCompatActivity implements Main.View {
 
     private ProgressBar bar;
 

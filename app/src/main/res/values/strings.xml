@@ -51,7 +51,7 @@
     <string name="recommend">권장</string>
     <!-- MAIN Activity -->
     <string name="istyle_already_a_member">이미 호두 회원이신가요?</string>
-    <!-- Login Activity -->    
+    <!-- Login Activity -->
     <string name="istyle_forgot_password">비밀번호를 잊으셨나요?</string>
     <!-- PAGE TITLE -->
     <string name="basin_info_regist_title">펫 추가</string>
@@ -233,7 +233,7 @@
     <string name="confirm_new_password">새 비밀번호 확인</string>
     <string name="not_mathed_old_password">이전비밀번호와 동일하지 않습니다.</string>
     <string name="password_edit_success">비밀번호를 변경했습니다.</string>
-    <string name="pet_name_empty_msg" >펫의 이름을 입력하세요.</string>
+    <string name="pet_name_empty_msg">펫의 이름을 입력하세요.</string>
     <string name="pet_birthday_empty_msg">생년월일을 입력하세요</string>
     <!-- ActivityFragment (e) -->
     <string name="forgot_password_sub_scription">이메일로 임시비밀번호를 발송해드립니다.</string>

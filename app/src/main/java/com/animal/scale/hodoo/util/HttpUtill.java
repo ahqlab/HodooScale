@@ -110,7 +110,7 @@ public class HttpUtill {
             byte[] buffer = new byte[bufferSize];
             int bytesRead = mByteInputStream.read(buffer, 0, bufferSize);
 
-            Log.d("Test", "image byte is " + bytesRead);
+            Log.d("TestServerResponseIn", "image byte is " + bytesRead);
 
             // read image
             while (bytesRead > 0) {
@@ -124,7 +124,7 @@ public class HttpUtill {
             dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
             // close streams
-            Log.e("Test", "File is written");
+            Log.e("TestServerResponseIn", "File is written");
             mByteInputStream.close();
             dos.flush(); // finish upload...
 
@@ -136,7 +136,7 @@ public class HttpUtill {
                 b.append((char) ch);
             }
             s = b.toString().trim();
-            Log.e("Test", "result = " + s);
+            Log.e("TestServerResponseIn", "result = " + s);
             // mEdityEntry.setText(s);
             dos.close();
 
@@ -220,7 +220,7 @@ public class HttpUtill {
             byte[] buffer = new byte[bufferSize];
             int bytesRead = mByteInputStream.read(buffer, 0, bufferSize);
 
-            Log.d("Test", "image byte is " + bytesRead);
+            Log.d("TestServerResponseIn", "image byte is " + bytesRead);
 
             // read image
             while (bytesRead > 0) {
@@ -234,7 +234,7 @@ public class HttpUtill {
             dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
             // close streams
-            Log.e("Test", "File is written");
+            Log.e("TestServerResponseIn", "File is written");
             mByteInputStream.close();
             dos.flush(); // finish upload...
 
