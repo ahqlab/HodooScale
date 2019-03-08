@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.Serializable;
 
+import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -33,6 +34,7 @@ public abstract class AbstractAsyncTask<D extends Serializable> extends AsyncTas
             Call<D> call = params[0];
             Response<D> response = call.execute();
             if (response.isSuccessful()) {
+                Headers stats = response.headers();
                 return response.body();
             }
             return null;

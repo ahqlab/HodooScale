@@ -69,5 +69,4 @@ public class InvitationFinishActivity extends BaseActivity<InvitationFinishActiv
             dialog.show();
         }
     }
-
 }

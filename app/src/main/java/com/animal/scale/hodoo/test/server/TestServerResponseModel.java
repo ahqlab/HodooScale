@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
 import retrofit2.Call;
@@ -34,5 +35,25 @@ public class TestServerResponseModel extends CommonModel {
 
             }
         }.execute(call), limitedTime, interval, true).start();*/
+    }
+
+    public void testSubmit(final DomainCallBackListner<User> domainListCallBackListner) {
+        Call<User> call = NetRetrofit.getInstance().getFeedService().testSubmit();
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<User>() {
+            @Override
+            protected void doPostExecute(User user) {
+                domainListCallBackListner.doPostExecute(user);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 }

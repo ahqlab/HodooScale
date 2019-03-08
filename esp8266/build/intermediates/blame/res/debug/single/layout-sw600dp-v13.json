@@ -1,6 +1,11 @@
 [
     {
+<<<<<<< HEAD
+        "merged": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\design_layout_snackbar.xml",
+        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\936da39391e7f93fa3c936fb8913edd1\\res\\layout-sw600dp-v13\\design_layout_snackbar.xml"
+=======
         "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\design_layout_snackbar.xml",
         "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\layout-sw600dp-v13\\design_layout_snackbar.xml"
+>>>>>>> refs/remotes/origin/master
     }
 ]

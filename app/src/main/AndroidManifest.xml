@@ -144,7 +144,11 @@
 
         <activity android:name=".activity.intro.IntroActivity" />
         <activity android:name=".fcm.AlertActivity" />
-        <activity android:name=".activity.setting.device.feeder.FeederOrderActivity"></activity>
+        <activity android:name=".activity.setting.device.feeder.FeederOrderActivity" />
+        <activity android:name=".test.server.TestServerResponseActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

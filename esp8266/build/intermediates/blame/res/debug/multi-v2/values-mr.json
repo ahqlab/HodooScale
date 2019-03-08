@@ -1,10 +1,27 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-mr\\values-mr.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-mr\\values-mr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,216,322,429,519,620,735,812,890,970,1082,1184,1280,1389,1490,1605,1762,1867",
+                        "endColumns": "110,105,106,89,100,114,76,77,79,111,101,95,108,100,114,156,104,79",
+                        "endOffsets": "211,317,424,514,615,730,807,885,965,1077,1179,1275,1384,1485,1600,1757,1862,1942"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\921a637b00511d2794a739da6b0ee3a0\\res\\values-mr\\values-mr.xml",
+=======
             "outputFile": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-mr\\values-mr.xml",
             "map": [
                 {
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\c88fab7c50a87e137205f160d346113f\\res\\values-mr\\values-mr.xml",
+>>>>>>> refs/remotes/origin/master
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -19,9 +36,18 @@
                         "endColumns": "100",
                         "endOffsets": "2043"
                     }
-                },
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-mr\\values-mr.xml",
+            "map": [
                 {
+<<<<<<< HEAD
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-mr\\values-mr.xml",
+=======
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-mr\\values-mr.xml",
+>>>>>>> refs/remotes/origin/master
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -29,6 +55,11 @@
                         "endColumns": "110,105,106,89,100,114,76,77,79,111,101,95,108,100,114,156,104,79",
                         "endOffsets": "211,317,424,514,615,730,807,885,965,1077,1179,1275,1384,1485,1600,1757,1862,1942"
                     }
+<<<<<<< HEAD
+                },
+                {
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\921a637b00511d2794a739da6b0ee3a0\\res\\values-mr\\values-mr.xml",
+=======
                 }
             ]
         },
@@ -37,6 +68,7 @@
             "map": [
                 {
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\c88fab7c50a87e137205f160d346113f\\res\\values-mr\\values-mr.xml",
+>>>>>>> refs/remotes/origin/master
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -51,6 +83,8 @@
                         "endColumns": "100",
                         "endOffsets": "2043"
                     }
+<<<<<<< HEAD
+=======
                 },
                 {
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-mr\\values-mr.xml",
@@ -61,6 +95,7 @@
                         "endColumns": "110,105,106,89,100,114,76,77,79,111,101,95,108,100,114,156,104,79",
                         "endOffsets": "211,317,424,514,615,730,807,885,965,1077,1179,1275,1384,1485,1600,1757,1862,1942"
                     }
+>>>>>>> refs/remotes/origin/master
                 }
             ]
         }
