@@ -22,6 +22,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.meal.list.FeedListActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -101,6 +102,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_meal_layout, container, false);
         binding.setActivity(this);
+
+        if ( getArguments() != null ) {
+            if ( getArguments().getBoolean("push") )
+                setCalendar();
+        }
 
         mSharedPrefManager = SharedPrefManager.getInstance(getActivity());
 
@@ -264,7 +270,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
         binding.calorieBar.invalidate();
-        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        presenter.getTodaySumCalorie(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
         Activity activity = getActivity();
         if ( activity != null )
             binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
@@ -313,6 +319,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
                 DateTime dt = dateTime;
                 DateTime now = new DateTime();
                 String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
+                HomeActivity.setCalendarDate(date);
                 if (now.toDateTime().toString().compareTo(date) < 0) {
                 } else {
                     focusDate  = date;
@@ -321,6 +328,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
                 }
             }
         });
+    }
+
+    @Override
+    public void setCalendar() {
+        binding.weekCalendar.setSelectedDate(DateTime.now());
     }
 
     public void setTodaySumCalorie() {
@@ -379,7 +391,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void onStart() {
-        presenter.initRaderChart(DateUtil.getCurrentDatetime());
+        presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
         //calorie_view
         binding.calorieView.setNumber(0);
         super.onStart();

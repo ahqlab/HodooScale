@@ -119,7 +119,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
                 intent.putExtra("data", gson.toJson(data));
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                message += getApplicationContext().getString(R.string.invitation_subfix);
+//                message += getApplicationContext().getString(R.string.invitation_subfix);
                 badgeType = HodooConstant.FIREBASE_INVITATION_TYPE;
                 channelId = HodooConstant.INVITATION_GROUP_CHANNEL;
                 presenter.setInvitationUser(idx, fromUserIdx);

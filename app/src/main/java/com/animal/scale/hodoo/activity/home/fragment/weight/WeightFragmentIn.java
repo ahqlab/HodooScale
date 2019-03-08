@@ -27,6 +27,8 @@ public interface WeightFragmentIn {
         void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d);
 
         void setTipMessageOfCountry(WeightTip weightTip);
+
+        void setCalendar();
     }
 
     interface Presenter{

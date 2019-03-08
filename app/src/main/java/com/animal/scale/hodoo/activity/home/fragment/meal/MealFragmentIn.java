@@ -29,6 +29,8 @@ public interface MealFragmentIn {
         void setTipMessageOfCountry(MealTip tip);
 
         void initWeekCalendar();
+
+        void setCalendar();
     }
     interface Presenter{
 
