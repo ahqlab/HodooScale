@@ -33,6 +33,7 @@ import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.wifi.find.FindHodoosActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfWifiList;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityWifiSearchBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.util.WifiUtil;
@@ -61,6 +62,8 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
     ConnectivityManager manager;
 
     public static WifiSearchActivity wifiSearchActivity;
+
+    private boolean inAppSettingState = false;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -121,6 +124,8 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
             //registerBroadcastReceiver();
             //showEsptouchInfo();
         }
+
+        inAppSettingState = getIntent().getBooleanExtra(HodooConstant.IN_APP_SETTING_KEY, false);
 
     }
 
@@ -191,6 +196,7 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
                 intent.putExtra("ssid", SSID);
                 intent.putExtra("bssid", bSSID);
                 intent.putExtra("password", password);
+                intent.putExtra(HodooConstant.IN_APP_SETTING_KEY, inAppSettingState);
                 startActivity(intent);
             }
         });

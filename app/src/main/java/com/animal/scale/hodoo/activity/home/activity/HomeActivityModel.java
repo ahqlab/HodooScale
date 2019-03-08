@@ -48,9 +48,9 @@ public class HomeActivityModel extends CommonModel{
 
             @Override
             protected void doCancelled() {
-
+                domainListCallBackListner.doCancelled();
             }
-        }.execute(call), limitedTime, interval, true).start();
+        }.execute(call), limitedTime , interval, true).start();
     }
 
     public void getInvitationCount( final HomeActivityModel.DomainListCallBackListner<InvitationUser> callback ) {

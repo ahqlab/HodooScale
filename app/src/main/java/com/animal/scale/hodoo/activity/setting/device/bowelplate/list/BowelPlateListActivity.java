@@ -11,12 +11,15 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.adapter.AbsractCommonAdapter;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityBowelPlateListBinding;
 import com.animal.scale.hodoo.databinding.ListviewBowelPlateItemBinding;
 import com.animal.scale.hodoo.databinding.SettingListviewBinding;
@@ -42,7 +45,6 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
         binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_list_bowelplate)));
         presenter = new ActivityBowelPlateListPresenter(this);
         presenter.loadData(BowelPlateListActivity.this);
-        presenter.getMyBowlPlateList();
 
     }
 
@@ -106,12 +108,13 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
             binding.bowelPlateListView.setAdapter(adapter);
 
         }else{
+            Log.e(TAG, "move intent");
             Intent i = new Intent(this, DeviceRegistActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-            finish();
+//            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.putExtra(HodooConstant.IN_APP_SETTING_KEY, true);
+            startActivityForResult(i, 500);
         }
     }
 
@@ -127,7 +130,10 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
     }
 
     public void onClickBowelPlateRegistBtn(View view) {
-        BowelPlateListActivity.super.moveIntent(this, WifiSearchActivity.class, 0, 0, false);
+        Intent intent = new Intent(this, WifiSearchActivity.class);
+        intent.putExtra(HodooConstant.IN_APP_SETTING_KEY, true);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 
     public void deleteDlalog(final int deviceIdx, final int size) {
@@ -142,5 +148,14 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
                         dialog.dismiss();
                     }
                 }).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if ( resultCode == RESULT_CANCELED )
+            if ( requestCode == 500 )
+                finish();
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

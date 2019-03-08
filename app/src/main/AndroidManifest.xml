@@ -102,8 +102,8 @@
         <activity android:name=".activity.user.invitation.finish.InvitationFinishActivity" />
         <activity
             android:name=".fcm.NotificationActivity"
-            android:excludeFromRecents="true"
-            android:taskAffinity="" />
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
         <activity android:name=".activity.user.invitation.confirm.InvitationConfirmActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -148,6 +148,7 @@
         <activity android:name=".test.server.TestServerResponseActivity">
 
         </activity>
+
     </application>
 
 </manifest>

@@ -6,6 +6,8 @@ public class HodooConstant {
 
     public static final boolean DEBUG = true;
 
+    public static final String IN_APP_SETTING_KEY = "in_app_setting_key";
+
     /* 초대관련 (s) */
     public static final int ACCEPT_TYPE = 1;
     public static final int DECLINE_TYPE = 2;
