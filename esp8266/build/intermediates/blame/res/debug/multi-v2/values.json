@@ -1,29 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/styles.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\library-3.2.0.aar\\63a179d8b74be86b49243f44a6c200da\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "6,28,32,24",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "186,1216,1398,1121",
-                        "endLines": "22,30,34,26",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "1115,1392,1567,1210"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "40",
+                        "endOffsets": "91"
                     },
                     "to": {
-                        "startLines": "731,1835,1838,2346",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "59305,129557,129738,167492",
-                        "endLines": "747,1837,1840,2348",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "60234,129733,129907,167581"
+                        "startLines": "634",
+                        "startColumns": "4",
+                        "startOffsets": "52637",
+                        "endColumns": "40",
+                        "endOffsets": "52673"
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/c354c773c5f3efb4ff8870c478fa428f/res/values/values.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,29,30,34,77,85,86,94,95,96,97,98,99,100,101,108,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,178,181,182,192,195,196,199,202,205,209,214,218,223,227,232,236,240,242,246,253,257,260,269,275,278,287,291",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -42,7 +40,94 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/f3a6f305bbdc8426affedca0371f1182/res/values/values.xml",
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "4,3,6,12,11,5,10,9,7,8",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "117,59,225,577,524,171,449,381,273,324",
+                        "endColumns": "52,56,46,84,51,52,73,66,49,55",
+                        "endOffsets": "165,111,267,657,571,219,518,443,318,375"
+                    },
+                    "to": {
+                        "startLines": "702,703,704,706,708,710,717,719,720,721",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "56690,56743,56800,56992,57198,57337,58258,58403,58470,58520",
+                        "endColumns": "52,56,46,84,51,52,73,66,49,55",
+                        "endOffsets": "56738,56795,56842,57072,57245,57385,58327,58465,58515,58571"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-27.1.1.aar\\71aad666bf29b6404d3866dec3e61cb4\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,348,414,536,597,663",
+                        "endColumns": "88,65,121,60,65,66",
+                        "endOffsets": "139,409,531,592,658,725"
+                    },
+                    "to": {
+                        "startLines": "77,2086,2088,2089,2094,2096",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "4747,148929,149105,149227,149489,149684",
+                        "endColumns": "88,65,121,60,65,66",
+                        "endOffsets": "4831,148990,149222,149283,149550,149746"
+                    }
+                },
+                {
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\dimens.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "92,151",
+                        "endColumns": "57,55",
+                        "endOffsets": "145,202"
+                    },
+                    "to": {
+                        "startLines": "542,543",
+                        "startColumns": "4,4",
+                        "startOffsets": "46676,46734",
+                        "endColumns": "57,55",
+                        "endOffsets": "46729,46785"
+                    }
+                },
+                {
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "2,8,3,6,5",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "57,240,99,191,145",
+                        "endColumns": "40,45,42,45,44",
+                        "endOffsets": "93,281,137,232,185"
+                    },
+                    "to": {
+                        "startLines": "30,31,38,96,97",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "1676,1717,2289,6121,6167",
+                        "endColumns": "40,45,42,45,44",
+                        "endOffsets": "1712,1758,2327,6162,6207"
+                    }
+                },
+                {
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\arrays.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "9",
+                        "endColumns": "20",
+                        "endOffsets": "261"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "150",
+                        "endLines": "9",
+                        "endColumns": "20",
+                        "endOffsets": "347"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-core-ui-27.1.1.aar\\13b6bcb934ae504cab556e1875da5b25\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,66",
                         "startColumns": "4,4,4,4",
@@ -61,77 +146,24 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/b455f8b7d3351d9191fba0d45335f890/res/values/values.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\adapters-3.2.0.aar\\603511bbfd219cb1f6b71a861671971d\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,685,744,792,848,923,999,1071",
-                        "endColumns": "629,58,47,55,74,75,71,65",
-                        "endOffsets": "680,739,787,843,918,994,1066,1132"
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,112,155",
+                        "endColumns": "56,42,40",
+                        "endOffsets": "107,150,191"
                     },
                     "to": {
-                        "startLines": "392,592,593,594,602,603,604,637",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "33159,49856,49915,49963,50630,50705,50781,52752",
-                        "endColumns": "629,58,47,55,74,75,71,65",
-                        "endOffsets": "33784,49910,49958,50014,50700,50776,50848,52813"
+                        "startLines": "640,641,652",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "52888,52945,53439",
+                        "endColumns": "56,42,40",
+                        "endOffsets": "52940,52983,53475"
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/f7594f6025d5fff14c801fc0532aac3b/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,348,414,536,597,663",
-                        "endColumns": "88,65,121,60,65,66",
-                        "endOffsets": "139,409,531,592,658,725"
-                    },
-                    "to": {
-                        "startLines": "77,2086,2088,2089,2094,2096",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "4747,148929,149105,149227,149489,149684",
-                        "endColumns": "88,65,121,60,65,66",
-                        "endOffsets": "4831,148990,149222,149283,149550,149746"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/eeb9442274730050e2bbbb649cf52b8e/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,18,20,23",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,107,168,230,292,356,1041,1100,1157,1211,1625,1689,1815",
-                        "endLines": "2,3,4,5,6,7,8,9,10,17,19,22,25",
-                        "endColumns": "51,60,61,61,63,684,58,56,53,12,12,12,12",
-                        "endOffsets": "102,163,225,287,351,1036,1095,1152,1206,1620,1684,1810,1938"
-                    },
-                    "to": {
-                        "startLines": "10,41,42,43,44,184,544,545,546,769,1827,1829,1832",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "352,2447,2508,2570,2632,19649,46790,46849,46906,61690,129239,129303,129429",
-                        "endLines": "10,41,42,43,44,184,544,545,546,775,1828,1831,1834",
-                        "endColumns": "51,60,61,61,63,684,58,56,53,12,12,12,12",
-                        "endOffsets": "399,2503,2565,2627,2691,20329,46844,46901,46955,62099,129298,129424,129552"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/strings.xml",
-                    "from": {
-                        "startLines": "4,3,6,12,11,5,10,9,7,8",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "113,56,219,565,513,166,439,372,266,316",
-                        "endColumns": "52,56,46,84,51,52,73,66,49,55",
-                        "endOffsets": "161,108,261,645,560,214,508,434,311,367"
-                    },
-                    "to": {
-                        "startLines": "702,703,704,706,708,710,717,719,720,721",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "56690,56743,56800,56992,57198,57337,58258,58403,58470,58520",
-                        "endColumns": "52,56,46,84,51,52,73,66,49,55",
-                        "endOffsets": "56738,56795,56842,57072,57245,57385,58327,58465,58515,58571"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/36f3074257a286cd17a4683a3db2f019/res/values/values.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\c88fab7c50a87e137205f160d346113f\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,6,15,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,54,55,59,60,61",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -150,7 +182,41 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values/values.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\recyclerview-v7-27.1.1.aar\\7b07686ecf72eb5e7ab021de902b237a\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,685,744,792,848,923,999,1071",
+                        "endColumns": "629,58,47,55,74,75,71,65",
+                        "endOffsets": "680,739,787,843,918,994,1066,1132"
+                    },
+                    "to": {
+                        "startLines": "392,592,593,594,602,603,604,637",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "33159,49856,49915,49963,50630,50705,50781,52752",
+                        "endColumns": "629,58,47,55,74,75,71,65",
+                        "endOffsets": "33784,49910,49958,50014,50700,50776,50848,52813"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\transition-27.1.1.aar\\534209a63021fcc216cdd8bc5435cf7f\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,95,138,185,240,285,339,391,440,501",
+                        "endColumns": "39,42,46,54,44,53,51,48,60,49",
+                        "endOffsets": "90,133,180,235,280,334,386,435,496,546"
+                    },
+                    "to": {
+                        "startLines": "635,642,645,646,647,656,657,658,659,660",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "52678,52988,53127,53174,53229,53607,53661,53713,53762,53823",
+                        "endColumns": "39,42,46,54,44,53,51,48,60,49",
+                        "endOffsets": "52713,53026,53169,53224,53269,53656,53708,53757,53818,53868"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,85,86,87,88,89,90,91,105,119,120,126,129,130,131,145,146,152,153,154,155,194,195,196,197,198,199,200,227,228,234,235,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,397,398,402,406,410,415,421,428,432,436,441,445,449,453,457,461,465,471,475,481,485,491,495,500,504,507,511,517,521,527,531,537,540,544,548,552,556,560,561,562,563,566,569,572,575,579,580,581,582,583,586,588,590,592,597,598,602,608,612,613,615,626,627,631,637,641,642,643,647,674,678,679,683,711,878,904,1072,1098,1129,1137,1143,1157,1179,1184,1189,1199,1208,1217,1221,1228,1236,1243,1244,1253,1256,1259,1263,1267,1271,1274,1275,1279,1283,1293,1298,1305,1311,1312,1315,1319,1324,1326,1328,1331,1334,1336,1340,1343,1350,1353,1356,1360,1362,1366,1368,1370,1372,1376,1384,1392,1404,1410,1419,1422,1433,1436,1441,1442,1447,1505,1564,1565,1575,1584,1585,1587,1591,1594,1597,1600,1603,1607,1610,1613,1616,1620,1623,1627,1631,1632,1633,1634,1635,1636,1637,1638,1639,1640,1641,1642,1643,1644,1645,1646,1647,1648,1649,1650,1651,1653,1655,1656,1657,1658,1659,1660,1661,1662,1664,1665,1667,1668,1670,1672,1673,1675,1676,1677,1678,1679,1680,1682,1683,1684,1685,1686,1687,1689,1691,1693,1694,1695,1696,1697,1698,1699,1700,1701,1702,1703,1704,1705,1707,1708,1709,1710,1711,1712,1714,1718,1722,1723,1724,1725,1726,1727,1728,1729,1731,1733,1735,1737,1739,1740,1741,1742,1744,1746,1748,1749,1750,1751,1752,1753,1754,1755,1756,1757,1758,1759,1762,1763,1764,1765,1767,1769,1770,1772,1773,1775,1777,1779,1780,1781,1782,1783,1784,1785,1786,1787,1788,1789,1790,1792,1793,1794,1795,1797,1798,1799,1800,1801,1803,1805,1807,1809,1810,1811,1812,1813,1814,1815,1816,1817,1818,1819,1820,1821,1822",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -169,135 +235,67 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/dimens.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-27.1.1.aar\\4394b0a6cbe718469362d03eea957d70\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "3,4",
-                        "startColumns": "4,4",
-                        "startOffsets": "89,147",
-                        "endColumns": "57,55",
-                        "endOffsets": "142,198"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,18,20,23",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,107,168,230,292,356,1041,1100,1157,1211,1625,1689,1815",
+                        "endLines": "2,3,4,5,6,7,8,9,10,17,19,22,25",
+                        "endColumns": "51,60,61,61,63,684,58,56,53,12,12,12,12",
+                        "endOffsets": "102,163,225,287,351,1036,1095,1152,1206,1620,1684,1810,1938"
                     },
                     "to": {
-                        "startLines": "542,543",
-                        "startColumns": "4,4",
-                        "startOffsets": "46676,46734",
-                        "endColumns": "57,55",
-                        "endOffsets": "46729,46785"
+                        "startLines": "10,41,42,43,44,184,544,545,546,769,1827,1829,1832",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "352,2447,2508,2570,2632,19649,46790,46849,46906,61690,129239,129303,129429",
+                        "endLines": "10,41,42,43,44,184,544,545,546,775,1828,1831,1834",
+                        "endColumns": "51,60,61,61,63,684,58,56,53,12,12,12,12",
+                        "endOffsets": "399,2503,2565,2627,2691,20329,46844,46901,46955,62099,129298,129424,129552"
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/adapters-3.2.0.aar/5f2d58a46f2534fc6c050a3d8e820767/res/values/values.xml",
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\styles.xml",
                     "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,112,155",
-                        "endColumns": "56,42,40",
-                        "endOffsets": "107,150,191"
+                        "startLines": "6,28,32,24",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "192,1244,1430,1145",
+                        "endLines": "22,30,34,26",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "1137,1422,1601,1236"
                     },
                     "to": {
-                        "startLines": "640,641,652",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "52888,52945,53439",
-                        "endColumns": "56,42,40",
-                        "endOffsets": "52940,52983,53475"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/197dff009b9ee1f2c94e68ae03f68799/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,95,138,185,240,285,339,391,440,501",
-                        "endColumns": "39,42,46,54,44,53,51,48,60,49",
-                        "endOffsets": "90,133,180,235,280,334,386,435,496,546"
-                    },
-                    "to": {
-                        "startLines": "635,642,645,646,647,656,657,658,659,660",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "52678,52988,53127,53174,53229,53607,53661,53713,53762,53823",
-                        "endColumns": "39,42,46,54,44,53,51,48,60,49",
-                        "endOffsets": "52713,53026,53169,53224,53269,53656,53708,53757,53818,53868"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/library-3.2.0.aar/9ae99e6e42de0caf6930c08b8cd58d81/res/values/values.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "40",
-                        "endOffsets": "91"
-                    },
-                    "to": {
-                        "startLines": "634",
-                        "startColumns": "4",
-                        "startOffsets": "52637",
-                        "endColumns": "40",
-                        "endOffsets": "52673"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/arrays.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "9",
-                        "endColumns": "20",
-                        "endOffsets": "252"
-                    },
-                    "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "150",
-                        "endLines": "9",
-                        "endColumns": "20",
-                        "endOffsets": "347"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/colors.xml",
-                    "from": {
-                        "startLines": "2,8,3,6,5",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "55,232,96,185,140",
-                        "endColumns": "40,45,42,45,44",
-                        "endOffsets": "91,273,134,226,180"
-                    },
-                    "to": {
-                        "startLines": "30,31,38,96,97",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "1676,1717,2289,6121,6167",
-                        "endColumns": "40,45,42,45,44",
-                        "endOffsets": "1712,1758,2327,6162,6207"
+                        "startLines": "731,1835,1838,2346",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "59305,129557,129738,167492",
+                        "endLines": "747,1837,1840,2348",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "60234,129733,129907,167581"
                     }
                 }
             ]
         },
         {
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/build/intermediates/res/merged/debug/values/values.xml",
+            "outputFile": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
             "map": [
                 {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/styles.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\library-3.2.0.aar\\63a179d8b74be86b49243f44a6c200da\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "6,28,32,24",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "186,1216,1398,1121",
-                        "endLines": "22,30,34,26",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "1115,1392,1567,1210"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "40",
+                        "endOffsets": "91"
                     },
                     "to": {
-                        "startLines": "731,1835,1838,2346",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "59305,129557,129738,167492",
-                        "endLines": "747,1837,1840,2348",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "60234,129733,129907,167581"
+                        "startLines": "634",
+                        "startColumns": "4",
+                        "startOffsets": "52637",
+                        "endColumns": "40",
+                        "endOffsets": "52673"
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/c354c773c5f3efb4ff8870c478fa428f/res/values/values.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,29,30,34,77,85,86,94,95,96,97,98,99,100,101,108,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,178,181,182,192,195,196,199,202,205,209,214,218,223,227,232,236,240,242,246,253,257,260,269,275,278,287,291",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -316,7 +314,94 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/f3a6f305bbdc8426affedca0371f1182/res/values/values.xml",
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "4,3,6,12,11,5,10,9,7,8",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "117,59,225,577,524,171,449,381,273,324",
+                        "endColumns": "52,56,46,84,51,52,73,66,49,55",
+                        "endOffsets": "165,111,267,657,571,219,518,443,318,375"
+                    },
+                    "to": {
+                        "startLines": "702,703,704,706,708,710,717,719,720,721",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "56690,56743,56800,56992,57198,57337,58258,58403,58470,58520",
+                        "endColumns": "52,56,46,84,51,52,73,66,49,55",
+                        "endOffsets": "56738,56795,56842,57072,57245,57385,58327,58465,58515,58571"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-27.1.1.aar\\71aad666bf29b6404d3866dec3e61cb4\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,348,414,536,597,663",
+                        "endColumns": "88,65,121,60,65,66",
+                        "endOffsets": "139,409,531,592,658,725"
+                    },
+                    "to": {
+                        "startLines": "77,2086,2088,2089,2094,2096",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "4747,148929,149105,149227,149489,149684",
+                        "endColumns": "88,65,121,60,65,66",
+                        "endOffsets": "4831,148990,149222,149283,149550,149746"
+                    }
+                },
+                {
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\dimens.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "92,151",
+                        "endColumns": "57,55",
+                        "endOffsets": "145,202"
+                    },
+                    "to": {
+                        "startLines": "542,543",
+                        "startColumns": "4,4",
+                        "startOffsets": "46676,46734",
+                        "endColumns": "57,55",
+                        "endOffsets": "46729,46785"
+                    }
+                },
+                {
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "2,8,3,6,5",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "57,240,99,191,145",
+                        "endColumns": "40,45,42,45,44",
+                        "endOffsets": "93,281,137,232,185"
+                    },
+                    "to": {
+                        "startLines": "30,31,38,96,97",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "1676,1717,2289,6121,6167",
+                        "endColumns": "40,45,42,45,44",
+                        "endOffsets": "1712,1758,2327,6162,6207"
+                    }
+                },
+                {
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\arrays.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "9",
+                        "endColumns": "20",
+                        "endOffsets": "261"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "150",
+                        "endLines": "9",
+                        "endColumns": "20",
+                        "endOffsets": "347"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-core-ui-27.1.1.aar\\13b6bcb934ae504cab556e1875da5b25\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,66",
                         "startColumns": "4,4,4,4",
@@ -335,77 +420,24 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/b455f8b7d3351d9191fba0d45335f890/res/values/values.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\adapters-3.2.0.aar\\603511bbfd219cb1f6b71a861671971d\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,685,744,792,848,923,999,1071",
-                        "endColumns": "629,58,47,55,74,75,71,65",
-                        "endOffsets": "680,739,787,843,918,994,1066,1132"
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,112,155",
+                        "endColumns": "56,42,40",
+                        "endOffsets": "107,150,191"
                     },
                     "to": {
-                        "startLines": "392,592,593,594,602,603,604,637",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "33159,49856,49915,49963,50630,50705,50781,52752",
-                        "endColumns": "629,58,47,55,74,75,71,65",
-                        "endOffsets": "33784,49910,49958,50014,50700,50776,50848,52813"
+                        "startLines": "640,641,652",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "52888,52945,53439",
+                        "endColumns": "56,42,40",
+                        "endOffsets": "52940,52983,53475"
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/f7594f6025d5fff14c801fc0532aac3b/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,348,414,536,597,663",
-                        "endColumns": "88,65,121,60,65,66",
-                        "endOffsets": "139,409,531,592,658,725"
-                    },
-                    "to": {
-                        "startLines": "77,2086,2088,2089,2094,2096",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "4747,148929,149105,149227,149489,149684",
-                        "endColumns": "88,65,121,60,65,66",
-                        "endOffsets": "4831,148990,149222,149283,149550,149746"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/eeb9442274730050e2bbbb649cf52b8e/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,18,20,23",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,107,168,230,292,356,1041,1100,1157,1211,1625,1689,1815",
-                        "endLines": "2,3,4,5,6,7,8,9,10,17,19,22,25",
-                        "endColumns": "51,60,61,61,63,684,58,56,53,12,12,12,12",
-                        "endOffsets": "102,163,225,287,351,1036,1095,1152,1206,1620,1684,1810,1938"
-                    },
-                    "to": {
-                        "startLines": "10,41,42,43,44,184,544,545,546,769,1827,1829,1832",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "352,2447,2508,2570,2632,19649,46790,46849,46906,61690,129239,129303,129429",
-                        "endLines": "10,41,42,43,44,184,544,545,546,775,1828,1831,1834",
-                        "endColumns": "51,60,61,61,63,684,58,56,53,12,12,12,12",
-                        "endOffsets": "399,2503,2565,2627,2691,20329,46844,46901,46955,62099,129298,129424,129552"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/strings.xml",
-                    "from": {
-                        "startLines": "4,3,6,12,11,5,10,9,7,8",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "113,56,219,565,513,166,439,372,266,316",
-                        "endColumns": "52,56,46,84,51,52,73,66,49,55",
-                        "endOffsets": "161,108,261,645,560,214,508,434,311,367"
-                    },
-                    "to": {
-                        "startLines": "702,703,704,706,708,710,717,719,720,721",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "56690,56743,56800,56992,57198,57337,58258,58403,58470,58520",
-                        "endColumns": "52,56,46,84,51,52,73,66,49,55",
-                        "endOffsets": "56738,56795,56842,57072,57245,57385,58327,58465,58515,58571"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/36f3074257a286cd17a4683a3db2f019/res/values/values.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\c88fab7c50a87e137205f160d346113f\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,6,15,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,54,55,59,60,61",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -424,7 +456,41 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values/values.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\recyclerview-v7-27.1.1.aar\\7b07686ecf72eb5e7ab021de902b237a\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,685,744,792,848,923,999,1071",
+                        "endColumns": "629,58,47,55,74,75,71,65",
+                        "endOffsets": "680,739,787,843,918,994,1066,1132"
+                    },
+                    "to": {
+                        "startLines": "392,592,593,594,602,603,604,637",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "33159,49856,49915,49963,50630,50705,50781,52752",
+                        "endColumns": "629,58,47,55,74,75,71,65",
+                        "endOffsets": "33784,49910,49958,50014,50700,50776,50848,52813"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\transition-27.1.1.aar\\534209a63021fcc216cdd8bc5435cf7f\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,95,138,185,240,285,339,391,440,501",
+                        "endColumns": "39,42,46,54,44,53,51,48,60,49",
+                        "endOffsets": "90,133,180,235,280,334,386,435,496,546"
+                    },
+                    "to": {
+                        "startLines": "635,642,645,646,647,656,657,658,659,660",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "52678,52988,53127,53174,53229,53607,53661,53713,53762,53823",
+                        "endColumns": "39,42,46,54,44,53,51,48,60,49",
+                        "endOffsets": "52713,53026,53169,53224,53269,53656,53708,53757,53818,53868"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,85,86,87,88,89,90,91,105,119,120,126,129,130,131,145,146,152,153,154,155,194,195,196,197,198,199,200,227,228,234,235,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,397,398,402,406,410,415,421,428,432,436,441,445,449,453,457,461,465,471,475,481,485,491,495,500,504,507,511,517,521,527,531,537,540,544,548,552,556,560,561,562,563,566,569,572,575,579,580,581,582,583,586,588,590,592,597,598,602,608,612,613,615,626,627,631,637,641,642,643,647,674,678,679,683,711,878,904,1072,1098,1129,1137,1143,1157,1179,1184,1189,1199,1208,1217,1221,1228,1236,1243,1244,1253,1256,1259,1263,1267,1271,1274,1275,1279,1283,1293,1298,1305,1311,1312,1315,1319,1324,1326,1328,1331,1334,1336,1340,1343,1350,1353,1356,1360,1362,1366,1368,1370,1372,1376,1384,1392,1404,1410,1419,1422,1433,1436,1441,1442,1447,1505,1564,1565,1575,1584,1585,1587,1591,1594,1597,1600,1603,1607,1610,1613,1616,1620,1623,1627,1631,1632,1633,1634,1635,1636,1637,1638,1639,1640,1641,1642,1643,1644,1645,1646,1647,1648,1649,1650,1651,1653,1655,1656,1657,1658,1659,1660,1661,1662,1664,1665,1667,1668,1670,1672,1673,1675,1676,1677,1678,1679,1680,1682,1683,1684,1685,1686,1687,1689,1691,1693,1694,1695,1696,1697,1698,1699,1700,1701,1702,1703,1704,1705,1707,1708,1709,1710,1711,1712,1714,1718,1722,1723,1724,1725,1726,1727,1728,1729,1731,1733,1735,1737,1739,1740,1741,1742,1744,1746,1748,1749,1750,1751,1752,1753,1754,1755,1756,1757,1758,1759,1762,1763,1764,1765,1767,1769,1770,1772,1773,1775,1777,1779,1780,1781,1782,1783,1784,1785,1786,1787,1788,1789,1790,1792,1793,1794,1795,1797,1798,1799,1800,1801,1803,1805,1807,1809,1810,1811,1812,1813,1814,1815,1816,1817,1818,1819,1820,1821,1822",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -443,107 +509,41 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/dimens.xml",
+                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-27.1.1.aar\\4394b0a6cbe718469362d03eea957d70\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "3,4",
-                        "startColumns": "4,4",
-                        "startOffsets": "89,147",
-                        "endColumns": "57,55",
-                        "endOffsets": "142,198"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,18,20,23",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,107,168,230,292,356,1041,1100,1157,1211,1625,1689,1815",
+                        "endLines": "2,3,4,5,6,7,8,9,10,17,19,22,25",
+                        "endColumns": "51,60,61,61,63,684,58,56,53,12,12,12,12",
+                        "endOffsets": "102,163,225,287,351,1036,1095,1152,1206,1620,1684,1810,1938"
                     },
                     "to": {
-                        "startLines": "542,543",
-                        "startColumns": "4,4",
-                        "startOffsets": "46676,46734",
-                        "endColumns": "57,55",
-                        "endOffsets": "46729,46785"
+                        "startLines": "10,41,42,43,44,184,544,545,546,769,1827,1829,1832",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "352,2447,2508,2570,2632,19649,46790,46849,46906,61690,129239,129303,129429",
+                        "endLines": "10,41,42,43,44,184,544,545,546,775,1828,1831,1834",
+                        "endColumns": "51,60,61,61,63,684,58,56,53,12,12,12,12",
+                        "endOffsets": "399,2503,2565,2627,2691,20329,46844,46901,46955,62099,129298,129424,129552"
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/adapters-3.2.0.aar/5f2d58a46f2534fc6c050a3d8e820767/res/values/values.xml",
+                    "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\values\\styles.xml",
                     "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,112,155",
-                        "endColumns": "56,42,40",
-                        "endOffsets": "107,150,191"
+                        "startLines": "6,28,32,24",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "192,1244,1430,1145",
+                        "endLines": "22,30,34,26",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "1137,1422,1601,1236"
                     },
                     "to": {
-                        "startLines": "640,641,652",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "52888,52945,53439",
-                        "endColumns": "56,42,40",
-                        "endOffsets": "52940,52983,53475"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/197dff009b9ee1f2c94e68ae03f68799/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,95,138,185,240,285,339,391,440,501",
-                        "endColumns": "39,42,46,54,44,53,51,48,60,49",
-                        "endOffsets": "90,133,180,235,280,334,386,435,496,546"
-                    },
-                    "to": {
-                        "startLines": "635,642,645,646,647,656,657,658,659,660",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "52678,52988,53127,53174,53229,53607,53661,53713,53762,53823",
-                        "endColumns": "39,42,46,54,44,53,51,48,60,49",
-                        "endOffsets": "52713,53026,53169,53224,53269,53656,53708,53757,53818,53868"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/library-3.2.0.aar/9ae99e6e42de0caf6930c08b8cd58d81/res/values/values.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "40",
-                        "endOffsets": "91"
-                    },
-                    "to": {
-                        "startLines": "634",
-                        "startColumns": "4",
-                        "startOffsets": "52637",
-                        "endColumns": "40",
-                        "endOffsets": "52673"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/arrays.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "9",
-                        "endColumns": "20",
-                        "endOffsets": "252"
-                    },
-                    "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "150",
-                        "endLines": "9",
-                        "endColumns": "20",
-                        "endOffsets": "347"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/src/main/res/values/colors.xml",
-                    "from": {
-                        "startLines": "2,8,3,6,5",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "55,232,96,185,140",
-                        "endColumns": "40,45,42,45,44",
-                        "endOffsets": "91,273,134,226,180"
-                    },
-                    "to": {
-                        "startLines": "30,31,38,96,97",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "1676,1717,2289,6121,6167",
-                        "endColumns": "40,45,42,45,44",
-                        "endOffsets": "1712,1758,2327,6162,6207"
+                        "startLines": "731,1835,1838,2346",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "59305,129557,129738,167492",
+                        "endLines": "747,1837,1840,2348",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "60234,129733,129907,167581"
                     }
                 }
             ]

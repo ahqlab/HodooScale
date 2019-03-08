@@ -24,8 +24,10 @@ import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistAc
 import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
+import com.animal.scale.hodoo.activity.setting.device.bowelplate.list.BowelPlateListActivity;
 import com.animal.scale.hodoo.activity.wifi.WifiSearchActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityFindHodoosBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.util.VIewUtil;
@@ -68,10 +70,13 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
 
     private EspWifiAdminSimple mWifiAdmin;
 
+    private boolean inAppSettingState = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+        inAppSettingState = intent.getBooleanExtra(HodooConstant.IN_APP_SETTING_KEY, false);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_find_hodoos);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.find_hodoo_title)));
@@ -200,6 +205,15 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
     @Override
     public void successDevideResigt() {
         wifiSearchActivity.finish();
+        if ( !inAppSettingState ) {
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), BowelPlateListActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        }
         finish();
     }
 
