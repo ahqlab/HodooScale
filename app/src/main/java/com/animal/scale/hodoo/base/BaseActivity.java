@@ -112,6 +112,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         }
         return builder;
     }
+
     public AlertDialog.Builder showBasicOneBtnPopup(int title, int message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivityClass());
         if(title != 0){

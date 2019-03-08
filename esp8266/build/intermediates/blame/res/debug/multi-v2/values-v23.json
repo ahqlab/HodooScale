@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/build/intermediates/res/merged/debug/values-v23/values-v23.xml",
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values-v23/values-v23.xml",
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/eeb9442274730050e2bbbb649cf52b8e/res/values-v23/values-v23.xml",
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-27.1.1.aar\\8d123fd60ad09b21ddf881000daeb9cb\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -36,10 +36,10 @@
             ]
         },
         {
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values-v23/values-v23.xml",
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -50,7 +50,7 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/eeb9442274730050e2bbbb649cf52b8e/res/values-v23/values-v23.xml",
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-27.1.1.aar\\8d123fd60ad09b21ddf881000daeb9cb\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

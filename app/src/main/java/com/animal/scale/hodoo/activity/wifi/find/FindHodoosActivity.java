@@ -174,8 +174,7 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
     private void showEsptouchInfo(String pSsid, String pBssid, String pPassword) {
         String isSsidHiddenStr = "NO";
         String taskResultCountStr = "1";
-        new EsptouchAsyncTask3().execute(pSsid, pBssid, pPassword,
-                isSsidHiddenStr, taskResultCountStr);
+        new EsptouchAsyncTask3().execute(pSsid, pBssid, pPassword, isSsidHiddenStr, taskResultCountStr);
     }
 
     @Override

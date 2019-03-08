@@ -71,7 +71,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         Intent intent = new Intent(getApplicationContext(), WifiSearchActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-//        finish();
+        finish();
     }
 
     @Override
@@ -89,5 +89,4 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
-
 }

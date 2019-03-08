@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/build/intermediates/res/merged/debug/values-v24/values-v24.xml",
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values-v24/values-v24.xml",
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/f7594f6025d5fff14c801fc0532aac3b/res/values-v24/values-v24.xml",
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-27.1.1.aar\\7703eb11f62b95e30c1dec7aea36df91\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -33,10 +33,10 @@
             ]
         },
         {
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale/esp8266/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values-v24/values-v24.xml",
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -46,7 +46,7 @@
                     }
                 },
                 {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/f7594f6025d5fff14c801fc0532aac3b/res/values-v24/values-v24.xml",
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-27.1.1.aar\\7703eb11f62b95e30c1dec7aea36df91\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

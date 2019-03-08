@@ -3,6 +3,9 @@ package com.animal.scale.hodoo.test.server;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.User;
+
+import java.util.List;
 
 public class TestServerResponsePresenter implements TestServerResponseIn.Presenter {
 
@@ -17,6 +20,23 @@ public class TestServerResponsePresenter implements TestServerResponseIn.Present
     @Override
     public void loadData(Context context) {
         mModel.loadData(context);
+    }
+
+    @Override
+    public void testSubmit() {
+        mModel.testSubmit(new CommonModel.DomainCallBackListner<User>() {
+            @Override
+            public void doPostExecute(User d) {
+                mView.setResult(d);
+            }
+
+            @Override
+            public void doPreExecute() {
+            }
+            @Override
+            public void doCancelled() {
+            }
+        });
     }
 
     /*@Override

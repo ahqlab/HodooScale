@@ -8,11 +8,13 @@ import com.animal.scale.hodoo.domain.MealHistoryContent;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.SearchParam;
+import com.animal.scale.hodoo.domain.User;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -33,4 +35,8 @@ public interface FeedService {
 
     @POST("feed/get/radar/chart/data.do")
     Call<Feed> getRadarChartData(@Query("date") String date, @Query("petIdx") int petIdx);
+
+
+    @GET("feed/tetest.do")
+    Call<User> testSubmit();
 }

@@ -131,9 +131,6 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     public void showDialog() {
         this.runOnUiThread(new Runnable() {
             public void run() {
-                Log.e("HJLEE", "!@#!@#!@#");
-                //Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
-                //DialogUtil.showAlert(getApplicationContext(), R.string.message_complete_required_fields);
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
                 alertDialog.setMessage("11111");
                 alertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

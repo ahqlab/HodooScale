@@ -57,7 +57,11 @@
         </provider>
 
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.user.login.LoginActivity" />
         <activity android:name=".activity.user.agree.TermsOfServiceActivity" />
@@ -142,11 +146,7 @@
         <activity android:name=".fcm.AlertActivity" />
         <activity android:name=".activity.setting.device.feeder.FeederOrderActivity" />
         <activity android:name=".test.server.TestServerResponseActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
