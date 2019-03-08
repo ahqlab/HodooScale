@@ -78,6 +78,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     private BottomNavigationView navigation;
 
+    public static String mCalendarDate = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,10 +88,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         //super.setToolbarColor();
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
-
         presenter.checkLogin();
-
-
     }
 
 
@@ -347,20 +346,33 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter.getInvitationToServer();
         setBadge();
         int notitype = getIntent().getIntExtra(HodooConstant.NOTI_TYPE_KEY, -1);
+        setCalendarDate("");//푸시가 왔을때 초기 캘린더를 보여주기 위한 캘린더 초기화
         if ( notitype >= 0 ) {
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("push", true);
             switch (notitype) {
                 case HodooConstant.FIREBASE_WEIGHT_TYPE :
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
-                    replaceFragment(WeightFragment.newInstance());
+                    WeightFragment wf = WeightFragment.newInstance();
+                    wf.setArguments(bundle);
+                    replaceFragment(wf);
                     navigation.setSelectedItemId(R.id.navigation_weight);
                     presenter.loadCustomDropdownView();
                     break;
                 case HodooConstant.FIREBASE_FEED_TYPE :
-                    replaceFragment(MealFragment.newInstance());
+                    MealFragment mf = MealFragment.newInstance();
+                    mf.setArguments(bundle);
+                    replaceFragment(mf);
                     navigation.setSelectedItemId(R.id.navigation_meal);
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
                     break;
             }
         }
+    }
+    public static void setCalendarDate ( String calendarDate ) {
+        mCalendarDate = calendarDate;
+    }
+    public static String getCalendarDate () {
+        return mCalendarDate;
     }
 }

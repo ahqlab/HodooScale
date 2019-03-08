@@ -21,7 +21,7 @@ public class InvitationFinishPresenter implements InvitationFinish.Presenter {
             public void doPostExecute(Integer result) {
 //                mView.setProgress(false);
                 if ( result == InvitationActivity.SUCESS ) {
-                    mView.showPopup(context.getString(R.string.invitation_finish__resend_alert_success_title), to + context.getString(R.string.invitation_finish__resend_alert_success_suffix));
+                    mView.showPopup(context.getString(R.string.invitation_finish__resend_alert_success_title), to + " " + context.getString(R.string.invitation_finish__resend_alert_success_suffix));
                 } else if (result == InvitationActivity.EXISTENCE_USER) {
                     mView.showPopup(context.getString(R.string.invitation_finish__resend_alert_error_title),  context.getString(R.string.invitation__error_existence_user));
                 } else if ( result == InvitationActivity.NOT_TO_USER ) {

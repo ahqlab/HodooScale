@@ -17,6 +17,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.RadioGroup;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
 import com.animal.scale.hodoo.common.SharedPrefManager;
@@ -67,6 +68,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     private View rotationView;
     int mBasicIdx = 0;
 
+    private String calendarDate = "";
+
     public WeightFragment() {
     }
 
@@ -84,6 +87,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_weight, container, false);
         binding.setActivity(this);
+
+        if ( getArguments() != null ) {
+            if ( getArguments().getBoolean("push") )
+                setCalendar();
+        }
 
         mSharedPrefManager = SharedPrefManager.getInstance(getActivity());
 
@@ -107,7 +115,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         statisicsPresenter.initLoadData(getContext());
         statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
         //달력 init
-        presenter.initWeekCalendar();
+
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
         if(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT).matches("")){
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
@@ -128,7 +136,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
     //오늘의 평균 체중
     public void setKg() {
-        presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
+        presenter.getLastCollectionData(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate(), TextManager.WEIGHT_DATA);
     }
 
     @Override
@@ -212,6 +220,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     @Override
+    public void setCalendar() {
+        if ( DEBUG ) Log.e(TAG, "setCaledar");
+        binding.weekCalendar.setSelectedDate( DateTime.now() );
+    }
+
+    @Override
     public void initWeekCalendar() {
          /* binding.weekCalendar.today;
         Button todaysDate = (Button) findViewById(R.id.today);
@@ -226,6 +240,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 DateTime dt = dateTime;
                 DateTime now = new DateTime();
                 String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
+                HomeActivity.setCalendarDate(date);
                 if (now.toDateTime().toString().compareTo(date) < 0) {
                 } else {
                     presenter.getDefaultData(date, TextManager.WEIGHT_DATA);
@@ -345,6 +360,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 }
             }
         });
+        presenter.initWeekCalendar();
         setKg();
     }
 }

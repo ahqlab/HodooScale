@@ -202,6 +202,11 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
     }
 
     @Override
+    public void setCalendar() {
+
+    }
+
+    @Override
     public void initWeekCalendar() {
          /* binding.weekCalendar.today;
         Button todaysDate = (Button) findViewById(R.id.today);
