@@ -103,10 +103,10 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_meal_layout, container, false);
         binding.setActivity(this);
 
-        if ( getArguments() != null ) {
-            if ( getArguments().getBoolean("push") )
-                setCalendar();
-        }
+//        if ( getArguments() != null ) {
+//            if ( getArguments().getBoolean("push") )
+//                setCalendar();
+//        }
 
         mSharedPrefManager = SharedPrefManager.getInstance(getActivity());
 
@@ -391,7 +391,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void onStart() {
-        presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
+
         //calorie_view
         binding.calorieView.setNumber(0);
         super.onStart();
@@ -401,6 +401,17 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     public void onResume() {
         presenter.getPetAllInfo();
         super.onResume();
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                binding.weekCalendar.setSelectedDate(
+                        HomeActivity.getCalendarDate().equals("") ?
+                                DateTime.parse(DateUtil.getCurrentDatetime()) : DateTime.parse(HomeActivity.getCalendarDate())
+                );
+            }
+        });
+        presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
+
     }
 
     public void setPetAllinfo(){
