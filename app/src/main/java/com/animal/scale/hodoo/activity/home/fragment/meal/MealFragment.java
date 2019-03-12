@@ -393,6 +393,9 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     public void onStart() {
         presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
         //calorie_view
+
+        String date = HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate();
+        Log.e("HJLEE", "date :" + date);
         binding.calorieView.setNumber(0);
         super.onStart();
     }

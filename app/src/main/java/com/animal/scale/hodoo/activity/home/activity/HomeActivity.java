@@ -244,7 +244,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
                 if(tf instanceof WeightFragment){
                     WeightFragment weightFragment = (WeightFragment) tf;
-//                    weightFragment.setKg();
                     weightFragment.setBcsOrBscDescAndTip(info.getPet().getBasic());
                     weightFragment.serChartOfDay();
                 }else if(tf instanceof MealFragment){

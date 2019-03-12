@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -143,17 +144,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public void setAnimationGaugeChart(int bcs) {
         this.bcs = bcs;
        /* int checkBCS = 0;
-        if (bcs < 3) {
-            checkBCS = 0;
-            //부족
-        } else if (bcs > 3) {
-            //초과
-            checkBCS = 1;
-        } else {
-            checkBCS = 2;
-            //적정
-        }*/
-
+        if (bcs < 3) {checkBCS = 0; //부족 } else if (bcs > 3) { //초과 checkBCS = 1; } else { checkBCS = 2; //적정 }*/
         if (bcs > 0) {
             binding.bcsSubscript.setText(bcsArr[bcs - 1]);
             binding.bcsStep.setText(String.valueOf(bcs));
@@ -221,7 +212,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setCalendar() {
-        if ( DEBUG ) Log.e(TAG, "setCaledar");
+        //if ( DEBUG ) Log.e(TAG, "setCaledar");
         binding.weekCalendar.setSelectedDate( DateTime.now() );
     }
 

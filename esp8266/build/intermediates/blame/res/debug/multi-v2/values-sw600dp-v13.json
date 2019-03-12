@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-<<<<<<< HEAD
             "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\936da39391e7f93fa3c936fb8913edd1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-=======
-            "outputFile": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,124,193,263,337,413,472,543",
-                        "endColumns": "68,68,69,73,75,58,70,67",
-                        "endOffsets": "119,188,258,332,408,467,538,606"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
->>>>>>> refs/remotes/origin/master
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -38,18 +21,9 @@
                         "endColumns": "59,69,70,71,57,57,105,63,62,12",
                         "endOffsets": "666,736,807,879,937,995,1101,1165,1228,1410"
                     }
-                }
-            ]
-        },
-        {
-            "outputFile": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-            "map": [
+                },
                 {
-<<<<<<< HEAD
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-=======
-                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
->>>>>>> refs/remotes/origin/master
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -57,7 +31,6 @@
                         "endColumns": "68,68,69,73,75,58,70,67",
                         "endOffsets": "119,188,258,332,408,467,538,606"
                     }
-<<<<<<< HEAD
                 }
             ]
         },
@@ -66,11 +39,6 @@
             "map": [
                 {
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\936da39391e7f93fa3c936fb8913edd1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-=======
-                },
-                {
-                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
->>>>>>> refs/remotes/origin/master
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -87,7 +55,6 @@
                         "endColumns": "59,69,70,71,57,57,105,63,62,12",
                         "endOffsets": "666,736,807,879,937,995,1101,1165,1228,1410"
                     }
-<<<<<<< HEAD
                 },
                 {
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
@@ -98,8 +65,6 @@
                         "endColumns": "68,68,69,73,75,58,70,67",
                         "endOffsets": "119,188,258,332,408,467,538,606"
                     }
-=======
->>>>>>> refs/remotes/origin/master
                 }
             ]
         }
