@@ -75,11 +75,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         intent.putExtra(HodooConstant.IN_APP_SETTING_KEY, inAppSettingState);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-<<<<<<< HEAD
-        finish();
-=======
         if( inAppSettingState ) this.finish();
->>>>>>> refs/remotes/origin/master
     }
 
     @Override
@@ -97,9 +93,6 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
-<<<<<<< HEAD
-=======
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -107,5 +100,4 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
             setResult(RESULT_CANCELED);
         }
     }
->>>>>>> refs/remotes/origin/master
 }

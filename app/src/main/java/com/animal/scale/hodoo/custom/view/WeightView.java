@@ -24,6 +24,8 @@ public class WeightView extends LinearLayout {
     private String mSufFix = "";
     private TickerView[] mFirstNum;
     private TickerView[] mPointView;
+    private String[] mSplitStr;
+    private float mNumber;
     public WeightView(Context context) {
         this(context, null);
     }
@@ -97,16 +99,22 @@ public class WeightView extends LinearLayout {
         mSufFix = attr.getString(R.styleable.WeightView_sufFix);
         attr.recycle();
     }
+
+    public float getNumber () {
+        return mNumber;
+    }
+
     public void setNumber ( float num ) {
+        mNumber = num;
         String formatStr = "%." + String.valueOf(mDisplayCount) + "f";
         String numberStr = String.format(formatStr, num);
         String[] splitStr = numberStr.split("\\.");
 
+        mSplitStr = splitStr;
+
         Log.e("HJLEE", "splitStr : " + splitStr.length);
 
-        for (int i = 0; i < mFirstNum.length; i++) {
-            mFirstNum[i].setText(null);
-        }
+
         char[] number = new char[splitStr[0].length()];
 
         int a = Integer.parseInt(String.valueOf(splitStr[0]));
@@ -131,21 +139,14 @@ public class WeightView extends LinearLayout {
         char[] hap = new char[ array.length + number.length ];
         System.arraycopy(array, 0, hap, 0, array.length);
         System.arraycopy(number, 0, hap, array.length, number.length);
+
+        for (int i = 0; i < mFirstNum.length; i++) {
+            if ( hap[i] == '0' )
+                mFirstNum[i].setText(null);
+        }
+
         /* data settings (e) */
 
-
-//
-//        for (int i = startPosition; i < mFirstNum.length; i++) {
-//            for(int j = 0; j < number.length; j++){
-//                number[j]=(splitStr[0].charAt(j));
-//                for (int k = 0; k <= Integer.parseInt(String.valueOf(number[j])); k++) {
-//                    if ( mFirstNum[i] != null ) {
-//                        mFirstNum[i].setText(String.valueOf(k));
-//                    }
-//
-//                }
-//            }
-//        }
 
         for (int i = 0; i < hap.length; i++) {
             if ( Integer.parseInt(String.valueOf(hap[i])) <= 0 && i != hap.length - 1 )
@@ -156,14 +157,6 @@ public class WeightView extends LinearLayout {
             }
         }
 
-
-//        for(int i=0;i<number.length;i++){
-//            number[i]=(splitStr[0].charAt(i));
-//            for (int j = 0; j <= Integer.parseInt(String.valueOf(number[i])); j++) {
-//                if ( mFirstNum[i] != null )
-//                    mFirstNum[i].setText(String.valueOf(j));
-//            }
-//        }
         if ( mDisplayCount > 0 ) {
             number = new char[splitStr[1].length()];
             if ( number.length < mDisplayCount) {
