@@ -93,10 +93,6 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/master
     @Override
     public void onBackPressed() {
         super.onBackPressed();

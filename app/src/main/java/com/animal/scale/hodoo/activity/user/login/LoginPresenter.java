@@ -7,7 +7,6 @@ import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.CommonResponce;
-import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.message.ResultMessage;
@@ -107,10 +106,10 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void checkRegistrationStatus() {
-        loginModel.confirmDeviceRegistration(new CommonModel.DomainListCallBackListner<Device>() {
+        loginModel.confirmDeviceRegistration(new CommonModel.DomainCallBackListner<Integer>() {
             @Override
-            public void doPostExecute(List<Device> devices) {
-                if(!devices.isEmpty()){
+            public void doPostExecute(Integer integer) {
+                if(integer > 0){
                     //디바이스 등록됨.
                     loginModel.confirmPetRegistration(new CommonModel.DomainListCallBackListner<Pet>() {
                         @Override
@@ -149,13 +148,13 @@ public class LoginPresenter implements Login.Presenter {
                     });
                 }else{
                     //디바이스 없음
-
                     loginView.saveFcmToken();
                 }
             }
+
             @Override
             public void doPreExecute() {
-                loginView.setProgress(true);
+
             }
 
             @Override
