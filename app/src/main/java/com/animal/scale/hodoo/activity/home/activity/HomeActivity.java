@@ -319,7 +319,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             WeightFragment weightFragment = (WeightFragment) tf;
 //            weightFragment.setKg();
             weightFragment.setBcsOrBscDescAndTip(info.getPet().getBasic());
-            weightFragment.serChartOfDay();
+//            weightFragment.serChartOfDay();
         }else if(tf instanceof MealFragment){
             MealFragment mealFragment = (MealFragment) tf;
             mealFragment.setTodaySumCalorie();
