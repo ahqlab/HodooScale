@@ -44,6 +44,7 @@ import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.util.BadgeUtils;
 import com.animal.scale.hodoo.util.DateUtil;
@@ -79,6 +80,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     private BottomNavigationView navigation;
 
     public static String mCalendarDate = "";
+
+    public static WeightTip mWeightTip = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -373,5 +376,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     }
     public static String getCalendarDate () {
         return mCalendarDate;
+    }
+
+    public static void setWeightTip ( WeightTip weightTip ) {
+        mWeightTip = weightTip;
     }
 }

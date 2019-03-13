@@ -66,6 +66,7 @@ public class MealRegistrationModel extends CommonModel {
     }
 
     public void getPetAllInfo(final DomainCallBackListner<PetAllInfos> domainCallBackListner) {
+        int petIdx = sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
         Call<PetAllInfos> call = NetRetrofit.getInstance().getPetService().petAllInfos(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetAllInfos>() {
             @Override
