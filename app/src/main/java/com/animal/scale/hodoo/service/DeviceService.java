@@ -16,6 +16,9 @@ public interface DeviceService {
     @POST("device/my/device/list.do")
     Call<List<Device>> getMyDeviceList(@Query("groupCode") String groupCode);
 
+    @POST("device/my/device/listResult.do")
+    Call<Integer> getMyDeviceListResult(@Query("groupCode") String groupCode);
+
     @POST("device/insert/device.do")
     Call<Integer> insertDevice(@Body Device device);
 

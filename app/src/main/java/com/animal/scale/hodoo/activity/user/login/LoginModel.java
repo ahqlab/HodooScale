@@ -11,15 +11,11 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
-import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.Pet;
-import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.ValidationUtil;
-import com.github.mikephil.charting.data.Entry;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -85,16 +81,17 @@ public class LoginModel extends CommonModel {
     }
 
 
-    public void confirmDeviceRegistration(final DomainListCallBackListner<Device> domainCallBackListner) {
-        Call<List<Device>> call = NetRetrofit.getInstance().getDeviceService().getMyDeviceList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Device>() {
+    public void confirmDeviceRegistration(final DomainCallBackListner<Integer> domainCallBackListner) {
+        Call<Integer> call = NetRetrofit.getInstance().getDeviceService().getMyDeviceListResult(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
-            protected void doPostExecute(List<Device> devices) {
-                domainCallBackListner.doPostExecute(devices);
+            protected void doPostExecute(Integer integer) {
+                domainCallBackListner.doPostExecute(integer);
             }
+
             @Override
             protected void doPreExecute() {
-                domainCallBackListner.doPreExecute();
+
             }
 
             @Override

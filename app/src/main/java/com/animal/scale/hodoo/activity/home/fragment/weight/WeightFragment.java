@@ -51,6 +51,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     Animation animation;
 
+    String country;
+
     int randomint = 6;
 
     SharedPrefManager mSharedPrefManager;
@@ -58,8 +60,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     WeightFragmentIn.Presenter presenter;
 
     WeightStatistics.Presenter statisicsPresenter;
-
-    private String country;
 
     public int bcs;
     private boolean refrashState = false;
@@ -206,6 +206,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
+
+        HomeActivity.setWeightTip(weightTip);
+
         binding.collapse.setTitle(weightTip.getTitle());
         binding.collapse.setContent(weightTip.getContent());
     }
@@ -265,7 +268,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void setBcs(PetWeightInfo petWeightInfo) {
         presenter.setAnimationGaugeChart(petWeightInfo.getBcs());
-        presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
+        if ( HomeActivity.mWeightTip == null )
+            presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
+        if ( HomeActivity.mWeightTip != null )
+            if ( !country.equals(HomeActivity.mWeightTip.getLanguage()) )
+                presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
         setKg();
     }
 
@@ -353,7 +360,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 }
             }
         });
+
+
         presenter.initWeekCalendar();
+        if ( HomeActivity.mWeightTip != null ) {
+            Log.e(TAG, "country : " + country + " HomeActivity.mWeightTip.getLanguage() : " + HomeActivity.mWeightTip.getLanguage());
+            if (country.equals(HomeActivity.mWeightTip.getLanguage()))
+                setTipMessageOfCountry(HomeActivity.mWeightTip);
+        }
         setKg();
     }
+
 }

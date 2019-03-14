@@ -4,17 +4,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.CommonResponce;
-import com.animal.scale.hodoo.domain.Device;
 import com.animal.scale.hodoo.domain.Pet;
+import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.message.ResultMessage;
+import com.animal.scale.hodoo.service.NetRetrofit;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.util.List;
+
+import retrofit2.Call;
 
 public class LoginPresenter implements Login.Presenter {
 
@@ -75,6 +81,10 @@ public class LoginPresenter implements Login.Presenter {
                             return;
                         }
                         saveUserSharedValue(resultMessageGroup.getDomain());
+
+
+
+
                         checkRegistrationStatus();
                     }
                 } else {
@@ -107,10 +117,10 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void checkRegistrationStatus() {
-        loginModel.confirmDeviceRegistration(new CommonModel.DomainListCallBackListner<Device>() {
+        loginModel.confirmDeviceRegistration(new CommonModel.DomainCallBackListner<Integer>() {
             @Override
-            public void doPostExecute(List<Device> devices) {
-                if(!devices.isEmpty()){
+            public void doPostExecute(Integer integer) {
+                if(integer > 0){
                     //디바이스 등록됨.
                     loginModel.confirmPetRegistration(new CommonModel.DomainListCallBackListner<Pet>() {
                         @Override
@@ -149,13 +159,13 @@ public class LoginPresenter implements Login.Presenter {
                     });
                 }else{
                     //디바이스 없음
-
                     loginView.saveFcmToken();
                 }
             }
+
             @Override
             public void doPreExecute() {
-                loginView.setProgress(true);
+
             }
 
             @Override

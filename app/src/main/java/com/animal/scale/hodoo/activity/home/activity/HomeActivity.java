@@ -46,6 +46,7 @@ import com.animal.scale.hodoo.databinding.PetsListviewItemBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.util.BadgeUtils;
 import com.animal.scale.hodoo.util.DateUtil;
@@ -54,6 +55,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Iterator;
 import java.util.List;
+
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class HomeActivity extends BaseActivity<HomeActivity> implements NavigationView.OnNavigationItemSelectedListener, HomeActivityIn.View {
 
@@ -91,6 +94,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     public PetAllInfos selectPet;
 
+    public static WeightTip mWeightTip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +108,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter.loginCheck();
     }
 
+
+
     public void onPetImageClick(View view) {
         cumtomPetListDialog.show();
     }
@@ -113,10 +120,12 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         overridePendingTransition(0, 0);
     }
 
+
     @Override
     protected BaseActivity<HomeActivity> getActivityClass() {
         return HomeActivity.this;
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -142,7 +151,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     replaceFragment(MealFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
                     return true;
-                case R.id.navigation_activity:
+                case R.id.navigation_activity :
                     replaceFragment(ActivityFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.activity)));
                     return true;
@@ -150,6 +159,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             return false;
         }
     };
+
     // Fragment 변환을 해주기 위한 부분, Fragment의 Instance를 받아서 변경
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -179,6 +189,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             }
         }
     }
+
     public void changeBottomNavigationSize(BottomNavigationView bottomNavigationView) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
         for (int i = 0; i < menuView.getChildCount(); i++) {
@@ -312,7 +323,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     @Override
     public void setPushCount(int count) {
-        if (count <= 0) {
+        if ( count <= 0 ) {
             BadgeUtils.clearBadge(this);
         } else {
             BadgeUtils.setBadge(this, Math.min(count, 99));
@@ -321,7 +332,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     @Override
     public void moveLoginActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent( this, MainActivity.class );
         intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
         startActivity(intent);
         finish();
@@ -343,11 +354,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     public void onStart() {
         super.onStart();
-        if(selectPet != null){
-            WeightFragment weightFragment = (WeightFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            weightFragment.setBcsOrBscDescAndTip(selectPet.getPet().getBasic());
-            weightFragment.serChartOfDay();
-        }
+//        presenter.loadCustomDropdownView();
+        //Kcal 로리 표시
     }
 
     @Override
@@ -357,11 +365,11 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         setBadge();
         int notitype = getIntent().getIntExtra(HodooConstant.NOTI_TYPE_KEY, -1);
         setCalendarDate("");//푸시가 왔을때 초기 캘린더를 보여주기 위한 캘린더 초기화
-        if (notitype >= 0) {
+        if ( notitype >= 0 ) {
             Bundle bundle = new Bundle();
             bundle.putBoolean("push", true);
             switch (notitype) {
-                case HodooConstant.FIREBASE_WEIGHT_TYPE:
+                case HodooConstant.FIREBASE_WEIGHT_TYPE :
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
                     WeightFragment wf = WeightFragment.newInstance();
                     wf.setArguments(bundle);
@@ -369,7 +377,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     navigation.setSelectedItemId(R.id.navigation_weight);
                     presenter.loadCustomPetListDialog();
                     break;
-                case HodooConstant.FIREBASE_FEED_TYPE:
+                case HodooConstant.FIREBASE_FEED_TYPE :
                     MealFragment mf = MealFragment.newInstance();
                     mf.setArguments(bundle);
                     replaceFragment(mf);
@@ -379,12 +387,14 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             }
         }
     }
-
-    public static void setCalendarDate(String calendarDate) {
+    public static void setCalendarDate ( String calendarDate ) {
         mCalendarDate = calendarDate;
     }
-
-    public static String getCalendarDate() {
+    public static String getCalendarDate () {
         return mCalendarDate;
+    }
+
+    public static void setWeightTip ( WeightTip weightTip ) {
+        mWeightTip = weightTip;
     }
 }
