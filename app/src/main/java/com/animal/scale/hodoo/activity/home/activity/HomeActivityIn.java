@@ -12,11 +12,7 @@ public interface HomeActivityIn {
 
     interface View{
 
-        void setCustomDropdownView(List<PetAllInfos> petAllInfos);
-
-        void setListviewAdapter(List<SettingMenu> settingList);
-
-        void setCurrentPetInfos(List<PetAllInfos> data);
+        void setCustomPetListDialog(List<PetAllInfos> petAllInfos);
 
         void setCurcleImage(PetAllInfos info);
 
@@ -33,16 +29,12 @@ public interface HomeActivityIn {
 
         void loadData(Context context);
 
-        void loadCustomDropdownView();
-
-        void setCurrentPetInfos(List<PetAllInfos> data);
-
-        void setCurcleImage(PetAllInfos info);
+        void chageCurcleImageOfSelectPet(PetAllInfos info);
 
         void getInvitationToServer();
 
-        void checkLogin();
+        void loginCheck();
 
-
+        void loadCustomPetListDialog();
     }
 }

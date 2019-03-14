@@ -1,23 +1,16 @@
 package com.animal.scale.hodoo.activity.home.activity;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.user.invitation.Invitation;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.InvitationUser;
-import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
-import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.service.NetRetrofit;
-import com.github.mikephil.charting.data.Entry;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,8 +26,8 @@ public class HomeActivityModel extends CommonModel{
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    public void setSpinner(final DomainListCallBackListner<PetAllInfos> domainListCallBackListner) {
-        Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().aboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+    public void getPetAllInfo(final DomainListCallBackListner<PetAllInfos> domainListCallBackListner) {
+        Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().getAboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetAllInfos>() {
             @Override
             protected void doPostExecute(List<PetAllInfos> petAllInfos) {

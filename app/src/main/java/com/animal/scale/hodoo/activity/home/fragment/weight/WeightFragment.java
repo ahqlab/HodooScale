@@ -325,12 +325,14 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void onStart() {
         //Kcal 로리 표시
+        Log.e("HJLEE", "WEIGHT : onStart");
 //        presenter.initWeekCalendar();
         super.onStart();
     }
 
     @Override
     public void onResume() {
+        Log.e("HJLEE", "WEIGHT : onResume");
         super.onResume();
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

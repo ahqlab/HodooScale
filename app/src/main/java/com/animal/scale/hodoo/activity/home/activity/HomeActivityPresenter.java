@@ -37,31 +37,7 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
     }
 
     @Override
-    public void loadCustomDropdownView() {
-        model.setSpinner(new CommonModel.DomainListCallBackListner<PetAllInfos>() {
-            @Override
-            public void doPostExecute(List<PetAllInfos> petAllInfos) {
-                view.setCustomDropdownView(petAllInfos);
-            }
-
-            @Override
-            public void doPreExecute() {
-
-            }
-
-            @Override
-            public void doCancelled() {
-            }
-        });
-    }
-
-    @Override
-    public void setCurrentPetInfos(List<PetAllInfos> data) {
-        view.setCurrentPetInfos(data);
-    }
-
-    @Override
-    public void setCurcleImage(PetAllInfos info) {
+    public void chageCurcleImageOfSelectPet(PetAllInfos info) {
         view.setCurcleImage(info);
     }
 
@@ -212,7 +188,7 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
     }
 
     @Override
-    public void checkLogin() {
+    public void loginCheck() {
         int idx = model.getUserIdx();
         if ( idx == 0 )
             view.moveLoginActivity();
@@ -220,5 +196,22 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
             view.setFragment();
     }
 
+    @Override
+    public void loadCustomPetListDialog() {
+        model.getPetAllInfo(new CommonModel.DomainListCallBackListner<PetAllInfos>() {
+            @Override
+            public void doPostExecute(List<PetAllInfos> petAllInfos) {
+                view.setCustomPetListDialog(petAllInfos);
+            }
 
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+            }
+        });
+    }
 }

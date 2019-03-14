@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,14 +35,15 @@ import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
+import com.animal.scale.hodoo.adapter.AbsractCommonAdapter;
 import com.animal.scale.hodoo.adapter.AdapterOfPets;
 import com.animal.scale.hodoo.adapter.AdapterSpinner;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityHomeBinding;
+import com.animal.scale.hodoo.databinding.PetsListviewItemBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
-import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
@@ -50,9 +52,8 @@ import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.VIewUtil;
 import com.squareup.picasso.Picasso;
 
+import java.util.Iterator;
 import java.util.List;
-
-import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class HomeActivity extends BaseActivity<HomeActivity> implements NavigationView.OnNavigationItemSelectedListener, HomeActivityIn.View {
 
@@ -74,80 +75,48 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     AlertDialog.Builder alertDialog;
 
+    AlertDialog cumtomPetListDialog;
+
     private List<PetAllInfos> data;
 
     private BottomNavigationView navigation;
 
     public static String mCalendarDate = "";
 
+    AbsractCommonAdapter<PetAllInfos> apaterOfPetList;
+
+    public int sharedPetIdx = 0;
+
+    public int localListViewHeight = 0;
+
+    public PetAllInfos selectPet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setActivity(this);
-        //super.setToolbarColor();
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
-        presenter.checkLogin();
+        sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+        presenter.loadCustomPetListDialog();
+        presenter.loginCheck();
     }
 
-
-
     public void onPetImageClick(View view) {
-        adapter = new AdapterOfPets(HomeActivity.this, HomeActivity.this ,data, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
-        alertDialog = super.showBasicOneBtnPopup(null, null);
-        View customView = getLayoutInflater().inflate(R.layout.pet_list_dialog, null);
-        ListView li = (ListView) customView.findViewById(R.id.pet_listview);
-        li.setAdapter(adapter);
-        if ( adapter.listViewHeight > 0 ) {
-            ViewGroup.LayoutParams params = li.getLayoutParams();
-            params.height = adapter.listViewHeight;
-            li.setLayoutParams(params);
-        }
-
-        li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                getSelectedItemOfSpinner(position);
-                adapter.notifyDataSetChanged();
-                presenter.setCurrentPetInfos(data);
-            }
-        });
-        alertDialog.setView(customView);
-       /* alertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });*/
-        Button addBtn = (Button) customView.findViewById(R.id.add_pet);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
-                intent.putExtra("petIdx", ADD_PET);
-                startActivity(intent);
-                //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-            }
-        });
-        AlertDialog dialog = alertDialog.create();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-//        alertDialog.show();
+        cumtomPetListDialog.show();
     }
 
     public void onSettingBtnClick(View view) {
         Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
         startActivity(intent);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
-
 
     @Override
     protected BaseActivity<HomeActivity> getActivityClass() {
         return HomeActivity.this;
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -162,7 +131,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 case R.id.navigation_weight:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
                     replaceFragment(WeightFragment.newInstance());
-                    presenter.loadCustomDropdownView();
                     return true;
 //                case R.id.navigation_temp:
 //                    binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
@@ -174,7 +142,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     replaceFragment(MealFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
                     return true;
-                case R.id.navigation_activity :
+                case R.id.navigation_activity:
                     replaceFragment(ActivityFragment.newInstance());
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.activity)));
                     return true;
@@ -182,7 +150,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             return false;
         }
     };
-
     // Fragment 변환을 해주기 위한 부분, Fragment의 Instance를 받아서 변경
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -212,7 +179,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             }
         }
     }
-
     public void changeBottomNavigationSize(BottomNavigationView bottomNavigationView) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
         for (int i = 0; i < menuView.getChildCount(); i++) {
@@ -226,36 +192,108 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     }
 
     @Override
-    public void setCustomDropdownView(List<PetAllInfos> data) {
-        this.data = data;
-        presenter.setCurrentPetInfos(data);
-    }
+    public void setCustomPetListDialog(final List<PetAllInfos> petAllInfos) {
 
-    @Override
-    public void setCurrentPetInfos(List<PetAllInfos> data) {
-        for (PetAllInfos info : data) {
-            if(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) == 0){
-                mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, info.getPet().getPetIdx());
-            }
-            if (info.getPet().getPetIdx() == mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)) {
-                //Curcle 이미지 셋팅
-                presenter.setCurcleImage(info);
-                //에니메이션 돌림 이미지 셋팅
-                android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                if(tf instanceof WeightFragment){
-                    WeightFragment weightFragment = (WeightFragment) tf;
-                    weightFragment.setBcsOrBscDescAndTip(info.getPet().getBasic());
-                    weightFragment.serChartOfDay();
-                }else if(tf instanceof MealFragment){
-                    MealFragment mealFragment = (MealFragment) tf;
-                    mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
-                    mealFragment.setTip();
-                    mealFragment.setPetAllinfo();
-                }else if(tf instanceof TempFragment){
-                    TempFragment tempFragment = (TempFragment) tf;
-                    tempFragment.drawChart();
+        saveDefaultPetIdx(petAllInfos);
+
+        apaterOfPetList = new AbsractCommonAdapter<PetAllInfos>(HomeActivity.this, petAllInfos) {
+
+            PetsListviewItemBinding binding;
+
+            public int listViewHeight = 0;
+
+            @Override
+            protected View getUserEditView(final int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = apaterOfPetList.inflater.inflate(R.layout.pets_listview_item, null);
+                    binding = DataBindingUtil.bind(convertView);
+                    binding.setDomain(data.get(position));
+                    binding.setCurrentPetIdx(sharedPetIdx);
+                    convertView.setTag(binding);
+                } else {
+                    binding = (PetsListviewItemBinding) convertView.getTag();
+                    binding.setDomain(data.get(position));
+                    binding.setCurrentPetIdx(sharedPetIdx);
                 }
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                    }
+                    public void onClick(View v) {
+
+                        selectPet = apaterOfPetList.data.get(position);
+                        Iterator<PetAllInfos> iterator = apaterOfPetList.data.iterator();
+                        while (iterator.hasNext()) {
+                            if (iterator.next() == selectPet)
+                                iterator.remove();
+                        }
+                        apaterOfPetList.data.add(0, selectPet);
+                        mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, selectPet.getPet().getPetIdx());
+                        apaterOfPetList.notifyDataSetChanged();
+                        presenter.chageCurcleImageOfSelectPet(selectPet);
+
+                        /*android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                        if (tf instanceof WeightFragment) {
+                            WeightFragment weightFragment = (WeightFragment) tf;
+                            weightFragment.setBcsOrBscDescAndTip(selectPet.getPet().getBasic());
+                            weightFragment.serChartOfDay();
+                        } else if (tf instanceof MealFragment) {
+                            MealFragment mealFragment = (MealFragment) tf;
+                            mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
+                            mealFragment.setTip();
+                            mealFragment.setPetAllinfo();
+                        } else if (tf instanceof TempFragment) {
+                            TempFragment tempFragment = (TempFragment) tf;
+                            tempFragment.drawChart();
+                        }*/
+                    }
+                });
+                return binding.getRoot();
             }
+
+            @Override
+            protected void setUsetEditConstructor() {
+                View view = LayoutInflater.from(HomeActivity.this).inflate(R.layout.pets_listview_item, null);
+                view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                if (data.size() >= 3) {
+                    listViewHeight = view.getMeasuredHeight() * 3;
+                    localListViewHeight = listViewHeight;
+                }
+                //Log.e(TAG, String.format("height : %d", view.getMeasuredHeight()));
+            }
+        };
+
+        alertDialog = super.showBasicOneBtnPopup(null, null);
+        View customView = getLayoutInflater().inflate(R.layout.pet_list_dialog, null);
+        ListView listview = (ListView) customView.findViewById(R.id.pet_listview);
+        listview.setAdapter(apaterOfPetList);
+        if (localListViewHeight > 0){
+            ViewGroup.LayoutParams params = listview.getLayoutParams();
+            params.height = localListViewHeight;
+            listview.setLayoutParams(params);
+        }
+        alertDialog.setView(customView);
+        Button addBtn = (Button) customView.findViewById(R.id.add_pet);
+        addBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+                intent.putExtra("petIdx", ADD_PET);
+                startActivity(intent);
+                //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+            }
+        });
+        cumtomPetListDialog = alertDialog.create();
+        cumtomPetListDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+    /**
+     * 처음 앱에 진입시 CURRENT_PET_IDX 를 List 첫번째 id로 정한다.
+     *
+     * @param data
+     */
+    private void saveDefaultPetIdx(List<PetAllInfos> data) {
+        if (mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) == 0) {
+            mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, data.get(0).getPet().getPetIdx());
+            selectPet = data.get(0);
         }
     }
 
@@ -274,7 +312,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     @Override
     public void setPushCount(int count) {
-        if ( count <= 0 ) {
+        if (count <= 0) {
             BadgeUtils.clearBadge(this);
         } else {
             BadgeUtils.setBadge(this, Math.min(count, 99));
@@ -283,11 +321,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     @Override
     public void moveLoginActivity() {
-        Intent intent = new Intent( this, MainActivity.class );
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
         startActivity(intent);
         finish();
-
     }
 
     @Override
@@ -299,44 +336,18 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
         fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
         binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
-        presenter.loadCustomDropdownView();
         VIewUtil vIewUtil = new VIewUtil(HomeActivity.this);
         VIewUtil.getLocationCode(HomeActivity.this);
     }
 
     @Override
-    public void setListviewAdapter(List<SettingMenu> settingList) {
-        //adapter = new AdapterOfSetting(HomeActivity.this, settingList);
-        //binding.appBarNavigation.customSpinnerListView.setAdapter(adapter);
-    }
-
-    public void getSelectedItemOfSpinner(int position) {
-        PetAllInfos info = (PetAllInfos) adapter.getItem(position);
-        presenter.setCurcleImage(info);
-        mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, info.getPet().getPetIdx());
-        android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if(tf instanceof WeightFragment){
-            WeightFragment weightFragment = (WeightFragment) tf;
-//            weightFragment.setKg();
-            weightFragment.setBcsOrBscDescAndTip(info.getPet().getBasic());
-//            weightFragment.serChartOfDay();
-        }else if(tf instanceof MealFragment){
-            MealFragment mealFragment = (MealFragment) tf;
-            mealFragment.setTodaySumCalorie();
-            mealFragment.setTip();
-        }else if(tf instanceof TempFragment){
-           /* TempFragment tempFragment = (TempFragment) tf;
-            tempFragment.drawChart();*/
-        }
-
-    }
-
-
-    @Override
     public void onStart() {
         super.onStart();
-//        presenter.loadCustomDropdownView();
-        //Kcal 로리 표시
+        if(selectPet != null){
+            WeightFragment weightFragment = (WeightFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            weightFragment.setBcsOrBscDescAndTip(selectPet.getPet().getBasic());
+            weightFragment.serChartOfDay();
+        }
     }
 
     @Override
@@ -346,19 +357,19 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         setBadge();
         int notitype = getIntent().getIntExtra(HodooConstant.NOTI_TYPE_KEY, -1);
         setCalendarDate("");//푸시가 왔을때 초기 캘린더를 보여주기 위한 캘린더 초기화
-        if ( notitype >= 0 ) {
+        if (notitype >= 0) {
             Bundle bundle = new Bundle();
             bundle.putBoolean("push", true);
             switch (notitype) {
-                case HodooConstant.FIREBASE_WEIGHT_TYPE :
+                case HodooConstant.FIREBASE_WEIGHT_TYPE:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
                     WeightFragment wf = WeightFragment.newInstance();
                     wf.setArguments(bundle);
                     replaceFragment(wf);
                     navigation.setSelectedItemId(R.id.navigation_weight);
-                    presenter.loadCustomDropdownView();
+                    presenter.loadCustomPetListDialog();
                     break;
-                case HodooConstant.FIREBASE_FEED_TYPE :
+                case HodooConstant.FIREBASE_FEED_TYPE:
                     MealFragment mf = MealFragment.newInstance();
                     mf.setArguments(bundle);
                     replaceFragment(mf);
@@ -368,10 +379,12 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             }
         }
     }
-    public static void setCalendarDate ( String calendarDate ) {
+
+    public static void setCalendarDate(String calendarDate) {
         mCalendarDate = calendarDate;
     }
-    public static String getCalendarDate () {
+
+    public static String getCalendarDate() {
         return mCalendarDate;
     }
 }

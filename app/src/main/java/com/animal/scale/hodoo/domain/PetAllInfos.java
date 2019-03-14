@@ -118,8 +118,7 @@ public class PetAllInfos implements Serializable {
         }else{
             factor = 0;
         }
-
-        Log.e("HJLEE", "factor : " + Float.parseFloat(String.valueOf(factor)));
+        //Log.e("HJLEE", "factor : " + Float.parseFloat(String.valueOf(factor)));
         return Float.parseFloat(String.valueOf(factor));
     }
 
