@@ -94,6 +94,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     public PetAllInfos selectPet;
 
+    public static WeightTip mWeightTip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
