@@ -205,7 +205,8 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     }
 
     public void setData(String date) {
-        presenter.getRadarChartData(date);
+        Log.e("HJLEE", "DATE : " + date);
+        //presenter.getRadarChartData(date);
     }
 
     @Override
@@ -391,17 +392,16 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void onStart() {
+        Log.e("HJLEE", "MEAL : onStart");
 
-        //calorie_view
-
-        String date = HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate();
-        Log.e("HJLEE", "date :" + date);
+        presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
         binding.calorieView.setNumber(0);
         super.onStart();
     }
 
     @Override
     public void onResume() {
+        Log.e("HJLEE", "MEAL : onResume");
         presenter.getPetAllInfo();
         super.onResume();
         new Handler().post(new Runnable() {
@@ -418,6 +418,12 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     }
 
     public void setPetAllinfo(){
+        /*rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
+        binding.calorieBar.invalidate();
+        presenter.getTodaySumCalorie(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
+        Activity activity = getActivity();
+        if ( activity != null )
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");*/
         presenter.getPetAllInfo();
     }
 

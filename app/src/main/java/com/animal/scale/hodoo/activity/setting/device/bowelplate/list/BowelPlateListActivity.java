@@ -104,6 +104,11 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
                     });
                     return adapterBinding.getRoot();
                 }
+
+                @Override
+                protected void setUsetEditConstructor() {
+
+                }
             };
             binding.bowelPlateListView.setAdapter(adapter);
 

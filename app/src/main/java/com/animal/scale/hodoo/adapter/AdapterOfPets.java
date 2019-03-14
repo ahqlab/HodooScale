@@ -28,20 +28,15 @@ public class AdapterOfPets extends BaseAdapter {
     Context context;
     private LayoutInflater inflater;
     private List<PetAllInfos> data;
-    private int currentPetIdx;
-    public SharedPrefManager mSharedPrefManager;
-
     PetsListviewItemBinding binding;
 
     public int listViewHeight = 0;
 
-    public AdapterOfPets(Activity activity, Context context, List<PetAllInfos> data, int currentPetIdx) {
+    public AdapterOfPets(Activity activity, List<PetAllInfos> data, int currentPetIdx) {
         this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.activity = activity;
         this.context = context;
         this.data = data;
-        this.currentPetIdx = currentPetIdx;
-        mSharedPrefManager = SharedPrefManager.getInstance(activity);
         View view = LayoutInflater.from(activity).inflate(R.layout.pets_listview_item, null);
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         if ( data.size() >= 3 )
@@ -74,12 +69,12 @@ public class AdapterOfPets extends BaseAdapter {
             convertView = LayoutInflater.from(activity).inflate(R.layout.pets_listview_item, null);
             binding = DataBindingUtil.bind(convertView);
             binding.setDomain(data.get(position));
-            binding.setCurrentPetIdx(currentPetIdx);
+            //binding.setCurrentPetIdx(currentPetIdx);
             convertView.setTag(binding);
         } else {
             binding = (PetsListviewItemBinding) convertView.getTag();
             binding.setDomain(data.get(position));
-            binding.setCurrentPetIdx(currentPetIdx);
+            //binding.setCurrentPetIdx(currentPetIdx);
         }
         return binding.getRoot();
     }

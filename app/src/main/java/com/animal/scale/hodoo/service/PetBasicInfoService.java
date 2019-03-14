@@ -25,6 +25,6 @@ public interface PetBasicInfoService {
     Call<List<PetBasicInfo>> getMyRegisteredPetList(@Query("groupId") String groupId);
 
     @POST("pet/about/my/pet/list.do")
-    Call<List<PetAllInfos>> aboutMyPetList(@Query("groupCode") String groupCode);
+    Call<List<PetAllInfos>> getAboutMyPetList(@Query("groupCode") String groupCode);
 }
 

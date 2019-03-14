@@ -112,9 +112,6 @@ public class WeightView extends LinearLayout {
 
         mSplitStr = splitStr;
 
-        Log.e("HJLEE", "splitStr : " + splitStr.length);
-
-
         char[] number = new char[splitStr[0].length()];
 
         int a = Integer.parseInt(String.valueOf(splitStr[0]));

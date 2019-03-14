@@ -20,9 +20,12 @@ public abstract class AbsractCommonAdapter<D extends Serializable> extends BaseA
         this.activity = activity;
         this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
+        setUsetEditConstructor();
     }
 
     protected abstract View getUserEditView(int position, View convertView, ViewGroup parent);
+
+    protected abstract void setUsetEditConstructor();
 
     @Override
     public int getCount() {

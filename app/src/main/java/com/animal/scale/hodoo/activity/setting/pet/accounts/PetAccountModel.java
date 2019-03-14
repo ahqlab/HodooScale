@@ -11,9 +11,7 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
-import com.github.mikephil.charting.data.Entry;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,7 +28,7 @@ public class PetAccountModel extends CommonModel {
     }
 
     public void getPetData(final CommonModel.DomainListCallBackListner<PetAllInfos> domainListCallBackListner) {
-        Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().aboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+        Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().getAboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetAllInfos>() {
             @Override
             protected void doPostExecute(List<PetAllInfos> data) {
