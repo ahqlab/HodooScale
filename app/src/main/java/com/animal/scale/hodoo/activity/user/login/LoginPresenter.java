@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
@@ -122,29 +123,34 @@ public class LoginPresenter implements Login.Presenter {
             public void doPostExecute(Integer integer) {
                 if(integer > 0){
                     //디바이스 등록됨.
-                    loginModel.confirmPetRegistration(new CommonModel.DomainListCallBackListner<Pet>() {
+                    loginModel.confirmPetRegistrationResult(new CommonModel.DomainCallBackListner<Integer[]>() {
                         @Override
-                        public void doPostExecute(List<Pet> pets) {
-                            if(!pets.isEmpty()){
-                                //PET 등록됨.
-                                if(pets.size() == 1){
-                                    if(pets.get(0).getBasic() == 0){
-                                        loginView.goPetRegistActivity(pets.get(0).getPetIdx());
-                                    }else if(pets.get(0).getDisease() == 0){
-                                        loginView.goDiseasesRegistActivity(pets.get(0).getPetIdx());
-                                    }else if(pets.get(0).getPhysical() == 0){
-                                        loginView.goPhysicalRegistActivity(pets.get(0).getPetIdx());
-                                    }else if(pets.get(0).getWeight() == 0){
-                                        loginView.goWeightRegistActivity(pets.get(0).getPetIdx());
-                                    }else{
+                        public void doPostExecute(Integer[] results) {
+                            if ( results.length == 1 ) {
+                                switch ( results[0] ) {
+                                    case HodooConstant.PET_REGIST_SUCESS :
                                         loginView.setAutoLoginState();
-                                    }
-                                }else{
-                                    loginView.setAutoLoginState();
+                                        break;
+                                    case HodooConstant.PET_REGIST_FAILED :
+                                        loginView.goPetRegistActivity(0);
+                                        break;
                                 }
-                            }else{
-                                //PET 등록페이지 이동
-                                loginView.goPetRegistActivity(0);
+                            } else {
+                                int petIdx = results[1];
+                                switch ( results[0] ) {
+                                    case HodooConstant.PET_REGIST_FAILED :
+                                        loginView.goPetRegistActivity(petIdx);
+                                        break;
+                                    case HodooConstant.PET_NOT_REGIST_DISEASES :
+                                        loginView.goDiseasesRegistActivity(petIdx);
+                                        break;
+                                    case HodooConstant.PET_NOT_REGIST_PHYSICAL :
+                                        loginView.goPhysicalRegistActivity(petIdx);
+                                        break;
+                                    case HodooConstant.PET_NOT_REGIST_WEIGHT :
+                                        loginView.goWeightRegistActivity(petIdx);
+                                        break;
+                                }
                             }
                         }
                         @Override

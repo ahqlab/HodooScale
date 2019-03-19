@@ -119,6 +119,25 @@ public class LoginModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    public void confirmPetRegistrationResult(final DomainCallBackListner<Integer []> domainCallBackListner) {
+        Call<Integer []> call = NetRetrofit.getInstance().getPetService().getMyPetResult(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer []>() {
+            @Override
+            protected void doPostExecute(Integer[] pets) {
+                domainCallBackListner.doPostExecute(pets);
+            }
+            @Override
+            protected void doPreExecute() {
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
     public void saveFCMToken (User user, final LoginModel.DomainCallBackListner<Integer> callback) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().saveFCMToken(user);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
