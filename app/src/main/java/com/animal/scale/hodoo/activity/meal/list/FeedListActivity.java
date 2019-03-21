@@ -55,7 +55,7 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
 
     private float darkGreySpan;
 
-    PetAllInfos selectPet;
+    private PetAllInfos selectPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,6 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         presenter = new FeedListPresenter(this);
 
         presenter.loadData(FeedListActivity.this);
-        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
         getIntentValue();
         setPetAllInfo();
     }
@@ -158,7 +157,7 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
     @Override
     public void deleteResult(Integer result) {
         if(result != 0){
-            presenter.getPetAllInfo();
+            presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
             presenter.getList(DateUtil.getCurrentDatetime());
         }
     }
@@ -189,14 +188,15 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
     }
 
     public void onClickFloatingBtn(View view) {
-        Log.e(TAG, "onClickFloatingBtn");
         Intent intent = new Intent(getApplicationContext(), MealSearchActivity.class);
+        intent.putExtra("selectPet", selectPet);
         startActivity(intent);
     }
 
     @Override
     protected void onResume() {
-        presenter.getList(DateUtil.getCurrentDatetime());
         super.onResume();
+        presenter.getList(DateUtil.getCurrentDatetime());
+        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
     }
 }

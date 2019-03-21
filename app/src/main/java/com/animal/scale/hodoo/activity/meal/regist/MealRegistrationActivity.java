@@ -65,6 +65,8 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
     IngredientsOfMealDialog dialog;
 
+    private PetAllInfos selectPet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +79,9 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
         presenter = new MealRegistrationPresenter(this);
         presenter.loadData(this);
-        presenter.getPetAllInfo();
         feedId = intent.getIntExtra("feedId", 0);
+        selectPet = (PetAllInfos) intent.getSerializableExtra("selectPet");
+        setPetAllInfo();
         presenter.getFeedInfo(feedId);
 
         dbHandler = new DBHandler(this);
@@ -135,40 +138,6 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         return MealRegistrationActivity.this;
     }
 
-    /*public void initDataToSeekbar(float rer, float kcal) {
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (float) (((rer * 0.7) / kcal) * 100);
-        mProgressItem.color = R.color.seek_bar_gray;
-        progressItemList.add(mProgressItem);
-
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (float) (((rer * 0.3) / kcal) * 100);
-        mProgressItem.color = R.color.grey;
-        progressItemList.add(mProgressItem);
-
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (darkGreySpan / kcal) * 100;
-        mProgressItem.color = R.color.red;
-        progressItemList.add(mProgressItem);
-
-        binding.seekBar.invalidate();
-    }
-
-    public void initDataToSeekbar(float rer) {
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (float) (((rer * 0.7) / rer) * 100);
-        mProgressItem.color = R.color.seek_bar_gray;
-        progressItemList.add(mProgressItem);
-        // greyspan
-
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (darkGreySpan / rer) * 100;
-        mProgressItem.color = R.color.grey;
-        progressItemList.add(mProgressItem);
-
-        binding.seekBar.invalidate();
-    }*/
-
     @Override
     public void setFeedInfo(Feed feed) {
         binding.setDomain(feed);
@@ -186,10 +155,14 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
             finish();
     }
 
-    @Override
+   /* @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+    }*/
+
+    public void setPetAllInfo() {
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
         binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
@@ -242,5 +215,11 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
         Log.e("HJLEE", "history > " + mealHistory.toString());
         presenter.saveMeal(mealHistory);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
     }
 }

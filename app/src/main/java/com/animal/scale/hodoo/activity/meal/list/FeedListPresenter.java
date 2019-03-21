@@ -74,7 +74,7 @@ public class FeedListPresenter implements FeedListIn.Presenter {
         });
     }
 
-    @Override
+    /*@Override
     public void getPetAllInfo() {
         mealRegistrationModel.getPetAllInfo(new CommonModel.DomainCallBackListner<PetAllInfos>() {
             @Override
@@ -93,7 +93,7 @@ public class FeedListPresenter implements FeedListIn.Presenter {
             }
         });
     }
-
+*/
     @Override
     public void deleteMealHistory(int historyIdx) {
         model.deleteMealHistory(historyIdx, new CommonModel.DomainCallBackListner<Integer>(){

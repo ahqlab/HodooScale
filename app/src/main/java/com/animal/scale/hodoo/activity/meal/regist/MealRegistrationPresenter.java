@@ -64,7 +64,7 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
         });
     }
 
-    @Override
+    /*@Override
     public void getPetAllInfo() {
         model.getPetAllInfo(new CommonModel.DomainCallBackListner<PetAllInfos>() {
             @Override
@@ -82,7 +82,7 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
 
             }
         });
-    }
+    }*/
 
     @Override
     public void getTodaySumCalorie(String date) {
