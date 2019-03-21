@@ -135,6 +135,7 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         binding.feedListview.setAdapter(adapter);
         binding.feedListview.setOnItemClickListener(onItemClickListener);
         binding.feedListview.setOnItemLongClickListener(onItemLongClickListener);
+        setProgress(false);
     }
 
     private AdapterView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {

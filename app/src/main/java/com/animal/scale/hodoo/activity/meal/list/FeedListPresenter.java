@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.activity.meal.list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragmentModel;
 import com.animal.scale.hodoo.activity.meal.regist.MealRegistrationModel;
@@ -13,6 +14,8 @@ import com.animal.scale.hodoo.domain.MealHistoryContent;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 
 import java.util.List;
+
+import static com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity.TAG;
 
 public class FeedListPresenter implements FeedListIn.Presenter {
 
@@ -44,12 +47,13 @@ public class FeedListPresenter implements FeedListIn.Presenter {
 
             @Override
             public void doPreExecute() {
-
+                Log.e(TAG, "Feed doPreExecute");
+                view.setProgress(true);
             }
 
             @Override
             public void doCancelled() {
-
+                view.setProgress(false);
             }
         });
     }

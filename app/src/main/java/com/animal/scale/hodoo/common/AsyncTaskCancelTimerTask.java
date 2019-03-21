@@ -24,7 +24,6 @@ public class AsyncTaskCancelTimerTask extends CountDownTimer {
 
     @Override
     public void onTick(long l) {
-        //Log.e(TAG, "onTick..");
         if (asyncTask == null) {
             this.cancel();
             return;

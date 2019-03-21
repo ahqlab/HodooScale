@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.meal.list;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.activity.meal.search.AutoCompleateFeed;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
@@ -21,6 +22,7 @@ import retrofit2.Call;
 
 public class FeedListModel extends CommonModel {
 
+    private String TAG = FeedListModel.class.getSimpleName();
     Context context;
 
     private SharedPrefManager sharedPrefManager;
@@ -40,12 +42,12 @@ public class FeedListModel extends CommonModel {
 
             @Override
             protected void doPreExecute() {
-
+                domainListCallBackListner.doPreExecute();
             }
 
             @Override
             protected void doCancelled() {
-
+                domainListCallBackListner.doCancelled();
             }
         }.execute(call), limitedTime, interval, true).start();
     }
