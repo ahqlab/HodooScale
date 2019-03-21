@@ -15,6 +15,8 @@ public class SharedPrefVariable {
     public static final String INVITATION_STATE = "INVITATION_STATE";
     public static final String INVITATION_USER_EMAIL = "INVITATION_USER_EMAIL";
 
+    public static final String PET_ALL_INFO = "PET_ALL_INFO";
+
 
     public static final String AUTO_LOGIN = "AUTO_LOGIN";
 

@@ -39,6 +39,7 @@ import com.animal.scale.hodoo.adapter.AbsractCommonAdapter;
 import com.animal.scale.hodoo.adapter.AdapterOfPets;
 import com.animal.scale.hodoo.adapter.AdapterSpinner;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.base.FragmentTip;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityHomeBinding;
@@ -95,6 +96,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public PetAllInfos selectPet;
 
     public static WeightTip mWeightTip;
+
+    public static FragmentTip[] fragmentTips = new FragmentTip[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -340,6 +343,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     @Override
     public void setFragment() {
+        Log.e(TAG, "setFragment");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
@@ -393,8 +397,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public static String getCalendarDate () {
         return mCalendarDate;
     }
-
     public static void setWeightTip ( WeightTip weightTip ) {
         mWeightTip = weightTip;
+    }
+    public static void setFragmentTip( int type, FragmentTip obj ) {
+        fragmentTips[type] = obj;
     }
 }

@@ -142,6 +142,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setAnimationGaugeChart(int bcs) {
+        Log.e(TAG, "setAnimationGaugeChart");
+        
         this.bcs = bcs;
        /* int checkBCS = 0;
         if (bcs < 3) {checkBCS = 0; //부족 } else if (bcs > 3) { //초과 checkBCS = 1; } else { checkBCS = 2; //적정 }*/
@@ -231,6 +233,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
+                Log.e(TAG, String.format("onDateClick bcs : %d", bcs));
                 DateTime dt = dateTime;
                 DateTime now = new DateTime();
                 String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));

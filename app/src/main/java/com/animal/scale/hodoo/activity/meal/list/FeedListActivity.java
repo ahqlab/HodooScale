@@ -9,6 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.meal.regist.MealRegistrationActivity;
@@ -140,10 +141,14 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
-        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-        binding.seekBar.invalidate();
-        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
-        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        if ( petAllInfos != null ) {
+            rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
+            binding.seekBar.invalidate();
+            presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        } else {
+            Toast.makeText(getApplicationContext(), "데이터를 가져오기에 실패했습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

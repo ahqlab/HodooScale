@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.constant.HodooConstant;
 
+import org.json.JSONArray;
+
 import java.io.Serializable;
 import java.util.List;
 

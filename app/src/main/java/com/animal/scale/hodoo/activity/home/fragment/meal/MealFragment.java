@@ -26,6 +26,7 @@ import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.meal.list.FeedListActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.mpchart.RadarMarkerView;
 import com.animal.scale.hodoo.databinding.FragmentMealLayoutBinding;
 import com.animal.scale.hodoo.domain.Feed;
@@ -121,7 +122,12 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         tfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
-        presenter.getTipMessageOfCountry(new MealTip(country));
+        if ( HomeActivity.fragmentTips[HodooConstant.FRAGMENT_TYPE_MEAL] == null )
+            presenter.getTipMessageOfCountry(new MealTip(country));
+        else {
+            binding.collapse.setTitle(((MealTip) HomeActivity.fragmentTips[HodooConstant.FRAGMENT_TYPE_MEAL]).getTitle());
+            binding.collapse.setContent(((MealTip) HomeActivity.fragmentTips[HodooConstant.FRAGMENT_TYPE_MEAL]).getContent());
+        }
         return binding.getRoot();
     }
 
@@ -269,12 +275,14 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
-        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-        binding.calorieBar.invalidate();
-        presenter.getTodaySumCalorie(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
-        Activity activity = getActivity();
-        if ( activity != null )
-            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        if ( petAllInfos != null ) {
+            rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
+            binding.calorieBar.invalidate();
+            presenter.getTodaySumCalorie(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
+            Activity activity = getActivity();
+            if ( activity != null )
+                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        }
     }
 
     @Override
@@ -308,6 +316,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void setTipMessageOfCountry(MealTip tip) {
+        HomeActivity.setFragmentTip(HodooConstant.FRAGMENT_TYPE_MEAL, tip);
         binding.collapse.setTitle(tip.getTitle());
         binding.collapse.setContent(tip.getContent());
     }

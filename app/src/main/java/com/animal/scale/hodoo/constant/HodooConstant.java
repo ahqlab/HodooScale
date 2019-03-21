@@ -35,6 +35,9 @@ public class HodooConstant {
     public static final int MEMBER_EXIST = -2;
     public static final int NOT_GROUP_MASTER = 2;
 
+    public static final int FRAGMENT_TYPE_WEIGHT = 0;
+    public static final int FRAGMENT_TYPE_MEAL = 0;
+
     /* oreo version notification channel (s) */
     public static final String NORMAL_CHANNEL = "notice_channel";
     public static final String WEIGHT_CHECK_CHANNEL = "weight_check_channel";
@@ -63,7 +66,7 @@ public class HodooConstant {
     /* pet 관련 등록 여부 체크 (s) */
 
     /* Retrofit 관련 (s) */
-    public static final int LIMITED_TIME = 60000;
+    public static final int LIMITED_TIME = 40000;
     public static final int INTERVAL = 1000;
     /* Retrofit 관련 (e) */
 

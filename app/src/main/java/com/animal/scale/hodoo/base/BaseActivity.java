@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -177,6 +178,10 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         try{
             getApplicationContext().unregisterReceiver(mMessageReceiver);
         } catch(IllegalArgumentException e){}
+
+        if ( isApplicationSentToBackground(getApplicationContext()) ) {
+            Log.e(TAG, "application kill");
+        }
     }
 
     @Override
@@ -216,5 +221,18 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
                 }
             }
         }
+    }
+
+    public static boolean isApplicationSentToBackground(final Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

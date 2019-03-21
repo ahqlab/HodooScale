@@ -12,6 +12,7 @@ import com.animal.scale.hodoo.domain.User;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -25,6 +26,9 @@ public interface FeedService {
 
     @POST("feed/search/list.do")
     Call<List<AutoCompleateFeed>> getSearchFeedList(@Body SearchParam searchParam, @Query("language") String language);
+
+    @POST("feed/search/listStr.do")
+    Call<ResponseBody> getSearchFeedStr(@Body SearchParam searchParam, @Query("language") String language);
 
     @POST("feed/get/info.do")
     Call<Feed> getFeedInfo(@Query("feedId") int feedId);
