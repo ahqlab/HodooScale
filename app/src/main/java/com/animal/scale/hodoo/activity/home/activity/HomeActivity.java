@@ -39,6 +39,7 @@ import com.animal.scale.hodoo.adapter.AbsractCommonAdapter;
 import com.animal.scale.hodoo.adapter.AdapterOfPets;
 import com.animal.scale.hodoo.adapter.AdapterSpinner;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.base.FragmentTip;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityHomeBinding;
@@ -96,6 +97,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public static PetAllInfos selectPet;
 
     public static WeightTip mWeightTip;
+
+    public static FragmentTip[] fragmentTips = new FragmentTip[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -379,7 +382,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             Bundle bundle = new Bundle();
             bundle.putBoolean("push", true);
             switch (notitype) {
-                case HodooConstant.FIREBASE_WEIGHT_TYPE:
+                case HodooConstant.FIREBASE_WEIGHT_TYPE :
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
                     WeightFragment wf = WeightFragment.newInstance();
                     wf.setArguments(bundle);
@@ -387,7 +390,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     navigation.setSelectedItemId(R.id.navigation_weight);
                     presenter.loadCustomPetListDialog();
                     break;
-                case HodooConstant.FIREBASE_FEED_TYPE:
+                case HodooConstant.FIREBASE_FEED_TYPE :
                     MealFragment mf = MealFragment.newInstance();
                     mf.setArguments(bundle);
                     replaceFragment(mf);
@@ -397,20 +400,14 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             }
         }
     }
-
-    public static void setCalendarDate(String calendarDate) {
+    public static void setCalendarDate ( String calendarDate ) {
         mCalendarDate = calendarDate;
     }
-
-    public static String getCalendarDate() {
+    public static String getCalendarDate () {
         return mCalendarDate;
     }
 
-    public static void setWeightTip(WeightTip weightTip) {
+    public static void setWeightTip ( WeightTip weightTip ) {
         mWeightTip = weightTip;
-    }
-
-    public static PetAllInfos getSelectPet() {
-        return selectPet;
     }
 }

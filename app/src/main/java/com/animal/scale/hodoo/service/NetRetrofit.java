@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class NetRetrofit {
     private static NetRetrofit ourInstance = new NetRetrofit();
@@ -31,6 +32,7 @@ public class NetRetrofit {
             .baseUrl(SharedPrefVariable.SERVER_ROOT)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create()) // 파싱등록
+            .addConverterFactory(ScalarsConverterFactory.create())
             .build();
 
     UserService service = retrofit.create(UserService.class);

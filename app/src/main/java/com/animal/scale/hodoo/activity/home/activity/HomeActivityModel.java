@@ -71,6 +71,12 @@ public class HomeActivityModel extends CommonModel{
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    public String getPetAllInfo() {
+        return mSharedPrefManager.getStringExtra(SharedPrefVariable.PET_ALL_INFO);
+    }
+    public void setPetAllInfo ( String petAllInfo ) {
+        mSharedPrefManager.putStringExtra(SharedPrefVariable.PET_ALL_INFO, petAllInfo);
+    }
     public void setNotiCount ( int count ) {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
     }

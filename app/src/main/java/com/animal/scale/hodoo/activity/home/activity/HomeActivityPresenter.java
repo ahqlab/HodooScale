@@ -7,7 +7,12 @@ import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.NameList;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -215,5 +220,7 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
                 //view.setProgress(false);
             }
         });
+
+
     }
 }

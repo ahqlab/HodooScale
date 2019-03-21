@@ -1,9 +1,11 @@
 package com.animal.scale.hodoo.domain;
 
+import com.animal.scale.hodoo.base.FragmentTip;
+
 import lombok.Data;
 
 @Data
-public class MealTip implements Domain {
+public class MealTip extends FragmentTip implements Domain {
 
     public MealTip() {
 

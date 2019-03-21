@@ -9,6 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.meal.regist.MealRegistrationActivity;
@@ -104,11 +105,23 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         binding.seekBar.setEnabled(true);
     }
 
+    @Override
+    public void setPetAllInfo(PetAllInfos petAllInfos) {
+        if ( petAllInfos != null ) {
+            rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
+            binding.seekBar.invalidate();
+            presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        }
+    }
 
     public void setPetAllInfo(){
-        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
-        binding.seekBar.invalidate();
-        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        if ( selectPet != null ) {
+            rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
+            binding.seekBar.invalidate();
+            presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        }
     }
 
     @Override
