@@ -235,7 +235,6 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
                 return true;
             }
         }
-
         return false;
     }
 }

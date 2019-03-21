@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.meal.list;
 
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -92,7 +93,9 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
                 binding.rer2.setText("/" + MathUtil.DecimalCut(rer) + "kcal");
                 //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
-            binding.seekBar.setProgress((int) mealHistory.getCalorie());
+            ObjectAnimator.ofInt(binding.seekBar, "progress", (int) mealHistory.getCalorie())
+                    .setDuration(300)
+                    .start();
             binding.calorieIntake.setText(String.valueOf(mealHistory.getCalorie()));
         } else {
             binding.seekBar.setMax((int) rer);
@@ -169,6 +172,7 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
             Intent intent = new Intent(getApplicationContext(), MealUpdateActivity.class);
             intent.putExtra("feedId", item.getFeed().getId());
             intent.putExtra("historyIdx", item.getMealHistory().getHistoryIdx());
+            intent.putExtra("selectPet", selectPet);
             startActivity(intent);
         }
     };

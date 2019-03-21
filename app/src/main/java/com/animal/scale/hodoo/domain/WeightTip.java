@@ -3,8 +3,10 @@ package com.animal.scale.hodoo.domain;
 import com.animal.scale.hodoo.base.FragmentTip;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class WeightTip  extends FragmentTip implements Domain{
 
 	public WeightTip() {

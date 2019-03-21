@@ -14,8 +14,6 @@ public interface MealUpdateIn {
 
         void setInsertResult(Integer integer);
 
-        void setPetAllInfo(PetAllInfos petAllInfos);
-
         void setTodaySumCalorie(MealHistory mealHistory);
 
         void setThisHistory(MealHistory mealHistory);
@@ -32,8 +30,6 @@ public interface MealUpdateIn {
         void saveMeal(MealHistory mealHistory);
 
         void updateMeal(MealHistory mealHistory);
-
-        void getPetAllInfo();
 
         void getTodaySumCalorie(String date);
 
