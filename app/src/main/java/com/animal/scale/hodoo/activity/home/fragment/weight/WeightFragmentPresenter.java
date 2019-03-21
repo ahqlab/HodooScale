@@ -8,7 +8,6 @@ import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
 import com.animal.scale.hodoo.domain.WeightTip;
-import com.animal.scale.hodoo.util.DateUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 
@@ -61,8 +60,8 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
     }
 
     @Override
-    public void setAnimationGaugeChart(int bcs) {
-        view.setAnimationGaugeChart(bcs);
+    public void setBcsAndBcsDesc(int bcs) {
+        view.setBcsAndBcsDesc(bcs);
     }
 
     @Override
@@ -101,20 +100,21 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
         model.setupChart(chart, model.getData(yVals, chart), d);
     }
 
-    @Override
+ /*   @Override
     public void setupDefaultChart() {
-    }
+    }*/
 
     @Override
     public void getLastCollectionData(final String date, int type) {
         model.getLastCollectionData(date, type , new CommonModel.DomainCallBackListner<RealTimeWeight>() {
             @Override
             public void doPostExecute(RealTimeWeight d) {
-                if(date.matches(DateUtil.getCurrentDatetime())){
+                view.setLastCollectionDataOrSaveAvgWeight(d);
+                /*if(date.matches(DateUtil.getCurrentDatetime())){
                     view.setLastCollectionDataOrSaveAvgWeight(d);
                 }else{
                     view.setLastCollectionData(d);
-                }
+                }*/
             }
             @Override
             public void doPreExecute() {
@@ -131,10 +131,6 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
         view.initWeekCalendar();
     }
 
-    @Override
-    public void initChart() {
-
-    }
 
     @Override
     public void getTipMessageOfCountry(WeightTip weightTip) {

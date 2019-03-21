@@ -18,9 +18,9 @@ public interface WeightFragmentIn {
 
         void setBcs(PetWeightInfo petWeightInfo);
 
-        void setAnimationGaugeChart(int bcs);
+        void setBcsAndBcsDesc(int bcs);
 
-        void setLastCollectionData(RealTimeWeight d);
+        //void setLastCollectionData(RealTimeWeight d);
 
         void initWeekCalendar();
 
@@ -37,17 +37,17 @@ public interface WeightFragmentIn {
 
         void getBcs(int basicIdx);
 
-        void setAnimationGaugeChart(int bcs);
+        void setBcsAndBcsDesc(int bcs);
 
         void getDefaultData(String date, int type);
 
-        void setupDefaultChart();
+        //void setupDefaultChart();
 
         void getLastCollectionData(String date, int type);
 
         void initWeekCalendar();
 
-        void initChart();
+        //void initChart();
 
         void getTipMessageOfCountry(WeightTip weightTip);
     }

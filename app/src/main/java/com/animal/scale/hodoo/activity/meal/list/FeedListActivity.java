@@ -27,6 +27,7 @@ import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.MealHistoryContent;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SearchHistory;
+import com.animal.scale.hodoo.domain.single.PetAllInfo;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.MathUtil;
 import com.animal.scale.hodoo.util.RER;
@@ -54,6 +55,8 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
 
     private float darkGreySpan;
 
+    PetAllInfos selectPet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,54 +64,19 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feed_list);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_feed)));
-
-        mSharedPrefManager = SharedPrefManager.getInstance(FeedListActivity.this);
-
         super.setToolbarColor();
+        mSharedPrefManager = SharedPrefManager.getInstance(FeedListActivity.this);
         presenter = new FeedListPresenter(this);
+
         presenter.loadData(FeedListActivity.this);
-        //this.initSeekbar();
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        getIntentValue();
+        setPetAllInfo();
     }
 
-   /* public void initDataToSeekbar(float rer, float kcal) {
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (float) (((rer * 0.7) / kcal) * 100);
-        mProgressItem.color = R.color.seek_bar_gray;
-        progressItemList.add(mProgressItem);
-
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (float) (((rer * 0.3) / kcal) * 100);
-        mProgressItem.color = R.color.grey;
-        progressItemList.add(mProgressItem);
-
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (darkGreySpan / kcal) * 100;
-        mProgressItem.color = R.color.red;
-        progressItemList.add(mProgressItem);
-
-        binding.seekBar.invalidate();
-    }
-
-    public void initDataToSeekbar(float rer) {
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (float) (((rer * 0.7) / rer) * 100);
-        mProgressItem.color = R.color.seek_bar_gray;
-        progressItemList.add(mProgressItem);
-        // greyspan
-
-        mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (darkGreySpan / rer) * 100;
-        mProgressItem.color = R.color.grey;
-        progressItemList.add(mProgressItem);
-
-        binding.seekBar.invalidate();
-    }*/
-
-    @Override
-    public void initSeekbar() {
-        //progressItemList = new ArrayList<ProgressItem>();
-        //binding.seekBar.initData(progressItemList);
+    private void getIntentValue(){
+        Intent intent = getIntent();
+        selectPet = (PetAllInfos) intent.getSerializableExtra("selectPet");
     }
 
     @Override
@@ -138,7 +106,6 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         binding.seekBar.setEnabled(true);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         if ( petAllInfos != null ) {
@@ -146,12 +113,17 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
             binding.seekBar.invalidate();
             presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
             binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-        } else {
-            Toast.makeText(getApplicationContext(), "데이터를 가져오기에 실패했습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
-
+    public void setPetAllInfo(){
+        if ( selectPet != null ) {
+            rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
+            binding.seekBar.invalidate();
+            presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        }
+    }
 
     @Override
     protected BaseActivity<FeedListActivity> getActivityClass() {
@@ -224,7 +196,6 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
 
     @Override
     protected void onResume() {
-        presenter.getPetAllInfo();
         presenter.getList(DateUtil.getCurrentDatetime());
         super.onResume();
     }

@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +23,7 @@ import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightSta
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
+import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightTip;
@@ -68,6 +68,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     private SimpleDateFormat lastRefreshSdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
     private View rotationView;
     int mBasicIdx = 0;
+    private PetAllInfos selectPet;
 
     private String calendarDate = "";
 
@@ -89,11 +90,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_weight, container, false);
         binding.setActivity(this);
 
-        if ( getArguments() != null ) {
-            if ( getArguments().getBoolean("push") )
-                setCalendar();
-        }
-
         mSharedPrefManager = SharedPrefManager.getInstance(getActivity());
 
         nowTime = System.currentTimeMillis();
@@ -111,7 +107,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.chart1.setNoDataText(getActivity().getString(R.string.weight_data_available));
         binding.chart1.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
 
-
         statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
         statisicsPresenter.initLoadData(getContext());
         statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
@@ -120,7 +115,16 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
         if(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT).matches("")){
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
-        }else{
+        }
+
+        if ( getArguments() != null ) {
+            if ( getArguments().getBoolean("push") )
+                setCalendar();
+            selectPet = (PetAllInfos) getArguments().getSerializable("selectPet");
+            if (null != selectPet){
+                setBcsOrBscDescAndTip(selectPet);
+                serChartOfDay();
+            }
         }
         return binding.getRoot();
     }
@@ -131,9 +135,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     //BCS or BCS DESC and TIP
-    public void setBcsOrBscDescAndTip(int basicIdx) {
-        mBasicIdx = basicIdx;
-        presenter.getBcs(basicIdx);
+    public void setBcsOrBscDescAndTip(PetAllInfos petAllInfos) {
+        setBcsAndBcsDesc(petAllInfos.getPetWeightInfo().getBcs());
     }
     //오늘의 평균 체중
     public void setKg() {
@@ -141,12 +144,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     @Override
-    public void setAnimationGaugeChart(int bcs) {
-        Log.e(TAG, "setAnimationGaugeChart");
-        
+    public void setBcsAndBcsDesc(int bcs) {
         this.bcs = bcs;
-       /* int checkBCS = 0;
-        if (bcs < 3) {checkBCS = 0; //부족 } else if (bcs > 3) { //초과 checkBCS = 1; } else { checkBCS = 2; //적정 }*/
+        //if (bcs < 3) {checkBCS = 0; //부족 } else if (bcs > 3) { //초과 checkBCS = 1; } else { checkBCS = 2; //적정 }*/
         if (bcs > 0) {
             binding.bcsSubscript.setText(bcsArr[bcs - 1]);
             binding.bcsStep.setText(String.valueOf(bcs));
@@ -155,31 +155,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             binding.bcsStep.setText(String.valueOf(bcs));
         }
     }
-    //여기 날짜도 들어가야함..
-    @Override
-    public void setLastCollectionData(RealTimeWeight d) {
-        if ( d != null ) {
-            DecimalFormat fmt = new DecimalFormat("0.##");
-            binding.weightView.setNumber(d.getValue());
-            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
-            /*
-            if (!String.valueOf(d.getValue()).matches("")) {
-                DecimalFormat fmt = new DecimalFormat("0.##");
-                binding.weightView.setNumber(d.getValue());
-                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
-            } else {
-                binding.weightView.setNumber(0f);
-                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
-            }*/
-
-        } else {
-            binding.weightView.setNumber(0f);
-            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
-        }
-
-        if (refrashState)
-            rotationStop(rotationView);
-    }
 
     @Override
     public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
@@ -187,37 +162,23 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             DecimalFormat fmt = new DecimalFormat("0.##");
             binding.weightView.setNumber(d.getValue());
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
-            /*
-            if (!String.valueOf(d.getValue()).matches("")) {
-                DecimalFormat fmt = new DecimalFormat("0.##");
-                binding.weightView.setNumber(d.getValue());
-                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
-            } else {
-                binding.weightView.setNumber(0f);
-                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
-            }*/
-
         } else {
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
-
         if (refrashState)
             rotationStop(rotationView);
     }
 
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
-
         HomeActivity.setWeightTip(weightTip);
-
         binding.collapse.setTitle(weightTip.getTitle());
         binding.collapse.setContent(weightTip.getContent());
     }
 
     @Override
     public void setCalendar() {
-        //if ( DEBUG ) Log.e(TAG, "setCaledar");
         binding.weekCalendar.setSelectedDate( DateTime.now() );
     }
 
@@ -233,7 +194,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
-                Log.e(TAG, String.format("onDateClick bcs : %d", bcs));
                 DateTime dt = dateTime;
                 DateTime now = new DateTime();
                 String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
@@ -242,7 +202,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 } else {
                     presenter.getDefaultData(date, TextManager.WEIGHT_DATA);
                     presenter.getLastCollectionData(date, TextManager.WEIGHT_DATA);
-                    presenter.setAnimationGaugeChart(bcs);
+                    presenter.setBcsAndBcsDesc(bcs);
                 }
             }
         });
@@ -250,14 +210,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.weekCalendar.setOnWeekChangeListener(new OnWeekChangeListener() {
             @Override
             public void onWeekChange(DateTime firstDayOfTheWeek, boolean forward) {
-                //Toast.makeText(getActivity(), "Week changed: " + firstDayOfTheWeek + " Forward: " + forward, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-
-    public void onClickResetGraph(View view) {
-//        binding.clockHands.startAnimation(animation);
     }
 
     @Override
@@ -265,27 +219,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         return false;
     }
 
-    public void onClickFloatingBtn(View view) {
-    }
-
     @Override
     public void setBcs(PetWeightInfo petWeightInfo) {
-        presenter.setAnimationGaugeChart(petWeightInfo.getBcs());
+        presenter.setBcsAndBcsDesc(petWeightInfo.getBcs());
         if ( HomeActivity.mWeightTip == null )
             presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
         if ( HomeActivity.mWeightTip != null )
             if ( !country.equals(HomeActivity.mWeightTip.getLanguage()) )
                 presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
         setKg();
-    }
-
-    public void setBcs() {
-        /*presenter.setAnimationGaugeChart(petWeightInfo.getBcs());
-        presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));*/
-    }
-
-    public void onRootViewClick(View view) {
-        /*((HomeActivity)getActivity()).showDropUp();*/
     }
 
     public void onRefreshClick(View v) {
@@ -304,7 +246,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     private void refreshData() {
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
-        presenter.getBcs(mBasicIdx);
+        /* 리프레쉬 할때 BCS 까지 변경 될 필요는 없을꺼 같음 */
+        //presenter.getBcs(mBasicIdx);
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
 
@@ -334,15 +277,17 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void onStart() {
-        //Kcal 로리 표시
-        Log.e("HJLEE", "WEIGHT : onStart");
-//        presenter.initWeekCalendar();
         super.onStart();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
     public void onResume() {
-        Log.e("HJLEE", "WEIGHT : onResume");
         super.onResume();
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -364,14 +309,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             }
         });
 
-
         presenter.initWeekCalendar();
         if ( HomeActivity.mWeightTip != null ) {
-            Log.e(TAG, "country : " + country + " HomeActivity.mWeightTip.getLanguage() : " + HomeActivity.mWeightTip.getLanguage());
+            //Log.e(TAG, "country : " + country + " HomeActivity.mWeightTip.getLanguage() : " + HomeActivity.mWeightTip.getLanguage());
             if (country.equals(HomeActivity.mWeightTip.getLanguage()))
                 setTipMessageOfCountry(HomeActivity.mWeightTip);
         }
         setKg();
     }
-
 }
