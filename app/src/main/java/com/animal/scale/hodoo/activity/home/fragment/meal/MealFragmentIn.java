@@ -22,7 +22,7 @@ public interface MealFragmentIn {
 
         void setRadarChartData(Feed d);
 
-        void setPetAllInfo(PetAllInfos petAllInfos);
+        //void setPetAllInfo(PetAllInfos petAllInfos);
 
         void setTodaySumCalorie(MealHistory mealHistory);
 
@@ -40,7 +40,7 @@ public interface MealFragmentIn {
 
         void getRadarChartData(String currentDatetime);
 
-        void getPetAllInfo();
+        //void getPetAllInfo();
 
         void getTodaySumCalorie(String date);
 

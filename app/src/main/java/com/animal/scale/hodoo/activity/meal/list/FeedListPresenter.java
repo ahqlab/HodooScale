@@ -55,11 +55,6 @@ public class FeedListPresenter implements FeedListIn.Presenter {
     }
 
     @Override
-    public void initSeekbar() {
-
-    }
-
-    @Override
     public void getTodaySumCalorie(String date) {
         mealRegistrationModel.getTodaySumCalorie(date, new CommonModel.DomainCallBackListner<MealHistory>() {
             @Override

@@ -15,7 +15,6 @@
         android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="@{activity::onRootViewClick}"
         tools:context=".activity.home.fragment.weight.WeightFragment">
 
         <noman.weekcalendar.WeekCalendar
@@ -291,7 +290,6 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="bottom|end"
             android:layout_margin="15sp"
-            android:onClick="@{activity::onClickFloatingBtn}"
             app:fabSize="normal" />
 
     </RelativeLayout>

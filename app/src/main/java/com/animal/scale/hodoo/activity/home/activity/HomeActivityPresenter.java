@@ -202,15 +202,17 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
             @Override
             public void doPostExecute(List<PetAllInfos> petAllInfos) {
                 view.setCustomPetListDialog(petAllInfos);
+                //view.setProgress(false);
             }
 
             @Override
             public void doPreExecute() {
-
+                //view.setProgress(true);
             }
 
             @Override
             public void doCancelled() {
+                //view.setProgress(false);
             }
         });
     }

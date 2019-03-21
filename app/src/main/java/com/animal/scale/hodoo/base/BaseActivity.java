@@ -27,6 +27,7 @@ import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
+import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.util.BadgeUtils;
 import com.animal.scale.hodoo.util.VIewUtil;
 
@@ -37,6 +38,8 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     protected final String TAG = "HJLEE";
     public SharedPrefManager mSharedPrefManager;
     private boolean badgeState = false;
+
+
 
     public interface OnSubBtnClickListener {
         void onClick( View v );

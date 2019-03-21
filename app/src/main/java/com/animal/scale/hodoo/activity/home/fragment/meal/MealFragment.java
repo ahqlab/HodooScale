@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -84,7 +85,9 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     private String country;
 
-   private String focusDate =  DateUtil.getCurrentDatetime();
+    private String focusDate = DateUtil.getCurrentDatetime();
+
+    private PetAllInfos selectPet;
 
     public MealFragment() {
     }
@@ -103,17 +106,12 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_meal_layout, container, false);
         binding.setActivity(this);
 
-//        if ( getArguments() != null ) {
-//            if ( getArguments().getBoolean("push") )
-//                setCalendar();
-//        }
-
         mSharedPrefManager = SharedPrefManager.getInstance(getActivity());
 
         presenter = new MealFragmentPresenter(this);
         presenter.loadData(getActivity());
         //presenter.initRaderChart(DateUtil.getCurrentDatetime());
-        presenter.initWeekCalendar();
+        //
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
 
@@ -122,6 +120,17 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
         presenter.getTipMessageOfCountry(new MealTip(country));
+        presenter.initWeekCalendar();
+        presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
+        presenter.getTipMessageOfCountry(new MealTip(country));
+        if (getArguments() != null) {
+           /* if (getArguments().getBoolean("push"))
+                setCalendar();*/
+            selectPet = (PetAllInfos) getArguments().getSerializable("selectPet");
+            if (null != selectPet) {
+                setPetAllInfo();
+            }
+        }
         return binding.getRoot();
     }
 
@@ -205,8 +214,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
     }
 
     public void setData(String date) {
-        Log.e("HJLEE", "DATE : " + date);
-        //presenter.getRadarChartData(date);
+        presenter.getRadarChartData(date);
     }
 
     @Override
@@ -267,19 +275,27 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     }
 
-    @Override
-    public void setPetAllInfo(PetAllInfos petAllInfos) {
-        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
+    public void setPetAllInfo() {
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
+        binding.calorieBar.invalidate();
+        Activity activity = getActivity();
+        if (activity != null)
+            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+    }
+    /* Call from HomaActivity */
+    public void setPetAllInfo(PetAllInfos selectPet) {
+        this.selectPet = selectPet;
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
         binding.calorieBar.invalidate();
         presenter.getTodaySumCalorie(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
         Activity activity = getActivity();
-        if ( activity != null )
+        if (activity != null)
             binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
     @Override
     public void setTodaySumCalorie(MealHistory mealHistory) {
-        if ( getActivity() != null ) {
+        if (getActivity() != null) {
             if (mealHistory != null) {
                 if (rer > mealHistory.getCalorie()) {
                     binding.calorieBar.setMax((int) rer);
@@ -302,7 +318,6 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
                 binding.calorieView.setNumber(0);
             }
         }
-
         binding.calorieBar.setEnabled(true);
     }
 
@@ -323,7 +338,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
                 HomeActivity.setCalendarDate(date);
                 if (now.toDateTime().toString().compareTo(date) < 0) {
                 } else {
-                    focusDate  = date;
+                    focusDate = date;
                     presenter.initRaderChart(date);
                     presenter.getTodaySumCalorie(date);
                 }
@@ -386,23 +401,19 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     public void onClickFloatingBtn(View v) {
         Intent intent = new Intent(getActivity(), FeedListActivity.class);
+        intent.putExtra("selectPet", selectPet);
         startActivity(intent);
     }
 
 
     @Override
     public void onStart() {
-        Log.e("HJLEE", "MEAL : onStart");
-
-        presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
         binding.calorieView.setNumber(0);
         super.onStart();
     }
 
     @Override
     public void onResume() {
-        Log.e("HJLEE", "MEAL : onResume");
-        presenter.getPetAllInfo();
         super.onResume();
         new Handler().post(new Runnable() {
             @Override
@@ -413,21 +424,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
                 );
             }
         });
-        presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
-
-    }
-
-    public void setPetAllinfo(){
-        /*rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-        binding.calorieBar.invalidate();
         presenter.getTodaySumCalorie(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
-        Activity activity = getActivity();
-        if ( activity != null )
-            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");*/
-        presenter.getPetAllInfo();
     }
 
-    public void setTip() {
-        presenter.getTipMessageOfCountry(new MealTip(country));
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

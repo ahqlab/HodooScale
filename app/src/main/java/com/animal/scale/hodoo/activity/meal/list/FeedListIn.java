@@ -18,8 +18,6 @@ public interface FeedListIn {
 
         void setListView(List<MealHistoryContent> d);
 
-        void initSeekbar();
-
         void setTodaySumCalorie(MealHistory mealHistory);
 
         void setPetAllInfo(PetAllInfos petAllInfos);
@@ -32,8 +30,6 @@ public interface FeedListIn {
         void loadData(Context context);
 
         void getList(String date);
-
-        void initSeekbar();
 
         void getTodaySumCalorie(String date);
 

@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +34,6 @@ import org.joda.time.format.DateTimeFormat;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
@@ -138,7 +135,7 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
     }
 
     @Override
-    public void setAnimationGaugeChart(int bcs) {
+    public void setBcsAndBcsDesc(int bcs) {
         this.bcs = bcs;
         int checkBCS = 0;
         if (bcs < 3) {
@@ -168,7 +165,7 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
     }
 
     //여기 날짜도 들어가야함..
-    @Override
+    /*@Override
     public void setLastCollectionData(RealTimeWeight d) {
         if (d != null) {
             Log.e("HJLEE", " >>>> " + d.toString());
@@ -180,7 +177,7 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
 
         if (refrashState)
             rotationStop(rotationView);
-    }
+    }*/
 
     @Override
     public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
@@ -228,7 +225,7 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
                     //setBcsMessage(info.getPet().getBasic());
                     //weightFragment.drawChart();
                     presenter.getLastCollectionData(date,TextManager.TEMP_DATA);
-                    presenter.setAnimationGaugeChart(bcs);
+                    presenter.setBcsAndBcsDesc(bcs);
 //                    refreshData();
                 }
             }
@@ -265,7 +262,7 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
 
     @Override
     public void setBcs(PetWeightInfo petWeightInfo) {
-        presenter.setAnimationGaugeChart(petWeightInfo.getBcs());
+        presenter.setBcsAndBcsDesc(petWeightInfo.getBcs());
     }
 
     public void onRootViewClick(View view) {
