@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.meal.update;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
@@ -62,13 +63,15 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
 
     IngredientsOfMealDialog dialog;
 
+    private PetAllInfos selectPet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         feedId = intent.getIntExtra("feedId", 0);
         historyIdx = intent.getIntExtra("historyIdx", 0);
-
+        selectPet = (PetAllInfos) intent.getSerializableExtra("selectPet");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_meal_update);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.food)));
@@ -79,13 +82,19 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
 
         presenter = new MealUpdatePresenter(this);
         presenter.loadData(this);
-        presenter.getPetAllInfo();
+        setPetAllInfo();
+        //presenter.getPetAllInfo();
         presenter.getFeedInfo(feedId);
         presenter.getThisHistory(historyIdx);
 
         dbHandler = new DBHandler(this);
         progressItemList = new ArrayList<ProgressItem>();
         //binding.seekBar.initData(progressItemList);
+    }
+
+    private void setPetAllInfo() {
+        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
+        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
     private void setNumberPicker(NumberPicker numberPicker) {
@@ -170,8 +179,6 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         progressItemList.add(mProgressItem);
 
         binding.seekBar.invalidate();
-
-
     }
 
     @Override
@@ -192,14 +199,6 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Override
-    public void setPetAllInfo(PetAllInfos petAllInfos) {
-        rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
-        binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-    }
-
     @Override
     public void setTodaySumCalorie(MealHistory mealHistory) {
         if (mealHistory != null) {
@@ -214,7 +213,9 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
                 binding.rer2.setText("/" + MathUtil.DecimalCut(rer) + "kcal");
                 //initDataToSeekbar(rer, mealHistory.getCalorie());
             }
-            binding.seekBar.setProgress((int) mealHistory.getCalorie());
+            ObjectAnimator.ofInt(binding.seekBar, "progress", (int) mealHistory.getCalorie())
+                    .setDuration(300)
+                    .start();
             binding.calorieIntake.setText(MathUtil.DecimalCut(mealHistory.getCalorie()));
         } else {
             binding.seekBar.setMax((int) rer);
@@ -296,5 +297,11 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
             return Integer.parseInt(array[0]);
         }
         return Integer.parseInt(String.valueOf(calorie));
+    }
+
+    @Override
+    protected void onResume() {
+        presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        super.onResume();
     }
 }

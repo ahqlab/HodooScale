@@ -64,26 +64,6 @@ public class MealRegistrationPresenter implements MealRegistrationIn.Presenter{
         });
     }
 
-    /*@Override
-    public void getPetAllInfo() {
-        model.getPetAllInfo(new CommonModel.DomainCallBackListner<PetAllInfos>() {
-            @Override
-            public void doPostExecute(PetAllInfos petAllInfos) {
-                view.setPetAllInfo(petAllInfos);
-            }
-
-            @Override
-            public void doPreExecute() {
-
-            }
-
-            @Override
-            public void doCancelled() {
-
-            }
-        });
-    }*/
-
     @Override
     public void getTodaySumCalorie(String date) {
         model.getTodaySumCalorie(date, new CommonModel.DomainCallBackListner<MealHistory>() {

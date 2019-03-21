@@ -401,6 +401,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     public void onClickFloatingBtn(View v) {
         Intent intent = new Intent(getActivity(), FeedListActivity.class);
+        intent.putExtra("selectPet", selectPet);
         startActivity(intent);
     }
 
