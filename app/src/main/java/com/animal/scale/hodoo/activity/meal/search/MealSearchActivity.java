@@ -17,6 +17,7 @@ import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityMealSearchBinding;
 import com.animal.scale.hodoo.db.DBHandler;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SearchHistory;
 import com.animal.scale.hodoo.util.DateUtil;
 
@@ -35,6 +36,8 @@ public class MealSearchActivity extends BaseActivity<MealSearchActivity> impleme
 
     private DBHandler dbHandler;
 
+    private PetAllInfos selectPet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,12 @@ public class MealSearchActivity extends BaseActivity<MealSearchActivity> impleme
         Intent intent = getIntent();
         binding.feedSearch.addTextChangedListener(new CustomAutoCompleateTextChageListner(this));
         binding.feedListview.setOnItemClickListener(onItemClickListener);
+        getIntentValue();
+    }
+
+    private void getIntentValue(){
+        Intent intent = getIntent();
+        selectPet = (PetAllInfos) intent.getSerializableExtra("selectPet");
     }
 
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
@@ -56,9 +65,11 @@ public class MealSearchActivity extends BaseActivity<MealSearchActivity> impleme
             if(adapterView.getItemAtPosition(i) instanceof SearchHistory){
                 SearchHistory feed = (SearchHistory) adapterView.getItemAtPosition(i);
                 intent.putExtra("feedId", feed.getFeedIdx());
+                intent.putExtra("selectPet", selectPet);
             }else if(adapterView.getItemAtPosition(i) instanceof AutoCompleateFeed){
                 AutoCompleateFeed feed = (AutoCompleateFeed) adapterView.getItemAtPosition(i);
                 intent.putExtra("feedId", feed.getId());
+                intent.putExtra("selectPet", selectPet);
             }
             startActivity(intent);
             overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
