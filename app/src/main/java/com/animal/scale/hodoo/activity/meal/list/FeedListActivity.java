@@ -108,15 +108,6 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         binding.seekBar.setEnabled(true);
     }
 
-    @Override
-    public void setPetAllInfo(PetAllInfos petAllInfos) {
-        if ( petAllInfos != null ) {
-            rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), petAllInfos.getFactor()).getRER();
-            binding.seekBar.invalidate();
-            presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
-            binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-        }
-    }
 
     public void setPetAllInfo(){
         if ( selectPet != null ) {
