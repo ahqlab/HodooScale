@@ -44,9 +44,6 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
 
     private int textOffset = 0;
 
-    private int limit = 0;
-
-    private Thread interaction;
 
     private TouchCallback callback;
 
@@ -92,6 +89,7 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
     }
     public void setMeterageNumber ( int[] meterageNumber ) {
         this.meterageNumber = meterageNumber;
+        invalidate();
     }
 
     public void setCallback ( TouchCallback callback ) {
@@ -209,10 +207,12 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         fillValue = y - topMargin;
         if ( fillValue < height - ( range * (meterageNumber.length - 1) ) - textOffset) {
             fillValue = height - ( range * (meterageNumber.length - 1) ) - textOffset;
+            value = meterageNumber[ meterageNumber.length - 1 ];
             invalidate();
             return true;
         } else if ( fillValue > height  - textOffset) {
             fillValue = height - textOffset;
+            value = 0;
             invalidate();
             return true;
         }
@@ -285,7 +285,7 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
             }
         }
         value = meterageNumber[selectCount];
-        fillValue = near - textOffset + range;
+        fillValue = in - textOffset;
         invalidate();
     }
 
