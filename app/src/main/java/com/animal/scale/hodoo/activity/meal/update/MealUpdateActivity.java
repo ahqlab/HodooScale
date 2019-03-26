@@ -66,6 +66,8 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
 
     private PetAllInfos selectPet;
 
+    private int kcal = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,7 +190,6 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         setNumberPicker(binding.jungsu);
         setDecimalNumberPicker(binding.umsu);
         setStringNumberPicker(binding.unit, feed);
-
         dialog = IngredientsOfMealDialog.newInstance(feed);
     }
 
@@ -268,7 +269,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
                 .historyIdx(binding.getHistory().getHistoryIdx())
                 .calorie(Float.parseFloat(AmountOfFeed.toString()))
                 .unitIndex(binding.unit.getValue())
-                .unitString(unitArray[1])
+                .unitString(unitArray[0])
                 .feedIdx(feedId)
                 .petIdx(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX))
                 .groupId(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE))
@@ -308,7 +309,8 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         binding.meterageCup.setCallback(new MeterageCup.TouchCallback() {
             @Override
             public void onResult(int value) {
-                Log.e(TAG, String.format("value : %d", value));
+                Log.e(TAG, String.format("value : %d, result : %d", value, (int) binding.getDomain().getCalculationCalories() * value / 100));
+                binding.calorieIntake.setText( MathUtil.DecimalCut( binding.getDomain().getCalculationCalories() * value / 100 ) );
             }
         });
     }

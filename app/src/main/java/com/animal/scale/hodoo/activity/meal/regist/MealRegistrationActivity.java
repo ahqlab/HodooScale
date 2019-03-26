@@ -227,5 +227,9 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
     protected void onResume() {
         super.onResume();
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+        binding.meterageCup.setFillColor(R.color.mainRed);
+//        binding.meterageCup.setMeterageNumber(new int[] {
+//                0, 10, 20, 30, 40, 50
+//        });
     }
 }
