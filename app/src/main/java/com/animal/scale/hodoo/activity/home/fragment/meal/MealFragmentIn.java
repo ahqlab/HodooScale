@@ -7,6 +7,7 @@ import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.util.DateUtil;
 
 import java.text.ParseException;
@@ -31,6 +32,8 @@ public interface MealFragmentIn {
         void initWeekCalendar();
 
         void setCalendar();
+
+        void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d);
     }
     interface Presenter{
 
@@ -48,6 +51,7 @@ public interface MealFragmentIn {
 
         void initWeekCalendar();
 
+        void getLastCollectionData(String s, int weightData);
     }
 
 }

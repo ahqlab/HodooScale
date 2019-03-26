@@ -68,6 +68,8 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
     private PetAllInfos selectPet;
 
+    private MealHistory mealHistory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,8 +157,8 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
     @Override
     public void setInsertResult(Integer result) {
         if (result == 1)
-            dbHandler.insertFeed(new SearchHistory(binding.getDomain().getName(), mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID), binding.getDomain().getId(),  DateUtil.getCurrentDatetime()));
-            finish();
+            dbHandler.insertFeed(new SearchHistory(binding.getDomain().getName(), mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID), binding.getDomain().getId(), DateUtil.getCurrentDatetime()));
+        finish();
     }
 
     public void setPetAllInfo() {
@@ -166,6 +168,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
     @Override
     public void setTodaySumCalorie(MealHistory mealHistory) {
+        this.mealHistory = mealHistory;
         if (mealHistory != null) {
             if (rer > mealHistory.getCalorie()) {
                 binding.seekBar.setMax((int) rer);
@@ -195,8 +198,13 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
     public void onClickDetailBtn(View view) {
         dialog.show(getFragmentManager(), "dialog");
-
     }
+
+    /*private void visualOfDinamicGraph(int value) {
+        ObjectAnimator.ofInt(binding.seekBar, "progress", (int) mealHistory.getCalorie(), (int) mealHistory.getCalorie() + value)
+                .setDuration(300)
+                .start();
+    }*/
 
     public void onClickSaveBtn(View view) {
         StringBuilder AmountOfFeed = new StringBuilder();

@@ -98,7 +98,7 @@
     <string name="add_pet_name">펫의 이름</string>
     <string name="add_pet_type">펫의 품종</string>
     <string name="add_pet_birthday">생년월일</string>
-    <string name="add_pet_gender">설별</string>
+    <string name="add_pet_gender">성별</string>
     <string name="add_pet_neuter">중성화 여부</string>
     <string name="add_pet_next_btn">다음 단계</string>
     <!-- DeseaseInformaionRegistActivity-->
@@ -327,6 +327,9 @@
     <string name="myaccount__member_exist_error_msg">그룹의 멤버들이 존재합니다.\n멤버들을 탈퇴 후 진행하실 수 있습니다.</string>
 
     <string name="basic_infomation_regist__pet_breed_title">품종</string>
+    <string name="dog" >강아지</string>
+    <string name="cat" >고양이</string>
+    <string name="petType">반려동물 종류</string>
 
     <!-- 2019-01-30 new code (e) -->
 </resources>

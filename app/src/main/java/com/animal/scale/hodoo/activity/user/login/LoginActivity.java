@@ -163,12 +163,11 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
 
     @Override
     public void goDeviceRegistActivity() {
-
         //token 등록
         mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
         Intent intent = new Intent(getApplicationContext(), DeviceRegistActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
@@ -177,7 +176,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
         intent.putExtra("petIdx", petIdx);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
@@ -186,7 +185,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
         intent.putExtra("petIdx", petIdx);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
@@ -195,7 +194,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
         intent.putExtra("petIdx", petIdx);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
@@ -204,7 +203,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
         intent.putExtra("petIdx", petIdx);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
@@ -212,7 +211,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     public void goHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
@@ -221,7 +220,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     public void goTermsOfServiceActivity() {
         Intent intent = new Intent(getApplicationContext(), TermsOfServiceActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
@@ -241,7 +240,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         Intent intent = new Intent(getApplicationContext(), SignUpFinishActivity.class);
         intent.putExtra(SharedPrefVariable.USER_EMAIL, binding.email.getText());
         startActivity(intent);
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 
     @Override
@@ -267,12 +266,12 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         presenter.saveFCMToken(user);
     }
 
-
     public void onClickForgotPasswordBtn(View view) {
         Intent intent = new Intent(getApplicationContext(), SendCertificationNumberActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
+
     private void checkState () {
         setBtnEnable(emailState && pwState);
     }

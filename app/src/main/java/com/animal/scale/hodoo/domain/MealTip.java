@@ -3,7 +3,9 @@ package com.animal.scale.hodoo.domain;
 import com.animal.scale.hodoo.base.FragmentTip;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper=false)
 @Data
 public class MealTip extends FragmentTip implements Domain {
 

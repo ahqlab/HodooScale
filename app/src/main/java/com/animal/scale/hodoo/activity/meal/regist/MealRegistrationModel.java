@@ -86,7 +86,7 @@ public class MealRegistrationModel extends CommonModel {
     }
 
     public void getTodaySumCalorie(String date, final DomainCallBackListner<MealHistory> domainCallBackListner) {
-        Call<MealHistory> call = NetRetrofit.getInstance().getMealHistoryService().getTodaySumCalorie(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX), date);
+        Call<MealHistory> call = NetRetrofit.getInstance().getMealHistoryService().getTodaySumCalorie(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX), date, sharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<MealHistory>() {
             @Override
             protected void doPostExecute(MealHistory mealHistory) {

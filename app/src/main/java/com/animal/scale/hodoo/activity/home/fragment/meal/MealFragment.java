@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.home.fragment.meal;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -33,6 +34,7 @@ import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.MathUtil;
@@ -52,6 +54,7 @@ import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -282,6 +285,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         if (activity != null)
             binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
+    /* Call from Broadcast */
+    public void refrashSetProgress() {
+        presenter.getLastCollectionData(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate(), TextManager.WEIGHT_DATA);
+    }
+
     /* Call from HomaActivity */
     public void setPetAllInfo(PetAllInfos selectPet) {
         this.selectPet = selectPet;
@@ -300,21 +308,18 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
                 if (rer > mealHistory.getCalorie()) {
                     binding.calorieBar.setMax((int) rer);
                     binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-                    //initDataToSeekbar(rer);
                 } else {
                     binding.calorieBar.setMax((int) mealHistory.getCalorie());
                     binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
-                    //initDataToSeekbar(rer, mealHistory.getCalorie());
                 }
-                binding.calorieBar.setProgress((int) mealHistory.getCalorie());
-                //binding.calorieIntake.setText((int) mealHistory.getCalorie() + "kcal");
-
+                ObjectAnimator.ofInt(binding.calorieBar, "progress", (int) mealHistory.getCalorie())
+                        .setDuration(300)
+                        .start();
                 binding.calorieView.setNumber(mealHistory.getCalorie());
             } else {
                 binding.calorieBar.setMax((int) rer);
                 binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
                 binding.calorieBar.setProgress(0);
-                //binding.calorieIntake.setText(0 + "kcal");
                 binding.calorieView.setNumber(0);
             }
         }
@@ -351,6 +356,20 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         binding.weekCalendar.setSelectedDate(DateTime.now());
     }
 
+    @Override
+    public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
+        if ( d != null ) {
+            DecimalFormat fmt = new DecimalFormat("0.##");
+            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
+            binding.calorieBar.invalidate();
+            presenter.getTodaySumCalorie(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
+            Activity activity = getActivity();
+            if (activity != null)
+                binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
+        }
+    }
+
     public void setTodaySumCalorie() {
         presenter.getTodaySumCalorie(focusDate);
     }
@@ -360,7 +379,6 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
             rotationStart(v);
             /* 새로고침에 대한 데이터 처리 (s) */
             refreshData();
-
             //데이터를 가져오기전에 임시 정지 처리
             rotationStop(v);
             /* 새로고침에 대한 데이터 처리 (e) */

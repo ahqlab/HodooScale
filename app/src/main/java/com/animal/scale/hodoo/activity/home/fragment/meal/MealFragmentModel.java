@@ -10,6 +10,7 @@ import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.MealHistoryContent;
 import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
@@ -56,6 +57,26 @@ public class MealFragmentModel extends CommonModel {
             @Override
             protected void doCancelled() {
 
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
+    public void getLastCollectionData(String date, int type, final DomainCallBackListner<RealTimeWeight> domainCallBackListner) {
+        Call<RealTimeWeight> call = NetRetrofit.getInstance().getRealTimeWeightService().getLastCollectionData(date, sharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), type, sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<RealTimeWeight>() {
+            @Override
+            protected void doPostExecute(RealTimeWeight realTimeWeight) {
+                domainCallBackListner.doPostExecute(realTimeWeight);
+            }
+
+            @Override
+            protected void doPreExecute() {
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+                domainCallBackListner.doCancelled();
             }
         }.execute(call), limitedTime, interval, true).start();
     }

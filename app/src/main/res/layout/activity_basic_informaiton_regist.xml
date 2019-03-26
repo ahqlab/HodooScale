@@ -71,7 +71,65 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:paddingLeft="4dp"
+                        android:textColor="#9b9b9b"
+                        android:text="@string/petType"/>
+
+                    <!--<LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/dogToggle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textStyle="bold"
+                                android:text="@string/dog"
+                                android:textColor="#9b9b9b"
+                                android:layout_marginRight="8dp"
+                                android:padding="8dp"
+                                />
+
+                            <RadioButton
+                                android:id="@+id/catToggle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textStyle="bold"
+                                android:text="@string/cat"
+                                android:textColor="#9b9b9b"
+                                android:layout_marginLeft="8dp"
+                                android:padding="8dp"
+                                />
+                        </RadioGroup>
+                    </LinearLayout>-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:orientation="horizontal">
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -124,6 +182,9 @@
 
                 </LinearLayout>
 
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -137,7 +198,7 @@
                         android:id="@+id/pet_birthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="16dp"
                         app:title="@string/add_pet_birthday"
                         app:editTextResourceId="@layout/normal_edittext"
                         app:hint="00/00/0000"
@@ -160,8 +221,8 @@
                         style="@style/CommonLabel"
                         android:text="@string/add_pet_gender" />
 
-                    <RadioGroup
-                        android:id="@+id/radio_group_sex"
+                    <!--<RadioGroup
+
                         android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -179,6 +240,37 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/male" />
+                    </RadioGroup>-->
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_sex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/female_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:text="@string/femle"
+                            android:textColor="#9b9b9b"
+                            android:layout_marginRight="8dp"
+                            android:padding="8dp"
+                            />
+
+                        <RadioButton
+                            android:id="@+id/male_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:text="@string/male"
+                            android:textColor="#9b9b9b"
+                            android:layout_marginLeft="8dp"
+                            android:padding="8dp"
+                            />
                     </RadioGroup>
 
 

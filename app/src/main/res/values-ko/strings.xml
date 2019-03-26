@@ -119,7 +119,7 @@
     <string name="add_pet_name">펫의 이름</string>
     <string name="add_pet_type">펫의 품종</string>
     <string name="add_pet_birthday">생년월일</string>
-    <string name="add_pet_gender">설별</string>
+    <string name="add_pet_gender">성별</string>
     <string name="add_pet_neuter">중성화 여부</string>
     <string name="add_pet_next_btn">다음 단계</string>
 
@@ -287,4 +287,5 @@
     <string name="weight_data_available">측정된 체중 데이터가 없습니다.</string>
     <string name="wether_tip_title">다이어트 할 때는 운동도 많이 시켜야 하나?</string>
     <string name="wether_tip_content">고도 비만 환자의 경우 바로 운동을 강요하지 않는 것이 좋습니다. 다이어트에 성공하고 싶으면 음식뿐만 아니라 운동도 중요하다고 이야기했지만 모든 동물에게 100% 적용되는 것은 아닙니다. 사람의 경우는 유산소 운동을 통해서 열량을 소모하고 지방을 줄이면서 꾸준히 근육을 키우면 기초 대사량이 증가하게 되어 다이어트에 성공할 수 있지만 강제로 운동을 시키기 어렵습니다. 특히 근력 운동을 할 수 없습니다. 반려동물이 고도 비만이 된 경우 무리하게 운동을 하면 관절과 심혈관 부담이 증가할 수 있고 결국 다이어트에 성공하기 전에 먼저 건강이 나빠질 수 있습니다. 제일 안전한 방식은 음식 관리로 살을 약간 빼고 나서 운동 능력을 되돌릴 때까지는 시키지 않는 것입니다. 연구 결과를 보면 살이 빠진 후에 반려동물의 활동 능력과 활동량이 스스로 증가할 수 있습니다. 그때부터 운동을 시작하기가 휠씬 더 쉽다. 반려동물의 경우 운동보다 음식을 통하여 관리하는 것이 다이어트에 성공할 수 있는 최고 원칙이랑 사실을 꼭 기억해야 합니다.</string>
+    <string name="petType">반려동물 종류</string>
 </resources>

@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
@@ -50,7 +51,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         @Override
         public void onReceive(Context context, Intent intent) {
             setBadge();
-
+            Log.e(TAG, "onReceive: ");
 
             ActivityManager mActivityManager = (ActivityManager) BaseActivity.this.getSystemService(Context.ACTIVITY_SERVICE);
             List<ActivityManager.RunningTaskInfo> rt = mActivityManager.getRunningTasks(1);
@@ -62,7 +63,11 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
                         /* 활동중인 프래그먼트가 체중 프래그먼트일경우 (s) */
                         if ( fragment instanceof WeightFragment )
                             ((WeightFragment) fragment).setKg();
-                        /* 활동중인 프래그먼트가 체중 프래그먼트일경우 (e) */
+                        /* 활동중인 프래그먼트가 식사 프래그먼트일경우 (e) */
+                        else if(fragment instanceof MealFragment){
+                            ((MealFragment) fragment).refrashSetProgress();
+                        }
+
                 }
             }
             /* 열려있는 액티비티가 홈 액티비티일 경우 (e) */

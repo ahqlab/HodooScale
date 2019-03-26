@@ -234,11 +234,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     binding.setCurrentPetIdx(sharedPetIdx);
                 }
                 convertView.setOnClickListener(new View.OnClickListener() {
-
                     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-
                     }
-
                     public void onClick(View v) {
 
                         selectPet = apaterOfPetList.data.get(position);
@@ -299,6 +296,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             WeightFragment weightFragment = (WeightFragment) tf;
             weightFragment.setBcsOrBscDescAndTip(selectPet);
             weightFragment.serChartOfDay();
+            weightFragment.getTipMessageOfCountry(selectPet);
+            weightFragment.setKg();
         } else if (tf instanceof MealFragment) {
             MealFragment mealFragment = (MealFragment) tf;
             mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
@@ -308,7 +307,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             tempFragment.drawChart();
         }
     }
-
     /**
      * 처음 앱에 진입시 CURRENT_PET_IDX 를 List 첫번째 id로 정한다.
      *
