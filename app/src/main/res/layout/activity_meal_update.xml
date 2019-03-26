@@ -224,8 +224,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.animal.scale.hodoo.custom.view.MeterageCup
+                    android:id="@+id/meterageCup"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
             <LinearLayout
