@@ -16,6 +16,7 @@ import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealModel;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.dialog.IngredientsOfMealDialog;
+import com.animal.scale.hodoo.custom.view.MeterageCup;
 import com.animal.scale.hodoo.custom.view.seekbar.ProgressItem;
 import com.animal.scale.hodoo.databinding.ActivityMealUpdateBinding;
 import com.animal.scale.hodoo.db.DBHandler;
@@ -232,6 +233,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     public void setThisHistory(MealHistory mealHistory) {
         binding.setHistory(mealHistory);
         String[] array = String.valueOf(mealHistory.getCalorie()).split("\\.");
+        binding.meterageCup.setValue( extractIntegerFromFloat(mealHistory.getCalorie()) );
         binding.jungsu.setValue(extractIntegerFromFloat(mealHistory.getCalorie()));
         int nagativeValue = findDecimalArrayIndexFromNumberPicker(decimalArray, extractNegativeNumberFromFloat(mealHistory.getCalorie()));
         if (nagativeValue != -1) {
@@ -259,14 +261,14 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
 
     public void onClickSaveBtn(View view) {
         StringBuilder AmountOfFeed = new StringBuilder();
-        AmountOfFeed.append(binding.jungsu.getValue());
+        AmountOfFeed.append(binding.meterageCup.getValue());
         AmountOfFeed.append(decimalArray[binding.umsu.getValue()]);
 
         MealHistory mealHistory = MealHistory.builder()
                 .historyIdx(binding.getHistory().getHistoryIdx())
                 .calorie(Float.parseFloat(AmountOfFeed.toString()))
                 .unitIndex(binding.unit.getValue())
-                .unitString(unitArray[binding.unit.getValue()])
+                .unitString(unitArray[1])
                 .feedIdx(feedId)
                 .petIdx(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX))
                 .groupId(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE))
@@ -303,5 +305,11 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     protected void onResume() {
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
         super.onResume();
+        binding.meterageCup.setCallback(new MeterageCup.TouchCallback() {
+            @Override
+            public void onResult(int value) {
+                Log.e(TAG, String.format("value : %d", value));
+            }
+        });
     }
 }

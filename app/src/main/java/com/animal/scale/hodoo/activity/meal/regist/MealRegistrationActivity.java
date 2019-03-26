@@ -208,13 +208,13 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
     public void onClickSaveBtn(View view) {
         StringBuilder AmountOfFeed = new StringBuilder();
-        AmountOfFeed.append(binding.jungsu.getValue());
+        AmountOfFeed.append(binding.meterageCup.getValue());
         AmountOfFeed.append(decimalArray[binding.umsu.getValue()]);
 
         MealHistory mealHistory = MealHistory.builder()
                 .calorie(Float.parseFloat(AmountOfFeed.toString()))
                 .unitIndex(binding.unit.getValue())
-                .unitString(unitArray[binding.unit.getValue()])
+                .unitString(unitArray[1])
                 .feedIdx(feedId)
                 .petIdx(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX))
                 .groupId(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE))
