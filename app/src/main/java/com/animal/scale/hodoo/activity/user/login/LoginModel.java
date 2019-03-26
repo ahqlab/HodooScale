@@ -138,7 +138,7 @@ public class LoginModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void saveFCMToken (User user, final LoginModel.DomainCallBackListner<Integer> callback) {
+    public void saveFCMToken (User user, final DomainCallBackListner<Integer> callback) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().saveFCMToken(user);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
@@ -171,25 +171,6 @@ public class LoginModel extends CommonModel {
     }
     public int getAutoLoginState() {
         return mSharedPrefManager.getIntExtra( SharedPrefVariable.AUTO_LOGIN );
-    }
-
-
-    public interface LoginResultListener {
-        void doPostExecute(User user);
-        void doPreExecute();
-    }
-
-    public interface RegistCheckListener {
-        void doPostExecute();
-        void doPreExecute();
-    }
-    public interface DeviceRegistrationListener {
-        void doPostExecute(List<Device> devices);
-        void doPreExecute();
-    }
-    public interface PetRegistrationListener {
-        void doPostExecute(List<Pet> pets);
-        void doPreExecute();
     }
 
 }

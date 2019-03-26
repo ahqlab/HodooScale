@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightSta
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
+import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
@@ -124,9 +126,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             if (null != selectPet){
                 setBcsOrBscDescAndTip(selectPet);
                 serChartOfDay();
+                presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
+                //presenter.getTipMessageOfCountry();
             }
         }
         return binding.getRoot();
+    }
+
+    public void getTipMessageOfCountry(PetAllInfos selectPet) {
+        presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
     }
 
    //오늘차트
@@ -154,6 +162,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
             binding.bcsStep.setText(String.valueOf(bcs));
         }
+    }
+
+
+    public void testRefrashKg(){
+        binding.weightView.setNumber(0);
     }
 
     @Override

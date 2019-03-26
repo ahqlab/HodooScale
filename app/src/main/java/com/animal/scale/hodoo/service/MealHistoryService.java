@@ -22,7 +22,7 @@ public interface MealHistoryService {
 
 
     @POST("history/meal/get/today/sum/calorie.do")
-    Call<MealHistory> getTodaySumCalorie(@Query("petIdx") int petIdx, @Query("date") String date);
+    Call<MealHistory> getTodaySumCalorie(@Query("petIdx") int petIdx, @Query("date") String date,  @Query("language") String language);
 
 
     @POST("history/meal/get/this/history.do")

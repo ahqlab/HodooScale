@@ -107,10 +107,8 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-//                    Toast.makeText(BasicInformationRegistActivity.this, "YES", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("YES");
                 } else {
-//                    Toast.makeText(BasicInformationRegistActivity.this, "NO", Toast.LENGTH_SHORT).show();
                     binding.getInfo().setNeutralization("NO");
                 }
             }
@@ -161,6 +159,13 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 validation();
             }
         }));
+
+       /* binding.dogToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //binding.dogToggle.
+            }
+        });*/
 
         presenter.getAllPetBreed( location );
     }
@@ -248,31 +253,24 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     public void onClickMaleBtn(View view) {
-       /* Toast.makeText(BasicInformationRegistActivity.this, "MALE", Toast.LENGTH_SHORT).show();
-        binding.maleBtn.setBackgroundResource(R.drawable.add_pet_middle_click_btn_blue_252_68);
-        binding.femaleBtn.setBackgroundResource(R.drawable.add_pet_middle_252_68);
-        binding.femaleBtn.setPressed(false);*/
         binding.getInfo().setSex("MALE");
     }
 
     public void onClickFemaleBtn(View view) {
-       /* Toast.makeText(BasicInformationRegistActivity.this, "FEMALE", Toast.LENGTH_SHORT).show();
-        binding.maleBtn.setBackgroundResource(R.drawable.add_pet_middle_btn_252_68);
-        binding.femaleBtn.setBackgroundResource(R.drawable.add_pet_middle_click_btn_pink_252_68);*/
         binding.getInfo().setSex("FEMALE");
     }
 
     public void onClickOpenBottomDlg(View view) {
         dialog = BottomDialog.getInstance();
         List<IosStyleBottomAlert> btns = new ArrayList<>();
-        btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.camera)).id(R.id.camera).build() );
-        btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.gallery)).id(R.id.gallery).build() );
+        btns.add(IosStyleBottomAlert.builder().btnName(getString(R.string.camera)).id(R.id.camera).build());
+        btns.add(IosStyleBottomAlert.builder().btnName(getString(R.string.gallery)).id(R.id.gallery).build());
         dialog.setButton(btns);
         dialog.setOnclick(new BottomDialog.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                    case R.id.camera :
+                    case R.id.camera:
                         int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
                         if (permissionCamera == PackageManager.PERMISSION_DENIED) {
                             ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
@@ -281,7 +279,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                             presenter.openCamera();
                         }
                         break;
-                    case R.id.gallery :
+                    case R.id.gallery:
                         int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
                         if (permissionStorage == PackageManager.PERMISSION_DENIED) {
                             ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
@@ -290,41 +288,13 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                             dialog.dismiss();
                         }
                         break;
-                        default :
-                            dialog.dismiss();
-                            break;
+                    default:
+                        dialog.dismiss();
+                        break;
                 }
             }
         });
         dialog.show(getSupportFragmentManager(), TAG);
-
-//        Button camera = (Button) dialog.findViewById(R.id.camera);
-//        camera.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
-//                if (permissionCamera == PackageManager.PERMISSION_DENIED) {
-//                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "CAMERA permission authorized", Toast.LENGTH_SHORT).show();
-//                    presenter.openCamera();
-//                }
-//            }
-//        });
-//
-//        Button gallery = (Button) dialog.findViewById(R.id.gallery);
-//        gallery.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int permissionStorage = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
-//                if (permissionStorage == PackageManager.PERMISSION_DENIED) {
-//                    ActivityCompat.requestPermissions(BasicInformationRegistActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-//                } else {
-//                    openGallery();
-//                    dialog.dismiss();
-//                }
-//            }
-//        });
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightTip;
 
 import java.util.List;
@@ -120,6 +121,28 @@ public class MealFragmentPresenter implements MealFragmentIn.Presenter{
     @Override
     public void initWeekCalendar() {
         view.initWeekCalendar();
+    }
+
+    @Override
+    public void getLastCollectionData(final String date, int type) {
+        model.getLastCollectionData(date, type , new CommonModel.DomainCallBackListner<RealTimeWeight>() {
+            @Override
+            public void doPostExecute(RealTimeWeight d) {
+                view.setLastCollectionDataOrSaveAvgWeight(d);
+                /*if(date.matches(DateUtil.getCurrentDatetime())){
+                    view.setLastCollectionDataOrSaveAvgWeight(d);
+                }else{
+                    view.setLastCollectionData(d);
+                }*/
+            }
+            @Override
+            public void doPreExecute() {
+            }
+
+            @Override
+            public void doCancelled() {
+            }
+        });
     }
 
 }
