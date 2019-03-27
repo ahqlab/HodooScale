@@ -32,6 +32,9 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
     private int[] meterageNumber = {
       0, 50, 100, 150, 200
     };
+    private String[] meterageStr = {
+      "0", "1/4", "2/4", "3/4", "4/4"
+    };
     private int fillValue = 0;
     private int topMargin = 100;
     private Bitmap bitmap;
@@ -50,6 +53,11 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
     private boolean initState = false;
 
     private int value = 0;
+    private String valueStr = "1/4";
+
+    private int fillColor = ContextCompat.getColor(getContext(), R.color.meterage_cup_color);
+
+    private int alpha = 255;
 
     public interface TouchCallback {
         void onResult( int value );
@@ -80,7 +88,7 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         setMeasuredDimension(getMeasuredWidth(), bitmap.getHeight());
         height = bitmap.getHeight();
         fillValue = height;
-        range = height / ( meterageNumber.length );
+        range = height / ( meterageStr.length );
         this.setOnTouchListener(this);
     }
 
@@ -89,6 +97,18 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
     }
     public void setMeterageNumber ( int[] meterageNumber ) {
         this.meterageNumber = meterageNumber;
+        range = height / ( meterageNumber.length );
+        invalidate();
+    }
+
+    public void setFillColor ( int fillColor ) {
+        this.fillColor = fillColor;
+        invalidate();
+    }
+
+    public void setFillColor ( int fillColor, int percent ) {
+        this.fillColor = fillColor;
+        this.alpha = 255 * percent / 100;
         invalidate();
     }
 
@@ -109,11 +129,12 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         fillY -= fillValue;//fill value zero settings
 
         Paint fillPaint = new Paint();
-        fillPaint.setColor(Color.GRAY);
+        fillPaint.setColor(fillColor);
+        fillPaint.setAlpha(alpha);
 
         Rect bounds = new Rect();
         Paint mTextPaint = new Paint();
-        mTextPaint.getTextBounds(String.format("%d ml", meterageNumber[0]), 0, String.format("%d ml", meterageNumber[0]).length(), bounds);
+        mTextPaint.getTextBounds(meterageStr[0], 0, meterageStr[0].length(), bounds);
 
         if ( textOffset == 0 )
             textOffset = bounds.height() * 3;
@@ -124,7 +145,6 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         }
 
         canvas.drawRect(xVal, (height + topMargin) - fillY, xVal + width, height + topMargin, fillPaint);
-//        canvas.drawRect(xVal, 0, xVal + width, 500, fillPaint);
         /* fill (e) */
 
         /* triangle (s) */
@@ -162,17 +182,16 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         Path path = new Path();
 
         int y = 0;
-        for (int i = 0; i < meterageNumber.length; i++) {
+        for (int i = 0; i < meterageStr.length; i++) {
             if ( i == 0 )
                 y = 0;
             else
-                y += height / ( meterageNumber.length );
+                y += height / ( meterageStr.length );
 
 
 
             /* text drawing (s) */
-            canvas.drawText(String.format("%d ml", meterageNumber[i]), xVal + width + 10, i == meterageNumber.length - 1 ? topMargin + (height / ( meterageNumber.length )) : (topMargin + height) - y - ((int) (bounds.height() * 2)), textPaint);
-//            canvas.drawText(String.format("%d ml", meterageNumber[i]), xVal + width + 10, (i + 1) * 50, textPaint);
+            canvas.drawText(meterageStr[i], xVal + width + 10, i == meterageStr.length - 1 ? topMargin + (height / ( meterageStr.length )) : (topMargin + height) - y - ((int) (bounds.height() * 2)), textPaint);
             /* text drawing (e) */
 
 
@@ -205,9 +224,10 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
     public boolean onTouch(View view, MotionEvent motionEvent) {
         int y  = (int) motionEvent.getY();
         fillValue = y - topMargin;
-        if ( fillValue < height - ( range * (meterageNumber.length - 1) ) - textOffset) {
-            fillValue = height - ( range * (meterageNumber.length - 1) ) - textOffset;
-            value = meterageNumber[ meterageNumber.length - 1 ];
+        if ( fillValue < height - ( range * (meterageStr.length - 1) ) - textOffset) {
+            fillValue = height - ( range * (meterageStr.length - 1) ) - textOffset;
+            valueStr = meterageStr[ meterageStr.length - 1 ];
+            value = 100 / (meterageStr.length - 1) * meterageStr.length - 1;
             invalidate();
             return true;
         } else if ( fillValue > height  - textOffset) {
@@ -219,10 +239,9 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
 
         if ( motionEvent.getAction() == MotionEvent.ACTION_UP ) {
 //
-            int[] data = new int[meterageNumber.length];
-            for (int i = 0; i < meterageNumber.length; i++) {
+            int[] data = new int[meterageStr.length];
+            for (int i = 0; i < meterageStr.length; i++) {
                 data[i] = height - (range * i);
-                Log.e(TAG, String.format("data[i] : %d", data[i]));
             }
 
             int target = y + topMargin;
@@ -239,9 +258,10 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
                     selectCount = i;
                 }
             }
+            Log.e(TAG, String.format("result : %d, calcu : %d selectCount : %d, length : %d", (100 / meterageStr.length - 1) * selectCount, (100 / meterageStr.length - 1), selectCount, meterageStr.length - 1));
             if ( callback != null )
-                callback.onResult( meterageNumber[selectCount] );
-            value = meterageNumber[selectCount];
+                callback.onResult( 100 / (meterageStr.length - 1) * selectCount );
+            value = 100 / (meterageStr.length - 1) * selectCount;
             fillValue = near - textOffset;
 
             invalidate();
@@ -261,16 +281,15 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
     }
     public void setValue( int in ) {
 
-        int[] data = new int[meterageNumber.length];
+        int[] data = new int[meterageStr.length];
         int position = 0;
-        for (int i = 0; i < meterageNumber.length; i++) {
-            if ( meterageNumber[i] == in ) {
+        for (int i = 0; i < meterageStr.length; i++) {
+            if ( 100 / (meterageStr.length - 1) * i == in ) {
                 position = i;
             }
         }
         for (int i = 0; i < meterageNumber.length; i++) {
             data[i] = height - (range * i);
-            Log.e(TAG, String.format("data[i] : %d", data[i]));
         }
         in = data[position];
         int near = 0;
@@ -284,7 +303,7 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
                 selectCount = i;
             }
         }
-        value = meterageNumber[selectCount];
+        valueStr = meterageStr[selectCount];
         fillValue = in - textOffset;
         invalidate();
     }
@@ -297,8 +316,6 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        Log.e(TAG, String.format("bitmap height : %d", bitmap.getHeight()));
         setMeasuredDimension(getMeasuredWidth(), bitmap.getHeight() + topMargin + ( triangleHeight / 2 ));
     }
 }

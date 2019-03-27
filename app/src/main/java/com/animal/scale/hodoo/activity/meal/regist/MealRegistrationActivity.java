@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistAc
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.dialog.IngredientsOfMealDialog;
+import com.animal.scale.hodoo.custom.view.MeterageCup;
 import com.animal.scale.hodoo.custom.view.seekbar.ProgressItem;
 import com.animal.scale.hodoo.databinding.ActivityMealRegistrationBinding;
 import com.animal.scale.hodoo.db.DBHandler;
@@ -69,6 +71,9 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
     private PetAllInfos selectPet;
 
     private MealHistory mealHistory;
+
+    private float resultCalorie = 0;
+    private float calorieInit = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +157,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         setStringNumberPicker(binding.unit, feed);
 
         dialog = IngredientsOfMealDialog.newInstance(feed);
+
     }
 
     @Override
@@ -193,6 +199,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
             binding.seekBar.setProgress(0);
             binding.calorieIntake.setText("0");
         }
+        calorieInit = mealHistory.getCalorie();
         binding.seekBar.setEnabled(true);
     }
 
@@ -214,7 +221,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         MealHistory mealHistory = MealHistory.builder()
                 .calorie(Float.parseFloat(AmountOfFeed.toString()))
                 .unitIndex(binding.unit.getValue())
-                .unitString(unitArray[1])
+                .unitString(unitArray[0])
                 .feedIdx(feedId)
                 .petIdx(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX))
                 .groupId(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE))
@@ -227,5 +234,25 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
     protected void onResume() {
         super.onResume();
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
+//        binding.meterageCup.setFillColor(ContextCompat.getColor(getApplicationContext(), R.color.mainRed), 80); //컬러 지정시 사용
+//        binding.meterageCup.setMeterageNumber(new int[] {
+//                0, 10, 20, 30, 40, 50
+//        });
+        binding.meterageCup.setCallback(new MeterageCup.TouchCallback() {
+            @Override
+            public void onResult(int value) {
+                float changeCalorie = binding.getDomain().getCalculationCalories() * value / 100;
+                float result;
+
+                resultCalorie = changeCalorie + calorieInit;
+                resultCalorie = changeCalorie + calorieInit;
+                if ( resultCalorie == calorieInit )
+                    result = calorieInit;
+                else
+                    result = resultCalorie;
+                binding.calorieIntake.setText( MathUtil.DecimalCut( result ) );
+                binding.seekBar.setProgress((int) result);
+            }
+        });
     }
 }

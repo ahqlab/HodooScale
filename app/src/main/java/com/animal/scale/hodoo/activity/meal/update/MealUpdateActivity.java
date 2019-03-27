@@ -3,16 +3,12 @@ package com.animal.scale.hodoo.activity.meal.update;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealActivity;
-import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealModel;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.dialog.IngredientsOfMealDialog;
@@ -65,6 +61,11 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
     IngredientsOfMealDialog dialog;
 
     private PetAllInfos selectPet;
+
+    private float resultCalorie = 0;
+    private float calorieInit = 0;
+    private float calorieVal = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +189,6 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         setNumberPicker(binding.jungsu);
         setDecimalNumberPicker(binding.umsu);
         setStringNumberPicker(binding.unit, feed);
-
         dialog = IngredientsOfMealDialog.newInstance(feed);
     }
 
@@ -234,6 +234,16 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         binding.setHistory(mealHistory);
         String[] array = String.valueOf(mealHistory.getCalorie()).split("\\.");
         binding.meterageCup.setValue( extractIntegerFromFloat(mealHistory.getCalorie()) );
+        calorieVal = mealHistory.getCalorie();
+//        historyCalorie = binding.getDomain().getCalculationCalories()  * historyCalorieValue / 100;
+//        calorieResult = historyCalorie;
+
+        Log.e(TAG, String.format("calorie : %f", binding.getDomain().getCalculationCalories()) );
+        Log.e(TAG, String.format("calorie result : %f", binding.getDomain().getCalculationCalories() - (binding.getDomain().getCalculationCalories() * mealHistory.getCalorie() / 100)) );
+
+        resultCalorie = calorieInit =  binding.getDomain().getCalculationCalories() - binding.getDomain().getCalculationCalories()  * calorieVal / 100;
+
+
         binding.jungsu.setValue(extractIntegerFromFloat(mealHistory.getCalorie()));
         int nagativeValue = findDecimalArrayIndexFromNumberPicker(decimalArray, extractNegativeNumberFromFloat(mealHistory.getCalorie()));
         if (nagativeValue != -1) {
@@ -268,7 +278,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
                 .historyIdx(binding.getHistory().getHistoryIdx())
                 .calorie(Float.parseFloat(AmountOfFeed.toString()))
                 .unitIndex(binding.unit.getValue())
-                .unitString(unitArray[1])
+                .unitString(unitArray[0])
                 .feedIdx(feedId)
                 .petIdx(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX))
                 .groupId(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE))
@@ -308,7 +318,17 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         binding.meterageCup.setCallback(new MeterageCup.TouchCallback() {
             @Override
             public void onResult(int value) {
-                Log.e(TAG, String.format("value : %d", value));
+                float changeCalorie = binding.getDomain().getCalculationCalories() * value / 100;
+                resultCalorie = changeCalorie + calorieInit;
+                int result = 0;
+                if ( resultCalorie == calorieInit )
+                    result = (int) calorieInit;
+                else
+                    result = (int) resultCalorie;
+                binding.calorieIntake.setText( MathUtil.DecimalCut( result ) );
+                binding.seekBar.setProgress(result);
+
+
             }
         });
     }
