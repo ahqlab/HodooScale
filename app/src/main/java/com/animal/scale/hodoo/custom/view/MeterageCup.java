@@ -55,7 +55,9 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
     private int value = 0;
     private String valueStr = "1/4";
 
-    private int fillColor = Color.GRAY;
+    private int fillColor = ContextCompat.getColor(getContext(), R.color.meterage_cup_color);
+
+    private int alpha = 255;
 
     public interface TouchCallback {
         void onResult( int value );
@@ -104,6 +106,12 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         invalidate();
     }
 
+    public void setFillColor ( int fillColor, int percent ) {
+        this.fillColor = fillColor;
+        this.alpha = 255 * percent / 100;
+        invalidate();
+    }
+
     public void setCallback ( TouchCallback callback ) {
         this.callback = callback;
     }
@@ -122,6 +130,7 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
 
         Paint fillPaint = new Paint();
         fillPaint.setColor(fillColor);
+        fillPaint.setAlpha(alpha);
 
         Rect bounds = new Rect();
         Paint mTextPaint = new Paint();

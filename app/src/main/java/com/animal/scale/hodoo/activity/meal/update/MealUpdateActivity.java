@@ -3,16 +3,12 @@ package com.animal.scale.hodoo.activity.meal.update;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealActivity;
-import com.animal.scale.hodoo.activity.meal.detail.IngredientsOfMealModel;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.dialog.IngredientsOfMealDialog;
@@ -66,7 +62,10 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
 
     private PetAllInfos selectPet;
 
-    private int kcal = 0;
+    private float resultCalorie = 0;
+    private float calorieInit = 0;
+    private float calorieVal = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,6 +234,16 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         binding.setHistory(mealHistory);
         String[] array = String.valueOf(mealHistory.getCalorie()).split("\\.");
         binding.meterageCup.setValue( extractIntegerFromFloat(mealHistory.getCalorie()) );
+        calorieVal = mealHistory.getCalorie();
+//        historyCalorie = binding.getDomain().getCalculationCalories()  * historyCalorieValue / 100;
+//        calorieResult = historyCalorie;
+
+        Log.e(TAG, String.format("calorie : %f", binding.getDomain().getCalculationCalories()) );
+        Log.e(TAG, String.format("calorie result : %f", binding.getDomain().getCalculationCalories() - (binding.getDomain().getCalculationCalories() * mealHistory.getCalorie() / 100)) );
+
+        resultCalorie = calorieInit =  binding.getDomain().getCalculationCalories();
+
+
         binding.jungsu.setValue(extractIntegerFromFloat(mealHistory.getCalorie()));
         int nagativeValue = findDecimalArrayIndexFromNumberPicker(decimalArray, extractNegativeNumberFromFloat(mealHistory.getCalorie()));
         if (nagativeValue != -1) {
@@ -309,8 +318,15 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         binding.meterageCup.setCallback(new MeterageCup.TouchCallback() {
             @Override
             public void onResult(int value) {
-                Log.e(TAG, String.format("value : %d, result : %d", value, (int) binding.getDomain().getCalculationCalories() * value / 100));
-                binding.calorieIntake.setText( MathUtil.DecimalCut( binding.getDomain().getCalculationCalories() * value / 100 ) );
+                float changeCalorie = binding.getDomain().getCalculationCalories() * value / 100;
+                resultCalorie = changeCalorie + calorieInit;
+                float result = 0;
+                if ( resultCalorie == calorieInit )
+                    result = calorieInit;
+                else
+                    result = resultCalorie;
+                binding.calorieIntake.setText( MathUtil.DecimalCut( result ) );
+                binding.seekBar.setProgress((int) result);
             }
         });
     }

@@ -40,5 +40,7 @@
 
     <color name="overlay_color">#80000000</color>
 
+    <color name="meterage_cup_color">#808080</color>
+
 
 </resources>
