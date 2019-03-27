@@ -74,7 +74,6 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
     private float resultCalorie = 0;
     private float calorieInit = 0;
-    private float calorieVal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,9 +242,10 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
             @Override
             public void onResult(int value) {
                 float changeCalorie = binding.getDomain().getCalculationCalories() * value / 100;
+                float result;
+
                 resultCalorie = changeCalorie + calorieInit;
                 resultCalorie = changeCalorie + calorieInit;
-                float result = 0;
                 if ( resultCalorie == calorieInit )
                     result = calorieInit;
                 else

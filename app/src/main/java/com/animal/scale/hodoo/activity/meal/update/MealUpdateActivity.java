@@ -241,7 +241,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         Log.e(TAG, String.format("calorie : %f", binding.getDomain().getCalculationCalories()) );
         Log.e(TAG, String.format("calorie result : %f", binding.getDomain().getCalculationCalories() - (binding.getDomain().getCalculationCalories() * mealHistory.getCalorie() / 100)) );
 
-        resultCalorie = calorieInit =  binding.getDomain().getCalculationCalories();
+        resultCalorie = calorieInit =  binding.getDomain().getCalculationCalories() - binding.getDomain().getCalculationCalories()  * calorieVal / 100;
 
 
         binding.jungsu.setValue(extractIntegerFromFloat(mealHistory.getCalorie()));
@@ -320,13 +320,15 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
             public void onResult(int value) {
                 float changeCalorie = binding.getDomain().getCalculationCalories() * value / 100;
                 resultCalorie = changeCalorie + calorieInit;
-                float result = 0;
+                int result = 0;
                 if ( resultCalorie == calorieInit )
-                    result = calorieInit;
+                    result = (int) calorieInit;
                 else
-                    result = resultCalorie;
+                    result = (int) resultCalorie;
                 binding.calorieIntake.setText( MathUtil.DecimalCut( result ) );
-                binding.seekBar.setProgress((int) result);
+                binding.seekBar.setProgress(result);
+
+
             }
         });
     }
