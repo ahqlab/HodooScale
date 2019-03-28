@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.service;
 
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
@@ -30,4 +31,7 @@ public interface PetService {
 
     @POST("pet/all/getBreed.do")
     Call<List<PetBreed>> getAllBreed( @Query("location") String location );
+
+    @POST("pet//make/it/invisible.do")
+    Call<CommonResponce<Integer>> deletePet(@Query("petIdx") int petIdx);
 }

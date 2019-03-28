@@ -22,11 +22,9 @@ public abstract class AbstractAsyncTaskOfList<D> extends AsyncTask<Call, Void, L
 
     @Override
     protected void onCancelled() {
-        Log.e("HJLEE", "onCancelled");
         doCancelled();
         super.onCancelled();
     }
-
 
     @Override
     protected List<D> doInBackground(Call... params) {

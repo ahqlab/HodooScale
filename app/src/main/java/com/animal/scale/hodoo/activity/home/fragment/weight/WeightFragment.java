@@ -323,11 +323,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         });
 
         presenter.initWeekCalendar();
-        if ( HomeActivity.mWeightTip != null ) {
+        /*if ( HomeActivity.mWeightTip != null ) {
             //Log.e(TAG, "country : " + country + " HomeActivity.mWeightTip.getLanguage() : " + HomeActivity.mWeightTip.getLanguage());
             if (country.equals(HomeActivity.mWeightTip.getLanguage()))
                 setTipMessageOfCountry(HomeActivity.mWeightTip);
-        }
+        }*/
         setKg();
     }
 }

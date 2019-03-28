@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.activity.pet.regist.weight;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +17,7 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
@@ -32,6 +34,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCheckIn.View {
@@ -49,6 +52,8 @@ public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCh
 
     YouTubePlayer.OnInitializedListener listener;
 
+    private boolean deleteAllPet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,8 @@ public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCh
         //presenter.setViewFlipper();
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
+        deleteAllPet = intent.getBooleanExtra("deleteAllPet", false);
+        Log.e("HJLEE", "weight deleteAllPet : " + deleteAllPet);
         presenter.getWeightInformation(petIdx);
 
         binding.youtubePlayer.initialize("AIzaSyA55VHiduzK7x3noqovYgi7YKKa53xyTrM", new YouTubePlayer.OnInitializedListener() {
@@ -151,21 +158,23 @@ public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCh
 
     @Override
     public void registResult(Integer integer) {
+        Log.e("HJLEE", "deleteAllPet : " + deleteAllPet);
         if (integer != 0) {
-           /* Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            overridePendingTransition(R.anim.end_enter, R.anim.end_exit);*/
-
             ((BasicInformationRegistActivity) BasicInformationRegistActivity.mContext).finish();
             ((DiseaseInformationRegistActivity) DiseaseInformationRegistActivity.mContext).finish();
             ((PhysiqueInformationRegistActivity) PhysiqueInformationRegistActivity.mContext).finish();
+            if(deleteAllPet){
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+            }
             finish();
-//            Toast.makeText(this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
-        } else {
-            Log.e("HJLEE", "registResult ERROR");
         }
     }
+
+
+
+
+
 
     public void onClickCompleateBtn(View view) {
         if (binding.getDomain().getBcs() > 0) {

@@ -12,6 +12,10 @@ public interface PetAccounts {
         public void setAdapter(List<PetAllInfos> data);
 
         void reFreshData( int idx );
+
+        void petDeleteResult(Integer result);
+
+        void goToPetRegistActivity();
     }
 
     interface Presenter {
@@ -21,5 +25,7 @@ public interface PetAccounts {
         void getData();
 
         void saveCurrentIdx( int idx );
+
+        void deletePet(int petIdx);
     }
 }

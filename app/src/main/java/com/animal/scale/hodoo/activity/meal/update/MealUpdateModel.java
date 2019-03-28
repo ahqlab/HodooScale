@@ -34,7 +34,7 @@ public class MealUpdateModel extends CommonModel {
     }
 
     public void saveMeal(MealHistory mealHistory, final DomainCallBackListner<Integer> domainCallBackListner) {
-        Call<Integer> call =  NetRetrofit.getInstance().getMealHistoryService().insert(mealHistory);
+        Call<Integer> call = NetRetrofit.getInstance().getMealHistoryService().insert(mealHistory);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer result) {
@@ -60,6 +60,7 @@ public class MealUpdateModel extends CommonModel {
             protected void doPostExecute(PetAllInfos petAllInfos) {
                 domainCallBackListner.doPostExecute(petAllInfos);
             }
+
             @Override
             protected void doPreExecute() {
 
@@ -72,8 +73,8 @@ public class MealUpdateModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void getTodaySumCalorie(String date , final DomainCallBackListner<MealHistory> domainCallBackListner) {
-        Call<MealHistory> call = NetRetrofit.getInstance().getMealHistoryService().getTodaySumCalorie(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX), date, sharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY));
+    public void getTodaySumCalorie(String date, final DomainCallBackListner<MealHistory> domainCallBackListner) {
+        Call<MealHistory> call = NetRetrofit.getInstance().getMealHistoryService().getTodaySumCalorie(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX), date);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<MealHistory>() {
             @Override
             protected void doPostExecute(MealHistory mealHistory) {
@@ -113,7 +114,7 @@ public class MealUpdateModel extends CommonModel {
     }
 
     public void updateMeal(MealHistory mealHistory, final DomainCallBackListner<Integer> domainCallBackListner) {
-        Call<Integer> call =  NetRetrofit.getInstance().getMealHistoryService().update(mealHistory);
+        Call<Integer> call = NetRetrofit.getInstance().getMealHistoryService().update(mealHistory);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer result) {

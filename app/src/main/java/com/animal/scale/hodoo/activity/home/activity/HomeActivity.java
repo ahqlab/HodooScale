@@ -62,6 +62,8 @@ import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class HomeActivity extends BaseActivity<HomeActivity> implements NavigationView.OnNavigationItemSelectedListener, HomeActivityIn.View {
 
+    public static HomeActivity hActivity;
+
     private final long FINISH_INTERVAL_TIME = 2000;
 
     private final int ADD_PET = 0;
@@ -103,6 +105,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hActivity = HomeActivity.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setActivity(this);
         sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
@@ -401,6 +404,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public static void setCalendarDate ( String calendarDate ) {
         mCalendarDate = calendarDate;
     }
+
     public static String getCalendarDate () {
         return mCalendarDate;
     }
