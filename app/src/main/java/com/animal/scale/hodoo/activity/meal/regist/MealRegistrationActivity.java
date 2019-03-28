@@ -191,6 +191,7 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
                     .setDuration(300)
                     .start();
             binding.calorieIntake.setText(MathUtil.DecimalCut(mealHistory.getCalorie()));
+            calorieInit = mealHistory.getCalorie();
         } else {
             binding.seekBar.setMax((int) rer);
             binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
@@ -198,8 +199,9 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
             //initDataToSeekbar(rer);
             binding.seekBar.setProgress(0);
             binding.calorieIntake.setText("0");
+            calorieInit = 0;
         }
-        calorieInit = mealHistory.getCalorie();
+
         binding.seekBar.setEnabled(true);
     }
 

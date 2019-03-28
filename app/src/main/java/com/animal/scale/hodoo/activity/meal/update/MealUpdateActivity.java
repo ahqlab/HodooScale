@@ -218,6 +218,9 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
                     .setDuration(300)
                     .start();
             binding.calorieIntake.setText(MathUtil.DecimalCut(mealHistory.getCalorie()));
+            calorieInit = mealHistory.getCalorie();
+            float cal = binding.getDomain().getCalculationCalories()  * calorieVal / 100;
+            calorieInit = calorieInit - cal;
         } else {
             binding.seekBar.setMax((int) rer);
             binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal" + "\n(" + getResources().getString(R.string.recommend) + ")");
@@ -226,6 +229,7 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
             binding.seekBar.setProgress(0);
             binding.calorieIntake.setText("0");
         }
+
         binding.seekBar.setEnabled(true);
     }
 
@@ -235,13 +239,6 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         String[] array = String.valueOf(mealHistory.getCalorie()).split("\\.");
         binding.meterageCup.setValue( extractIntegerFromFloat(mealHistory.getCalorie()) );
         calorieVal = mealHistory.getCalorie();
-//        historyCalorie = binding.getDomain().getCalculationCalories()  * historyCalorieValue / 100;
-//        calorieResult = historyCalorie;
-
-        Log.e(TAG, String.format("calorie : %f", binding.getDomain().getCalculationCalories()) );
-        Log.e(TAG, String.format("calorie result : %f", binding.getDomain().getCalculationCalories() - (binding.getDomain().getCalculationCalories() * mealHistory.getCalorie() / 100)) );
-
-        resultCalorie = calorieInit =  binding.getDomain().getCalculationCalories() - binding.getDomain().getCalculationCalories()  * calorieVal / 100;
 
 
         binding.jungsu.setValue(extractIntegerFromFloat(mealHistory.getCalorie()));
@@ -320,13 +317,13 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
             public void onResult(int value) {
                 float changeCalorie = binding.getDomain().getCalculationCalories() * value / 100;
                 resultCalorie = changeCalorie + calorieInit;
-                int result = 0;
+                float result = 0;
                 if ( resultCalorie == calorieInit )
-                    result = (int) calorieInit;
+                    result = calorieInit;
                 else
-                    result = (int) resultCalorie;
+                    result = resultCalorie;
                 binding.calorieIntake.setText( MathUtil.DecimalCut( result ) );
-                binding.seekBar.setProgress(result);
+                binding.seekBar.setProgress((int) result);
 
 
             }

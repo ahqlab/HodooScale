@@ -13,12 +13,14 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ScrollView;
 
 import com.animal.scale.hodoo.R;
 
@@ -144,6 +146,9 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
             initState = true;
         }
 
+//        RectF oval1 = new RectF(xVal, (height + topMargin) - fillY, xVal + width,(height + topMargin) - fillY + 80);
+//        canvas.drawOval(oval1, fillPaint);
+
         canvas.drawRect(xVal, (height + topMargin) - fillY, xVal + width, height + topMargin, fillPaint);
         /* fill (e) */
 
@@ -165,9 +170,6 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         textPaint.setColor(Color.BLACK);
         textPaint.setTextSize(40);
 
-
-
-
         Paint mPaint = new Paint();
 
         mPaint.setColor(Color.RED);
@@ -187,8 +189,6 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
                 y = 0;
             else
                 y += height / ( meterageStr.length );
-
-
 
             /* text drawing (s) */
             canvas.drawText(meterageStr[i], xVal + width + 10, i == meterageStr.length - 1 ? topMargin + (height / ( meterageStr.length )) : (topMargin + height) - y - ((int) (bounds.height() * 2)), textPaint);
@@ -222,6 +222,12 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
+
+        getParent().requestDisallowInterceptTouchEvent(true);
+        
+        if ( view instanceof ScrollView) {
+            Log.e(TAG, "scroll view touch");
+        }
         int y  = (int) motionEvent.getY();
         fillValue = y - topMargin;
         if ( fillValue < height - ( range * (meterageStr.length - 1) ) - textOffset) {
@@ -238,14 +244,12 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         }
 
         if ( motionEvent.getAction() == MotionEvent.ACTION_UP ) {
-//
             int[] data = new int[meterageStr.length];
             for (int i = 0; i < meterageStr.length; i++) {
                 data[i] = height - (range * i);
             }
 
             int target = y + topMargin;
-
 
             int near = 0;
             int min = Integer.MAX_VALUE;
