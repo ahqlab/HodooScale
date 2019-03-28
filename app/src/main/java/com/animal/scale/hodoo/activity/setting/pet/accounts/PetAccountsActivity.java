@@ -10,7 +10,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
+import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.BottomDialog;
@@ -26,11 +28,16 @@ import java.util.List;
 public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> implements PetAccounts.View {
 
     public static final String TAG = PetAccountsActivity.class.getSimpleName();
+
     ActivityPetAccountsBinding binding;
 
     PetGridAdapter adapter;
 
     PetAccounts.Presenter presenter;
+
+    HomeActivity homeActivity;
+
+    SettingListActivity settingListActivity;
 
     public static final int ADD_PET = 0;
 
@@ -44,6 +51,10 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         presenter = new PetAccountPresenter(this);
         presenter.initUserData(getApplicationContext());
         presenter.getData();
+        homeActivity = (HomeActivity)HomeActivity.hActivity;
+        settingListActivity = (SettingListActivity) SettingListActivity.settingListActivity;
+
+
     }
 
     @Override
@@ -110,6 +121,7 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
                                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                                 break;
                             case R.id.pet_delete :
+                                presenter.deletePet(petAllInfos.getPet().getPetIdx());
                                 break;
                             case R.id.cancel :
                                 break;
@@ -142,5 +154,23 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
     public void reFreshData( int idx ) {
         adapter.setPetIdx(idx);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void petDeleteResult(Integer result) {
+        if(result == 1){
+            presenter.getData();
+        }
+    }
+
+    @Override
+    public void goToPetRegistActivity() {
+        homeActivity.finish();
+        settingListActivity.finish();
+        Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+        intent.putExtra("petIdx", 0);
+        intent.putExtra("deleteAllPet", true);
+        startActivity(intent);
+        finish();
     }
 }

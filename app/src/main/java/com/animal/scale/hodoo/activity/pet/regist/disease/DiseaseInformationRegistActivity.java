@@ -45,7 +45,7 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
 
     private int petIdx;
 
-
+    private boolean deleteAllPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,8 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
 
         Intent intent = getIntent();
         petIdx = intent.getIntExtra("petIdx", 0);
+        deleteAllPet = intent.getBooleanExtra("deleteAllPet", false);
+        Log.e("HJLEE", "diseases deleteAllPet : " + deleteAllPet);
         presenter.getDiseaseInformation(petIdx);
 
     }
@@ -148,6 +150,7 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
     public void nextStep(int result) {
         Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
         intent.putExtra("petIdx", petIdx);
+        intent.putExtra("deleteAllPet", deleteAllPet);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
 //        finish();

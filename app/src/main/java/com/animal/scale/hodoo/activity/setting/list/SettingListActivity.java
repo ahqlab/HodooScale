@@ -35,6 +35,9 @@ import java.util.List;
 
 public class SettingListActivity extends BaseActivity<SettingListActivity> implements SettingList.View{
 
+
+    public static SettingListActivity settingListActivity;
+
     ActivitySettingListBinding binding;
 
     AdapterOfSetting oldAdapter;
@@ -88,6 +91,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingListActivity = SettingListActivity.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting_list);
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.istyle_setting)));

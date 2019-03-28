@@ -83,9 +83,7 @@ public class LoginPresenter implements Login.Presenter {
                         }
                         saveUserSharedValue(resultMessageGroup.getDomain());
 
-
-
-
+                        // 디바이스, 펫 등록 상태를 Check 한다
                         checkRegistrationStatus();
                     }
                 } else {

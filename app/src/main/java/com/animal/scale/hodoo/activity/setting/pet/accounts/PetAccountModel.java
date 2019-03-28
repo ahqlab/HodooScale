@@ -3,11 +3,13 @@ package com.animal.scale.hodoo.activity.setting.pet.accounts;
 import android.content.Context;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
@@ -32,9 +34,9 @@ public class PetAccountModel extends CommonModel {
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetAllInfos>() {
             @Override
             protected void doPostExecute(List<PetAllInfos> data) {
-                if(data.size() > 0){
+                //if(data.size() > 0){
                     domainListCallBackListner.doPostExecute(data);
-                }
+               // }
             }
             @Override
             protected void doPreExecute() {
@@ -61,6 +63,26 @@ public class PetAccountModel extends CommonModel {
     }
     public void saveCurrentIdx(int idx) {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, idx);
+    }
+
+    public void deletePet(int petIdx, final DomainCallBackListner<CommonResponce<Integer>> domainCallBackListner) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetService().deletePet(petIdx);
+        new AsyncTaskCancelTimerTask( new AbstractAsyncTask<CommonResponce<Integer>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<Integer> integerCommonResponce) {
+                domainCallBackListner.doPostExecute(integerCommonResponce);
+            }
+            @Override
+            protected void doPreExecute() {
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+                domainCallBackListner.doCancelled();
+            }
+        }.execute(call), limitedTime, interval, true).start();
+
     }
 
     public interface asyncTaskListner {
