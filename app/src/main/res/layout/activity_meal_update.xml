@@ -226,12 +226,25 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.animal.scale.hodoo.custom.view.MeterageCup
                         android:id="@+id/meterageCup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="40dp"
+                        android:background="@drawable/rounded_pink_btn"
+                        android:onClick="@{activity::onClickSaveBtn}"
+                        android:text="@string/save"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -276,17 +289,7 @@
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="40dp"
-                android:background="@drawable/rounded_pink_btn"
-                android:onClick="@{activity::onClickSaveBtn}"
-                android:text="@string/save"
-                android:textColor="@color/white" />
+
         </LinearLayout>
     </RelativeLayout>
 </layout>
