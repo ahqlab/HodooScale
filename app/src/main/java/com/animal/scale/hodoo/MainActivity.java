@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
     public SharedPrefManager sharedPrefManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +58,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         sharedPrefManager = SharedPrefManager.getInstance(MainActivity.this);
         String countryCode = VIewUtil.getMyLocationCode(MainActivity.this);
         sharedPrefManager.putStringExtra(SharedPrefVariable.CURRENT_COUNTRY, countryCode);
-
         mSlideView = findViewById(R.id.slide_view);
-
         systemAlertPermission();
     }
 
@@ -106,8 +103,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
-                                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                        Uri.parse("package:" + getPackageName()));
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
                                 startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
                             }
                         }).setNegativeButton(R.string.cancle, new DialogInterface.OnClickListener() {

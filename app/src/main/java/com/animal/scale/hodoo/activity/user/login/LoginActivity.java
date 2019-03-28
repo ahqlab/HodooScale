@@ -175,6 +175,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     public void goPetRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
         intent.putExtra("petIdx", petIdx);
+        intent.putExtra("deleteAllPet", true);
         startActivity(intent);
         //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
