@@ -74,6 +74,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     private String calendarDate = "";
 
+    private boolean realTimeMode = false;
+
     public WeightFragment() {
     }
 
@@ -171,14 +173,20 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
-        if ( d != null ) {
-            DecimalFormat fmt = new DecimalFormat("0.##");
-            binding.weightView.setNumber(d.getValue());
-            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+        if ( realTimeMode ) {
+            if ( d != null ) {
+                DecimalFormat fmt = new DecimalFormat("0.##");
+                binding.weightView.setNumber(d.getValue());
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(d.getValue()));
+            } else {
+                binding.weightView.setNumber(0f);
+                mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
+            }
         } else {
-            binding.weightView.setNumber(0f);
-            mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
+            if ( HomeActivity.selectPet != null )
+                binding.weightView.setNumber(HomeActivity.selectPet.pet.getWeight());
         }
+
         if (refrashState)
             rotationStop(rotationView);
     }
