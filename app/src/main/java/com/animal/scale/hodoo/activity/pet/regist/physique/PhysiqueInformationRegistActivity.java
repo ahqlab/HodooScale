@@ -28,7 +28,7 @@ import com.tistory.dwfox.dwrulerviewlibrary.view.DWRulerSeekbar;
 import com.tistory.dwfox.dwrulerviewlibrary.view.ObservableHorizontalScrollView;
 import com.tistory.dwfox.dwrulerviewlibrary.view.ScrollingValuePicker;
 
-public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInformationRegistActivity> implements PhysiqueInformationRegistIn.View{
+public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInformationRegistActivity> implements PhysiqueInformationRegistIn.View {
 
     public static Context mContext;
 
@@ -42,7 +42,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
     private DWRulerSeekbar dwRulerSeekbar;
 
     private static final float MIN_VALUE = 0;
-    private static final float MAX_VALUE = 50;
+    private static final float MAX_VALUE = 30;
     private static final float LINE_RULER_MULTIPLE_SIZE = 3.5f;
 
     PhysiqueInformationRegistIn.Presenter presenter;
@@ -67,7 +67,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
         deleteAllPet = intent.getBooleanExtra("deleteAllPet", false);
         Log.e("HJLEE", "phycique deleteAllPet : " + deleteAllPet);
         presenter.getPhysiqueInformation(petIdx);
-        setTextWatcher( binding.editWidth, binding.editHeight, binding.editWeight );
+        setTextWatcher(binding.editWidth, binding.editHeight, binding.editWeight);
     }
 
     @Override
@@ -77,56 +77,57 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
 
     @Override
     public void setDiseaseInfo(PetPhysicalInfo petPhysicalInfo) {
-        if(petPhysicalInfo != null){
+        if (petPhysicalInfo != null) {
             binding.setDomain(petPhysicalInfo);
-        }else{
+        } else {
             binding.setDomain(new PetPhysicalInfo());
         }
         validation();
     }
 
-    public void onClickWidthEt(PetPhysicalInfo petPhysicalInfo){
-        if(petPhysicalInfo != null){
-            if(petPhysicalInfo.getWidth() != null){
+    public void onClickWidthEt(PetPhysicalInfo petPhysicalInfo) {
+        if (petPhysicalInfo != null) {
+            if (petPhysicalInfo.getWidth() != null) {
                 presenter.showRulerBottomDlg(binding.editWidth, petPhysicalInfo.getWidth());
-            }else{
+            } else {
                 presenter.showRulerBottomDlg(binding.editWidth, "0");
             }
-        }else{
+        } else {
             presenter.showRulerBottomDlg(binding.editWidth, "0");
         }
     }
 
-    public void onClickHightEt(PetPhysicalInfo petPhysicalInfo){
-        if(petPhysicalInfo != null){
-            if(petPhysicalInfo.getHeight() != null){
+    public void onClickHightEt(PetPhysicalInfo petPhysicalInfo) {
+        if (petPhysicalInfo != null) {
+            if (petPhysicalInfo.getHeight() != null) {
                 presenter.showRulerBottomDlg(binding.editHeight, petPhysicalInfo.getHeight());
-            }else{
+            } else {
                 presenter.showRulerBottomDlg(binding.editHeight, "0");
             }
-        }else{
+        } else {
             presenter.showRulerBottomDlg(binding.editHeight, "0");
         }
 
     }
-    public void onClickWeightEt(PetPhysicalInfo petPhysicalInfo){
-        if(petPhysicalInfo != null){
-            if(petPhysicalInfo.getWeight() != null){
+
+    public void onClickWeightEt(PetPhysicalInfo petPhysicalInfo) {
+        if (petPhysicalInfo != null) {
+            if (petPhysicalInfo.getWeight() != null) {
                 presenter.showRulerBottomDlg(binding.editWeight, petPhysicalInfo.getWeight());
-            }else{
-                presenter.showRulerBottomDlg(binding.editWeight,  "0");
+            } else {
+                presenter.showRulerBottomDlg(binding.editWeight, "0");
             }
-        }else{
+        } else {
             presenter.showRulerBottomDlg(binding.editWeight, "0");
         }
 
     }
 
     @Override
-    public void showRulerBottomDlg(final EditText editText, String value){
+    public void showRulerBottomDlg(final EditText editText, String value) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View customView = inflater.inflate(R.layout.dialog_custom_ruler_popup, null);
-        builder =  new BottomDialog.Builder(this)
+        builder = new BottomDialog.Builder(this)
                 .setCustomView(customView)
                 .setNegativeText(getString(R.string.confirm))
                 .show();
@@ -149,9 +150,10 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             @Override
             public void onScrollChanged(ObservableHorizontalScrollView view, int l, int t) {
             }
+
             @Override
             public void onScrollStopped(int l, int t) {
-                editText.setText(String.valueOf(DWUtils.getValueAndScrollItemToCenter(myScrollingValuePicker.getScrollView() , l , t , MAX_VALUE , MIN_VALUE , myScrollingValuePicker.getViewMultipleSize())));
+                editText.setText(String.valueOf(DWUtils.getValueAndScrollItemToCenter(myScrollingValuePicker.getScrollView(), l, t, MAX_VALUE, MIN_VALUE, myScrollingValuePicker.getViewMultipleSize())));
             }
         });
     }
@@ -171,7 +173,7 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
 //        finish();
     }
 
-    public void onClickNextBtn(View view){
+    public void onClickNextBtn(View view) {
         presenter.deletePhysiqueInformation(petIdx, binding.getDomain().getId());
     }
 
@@ -221,8 +223,9 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             }
         });*/
     }
-    private void setTextWatcher ( EditText... edts ) {
-        for ( EditText edt : edts ) {
+
+    private void setTextWatcher(EditText... edts) {
+        for (EditText edt : edts) {
             edt.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -241,11 +244,12 @@ public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInfo
             });
         }
     }
-    private void validation () {
+
+    private void validation() {
         if (
-                !ValidationUtil.isEmpty( binding.editWidth.getText().toString() ) &&
-                !ValidationUtil.isEmpty( binding.editHeight.getText().toString() ) &&
-                !ValidationUtil.isEmpty( binding.editWeight.getText().toString() )) {
+                !ValidationUtil.isEmpty(binding.editWidth.getText().toString()) &&
+                        !ValidationUtil.isEmpty(binding.editHeight.getText().toString()) &&
+                        !ValidationUtil.isEmpty(binding.editWeight.getText().toString())) {
             binding.nextStep.setEnabled(true);
         } else {
             binding.nextStep.setEnabled(false);

@@ -158,7 +158,7 @@ public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCh
 
     @Override
     public void registResult(Integer integer) {
-        Log.e("HJLEE", "deleteAllPet : " + deleteAllPet);
+        //Log.e("HJLEE", "deleteAllPet : " + deleteAllPet);
         if (integer != 0) {
             ((BasicInformationRegistActivity) BasicInformationRegistActivity.mContext).finish();
             ((DiseaseInformationRegistActivity) DiseaseInformationRegistActivity.mContext).finish();
@@ -171,11 +171,6 @@ public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCh
         }
     }
 
-
-
-
-
-
     public void onClickCompleateBtn(View view) {
         if (binding.getDomain().getBcs() > 0) {
             presenter.deleteWeightInfo(petIdx, binding.getDomain().getId());
@@ -186,7 +181,8 @@ public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCh
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                         }
-                    }).show();
+                    }
+            ).show();
         }
     }
 

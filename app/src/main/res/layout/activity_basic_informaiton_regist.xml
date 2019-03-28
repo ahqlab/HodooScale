@@ -66,7 +66,7 @@
                         app:civ_border_width="2dp" />
                 </LinearLayout>
 
-                <LinearLayout
+              <!--  <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -83,7 +83,7 @@
                         android:textColor="#9b9b9b"
                         android:text="@string/petType"/>
 
-                    <!--<LinearLayout
+                    &lt;!&ndash;<LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -120,8 +120,8 @@
                                 android:padding="8dp"
                                 />
                         </RadioGroup>
-                    </LinearLayout>-->
-                </LinearLayout>
+                    </LinearLayout>&ndash;&gt;
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
