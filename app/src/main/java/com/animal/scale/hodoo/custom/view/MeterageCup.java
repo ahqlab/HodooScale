@@ -235,7 +235,7 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
             valueStr = meterageStr[ meterageStr.length - 1 ];
             value = 100 / (meterageStr.length - 1) * meterageStr.length - 1;
             if ( callback != null )
-                callback.onResult( 100 / (meterageStr.length - 1) * meterageStr.length - 1 );
+                callback.onResult( 100 / (meterageStr.length - 1) * (meterageStr.length - 1) );
             invalidate();
             return true;
         } else if ( fillValue > height  - textOffset) {
