@@ -184,7 +184,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             }
         } else {
             if ( HomeActivity.selectPet != null )
-                binding.weightView.setNumber(HomeActivity.selectPet.pet.getWeight());
+                if ( HomeActivity.selectPet.petPhysicalInfo != null )
+                  binding.weightView.setNumber(Integer.parseInt(HomeActivity.selectPet.petPhysicalInfo.getWeight()));
         }
 
         if (refrashState)
