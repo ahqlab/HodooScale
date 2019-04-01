@@ -290,8 +290,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                v.clearAnimation();
-                v.animate().cancel();
+                if ( v != null ) {
+                    v.clearAnimation();
+                    v.animate().cancel();
+                }
                 refrashState = false;
             }
         }, 2000);
