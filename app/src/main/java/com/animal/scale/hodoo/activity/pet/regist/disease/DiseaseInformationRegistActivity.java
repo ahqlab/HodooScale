@@ -112,7 +112,8 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
     }
 
     public void onClickNextBtn(View view){
-        presenter.deleteDiseaseInformation(petIdx, binding.getDomain().getId());
+        if ( binding.getDomain() != null )
+            presenter.deleteDiseaseInformation(petIdx, binding.getDomain().getId());
     }
 
     public String getDiseaName(){
