@@ -185,7 +185,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         } else {
             if ( HomeActivity.selectPet != null )
                 if ( HomeActivity.selectPet.petPhysicalInfo != null )
-                  binding.weightView.setNumber(Integer.parseInt(HomeActivity.selectPet.petPhysicalInfo.getWeight()));
+                  binding.weightView.setNumber(Float.parseFloat(HomeActivity.selectPet.petPhysicalInfo.getWeight()));
         }
 
         if (refrashState)
@@ -194,9 +194,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
-        HomeActivity.setWeightTip(weightTip);
-        binding.collapse.setTitle(weightTip.getTitle());
-        binding.collapse.setContent(weightTip.getContent());
+        if ( weightTip != null ) {
+            HomeActivity.setWeightTip(weightTip);
+            binding.collapse.setTitle(weightTip.getTitle());
+            binding.collapse.setContent(weightTip.getContent());
+        }
     }
 
     @Override

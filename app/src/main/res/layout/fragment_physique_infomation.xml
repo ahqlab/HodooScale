@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.pet.regist.fragment.physique.PhysiqueInfomationRegistFragment" />
+        <variable
+            name="domain"
+            type="com.animal.scale.hodoo.domain.PetPhysicalInfo" />
+        <variable
+            name="state"
+            type="Boolean"/>
+    </data>
+
+    <RelativeLayout
+        android:background="@color/hodoo_background_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/add_pet_navigation"
+            layout="@layout/add_pet_nav"/>
+
+        <TextView
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:id="@+id/info_text"
+            android:layout_below="@+id/add_pet_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Hodoo's weight"
+            android:textSize="20sp"
+            android:textColor="#313131"/>
+
+        <TextView
+            android:layout_below="@+id/info_text"
+            android:layout_above="@+id/numeric_wrap"
+            android:id="@+id/kilogram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text='@{domain.weight + "kg"}'
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="48sp"
+            android:textColor="@color/mainBlack"
+            />
+
+        <LinearLayout
+            android:id="@+id/numeric_wrap"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:id="@+id/numeric_keybord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3">
+                <Button
+                    android:background="@null"
+                    android:text="1"
+                    android:layout_columnWeight="1"
+
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="2"
+                    android:layout_columnWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="3"
+                    android:layout_columnWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="4"
+                    android:layout_columnWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="5"
+                    android:layout_columnWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="6"
+                    android:layout_columnWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="7"
+                    android:layout_columnWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="8"
+                    android:layout_columnWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="9"
+                    android:layout_columnWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="."
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    />
+                <Button
+                    android:background="@null"
+                    android:text="0"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    />
+                <ImageButton
+                    android:background="@null"
+                    android:src="@drawable/back"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:visibility="@{state ? View.VISIBLE : View.INVISIBLE}"
+                    />
+            </GridLayout>
+
+            <Button
+                android:id="@+id/next_step"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/pink_btn"
+                android:text="@string/add_pet_next_btn"
+                android:textColor="@color/white"
+                android:onClick="@{activity::onClickNextBtn}"
+                android:textStyle="bold"
+                android:visibility="@{state ? View.VISIBLE : View.INVISIBLE}"/>
+                />
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/pet_body_middle_example_606_307"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="left"
+                            android:text="@string/physique_information_guide_text1"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="left"
+                            android:text="@string/physique_information_guide_text2"
+                            android:textColor="@color/hodoo_midle_pink"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="40dp"
+                            android:gravity="left"
+                            android:text="@string/physique_information_guide_text3"
+                            android:textColor="@color/hodoo_midle_pink"
+                            android:textSize="11sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/pet_width"
+                                android:textSize="11sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/pet_height"
+                                android:textSize="11sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/pet_unit"
+                                android:textSize="11sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/edit_width"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="0"
+                                android:focusable="false"
+                                android:text="@={domain.width}"
+                                android:onClick="@{() -> activity.onClickWidthEt(domain)}" />
+
+                            <EditText
+                                android:id="@+id/edit_height"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="0"
+                                android:focusable="false"
+                                android:text="@={domain.height}"
+                                android:onClick="@{() -> activity.onClickHightEt(domain)}"/>
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:focusable="false"
+                                android:text="@string/pet_unit" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:text="@string/pet_weight"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/edit_weight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:hint="0"
+                                android:focusable="false"
+                                android:text="@={domain.weight}"
+                                android:onClick="@{() -> activity.onClickWeightEt(domain)}"/>
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:focusable="false"
+                                android:text="@string/pet_kg" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+            </LinearLayout>
+    </RelativeLayout>
+
+</layout>

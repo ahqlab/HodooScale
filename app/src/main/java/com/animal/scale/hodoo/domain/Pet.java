@@ -20,4 +20,6 @@ public class Pet implements Serializable {
     private int weight;
 
     private String createDate;
+
+    private int petType;
 }

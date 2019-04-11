@@ -10,6 +10,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PetService {
@@ -34,4 +35,12 @@ public interface PetService {
 
     @POST("pet//make/it/invisible.do")
     Call<CommonResponce<Integer>> deletePet(@Query("petIdx") int petIdx);
+
+    @POST("pet/get/type.do")
+    Call<Integer> getPetType( @Query("petIdx") int petIdx );
+
+    @POST("pet/{type}/petType.do")
+    Call<Integer> registPetType ( @Path("type") String type, @Query("petType") int petType );
+
+
 }

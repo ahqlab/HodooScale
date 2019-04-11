@@ -145,8 +145,8 @@
         <activity android:name=".activity.intro.IntroActivity" />
         <activity android:name=".fcm.AlertActivity" />
         <activity android:name=".activity.setting.device.feeder.FeederOrderActivity" />
+        <activity android:name=".activity.pet.regist.activity.PetRegistActivity"/>
         <activity android:name=".test.server.TestServerResponseActivity">
-
         </activity>
 
     </application>

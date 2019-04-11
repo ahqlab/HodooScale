@@ -205,6 +205,7 @@
     <string name="choice_country">국가</string>
 
     <string name="bcs_watching_tv_desc">동영상을 본 후 반려견의 BCS 단계를 선택하십시오.</string>
+    <string name="bfi_desc">의 비만도 측정을 위한 질문에 답해주세요</string>
     <string name="select_bcs">Select BCS</string>
     <string name="istyle_required_select_bcs_message">BCS를 선택하세요.</string>
     <string name="istyle_statistic_week">주</string>
@@ -331,5 +332,7 @@
     <string name="cat" >고양이</string>
     <string name="petType">반려동물 종류</string>
 
+    <string name="pet_type_explain">반려동물 종류를 선택해주세요.</string>
+    <string name="physical_info_text">의 체중을 입력해주세요.</string>
     <!-- 2019-01-30 new code (e) -->
 </resources>

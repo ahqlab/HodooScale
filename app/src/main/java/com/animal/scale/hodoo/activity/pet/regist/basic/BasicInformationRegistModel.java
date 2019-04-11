@@ -36,8 +36,6 @@ public class BasicInformationRegistModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    ;
-
     public View onClickOpenBottomDlg() {
         return null;
     }

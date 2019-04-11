@@ -328,8 +328,10 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void setTipMessageOfCountry(MealTip tip) {
-        binding.collapse.setTitle(tip.getTitle());
-        binding.collapse.setContent(tip.getContent());
+        if( tip != null ) {
+            binding.collapse.setTitle(tip.getTitle());
+            binding.collapse.setContent(tip.getContent());
+        }
     }
 
     @Override

@@ -57,6 +57,12 @@ public class HodooConstant {
     public static final String PET_REGIST_RESULT_KEY = "PET_REGIST_RESULT_KEY";
     public static final String PET_IDX_KEY = "PET_IDX_KEY";
 
+    public static final String PET_REGIST_BASIC_DATA_KEY = "PET_REGIST_BASIC_DATA_KEY";
+    public static final String PET_BREED_DATA_KEY = "PET_REGIST_BASIC_DATA_KEY";
+
+    public static final String PET_REGIST_MODE_KEY = "PET_REGIST_MODE_KEY";
+    public static final String PET_EDIT_MODE_KEY = "PET_REGIST_MODE_KEY";
+
     public static final int PET_REGIST_SUCESS = 1;
     public static final int PET_NOT_REGIST_PET = 0;
     public static final int PET_REGIST_FAILED = -1;
