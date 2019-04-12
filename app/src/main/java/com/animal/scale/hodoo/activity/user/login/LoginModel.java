@@ -180,6 +180,9 @@ public class LoginModel extends CommonModel {
     public void saveAutoLogin() {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, HodooConstant.AUTO_LOGIN_SUCCESS);
     }
+    public void removeAutoLogin() {
+        mSharedPrefManager.removePreference(SharedPrefVariable.AUTO_LOGIN);
+    }
 
     public User getUser () {
         User user = new User();
