@@ -60,7 +60,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     public static final int CAMERA_PERMISSION_CODE = 100;
     public static final int STORAGE_PERMISSION_CODE = 101;
 
-    private int breedIndex;
+    private int breedIndex = -1;
 
     ProgressDialog progressDialog;
 
@@ -251,6 +251,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     @Override
     public void getAllPetBreed(List<PetBreed> breeds) {
         this.breeds = breeds;
+        for (int i = 0; i < breeds.size(); i++) {
+            if ( breeds.get(i).getName().equals(binding.getInfo().getPetBreed()) ) {
+                breedIndex = breeds.get(i).getId();
+                break;
+            }
+        }
     }
 
     @Override
@@ -409,6 +415,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         } else {
             presenter.registBasicInfo(REQUEST_URL, info, binding.profile);
         }
+
+
+
     }
 
     private void setBasicInfo() {

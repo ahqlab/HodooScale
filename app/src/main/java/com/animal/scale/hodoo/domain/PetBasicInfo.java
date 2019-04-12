@@ -38,4 +38,8 @@ public class PetBasicInfo implements Serializable{
 
 	//중성화 여부 (YES || NO)
 	private String neutralization;
+
+	private int petType;
+
+	private String selectedBfi;
 }

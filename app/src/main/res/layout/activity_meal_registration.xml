@@ -21,7 +21,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/hodoo_background_color"
+        android:background="@color/hodoo_deep_gray"
         android:gravity="center_horizontal"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -31,8 +31,106 @@
             layout="@layout/common_toolbar"
             bind:activityInfo="@{activityInfo}" />
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/calorie_wrap"
             android:layout_below="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:letterSpacing="0.01"
+                    android:text="@string/istyle_calories_taken_today"
+                    android:textColor="@color/mainBlack"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/calorie_intake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/mainRed"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/rer2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/mainBlack"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="40dp"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/seek_bar"
+                    style="@style/CalorieProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressBackgroundTint="#f1f1f1"
+                    android:progressTint="@color/mainRed" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="31dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.01"
+                    android:text="0kcal"
+                    android:textColor="#4a4a4a"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/rer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:letterSpacing="0.01"
+                    android:text="0kcal"
+                    android:textColor="#4a4a4a"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:fillViewport="true"
+            android:layout_marginTop="1dp"
+            android:layout_below="@+id/calorie_wrap"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -42,109 +140,14 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="#19455b63"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:padding="1dp">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:letterSpacing="0.01"
-                            android:text="@string/istyle_calories_taken_today"
-                            android:textColor="@color/mainBlack"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/calorie_intake"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textColor="@color/mainRed"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/rer2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textColor="@color/mainBlack"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginRight="40dp"
-                        android:orientation="vertical">
-
-                        <ProgressBar
-                            android:id="@+id/seek_bar"
-                            style="@style/CalorieProgress"
-                            android:layout_width="match_parent"
-                            android:layout_height="10dp"
-                            android:max="100"
-                            android:progress="0"
-                            android:progressBackgroundTint="#f1f1f1"
-                            android:progressTint="@color/mainRed" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginBottom="31dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.01"
-                            android:text="0kcal"
-                            android:textColor="#4a4a4a"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/rer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:letterSpacing="0.01"
-                            android:text="0kcal"
-                            android:textColor="#4a4a4a"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#19455b63"
-                    android:orientation="vertical"
-                    android:padding="1dp">
-
-                </LinearLayout>
+                <!--</LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"

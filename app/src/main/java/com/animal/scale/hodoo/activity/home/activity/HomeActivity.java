@@ -112,6 +112,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
         presenter.loginCheck();
+
+        Log.e(TAG, String.format("onCreate null check : %b, id : %d", apaterOfPetList != null, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
     }
 
     public void onPetImageClick(View view) {
@@ -401,6 +403,14 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     break;
             }
         }
+        if ( sharedPetIdx != mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) ) {
+            sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+
+
+            Log.e(TAG, "sharedPetIdx 다름");
+            Log.e(TAG, String.format("null check : %b, sharedPetIdx : %d, id : %d", apaterOfPetList != null, sharedPetIdx, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
+        }
+//        Log.e(TAG, String.format("null check : %b, id : %d", apaterOfPetList != null, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
     }
     public static void setCalendarDate ( String calendarDate ) {
         mCalendarDate = calendarDate;

@@ -1,6 +1,9 @@
 package com.animal.scale.hodoo.service;
 
+import com.animal.scale.hodoo.domain.BfiModel;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -21,7 +24,7 @@ public interface PetWeightInfoService {
     @POST("pet/weight/bcs.do")
     Call<PetWeightInfo> getBcs(@Query("basicIdx") int basicIdx);
 
-
-
+    @POST("pet/weight/bfi.do")
+    Call<List<BfiModel>> getBfiQuestion(@Query("location") String location, @Query("type") int type);
 
 }
