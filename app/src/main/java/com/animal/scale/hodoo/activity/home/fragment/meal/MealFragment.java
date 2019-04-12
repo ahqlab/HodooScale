@@ -122,7 +122,7 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         tfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
-        presenter.getTipMessageOfCountry(new MealTip(country));
+//        presenter.getTipMessageOfCountry(new MealTip(country));
         presenter.initWeekCalendar();
         presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
         presenter.getTipMessageOfCountry(new MealTip(country));
