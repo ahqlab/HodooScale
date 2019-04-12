@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.user.signup;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Country;
 import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
@@ -38,14 +39,14 @@ class SignUpPresenter implements SignUpIn.Presenter {
 
     @Override
     public void registUser(final User user) {
-        model.registUser(user, new CommonModel.DomainCallBackListner<ResultMessageGroup>() {
+        model.registUser(user, new CommonModel.ObjectCallBackListner<CommonResponce<User>>() {
             @Override
-            public void doPostExecute(ResultMessageGroup resultMessageGroup) {
-                if(resultMessageGroup.getResultMessage().equals(ResultMessage.DUPLICATE_EMAIL)){
+            public void doPostExecute(CommonResponce<User> commonResponce) {
+                if(commonResponce.getResultMessage().equals(ResultMessage.DUPLICATE_EMAIL)){
                     view.showPopup("DUPLICATE_EMAIL");
-                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)){
+                }else if(commonResponce.getResultMessage().equals(ResultMessage.FAILED)){
                     view.showPopup("FAILED");
-                }else if(resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)){
+                }else if(commonResponce.getResultMessage().equals(ResultMessage.SUCCESS)){
                     view.sendEmail(user.getEmail());
                     return;
                 }

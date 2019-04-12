@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rPT\\values-pt-rPT.xml",
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rPT\\values-pt-rPT.xml",
             "map": [
                 {
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\921a637b00511d2794a739da6b0ee3a0\\res\\values-pt-rPT\\values-pt-rPT.xml",
@@ -33,7 +33,7 @@
             ]
         },
         {
-            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScale\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-pt-rPT\\values-pt-rPT.xml",
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-pt-rPT\\values-pt-rPT.xml",
             "map": [
                 {
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\921a637b00511d2794a739da6b0ee3a0\\res\\values-pt-rPT\\values-pt-rPT.xml",

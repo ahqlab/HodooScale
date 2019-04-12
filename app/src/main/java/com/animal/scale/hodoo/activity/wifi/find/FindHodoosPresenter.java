@@ -49,7 +49,7 @@ public class FindHodoosPresenter implements  FindHodoosIn.Presenter {
     }
 
     @Override
-    public void confirmPetRegistration() {
+    public void  confirmPetRegistration() {
         loginModel.confirmPetRegistration(new CommonModel.DomainListCallBackListner<Pet>() {
             @Override
             public void doPostExecute(List<Pet> pets) {

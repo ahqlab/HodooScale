@@ -7,9 +7,19 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class CommonResponce<D extends Serializable > implements Domain {
+public class CommonResponce<D> implements Domain {
 	
 	public ResultMessage resultMessage;
-	
+
 	public D domain;
+
+	public int status;
+
+	public String error;
+
+	public String exception;
+
+	public String message;
+
+	public String path;
 }

@@ -74,7 +74,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     private String calendarDate = "";
 
-    private boolean realTimeMode = false;
+    private boolean realTimeMode = true;
 
     public WeightFragment() {
     }
@@ -128,15 +128,22 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             if (null != selectPet){
                 setBcsOrBscDescAndTip(selectPet);
                 serChartOfDay();
-                presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
-                //presenter.getTipMessageOfCountry();
+
+                /*WeightTip tip =  new WeightTip(country, selectPet.getPetWeightInfo().getBcs());
+                Log.e("HJLEE", "onCreateView : " + tip.toString());
+                Log.e("HJLEE", "onCreateView : "  +selectPet.toString());*/
+                getTipMessageOfCountry(selectPet);
+                //presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
             }
         }
         return binding.getRoot();
     }
 
     public void getTipMessageOfCountry(PetAllInfos selectPet) {
-        presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
+        String[] weightTipStrings = getResources().getStringArray(R.array.weight_tip);
+        String[] weightTipTitleStrings = getResources().getStringArray(R.array.weight_tip_title);
+        binding.collapse.setTitle(weightTipTitleStrings[selectPet.getPetWeightInfo().getBcs() - 1]);
+        binding.collapse.setContent(weightTipStrings[selectPet.getPetWeightInfo().getBcs() - 1]);
     }
 
    //오늘차트
@@ -194,9 +201,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
-        HomeActivity.setWeightTip(weightTip);
-        binding.collapse.setTitle(weightTip.getTitle());
-        binding.collapse.setContent(weightTip.getContent());
+        String[] weightTipStrings = getResources().getStringArray(R.array.weight_tip);
+        binding.collapse.setTitle("title");
+        binding.collapse.setContent(weightTipStrings[selectPet.getPetWeightInfo().getBcs() - 1]);
     }
 
     @Override
@@ -243,13 +250,13 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setBcs(PetWeightInfo petWeightInfo) {
-        presenter.setBcsAndBcsDesc(petWeightInfo.getBcs());
+     /*   presenter.setBcsAndBcsDesc(petWeightInfo.getBcs());
         if ( HomeActivity.mWeightTip == null )
-            presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
+            //presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
         if ( HomeActivity.mWeightTip != null )
             if ( !country.equals(HomeActivity.mWeightTip.getLanguage()) )
-                presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
-        setKg();
+                //presenter.getTipMessageOfCountry(new WeightTip(country, petWeightInfo.getBcs()));
+        setKg();*/
     }
 
     public void onRefreshClick(View v) {

@@ -251,6 +251,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                         mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, selectPet.getPet().getPetIdx());
                         apaterOfPetList.notifyDataSetChanged();
                         presenter.chageCurcleImageOfSelectPet(selectPet);
+                        //presenter.getTipOfCountry(new WeightTip("ko", 3));
                         setFragmentContent();
                     }
                 });
@@ -299,8 +300,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             WeightFragment weightFragment = (WeightFragment) tf;
             weightFragment.setBcsOrBscDescAndTip(selectPet);
             weightFragment.serChartOfDay();
-            weightFragment.getTipMessageOfCountry(selectPet);
             weightFragment.setKg();
+            weightFragment.getTipMessageOfCountry(selectPet);
         } else if (tf instanceof MealFragment) {
             MealFragment mealFragment = (MealFragment) tf;
             mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
@@ -411,5 +412,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     public static void setWeightTip ( WeightTip weightTip ) {
         mWeightTip = weightTip;
+    }
+
+    @Override
+    public void setTipOfCountry(WeightTip weightTips) {
+        Log.e("HJLEE", "weightTips  ) : " + weightTips);
     }
 }

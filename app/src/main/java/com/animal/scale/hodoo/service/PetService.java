@@ -20,6 +20,9 @@ public interface PetService {
     @POST("pet/my/pet/listResult.do")
     Call<Integer []> getMyPetResult(@Query("groupCode") String groupCode);
 
+    @POST("android/pet/exist/my/pet.do")
+    Call<CommonResponce<Integer>> getExistMyPet(@Query("groupCode") String groupCode);
+
     @POST("pet/my/pet/myPetFirstIdx.do")
     Call<Integer> myPetFirstIdx(@Query("groupCode") String groupCode);
 

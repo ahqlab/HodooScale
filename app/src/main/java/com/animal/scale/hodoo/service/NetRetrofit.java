@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class NetRetrofit {
+
     private static NetRetrofit ourInstance = new NetRetrofit();
 
     public static NetRetrofit getInstance() {

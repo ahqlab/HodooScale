@@ -1,73 +1,73 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
 	package
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:3:5-43
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:3:5-43
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:1-50:12
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:2:11-69
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:5:5-67
+ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:5:5-67
 	android:name
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:5:22-64
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:5:22-64
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:6:5-76
+ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:6:5-76
 	android:name
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:6:22-73
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:6:22-73
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:7:5-79
+ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:7:5-79
 	android:name
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:7:22-76
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:7:22-76
 uses-permission#android.permission.CHANGE_WIFI_MULTICAST_STATE
-ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:8:5-86
+ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:8:5-86
 	android:name
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:8:22-83
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:8:22-83
 application
-ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:10:5-48:19
+ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:10:5-48:19
 	android:label
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:14:9-41
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:14:9-41
 	android:icon
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:13:9-42
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:13:9-42
 	android:allowBackup
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:11:9-35
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:15:9-44
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:15:9-44
 	android:name
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:12:9-40
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:12:9-40
 activity#com.cmmakerclub.iot.esptouch.activity.MainActivity
-ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:35:9-44:20
+ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:35:9-44:20
 	android:screenOrientation
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:37:13-49
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:37:13-49
 	android:label
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:38:13-45
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:38:13-45
 	android:name
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml:36:13-50
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml:36:13-50
 uses-sdk
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-		ADDED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
-		INJECTED from E:\AndroidStudio\Projects\HodooScale\HodooScale\esp8266\src\main\AndroidManifest.xml
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+		ADDED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml
+		INJECTED from E:\AndroidStudio\Projects\HodooScaleAfter\HodooScale\esp8266\src\main\AndroidManifest.xml

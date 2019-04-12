@@ -58,6 +58,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
@@ -122,10 +123,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
         tfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
-        presenter.getTipMessageOfCountry(new MealTip(country));
+        //presenter.getTipMessageOfCountry(new MealTip(country));
         presenter.initWeekCalendar();
         presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
-        presenter.getTipMessageOfCountry(new MealTip(country));
+        getTipMessageOfCountry();
+        //presenter.getTipMessageOfCountry(new MealTip(country));
         if (getArguments() != null) {
            /* if (getArguments().getBoolean("push"))
                 setCalendar();*/
@@ -135,6 +137,16 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
             }
         }
         return binding.getRoot();
+    }
+
+    private void getTipMessageOfCountry() {
+        Random randomGenerator = new Random();
+        int randomInteger = randomGenerator.nextInt(6); //0 ~ 99 사이의 int를 랜덤으로 생성
+
+        String[] weightTipStrings = getResources().getStringArray(R.array.meal_tip);
+        String[] weightTipTitleStrings = getResources().getStringArray(R.array.meal_tip_title);
+        binding.collapse.setTitle(weightTipTitleStrings[randomInteger]);
+        binding.collapse.setContent(weightTipStrings[randomInteger]);
     }
 
     @Override

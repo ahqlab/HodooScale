@@ -37,7 +37,7 @@
     <string name="compleate">완료</string>
     <string name="cancle">취소</string>
     <string name="agree">동의</string>
-    <string name="press_back_message">Press \'Back\' button again to exit.</string>
+    <string name="press_back_message">\'뒤로\' 버튼 한번 더 누르시면 종료됩니다.</string>
     <string name="password">비밀번호</string>
     <string name="gallery">갤러리</string>
     <string name="camera">카메라</string>
