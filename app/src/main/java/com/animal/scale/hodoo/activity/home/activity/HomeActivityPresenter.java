@@ -7,6 +7,7 @@ import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -221,5 +222,25 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
         });
 
 
+    }
+
+    @Override
+    public void getTipOfCountry(WeightTip weightTip) {
+        model.getTipOfCountry(weightTip, new CommonModel.DomainCallBackListner<WeightTip>() {
+            @Override
+            public void doPostExecute(WeightTip weightTips) {
+                view.setTipOfCountry(weightTips);
+            }
+
+            @Override
+            public void doPreExecute() {
+                //view.setProgress(true);
+            }
+
+            @Override
+            public void doCancelled() {
+                //view.setProgress(false);
+            }
+        });
     }
 }

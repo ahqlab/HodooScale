@@ -40,6 +40,11 @@ public interface Login {
 
         void saveFcmToken();
 
+        void selectTheNextAction();
+
+        void setServerError();
+
+        void goInvitationActivity();
     }
 
     interface Presenter {

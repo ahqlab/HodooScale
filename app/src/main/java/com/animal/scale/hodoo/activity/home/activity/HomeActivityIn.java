@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.animal.scale.hodoo.domain.WeightTip;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public interface HomeActivityIn {
         void moveLoginActivity ();
 
         void setFragment();
+
+        void setTipOfCountry(WeightTip weightTips);
     }
 
     interface Presenter{
@@ -36,5 +39,7 @@ public interface HomeActivityIn {
         void loginCheck();
 
         void loadCustomPetListDialog();
+
+        void getTipOfCountry(WeightTip weightTip);
     }
 }

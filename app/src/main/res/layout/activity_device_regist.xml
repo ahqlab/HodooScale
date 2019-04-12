@@ -47,21 +47,21 @@
                 android:background="@color/white"
                 android:gravity="center"
                 >
-                <ImageView
+                <!--<ImageView
                     app:scale_top="65"
                     app:scale_width="200"
                     app:scale_height="74"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/potty" />
+                    android:src="@drawable/potty" />-->
                 <TextView
                     app:scale_top="155"
                     app:scale_width="280"
                     android:layout_marginBottom="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Connect Device"
+                    android:text="펫 등록"
                     app:scale_textsize="20"
                     android:textStyle="bold"
                     android:textAlignment="center"

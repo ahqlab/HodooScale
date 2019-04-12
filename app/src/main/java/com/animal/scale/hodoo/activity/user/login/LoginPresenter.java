@@ -3,8 +3,10 @@ package com.animal.scale.hodoo.activity.user.login;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
@@ -22,6 +24,8 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import retrofit2.Call;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class LoginPresenter implements Login.Presenter {
 
@@ -59,6 +63,8 @@ public class LoginPresenter implements Login.Presenter {
                         loginView.showPopup(context.getString(R.string.not_found_email));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.ID_PASSWORD_DO_NOT_MATCH)) {
                         loginView.showPopup(context.getString(R.string.id_password_do_not_match));
+                    } else if ( resultMessageGroup.getResultMessage().equals(ResultMessage.WAIT_INVITATION) ) {
+                        loginView.goInvitationActivity();
                     } else if ( resultMessageGroup.getResultMessage().equals(ResultMessage.WITHDRAW_USER) ) {
                         loginView.showPopup(context.getString(R.string.login__alert_withdraw_user_content));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
@@ -116,54 +122,84 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void checkRegistrationStatus() {
-        loginModel.confirmDeviceRegistration(new CommonModel.DomainCallBackListner<Integer>() {
+       /* loginModel.confirmDeviceRegistration(new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer integer) {
                 if(integer > 0){
-                    //디바이스 등록됨.
-                    loginModel.confirmPetRegistrationResult(new CommonModel.DomainCallBackListner<Integer[]>() {
-                        @Override
-                        public void doPostExecute(Integer[] results) {
-                            if ( results.length == 1 ) {
-                                switch ( results[0] ) {
-                                    case HodooConstant.PET_REGIST_SUCESS :
-                                        loginView.setAutoLoginState();
-                                        break;
-                                    case HodooConstant.PET_REGIST_FAILED :
-                                        loginView.goPetRegistActivity(0);
-                                        break;
-                                }
-                            } else {
-                                int petIdx = results[1];
-                                switch ( results[0] ) {
-                                    case HodooConstant.PET_REGIST_FAILED :
-                                        loginView.goPetRegistActivity(petIdx);
-                                        break;
-                                    case HodooConstant.PET_NOT_REGIST_DISEASES :
-                                        loginView.goDiseasesRegistActivity(petIdx);
-                                        break;
-                                    case HodooConstant.PET_NOT_REGIST_PHYSICAL :
-                                        loginView.goPhysicalRegistActivity(petIdx);
-                                        break;
-                                    case HodooConstant.PET_NOT_REGIST_WEIGHT :
-                                        loginView.goWeightRegistActivity(petIdx);
-                                        break;
-                                }
-                            }
-                        }
-                        @Override
-                        public void doPreExecute() {
+                    //디바이스 등록됨.*/
+            loginModel.confirmPetRegistrationResult(new CommonModel.DomainCallBackListner<CommonResponce<Integer>>() {
+                @Override
+                public void doPostExecute(CommonResponce<Integer> responce) {
+                    if(responce.getStatus() == HodooConstant.OK_RESPONSE){
+                        if(responce.getDomain() > 0){
+                            //등록된 펫 존재함.
+                            loginView.setProgress(false);
+                            loginView.setAutoLoginState();
+                        }else{
+                            //펫이 없음.
+                            loginView.setProgress(false);
+                            loginView.selectTheNextAction();
 
+                            //loginView.saveFcmToken();
                         }
+                    }else if(responce.getStatus() == HodooConstant.SQL_ERROR_RESPONSE){
+                        loginView.setProgress(false);
+                        loginView.setServerError();
+                    }
+                }
 
-                        @Override
-                        public void doCancelled() {
+                @Override
+                public void doPreExecute() {
 
+                }
+
+                @Override
+                public void doCancelled() {
+                    loginView.setProgress(false);
+                    loginView.setServerError();
+                }
+                /*@Override
+                public void doPostExecute(Integer[] results) {
+                    if ( results.length == 1 ) {
+                        switch ( results[0] ) {
+                            case HodooConstant.PET_REGIST_SUCESS :
+                                loginView.setAutoLoginState();
+                                break;
+                            case HodooConstant.PET_REGIST_FAILED :
+                                loginView.goPetRegistActivity(0);
+                                break;
                         }
-                    });
-                }else{
+                    } else {
+                        int petIdx = results[1];
+                        switch ( results[0] ) {
+                            case HodooConstant.PET_REGIST_FAILED :
+                                loginView.goPetRegistActivity(petIdx);
+                                break;
+                            case HodooConstant.PET_NOT_REGIST_DISEASES :
+                                loginView.goDiseasesRegistActivity(petIdx);
+                                break;
+                            case HodooConstant.PET_NOT_REGIST_PHYSICAL :
+                                loginView.goPhysicalRegistActivity(petIdx);
+                                break;
+                            case HodooConstant.PET_NOT_REGIST_WEIGHT :
+                                loginView.goWeightRegistActivity(petIdx);
+                                break;
+                        }
+                    }
+                }
+                @Override
+                public void doPreExecute() {
+
+                }
+
+                @Override
+                public void doCancelled() {
+
+                }*/
+            });
+              /*  }else{
                     //디바이스 없음
-                    loginView.saveFcmToken();
+
                 }
             }
 
@@ -176,7 +212,7 @@ public class LoginPresenter implements Login.Presenter {
             public void doCancelled() {
 
             }
-        });
+        });*/
     }
 
     @Override

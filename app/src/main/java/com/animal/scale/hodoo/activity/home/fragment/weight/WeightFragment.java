@@ -194,11 +194,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
-        if ( weightTip != null ) {
-            HomeActivity.setWeightTip(weightTip);
-            binding.collapse.setTitle(weightTip.getTitle());
-            binding.collapse.setContent(weightTip.getContent());
-        }
+        HomeActivity.setWeightTip(weightTip);
+        binding.collapse.setTitle(weightTip.getTitle());
+        binding.collapse.setContent(weightTip.getContent());
     }
 
     @Override

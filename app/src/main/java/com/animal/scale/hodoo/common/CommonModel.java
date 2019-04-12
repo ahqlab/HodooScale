@@ -30,6 +30,13 @@ public class CommonModel {
 
     }
 
+    public interface ObjectCallBackListner<D> {
+        void doPostExecute(D d);
+        void doPreExecute();
+        void doCancelled();
+
+    }
+
     public interface DomainListCallBackListner<D extends Serializable> {
         void doPostExecute(List<D> d);
         void doPreExecute();

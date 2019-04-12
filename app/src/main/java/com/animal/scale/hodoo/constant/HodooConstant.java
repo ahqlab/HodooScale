@@ -76,6 +76,12 @@ public class HodooConstant {
     public static final int INTERVAL = 1000;
     /* Retrofit 관련 (e) */
 
+    /* SERVER RESPONSE */
 
+    public static final int NO_CONTENT_RESPONSE = 204;
+    public static final int OK_RESPONSE = 200;
+    public static final int BAD_REQUEST = 400;
+    public static final int SERVER_ERROR = 500;
+    public static final int SQL_ERROR_RESPONSE = 500;
 
 }
