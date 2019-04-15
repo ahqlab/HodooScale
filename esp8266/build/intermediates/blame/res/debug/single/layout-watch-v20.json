@@ -1,10 +1,10 @@
 [
     {
-        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\layout-watch-v20\\abc_alert_dialog_title_material.xml",
-        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\layout-watch-v20\\abc_alert_dialog_title_material.xml"
+        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\layout-watch-v20\\abc_alert_dialog_button_bar_material.xml",
+        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\layout-watch-v20\\abc_alert_dialog_button_bar_material.xml"
     },
     {
-        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\layout-watch-v20\\abc_alert_dialog_button_bar_material.xml",
-        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\layout-watch-v20\\abc_alert_dialog_button_bar_material.xml"
+        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\layout-watch-v20\\abc_alert_dialog_title_material.xml",
+        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\layout-watch-v20\\abc_alert_dialog_title_material.xml"
     }
 ]

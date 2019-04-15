@@ -56,6 +56,8 @@ public class NetRetrofit {
     FeederService feederService = retrofit.create(FeederService.class);
     WeightTipService weightTipService =  retrofit.create(WeightTipService.class);
     MealTipService mealTipService =  retrofit.create(MealTipService.class);
+    AppVersionService appVersionService =  retrofit.create(AppVersionService.class);
+
 
     public UserService getUserService() {
         return service;
@@ -107,5 +109,7 @@ public class NetRetrofit {
     public MealTipService getMealTipService() {
         return mealTipService;
     }
+
+    public AppVersionService getAppVersionService() { return appVersionService; }
 }
 

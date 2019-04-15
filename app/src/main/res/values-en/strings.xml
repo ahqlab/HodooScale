@@ -320,4 +320,7 @@
     <string name="auto_login">Remember Me</string>
 
     <string name="common__recommend_calorie">700kcal\n(recommend quantity)</string>
+    <string name="request_for_hodoo_link">그룹 참여하기</string>
+    <string name="go_to_regist_pet" >펫 등록 하러가기</string>
+    <string name="regist_pet_desc">나의 펫을 등록하고 호두를 시작할래요</string>
 </resources>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.lang.String"/>
+
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.setting.version.VersionActivity" />
+
+        <variable
+            name="activityInfo"
+            type="com.animal.scale.hodoo.domain.ActivityInfo" />
+
+        <variable
+            name="domain"
+            type="com.animal.scale.hodoo.domain.AppVersion" />
+
+        <variable
+            name="presenter"
+            type="com.animal.scale.hodoo.activity.setting.version.VersionPresenter" />
+
+        <variable
+            name="version"
+            type="java.lang.String" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hodoo_background_color"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal"
+        tools:context=".activity.setting.version.VersionActivity">
+
+        <include layout="@layout/common_toolbar" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_toolbar"
+            android:paddingLeft="16dp"
+            android:text="@{activityInfo.barTitle}"
+            android:textColor="@color/mainBlack"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="32dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bi" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_below="@+id/title"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/current_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:letterSpacing="0.02"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="Current Version 1.0.0" />
+
+                <!--<TextView
+                    android:id="@+id/current_version_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:textSize="13sp"
+                    android:textColor="#4a4a4a"
+                    android:letterSpacing="0.03"
+                    android:text="Supported OS iOS 10.0 or later"/>-->
+
+                <Button
+                    android:id="@+id/update_btn"
+                    android:layout_width="280dp"
+                    android:layout_height="58dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:elevation="0dp"
+                    android:textColor="@{domain.version.equals(version)  ? @color/hodoo_pink : @color/white}"
+                    app:serverVersion="@{domain.version}"
+                    app:appVersion="@{version}"
+                    android:textStyle="bold"
+                    android:layout_marginTop="32dp"
+                    android:background="@{domain.version.equals(version)  ? @drawable/rounded_gray_btn : @drawable/rounded_pink_btn}"
+                    android:onClick="@{(view) -> presenter.doUpdate(domain.version, version)}" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</layout>

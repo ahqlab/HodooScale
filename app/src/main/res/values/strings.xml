@@ -74,6 +74,7 @@
     <string name="istyle_management_pet">펫 관리</string>
     <string name="istyle_management_user">유저관리</string>
     <string name="istyle_find_password">비밀번호찾기</string>
+    <string name="istyle_app_version">앱 버전</string>
     <!-- Setting List -->
     <string name="istyle_setting_menu_my_account">내 계정</string>
     <string name="istyle_setting_menu_notice">공지사항</string>
@@ -257,8 +258,8 @@
     <!-- firebase (s) -->
     <string name="invitation_subfix">님의 요청입니다.</string>
     <!-- firebase (e) -->
-    <string name="invitation_finish_title">요청 링크를\n발송했습니다!</string>
-    <string name="invitation_finish_content">기기 소유자가 요청을 수락하면\n앱 메인 페이지로 이동할 수 있습니다.</string>
+    <string name="invitation_finish_title">그룹 참여를\n요청하였습니다!</string>
+    <string name="invitation_finish_content">그룹 리더가 요청을 수락하면\n앱 메인 페이지로 이동할 수 있습니다.</string>
 
     <string name="invitation__state_msg">상태</string>
     <string name="pet_account__main_pet_btn">메인 펫으로 선택</string>
@@ -288,9 +289,9 @@
 
     <string name="user_group_manager__tool_bar_title">그룹 관리</string>
 
-    <string name="invitation__tool_bar_title">회원 초대</string>
+    <string name="invitation__tool_bar_title">그룹 참여하기</string>
     <string name="invitation__content">그룹에 참여하실 회원의 이메일을 입력해주세요.</string>
-    <string name="invitation__send_btn">그룹 참여 요청하기</string>
+    <string name="invitation__send_btn">참여 요청 보내기</string>
 
     <string name="activity_fragment__not_found_location_msg">위치를 파악할 수 없음</string>
     <!-- 2019.02.07 추가 -->
@@ -313,8 +314,8 @@
     <string name="invitation_finish__resend_alert_success_title">그룹 참여 요청 완료</string>
     <string name="invitation_finish__resend_alert_success_suffix">님에게 초대 메세지를 발송했습니다.</string>
     <string name="invitation_finish__resend_alert_error_title">그룹 참여 요청 에러</string>
-    <string name="invitation_finish__resend_btn">재발송</string>
-    <string name="invitation_finish__resend_cancel_btn">발송 취소</string>
+    <string name="invitation_finish__resend_btn">다시 보내기</string>
+    <string name="invitation_finish__resend_cancel_btn">참여 요청 취소하기</string>
 
     <string name="invitation__invitation_error_title">그룹 참여 에러</string>
     <string name="invitation__error_existence_user">이미 그룹에 참여되었습니다.\n로그인창으로 이동합니다.</string>
@@ -328,11 +329,18 @@
     <string name="myaccount__member_exist_error_msg">그룹의 멤버들이 존재합니다.\n멤버들을 탈퇴 후 진행하실 수 있습니다.</string>
 
     <string name="basic_infomation_regist__pet_breed_title">품종</string>
-    <string name="dog" >강아지</string>
-    <string name="cat" >고양이</string>
+    <string name="dog">강아지</string>
+    <string name="cat">고양이</string>
     <string name="petType">반려동물 종류</string>
 
     <string name="pet_type_explain">반려동물 종류를 선택해주세요.</string>
     <string name="physical_info_text">의 체중을 입력해주세요.</string>
+    <string name="this_is_latest_version">현재 최신 버전입니다.</string>
+    <string name="current_app_version">현재버전</string>
+    <string name="you_need_update">최신버전으로 업데이트 해주세요!</string>
+    <string name="with_a_hodoo_user" >기존 호두 유저 와 함께 펫을 케어 할래요</string>
+    <string name="request_for_hodoo_link">그룹 참여하기</string>
+    <string name="go_to_regist_pet" >펫 등록 하러가기</string>
+    <string name="regist_pet_desc">나의 펫을 등록하고 호두를 시작할래요</string>
     <!-- 2019-01-30 new code (e) -->
 </resources>
