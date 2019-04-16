@@ -305,7 +305,6 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
                         @Override
                         public void onCancel(DialogInterface dialogInterface) {
                             fragmentPosition = editModeState ? 1 : 1;
-                            Log.e(TAG, "onCancel: ");
                         }
                     }).create();
             dialog.show();
