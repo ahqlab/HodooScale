@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
@@ -18,7 +19,7 @@ public interface BasicInfomationIn {
     interface View {
         void setNavigation();
         void setView(PetBasicInfo basicInfo);
-        void getAllPetBreed(List<PetBreed> breeds);
+        void getAllPetBreed(CommonResponce<List<PetBreed>> d);
         void openCamera();
         void setSaveImageFile ( Bitmap image );
         void setBasicInfo(PetBasicInfo basicInfo);
@@ -28,7 +29,7 @@ public interface BasicInfomationIn {
         void getPetBasicInformation(String location, int petIdx);
         void loadData (Context context);
         void setView(PetBasicInfo basicInfo);
-        void getAllPetBreed( String location );
+        void getAllPetBreed( String location, int typeIdx );
         void openCamera();
         File setSaveImageFile(Context context );
         void rotationImage ( String imageFilePath );

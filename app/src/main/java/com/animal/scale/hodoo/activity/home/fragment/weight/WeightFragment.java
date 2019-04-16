@@ -157,12 +157,20 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public void setBcsAndBcsDesc(int bcs) {
         this.bcs = bcs;
         //if (bcs < 3) {checkBCS = 0; //부족 } else if (bcs > 3) { //초과 checkBCS = 1; } else { checkBCS = 2; //적정 }*/
+
+        int tempBcs = bcs;
+        if ( bcs >= 20 ) { //완전히 로직을 바꾸기전 임시로 분기문으로 처리
+            this.bcs = bcs = bcs / 10 - 1;
+            if ( selectPet != null )
+                selectPet.getPetWeightInfo().setBcs(bcs);
+        }
+
         if (bcs > 0) {
             binding.bcsSubscript.setText(bcsArr[bcs - 1]);
-            binding.bcsStep.setText(String.valueOf(bcs));
+            binding.bcsStep.setText(String.valueOf(tempBcs));
         } else {
             binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
-            binding.bcsStep.setText(String.valueOf(bcs));
+            binding.bcsStep.setText(String.valueOf(tempBcs));
         }
     }
 
