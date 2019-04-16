@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.common;
 import android.content.Context;
 
 import com.animal.scale.hodoo.constant.HodooConstant;
+import com.animal.scale.hodoo.domain.CommonResponce;
 
 import org.json.JSONArray;
 
@@ -25,6 +26,13 @@ public class CommonModel {
 
     public interface DomainCallBackListner<D extends Serializable> {
         void doPostExecute(D d);
+        void doPreExecute();
+        void doCancelled();
+
+    }
+
+    public interface CommonDomainCallBackListner<D> {
+        void doPostExecute(CommonResponce<List<D>> d);
         void doPreExecute();
         void doCancelled();
 

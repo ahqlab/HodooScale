@@ -17,6 +17,7 @@ import com.animal.scale.hodoo.activity.setting.account.MyAccountActivity;
 import com.animal.scale.hodoo.activity.setting.device.bowelplate.list.BowelPlateListActivity;
 import com.animal.scale.hodoo.activity.setting.device.feeder.FeederOrderActivity;
 import com.animal.scale.hodoo.activity.setting.device.list.DeviceListActivity;
+import com.animal.scale.hodoo.activity.setting.alarmManager.AlarmItemListActivity;
 import com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity;
 import com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity;
 import com.animal.scale.hodoo.activity.setting.user.group.list.UserGroupListActivity;
@@ -173,6 +174,9 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                 }else if ( titlePosition == USER ) {
                     if ( contentPosition == ACCOUNT)
                         SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
+                    else if ( contentPosition == NOTIFICATION ) {
+                        SettingListActivity.super.moveIntent(SettingListActivity.this, AlarmItemListActivity.class, 0,0, false);
+                    }
                     else if ( contentPosition == LOGOUT ) {
                         presenter.logout();
                         return false;

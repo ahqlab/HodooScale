@@ -1,8 +1,8 @@
-package com.animal.scale.hodoo.activity.test;
+package com.animal.scale.hodoo.activity.setting.notice;
 
 import android.content.Context;
 
-public interface Test {
+public interface NoticeIn {
 
 
     interface View {

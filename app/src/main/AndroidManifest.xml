@@ -146,8 +146,10 @@
         <activity android:name=".fcm.AlertActivity" />
         <activity android:name=".activity.setting.device.feeder.FeederOrderActivity" />
         <activity android:name=".activity.pet.regist.activity.PetRegistActivity" />
-        <activity android:name=".test.server.TestServerResponseActivity"></activity>
-        <activity android:name=".activity.setting.version.VersionActivity"></activity>
+        <activity android:name=".test.server.TestServerResponseActivity" />
+        <activity android:name=".activity.setting.version.VersionActivity" />
+        <activity android:name=".activity.setting.alarmManager.AlarmItemListActivity" />
+        <activity android:name=".activity.setting.notice.NoticeActivity"></activity>
     </application>
 
 </manifest>

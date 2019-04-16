@@ -57,6 +57,7 @@ public class NetRetrofit {
     WeightTipService weightTipService =  retrofit.create(WeightTipService.class);
     MealTipService mealTipService =  retrofit.create(MealTipService.class);
     AppVersionService appVersionService =  retrofit.create(AppVersionService.class);
+    AlarmItemService alarmItemService =  retrofit.create(AlarmItemService.class);
 
 
     public UserService getUserService() {
@@ -111,5 +112,7 @@ public class NetRetrofit {
     }
 
     public AppVersionService getAppVersionService() { return appVersionService; }
+
+    public AlarmItemService getAlarmItemService() { return alarmItemService; }
 }
 

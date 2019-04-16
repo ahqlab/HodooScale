@@ -338,9 +338,9 @@
     <string name="this_is_latest_version">현재 최신 버전입니다.</string>
     <string name="current_app_version">현재버전</string>
     <string name="you_need_update">최신버전으로 업데이트 해주세요!</string>
-    <string name="with_a_hodoo_user" >기존 호두 유저 와 함께 펫을 케어 할래요</string>
+    <string name="with_a_hodoo_user">기존 호두 유저 와 함께 펫을 케어 할래요</string>
     <string name="request_for_hodoo_link">그룹 참여하기</string>
-    <string name="go_to_regist_pet" >펫 등록 하러가기</string>
+    <string name="go_to_regist_pet">펫 등록 하러가기</string>
     <string name="regist_pet_desc">나의 펫을 등록하고 호두를 시작할래요</string>
     <!-- 2019-01-30 new code (e) -->
 </resources>

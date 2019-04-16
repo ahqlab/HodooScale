@@ -65,13 +65,12 @@ public class AdapterOfUserGroup extends BaseAdapter {
             binding.btnWrap.setVisibility(View.GONE);
             switch (mUsers.get(i).getState()) {
                 case UserGroupListActivity.ACCEPT_TYPE:
-                    binding.state.setText("Accept");
+                    binding.state.setText("수락");
                     break;
                 case UserGroupListActivity.DECLINE_TYPE:
-                    binding.state.setText("Decline");
+                    binding.state.setText("거절");
                     break;
             }
-
         } else {
             binding.btnWrap.setVisibility(View.VISIBLE);
             binding.stateWrap.setVisibility(View.GONE);

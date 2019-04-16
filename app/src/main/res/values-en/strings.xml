@@ -268,7 +268,7 @@
     <string name="common__invitation_title">Requested Log</string>
 
     <string name="main_activity__permission_check_title">Permission Check</string>
-    <string name="main_activity__permission_check_suffix">You must have the appropriate permissions to receive notifications.\npermission : SystemAlert</string>
+    <string name="main_activity__permission_check_suffix">You must have the appropriate permissions to receive alarmItems.\npermission : SystemAlert</string>
 
     <string name="login__auto_login_btn">Remember Me</string>
     <string name="login__alert_withdraw_user_content">a member who has left.</string>
