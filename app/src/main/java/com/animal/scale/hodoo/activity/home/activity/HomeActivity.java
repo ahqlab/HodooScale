@@ -108,12 +108,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         hActivity = HomeActivity.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setActivity(this);
-        sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
         presenter.loginCheck();
-
-        Log.e(TAG, String.format("onCreate null check : %b, id : %d", apaterOfPetList != null, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
     }
 
     public void onPetImageClick(View view) {
@@ -303,6 +301,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             weightFragment.setBcsOrBscDescAndTip(selectPet);
             weightFragment.serChartOfDay();
             weightFragment.setKg();
+
+            if ( selectPet != null )
+                if ( selectPet.getPetWeightInfo().getBcs() >= 20 )
+                    selectPet.getPetWeightInfo().setBcs( selectPet.getPetWeightInfo().getBcs() / 10 - 1 );
             weightFragment.getTipMessageOfCountry(selectPet);
         } else if (tf instanceof MealFragment) {
             MealFragment mealFragment = (MealFragment) tf;
@@ -319,9 +321,17 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
      * @param data
      */
     private void saveDefaultPetIdx(List<PetAllInfos> data) {
+        Log.e(TAG, String.format("pet idx : %d", mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
         if (mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) == 0) {
             mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, data.get(0).getPet().getPetIdx());
             selectPet = data.get(0);
+        } else {
+            for (int i = 0; i < data.size(); i++) {
+                if( data.get(i).getPet().getPetIdx() == mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) ) {
+                    selectPet = data.get(i);
+                    break;
+                }
+            }
         }
         setFragmentContent();
     }
@@ -378,6 +388,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     protected void onResume() {
         super.onResume();
+
+        sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+
         presenter.getInvitationToServer();
         setBadge();
         int notitype = getIntent().getIntExtra(HodooConstant.NOTI_TYPE_KEY, -1);
@@ -403,6 +416,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     break;
             }
         }
+        Log.e(TAG, String.format(" shared pet idx : %d ", mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
         if ( sharedPetIdx != mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) ) {
             sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
 

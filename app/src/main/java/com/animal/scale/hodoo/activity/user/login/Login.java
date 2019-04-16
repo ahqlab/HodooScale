@@ -45,6 +45,10 @@ public interface Login {
         void setServerError();
 
         void goInvitationActivity();
+
+        void setBtnEnable( boolean state );
+
+        void removeAutoLogin();
     }
 
     interface Presenter {
@@ -64,5 +68,7 @@ public interface Login {
         void setAutoLogin( boolean state );
 
         void autoLogin ();
+
+        void removeAutoLogin();
     }
 }

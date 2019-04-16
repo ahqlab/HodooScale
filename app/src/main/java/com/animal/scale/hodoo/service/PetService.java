@@ -33,8 +33,8 @@ public interface PetService {
     @POST("pet/all/infos.do")
     Call<PetAllInfos> petAllInfos(@Query("petIdx") int petIdx);
 
-    @POST("pet/all/getBreed.do")
-    Call<List<PetBreed>> getAllBreed( @Query("location") String location );
+    @POST("android/pet/get/breed/of/type.do")
+    Call<CommonResponce<List<PetBreed>>> getAllBreed( @Query("location") String location, @Query("typeIdx") int typeIdx );
 
     @POST("pet/make/it/invisible.do")
     Call<CommonResponce<Integer>> deletePet(@Query("petIdx") int petIdx);

@@ -12,6 +12,7 @@ import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
@@ -104,8 +105,8 @@ public class PetRegistModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void getAllPetBreed(String location, final DomainListCallBackListner<PetBreed> callback) {
-        final Call<List<PetBreed>> call = NetRetrofit.getInstance().getPetService().getAllBreed( location );
+    public void getAllPetBreed(String location, int typeIdx, final DomainListCallBackListner<PetBreed> callback) {
+        final Call<CommonResponce<List<PetBreed>>> call = NetRetrofit.getInstance().getPetService().getAllBreed( location, typeIdx );
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetBreed>() {
             @Override
             protected void doPostExecute(List<PetBreed> d) {

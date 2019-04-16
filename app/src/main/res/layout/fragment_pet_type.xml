@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@drawable/pet_type_radio_color"
-                    android:text="Cat"
+                    android:text="@string/cat"
                     android:button="@null"
                     android:textSize="32sp"/>
                 <RadioButton
@@ -52,7 +52,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dog"
+                    android:text="@string/dog"
                     android:textColor="@drawable/pet_type_radio_color"
                     android:button="@null"
                     android:textSize="32sp"/>

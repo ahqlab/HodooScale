@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.user.login;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
@@ -19,6 +20,8 @@ import com.animal.scale.hodoo.util.ValidationUtil;
 import java.util.List;
 
 import retrofit2.Call;
+
+import static com.cmmakerclub.iot.esptouch.activity.MainActivity.TAG;
 
 public class LoginModel extends CommonModel {
 
@@ -68,12 +71,20 @@ public class LoginModel extends CommonModel {
     }
 
     public void saveUserSharedValue(User user){
+
+        Log.e(TAG, "userEmail : " + mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL));
+        int savePetIdx = -1;
+        if ( mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID) == user.getUserIdx() )
+            savePetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+
         removeSharedValue();
         mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_UNIQUE_ID, user.getUserIdx());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_EMAIL, user.getEmail());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.GROUP_CODE, user.getGroupCode());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_PASSWORD, user.getPassword());
         mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_GROUP_ACCESS_TYPE, user.getAccessType());
+        if( savePetIdx > 0 )
+            mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, savePetIdx);
     }
 
     public void removeSharedValue(){
@@ -179,6 +190,9 @@ public class LoginModel extends CommonModel {
 
     public void saveAutoLogin() {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, HodooConstant.AUTO_LOGIN_SUCCESS);
+    }
+    public void removeAutoLogin() {
+        mSharedPrefManager.removePreference(SharedPrefVariable.AUTO_LOGIN);
     }
 
     public User getUser () {

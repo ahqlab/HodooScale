@@ -304,12 +304,19 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     private void checkState () {
         setBtnEnable(emailState && pwState);
     }
-    private void setBtnEnable ( boolean state ) {
+    @Override
+    public void setBtnEnable ( boolean state ) {
         binding.signupBtn.setEnabled(state);
         if ( binding.signupBtn.isEnabled() ) {
             binding.signupBtn.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         } else {
             binding.signupBtn.setTextColor(ContextCompat.getColor(this, R.color.mainRed));
         }
+    }
+
+    @Override
+    public void removeAutoLogin() {
+        presenter.removeAutoLogin();
+        binding.autoLogin.setChecked(false);
     }
 }

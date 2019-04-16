@@ -29,6 +29,7 @@ import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistAc
 import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
 import com.animal.scale.hodoo.base.BaseFragment;
+import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.BfiAdditionalAlertLayoutBinding;
 import com.animal.scale.hodoo.databinding.FragmentWeightCheckBinding;
@@ -48,7 +49,7 @@ import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 /**
  * Created by SongSeokwoo on 2019-04-02.
  */
-public class WeightCheckFragment extends BaseFragment implements WeightCheckIn.View {
+public class WeightCheckFragment extends PetRegistFragment implements WeightCheckIn.View {
 
     private String TAG = WeightCheckFragment.class.getSimpleName();
 
@@ -92,7 +93,7 @@ public class WeightCheckFragment extends BaseFragment implements WeightCheckIn.V
         return binding.getRoot();
     }
 
-    public static BaseFragment newInstance() {
+    public static PetRegistFragment newInstance() {
         return new WeightCheckFragment();
     }
 
@@ -175,7 +176,7 @@ public class WeightCheckFragment extends BaseFragment implements WeightCheckIn.V
         int[] temp = new int[0];
 
         PetBasicInfo basicInfo = ((PetRegistActivity) getActivity()).getPetBasicInfo();
-        if ( basicInfo.getSelectedBfi() != null ) {
+        if ( basicInfo.getSelectedBfi() != null && petType == ((PetRegistActivity) getActivity()).getPetBasicInfo().getPetType() ) {
             temp = new int[bfis.size()];
             editType = true;
             String[] split = basicInfo.getSelectedBfi().replaceAll(" ", "").split(",");
@@ -290,6 +291,7 @@ public class WeightCheckFragment extends BaseFragment implements WeightCheckIn.V
                 bfi = data[i];
             }
         }
+        bfi = (bfi + 1) * 10;
         PetWeightInfo info = binding.getDomain();
         info.setBcs(bfi);
         String bfiStr = "";

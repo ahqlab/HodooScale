@@ -69,6 +69,8 @@ public class LoginPresenter implements Login.Presenter {
                         loginView.showPopup(context.getString(R.string.login__alert_withdraw_user_content));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
                         loginView.showPopup(context.getString(R.string.failed));
+                        loginView.setBtnState(false);
+                        loginView.removeAutoLogin();
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.SUCCESS)) {
                         Gson gson = new Gson();
                         User user = resultMessageGroup.getDomain();
@@ -94,7 +96,7 @@ public class LoginPresenter implements Login.Presenter {
                     }
                 } else {
                     loginView.showPopup(context.getString(R.string.failed));
-                    loginView.setBtnState(true);
+                    loginView.setBtnState(false);
                 }
             }
 
@@ -105,7 +107,9 @@ public class LoginPresenter implements Login.Presenter {
 
             @Override
             public void doCancelled() {
+                loginView.removeAutoLogin();
                 loginView.setProgress(false);
+                loginView.setBtnState(false);
             }
         });
     }
@@ -155,6 +159,7 @@ public class LoginPresenter implements Login.Presenter {
 
                 @Override
                 public void doCancelled() {
+                    loginView.removeAutoLogin();
                     loginView.setProgress(false);
                     loginView.setServerError();
                 }
@@ -254,5 +259,10 @@ public class LoginPresenter implements Login.Presenter {
         }
         loginView.setPassword(user.getPassword());
         sendServer(user);
+    }
+
+    @Override
+    public void removeAutoLogin() {
+        loginModel.removeAutoLogin();
     }
 }
