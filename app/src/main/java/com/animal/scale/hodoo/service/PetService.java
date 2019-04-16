@@ -36,7 +36,7 @@ public interface PetService {
     @POST("android/pet/get/breed/of/type.do")
     Call<CommonResponce<List<PetBreed>>> getAllBreed( @Query("location") String location, @Query("typeIdx") int typeIdx );
 
-    @POST("pet//make/it/invisible.do")
+    @POST("pet/make/it/invisible.do")
     Call<CommonResponce<Integer>> deletePet(@Query("petIdx") int petIdx);
 
     @POST("pet/get/type.do")

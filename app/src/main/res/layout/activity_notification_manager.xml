@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+      <!--  <import type="java.lang.String"/>-->
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.setting.alarmManager.AlarmItemListActivity" />
+
+        <variable
+            name="activityInfo"
+            type="com.animal.scale.hodoo.domain.ActivityInfo" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hodoo_background_color"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal"
+        tools:context=".activity.setting.alarmManager.AlarmItemListActivity">
+
+        <include layout="@layout/common_toolbar" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_toolbar"
+            android:paddingLeft="16dp"
+            android:text="@{activityInfo.barTitle}"
+            android:textColor="@color/mainBlack"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+
+
+
+        <LinearLayout
+            android:layout_below="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#4a4a4a"
+                android:letterSpacing="0.01"
+                android:text="알림 설정"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="15dp"
+                />
+
+            <ListView
+                android:layout_below="@+id/title"
+                android:id="@+id/notification_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
+
+        </LinearLayout>
+
+
+
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</layout>

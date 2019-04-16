@@ -47,21 +47,21 @@
                 android:background="@color/white"
                 android:gravity="center"
                 >
-                <!--<ImageView
+                <ImageView
                     app:scale_top="65"
                     app:scale_width="200"
                     app:scale_height="74"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/potty" />-->
+                    android:src="@drawable/choice_add_pet_bi" />
                 <TextView
                     app:scale_top="155"
                     app:scale_width="280"
                     android:layout_marginBottom="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="펫 등록"
+                    android:text="@string/go_to_regist_pet"
                     app:scale_textsize="20"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:scale_textsize="13"
-                    android:text="Find a newly purchased\nHodoo Scale"
+                    android:text="@string/regist_pet_desc"
                     />
 
             </com.ssomai.android.scalablelayout.ScalableLayout>
@@ -108,7 +108,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Request for Hodoo Link"
+                    android:text="@string/request_for_hodoo_link"
                     app:scale_textsize="20"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -121,8 +121,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:scale_textsize="13"
-                    android:text="With a Hodoo user(device holder),\nimprove your pet's health together"
+                    android:text="@string/with_a_hodoo_user"
                     />
+
+                <!--android:text="With a Hodoo user(device holder),\nimprove your pet's health together"-->
 
             </com.ssomai.android.scalablelayout.ScalableLayout>
 

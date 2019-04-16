@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.activity.user.invitation.InvitationActivity;
 import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
@@ -97,7 +98,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
 
     @Override
     public void goPetRegist() {
-        Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+        Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
         intent.putExtra("petIdx", ADD_PET);
         startActivity(intent);
         finish();

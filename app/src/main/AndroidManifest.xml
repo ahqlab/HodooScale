@@ -102,8 +102,8 @@
         <activity android:name=".activity.user.invitation.finish.InvitationFinishActivity" />
         <activity
             android:name=".fcm.NotificationActivity"
-            android:taskAffinity=""
-            android:excludeFromRecents="true"/>
+            android:excludeFromRecents="true"
+            android:taskAffinity="" />
         <activity android:name=".activity.user.invitation.confirm.InvitationConfirmActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -145,10 +145,11 @@
         <activity android:name=".activity.intro.IntroActivity" />
         <activity android:name=".fcm.AlertActivity" />
         <activity android:name=".activity.setting.device.feeder.FeederOrderActivity" />
-        <activity android:name=".activity.pet.regist.activity.PetRegistActivity"/>
-        <activity android:name=".test.server.TestServerResponseActivity">
-        </activity>
-
+        <activity android:name=".activity.pet.regist.activity.PetRegistActivity" />
+        <activity android:name=".test.server.TestServerResponseActivity" />
+        <activity android:name=".activity.setting.version.VersionActivity" />
+        <activity android:name=".activity.setting.alarmManager.AlarmItemListActivity" />
+        <activity android:name=".activity.setting.notice.NoticeActivity"></activity>
     </application>
 
 </manifest>

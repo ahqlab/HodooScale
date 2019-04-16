@@ -36,10 +36,8 @@ public interface FeedService {
     @POST("feed/insert.do")
     Call<Integer> insertFeed(@Body MealHistory mealHistory);
 
-
     @POST("feed/get/radar/chart/data.do")
     Call<Feed> getRadarChartData(@Query("date") String date, @Query("petIdx") int petIdx);
-
 
     @GET("feed/tetest.do")
     Call<User> testSubmit();

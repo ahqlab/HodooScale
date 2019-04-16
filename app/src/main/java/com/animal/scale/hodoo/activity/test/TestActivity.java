@@ -11,7 +11,7 @@ public class TestActivity extends BaseActivity<TestActivity> implements Test.Vie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new TestPresenter(this);
-        presenter.initData(this);
+       // presenter.initData(this);
 
     }
 
@@ -23,6 +23,6 @@ public class TestActivity extends BaseActivity<TestActivity> implements Test.Vie
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.sendNoti();
+      //  presenter.sendNoti();
     }
 }

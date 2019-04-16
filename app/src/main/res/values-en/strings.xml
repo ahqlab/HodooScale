@@ -268,7 +268,7 @@
     <string name="common__invitation_title">Requested Log</string>
 
     <string name="main_activity__permission_check_title">Permission Check</string>
-    <string name="main_activity__permission_check_suffix">You must have the appropriate permissions to receive notifications.\npermission : SystemAlert</string>
+    <string name="main_activity__permission_check_suffix">You must have the appropriate permissions to receive alarmItems.\npermission : SystemAlert</string>
 
     <string name="login__auto_login_btn">Remember Me</string>
     <string name="login__alert_withdraw_user_content">a member who has left.</string>
@@ -320,4 +320,7 @@
     <string name="auto_login">Remember Me</string>
 
     <string name="common__recommend_calorie">700kcal\n(recommend quantity)</string>
+    <string name="request_for_hodoo_link">그룹 참여하기</string>
+    <string name="go_to_regist_pet" >펫 등록 하러가기</string>
+    <string name="regist_pet_desc">나의 펫을 등록하고 호두를 시작할래요</string>
 </resources>

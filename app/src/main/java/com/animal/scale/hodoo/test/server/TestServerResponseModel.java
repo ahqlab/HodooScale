@@ -18,7 +18,7 @@ public class TestServerResponseModel extends CommonModel {
 
 
     public void sendNoti( String toUserEmail, final DomainCallBackListner<Integer> callback ) {
-       /* Call<Integer> call = NetRetrofit.getInstance().getFcmService().normalPush("TestServerResponseIn Notification", "testContent", toUserEmail);
+       /* Call<Integer> call = NetRetrofit.getInstance().getFcmService().normalPush("TestServerResponseIn AlarmItem", "testContent", toUserEmail);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
             @Override
             protected void doPostExecute(Integer integer) {
