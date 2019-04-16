@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.base.BaseFragment;
+import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.databinding.FragmentPhysiqueInfomationBinding;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.util.ValidationUtil;
@@ -29,7 +30,7 @@ import com.tistory.dwfox.dwrulerviewlibrary.view.ScrollingValuePicker;
 /**
  * Created by SongSeokwoo on 2019-04-02.
  */
-public class PhysiqueInfomationRegistFragment extends BaseFragment implements PhysiqueInformationRegistIn.View {
+public class PhysiqueInfomationRegistFragment extends PetRegistFragment implements PhysiqueInformationRegistIn.View {
     private FragmentPhysiqueInfomationBinding binding;
     private PhysiqueInformationRegistPresenter presenter;
 
@@ -112,7 +113,7 @@ public class PhysiqueInfomationRegistFragment extends BaseFragment implements Ph
         setTextWatcher(binding.editWidth, binding.editHeight, binding.editWeight);
         return binding.getRoot();
     }
-    public static BaseFragment newInstance() {
+    public static PetRegistFragment newInstance() {
         return new PhysiqueInfomationRegistFragment();
     }
 
@@ -302,7 +303,8 @@ public class PhysiqueInfomationRegistFragment extends BaseFragment implements Ph
         }
     }
     public void updateView() {
-        binding.infoText.setText( ((PetRegistActivity) getActivity()).getPetBasicInfo().getPetName() + getContext().getString(R.string.physical_info_text) );
+        if ( ((PetRegistActivity) getActivity()).getPetBasicInfo() != null )
+            binding.infoText.setText( ((PetRegistActivity) getActivity()).getPetBasicInfo().getPetName() + getContext().getString(R.string.physical_info_text) );
         validation();
     }
 }

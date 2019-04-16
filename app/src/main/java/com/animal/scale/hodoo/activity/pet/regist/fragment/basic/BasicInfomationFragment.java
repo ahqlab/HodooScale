@@ -34,11 +34,13 @@ import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfDisease;
 import com.animal.scale.hodoo.base.BaseFragment;
+import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.BottomDialog;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.FragmentBasicInfomationBinding;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Disease;
 import com.animal.scale.hodoo.domain.IosStyleBottomAlert;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
@@ -61,7 +63,7 @@ import java.util.List;
 /**
  * Created by SongSeokwoo on 2019-04-02..
  */
-public class BasicInfomationFragment extends BaseFragment implements BasicInfomationIn.View, CheckBox.OnCheckedChangeListener {
+public class BasicInfomationFragment extends PetRegistFragment implements BasicInfomationIn.View, CheckBox.OnCheckedChangeListener {
     private String TAG = BasicInfomationFragment.class.getSimpleName();
 
     private FragmentBasicInfomationBinding binding;
@@ -93,6 +95,10 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
     private String imageFilePath;
 
     int number;
+    boolean changeState = false;
+
+    private int petType;
+    private int petIdx;
 
     @Nullable
     @Override
@@ -102,17 +108,16 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
         presenter = new BasicInfomationPresenter(this);
         presenter.loadData(getContext());
 
-
         if ( getArguments() != null ) {
+            petIdx = getArguments().getInt("petIdx");
             presenter.getDiseaseInformation(getArguments().getInt("petIdx"));
-            presenter.getPetBasicInformation(VIewUtil.getMyLocationCode(getContext()), getArguments().getInt("petIdx"));
         } else {
 
         }
         validation();
         return binding.getRoot();
     }
-    public static BaseFragment newInstance() {
+    public static PetRegistFragment newInstance() {
         return new BasicInfomationFragment();
     }
     public void onClickOpenBottomDlg ( View v ) {
@@ -161,6 +166,8 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
         ((PetRegistActivity) getActivity()).setPetBasicInfo( binding.profile, info );
         ((PetRegistActivity) getActivity()).setPetDiseaseInfo( petChronicDisease );
         ((PetRegistActivity) getActivity()).nextFragment();
+        if ( changeState )
+            ((PetRegistActivity) getActivity()).setChangeState( true );
     }
 
     @Override
@@ -173,7 +180,10 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
     public void setView(PetBasicInfo basicInfo) {
         if ( basicInfo != null ) {
             binding.petName.editText.setText(basicInfo.getPetName());
-            binding.petBreed.editText.setText(basicInfo.getPetBreed());
+            if ( petType == basicInfo.getPetType() )
+                binding.petBreed.editText.setText(basicInfo.getPetBreed());
+            else
+                binding.petBreed.editText.setText("");
 
             binding.petBirthday.editText.setText(basicInfo.getBirthday());
             if (basicInfo.getNeutralization().matches("YES")) {
@@ -196,12 +206,12 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
     }
 
     @Override
-    public void getAllPetBreed(List<PetBreed> breeds) {
-        this.breeds = breeds;
+    public void getAllPetBreed(CommonResponce<List<PetBreed>> breeds) {
+        this.breeds = breeds.domain;
         if ( binding.getInfo() != null ) {
-            for (int i = 0; i < breeds.size(); i++) {
-                if ( breeds.get(i).getName().equals(binding.getInfo().getPetBreed()) ) {
-                    breedIndex = breeds.get(i).getId();
+            for (int i = 0; i < this.breeds.size(); i++) {
+                if ( this.breeds.get(i).getName().equals(binding.getInfo().getPetBreed()) ) {
+                    breedIndex = this.breeds.get(i).getId();
                     break;
                 }
             }
@@ -227,6 +237,8 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
         }
     }
     public void onClickSelectEditText(View view) {
+        if ( breeds == null )
+            return;
         final String[] values = new String[breeds.size()];
         for (int i = 0; i < breeds.size(); i++)
             values[i] = breeds.get(i).getName();
@@ -299,8 +311,13 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
                 onClickCalDalog(view);
             }
         });
-
-        binding.petBreed.editText.addTextChangedListener(new CommonTextWatcher(binding.petBreed, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+        binding.petName.editText.addTextChangedListener(new CommonTextWatcher(binding.petName, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+            @Override
+            public void onChangeState(boolean state) {
+                validation();
+            }
+        }));
+        binding.petBreed.editText.addTextChangedListener(new CommonTextWatcher(binding.petBreed, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_breed_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
             @Override
             public void onChangeState(boolean state) {
                 validation();
@@ -359,7 +376,6 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
 
     @Override
     public void setBasicInfo(PetBasicInfo basicInfo) {
-        presenter.getAllPetBreed(VIewUtil.getMyLocationCode(getContext()));
         if ( basicInfo != null )
             binding.setInfo(basicInfo);
         else {
@@ -504,5 +520,18 @@ public class BasicInfomationFragment extends BaseFragment implements BasicInfoma
 //                number -= (0x01<<position);
 //        }
         compoundButton.setChecked(b);
+    }
+
+    @Override
+    protected void changeState(boolean state) {
+        super.changeState(state);
+        ((PetRegistActivity) getActivity()).setChangeState( state );
+    }
+
+    public void setPetType ( int petType ) {
+        this.petType = petType;
+
+        presenter.getPetBasicInformation(VIewUtil.getMyLocationCode(getContext()), petIdx);
+        presenter.getAllPetBreed(VIewUtil.getMyLocationCode(getContext()), petType);
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.EditText;
 
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
@@ -36,7 +37,7 @@ public interface BasicInformationRegistIn {
 
         void setSaveImageFile ( Bitmap image );
 
-        void getAllPetBreed(List<PetBreed> breeds);
+        void getAllPetBreed(CommonResponce<List<PetBreed>> breeds);
 
     }
 
@@ -66,6 +67,6 @@ public interface BasicInformationRegistIn {
 
         void setGalleryImage (Context context, Uri img);
 
-        void getAllPetBreed( String location );
+        void getAllPetBreed( String location, int petIdx );
     }
 }

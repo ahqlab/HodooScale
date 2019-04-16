@@ -46,7 +46,7 @@ public interface PetRegistIn {
 
         /* BasicInfomation (s) */
         void getPetBasicInformation(String location, int petIdx);
-        void getAllPetBreed( PetBasicInfo basicInfo, String location );
+//        void getAllPetBreed( PetBasicInfo basicInfo, String location, int typeIdx );
 
         void registPetType( int petType, boolean editType );
 

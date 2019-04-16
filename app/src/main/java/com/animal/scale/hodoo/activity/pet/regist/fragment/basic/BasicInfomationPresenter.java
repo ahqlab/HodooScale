@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistModel;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
@@ -67,10 +68,10 @@ public class BasicInfomationPresenter implements BasicInfomationIn.Presenter {
     }
 
     @Override
-    public void getAllPetBreed(String location) {
-        model.getAllPetBreed(location, new CommonModel.DomainListCallBackListner<PetBreed>() {
+    public void getAllPetBreed(String location, int typeIdx) {
+        model.getAllPetBreed(location, typeIdx, new CommonModel.ObjectCallBackListner<CommonResponce<List<PetBreed>>>() {
             @Override
-            public void doPostExecute(List<PetBreed> d) {
+            public void doPostExecute(CommonResponce<List<PetBreed>> d) {
                 view.getAllPetBreed(d);
             }
 

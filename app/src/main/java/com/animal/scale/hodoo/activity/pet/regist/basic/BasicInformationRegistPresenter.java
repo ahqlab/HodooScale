@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
@@ -183,10 +184,10 @@ public class BasicInformationRegistPresenter implements BasicInformationRegistIn
     }
 
     @Override
-    public void getAllPetBreed( String location ) {
-        model.getAllPetBreed(location, new CommonModel.DomainListCallBackListner<PetBreed>() {
+    public void getAllPetBreed( String location, int typeIdx ) {
+        model.getAllPetBreed(location, typeIdx, new CommonModel.ObjectCallBackListner<CommonResponce<List<PetBreed>>>() {
             @Override
-            public void doPostExecute(List<PetBreed> d) {
+            public void doPostExecute(CommonResponce<List<PetBreed>> d) {
                 view.getAllPetBreed(d);
             }
 

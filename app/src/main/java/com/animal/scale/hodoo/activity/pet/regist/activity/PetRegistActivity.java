@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -24,6 +25,7 @@ import com.animal.scale.hodoo.activity.pet.regist.fragment.type.PetTypeFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.weight.WeightCheckFragment;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.base.BaseFragment;
+import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityPetRegistBinding;
@@ -53,7 +55,7 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     private ActivityPetRegistBinding binding;
     private int petIdx;
     private boolean editModeState = false;
-    private BaseFragment[] fragments = {
+    private PetRegistFragment[] fragments = {
             PetTypeFragment.newInstance(),
             BasicInfomationFragment.newInstance(),
             PhysiqueInfomationRegistFragment.newInstance(),
@@ -70,13 +72,15 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     private PetWeightInfo petWeightInfo;
     private CircleImageView profile;
 
-    public static final int PET_BASIC_INFO = 0;
-    public static final int PET_DISEASE_INFO = 1;
+    public static final int PET_TYPE_INFO = 0;
+    public static final int PET_BASIC_INFO = 1;
     public static final int PET_PHYSIQUE_INFO = 2;
     public static final int PET_WEIGHT_INFO = 3;
 
-    public static final int CAT_TYPE = 1;
-    public static final int DOG_TYPE = 2;
+    public static final int DOG_TYPE = 1;
+    public static final int CAT_TYPE = 2;
+
+    private boolean changeState = false;
 
 
     @Override
@@ -100,7 +104,7 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
         location = VIewUtil.getMyLocationCode(this);
 
 
-        BaseFragment firstFragment = fragments[fragmentPosition];
+        PetRegistFragment firstFragment = fragments[fragmentPosition];
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -122,12 +126,11 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     }
     public void nextFragment() {
         fragmentPosition++;
-        BaseFragment fragment = fragments[fragmentPosition];
+        PetRegistFragment fragment = fragments[fragmentPosition];
         Bundle bundle = new Bundle();
         bundle.putInt("petIdx", petIdx);
-        if ( fragmentPosition == DISEASE_TYPE ) {
-
-        }
+        if ( fragmentPosition == PET_BASIC_INFO )
+            ((BasicInfomationFragment) fragment).setPetType(petType);
         else if ( fragmentPosition == PET_WEIGHT_INFO )
             ((WeightCheckFragment) fragment).setPetIdx(petType);
         else if ( fragmentPosition == PET_PHYSIQUE_INFO )
@@ -266,8 +269,15 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
         backButtonAction();
     }
     private void backButtonAction () {
-        if ( fragmentPosition > -1 )
-            fragmentPosition--;
+        if ( !editModeState ) {
+            if ( fragmentPosition > 0 )
+                fragmentPosition--;
+        } else {
+            if ( fragmentPosition > 0 )
+                fragmentPosition--;
+        }
+
+
 
         if ( fragmentPosition == 0 ) {
 //            Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -275,14 +285,14 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 //            toolbar.setNavigationOnClickListener(null);
         }
 
-        if ( fragmentPosition < 0 ) {
+        if ( !editModeState ? fragmentPosition < 1 : fragmentPosition < 1 ) {
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("현재까지 작성하신 모든 데이터가 저장되지않습니다.\n그래도 취소하시겠습니까?")
                     .setNegativeButton(R.string.cancle, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            fragmentPosition = 0;
+                            fragmentPosition = editModeState ? 1 : 1;
                         }
                     }).setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                         @Override
@@ -294,13 +304,14 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
                     .setOnCancelListener(new DialogInterface.OnCancelListener() {
                         @Override
                         public void onCancel(DialogInterface dialogInterface) {
-                            fragmentPosition = 0;
+                            fragmentPosition = editModeState ? 1 : 1;
+                            Log.e(TAG, "onCancel: ");
                         }
                     }).create();
             dialog.show();
             return;
         }
-        BaseFragment fragment = fragments[fragmentPosition];
+        PetRegistFragment fragment = fragments[fragmentPosition];
         Bundle bundle = new Bundle();
         bundle.putInt("petIdx", petIdx);
 
@@ -317,9 +328,12 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setChangeState ( boolean state ) {
+            changeState = state;
     }
 }
