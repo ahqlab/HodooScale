@@ -16,35 +16,30 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/switch_wrap"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:padding="16dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/info_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:letterSpacing="0.01"
+            android:text="@{domain.name}"
+            android:textColor="@color/hodoo_text_light_gray"
             android:gravity="center_vertical"
-            android:padding="16dp"
-            android:orientation="horizontal">
+            android:textSize="17sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:letterSpacing="0.01"
-                android:text="@{domain.name}"
-                android:textColor="#200000"
-                android:gravity="center_vertical"
-                android:textSize="17sp" />
+        <Switch
+            android:id="@+id/notification_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right|center_vertical"/>
 
-            <Switch
-                android:id="@+id/notification_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="right|center_vertical"/>
-
-        </LinearLayout>
     </LinearLayout>
 </layout>
 

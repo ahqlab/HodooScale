@@ -44,4 +44,49 @@ public class AlarmItemListPresenter implements AlarmItemListIn.Presenter {
             }
         });
     }
+
+    @Override
+    public void getAlarm() {
+        model.getAlarm(new CommonModel.ObjectCallBackListner<CommonResponce<Integer>>() {
+            @Override
+            public void doPostExecute(CommonResponce<Integer> integerCommonResponce) {
+                if ( integerCommonResponce != null )
+                    view.setAlarm(integerCommonResponce.domain);
+                else
+                    view.setAlarm(0);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+
+    @Override
+    public void saveAlarm(int number) {
+        model.saveAlarm(number, new CommonModel.ObjectCallBackListner<CommonResponce<Integer>>() {
+            @Override
+            public void doPostExecute(CommonResponce<Integer> integerCommonResponce) {
+                if ( integerCommonResponce != null ) {
+                    view.done( integerCommonResponce.domain );
+                }
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
 }

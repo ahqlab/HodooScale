@@ -37,10 +37,8 @@
             android:textSize="34sp"
             android:textStyle="bold" />
 
-
-
-
         <LinearLayout
+            android:layout_above="@+id/save_noti"
             android:layout_below="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,8 +62,23 @@
                 android:id="@+id/notification_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
-
         </LinearLayout>
+
+        <Button
+            android:layout_alignParentBottom="true"
+            android:id="@+id/save_noti"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/pink_btn"
+            android:onClick="@{activity::saveNotiListner }"
+            android:text="@string/common__save"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
 
 
