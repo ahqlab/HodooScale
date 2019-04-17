@@ -38,35 +38,20 @@
             android:textStyle="bold" />
 
 
-
-
-        <!--<LinearLayout
-            android:layout_below="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#4a4a4a"
-                android:letterSpacing="0.01"
-                android:text="알림 설정"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="15dp"
-                />
 
             <ListView
-                android:layout_below="@+id/title"
-                android:id="@+id/notification_listview"
+                android:id="@+id/notice_listview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"></ListView>
 
-        </LinearLayout>-->
-
+        </LinearLayout>
 
 
         <ProgressBar
