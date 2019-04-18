@@ -113,7 +113,6 @@ public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> i
                     target.setChecked(true);
                 }
             }
-            boolean tempAllCheckState = false;
             int count = 0;
             for (int i = 1; i < binding.notificationListview.getChildCount(); i++) {
                 LinearLayout wrap = (LinearLayout) binding.notificationListview.getChildAt(i);
@@ -153,10 +152,7 @@ public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> i
                             text.setTextColor(b ? Color.parseColor("#200000") : ContextCompat.getColor(getApplicationContext(), R.color.hodoo_text_light_gray));
                             target.setChecked(b);
                         }
-                        if ( b )
-                            mNumber = 1;
-                        else
-                            mNumber = 0;
+                        mNumber = b ? 1 : 0;
                     }
 
                     if ( position != 0 ) {
@@ -177,12 +173,10 @@ public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> i
                                         if ( tempTarget.isChecked() )
                                             mNumber += (0x01 << i);
                                     }
-                                } else {
+                                } else
                                     mNumber -= (0x01 << position);
-                                }
 
                             } else {
-                                boolean tempAllCheckState = false;
                                 int count = 0;
                                 for (int i = 1; i < binding.notificationListview.getChildCount(); i++) {
                                     LinearLayout tempWrap = (LinearLayout) binding.notificationListview.getChildAt(i);

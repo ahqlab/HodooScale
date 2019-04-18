@@ -8,6 +8,7 @@ import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.AlarmItem;
+import com.animal.scale.hodoo.domain.AlarmObject;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
@@ -70,7 +71,7 @@ public class AlarmItemListModel extends CommonModel {
     }
 
     public void saveAlarm(int number, final ObjectCallBackListner<CommonResponce<Integer>> domainCallBackListner) {
-        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getAlarmItemService().saveAlarm(sharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID), number);
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getAlarmItemService().saveAlarm(AlarmObject.builder().number(number).userIdx(sharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID)).build());
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>() {
             @Override
             protected void doPostExecute(CommonResponce<Integer> listCommonResponce) {
