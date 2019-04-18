@@ -87,6 +87,4 @@ public class VersionActivity extends BaseActivity<VersionActivity> implements Ve
             boButton.setText("Go app store to update");
         }*/
     }
-
-
 }
