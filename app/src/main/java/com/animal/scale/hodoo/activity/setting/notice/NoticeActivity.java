@@ -1,19 +1,55 @@
 package com.animal.scale.hodoo.activity.setting.notice;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.CompoundButton;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.adapter.AbsractCommonAdapter;
+import com.animal.scale.hodoo.adapter.BaseExpandableAdapter;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityNoticeBinding;
+import com.animal.scale.hodoo.databinding.NoticeListviewItemBinding;
+import com.animal.scale.hodoo.databinding.NotificationListviewItemBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.Notice;
+import com.animal.scale.hodoo.domain.Notice;
 
-public class NoticeActivity extends BaseActivity<NoticeActivity> implements NoticeIn.View{
+import java.util.ArrayList;
+import java.util.List;
+
+public class NoticeActivity extends BaseActivity<NoticeActivity> implements NoticeIn.View {
 
     ActivityNoticeBinding binding;
 
     NoticeIn.Presenter presenter;
+
+    AbsractCommonAdapter<Notice> adapterOfNotice;
+
+    public int startRow = 0;
+
+    public int pageSize = 20;
+
+    private LayoutInflater inflater;
+
+    private boolean mLockListview;
+
+    private ArrayList<Notice> mGroupList = null;
+
+    private ArrayList<ArrayList<Notice>> mChildList = null;
+
+    private ArrayList<Notice> mChildListContent = null;
+
+    BaseExpandableAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +59,93 @@ public class NoticeActivity extends BaseActivity<NoticeActivity> implements Noti
         binding.setActivity(this);
         binding.setActivityInfo(new ActivityInfo(getString(R.string.activity_title_notice)));
         super.setToolbarColor();
-        presenter  = new NoticePresenter(NoticeActivity.this);
+        presenter = new NoticePresenter(NoticeActivity.this);
         presenter.loadModel(NoticeActivity.this);
+        mLockListview = true;
+        inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        initNoticeAdapter();
+        addItem(startRow, pageSize);
+    }
+
+    private void initNoticeAdapter() {
+
+        List<Notice> list = new ArrayList<Notice>();
+        List<Notice> list2 = new ArrayList<Notice>();
+
+        ArrayList<Notice> mGroupList = new ArrayList<Notice>();
+        ArrayList<ArrayList<Notice>> mChildList = new ArrayList<ArrayList<Notice>>();
+        ArrayList<Notice> mChildListContent = new ArrayList<Notice>();
+
+        for (int i = 0; i < list.size(); i++) {
+            mGroupList.add(list.get(i));
+            mChildListContent = new ArrayList<Notice>();
+            for (int j = 0; j < list2.size(); j++) {
+                if (list.get(i).getNoticeIdx() == list2.get(j).getNoticeIdx()) {
+                    mChildListContent.add(list2.get(j));
+                }
+            }
+            mChildList.add(mChildListContent);
+        }
+
+        adapter = new BaseExpandableAdapter(this, mGroupList, mChildList);
+        binding.noticeListview.setAdapter(adapter);
+        binding.noticeListview.addFooterView(inflater.inflate(R.layout.notice_listview_footer, null));
+        binding.noticeListview.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int count = totalItemCount - visibleItemCount;
+
+                if (firstVisibleItem >= count && totalItemCount != 0 && mLockListview == false) {
+                    startRow += pageSize;
+                    addItem(startRow, pageSize);
+                }
+            }
+        });
     }
 
     @Override
     protected BaseActivity<NoticeActivity> getActivityClass() {
         return NoticeActivity.this;
+    }
+
+    private void addItem(final int startRow, final int pageSize) {
+        mLockListview = true;
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                presenter.getNoticeList(startRow, pageSize);
+                mLockListview = false;
+            }
+        };
+        Handler handler = new Handler();
+        handler.postDelayed(run, 1500);
+    }
+
+    @Override
+    public void setNoticeListview(List<Notice> noticeList) {
+        List<Notice> list = noticeList;
+        List<Notice> list2 = noticeList;
+
+        ArrayList<Notice> mGroupList = new ArrayList<Notice>();
+        ArrayList<ArrayList<Notice>> mChildList = new ArrayList<ArrayList<Notice>>();
+        ArrayList<Notice> mChildListContent = new ArrayList<Notice>();
+
+        for (int i = 0; i < list.size(); i++) {
+            mGroupList.add(list.get(i));
+            mChildListContent = new ArrayList<Notice>();
+            for (int j = 0; j < list2.size(); j++) {
+                if (list.get(i).getNoticeIdx() == list2.get(j).getNoticeIdx()) {
+                    mChildListContent.add(list2.get(j));
+                }
+            }
+            mChildList.add(mChildListContent);
+        }
+        adapter.groupList.addAll(mGroupList);
+        adapter.childList.addAll(mChildList);
+        adapter.notifyDataSetChanged();
     }
 }

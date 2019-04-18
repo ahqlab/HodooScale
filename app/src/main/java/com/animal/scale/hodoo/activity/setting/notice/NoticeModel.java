@@ -5,7 +5,13 @@ import android.content.Context;
 import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.AlarmItem;
+import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.Notice;
 import com.animal.scale.hodoo.service.NetRetrofit;
+
+import java.util.List;
 
 import retrofit2.Call;
 
@@ -16,4 +22,23 @@ public class NoticeModel extends CommonModel {
         super.loadData(context);
     }
 
+    public void getNoticeList(int startRow, int pageSize, final CommonDomainCallBackListner<Notice> domainCallBackListner) {
+        Call<CommonResponce<List<Notice>>> call = NetRetrofit.getInstance().getNoticeService().getNoticeList(startRow, pageSize, sharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<List<Notice>>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<List<Notice>> listCommonResponce) {
+                domainCallBackListner.doPostExecute(listCommonResponce);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
 }

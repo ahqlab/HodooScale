@@ -18,6 +18,7 @@ import com.animal.scale.hodoo.activity.setting.device.bowelplate.list.BowelPlate
 import com.animal.scale.hodoo.activity.setting.device.feeder.FeederOrderActivity;
 import com.animal.scale.hodoo.activity.setting.device.list.DeviceListActivity;
 import com.animal.scale.hodoo.activity.setting.alarmManager.AlarmItemListActivity;
+import com.animal.scale.hodoo.activity.setting.notice.NoticeActivity;
 import com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity;
 import com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity;
 import com.animal.scale.hodoo.activity.setting.user.group.list.UserGroupListActivity;
@@ -165,7 +166,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
             public boolean onChildClick(ExpandableListView expandableListView, View view, int titlePosition, int contentPosition, long l) {
                 if(titlePosition == GENERAL){
                     if(contentPosition == NOTICE){
-
+                        SettingListActivity.super.moveIntent(SettingListActivity.this, NoticeActivity.class, 0,0, false);
                     }else if(contentPosition == HOMEPAGE){
 
                     }else if(contentPosition == APP_VERSION){
