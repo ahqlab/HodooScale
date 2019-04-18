@@ -47,4 +47,47 @@ public class AlarmItemListModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+
+    public void getAlarm(final ObjectCallBackListner<CommonResponce<Integer>> domainCallBackListner) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getAlarmItemService().getAlarm(sharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<Integer> listCommonResponce) {
+                domainCallBackListner.doPostExecute(listCommonResponce);
+
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
+    public void saveAlarm(int number, final ObjectCallBackListner<CommonResponce<Integer>> domainCallBackListner) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getAlarmItemService().saveAlarm(sharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID), number);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<Integer> listCommonResponce) {
+                domainCallBackListner.doPostExecute(listCommonResponce);
+
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
 }
