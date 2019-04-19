@@ -71,7 +71,8 @@ public class AlarmItemListModel extends CommonModel {
     }
 
     public void saveAlarm(int number, final ObjectCallBackListner<CommonResponce<Integer>> domainCallBackListner) {
-        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getAlarmItemService().saveAlarm(AlarmObject.builder().number(number).userIdx(sharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID)).build());
+        AlarmObject obj = AlarmObject.builder().number(number).userIdx(sharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID)).build();
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getAlarmItemService().saveAlarm ( obj );
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>() {
             @Override
             protected void doPostExecute(CommonResponce<Integer> listCommonResponce) {

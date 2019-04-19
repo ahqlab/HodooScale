@@ -23,6 +23,7 @@ import com.animal.scale.hodoo.activity.pet.regist.fragment.disease.DiseaseInfoma
 import com.animal.scale.hodoo.activity.pet.regist.fragment.physique.PhysiqueInfomationRegistFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.type.PetTypeFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.weight.WeightCheckFragment;
+import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.base.PetRegistFragment;
@@ -81,6 +82,7 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     public static final int CAT_TYPE = 2;
 
     private boolean changeState = false;
+    private boolean loginRegistState = false;
 
 
     @Override
@@ -88,6 +90,8 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pet_regist);
         binding.setActivityInfo( new ActivityInfo(getString(R.string.basin_info_regist_title)) );
+
+        loginRegistState = getIntent().getBooleanExtra(HodooConstant.LOGIN_PET_REGIST, false);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.hodoo_pink), PorterDuff.Mode.SRC_ATOP);
@@ -222,6 +226,10 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
                 .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        if ( loginRegistState ) {
+                            Intent intent = new Intent(PetRegistActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
                         finish();
                     }

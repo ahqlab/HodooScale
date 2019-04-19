@@ -31,5 +31,5 @@ public class SharedPrefVariable {
 //    public static final String SERVER_ROOT = "http://www.cnu-farm.com/";
     public static final String CURRENT_COUNTRY = "CURRENT_COUNTRY";
     public static final String SERVER_ROOT = "http://192.168.0.7:9090/";
-    //public static final String SERVER_ROOT = "http://192.168.0.2:8181/";
+//    public static final String SERVER_ROOT = "http://192.168.0.2:8181/";
 }

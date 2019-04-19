@@ -48,6 +48,8 @@ public class HodooConstant {
     /* fcm 관련 (e) */
     public static final int AUTO_LOGIN_SUCCESS = 1;
 
+    public static final String LOGIN_PET_REGIST = "LOGIN_PET_REGIST";
+
 
     public static final int WITHDRAW = -1;
 
