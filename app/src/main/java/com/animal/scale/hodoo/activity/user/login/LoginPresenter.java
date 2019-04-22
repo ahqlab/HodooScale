@@ -140,14 +140,18 @@ public class LoginPresenter implements Login.Presenter {
                             //등록된 펫 존재함.
                             loginView.setProgress(false);
                             loginView.setAutoLoginState();
-                        }else{
+                        } else{
                             //펫이 없음.
                             loginView.setProgress(false);
                             loginView.selectTheNextAction();
 
                             //loginView.saveFcmToken();
                         }
-                    }else if(responce.getStatus() == HodooConstant.SQL_ERROR_RESPONSE){
+                    } else if ( responce.getStatus() == HodooConstant.NO_CONTENT_RESPONSE ) {
+                        //펫이 없음.
+                        loginView.setProgress(false);
+                        loginView.selectTheNextAction();
+                    } else if(responce.getStatus() == HodooConstant.SQL_ERROR_RESPONSE){
                         loginView.setProgress(false);
                         loginView.setServerError();
                     }

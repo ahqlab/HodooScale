@@ -30,6 +30,8 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
 
     private final int ADD_PET = 0;
 
+    private boolean loginRegistState = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         presenter.loadData(getApplicationContext());
         presenter.checkInvitation();
         inAppSettingState = getIntent().getBooleanExtra(HodooConstant.IN_APP_SETTING_KEY, false);
+        loginRegistState = getIntent().getBooleanExtra(HodooConstant.LOGIN_PET_REGIST, false);
     }
 
     @Override
@@ -100,6 +103,8 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
     public void goPetRegist() {
         Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
         intent.putExtra("petIdx", ADD_PET);
+        if ( loginRegistState )
+            intent.putExtra(HodooConstant.LOGIN_PET_REGIST, loginRegistState);
         startActivity(intent);
         finish();
     }
