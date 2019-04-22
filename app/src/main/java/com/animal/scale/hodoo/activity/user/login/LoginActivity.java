@@ -274,6 +274,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     public void selectTheNextAction() {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
         Intent intent = new Intent(getApplicationContext(), DeviceRegistActivity.class);
+        intent.putExtra(HodooConstant.LOGIN_PET_REGIST, true);
         startActivity(intent);
         //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
