@@ -144,7 +144,6 @@
                 android:onClick="@{activity::onClickNextBtn}"
                 android:textStyle="bold"
                 android:visibility="@{state ? View.VISIBLE : View.INVISIBLE}"/>
-                />
 
         </LinearLayout>
 

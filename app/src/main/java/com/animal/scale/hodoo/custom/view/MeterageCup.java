@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ScrollView;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.util.VIewUtil;
 
 public class MeterageCup extends View implements View.OnTouchListener, Runnable {
 
@@ -84,9 +85,11 @@ public class MeterageCup extends View implements View.OnTouchListener, Runnable 
         /* image settings (s) */
         bitmap = BitmapFactory.decodeResource(getResources(), cupResources[0]);
         /* image settings (e) */
+//        View parent = (View) getParent();
+//        Log.e(TAG, String.format("parent width : %d", parent.getWidth()));
 
         width = bitmap.getWidth();
-
+//        width = VIewUtil.pxToDp(300);
         setMeasuredDimension(getMeasuredWidth(), bitmap.getHeight());
         height = bitmap.getHeight();
         fillValue = height;

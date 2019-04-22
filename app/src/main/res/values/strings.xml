@@ -346,5 +346,6 @@
     <string name="activity_title_notice" >공지사항</string>
 
     <string name="common__save">저장</string>
+    <string name="navigation__home">홈</string>
     <!-- 2019-01-30 new code (e) -->
 </resources>

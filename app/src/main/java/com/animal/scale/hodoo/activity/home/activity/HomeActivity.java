@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.activity.ActivityFragment;
+import com.animal.scale.hodoo.activity.home.fragment.dashboard.DashBoardFragment;
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
@@ -141,6 +142,13 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Bundle bundle = new Bundle();
             switch (item.getItemId()) {
+                case R.id.navigation_home :
+                    binding.setActivityInfo(new ActivityInfo("Home"));
+                    bundle.putSerializable("selectPet", selectPet);
+                    DashBoardFragment df = DashBoardFragment.newInstance();
+                    df.setArguments(bundle);
+                    replaceFragment(df);
+                    return true;
                 case R.id.navigation_weight:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
                     bundle.putSerializable("selectPet", selectPet);
@@ -296,7 +304,11 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     public void setFragmentContent() {
         android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (tf instanceof WeightFragment) {
+        if ( tf instanceof DashBoardFragment ) {
+            DashBoardFragment dashBoardFragment = (DashBoardFragment) tf;
+            dashBoardFragment.setSelectPet(selectPet);
+        }
+        else if (tf instanceof WeightFragment) {
             WeightFragment weightFragment = (WeightFragment) tf;
             weightFragment.setBcsOrBscDescAndTip(selectPet);
             weightFragment.serChartOfDay();
@@ -373,8 +385,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
-        binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
+        fragmentTransaction.add(R.id.fragment_container, DashBoardFragment.newInstance()).commit();
+        binding.setActivityInfo(new ActivityInfo("Home"));
         VIewUtil vIewUtil = new VIewUtil(HomeActivity.this);
         VIewUtil.getLocationCode(HomeActivity.this);
     }
@@ -400,7 +412,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             bundle.putBoolean("push", true);
             switch (notitype) {
                 case HodooConstant.FIREBASE_WEIGHT_TYPE :
-                    binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
+                    binding.setActivityInfo(new ActivityInfo("Home"));
                     WeightFragment wf = WeightFragment.newInstance();
                     wf.setArguments(bundle);
                     replaceFragment(wf);

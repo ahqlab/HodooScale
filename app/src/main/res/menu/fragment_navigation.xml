@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/menu_icon_48_48_01"
+        android:enabled="true"
+        android:title="@string/navigation__home"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/navigation_weight"
         android:icon="@drawable/menu_icon_48_48_02"
         android:enabled="true"
