@@ -99,9 +99,9 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
         binding.chart1.setNoDataText(getActivity().getString(R.string.weight_data_available));
         binding.chart1.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
 
-        statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
-        statisicsPresenter.initLoadData(getContext());
-        statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
+        //statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
+        //statisicsPresenter.initLoadData(getContext());
+        //statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
         //Kcal 로리 표시
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),TextManager.TEMP_DATA);
 

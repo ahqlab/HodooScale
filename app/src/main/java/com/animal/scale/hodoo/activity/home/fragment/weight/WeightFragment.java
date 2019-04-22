@@ -102,10 +102,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.bcsSubscript.setText(getResources().getString(R.string.not_data));
         binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
 
-        binding.chartView.setNoDataText(getActivity().getString(R.string.weight_data_available));
-        binding.chartView.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
+        //binding.chartView.setNoDataText(getActivity().getString(R.string.weight_data_available));
+        //binding.chartView.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
 
-        presenter = new WeightFragmentPresenter(this, binding.chartView);
+        //presenter = new WeightFragmentPresenter(this, binding.chartView);
+        presenter = new WeightFragmentPresenter(this);
         presenter.loadData(getActivity());
 
         binding.chart1.setNoDataText(getActivity().getString(R.string.weight_data_available));
@@ -139,9 +140,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
     }
 
-   //오늘차트
+    //오늘차트
     public void serChartOfDay() {
-        presenter.getDefaultData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
+        //presenter.getDefaultData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
 
     //BCS or BCS DESC and TIP
@@ -203,8 +204,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
         HomeActivity.setWeightTip(weightTip);
-        binding.collapse.setTitle(weightTip.getTitle());
-        binding.collapse.setContent(weightTip.getContent());
+        //binding.collapse.setTitle(weightTip.getTitle());
+       // binding.collapse.setContent(weightTip.getContent());
     }
 
     @Override

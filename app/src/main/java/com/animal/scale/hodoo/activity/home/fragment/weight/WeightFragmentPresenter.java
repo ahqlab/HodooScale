@@ -28,6 +28,12 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
         this.model = new WeightFragmentModel();
     }
 
+    public WeightFragmentPresenter(WeightFragment fragment){
+        this.view = fragment;
+        this.model = new WeightFragmentModel();
+    }
+
+
     public WeightFragmentPresenter(TempFragment fragment, LineChart chart){
         this.view = fragment;
         this.chart = chart;
