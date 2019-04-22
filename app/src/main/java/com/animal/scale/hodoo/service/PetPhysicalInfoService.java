@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.service;
 
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 
 import retrofit2.Call;
@@ -13,8 +14,8 @@ public interface PetPhysicalInfoService {
     Call<PetPhysicalInfo> getPhysicalIformation(@Query("groupCode") String groupCode, @Query("petIdx") int petIdx);
 
 
-    @POST("pet/physical/regist.do")
-    Call<Integer> regist(@Query("petIdx") int petIdx, @Body PetPhysicalInfo petPhysicalInfo);
+    @POST("android/pet/physical/regist.do")
+    Call<CommonResponce<Integer>> regist(@Query("petIdx") int petIdx, @Query("groupCode") String groupCode, @Body PetPhysicalInfo petPhysicalInfo);
 
 
     @POST("pet/physical/delete.do")

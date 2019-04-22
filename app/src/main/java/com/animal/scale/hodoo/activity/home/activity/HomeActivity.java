@@ -48,6 +48,7 @@ import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.domain.WeightTip;
+import com.animal.scale.hodoo.domain.single.ActivityStack;
 import com.animal.scale.hodoo.domain.single.PetAllInfo;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.util.BadgeUtils;
@@ -108,10 +109,12 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         hActivity = HomeActivity.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setActivity(this);
-
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
         presenter.loginCheck();
+
+
+
     }
 
     public void onPetImageClick(View view) {
@@ -388,7 +391,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     protected void onResume() {
         super.onResume();
-
+        ActivityStack<HomeActivity> stack =  ActivityStack.getInstance();
+        Log.e("HJLEE", " >>>>> " + stack.getClasses().size());
+        //stack.getClasses().get(0).finish();
         sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
 
         presenter.getInvitationToServer();

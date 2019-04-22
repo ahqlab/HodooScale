@@ -31,8 +31,15 @@ public class CommonModel {
 
     }
 
-    public interface CommonDomainCallBackListner<D> {
+    public interface CommonDomainListCallBackListner<D> {
         void doPostExecute(CommonResponce<List<D>> d);
+        void doPreExecute();
+        void doCancelled();
+
+    }
+
+    public interface CommonDomainCallBackListner<D> {
+        void doPostExecute(CommonResponce<D> d);
         void doPreExecute();
         void doCancelled();
 

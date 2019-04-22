@@ -343,8 +343,11 @@
     <string name="request_for_hodoo_link">그룹 참여하기</string>
     <string name="go_to_regist_pet">펫 등록 하러가기</string>
     <string name="regist_pet_desc">나의 펫을 등록하고 호두를 시작할래요</string>
-    <string name="activity_title_notice" >공지사항</string>
+    <string name="activity_title_notice">공지사항</string>
 
     <string name="common__save">저장</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- 2019-01-30 new code (e) -->
 </resources>

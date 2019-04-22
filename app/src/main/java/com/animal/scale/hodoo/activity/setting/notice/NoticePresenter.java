@@ -28,7 +28,7 @@ public class NoticePresenter implements NoticeIn.Presenter {
 
     @Override
     public void getNoticeList(int startRow, int pageSize) {
-        model.getNoticeList(startRow, pageSize, new CommonModel.CommonDomainCallBackListner<Notice>() {
+        model.getNoticeList(startRow, pageSize, new CommonModel.CommonDomainListCallBackListner<Notice>() {
             @Override
             public void doPostExecute(CommonResponce<List<Notice>> d) {
                 if(d.getStatus() == HodooConstant.OK_RESPONSE|| d.getStatus() == HodooConstant.NO_CONTENT_RESPONSE)

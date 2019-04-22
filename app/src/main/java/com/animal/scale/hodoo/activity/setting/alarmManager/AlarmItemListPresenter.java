@@ -26,7 +26,7 @@ public class AlarmItemListPresenter implements AlarmItemListIn.Presenter {
 
     @Override
     public void getAlarmItems() {
-        model.getAlarmItems(new CommonModel.CommonDomainCallBackListner<AlarmItem>() {
+        model.getAlarmItems(new CommonModel.CommonDomainListCallBackListner<AlarmItem>() {
 
             @Override
             public void doPostExecute(CommonResponce<List<AlarmItem>> d) {

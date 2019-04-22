@@ -28,7 +28,7 @@ public class AlarmItemListModel extends CommonModel {
     }
 
 
-    public void getAlarmItems(final CommonDomainCallBackListner<AlarmItem> domainCallBackListner) {
+    public void getAlarmItems(final CommonDomainListCallBackListner<AlarmItem> domainCallBackListner) {
         Call<CommonResponce<List<AlarmItem>>> call = NetRetrofit.getInstance().getAlarmItemService().getAlarmList(sharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<List<AlarmItem>>>() {
             @Override

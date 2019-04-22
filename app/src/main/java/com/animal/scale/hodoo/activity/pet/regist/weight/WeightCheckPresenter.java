@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.pet.regist.weight;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 
 public class WeightCheckPresenter implements WeightCheckIn.Presenter{
@@ -68,10 +69,10 @@ public class WeightCheckPresenter implements WeightCheckIn.Presenter{
 
     @Override
     public void registWeightInfo(int petIdx, PetWeightInfo domain) {
-        model.registWeightInformation(petIdx, domain, new CommonModel.DomainCallBackListner<Integer>() {
+        model.registWeightInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
             @Override
-            public void doPostExecute(Integer integer) {
-                view.registResult(integer);
+            public void doPostExecute(CommonResponce<Integer> d) {
+                view.registResult(d.getDomain());
             }
 
             @Override
