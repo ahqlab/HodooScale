@@ -80,8 +80,8 @@ public class WeightFragmentModel extends CommonModel {
         chart.setDragEnabled(false);
         chart.setScaleEnabled(false);
         chart.setPinchZoom(false);
-        chart.getAxisLeft().setAxisMaxValue(7f);
-        chart.getAxisLeft().setAxisMinValue(5f);
+        //chart.getAxisLeft().setAxisMaxValue(7f);
+        //chart.getAxisLeft().setAxisMinValue(5f);
 
         MyMarkerView mv = new MyMarkerView(context, R.layout.mpchart_market_layout);
         mv.setChartView(chart); // For bounds control

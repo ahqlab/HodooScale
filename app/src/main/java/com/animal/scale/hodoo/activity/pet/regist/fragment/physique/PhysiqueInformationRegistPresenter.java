@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.EditText;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 
 public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRegistIn.Presenter{
@@ -72,12 +73,14 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
         });
     }
 
+
     @Override
     public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain) {
-        model.registPhysiqueInformation(petIdx, domain, new CommonModel.DomainCallBackListner<Integer>() {
+        model.registPhysiqueInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
             @Override
-            public void doPostExecute(Integer result) {
-                view.registResult(result);
+            public void doPostExecute(CommonResponce<Integer> d) {
+                //view.nextStep(PetRegistActivity.WEIGHT_TYPE);
+                view.registResult(d.getDomain());
             }
 
             @Override

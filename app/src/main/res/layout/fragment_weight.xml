@@ -139,7 +139,7 @@
                     </RelativeLayout>
                     <!-- sync (e) -->
                 </com.animal.scale.hodoo.custom.view.TopImageLayout>
-                <com.animal.scale.hodoo.custom.view.CustomCollapse
+               <!-- <com.animal.scale.hodoo.custom.view.CustomCollapse
                     android:id="@+id/collapse"
                     android:layout_marginTop="1dp"
                     android:paddingLeft="38dp"
@@ -185,9 +185,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
-                </com.animal.scale.hodoo.custom.view.CustomCollapse>
+                </com.animal.scale.hodoo.custom.view.CustomCollapse>-->
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:paddingTop="16dp"
                     android:orientation="vertical"
                     android:layout_marginTop="1dp"
@@ -211,7 +211,7 @@
                         android:layout_gravity="center_vertical|center_horizontal"
                         android:gravity="center_vertical|center_horizontal" />
 
-                </LinearLayout>
+                </LinearLayout>-->
                 <LinearLayout
                     android:layout_marginTop="8dp"
                     android:id="@+id/averageChart"
@@ -266,7 +266,7 @@
                                 android:background="@drawable/custom_radio_background"
                                 android:button="@null"/>
                         </RadioGroup>
-                        <com.github.mikephil.charting.charts.LineChart
+                        <com.github.mikephil.charting.charts.BarChart
                             android:id="@+id/chart1"
                             android:layout_width="match_parent"
                             android:layout_height="238dp"

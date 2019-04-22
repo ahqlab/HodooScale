@@ -1,14 +1,11 @@
 package com.animal.scale.hodoo.activity.pet.regist.activity;
 
 import android.content.Context;
-import android.os.Bundle;
 
-import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistModel;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
-import com.animal.scale.hodoo.domain.PetBreed;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
@@ -180,9 +177,9 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
     }
     @Override
     public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain) {
-        model.registPhysiqueInformation(petIdx, domain, new CommonModel.DomainCallBackListner<Integer>() {
+        model.registPhysiqueInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
             @Override
-            public void doPostExecute(Integer result) {
+            public void doPostExecute(CommonResponce<Integer> d) {
                 view.nextStep(PetRegistActivity.WEIGHT_TYPE);
             }
 
@@ -219,9 +216,9 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
 
     @Override
     public void registWeightInfo(int petIdx, PetWeightInfo domain) {
-        model.registWeightInformation(petIdx, domain, new CommonModel.DomainCallBackListner<Integer>() {
+        model.registWeightInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
             @Override
-            public void doPostExecute(Integer integer) {
+            public void doPostExecute(CommonResponce<Integer> d) {
                 view.registFinish();
             }
 

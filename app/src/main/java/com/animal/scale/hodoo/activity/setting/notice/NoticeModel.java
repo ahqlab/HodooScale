@@ -6,7 +6,6 @@ import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
-import com.animal.scale.hodoo.domain.AlarmItem;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Notice;
 import com.animal.scale.hodoo.service.NetRetrofit;
@@ -22,7 +21,7 @@ public class NoticeModel extends CommonModel {
         super.loadData(context);
     }
 
-    public void getNoticeList(int startRow, int pageSize, final CommonDomainCallBackListner<Notice> domainCallBackListner) {
+    public void getNoticeList(int startRow, int pageSize, final CommonDomainListCallBackListner<Notice> domainCallBackListner) {
         Call<CommonResponce<List<Notice>>> call = NetRetrofit.getInstance().getNoticeService().getNoticeList(startRow, pageSize, sharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<List<Notice>>>() {
             @Override

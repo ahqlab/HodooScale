@@ -125,7 +125,6 @@ public class PetRegistModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-
     public interface BasicInfoRegistListner {
         void doPostExecute(Pet pet);
 
@@ -143,6 +142,8 @@ public class PetRegistModel extends CommonModel {
 
         void doPreExecute();
     }
+
+
     public void deleteDiseaseformation(int petIdx, int diseaseIdx,  final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetChronicDiseaseService().delete(petIdx, diseaseIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
@@ -163,6 +164,8 @@ public class PetRegistModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+
+
     public void registDiseaseformation(PetChronicDisease domain, int petIdx, final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetChronicDiseaseService().registDiseaseformation(domain, petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
@@ -183,6 +186,8 @@ public class PetRegistModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+
+
     public void deletePhysiqueInformation(int petIdx, int id, final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetPhysicalInfoService().delete(petIdx, id);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
@@ -203,13 +208,15 @@ public class PetRegistModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
-    public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain, final DomainCallBackListner<Integer> domainCallBackListner) {
-        Call<Integer> call = NetRetrofit.getInstance().getPetPhysicalInfoService().regist(petIdx, domain);
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
+
+
+    public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain, final CommonDomainCallBackListner<Integer> domainCallBackListner) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetPhysicalInfoService().regist(petIdx, mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), domain);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>(){
 
             @Override
-            protected void doPostExecute(Integer result) {
-                domainCallBackListner.doPostExecute(result);
+            protected void doPostExecute(CommonResponce<Integer> commonResponce) {
+                domainCallBackListner.doPostExecute(commonResponce);
             }
 
             @Override
@@ -244,13 +251,12 @@ public class PetRegistModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void registWeightInformation(int petIdx, PetWeightInfo petWeightInfo, final DomainCallBackListner<Integer> domainCallBackListner) {
-        Call<Integer> call = NetRetrofit.getInstance().getPetWeightInfoService().regist(petIdx, petWeightInfo);
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
-
+    public void registWeightInformation(int petIdx, PetWeightInfo petWeightInfo, final CommonDomainCallBackListner<Integer> domainCallBackListner) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetWeightInfoService().regist(petIdx, petWeightInfo);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>(){
             @Override
-            protected void doPostExecute(Integer integer) {
-                domainCallBackListner.doPostExecute(integer);
+            protected void doPostExecute(CommonResponce<Integer> commonResponce) {
+                domainCallBackListner.doPostExecute(commonResponce);
             }
 
             @Override
@@ -264,6 +270,8 @@ public class PetRegistModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+
+
     public void registPetType ( String path, int petType, final DomainCallBackListner<Integer> callback ) {
         Call<Integer> call = NetRetrofit.getInstance().getPetService().registPetType(path, petType);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {

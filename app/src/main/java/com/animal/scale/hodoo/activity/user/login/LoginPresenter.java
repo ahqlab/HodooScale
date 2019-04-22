@@ -134,7 +134,8 @@ public class LoginPresenter implements Login.Presenter {
             loginModel.confirmPetRegistrationResult(new CommonModel.DomainCallBackListner<CommonResponce<Integer>>() {
                 @Override
                 public void doPostExecute(CommonResponce<Integer> responce) {
-                    if(responce.getStatus() == HodooConstant.OK_RESPONSE){
+                    Log.e("HJLEE", "responce : " + responce.toString());
+                    if(responce.getStatus() == HodooConstant.OK_RESPONSE || responce.getStatus() == HodooConstant.NO_CONTENT_RESPONSE){
                         if(responce.getDomain() > 0){
                             //등록된 펫 존재함.
                             loginView.setProgress(false);

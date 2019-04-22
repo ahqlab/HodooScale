@@ -16,9 +16,13 @@ import com.animal.scale.hodoo.domain.Statistics;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.VIewUtil;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -41,15 +45,17 @@ public class WeightStatisticsModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    public void setupChart(LineChart chart, LineData data, final List<Statistics> xValues, final String type) {
+    public void setupChart(BarChart chart, BarData data, final List<Statistics> xValues, final String type) {
         chart.getDescription().setEnabled(false);
         chart.setDrawGridBackground(false);
         chart.setTouchEnabled(true);
         chart.setDragEnabled(false);
         chart.setScaleEnabled(false);
         chart.setPinchZoom(false);
-        chart.getAxisLeft().setAxisMaxValue(7f);
-        chart.getAxisLeft().setAxisMinValue(5f);
+
+        //max 와 min을 고정한다.
+        //chart.getAxisLeft().setAxisMaxValue(7f);
+        //chart.getAxisLeft().setAxisMinValue(5f);
 
         MyMarkerView mv = new MyMarkerView(context, R.layout.mpchart_market_layout);
         mv.setChartView(chart); // For bounds control
@@ -60,8 +66,9 @@ public class WeightStatisticsModel extends CommonModel {
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setAxisMinimum(0f);
-        xAxis.setGranularity(1f);
+        //line chart 에서 사용한다.
+        //xAxis.setAxisMinimum(0f);
+        //xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -79,7 +86,7 @@ public class WeightStatisticsModel extends CommonModel {
         });
         chart.setData(data);
         chart.getLegend().setEnabled(false);
-        //chart.animateX(2500);
+        chart.animateX(2500);
         chart.invalidate();
 
         Highlight highlight = new Highlight((float) data.getEntryCount(), 0, -1);
@@ -104,21 +111,21 @@ public class WeightStatisticsModel extends CommonModel {
         return xValues.get((int) value % xValues.size()).getTheYear() + context.getString(R.string.istyle_one_year);
     }
 
-    public LineData getData(ArrayList<Entry> yVals) {
-        LineDataSet set1 = new LineDataSet(yVals, "DataSet");
+    public BarData getData(ArrayList<BarEntry> yVals) {
+        BarDataSet set1 = new BarDataSet(yVals, "DataSet");
         set1.setDrawValues(false);
         //커브 곡선
-        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        set1.setCubicIntensity(0.2f);
-        set1.setDrawFilled(false);
-        set1.setDrawCircles(false);
-        set1.setLineWidth(1.8f);
-        set1.setCircleRadius(4f);
-        set1.setCircleColor(context.getResources().getColor(R.color.mainRed));
+        //set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        //set1.setCubicIntensity(0.2f);
+        //set1.setDrawFilled(false);
+        //set1.setDrawCircles(false);
+        //set1.setLineWidth(1.8f);
+        //set1.setCircleRadius(4f);
+        //set1.setCircleColor(context.getResources().getColor(R.color.mainRed));
         set1.setHighLightColor(context.getResources().getColor(R.color.mainRed));
         set1.setColor(context.getResources().getColor(R.color.mainRed));
-        set1.setDrawHorizontalHighlightIndicator(false);
-        return new LineData(set1);
+        //set1.setDrawHorizontalHighlightIndicator(false);
+        return new BarData(set1);
     }
 
     public void getDailyStatisticalData(int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {

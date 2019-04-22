@@ -30,9 +30,11 @@ import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.single.ActivityStack;
 import com.animal.scale.hodoo.util.BadgeUtils;
 import com.animal.scale.hodoo.util.VIewUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseActivity<D extends Activity> extends AppCompatActivity {
@@ -40,9 +42,7 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
     protected final String TAG = "HJLEE";
     public SharedPrefManager mSharedPrefManager;
     private boolean badgeState = false;
-
-
-
+    //public static  List<BaseActivity<D>> classes;
     public interface OnSubBtnClickListener {
         void onClick( View v );
     }
@@ -80,6 +80,8 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
         mSharedPrefManager = SharedPrefManager.getInstance(getActivityClass());
         String countryCode = VIewUtil.getMyLocationCode(getActivityClass());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.CURRENT_COUNTRY, countryCode);
+        ActivityStack<D> stack =  ActivityStack.getInstance();
+        stack.getClasses().add(getActivityClass());
     }
 
     protected abstract BaseActivity<D> getActivityClass();

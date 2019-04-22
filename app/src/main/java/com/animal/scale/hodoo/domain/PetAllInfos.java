@@ -33,6 +33,10 @@ public class PetAllInfos implements Serializable {
     @Setter
     public PetWeightInfo petWeightInfo;
 
+    @Getter
+    @Setter
+    public PetUserSelectionQuestion petUserSelectionQuestion;
+
     public float getFactor() {
         double factor = 0;
         //나이 <= 4개월
@@ -118,7 +122,6 @@ public class PetAllInfos implements Serializable {
         }else{
             factor = 0;
         }
-        //Log.e("HJLEE", "factor : " + Float.parseFloat(String.valueOf(factor)));
         return Float.parseFloat(String.valueOf(factor));
     }
 

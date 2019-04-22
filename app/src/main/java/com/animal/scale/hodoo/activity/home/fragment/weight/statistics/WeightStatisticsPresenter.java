@@ -4,7 +4,9 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
@@ -17,11 +19,11 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
     WeightStatisticsModel model;
 
-    LineChart chart;
+    BarChart chart;
 
     private Context mContext;
 
-    public WeightStatisticsPresenter(WeightStatistics.View view, LineChart chart) {
+    public WeightStatisticsPresenter(WeightStatistics.View view, BarChart chart) {
         this.view = view;
         this.chart = chart;
         this.model = new WeightStatisticsModel();
@@ -168,9 +170,9 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     private void setStatisticalData(List<Statistics> d, String type) {
-        ArrayList<Entry> yVals = new ArrayList<Entry>();
+        ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
         for (int i = 0; i < d.size(); i++) {
-            yVals.add(new Entry(i, d.get(i).getAverage()));
+            yVals.add(new BarEntry(i, d.get(i).getAverage()));
         }
         model.setupChart(chart, model.getData(yVals), d, type);
     }
