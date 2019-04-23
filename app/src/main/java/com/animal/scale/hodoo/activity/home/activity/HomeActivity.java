@@ -113,9 +113,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
         presenter.loginCheck();
-
-
-
     }
 
     public void onPetImageClick(View view) {
