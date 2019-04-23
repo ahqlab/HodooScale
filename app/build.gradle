@@ -122,4 +122,6 @@ dependencies {
 
     /* implementation project(':esp8266')*/
     implementation project(':esp8266')
+
+    implementation 'com.android.support:gridlayout-v7:27.1.1'
 }
