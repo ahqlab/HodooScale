@@ -1,6 +1,7 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight.statistics;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Statistics;
@@ -171,6 +172,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
     private void setStatisticalData(List<Statistics> d, String type) {
         ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
+        Log.e("HJLEE", "size : " + d.size());
         for (int i = 0; i < d.size(); i++) {
             yVals.add(new BarEntry(i, d.get(i).getAverage()));
         }
