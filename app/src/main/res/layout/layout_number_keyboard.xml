@@ -15,7 +15,8 @@
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
         <LinearLayout
             android:padding="16dp"
             android:orientation="vertical"
@@ -138,7 +139,7 @@
 
         <Button
             android:layout_alignParentBottom="true"
-            android:id="@+id/next_step"
+            android:id="@+id/done_btn"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -150,7 +151,6 @@
             android:background="@drawable/pink_btn"
             android:text="@string/compleate"
             android:textColor="@color/white"
-            android:onClick="@{activity::onClickDone}"
             android:textStyle="bold"
             android:visibility="@{state ? View.VISIBLE : View.INVISIBLE}"/>
 

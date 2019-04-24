@@ -33,6 +33,9 @@ public interface PetService {
     @POST("pet/all/infos.do")
     Call<PetAllInfos> petAllInfos(@Query("petIdx") int petIdx);
 
+    @POST("android/pet/all/infos.do")
+    Call<CommonResponce<PetAllInfos>> petAllInfosForAndroid(@Query("petIdx") int petIdx);
+
     @POST("android/pet/get/breed/of/type.do")
     Call<CommonResponce<List<PetBreed>>> getAllBreed( @Query("location") String location, @Query("typeIdx") int typeIdx );
 

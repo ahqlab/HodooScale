@@ -59,6 +59,7 @@ public class NetRetrofit {
     AppVersionService appVersionService =  retrofit.create(AppVersionService.class);
     AlarmItemService alarmItemService =  retrofit.create(AlarmItemService.class);
     NoticeService noticeService =  retrofit.create(NoticeService.class);
+    BodyFatRiskService bodyFatRiskService = retrofit.create(BodyFatRiskService.class);
 
 
     public UserService getUserService() {
@@ -117,5 +118,7 @@ public class NetRetrofit {
     public AlarmItemService getAlarmItemService() { return alarmItemService; }
 
     public NoticeService getNoticeService() { return noticeService; }
+
+    public BodyFatRiskService getBodyFatRiskService () { return bodyFatRiskService; }
 }
 
