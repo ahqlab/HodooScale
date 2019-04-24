@@ -26,6 +26,7 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentTempBinding;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
+import com.animal.scale.hodoo.domain.WeightGoalChart;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.TextManager;
@@ -201,6 +202,16 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void setCalendar() {
+
+    }
+
+    @Override
+    public void setWeightGoal(WeightGoalChart d) {
+
+    }
+
+    @Override
+    public void setLastCollectionData(RealTimeWeight d) {
 
     }
 

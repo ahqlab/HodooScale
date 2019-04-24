@@ -150,12 +150,12 @@
     <string name="istyle_one_year">년</string>
     <!-- MealFragment -->
     <!-- WeightFragment -->
-    <string name="average_weight_for_today">AVERAGE WEIGHT FOR TODAY</string>
+    <string name="average_weight_for_today">CURRENT WEIGHT</string>
     <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
     <string name="weight_for_today">오늘의 체중</string>
     <string name="temp_for_today">today\'s temp</string>
-    <string name="bcs_step_str">BCS STEP</string>
-    <string name="bcs_description_str">BCS DESCRIPTION</string>
+    <string name="bcs_step_str">REMAINS</string>
+    <string name="bcs_description_str">WEIGHT GOAL</string>
     <string name="last_sync_refresh_str">Last refresh</string>
     <string name="not_data">No Data</string>
     <string name="today_intake_kcal">일일 섭취 총 칼로리</string>
