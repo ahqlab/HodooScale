@@ -79,21 +79,16 @@
                             android:textSize="16sp"
                             android:textColor="#030303"
                             android:textStyle="bold"/>
-                        <RelativeLayout
+                        <TextView
+                            android:id="@+id/goal_weight"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/goal_weight"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="60sp"
-                                android:text="4.8kg"
-                                android:fontFamily="sans-serif-light"
-                                android:textStyle="normal"
-                                android:textColor="#030303"
-                                android:textAlignment="textEnd"/>
-                        </RelativeLayout>
+                            android:layout_height="wrap_content"
+                            android:textSize="60sp"
+                            android:text="36.0kg"
+                            android:fontFamily="sans-serif-light"
+                            android:textStyle="normal"
+                            android:textColor="#030303"
+                            android:textAlignment="textEnd"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -140,13 +135,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="60sp"
-                            android:text="150g"
+                            android:text="0kcal"
                             android:letterSpacing="-0.02"
                             android:fontFamily="sans-serif-light"
                             android:textStyle="normal"
                             android:textColor="#030303"
                             android:textAlignment="textEnd"/>
                         <Button
+                            android:id="@+id/meal_btn"
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:layout_alignParentRight="true"

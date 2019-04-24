@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.WeightTip;
@@ -204,20 +205,20 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
     @Override
     public void loadCustomPetListDialog() {
-        model.getPetAllInfo(new CommonModel.DomainListCallBackListner<PetAllInfos>() {
+        model.getPetAllInfo(new CommonModel.ObjectCallBackListner<CommonResponce<List<PetAllInfos>>>() {
             @Override
-            public void doPostExecute(List<PetAllInfos> petAllInfos) {
-                view.setCustomPetListDialog(petAllInfos);
+            public void doPostExecute(CommonResponce<List<PetAllInfos>> listCommonResponce) {
+                view.setCustomPetListDialog(listCommonResponce.domain);
             }
 
             @Override
             public void doPreExecute() {
-                //view.setProgress(true);
+
             }
 
             @Override
             public void doCancelled() {
-                //view.setProgress(false);
+
             }
         });
 
