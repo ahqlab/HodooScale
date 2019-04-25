@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.activity.ActivityQuestionFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.basic.BasicInfomationFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.disease.DiseaseInfomationFragment;
@@ -254,7 +255,7 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if ( loginRegistState ) {
-                            Intent intent = new Intent(PetRegistActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(PetRegistActivity.this, HomeActivity.class);
                             startActivity(intent);
                         }
                         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
