@@ -34,6 +34,7 @@ public class PetAccountPresenter implements PetAccounts.Presenter{
                    model.addRegistBtn(data);
                    view.setAdapter(data);
                }else{
+                   model.removeCurrentPetIdx();
                    view.goToPetRegistActivity();
                }
            }

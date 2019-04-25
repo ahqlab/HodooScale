@@ -84,6 +84,9 @@ public class PetAccountModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
 
     }
+    public void removeCurrentPetIdx () {
+        mSharedPrefManager.removePreference(SharedPrefVariable.CURRENT_PET_IDX);
+    }
 
     public interface asyncTaskListner {
         void doPostExecute(List<PetAllInfos> data);

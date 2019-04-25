@@ -54,7 +54,7 @@ public class DashBoardModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
     public void updatePhysical(PetPhysicalInfo info, final CommonModel.ObjectCallBackListner<CommonResponce<PetPhysicalInfo>> callBackListner) {
-        Call<CommonResponce<PetPhysicalInfo>> call = NetRetrofit.getInstance().getPetPhysicalInfoService().update(info);
+        Call<CommonResponce<PetPhysicalInfo>> call = NetRetrofit.getInstance().getPetPhysicalInfoService().update(sharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX), sharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE),info);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<PetPhysicalInfo>>() {
 
             @Override
