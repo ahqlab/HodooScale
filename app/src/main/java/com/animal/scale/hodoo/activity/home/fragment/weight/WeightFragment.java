@@ -64,7 +64,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     WeightStatistics.Presenter statisicsPresenter;
 
     public int bcs;
-    private boolean refrashState = false;
+    private boolean refrashState = true;
     private String[] bcsArr;
     private long nowTime;
     private SimpleDateFormat lastRefreshSdf = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
@@ -74,7 +74,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     private String calendarDate = "";
 
-    private boolean realTimeMode = false;
+    private boolean realTimeMode = true;
 
     public WeightFragment() {
     }
