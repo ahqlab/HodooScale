@@ -46,6 +46,7 @@ public class WeightStatisticsModel extends CommonModel {
     }
 
     public void setupChart(BarChart chart, BarData data, final List<Statistics> xValues, final String type) {
+        Log.e("HJLEE", ">>> " + xValues.size());
         chart.getDescription().setEnabled(false);
         chart.setDrawGridBackground(false);
         chart.setTouchEnabled(true);
@@ -62,13 +63,12 @@ public class WeightStatisticsModel extends CommonModel {
         chart.setMarker(mv); // Set the marker to the chart
 //        chart.setBackgroundColor(Color.parseColor("#f7f7f7"));
         chart.getAxisRight().setEnabled(false);
-        chart.getXAxis().setDrawGridLines(false);
+        //chart.getXAxis().setDrawGridLines(false);
+
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        //line chart 에서 사용한다.
-        //xAxis.setAxisMinimum(0f);
-        //xAxis.setGranularity(1f);
+       // xAxis.setDrawGridLines(false);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -85,6 +85,7 @@ public class WeightStatisticsModel extends CommonModel {
             }
         });
         chart.setData(data);
+        chart.setFitBars(true);
         chart.getLegend().setEnabled(false);
         chart.animateX(2500);
         chart.invalidate();
@@ -125,7 +126,9 @@ public class WeightStatisticsModel extends CommonModel {
         set1.setHighLightColor(context.getResources().getColor(R.color.mainRed));
         set1.setColor(context.getResources().getColor(R.color.mainRed));
         //set1.setDrawHorizontalHighlightIndicator(false);
-        return new BarData(set1);
+        BarData data = new BarData(set1);
+        data.setBarWidth(0.1f);
+        return data;
     }
 
     public void getDailyStatisticalData(int type, final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {

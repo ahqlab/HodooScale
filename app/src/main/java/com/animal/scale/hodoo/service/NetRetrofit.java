@@ -61,6 +61,7 @@ public class NetRetrofit {
     AlarmItemService alarmItemService =  retrofit.create(AlarmItemService.class);
     NoticeService noticeService =  retrofit.create(NoticeService.class);
     BodyFatRiskService bodyFatRiskService = retrofit.create(BodyFatRiskService.class);
+    WeightGoalChartService weightGoalChartService =  retrofit.create(WeightGoalChartService.class);
 
     PetUserSelectQuestionService petUserSelectionQuestionService = retrofit.create(PetUserSelectQuestionService.class);
 
@@ -118,12 +119,20 @@ public class NetRetrofit {
 
     public AppVersionService getAppVersionService() { return appVersionService; }
 
-    public AlarmItemService getAlarmItemService() { return alarmItemService; }
+    public AlarmItemService getAlarmItemService() {
+        return alarmItemService;
+    }
 
-    public NoticeService getNoticeService() { return noticeService; }
-
-    public BodyFatRiskService getBodyFatRiskService () { return bodyFatRiskService; }
-
+    public NoticeService getNoticeService() {
+        return noticeService;
+    }
     public PetUserSelectQuestionService getPetUserSelectionQuestionService() {return petUserSelectionQuestionService;}
+    public BodyFatRiskService getBodyFatRiskService(){
+        return  bodyFatRiskService;
+    }
+
+    public WeightGoalChartService getWeightGoalChartService(){
+        return weightGoalChartService;
+    }
 }
 

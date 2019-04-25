@@ -7,6 +7,15 @@ import lombok.Data;
 @Data
 public class Statistics implements Serializable {
 
+    public Statistics(){
+
+    }
+
+    public Statistics(String theDay, float average) {
+        this.theDay = theDay;
+        this.average = average;
+    }
+
     private String theHour;
 
     private String theDay;

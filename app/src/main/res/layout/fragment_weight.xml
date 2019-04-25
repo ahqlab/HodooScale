@@ -39,6 +39,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_marginTop="8dp"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
@@ -46,22 +47,17 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                    android:paddingBottom="22dp"
                 android:background="@android:color/white"
                 android:gravity="center_horizontal">
                     <com.animal.scale.hodoo.custom.view.WeightView
                         android:id="@+id/weight_view"
-                        app:displayNum="2"
+                        app:displayNum="1"
                         app:textSize="40sp"
                         app:sufFix="kg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"/>
-                    <TextView
-                        android:layout_marginTop="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/average_weight_for_today"
-                        android:textColor="#9b9b9b"/>
 
                     <!-- bcs (s) -->
                     <LinearLayout
@@ -80,6 +76,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
+                                android:textColor="@color/mainRed"
                                 android:text="0"/>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -104,7 +101,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=""
-                                android:textColor="@color/mainRed"/>
+                                />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -114,7 +111,7 @@
                     </LinearLayout>
                     <!-- bcs (e) -->
                     <!-- sync (s) -->
-                    <RelativeLayout
+                    <!--<RelativeLayout
                         android:paddingTop="30dp"
                         android:paddingBottom="22dp"
                         android:paddingLeft="38dp"
@@ -136,7 +133,7 @@
                             android:layout_height="14dp"
                             android:src="@drawable/refresh"
                             android:onClick="@{activity::onRefreshClick}"/>
-                    </RelativeLayout>
+                    </RelativeLayout>-->
                     <!-- sync (e) -->
                 </com.animal.scale.hodoo.custom.view.TopImageLayout>
                <!-- <com.animal.scale.hodoo.custom.view.CustomCollapse
@@ -221,6 +218,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="16sp"
+                        android:textColor="#9b9b9b"
+                        android:letterSpacing="-0.01"
+                        android:layout_marginBottom="11dp"
+                        android:gravity="center_horizontal"
+                        android:text="체중 통계"
+                        />
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
@@ -257,14 +266,14 @@
                                 android:textColor="@drawable/custom_radio_background"
                                 android:background="@drawable/custom_radio_background"
                                 android:button="@null"/>
-                            <RadioButton
+                        <!--    <RadioButton
                                 android:id="@+id/chart_year"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/one_year"
                                 android:textColor="@drawable/custom_radio_background"
                                 android:background="@drawable/custom_radio_background"
-                                android:button="@null"/>
+                                android:button="@null"/>-->
                         </RadioGroup>
                         <com.github.mikephil.charting.charts.BarChart
                             android:id="@+id/chart1"

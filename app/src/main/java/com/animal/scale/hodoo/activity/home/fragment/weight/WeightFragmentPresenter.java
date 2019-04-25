@@ -4,10 +4,13 @@ import android.content.Context;
 
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.animal.scale.hodoo.domain.WeightGoalChart;
 import com.animal.scale.hodoo.domain.WeightTip;
+import com.animal.scale.hodoo.util.DateUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 
@@ -99,6 +102,21 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
     }
 
     private void getDayData(List<Statistics> d) {
+        /*String[] dayArray = {"월","화","수","목", "금", "토", "일"};
+        ArrayList<Entry> yVals = new ArrayList<Entry>();
+        for (int i = 0; i < dayArray.length; i++){
+            for (int j = 0; j < d.size(); i++) {
+                if(d.get(j).getTheDay().equals(dayArray[i])){
+                    yVals.add(new Entry(i, d.get(i).getAverage()));
+                }else{
+                    Statistics statistics = new Statistics();
+                    statistics.setTheDay("no");
+                    statistics.setAverage(0);
+                    yVals.add(new Entry(i, statistics.getAverage()));
+                }
+            }
+        }*/
+
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < d.size(); i++) {
             yVals.add(new Entry(i, d.get(i).getAverage()));
@@ -116,11 +134,11 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
             @Override
             public void doPostExecute(RealTimeWeight d) {
                 view.setLastCollectionDataOrSaveAvgWeight(d);
-                /*if(date.matches(DateUtil.getCurrentDatetime())){
+                if(date.matches(DateUtil.getCurrentDatetime())){
                     view.setLastCollectionDataOrSaveAvgWeight(d);
                 }else{
                     view.setLastCollectionData(d);
-                }*/
+                }
             }
             @Override
             public void doPreExecute() {
@@ -144,6 +162,26 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
             @Override
             public void doPostExecute(WeightTip weightTip) {
                 view.setTipMessageOfCountry(weightTip);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+
+    @Override
+    public void getWeightGoal(float currentWeight, int bodyFat, int petType) {
+        model.getWeightGoal(currentWeight, bodyFat, petType, new CommonModel.CommonDomainCallBackListner<WeightGoalChart>() {
+            @Override
+            public void doPostExecute(CommonResponce<WeightGoalChart> d) {
+                view.setWeightGoal(d.getDomain());
             }
 
             @Override

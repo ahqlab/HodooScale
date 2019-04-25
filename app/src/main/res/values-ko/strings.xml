@@ -189,19 +189,19 @@
     <!-- MealFragment -->
 
     <!-- WeightFragment -->
-    <string name="average_weight_for_today">일일 평균 체중</string>
+    <string name="average_weight_for_today">현재 체중</string>
     <string name="average_temp_for_today">AVERAGE TEMP FOR TODAY</string>
     <string name="weight_for_today">today\'s weight</string>
     <string name="temp_for_today">today\'s temp</string>
-    <string name="bcs_step_str">BCS STEP</string>
-    <string name="bcs_description_str">BCS DESCRIPTION</string>
+    <string name="bcs_step_str">남은 체중</string>
+    <string name="bcs_description_str">목표 체중</string>
     <string name="last_sync_refresh_str">Last refresh</string>
     <string name="not_data">No Data</string>
     <string name="today_intake_kcal">일일 섭취 총 칼로리</string>
 
-    <string name="one_day">하루</string>
-    <string name="one_week">한주</string>
-    <string name="one_month">한달</string>
+    <string name="one_day">일별</string>
+    <string name="one_week">주별</string>
+    <string name="one_month">월별</string>
     <string name="one_year">년</string>
 
     <!-- Meal Detail Info Dialog -->

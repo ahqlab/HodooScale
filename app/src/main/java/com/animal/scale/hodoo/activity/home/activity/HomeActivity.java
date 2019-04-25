@@ -311,12 +311,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         else if (tf instanceof WeightFragment) {
             WeightFragment weightFragment = (WeightFragment) tf;
             weightFragment.setBcsOrBscDescAndTip(selectPet);
-            weightFragment.serChartOfDay();
+            //일일 데이터 삭제
+            //weightFragment.serChartOfDay();
             weightFragment.setKg();
-
-            if ( selectPet != null )
-                if ( selectPet.getPetWeightInfo().getBcs() >= 20 )
-                    selectPet.getPetWeightInfo().setBcs( selectPet.getPetWeightInfo().getBcs() / 10 - 1 );
+            weightFragment.refrashChart();
             weightFragment.getTipMessageOfCountry(selectPet);
         } else if (tf instanceof MealFragment) {
             MealFragment mealFragment = (MealFragment) tf;
