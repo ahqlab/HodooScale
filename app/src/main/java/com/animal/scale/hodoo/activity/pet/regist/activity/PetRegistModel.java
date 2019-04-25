@@ -18,6 +18,7 @@ import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
+import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.HttpUtill;
@@ -291,7 +292,44 @@ public class PetRegistModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    public void registPetUserSelectQuestion (int petIdx, PetUserSelectionQuestion petUserSelectionQuestion, final CommonModel.ObjectCallBackListner<CommonResponce<Integer>> callback) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetService().registPetUserSelectQuestion(petIdx, petUserSelectionQuestion);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<Integer> integerCommonResponce) {
+                callback.doPostExecute(integerCommonResponce);
+            }
 
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+    public void deletePetUserSelectQuestion ( int petIdx, int questionIdx, final CommonModel.ObjectCallBackListner<CommonResponce<Integer>> callback ) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetService().deletePetUserSelectQuestion(petIdx, questionIdx);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<Integer> integerCommonResponce) {
+                callback.doPostExecute(integerCommonResponce);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
 
 
 }

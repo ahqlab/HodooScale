@@ -98,7 +98,7 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/pink_btn"
                         android:onClick="@{activity::onClickCompleateBtn}"
-                        android:text="@string/compleate"
+                        android:text="@string/add_pet_next_btn"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="40dp"
                         android:textColor="@color/white"

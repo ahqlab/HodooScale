@@ -309,7 +309,7 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
 
         if (binding.getDomain().getBcs() > 0) {
             ((PetRegistActivity) getActivity()).setPetWeightInfo(binding.getDomain());
-            ((PetRegistActivity) getActivity()).regist();
+            ((PetRegistActivity) getActivity()).nextFragment();
 //            presenter.deleteWeightInfo(petIdx, binding.getDomain().getId());
         } else {
             showBasicOneBtnPopup(null, getResources().getString(R.string.istyle_required_select_bcs_message))
@@ -491,6 +491,8 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
         });*/
     }
     public void setPetIdx ( int petType ) {
+        if ( petType == 0 )
+            petType = 1;
         if ( this.petType != petType ) {
             binding.bfiWrap.removeAllViews();
             result = null;

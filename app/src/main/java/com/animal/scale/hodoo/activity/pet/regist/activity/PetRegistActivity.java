@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.pet.regist.fragment.activity.ActivityQuestionFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.basic.BasicInfomationFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.disease.DiseaseInfomationFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.physique.PhysiqueInfomationRegistFragment;
@@ -35,6 +36,7 @@ import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
+import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.util.VIewUtil;
 
@@ -51,6 +53,7 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     public static final int DISEASE_TYPE = 1;
     public static final int PHYSIQUE_TYPE = 2;
     public static final int WEIGHT_TYPE = 3;
+    public static final int PET_USER_SELECT_QUESTION_TYPE = 4;
 
 
     private ActivityPetRegistBinding binding;
@@ -60,17 +63,22 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
             PetTypeFragment.newInstance(),
             BasicInfomationFragment.newInstance(),
             PhysiqueInfomationRegistFragment.newInstance(),
-            WeightCheckFragment.newInstance()
+            WeightCheckFragment.newInstance(),
+            ActivityQuestionFragment.newInstance()
     };
     private int fragmentPosition = 0;
     private PetRegistIn.Presenter presenter;
     private String location;
     private int petType;
 
+    /* data (s) */
     private PetBasicInfo petBasicInfo;
     private PetChronicDisease petDiseaseInfo;
     private PetPhysicalInfo petPhysicalInfo;
     private PetWeightInfo petWeightInfo;
+    private PetUserSelectionQuestion petUserSelectionQuestion;
+    /* data (e) */
+
     private CircleImageView profile;
 
     public static final int PET_TYPE_INFO = 0;
@@ -178,6 +186,17 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
                     presenter.deleteWeightInfo(petIdx, petWeightInfo.getId());
                 }
                 break;
+            case PET_USER_SELECT_QUESTION_TYPE :
+                petUserSelectionQuestion.setBodyFat(petWeightInfo.getBcs());
+                if ( petUserSelectionQuestion != null ) {
+                    if (  petUserSelectionQuestion.getQuestionIdx() == 0 ) {
+                        presenter.registPetUserSelectQuestion(petIdx, petUserSelectionQuestion);
+                    } else {
+                        presenter.deletePetUserSelectQuestion(petIdx, petUserSelectionQuestion.getQuestionIdx());
+                    }
+//                    presenter.registPetType();
+                }
+                break;
         }
     }
 
@@ -193,13 +212,16 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     @Override
     public void registBasicInfo(int result) {
         String REQUEST_URL = "";
+        petBasicInfo.setPetType(petType);
         if ( !editModeState ) {
             REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist.do";
+            presenter.registBasicInfo( REQUEST_URL, petBasicInfo, profile );
         } else {
             REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/update.do";
+            presenter.updateBasicInfo( REQUEST_URL, petBasicInfo, profile );
         }
-        petBasicInfo.setPetType(petType);
-        presenter.registBasicInfo( REQUEST_URL, petBasicInfo, profile );
+
+
     }
 
     @Override
@@ -215,6 +237,11 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     @Override
     public void registWeightInfo() {
         presenter.registWeightInfo(petIdx, petWeightInfo);
+    }
+
+    @Override
+    public void registPetUserSelectQuestion() {
+        presenter.registPetUserSelectQuestion(petIdx, petUserSelectionQuestion);
     }
 
     @Override
@@ -256,20 +283,29 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     public void setPetWeightInfo ( PetWeightInfo petWeightInfo ) {
         this.petWeightInfo = petWeightInfo;
     }
+    public void setPetUserSelectionQuestion ( PetUserSelectionQuestion petUserSelectionQuestion ) {
+        this.petUserSelectionQuestion = petUserSelectionQuestion;
+    }
     public void setPetType ( int petType ) {
         this.petType = petType;
     }
     public void regist() {
         binding.setStatus(true);
         String REQUEST_URL = "";
-        if ( !editModeState ) {
-            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist.do";
-        } else {
-            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/update.do";
-        }
+//        if ( !editModeState ) {
+//            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist.do";
+//        } else {
+//            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/update.do";
+//        }
         petBasicInfo.setSelectedBfi(petWeightInfo.getSelectedBfi());
         petBasicInfo.setPetType(petType);
-        presenter.registBasicInfo( REQUEST_URL, petBasicInfo, profile );
+        if ( !editModeState ) {
+            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist.do";
+            presenter.registBasicInfo( REQUEST_URL, petBasicInfo, profile );
+        } else {
+            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/update.do";
+            presenter.updateBasicInfo( REQUEST_URL, petBasicInfo, profile );
+        }
     }
 
     @Override

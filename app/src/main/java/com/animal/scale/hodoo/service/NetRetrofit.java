@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.service;
 
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
+import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -61,6 +62,8 @@ public class NetRetrofit {
     NoticeService noticeService =  retrofit.create(NoticeService.class);
     BodyFatRiskService bodyFatRiskService = retrofit.create(BodyFatRiskService.class);
     WeightGoalChartService weightGoalChartService =  retrofit.create(WeightGoalChartService.class);
+
+    PetUserSelectQuestionService petUserSelectionQuestionService = retrofit.create(PetUserSelectQuestionService.class);
 
 
     public UserService getUserService() {
@@ -123,7 +126,7 @@ public class NetRetrofit {
     public NoticeService getNoticeService() {
         return noticeService;
     }
-
+    public PetUserSelectQuestionService getPetUserSelectionQuestionService() {return petUserSelectionQuestionService;}
     public BodyFatRiskService getBodyFatRiskService(){
         return  bodyFatRiskService;
     }

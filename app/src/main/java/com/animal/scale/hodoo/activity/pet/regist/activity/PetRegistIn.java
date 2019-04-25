@@ -8,6 +8,7 @@ import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
+import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public interface PetRegistIn {
 
         void registPhysiqueInfo();
         void registWeightInfo();
+        void registPetUserSelectQuestion();
 
         void registFinish();
     }
@@ -51,6 +53,7 @@ public interface PetRegistIn {
         void registPetType( int petType, boolean editType );
 
         void registBasicInfo ( String requestUrl, PetBasicInfo info, CircleImageView profile );
+        void updateBasicInfo(String requestUrl, PetBasicInfo info, CircleImageView profile);
         /* BasicInfomation (e) */
 
         /* DiseaseInfomation (s) */
@@ -64,6 +67,9 @@ public interface PetRegistIn {
 
         void deleteWeightInfo(int petIdx, int id);
         void registWeightInfo(int petIdx, PetWeightInfo domain);
+
+        void registPetUserSelectQuestion (int petIdx, PetUserSelectionQuestion petUserSelectionQuestion);
+        void deletePetUserSelectQuestion (int petIdx, int questionIdx);
 
         /* DiseaseInfomation (e) */
     }
