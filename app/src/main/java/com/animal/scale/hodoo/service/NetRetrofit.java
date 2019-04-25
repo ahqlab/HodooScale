@@ -116,8 +116,20 @@ public class NetRetrofit {
 
     public AppVersionService getAppVersionService() { return appVersionService; }
 
-    public AlarmItemService getAlarmItemService() { return alarmItemService; }
+    public AlarmItemService getAlarmItemService() {
+        return alarmItemService;
+    }
 
-    public NoticeService getNoticeService() { return noticeService; }
+    public NoticeService getNoticeService() {
+        return noticeService;
+    }
+
+    public BodyFatRiskService getBodyFatRiskService(){
+        return  bodyFatRiskService;
+    }
+
+    public WeightGoalChartService getWeightGoalChartService(){
+        return weightGoalChartService;
+    }
 }
 
