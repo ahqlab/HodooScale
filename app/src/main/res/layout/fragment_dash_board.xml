@@ -42,7 +42,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="60sp"
-                                android:text="4.8kg"
                                 android:fontFamily="sans-serif-light"
                                 android:textStyle="normal"
                                 android:textColor="#030303"
@@ -84,7 +83,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="60sp"
-                            android:text="36.0kg"
                             android:fontFamily="sans-serif-light"
                             android:textStyle="normal"
                             android:textColor="#030303"
@@ -93,6 +91,61 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:layout_below="@+id/weight_wrap"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginBottom="64dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비만도"
+                    android:textSize="16sp"
+                    android:textColor="#030303"
+                    android:textStyle="bold"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/risk"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="60sp"
+                        android:text="위험도"
+                        android:textAlignment="viewEnd"
+                        android:letterSpacing="-0.02"
+                        android:fontFamily="sans-serif-light"
+                        android:textStyle="normal"
+                        android:textColor="#030303"/>
+                    <TextView
+                        android:layout_below="@+id/risk"
+                        android:id="@+id/risk_level"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="60sp"
+                        android:letterSpacing="-0.02"
+                        android:fontFamily="sans-serif-light"
+                        android:textStyle="normal"
+                        android:textColor="#030303"
+                        android:textAlignment="textEnd" />
+                    <Button
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:layout_below="@+id/risk_level"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="업데이트 하기 ->"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
                 android:layout_below="@+id/weight_wrap"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -192,60 +245,7 @@
                         </RelativeLayout>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_marginTop="1dp"
-                        android:background="@color/white"
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_marginBottom="64dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="비만도"
-                            android:textSize="16sp"
-                            android:textColor="#030303"
-                            android:textStyle="bold"/>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/risk"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="60sp"
-                                android:text="위험도"
-                                android:textAlignment="viewEnd"
-                                android:letterSpacing="-0.02"
-                                android:fontFamily="sans-serif-light"
-                                android:textStyle="normal"
-                                android:textColor="#030303"/>
-                            <TextView
-                                android:layout_below="@+id/risk"
-                                android:id="@+id/risk_level"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="60sp"
-                                android:text="낮음"
-                                android:letterSpacing="-0.02"
-                                android:fontFamily="sans-serif-light"
-                                android:textStyle="normal"
-                                android:textColor="#030303"
-                                android:textAlignment="textEnd" />
-                            <Button
-                                android:minWidth="0dp"
-                                android:minHeight="0dp"
-                                android:layout_below="@+id/risk_level"
-                                android:layout_alignParentRight="true"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:text="업데이트 하기 ->"/>
-                        </RelativeLayout>
-                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
