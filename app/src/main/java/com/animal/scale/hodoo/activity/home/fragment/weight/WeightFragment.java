@@ -174,13 +174,17 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setWeightGoal(WeightGoalChart d) {
+        Log.e("HJLEE", d.toString());
+
         float currentWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight());
         float goal = d.getWeightGoal();
         float remains = currentWeight - goal;
         if(remains == 0){
             binding.bcsStep.setText((int) remains + "Kg");
         }else{
-            binding.bcsStep.setText(remains + "Kg");
+            DecimalFormat df = new DecimalFormat("#.#");
+            String result = df.format(remains);
+            binding.bcsStep.setText(result + "Kg");
         }
         if(goal == 0){
             binding.bcsSubscript.setText((int) goal + "Kg");
@@ -213,10 +217,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void setBcsAndBcsDesc(int bcs) {
 
+        Log.e("HJLEE", selectPet.toString());
         float currentWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight());
-        //int bodyFat = selectPet.getPetUserSelectionQuestion().getBodyFat();
-        int bodyFat = 20;
-        int petType = selectPet.getPet().getPetType() == 0 ? 1 : 2;
+        int bodyFat = selectPet.getPetUserSelectionQuestion().getBodyFat();
+        int petType = selectPet.getPetBasicInfo().getPetType();
         presenter.getWeightGoal(currentWeight, bodyFat, petType);
 
         //this.bcs = bcs;

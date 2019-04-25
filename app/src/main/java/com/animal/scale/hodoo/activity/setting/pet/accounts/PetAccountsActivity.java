@@ -170,9 +170,7 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
     public void goToPetRegistActivity() {
         homeActivity.finish();
         settingListActivity.finish();
-        Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
-        intent.putExtra("petIdx", 0);
-        intent.putExtra("deleteAllPet", true);
+        Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
         startActivity(intent);
         finish();
     }
