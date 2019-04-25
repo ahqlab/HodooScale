@@ -171,6 +171,7 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         homeActivity.finish();
         settingListActivity.finish();
         Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
+        intent.putExtra(HodooConstant.LOGIN_PET_REGIST, true);
         startActivity(intent);
         finish();
     }

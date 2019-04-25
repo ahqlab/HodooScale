@@ -18,7 +18,7 @@ public interface PetPhysicalInfoService {
     Call<CommonResponce<Integer>> regist(@Query("petIdx") int petIdx, @Query("groupCode") String groupCode, @Body PetPhysicalInfo petPhysicalInfo);
 
     @POST("android/pet/physical/update.do")
-    Call<CommonResponce<PetPhysicalInfo>> update(@Body PetPhysicalInfo petPhysicalInfo);
+    Call<CommonResponce<PetPhysicalInfo>> update(@Query("petIdx") int petIdx, @Query("groupCode") String groupCode, @Body PetPhysicalInfo petPhysicalInfo);
 
 
     @POST("pet/physical/delete.do")
