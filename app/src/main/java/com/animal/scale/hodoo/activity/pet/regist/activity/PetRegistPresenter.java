@@ -2,12 +2,14 @@ package com.animal.scale.hodoo.activity.pet.regist.activity;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistModel;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
+import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 
 import java.util.List;
@@ -119,6 +121,21 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
     }
 
     @Override
+    public void updateBasicInfo(String requestUrl, PetBasicInfo info, CircleImageView profile) {
+        model.updateBasicInfo(requestUrl, info, profile, new BasicInformationRegistModel.BasicInfoUpdateListner() {
+            @Override
+            public void doPostExecute() {
+                view.nextStep(PetRegistActivity.DISEASE_TYPE);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+        });
+    }
+
+    @Override
     public void deleteDiseaseInformation(int petIdx, int diseaseIdx) {
         model.deleteDiseaseformation(petIdx, diseaseIdx, new CommonModel.DomainCallBackListner<Integer>()  {
             @Override
@@ -219,7 +236,52 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         model.registWeightInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(CommonResponce<Integer> d) {
-                view.registFinish();
+                view.nextStep(PetRegistActivity.PET_USER_SELECT_QUESTION_TYPE);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+
+    @Override
+    public void registPetUserSelectQuestion(int petIdx, PetUserSelectionQuestion petUserSelectionQuestion) {
+        model.registPetUserSelectQuestion(petIdx, petUserSelectionQuestion, new CommonModel.ObjectCallBackListner<CommonResponce<Integer>>() {
+            @Override
+            public void doPostExecute(CommonResponce<Integer> integerCommonResponce) {
+                if ( integerCommonResponce.domain > 0 ) {
+                    view.registFinish();
+                }
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+
+    @Override
+    public void deletePetUserSelectQuestion(int petIdx, int questionIdx) {
+        model.deletePetUserSelectQuestion(petIdx, questionIdx, new CommonModel.ObjectCallBackListner<CommonResponce<Integer>>() {
+            @Override
+            public void doPostExecute(CommonResponce<Integer> integerCommonResponce) {
+                if ( integerCommonResponce != null ) {
+                    if ( integerCommonResponce.domain > 0 )
+                        view.registPetUserSelectQuestion();
+                }
             }
 
             @Override

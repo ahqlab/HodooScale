@@ -5,10 +5,12 @@ import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
+import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -48,5 +50,10 @@ public interface PetService {
     @POST("pet/{type}/petType.do")
     Call<Integer> registPetType ( @Path("type") String type, @Query("petType") int petType );
 
+    @POST("android/pet/question/regist.do")
+    Call<CommonResponce<Integer>> registPetUserSelectQuestion (@Query("petIdx") int petIdx, @Body PetUserSelectionQuestion petUserSelectionQuestion);
+
+    @POST("android/pet/question/delete.do")
+    Call<CommonResponce<Integer>> deletePetUserSelectQuestion (@Query("petIdx") int petIdx, @Query("questionIdx") int questionIdx);
 
 }

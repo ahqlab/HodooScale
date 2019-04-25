@@ -223,6 +223,7 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                 petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20,
                 petAllInfos.getPetBasicInfo().getPetType() );
         String[] reskLevelArr = getContext().getResources().getStringArray(R.array.risk_level_item);
+        int number = ((petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20) - 10) / 10 - 1;
         binding.riskLevel.setText( reskLevelArr[((petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20) - 10) / 10 - 1] );
         binding.goalMeal.setText( String.valueOf( (int) new RER(Float.parseFloat(presenter.getTodayAverageWeight()), selectPet.getFactor()).getRER() ) + "kcal" );
     }

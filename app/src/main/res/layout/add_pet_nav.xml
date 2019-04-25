@@ -46,6 +46,14 @@
             android:layout_marginLeft="4dp"
             android:background="@drawable/rounded_gray_btn" />
 
+        <Button
+            android:id="@+id/activity_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/rounded_gray_btn" />
+
     </LinearLayout>
 
 </layout>
