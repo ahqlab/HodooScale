@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by SongSeokwoo on 2019-04-24.
  */
-public class AdapterOfString extends BaseAdapter {
+public class AdapterOfPetUserSelectItem extends BaseAdapter {
     public interface ItemClickListener {
         void OnClickListener( int position, View view );
     }
@@ -25,7 +25,7 @@ public class AdapterOfString extends BaseAdapter {
     private ArrayList<PetUserSelectItem> title;
     private LayoutInflater inflater;
     private ItemClickListener callback;
-    public AdapterOfString(Context context, ArrayList<PetUserSelectItem> title, ItemClickListener callback) {
+    public AdapterOfPetUserSelectItem(Context context, ArrayList<PetUserSelectItem> title, ItemClickListener callback) {
         this.context = context;
         this.title = title;
         this.callback = callback;
