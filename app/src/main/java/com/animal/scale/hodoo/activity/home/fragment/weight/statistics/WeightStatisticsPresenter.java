@@ -12,8 +12,12 @@ import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
+import static com.cmmakerclub.iot.esptouch.activity.MainActivity.TAG;
 
 public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
@@ -58,9 +62,47 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                             }
                         }
 
-                    }else if(localeStr.equals("ko")){
+                    }else if( localeStr.equals("ko")){
+                        List<String> temp = new ArrayList<>();
+                        Collections.addAll(temp, ko);
+                        Iterator<String> iterator = temp.iterator();
 
-                    }else if(localeStr.equals("en")){
+                        /* 있는 요일 삭제 */
+                        while (iterator.hasNext()) {
+                            String target = iterator.next();
+                            for (int j = 0; j < d.size(); j++) {
+                                if (target.equals( d.get(j).getTheDay() ) ) {
+                                    iterator.remove();
+                                    break;
+                                }
+                            }
+                        }
+
+                        /* 없는 요일 데이터 넣기 */
+                        for (int i = 0; i < temp.size(); i++) {
+                            Statistics statistics = new Statistics();
+                            statistics.setTheDay(temp.get(i));
+                            d.add(statistics);
+                        }
+
+                        /* 데이터 정렬 */
+                        for (int i = 0; i < ko.length; i++) {
+                            for (int j = 0; j < d.size(); j++) {
+                                if( ko[i].equals( d.get(j).getTheDay() ) ) {
+                                    if ( i == j ) break;
+                                    Statistics tempData = d.get(i);
+                                    d.set(i, d.get(j));
+                                    d.set(j, tempData);
+                                    break;
+                                }
+                            }
+                        }
+
+                        
+                        Log.e(TAG, "debug");
+                            
+                        
+                    } else if(localeStr.equals("en")){
                         for (Statistics value : d) {
                             for (int i = 0; i < ko.length; i++) {
                                 if (value.getTheDay().equals(ko[i])) {
@@ -99,6 +141,39 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                     if (chart.getData() != null) {
                         chart.getData().notifyDataChanged();
                     }
+                    List<String> list = new ArrayList<>();
+
+                    String[] weeks = new String[5];
+                    for (int i = 0; i < weeks.length; i++)
+                        list.add( String.valueOf(i + 1));
+
+                    Iterator<String> iterator = list.iterator();
+                    while (iterator.hasNext()) {
+                        String target = iterator.next();
+                        for (int i = 0; i < d.size(); i++) {
+                            if ( target.equals(d.get(i).getTheWeek()) ) {
+                                iterator.remove();
+                                break;
+                            }
+                        }
+                    }
+
+                    /* 데이터 추가 */
+                    for (int i = 0; i < list.size(); i++) {
+                        Statistics statistics = new Statistics();
+                        statistics.setTheWeek(list.get(i));
+                        d.add(statistics);
+                    }
+
+                    /* 데이터 정렬 */
+                    for (int i = 0; i < d.size() - 1; i++) {
+                        if ( Integer.parseInt(d.get(i).getTheWeek()) > Integer.parseInt(d.get(i + 1).getTheWeek()) ) {
+                            Statistics temp = d.get(i);
+                            d.set(i, d.get(i + 1));
+                            d.set(i+1, temp);
+                        }
+                    }
+
                     chart.notifyDataSetChanged();
                     setStatisticalData(d, "Week");
                 } else {

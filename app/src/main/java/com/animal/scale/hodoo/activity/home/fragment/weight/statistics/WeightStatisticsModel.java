@@ -68,6 +68,12 @@ public class WeightStatisticsModel extends CommonModel {
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        if ( type.matches("Day") )
+            xAxis.setLabelCount(7);
+        else if ( type.matches("Week") )
+            xAxis.setLabelCount(5);
+        else if ( type.matches("Month") )
+            xAxis.setLabelCount(7);
        // xAxis.setDrawGridLines(false);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
@@ -84,6 +90,8 @@ public class WeightStatisticsModel extends CommonModel {
                 return "0";
             }
         });
+//        if ( type.matches("Week") )
+        chart.setMaxVisibleValueCount(5);
         chart.setData(data);
         chart.setFitBars(true);
         chart.getLegend().setEnabled(false);
