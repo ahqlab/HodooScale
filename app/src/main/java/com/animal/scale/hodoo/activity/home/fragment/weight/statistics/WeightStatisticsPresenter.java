@@ -10,9 +10,11 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -143,7 +145,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                     }
                     List<String> list = new ArrayList<>();
 
-                    String[] weeks = new String[5];
+                    String[] weeks = new String[getWeekCount(new Date())];
                     for (int i = 0; i < weeks.length; i++)
                         list.add( String.valueOf(i + 1));
 
@@ -190,6 +192,26 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
             }
         });
+    }
+
+    private int getWeekCount ( Date date ) {
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYYMM");
+        String dateStr = sdf.format(date);
+        Calendar nowCal = Calendar.getInstance();
+        Calendar lastCal = Calendar.getInstance();
+
+
+        int year = Integer.parseInt(dateStr.substring(0, 4));
+        int month = Integer.parseInt(dateStr.substring(4, 6));
+
+        nowCal.set(year, month - 1, 1);
+        lastCal.set(year, month, 0);
+
+        int lastDate = lastCal.get(Calendar.DATE);
+        int monthWeek = nowCal.get(Calendar.DAY_OF_WEEK);
+
+        int weekSeq = ((lastDate + monthWeek - 1) / 7) + 1;
+        return weekSeq;
     }
 
     @Override
