@@ -195,8 +195,9 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     private int getWeekCount ( Date date ) {
-        SimpleDateFormat sdf = new SimpleDateFormat("YYYYMM");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
         String dateStr = sdf.format(date);
+//        String dateStr = "201906";
         Calendar nowCal = Calendar.getInstance();
         Calendar lastCal = Calendar.getInstance();
 
