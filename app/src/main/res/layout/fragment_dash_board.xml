@@ -51,7 +51,7 @@
                                 android:textStyle="normal"
                                 android:textColor="#030303"
                                 android:textAlignment="textEnd"
-                                android:text='@{domain.petPhysicalInfo.weight + "kg"}'/>
+                                android:text='@{domain == null ? "" : domain.petPhysicalInfo.weight + "kg"}'/>
                             <Button
                                 android:id="@+id/weight_modify"
                                 android:minWidth="0dp"
