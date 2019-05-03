@@ -65,7 +65,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                             }
                         }
 
-                    }else if( localeStr.equals("ko")){
+                    } else if( localeStr.equals("ko")){
                         List<String> temp = new ArrayList<>();
                         Collections.addAll(temp, ko);
 

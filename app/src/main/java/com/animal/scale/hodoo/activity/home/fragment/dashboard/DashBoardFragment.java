@@ -72,7 +72,7 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                 final LayoutNumberKeyboardBinding keyboardBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_number_keyboard, null, false);
                 keyboardBinding.setActivity(DashBoardFragment.this);
                 keyboardBinding.setState(false);
-                keyboardBinding.setWeight("0");
+                keyboardBinding.setWeight(petAllInfos.petPhysicalInfo.getWeight());
 
                 dialog = new Dialog(getContext(), android.R.style.Theme_Light_NoTitleBar_Fullscreen);
                 dialog.setContentView(keyboardBinding.getRoot());
@@ -110,7 +110,8 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                                 if ( kilogram.equals("") ) {
                                     kilogram = "0";
                                     state = false;
-                                }
+                                } else
+                                    state = true;
                             }
                             info.setWeight(kilogram);
                             keyboardBinding.setState(state);
@@ -118,6 +119,8 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                         }
                     });
                 }
+                if ( Float.parseFloat( petAllInfos.petPhysicalInfo.getWeight() ) > 0 )
+                    keyboardBinding.setState(true);
 //                keyboardBinding.ㅇ.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {
@@ -197,7 +200,8 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
             builder.create().show();
             HomeActivity.selectPet.setPetPhysicalInfo(result);
             selectPet = HomeActivity.selectPet;
-            binding.nowWeight.setText( selectPet.petPhysicalInfo.getWeight() + "kg");
+            binding.setDomain( selectPet );
+//            binding.nowWeight.setText( selectPet.petPhysicalInfo.getWeight() + "kg");
             presenter.getGoalWeight(
                     Float.parseFloat(selectPet.petPhysicalInfo.getWeight()),
                     petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20,
