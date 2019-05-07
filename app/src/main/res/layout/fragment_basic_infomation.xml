@@ -21,10 +21,12 @@
         android:background="@color/hodoo_background_color">
 
         <ScrollView
+            android:id="@+id/wrap"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/linearWrap"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/my_toolbar"

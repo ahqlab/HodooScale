@@ -21,105 +21,106 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-
-        <LinearLayout
-
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/my_toolbar"
-            android:paddingTop="16dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+            <LinearLayout
 
-            <include
-                android:id="@+id/add_pet_navigation"
-                layout="@layout/add_pet_nav"/>
-
-            <!-- <ImageView
-                 android:layout_width="match_parent"
-                 android:layout_height="164dp"
-                 android:layout_marginLeft="40dp"
-                 android:layout_marginRight="40dp"
-                 android:layout_marginTop="24dp"
-                 android:layout_marginBottom="16dp"
-                 android:background="@drawable/temp_rounded_youtube"/>-->
-
-            <!--<fragment-->
-                <!--android:name="com.google.android.youtube.player.YouTubePlayerFragment"-->
-                <!--android:id="@+id/youtube_player"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="40dp"-->
-                <!--android:layout_marginRight="40dp"-->
-                <!--android:layout_marginTop="24dp"-->
-                <!--android:layout_marginBottom="16dp"/>-->
-
-            <!--<com.google.android.youtube.player.YouTubePlayerView-->
-                <!--android:id="@+id/youtube_player"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="40dp"-->
-                <!--android:layout_marginRight="40dp"-->
-                <!--android:layout_marginTop="24dp"-->
-                <!--android:layout_marginBottom="16dp">-->
-
-            <!--</com.google.android.youtube.player.YouTubePlayerView>-->
-
-            <TextView
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="32dp"
-                android:id="@+id/bfi_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:textColor="@color/subscript_color"
-                android:letterSpacing="0.04"
-                android:textSize="20sp"/>
+                android:layout_below="@+id/my_toolbar"
+                android:paddingTop="16dp"
+                android:orientation="vertical">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
+                <include
+                    android:id="@+id/add_pet_navigation"
+                    layout="@layout/add_pet_nav"/>
+
+                <!-- <ImageView
+                     android:layout_width="match_parent"
+                     android:layout_height="164dp"
+                     android:layout_marginLeft="40dp"
+                     android:layout_marginRight="40dp"
+                     android:layout_marginTop="24dp"
+                     android:layout_marginBottom="16dp"
+                     android:background="@drawable/temp_rounded_youtube"/>-->
+
+                <!--<fragment-->
+                    <!--android:name="com.google.android.youtube.player.YouTubePlayerFragment"-->
+                    <!--android:id="@+id/youtube_player"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="40dp"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:layout_marginTop="24dp"-->
+                    <!--android:layout_marginBottom="16dp"/>-->
+
+                <!--<com.google.android.youtube.player.YouTubePlayerView-->
+                    <!--android:id="@+id/youtube_player"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="40dp"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:layout_marginTop="24dp"-->
+                    <!--android:layout_marginBottom="16dp">-->
+
+                <!--</com.google.android.youtube.player.YouTubePlayerView>-->
+
+                <TextView
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="32dp"
+                    android:id="@+id/bfi_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:textColor="@color/subscript_color"
+                    android:letterSpacing="0.04"
+                    android:textSize="20sp"/>
+
+
                     <LinearLayout
-                        android:id="@+id/bfiWrap"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <Button
-                        android:id="@+id/next_step"
-                        style="?android:textAppearanceSmall"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/pink_btn"
-                        android:onClick="@{activity::onClickCompleateBtn}"
-                        android:text="@string/add_pet_next_btn"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="40dp"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:id="@+id/bfiWrap"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <Button
+                            android:layout_marginBottom="40dp"
+                            android:id="@+id/next_step"
+                            style="?android:textAppearanceSmall"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/pink_btn"
+                            android:onClick="@{activity::onClickCompleateBtn}"
+                            android:text="@string/add_pet_next_btn"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
-            </ScrollView>
 
 
 
-            <NumberPicker
-                android:visibility="invisible"
-                android:id="@+id/bcs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:layout_marginTop="2dp"
-                android:layout_margin="5dp" />
 
-        </LinearLayout>
+                <NumberPicker
+                    android:visibility="gone"
+                    android:id="@+id/bcs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white"
+                    android:layout_marginTop="2dp"
+                    android:layout_margin="5dp" />
+
+            </LinearLayout>
+        </ScrollView>
 
         <!--<LinearLayout
             android:layout_below="@+id/my_toolbar"
