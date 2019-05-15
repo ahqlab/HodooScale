@@ -1,4 +1,4 @@
-package com.animal.scale.hodoo.activity.home.fragment.welcome;
+package com.animal.scale.hodoo.activity.home.fragment.welcome.home;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -10,19 +10,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.activity.user.signup.SignUpActivity;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentWelcomeHomeBinding;
-import com.animal.scale.hodoo.util.CheckConnect;
 
 import static android.support.constraint.Constraints.TAG;
 
 
-public class WelcomeHomeFragment extends Fragment {
+public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View {
     private FragmentWelcomeHomeBinding binding;
+    private WelcomeHomeIn.Presenter presenter;
     private static final String CONNECTION_CONFIRM_CLIENT_URL = "http://clients3.google.com/generate_204";
     Intent intent;
 
@@ -36,6 +37,8 @@ public class WelcomeHomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_welcome_home, container, false);
+        presenter = new WelcomeHomePresenter(this);
+        presenter.initDate(getContext());
         binding.setFragment(this);
         binding.progressLoader.setVisibility(View.GONE);
       /*  if (!isOnline()) {
@@ -64,12 +67,17 @@ public class WelcomeHomeFragment extends Fragment {
     public void onButtonClick( View v ) {
         Log.e(TAG, "buttonClick");
         switch (v.getId()) {
-            case R.id.signup_btn:
+            case R.id.signup_btn :
                 intent = new Intent(getContext(), SignUpActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.login_btn:
+            case R.id.login_btn :
                 intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.experience_btn :
+                intent = new Intent(getContext(), HomeActivity.class);
+                intent.putExtra(SharedPrefVariable.EXPERIENCE_KEY, true);
                 startActivity(intent);
                 break;
         }

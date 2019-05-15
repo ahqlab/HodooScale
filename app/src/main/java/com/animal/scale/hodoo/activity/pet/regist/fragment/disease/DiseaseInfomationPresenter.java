@@ -22,7 +22,7 @@ public class DiseaseInfomationPresenter implements DiseaseInfomationIn.Presenter
     public void initData(Context context) {
         this.context = context;
         model.loadData(context);
-        view.setNavigation();
+//        view.setNavigation();
     }
 
     @Override

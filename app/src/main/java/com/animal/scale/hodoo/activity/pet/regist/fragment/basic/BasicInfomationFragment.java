@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
@@ -15,12 +14,12 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,23 +29,12 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
-import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
-import com.animal.scale.hodoo.adapter.AdapterOfDisease;
-import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
-import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.BottomDialog;
-import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.FragmentBasicInfomationBinding;
 import com.animal.scale.hodoo.databinding.LayoutPetBreedBinding;
 import com.animal.scale.hodoo.domain.CommonResponce;
@@ -57,11 +45,6 @@ import com.animal.scale.hodoo.domain.PetBreed;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
 import com.animal.scale.hodoo.util.VIewUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
-import com.google.android.flexbox.AlignItems;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -72,7 +55,10 @@ import java.util.List;
 /**
  * Created by SongSeokwoo on 2019-04-02..
  */
-public class BasicInfomationFragment extends PetRegistFragment implements BasicInfomationIn.View, CheckBox.OnCheckedChangeListener {
+public class BasicInfomationFragment extends PetRegistFragment implements BasicInfomationIn.View, CheckBox.OnCheckedChangeListener, PetBasicInfoBaseFragment.OnDataListener {
+//    public interface OnSectionListener {
+//        void
+//    }
     private String TAG = BasicInfomationFragment.class.getSimpleName();
 
     private FragmentBasicInfomationBinding binding;
@@ -111,6 +97,18 @@ public class BasicInfomationFragment extends PetRegistFragment implements BasicI
     private int petIdx;
     private String[] values;
 
+    private PetBasicInfoBaseFragment[] fragments = {
+//            new PetTypeFragment().newInstance(),
+//            new PetNameFragment().newInstance(),
+//            new PetProfileFragment().newInstance(),
+//            new PetBreedFragment().newInstance(),
+//            new PetBirthdayFragment().newInstance(),
+//            new PetDiseaseFragment().newInstance(),
+//            new PetGenderFragment().newInstance(),
+//            new PetNeuterFragment().newInstance()
+    };
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -119,15 +117,39 @@ public class BasicInfomationFragment extends PetRegistFragment implements BasicI
         presenter = new BasicInfomationPresenter(this);
         presenter.loadData(getContext());
 
-        if ( getArguments() != null ) {
-            petIdx = getArguments().getInt("petIdx");
-            presenter.getDiseaseInformation(getArguments().getInt("petIdx"));
-        } else {
-
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+//        ft.replace(R.id.basic_info_section_wrap, PetTypeFragment.newInstance());
+        for (int i = 0; i < fragments.length; i++) {
+            fragments[i].setCallback(this);
+//
+//            ft.add(R.id.basic_info_section_wrap, fragments[i]);
+//            ft.hide(fragments[i]);
         }
-        validation();
+
+
+        ft.replace(R.id.basic_info_section_wrap, fragments[0]);
+//        ft.show(fragments[0]);
+        ft.commit();
+
+//        if ( getArguments() != null ) {
+//            petIdx = getArguments().getInt("petIdx");
+//            presenter.getDiseaseInformation(getArguments().getInt("petIdx"));
+//        } else {
+//
+//        }
+//        validation();
+//        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() )
+//            setBtnEnable(true);
         return binding.getRoot();
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+    }
+
     public static PetRegistFragment newInstance() {
         return new BasicInfomationFragment();
     }
@@ -371,65 +393,65 @@ public class BasicInfomationFragment extends PetRegistFragment implements BasicI
     public void onResume() {
         super.onResume();
 //        validation();
-        binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    binding.getInfo().setNeutralization("YES");
-                } else {
-                    binding.getInfo().setNeutralization("NO");
-                }
-                releaseFocus();
-            }
-        });
-        binding.radioGroupSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                Log.e(TAG, "radioGroupSex onCheckedChanged");
-                int rd = radioGroup.getCheckedRadioButtonId();
-                RadioButton radioButton = binding.getRoot().findViewById(rd);
-                if (radioButton.getText().toString().matches(getResources().getString(R.string.femle))) {
-                    binding.getInfo().setSex("FEMALE");
-                } else if (radioButton.getText().toString().matches(getResources().getString(R.string.male))) {
-                    binding.getInfo().setSex("MALE");
-                }
-                genderCheck = true;
-                validation();
-                releaseFocus();
-            }
-        });
-        binding.petBreed.editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickSelectEditText(view);
-                releaseFocus();
-            }
-        });
-        binding.petBirthday.editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickCalDalog(view);
-                releaseFocus();
-            }
-        });
-        binding.petName.editText.addTextChangedListener(new CommonTextWatcher(binding.petName, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
-            @Override
-            public void onChangeState(boolean state) {
-                validation();
-            }
-        }));
-        binding.petBreed.editText.addTextChangedListener(new CommonTextWatcher(binding.petBreed, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_breed_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
-            @Override
-            public void onChangeState(boolean state) {
-                validation();
-            }
-        }));
-        binding.petBirthday.editText.addTextChangedListener(new CommonTextWatcher(binding.petBirthday, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_birthday_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
-            @Override
-            public void onChangeState(boolean state) {
-                validation();
-            }
-        }));
+//        binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    binding.getInfo().setNeutralization("YES");
+//                } else {
+//                    binding.getInfo().setNeutralization("NO");
+//                }
+//                releaseFocus();
+//            }
+//        });
+//        binding.radioGroupSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//                Log.e(TAG, "radioGroupSex onCheckedChanged");
+//                int rd = radioGroup.getCheckedRadioButtonId();
+//                RadioButton radioButton = binding.getRoot().findViewById(rd);
+//                if (radioButton.getText().toString().matches(getResources().getString(R.string.femle))) {
+//                    binding.getInfo().setSex("FEMALE");
+//                } else if (radioButton.getText().toString().matches(getResources().getString(R.string.male))) {
+//                    binding.getInfo().setSex("MALE");
+//                }
+//                genderCheck = true;
+//                validation();
+//                releaseFocus();
+//            }
+//        });
+//        binding.petBreed.editText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onClickSelectEditText(view);
+//                releaseFocus();
+//            }
+//        });
+//        binding.petBirthday.editText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onClickCalDalog(view);
+//                releaseFocus();
+//            }
+//        });
+//        binding.petName.editText.addTextChangedListener(new CommonTextWatcher(binding.petName, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+//            @Override
+//            public void onChangeState(boolean state) {
+//                validation();
+//            }
+//        }));
+//        binding.petBreed.editText.addTextChangedListener(new CommonTextWatcher(binding.petBreed, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_breed_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+//            @Override
+//            public void onChangeState(boolean state) {
+//                validation();
+//            }
+//        }));
+//        binding.petBirthday.editText.addTextChangedListener(new CommonTextWatcher(binding.petBirthday, getContext(), CommonTextWatcher.EMPTY_TYPE, R.string.pet_birthday_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
+//            @Override
+//            public void onChangeState(boolean state) {
+//                validation();
+//            }
+//        }));
     }
 
     private void setBasicInfo() {
@@ -635,5 +657,27 @@ public class BasicInfomationFragment extends PetRegistFragment implements BasicI
 
         presenter.getPetBasicInformation(VIewUtil.getMyLocationCode(getContext()), petIdx);
         presenter.getAllPetBreed(VIewUtil.getMyLocationCode(getContext()), petType);
+    }
+
+    @Override
+    public void onDataCallback(int type, Object data) {
+        Log.e(TAG, "callback");
+        switch ( type ) {
+            case 0 :
+                petType = (int) data;
+                break;
+        }
+
+        PetBasicInfoBaseFragment fragment = fragments[type + 1];
+        Bundle bundle = new Bundle();
+        bundle.putInt("petType", petType);
+        fragment.setArguments(bundle);
+
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.replace(R.id.basic_info_section_wrap, fragment);
+        ft.commit();
+        
+
+        Log.e(TAG, String.format("pet type data : %d", (int) data));
     }
 }

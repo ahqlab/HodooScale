@@ -8,13 +8,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ProgressBar;
 
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFirstFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFourFragment;
-import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeHomeFragment;
+import com.animal.scale.hodoo.activity.home.fragment.welcome.home.WelcomeHomeFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeSecondFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragment;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;

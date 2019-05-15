@@ -15,6 +15,7 @@ import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.basic.BasicInfomationFragment;
 import com.animal.scale.hodoo.adapter.AdapterOfDisease;
 import com.animal.scale.hodoo.base.BaseFragment;
+import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.databinding.FragmentDiseaseInfomationBinding;
 import com.animal.scale.hodoo.domain.Disease;
 import com.animal.scale.hodoo.domain.PetChronicDisease;
@@ -32,7 +33,7 @@ import static com.animal.scale.hodoo.activity.setting.list.SettingListActivity.T
 /**
  * Created by SongSeokwoo on 2019-04-02.
  */
-public class DiseaseInfomationFragment extends BaseFragment implements DiseaseInfomationIn.View {
+public class DiseaseInfomationFragment extends PetRegistFragment implements DiseaseInfomationIn.View {
     private FragmentDiseaseInfomationBinding binding;
     private DiseaseInfomationIn.Presenter presenter;
     private int petIdx = 0;
@@ -53,7 +54,7 @@ public class DiseaseInfomationFragment extends BaseFragment implements DiseaseIn
 
         return binding.getRoot();
     }
-    public static BaseFragment newInstance() {
+    public static PetRegistFragment newInstance() {
         return new DiseaseInfomationFragment();
     }
 
@@ -78,8 +79,8 @@ public class DiseaseInfomationFragment extends BaseFragment implements DiseaseIn
 
     @Override
     public void setNavigation() {
-        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
     }
 
     public void setListviewAdapter(PetChronicDisease petChronicDisease){
@@ -98,6 +99,16 @@ public class DiseaseInfomationFragment extends BaseFragment implements DiseaseIn
         binding.recyclerview.setLayoutManager(layoutManager);
 
         adapter = new AdapterOfDisease(diseases, petChronicDisease);
+        binding.setChecked( petChronicDisease.getDiseaseName() > 0 );
+        adapter.setOnCheckListener(new AdapterOfDisease.OnCheckListener() {
+            @Override
+            public void setOnChecked(int number) {
+                if ( number == 0 )
+                    binding.setChecked( false );
+                else
+                    binding.setChecked( true );
+            }
+        });
         binding.recyclerview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         /* new code 2018.12.26 (e) */

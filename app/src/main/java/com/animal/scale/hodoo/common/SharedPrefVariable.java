@@ -17,6 +17,8 @@ public class SharedPrefVariable {
 
     public static final String PET_ALL_INFO = "PET_ALL_INFO";
 
+    public static final String EXPERIENCE_KEY = "EXPERIENCE_KEY";
+
 
     public static final String AUTO_LOGIN = "AUTO_LOGIN";
 
@@ -28,7 +30,7 @@ public class SharedPrefVariable {
 
     public static final String UPDATE_ACTIVITY_INTENT_NAME = "UPDATE_ACTIVITY_INTENT_NAME";
 //    public static final String SERVER_ROOT = "http://121.183.234.14:7171/";
-    //    public static final String SERVER_ROOT = "http://www.cnu-farm.com/";
+//        public static final String SERVER_ROOT = "http://www.cnu-farm.com/";
     public static final String CURRENT_COUNTRY = "CURRENT_COUNTRY";
      public static final String SERVER_ROOT = "http://192.168.0.7:9090/";
     //public static final String SERVER_ROOT = "http://192.168.0.2:8181/";

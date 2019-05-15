@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity;
@@ -60,6 +61,8 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                 } else if(position == MyAccount.CHANGE_USER_INFO){
                     presenter.changePassword();
                 }  else if ( position == MyAccount.WITHDRAW ) {
+                    if ( ((HodooApplication) getApplicationContext()).isExperienceState() )
+                        return;
                     presenter.checkGroupCount(getApplicationContext());
                 }
             }

@@ -48,6 +48,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         model.getDailyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
+                if ( d == null )
+                    return;
                 if (d.size() > 0) {
                     /* 임시 일본어 처리(s) */
                     String[] ko = {"월", "화", "수", "목", "금", "토", "일"};
@@ -101,6 +103,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 //                                }
 //                            }
 //                        }
+
+                        //일요일 ~ 토요일 셋팅
                         
                         List<Statistics> tempList = new ArrayList<>();
                         tempList.addAll(d);

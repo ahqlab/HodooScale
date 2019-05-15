@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
@@ -179,6 +180,9 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.getData();
+        if ( ((HodooApplication) getApplication()).isExperienceState() )
+            presenter.addPetBtn();
+        else
+            presenter.getData();
     }
 }

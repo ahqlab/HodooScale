@@ -1,5 +1,7 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,15 +19,18 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.RadioGroup;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.custom.dialog.WeightDialog;
 import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
 import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightGoalChart;
@@ -43,6 +48,8 @@ import java.util.Date;
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 import noman.weekcalendar.listener.OnWeekChangeListener;
+
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
 
@@ -78,6 +85,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     private boolean realTimeMode = false;
 
     private int currentChart = 0;
+
+    private WeightDialog weightDialog;
+
+    private HodooApplication app;
 
     public WeightFragment() {
     }
@@ -133,13 +144,19 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 setBcsOrBscDescAndTip(selectPet);
                 serChartOfDay();
                 presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
+                setWeight();
                 //presenter.getTipMessageOfCountry();
             }
         }
+
         return binding.getRoot();
     }
 
     public void getTipMessageOfCountry(PetAllInfos selectPet) {
+        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() )
+            return;
+        if ( selectPet.getPetWeightInfo() == null )
+            return;
         presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
     }
 
@@ -150,6 +167,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     //BCS or BCS DESC and TIP
     public void setBcsOrBscDescAndTip(PetAllInfos petAllInfos) {
+        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() )
+            return;
+
+        if ( petAllInfos.getPetWeightInfo() == null )
+            return;
+        selectPet = petAllInfos;
         setBcsAndBcsDesc(petAllInfos.getPetWeightInfo().getBcs());
     }
 
@@ -216,12 +239,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setBcsAndBcsDesc(int bcs) {
-
+        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() )
+            return;
         Log.e("HJLEE", selectPet.toString());
         float currentWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight());
         int bodyFat = selectPet.getPetUserSelectionQuestion().getBodyFat();
         int petType = selectPet.getPetBasicInfo().getPetType();
         presenter.getWeightGoal(currentWeight, bodyFat, petType);
+
+        setWeight();
 
         //this.bcs = bcs;
         //if (bcs < 3) {checkBCS = 0; //부족 } else if (bcs > 3) { //초과 checkBCS = 1; } else { checkBCS = 2; //적정 }*/
@@ -388,9 +414,13 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void onResume() {
         super.onResume();
+        app = (HodooApplication) getActivity().getApplication();
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
+                if ( app.isExperienceState() )
+                    return;
+
                 switch (radioId) {
                     case R.id.chart_day:
                         currentChart = 0;
@@ -419,5 +449,52 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         }*/
         setKg();
         //setWeightGoal();
+    }
+    private void setWeight() {
+        float petWeight = Float.valueOf(selectPet.getPet().getFixWeight());
+        float compareWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight()) - petWeight;
+        DecimalFormat df = new DecimalFormat("#.#");
+        binding.nowWeight.setText( selectPet.getPetPhysicalInfo().getWeight() + " kg" );
+        binding.petWeight.setText( df.format(petWeight) + " kg" );
+        binding.compareWeight.setText( compareWeight > 0 ? "+" +df.format(compareWeight) :  df.format(compareWeight) );
+
+        binding.editWeightBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                weightDialog = new WeightDialog(getContext(), android.R.style.Theme_Light_NoTitleBar_Fullscreen, selectPet, new WeightDialog.KeypadCallback() {
+                    @Override
+                    public void keypadCallback( PetAllInfos petAllInfos ) {
+                        if ( DEBUG ) Log.e(TAG, "debug");
+                        petAllInfos.getPetPhysicalInfo().setId( selectPet.pet.getPhysical() );
+                        presenter.updatePhysical(petAllInfos.petPhysicalInfo);
+                    }
+                });
+            }
+        });
+    }
+    @Override
+    public void physicalUpdateDone(PetPhysicalInfo result) {
+        if ( result != null ) {
+            weightDialog.dismiss();
+//            dialog.dismiss();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                    .setTitle("변경완료")
+                    .setMessage("현재 체중이 변경완료되었습니다.")
+                    .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+            builder.create().show();
+            selectPet.setPetPhysicalInfo(result);
+            setWeight();
+//            binding.setDomain( selectPet );
+////            binding.nowWeight.setText( selectPet.petPhysicalInfo.getWeight() + "kg");
+//            presenter.getGoalWeight(
+//                    Float.parseFloat(selectPet.petPhysicalInfo.getWeight()),
+//                    petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20,
+//                    petAllInfos.getPetBasicInfo().getPetType() );
+        }
     }
 }

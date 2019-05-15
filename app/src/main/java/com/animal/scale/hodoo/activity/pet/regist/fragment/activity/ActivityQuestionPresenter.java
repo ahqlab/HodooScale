@@ -19,7 +19,7 @@ public class ActivityQuestionPresenter implements ActivityQuestionIn.Presenter {
     public void loadData(Context context){
         model = new ActivityQuestionModel();
         model.loadData(context);
-        view.setNavigation();
+//        view.setNavigation();
     }
 
     @Override

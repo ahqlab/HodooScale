@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
@@ -182,6 +183,25 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
             @Override
             public void doPostExecute(CommonResponce<WeightGoalChart> d) {
                 view.setWeightGoal(d.getDomain());
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+    @Override
+    public void updatePhysical(PetPhysicalInfo info) {
+        model.updatePhysical(info, new CommonModel.ObjectCallBackListner<CommonResponce<PetPhysicalInfo>>() {
+            @Override
+            public void doPostExecute(CommonResponce<PetPhysicalInfo> integerCommonResponce) {
+                view.physicalUpdateDone(integerCommonResponce.domain);
             }
 
             @Override
