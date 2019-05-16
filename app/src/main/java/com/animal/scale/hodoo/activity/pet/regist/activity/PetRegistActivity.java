@@ -73,6 +73,7 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 
 
     public static final int PET_PHYSIQUE_INFO = 7;
+    public static final int PET_DISEASE_INFO = 8;
     public static final int PET_WEIGHT_INFO = 9;
 
     private ActivityPetRegistBinding binding;
@@ -174,11 +175,12 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
         }
         else if ( fragmentPosition == PET_WEIGHT_INFO ) {
             ((WeightCheckFragment) fragment).setPetIdx(petBasicInfo.getPetType());
-        } else
-        if ( fragmentPosition == PET_PHYSIQUE_INFO ) {
+        } else if ( fragmentPosition == PET_PHYSIQUE_INFO ) {
             ((PhysiqueInfomationRegistFragment) fragment).updateView();
             ((PhysiqueInfomationRegistFragment) fragment).setPetType(petBasicInfo.getPetType());
             super.setSubBtn("건너뛰기", this);
+        } else if ( fragmentPosition == PET_DISEASE_INFO )  {
+            ((DiseaseInfomationFragment) fragment).setPetIdx(petIdx);
         }
         if ( fragmentPosition != PET_PHYSIQUE_INFO )
             super.hideSubBtn();

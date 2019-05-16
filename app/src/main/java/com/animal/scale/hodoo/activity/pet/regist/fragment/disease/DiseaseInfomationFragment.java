@@ -99,7 +99,8 @@ public class DiseaseInfomationFragment extends PetRegistFragment implements Dise
         binding.recyclerview.setLayoutManager(layoutManager);
 
         adapter = new AdapterOfDisease(diseases, petChronicDisease);
-        binding.setChecked( petChronicDisease.getDiseaseName() > 0 );
+        if ( petChronicDisease != null )
+            binding.setChecked( petChronicDisease.getDiseaseName() > 0 );
         adapter.setOnCheckListener(new AdapterOfDisease.OnCheckListener() {
             @Override
             public void setOnChecked(int number) {
@@ -142,5 +143,9 @@ public class DiseaseInfomationFragment extends PetRegistFragment implements Dise
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    public void setPetIdx ( int petIdx ) {
+
     }
 }

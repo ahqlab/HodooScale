@@ -155,7 +155,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public void getTipMessageOfCountry(PetAllInfos selectPet) {
         if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() )
             return;
-        if ( selectPet.getPetWeightInfo() == null )
+        if ( selectPet == null )
             return;
         presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
     }
@@ -170,7 +170,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() )
             return;
 
-        if ( petAllInfos.getPetWeightInfo() == null )
+        if ( petAllInfos == null )
             return;
         selectPet = petAllInfos;
         setBcsAndBcsDesc(petAllInfos.getPetWeightInfo().getBcs());
