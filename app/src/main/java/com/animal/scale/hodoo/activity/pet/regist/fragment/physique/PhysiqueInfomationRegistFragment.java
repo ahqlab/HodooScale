@@ -114,7 +114,8 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
 //        presenter.setNavigation();
 
         presenter.getPhysiqueInformation(petIdx);
-        setTextWatcher(binding.editWidth, binding.editHeight, binding.editWeight);
+//        setTextWatcher(binding.editWidth, binding.editHeight, binding.editWeight);
+        setTextWatcher(binding.editWidth, binding.editHeight);
         return binding.getRoot();
     }
     public static PetRegistFragment newInstance() {
@@ -314,8 +315,8 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
         /* 2019.05.08 삭제 (e) */
         if (
                 !ValidationUtil.isEmpty(binding.editWidth.getText().toString()) &&
-                        !ValidationUtil.isEmpty(binding.editHeight.getText().toString()) &&
-                        !ValidationUtil.isEmpty(binding.editWeight.getText().toString())) {
+                        !ValidationUtil.isEmpty(binding.editHeight.getText().toString()) ) {
+            //&& !ValidationUtil.isEmpty(binding.editWeight.getText().toString())
             binding.nextStep.setEnabled(true);
         } else {
             binding.nextStep.setEnabled(false);

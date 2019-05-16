@@ -209,13 +209,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             String result = df.format(remains);
             binding.bcsStep.setText(result + "Kg");
         }
-        if(goal == 0){
-            binding.bcsSubscript.setText((int) goal + "Kg");
+        if(goal == 0) {
+            binding.goal.setText((int) goal + "Kg");
+//            binding.bcsSubscript.setText((int) goal + "Kg");
         }else{
             //String[] numbers = String.valueOf(goal).split("\\.");
             DecimalFormat df = new DecimalFormat("#.#");
             String result = df.format(goal);
-            binding.bcsSubscript.setText(result + "Kg");
+            binding.goal.setText(result + "Kg");
+//            binding.bcsSubscript.setText(result + "Kg");
             //Log.e("HJLEE", "result : " + result);
             //if(numbers[1].equals("0")){
             //    binding.bcsSubscript.setText(numbers[0] + "Kg");
@@ -454,9 +456,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         float petWeight = Float.valueOf(selectPet.getPet().getFixWeight());
         float compareWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight()) - petWeight;
         DecimalFormat df = new DecimalFormat("#.#");
-        binding.nowWeight.setText( selectPet.getPetPhysicalInfo().getWeight() + " kg" );
+        binding.nowWeight.setText( Float.parseFloat( selectPet.getPetPhysicalInfo().getWeight() ) != 0 ? selectPet.getPetPhysicalInfo().getWeight() + " kg" : "-" );
         binding.petWeight.setText( df.format(petWeight) + " kg" );
         binding.compareWeight.setText( compareWeight > 0 ? "+" +df.format(compareWeight) :  df.format(compareWeight) );
+
+        /* 체중 */
+        String fixWeight = binding.petWeight.getText().toString();
+        fixWeight = fixWeight.replace(" kg", "");
+        if ( Float.parseFloat( fixWeight ) == 0 )
+            binding.petWeight.setText( selectPet.getPetPhysicalInfo().getWeight() + " kg" );
 
         binding.editWeightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
