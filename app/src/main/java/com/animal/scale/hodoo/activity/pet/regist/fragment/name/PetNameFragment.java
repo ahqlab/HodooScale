@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
@@ -35,6 +36,20 @@ public class PetNameFragment extends PetRegistFragment implements View.OnClickLi
                 binding.setChecked( validation( binding.petName ) );
             }
         }));
+        binding.petName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View parent = (View) view.getParent();
+                parent.performClick();
+            }
+        });
+        binding.innerWrap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager im = (InputMethodManager)getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                im.hideSoftInputFromWindow(binding.petName.editText.getWindowToken(), 0);
+            }
+        });
 
         return binding.getRoot();
     }
