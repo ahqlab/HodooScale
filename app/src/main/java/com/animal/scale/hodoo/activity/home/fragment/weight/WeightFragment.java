@@ -286,6 +286,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
+
         /*} else {
             if ( HomeActivity.selectPet != null )
                 if ( HomeActivity.selectPet.petPhysicalInfo != null )
@@ -465,7 +466,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         fixWeight = fixWeight.replace(" kg", "");
         if ( Float.parseFloat( fixWeight ) == 0 )
             binding.petWeight.setText( selectPet.getPetPhysicalInfo().getWeight() + " kg" );
-
+        presenter.getWeekRate();
         binding.editWeightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -504,5 +505,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 //                    petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20,
 //                    petAllInfos.getPetBasicInfo().getPetType() );
         }
+    }
+
+    @Override
+    public void setWeekRate(float rate) {
+        if ( rate > 0 )
+            binding.editWeightBtn.setRotation(180);
+        binding.weekRate.setText( String.format("%.2f", rate) + "%" );
     }
 }

@@ -182,10 +182,17 @@ public class PetProfileFragment extends PetRegistFragment implements PetProfileI
         if ( !hidden ) {
             petBasicInfo = getPetBasicInfo();
             if ( petBasicInfo != null ) {
-                Picasso.with(getContext())
-                        .load(SharedPrefVariable.SERVER_ROOT + petBasicInfo.getProfileFilePath())
-                        .error(R.drawable.icon_pet_profile)
-                        .into(binding.profile);
+                Picasso picasso = Picasso.with(getContext());
+                if ( petBasicInfo.getPetType() == PetRegistActivity.CAT_TYPE ) {
+                    picasso.load(SharedPrefVariable.SERVER_ROOT + petBasicInfo.getProfileFilePath())
+                            .error(R.drawable.cat)
+                            .into(binding.profile);
+                } else {
+                    picasso.load(SharedPrefVariable.SERVER_ROOT + petBasicInfo.getProfileFilePath())
+                            .error(R.drawable.dog)
+                            .into(binding.profile);
+                }
+
             }
 
         }

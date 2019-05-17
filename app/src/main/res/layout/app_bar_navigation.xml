@@ -34,6 +34,16 @@
                 android:elevation="0dp"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+                <ImageButton
+                    android:padding="5dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:src="@drawable/settings_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:onClick="@{activity::onSettingBtnClick}"/>
+
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
@@ -53,18 +63,8 @@
                     android:orientation="horizontal"
                     android:clipChildren="false">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/petImage"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_horizontal|center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/icon_pet_profile"
-                        android:onClick="@{activity::onPetImageClick}"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="@color/hodoo_text_light_gray"/>
-
                     <FrameLayout
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clipChildren="false"
@@ -92,6 +92,19 @@
                             android:textSize="10sp"/>
 
                     </FrameLayout>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/petImage"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icon_pet_profile"
+                        android:onClick="@{activity::onPetImageClick}"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/hodoo_text_light_gray"/>
+
+
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
 

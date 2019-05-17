@@ -273,4 +273,23 @@ public class WeightFragmentModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    public void getWeekRate(final CommonModel.ObjectCallBackListner<Float> callback ) {
+        Call<CommonResponce<Float>> call = NetRetrofit.getInstance().getPetWeightInfoService().getWeekRate(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Float>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<Float> floatCommonResponce) {
+                callback.doPostExecute( floatCommonResponce.domain );
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
 }

@@ -39,6 +39,8 @@ public interface WeightFragmentIn {
 
         void physicalUpdateDone(PetPhysicalInfo result);
 
+        void setWeekRate( float rate );
+
     }
 
     interface Presenter{
@@ -63,8 +65,8 @@ public interface WeightFragmentIn {
 
         void getWeightGoal(float currentWeight, int bodyFat, int petType);
 
-
-
         void updatePhysical(PetPhysicalInfo info);
+
+        void getWeekRate();
     }
 }

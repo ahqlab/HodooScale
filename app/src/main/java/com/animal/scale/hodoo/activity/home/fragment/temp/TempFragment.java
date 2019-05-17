@@ -222,6 +222,11 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
     }
 
     @Override
+    public void setWeekRate(float rate) {
+
+    }
+
+    @Override
     public void initWeekCalendar() {
          /* binding.weekCalendar.today;
         Button todaysDate = (Button) findViewById(R.id.today);
