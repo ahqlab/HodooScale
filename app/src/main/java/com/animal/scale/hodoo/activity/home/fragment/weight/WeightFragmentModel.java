@@ -278,7 +278,8 @@ public class WeightFragmentModel extends CommonModel {
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Float>>() {
             @Override
             protected void doPostExecute(CommonResponce<Float> floatCommonResponce) {
-                callback.doPostExecute( floatCommonResponce.domain );
+                if ( floatCommonResponce != null )
+                    callback.doPostExecute( floatCommonResponce.domain );
             }
 
             @Override

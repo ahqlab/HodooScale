@@ -510,7 +510,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void setWeekRate(float rate) {
         if ( rate > 0 )
-            binding.editWeightBtn.setRotation(180);
+            binding.rateArrow.setRotation(-180);
         binding.weekRate.setText( String.format("%.2f", rate) + "%" );
     }
 }
