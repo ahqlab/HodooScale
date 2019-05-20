@@ -12,11 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
 import android.util.Base64;
 import android.util.Log;
-=======
->>>>>>> refs/remotes/origin/master
 import android.widget.ProgressBar;
 
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;

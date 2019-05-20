@@ -1,7 +1,6 @@
 package com.animal.scale.hodoo.activity.home.fragment.welcome.home;
 
 import android.content.Context;
-<<<<<<< HEAD
 import android.content.DialogInterface;
 import android.util.Log;
 
@@ -17,7 +16,7 @@ import com.animal.scale.hodoo.message.ResultMessage;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
-public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter{
+public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter {
 
     WelcomeHomeIn.View view;
 
@@ -40,6 +39,11 @@ public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter{
         this.context = context;
         model.loadData(context);
         loginModel.initUserData(context);
+    }
+
+    @Override
+    public void removeAllPref() {
+        model.removeAllPref();
     }
 
     @Override
@@ -70,10 +74,10 @@ public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter{
         loginModel.sendServer(user, new CommonModel.DomainCallBackListner<CommonResponce<User>>() {
             @Override
             public void doPostExecute(CommonResponce<User> resultMessageGroup) {
-                if ( resultMessageGroup != null ) {
-                    if ( resultMessageGroup.getResultMessage().equals(ResultMessage.WAIT_INVITATION) ) {
+                if (resultMessageGroup != null) {
+                    if (resultMessageGroup.getResultMessage().equals(ResultMessage.WAIT_INVITATION)) {
                         view.goInvitationActivity();
-                    } else if ( resultMessageGroup.getResultMessage().equals(ResultMessage.WITHDRAW_USER) ) {
+                    } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.WITHDRAW_USER)) {
                         view.showPopup(context.getString(R.string.login__alert_withdraw_user_content));
                     } else if (resultMessageGroup.getResultMessage().equals(ResultMessage.FAILED)) {
                         view.showPopup(context.getString(R.string.failed));
@@ -101,28 +105,33 @@ public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter{
         });
     }
 
+    @Override
+    public void initDate(Context context) {
+
+    }
+
     private void checkRegistrationStatus() {
         loginModel.confirmPetRegistrationResult(new CommonModel.DomainCallBackListner<CommonResponce<Integer>>() {
             @Override
             public void doPostExecute(CommonResponce<Integer> responce) {
                 Log.e("HJLEE", "responce : " + responce.toString());
-                if(responce.getStatus() == HodooConstant.OK_RESPONSE || responce.getStatus() == HodooConstant.NO_CONTENT_RESPONSE){
-                    if(responce.getDomain() > 0){
+                if (responce.getStatus() == HodooConstant.OK_RESPONSE || responce.getStatus() == HodooConstant.NO_CONTENT_RESPONSE) {
+                    if (responce.getDomain() > 0) {
                         //등록된 펫 존재함.
                         view.setProgress(false);
                         //view.setAutoLoginState();
-                    } else{
+                    } else {
                         //펫이 없음.
                         view.setProgress(false);
                         view.selectTheNextAction();
 
                         //loginView.saveFcmToken();
                     }
-                } else if ( responce.getStatus() == HodooConstant.NO_CONTENT_RESPONSE ) {
+                } else if (responce.getStatus() == HodooConstant.NO_CONTENT_RESPONSE) {
                     //펫이 없음.
                     view.setProgress(false);
                     view.selectTheNextAction();
-                } else if(responce.getStatus() == HodooConstant.SQL_ERROR_RESPONSE){
+                } else if (responce.getStatus() == HodooConstant.SQL_ERROR_RESPONSE) {
                     view.setProgress(false);
                     view.setServerError();
                 }
@@ -140,27 +149,6 @@ public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter{
                 //loginView.setServerError();
             }
         });
-=======
 
-/**
- * Created by SongSeokwoo on 2019-05-08.
- */
-public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter {
-    private WelcomeHomeIn.View view;
-    private WelcomeHomeModel model;
-    WelcomeHomePresenter ( WelcomeHomeIn.View view ) {
-        this.view = view;
-        model = new WelcomeHomeModel();
-    }
-
-    @Override
-    public void initDate(Context context) {
-        model.initData(context);
-    }
-
-    @Override
-    public void removeAllPref() {
-        model.removeAllPref();
->>>>>>> refs/remotes/origin/master
     }
 }

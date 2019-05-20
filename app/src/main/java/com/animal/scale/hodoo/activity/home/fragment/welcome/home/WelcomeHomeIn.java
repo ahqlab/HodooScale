@@ -2,7 +2,6 @@ package com.animal.scale.hodoo.activity.home.fragment.welcome.home;
 
 import android.content.Context;
 
-<<<<<<< HEAD
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Feed;
 import com.animal.scale.hodoo.domain.MealHistory;
@@ -35,19 +34,10 @@ public interface WelcomeHomeIn {
         void doSnsLogin(User user);
 
         void doLogin(User user);
-    }
 
-=======
-/**
- * Created by SongSeokwoo on 2019-05-08.
- */
-public interface WelcomeHomeIn {
-    interface Presenter {
         void initDate(Context context);
+
         void removeAllPref();
     }
-    interface View {
 
-    }
->>>>>>> refs/remotes/origin/master
 }

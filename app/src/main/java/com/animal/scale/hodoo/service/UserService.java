@@ -1,7 +1,6 @@
 package com.animal.scale.hodoo.service;
 
 import com.animal.scale.hodoo.domain.CommonResponce;
-import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 
 import java.util.List;
