@@ -431,6 +431,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                         break;
                     case R.id.chart_week:
                         currentChart = 1;
+//                        binding.weekRateWrap.setVisiblity( View.VISIBLE );
                         statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA);
                         break;
                     case R.id.chart_month:
@@ -441,6 +442,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                         statisicsPresenter.getStatisticalDataByYear(TextManager.WEIGHT_DATA);
                         break;*/
                 }
+                if( currentChart == 1 )
+                    binding.weekRateWrap.setVisibility( View.VISIBLE );
+                else
+                    binding.weekRateWrap.setVisibility( View.GONE );
             }
         });
 
@@ -485,7 +490,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public void physicalUpdateDone(PetPhysicalInfo result) {
         if ( result != null ) {
             weightDialog.dismiss();
-//            dialog.dismiss();
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
                     .setTitle("변경완료")
                     .setMessage("현재 체중이 변경완료되었습니다.")
@@ -498,12 +502,6 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             builder.create().show();
             selectPet.setPetPhysicalInfo(result);
             setWeight();
-//            binding.setDomain( selectPet );
-////            binding.nowWeight.setText( selectPet.petPhysicalInfo.getWeight() + "kg");
-//            presenter.getGoalWeight(
-//                    Float.parseFloat(selectPet.petPhysicalInfo.getWeight()),
-//                    petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20,
-//                    petAllInfos.getPetBasicInfo().getPetType() );
         }
     }
 
@@ -511,6 +509,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public void setWeekRate(float rate) {
         if ( rate > 0 )
             binding.rateArrow.setRotation(-180);
+        else
+            binding.rateArrow.setRotation(0);
         binding.weekRate.setText( String.format("%.2f", rate) + "%" );
     }
 }

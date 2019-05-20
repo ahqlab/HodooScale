@@ -330,6 +330,8 @@
 
                 </LinearLayout>-->
                 <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/week_rate_wrap"
                     android:background="@color/white"
                     android:layout_marginTop="1dp"
                     android:padding="16dp"
