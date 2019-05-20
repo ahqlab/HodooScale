@@ -54,4 +54,11 @@ public interface UserService{
 
     @POST("user/checkGroupCount.do")
     Call<Integer> checkGroupCount( @Query("idx") int idx );
+
+
+    @POST("android/user/sns/regist.do")
+    Call<CommonResponce<User>> doSnsRegist(@Body User user);
+
+    @POST("android/user/sns/login.do")
+    Call<CommonResponce<User>> snsLogin(@Body User user);
 }

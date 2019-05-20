@@ -4,7 +4,7 @@
     <data>
         <variable
             name="fragment"
-            type="com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeHomeFragment"/>
+            type="com.animal.scale.hodoo.activity.home.fragment.welcome.home.WelcomeHomeFragment"/>
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,6 +30,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
+
+            <com.kakao.usermgmt.LoginButton
+                android:id="@+id/btn_kakao_login"
+                android:text="카카오 로그인"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="16dp"
+                android:onClick="@{fragment::onButtonClick}" />
 
             <Button
                 android:id="@+id/signup_btn"

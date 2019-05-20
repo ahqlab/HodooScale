@@ -1,28 +1,38 @@
 package com.animal.scale.hodoo;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.ProgressBar;
 
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFirstFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFourFragment;
-import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeHomeFragment;
+import com.animal.scale.hodoo.activity.home.fragment.welcome.home.WelcomeHomeFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeSecondFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragment;
-import com.animal.scale.hodoo.activity.user.login.LoginActivity;
+import com.animal.scale.hodoo.activity.user.login.KakaoLoginActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.WelcomeViewPager;
 import com.animal.scale.hodoo.util.VIewUtil;
+import com.kakao.auth.Session;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import static android.support.constraint.Constraints.TAG;
 import static com.animal.scale.hodoo.constant.HodooConstant.ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE;
 import static com.animal.scale.hodoo.constant.HodooConstant.AUTO_LOGIN_SUCCESS;
 
@@ -60,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         sharedPrefManager.putStringExtra(SharedPrefVariable.CURRENT_COUNTRY, countryCode);
         mSlideView = findViewById(R.id.slide_view);
         systemAlertPermission();
+        //String key = getKeyHash(this);
+        //Log.e("HJLEE", key);
     }
 
     @Override
@@ -86,14 +98,14 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
     @Override
     public void goAutoLogin() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), KakaoLoginActivity.class);
         intent.putExtra(SharedPrefVariable.AUTO_LOGIN, AUTO_LOGIN_SUCCESS);
         startActivity(intent);
         //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
 
-    public void systemAlertPermission () {
+    public void systemAlertPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
                 AlertDialog builder = new AlertDialog.Builder(this)
@@ -127,9 +139,36 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if (Settings.canDrawOverlays(this)) {
             presenter.getData();
         }
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            Log.d(TAG, "requestCode: " + requestCode + ", resultCode: " + resultCode);
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    public static String getKeyHash(final Context context) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+            if (packageInfo == null)
+                return null;
+
+            for (Signature signature : packageInfo.signatures) {
+                try {
+                    MessageDigest md = MessageDigest.getInstance("SHA");
+                    md.update(signature.toByteArray());
+                    return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+                } catch (NoSuchAlgorithmException e) {
+                    Log.e("HJLEE", "Unable to get MessageDigest. signature=" + signature, e);
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
