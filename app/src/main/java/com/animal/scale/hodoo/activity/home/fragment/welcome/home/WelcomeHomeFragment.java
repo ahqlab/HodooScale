@@ -2,7 +2,6 @@ package com.animal.scale.hodoo.activity.home.fragment.welcome.home;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
+import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -296,6 +297,11 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
                     final Dialog dialog = createLoginDialog(authKakaoAuthItems, adapter);
                     dialog.show();
                 }
+                break;
+            case R.id.experience_btn :
+                intent = new Intent(getContext(), HomeActivity.class);
+                intent.putExtra(SharedPrefVariable.EXPERIENCE_KEY, true);
+                startActivity(intent);
                 break;
         }
     }

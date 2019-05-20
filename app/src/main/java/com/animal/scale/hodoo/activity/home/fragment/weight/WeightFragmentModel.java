@@ -280,6 +280,8 @@ public class WeightFragmentModel extends CommonModel {
             protected void doPostExecute(CommonResponce<Float> floatCommonResponce) {
                 if ( floatCommonResponce != null )
                     callback.doPostExecute( floatCommonResponce.domain );
+                else
+                    callback.doPostExecute(0f);
             }
 
             @Override
