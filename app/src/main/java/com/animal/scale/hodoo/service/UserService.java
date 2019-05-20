@@ -1,7 +1,6 @@
 package com.animal.scale.hodoo.service;
 
 import com.animal.scale.hodoo.domain.CommonResponce;
-import com.animal.scale.hodoo.domain.ResultMessageGroup;
 import com.animal.scale.hodoo.domain.User;
 
 import java.util.List;
@@ -54,4 +53,11 @@ public interface UserService{
 
     @POST("user/checkGroupCount.do")
     Call<Integer> checkGroupCount( @Query("idx") int idx );
+
+
+    @POST("android/user/sns/regist.do")
+    Call<CommonResponce<User>> doSnsRegist(@Body User user);
+
+    @POST("android/user/sns/login.do")
+    Call<CommonResponce<User>> snsLogin(@Body User user);
 }

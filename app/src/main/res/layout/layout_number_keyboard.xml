@@ -41,17 +41,17 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:layout_marginBottom="90dp"
                 android:id="@+id/kilogram"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="90dp"
+                android:gravity="center"
                 android:text='@{weight + "kg"}'
                 android:textAlignment="center"
-                android:gravity="center"
-                android:textSize="48sp"
                 android:textColor="@color/mainBlack"
-                />
+                android:textSize="48sp" />
 
             <LinearLayout
                 android:id="@+id/numeric_wrap"

@@ -352,4 +352,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- 2019-01-30 new code (e) -->
+
+    <string name="kakao_app_key">6c3ac725269577a6048f062d88866f02</string>
 </resources>

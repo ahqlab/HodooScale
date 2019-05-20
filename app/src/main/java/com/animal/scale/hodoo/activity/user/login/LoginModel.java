@@ -50,7 +50,7 @@ public class LoginModel extends CommonModel {
     }
 
     public void sendServer(User user, final DomainCallBackListner<CommonResponce<User>> domainCallBackListner) {
-        Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().login(user);
+        Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().snsLogin(user);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<User>>() {
             @Override
             protected void doPostExecute(CommonResponce<User> resultMessageGroup) {
