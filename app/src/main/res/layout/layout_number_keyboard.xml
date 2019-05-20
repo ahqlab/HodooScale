@@ -7,9 +7,6 @@
             name="state"
             type="Boolean"/>
         <variable
-            name="activity"
-            type="com.animal.scale.hodoo.activity.home.fragment.dashboard.DashBoardFragment"/>
-        <variable
             name="weight"
             type="String"/>
     </data>

@@ -22,4 +22,6 @@ public class Pet implements Serializable {
     private String createDate;
 
     private int petType;
+
+    private String fixWeight;
 }

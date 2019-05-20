@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
@@ -79,7 +80,7 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
         binding.setActivity(this);
         presenter = new WeightCheckPresenter(this);
         presenter.loadData(getContext());
-        presenter.setNavigation();
+//        presenter.setNavigation();
 
         if ( getArguments() != null ) {
             petIdx = getArguments().getInt("petIdx");
@@ -269,6 +270,11 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
 
     public void onClickCompleateBtn(View view) {
 
+        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() ) {
+            ((PetRegistActivity) getActivity()).nextFragment();
+            return;
+        }
+
         double operandTarget = result.length;
         double operand = 0;
         int[] data = new int[result.length];
@@ -445,40 +451,40 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
 
     @Override
     public void setNavigation() {
-        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
-                intent.putExtra("petIdx", petIdx);
-                startActivity(intent);
-                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();*/
-            }
-        });
-        binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
-                intent.putExtra("petIdx", petIdx);
-                startActivity(intent);
-                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();*/
-            }
-        });
-        binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
-                intent.putExtra("petIdx", petIdx);
-                startActivity(intent);
-                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();*/
-            }
-        });
+//        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                /*Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+//                intent.putExtra("petIdx", petIdx);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+//                finish();*/
+//            }
+//        });
+//        binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                /*Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+//                intent.putExtra("petIdx", petIdx);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+//                finish();*/
+//            }
+//        });
+//        binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                /*Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
+//                intent.putExtra("petIdx", petIdx);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+//                finish();*/
+//            }
+//        });
         /*binding.addPetNavigation.weightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -491,7 +497,7 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
         });*/
     }
     public void setPetIdx ( int petType ) {
-        if ( petType == 0 )
+        if ( petType == 0 || petType < 0 )
             petType = 1;
         if ( this.petType != petType ) {
             binding.bfiWrap.removeAllViews();

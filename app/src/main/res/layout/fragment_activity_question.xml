@@ -10,9 +10,9 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            android:id="@+id/add_pet_navigation"
-            layout="@layout/add_pet_nav"/>
+        <!--<include-->
+            <!--android:id="@+id/add_pet_navigation"-->
+            <!--layout="@layout/add_pet_nav"/>-->
         <ListView
             android:layout_marginTop="20dp"
             android:layout_below="@+id/add_pet_navigation"

@@ -6,6 +6,8 @@ import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
 import retrofit2.Call;
@@ -33,6 +35,26 @@ public class PetTypeModel extends CommonModel {
             @Override
             protected void doPreExecute() {
                 callback.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+    public void getPetBasicInformation(String location, int petIdx, final DomainCallBackListner<PetBasicInfo> domainCallBackListner) {
+        Call<PetBasicInfo> call = NetRetrofit.getInstance().getPetService().getBasicInformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx, location);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetBasicInfo>() {
+
+            @Override
+            protected void doPostExecute(PetBasicInfo basicInfo) {
+                domainCallBackListner.doPostExecute(basicInfo);
+            }
+
+            @Override
+            protected void doPreExecute() {
+                domainCallBackListner.doPreExecute();
             }
 
             @Override

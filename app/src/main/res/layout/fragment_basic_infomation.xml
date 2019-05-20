@@ -12,6 +12,9 @@
         <variable
             name="activity"
             type="com.animal.scale.hodoo.activity.pet.regist.fragment.basic.BasicInfomationFragment" />
+        <variable
+            name="experienceMode"
+            type="Boolean"/>
     </data>
 
 
@@ -19,12 +22,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/hodoo_background_color">
+        <FrameLayout
+            android:id="@+id/basic_info_section_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
 
         <ScrollView
+            android:visibility="invisible"
+            android:id="@+id/wrap"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/linearWrap"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/my_toolbar"
@@ -275,6 +285,7 @@
                                 android:textColor="#9b9b9b"
                                 android:layout_marginRight="8dp"
                                 android:padding="8dp"
+                                android:enabled="@{!experienceMode }"
                                 />
 
                             <RadioButton
@@ -287,6 +298,7 @@
                                 android:textColor="#9b9b9b"
                                 android:layout_marginLeft="8dp"
                                 android:padding="8dp"
+                                android:enabled="@{!experienceMode }"
                                 />
                         </RadioGroup>
 
@@ -316,7 +328,8 @@
                             <Switch
                                 android:id="@+id/switch1"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:enabled="@{!experienceMode }"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

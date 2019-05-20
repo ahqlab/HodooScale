@@ -1,10 +1,12 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
@@ -17,7 +19,9 @@ import com.github.mikephil.charting.data.Entry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
+import static com.animal.scale.hodoo.custom.view.input.CommonTextWatcher.TAG;
+
+public class WeightFragmentPresenter implements WeightFragmentIn.Presenter {
 
     WeightFragmentIn.View view;
 
@@ -182,6 +186,45 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
             @Override
             public void doPostExecute(CommonResponce<WeightGoalChart> d) {
                 view.setWeightGoal(d.getDomain());
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+    @Override
+    public void updatePhysical(PetPhysicalInfo info) {
+        model.updatePhysical(info, new CommonModel.ObjectCallBackListner<CommonResponce<PetPhysicalInfo>>() {
+            @Override
+            public void doPostExecute(CommonResponce<PetPhysicalInfo> integerCommonResponce) {
+                view.physicalUpdateDone(integerCommonResponce.domain);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+
+    @Override
+    public void getWeekRate() {
+        model.getWeekRate(new CommonModel.ObjectCallBackListner<Float>() {
+            @Override
+            public void doPostExecute(Float result) {
+                view.setWeekRate(result);
             }
 
             @Override

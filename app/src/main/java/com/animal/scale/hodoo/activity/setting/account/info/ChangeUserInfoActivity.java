@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.change.password.ChangePasswordActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
@@ -189,6 +190,12 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 */
     public void onConfirmBtn(View view) {
 
+        if ( ((HodooApplication) getApplication()).isExperienceState() ) {
+            finish();
+            return;
+        }
+
+
         String nickName =  binding.nickName.editText.getText().toString();
         binding.getDomain().setNickname(nickName);
         binding.getDomain().setCountry(selectCountry);
@@ -225,12 +232,14 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 
     @Override
     public void setUserInfo(User user) {
-        binding.password.editText.setText(user.getPassword());
-        binding.nickName.editText.setText(user.getNickname());
-        binding.country.editText.setText(country[user.getCountry() - 1]);
-        selectCountry = user.getCountry();
-        binding.email.editText.setText(user.getEmail());
-        binding.setDomain(user);
+        if ( user != null ) {
+            binding.password.editText.setText(user.getPassword());
+            binding.nickName.editText.setText(user.getNickname());
+            binding.country.editText.setText(country[user.getCountry() - 1]);
+            selectCountry = user.getCountry();
+            binding.email.editText.setText(user.getEmail());
+            binding.setDomain(user);
+        }
     }
 
     @Override

@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#fbfbfb"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/notice_content"
+    android:layout_height="match_parent"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        />
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/notice_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -88,6 +88,7 @@
     <string name="vailed_email">이메일 형식에 맞지 않습니다.</string>
     <!-- COMMON MESSAGE -->
     //TermsOfServiceActivity
+    <string name="experience_title">체험하기</string>
     <string name="signup_title">회원가입</string>
     <string name="agree_terms">약관 동의</string>
     <string name="agree_terms_message">개인정보 수집 및 이용에 동의합니다.</string>

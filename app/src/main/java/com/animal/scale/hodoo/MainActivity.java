@@ -12,8 +12,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+<<<<<<< HEAD
 import android.util.Base64;
 import android.util.Log;
+=======
+>>>>>>> refs/remotes/origin/master
 import android.widget.ProgressBar;
 
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
@@ -23,6 +26,7 @@ import com.animal.scale.hodoo.activity.home.fragment.welcome.home.WelcomeHomeFra
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeSecondFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragment;
 import com.animal.scale.hodoo.activity.user.login.KakaoLoginActivity;
+import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.WelcomeViewPager;
@@ -98,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
     @Override
     public void goAutoLogin() {
-        Intent intent = new Intent(getApplicationContext(), KakaoLoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.putExtra(SharedPrefVariable.AUTO_LOGIN, AUTO_LOGIN_SUCCESS);
         startActivity(intent);
         //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);

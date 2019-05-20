@@ -28,4 +28,7 @@ public interface PetWeightInfoService {
     @POST("pet/weight/bfi.do")
     Call<List<BfiModel>> getBfiQuestion(@Query("location") String location, @Query("type") int type);
 
+    @POST("android/pet/weight/getWeekRate.do")
+    Call<CommonResponce<Float>> getWeekRate( @Query("groupCode") String groupCode );
+
 }

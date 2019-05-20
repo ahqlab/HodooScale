@@ -15,6 +15,7 @@ import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
@@ -251,5 +252,45 @@ public class WeightFragmentModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
 
+    }
+    public void updatePhysical(PetPhysicalInfo info, final CommonModel.ObjectCallBackListner<CommonResponce<PetPhysicalInfo>> callBackListner) {
+        Call<CommonResponce<PetPhysicalInfo>> call = NetRetrofit.getInstance().getPetPhysicalInfoService().update(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX), mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE),info);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<PetPhysicalInfo>>() {
+
+            @Override
+            protected void doPostExecute(CommonResponce<PetPhysicalInfo> mealHistoryCommonResponce) {
+                callBackListner.doPostExecute(mealHistoryCommonResponce);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+    public void getWeekRate(final CommonModel.ObjectCallBackListner<Float> callback ) {
+        Call<CommonResponce<Float>> call = NetRetrofit.getInstance().getPetWeightInfoService().getWeekRate(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Float>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<Float> floatCommonResponce) {
+                if ( floatCommonResponce != null )
+                    callback.doPostExecute( floatCommonResponce.domain );
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
     }
 }
