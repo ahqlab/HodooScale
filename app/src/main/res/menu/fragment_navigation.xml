@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/menu_icon_48_48_01"
-        android:enabled="true"
-        android:title="@string/navigation__home"
-        app:showAsAction="ifRoom" />
+    <!--<item-->
+        <!--android:id="@+id/navigation_home"-->
+        <!--android:icon="@drawable/menu_icon_48_48_01"-->
+        <!--android:enabled="true"-->
+        <!--android:title="@string/navigation__home"-->
+        <!--app:showAsAction="ifRoom" />-->
     <item
         android:id="@+id/navigation_weight"
         android:icon="@drawable/menu_icon_48_48_02"
         android:enabled="true"
         android:title="@string/pet_weight"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/weight_top_setting_icon_38_38"
+        android:enabled="true"
+        android:title="@string/istyle_setting"
         app:showAsAction="ifRoom" />
     <!--<item-->
         <!--android:id="@+id/navigation_temp"-->
@@ -19,16 +25,16 @@
         <!--android:enabled="true"-->
         <!--android:title="@string/pet_temp"-->
         <!--app:showAsAction="ifRoom"/>-->
-    <item
-        android:id="@+id/navigation_meal"
-        android:icon="@drawable/menu_icon_48_48_03"
-        android:enabled="true"
-        android:title="@string/meal"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/navigation_activity"
-        android:icon="@drawable/menu_icon_48_48_04"
-        android:enabled="true"
-        android:title="@string/activity"
-        app:showAsAction="ifRoom"/>
+    <!--<item-->
+        <!--android:id="@+id/navigation_meal"-->
+        <!--android:icon="@drawable/menu_icon_48_48_03"-->
+        <!--android:enabled="true"-->
+        <!--android:title="@string/meal"-->
+        <!--app:showAsAction="ifRoom"/>-->
+    <!--<item-->
+        <!--android:id="@+id/navigation_activity"-->
+        <!--android:icon="@drawable/menu_icon_48_48_04"-->
+        <!--android:enabled="true"-->
+        <!--android:title="@string/activity"-->
+        <!--app:showAsAction="ifRoom"/>-->
 </menu>

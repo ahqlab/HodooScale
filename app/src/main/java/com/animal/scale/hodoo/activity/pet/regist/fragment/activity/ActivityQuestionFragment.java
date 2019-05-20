@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfPetUserSelectItem;
@@ -61,6 +62,10 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
         return new ActivityQuestionFragment();
     }
     public void onClickCompleateBtn ( View v ) {
+        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() ) {
+            getActivity().finish();
+            return;
+        }
         ((PetRegistActivity) getActivity()).setPetUserSelectionQuestion(petUserSelectionQuestion);
         ((PetRegistActivity) getActivity()).regist();
     }
@@ -133,10 +138,10 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
 
     @Override
     public void setNavigation() {
-        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.activityBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.activityBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
     }
 }

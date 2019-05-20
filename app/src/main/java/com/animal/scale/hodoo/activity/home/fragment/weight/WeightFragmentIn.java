@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.domain.ArrayListDevice;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Device;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightGoalChart;
@@ -35,6 +36,11 @@ public interface WeightFragmentIn {
         void setWeightGoal(WeightGoalChart d);
 
         void setLastCollectionData(RealTimeWeight d);
+
+        void physicalUpdateDone(PetPhysicalInfo result);
+
+        void setWeekRate( float rate );
+
     }
 
     interface Presenter{
@@ -58,5 +64,9 @@ public interface WeightFragmentIn {
         void getTipMessageOfCountry(WeightTip weightTip);
 
         void getWeightGoal(float currentWeight, int bodyFat, int petType);
+
+        void updatePhysical(PetPhysicalInfo info);
+
+        void getWeekRate();
     }
 }

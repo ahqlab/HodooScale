@@ -111,6 +111,11 @@ public abstract class BaseActivity<D extends Activity> extends AppCompatActivity
             }
         });
     }
+    public void hideSubBtn () {
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        Button subBtn = toolbar.findViewById(R.id.sub_btn);
+        subBtn.setVisibility(View.GONE);
+    }
 
 
     public AlertDialog.Builder showBasicOneBtnPopup(String title, String message) {

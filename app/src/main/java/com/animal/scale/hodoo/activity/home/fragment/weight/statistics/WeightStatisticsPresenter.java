@@ -48,6 +48,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         model.getDailyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
+                if ( d == null )
+                    return;
                 if (d.size() > 0) {
                     /* 임시 일본어 처리(s) */
                     String[] ko = {"월", "화", "수", "목", "금", "토", "일"};
@@ -65,63 +67,65 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                             }
                         }
 
-                    }else if( localeStr.equals("ko")){
+                    } else if( localeStr.equals("ko")){
                         List<String> temp = new ArrayList<>();
                         Collections.addAll(temp, ko);
 
-//                        Iterator<String> iterator = temp.iterator();
-//
-//                        /* 있는 요일 삭제 */
-//                        while (iterator.hasNext()) {
-//                            String target = iterator.next();
-//                            for (int j = 0; j < d.size(); j++) {
-//                                if (target.equals( d.get(j).getTheDay() ) ) {
-//                                    iterator.remove();
-//                                    break;
-//                                }
-//                            }
-//                        }
-//
-//                        /* 없는 요일 데이터 넣기 */
-//                        for (int i = 0; i < temp.size(); i++) {
-//                            Statistics statistics = new Statistics();
-//                            statistics.setTheDay(temp.get(i));
-//                            d.add(statistics);
-//                        }
-//
-//                        /* 데이터 정렬 */
-//                        for (int i = 0; i < ko.length; i++) {
-//                            for (int j = 0; j < d.size(); j++) {
-//                                if( ko[i].equals( d.get(j).getTheDay() ) ) {
-//                                    if ( i == j ) break;
-//                                    Statistics tempData = d.get(i);
-//                                    d.set(i, d.get(j));
-//                                    d.set(j, tempData);
-//                                    break;
-//                                }
-//                            }
-//                        }
-                        
-                        List<Statistics> tempList = new ArrayList<>();
-                        tempList.addAll(d);
-                        for (int i = 0; i < tempList.size() - 1; i++) {
-                            int target = 0;
-                            for (int j = 0; j < ko.length; j++) {
-                                if( ko[j].equals(tempList.get(i).getTheDay()) ) {
-                                    target = j + 1;
+                        Iterator<String> iterator = temp.iterator();
+
+                        /* 있는 요일 삭제 */
+                        while (iterator.hasNext()) {
+                            String target = iterator.next();
+                            for (int j = 0; j < d.size(); j++) {
+                                if (target.equals( d.get(j).getTheDay() ) ) {
+                                    iterator.remove();
                                     break;
                                 }
                             }
-                            if ( ko.length == target )
-                                continue;
-                            if ( ko[target].equals(tempList.get(i + 1).getTheDay()) )
-                                continue;
-                            Statistics statistics = new Statistics();
-                            statistics.setTheDay( ko[target] );
-                            tempList.add(i + 1, statistics);
                         }
-                        d.clear();
-                        d.addAll(tempList);
+
+                        /* 없는 요일 데이터 넣기 */
+                        for (int i = 0; i < temp.size(); i++) {
+                            Statistics statistics = new Statistics();
+                            statistics.setTheDay(temp.get(i));
+                            d.add(statistics);
+                        }
+
+                        /* 데이터 정렬 */
+                        for (int i = 0; i < ko.length; i++) {
+                            for (int j = 0; j < d.size(); j++) {
+                                if( ko[i].equals( d.get(j).getTheDay() ) ) {
+                                    if ( i == j ) break;
+                                    Statistics tempData = d.get(i);
+                                    d.set(i, d.get(j));
+                                    d.set(j, tempData);
+                                    break;
+                                }
+                            }
+                        }
+
+                        //일요일 ~ 토요일 셋팅
+                        
+//                        List<Statistics> tempList = new ArrayList<>();
+//                        tempList.addAll(d);
+//                        for (int i = 0; i < tempList.size() - 1; i++) {
+//                            int target = 0;
+//                            for (int j = 0; j < ko.length; j++) {
+//                                if( ko[j].equals(tempList.get(i).getTheDay()) ) {
+//                                    target = j + 1;
+//                                    break;
+//                                }
+//                            }
+//                            if ( ko.length == target )
+//                                continue;
+//                            if ( ko[target].equals(tempList.get(i + 1).getTheDay()) )
+//                                continue;
+//                            Statistics statistics = new Statistics();
+//                            statistics.setTheDay( ko[target] );
+//                            tempList.add(i + 1, statistics);
+//                        }
+//                        d.clear();
+//                        d.addAll(tempList);
                             
                         
                     } else if(localeStr.equals("en")){
