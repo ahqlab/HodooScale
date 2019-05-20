@@ -121,6 +121,15 @@
                     android:scheme="selphone" />
             </intent-filter>
         </activity>
+        <!-- 3 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+        <!-- 4 -->
+        <activity
+            android:name="com.kakao.auth.authorization.authcode.KakaoWebViewActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize"></activity>
 
         <service android:name=".service.firebase.MyFirebaseMessagingService">
             <intent-filter>

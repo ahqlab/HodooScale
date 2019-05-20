@@ -28,8 +28,6 @@ import android.widget.Toast;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
-import com.animal.scale.hodoo.activity.home.fragment.welcome.home.WelcomeHomeIn;
-import com.animal.scale.hodoo.activity.home.fragment.welcome.home.WelcomeHomePresenter;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -149,7 +147,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
         return binding.getRoot();
     }
 
-    public static Fragment newInstance() {
+    public static WelcomeHomeFragment newInstance() {
         return new WelcomeHomeFragment();
     }
 
