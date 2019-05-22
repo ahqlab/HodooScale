@@ -6,11 +6,15 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
@@ -19,6 +23,7 @@ import com.animal.scale.hodoo.adapter.AdapterOfPetUserSelectItem;
 import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.databinding.FragmentActivityQuestionBinding;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetUserSelectItem;
 import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 
@@ -53,7 +58,7 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
             presenter.getPetUserSelectQuestion(petIdx);
         } else {
             petUserSelectionQuestion = new PetUserSelectionQuestion();
-            loadData(null);
+            setBtnEnable(false);
         }
 
         return binding.getRoot();
@@ -110,13 +115,16 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
                                         break;
                                 }
                                 ((EditText) view).setText( alertAdapter.getItem(i) );
+                                setBtnEnable(validation());
                             }
                         });
                 builder.create().show();
             }
         });
-
+//        binding.activityQuestionGridWrap
+//        binding.activityQuestionGridWrap.setAdapter( adapter );
         binding.activityQuestionWrap.setAdapter(adapter);
+
         if ( inPetUserSelectionQuestion != null ) {
             items.get(WALK_QUESTION_TYPE).setSelectNum( inPetUserSelectionQuestion.getPlayTime() );
             items.get(ACTIVITY_QUESTION).setSelectNum( inPetUserSelectionQuestion.getActive() );
@@ -135,6 +143,30 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
             loadData(petUserSelectionQuestion);
         }
     }
+    public boolean validation() {
+        for (int i = 0; i < binding.activityQuestionWrap.getChildCount(); i++) {
+            LinearLayout wrap = (LinearLayout) binding.activityQuestionWrap.getChildAt(i);
+            for (int j = 0; j < wrap.getChildCount(); j++) {
+                if ( !(wrap.getChildAt(i) instanceof EditText) )
+                    continue;
+                EditText edt = (EditText) wrap.getChildAt(i);
+                if ( edt.getText().toString().equals("") )
+                    return false;
+
+            }
+        }
+        if ( binding.activityQuestionWrap.getChildCount() == 0 )
+            return false;
+        return true;
+    }
+    private void setBtnEnable(boolean state) {
+        binding.nextStep.setEnabled(state);
+        if (binding.nextStep.isEnabled()) {
+            binding.nextStep.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
+        } else {
+            binding.nextStep.setTextColor(ContextCompat.getColor(getContext(), R.color.mainRed));
+        }
+    }
 
     @Override
     public void setNavigation() {
@@ -143,5 +175,12 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
 //        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
 //        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
 //        binding.addPetNavigation.activityBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+    }
+
+    @Override
+    public void setPetBasicInfo(PetBasicInfo petBasicInfo) {
+        super.setPetBasicInfo(petBasicInfo);
+        loadData(null);
+        setBtnEnable(validation());
     }
 }

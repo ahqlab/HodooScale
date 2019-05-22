@@ -99,6 +99,7 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
 
     @Override
     public void registBasicInfo(String requestUrl, PetBasicInfo info, CircleImageView profile) {
+
         model.registBasicInfo(requestUrl, info, profile, new CommonModel.DomainCallBackListner<Pet>() {
             @Override
             public void doPostExecute(Pet pet) {

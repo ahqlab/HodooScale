@@ -345,10 +345,10 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 //        }
         petBasicInfo.setSelectedBfi(petWeightInfo.getSelectedBfi());
         if ( !editModeState ) {
-            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/regist.do";
+            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/android/pet/basic/regist.do";
             presenter.registBasicInfo( REQUEST_URL, petBasicInfo, profile );
         } else {
-            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/pet/basic/update.do";
+            REQUEST_URL = SharedPrefVariable.SERVER_ROOT + "/android/pet/basic/update.do";
             presenter.updateBasicInfo( REQUEST_URL, petBasicInfo, profile );
         }
     }

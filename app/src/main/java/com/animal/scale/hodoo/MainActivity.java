@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         sharedPrefManager.putStringExtra(SharedPrefVariable.CURRENT_COUNTRY, countryCode);
         mSlideView = findViewById(R.id.slide_view);
         systemAlertPermission();
-        //String key = getKeyHash(this);
-        //Log.e("HJLEE", key);
+        String key = getKeyHash(this);
+        Log.e("HJLEE", key);
     }
 
     @Override
