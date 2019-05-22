@@ -119,6 +119,7 @@ public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter {
                     if (responce.getDomain() > 0) {
                         //등록된 펫 존재함.
                         view.setProgress(false);
+                        view.goHomeActivity();
                         //view.setAutoLoginState();
                         view.goHomeActivity();
                     } else {

@@ -32,7 +32,6 @@ public class PetGenderFragment extends PetRegistFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pet_gender, container, false);
-        binding.setChecked(true);
         binding.doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +51,7 @@ public class PetGenderFragment extends PetRegistFragment {
                         selectGender = GENDER_FEMALE;
                         break;
                 }
+                binding.setChecked(true);
             }
         });
         return binding.getRoot();

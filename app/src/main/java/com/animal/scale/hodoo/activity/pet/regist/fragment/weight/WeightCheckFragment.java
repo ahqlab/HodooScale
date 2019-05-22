@@ -8,6 +8,7 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,7 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +33,8 @@ import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
+import com.animal.scale.hodoo.adapter.AdapterOfBfi;
+import com.animal.scale.hodoo.adapter.AdapterOfPetUserSelectItem;
 import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
@@ -36,12 +42,14 @@ import com.animal.scale.hodoo.databinding.BfiAdditionalAlertLayoutBinding;
 import com.animal.scale.hodoo.databinding.FragmentWeightCheckBinding;
 import com.animal.scale.hodoo.domain.BfiModel;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
+import com.animal.scale.hodoo.domain.PetUserSelectItem;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.util.VIewUtil;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -186,86 +194,115 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
                 result[i] = Integer.parseInt(split[i]) + 1;
             }
         }
-
-        for (int i = 0; i < bfis.size(); i++) {
-            final int position = i;
-            LinearLayout wrap = new LinearLayout(getContext());
-            wrap.setOrientation(LinearLayout.VERTICAL);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, 50);
-            wrap.setLayoutParams(params);
-            LinearLayout titleWrap = new LinearLayout(getContext());
-            titleWrap.setOrientation(LinearLayout.HORIZONTAL);
-            TextView title = new TextView(getContext());
-            titleWrap.addView(title);
-            titleWrap.setGravity(Gravity.CENTER_VERTICAL);
-
-            if ( bfis.get(i).getAdditionalId() > 0 ) {
-                ImageView icon = new ImageView(getContext());
-                icon.setImageResource(R.drawable.question_info_icon);
-                icon.setPadding(10, 10, 10, 10);
-
-                icon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        final BfiAdditionalAlertLayoutBinding alertBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.bfi_additional_alert_layout, null, false);
-                        alertBinding.setDomain(bfis.get(position));
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                                .setView(alertBinding.getRoot());
-                        Picasso.with(getContext())
-                                .load(SharedPrefVariable.SERVER_ROOT + bfis.get(position).getImage())
-                                .skipMemoryCache()
-                                .into(alertBinding.infoImage, new Callback() {
-                                    @Override
-                                    public void onSuccess() {
-                                        Log.e(TAG, "onSuccess: ");
-                                    }
-
-                                    @Override
-                                    public void onError() {
-                                        Log.e(TAG, "onError: ");
-                                    }
-                                });
-                        builder.create().show();
-                    }
-                });
-                titleWrap.addView(icon);
-            }
-
-            final EditText edt = new EditText(getContext());
-            edt.setFocusable(false);
-            if ( editType && basicInfo.getPetType() == petType )
-                edt.setText( bfis.get(i).getAnswers().get( temp[i] ).getAnswer() );
-            edt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Log.e(TAG, String.format(bfis.get(position).getQuestion() + " : position : %d", position));
-
-                    final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
-                    for (int j = 0; j < bfis.get(position).getAnswers().size(); j++) {
-                        adapter.add( bfis.get(position).getAnswers().get(j).getAnswer() );
-                    }
-
-                    builder = new AlertDialog.Builder(getContext())
-                            .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    result[position] = i + 1;
-                                    edt.setText( adapter.getItem(i) );
-                                }
-                            });
-                    builder.create().show();
+        AdapterOfBfi adapter = new AdapterOfBfi(getContext(), bfis, result, new AdapterOfBfi.OnCheckedListener() {
+            @Override
+            public void onItemChecked(final int position, final View v) {
+                final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
+                for (int j = 0; j < bfis.get(position).getAnswers().size(); j++) {
+                    adapter.add( bfis.get(position).getAnswers().get(j).getAnswer() );
                 }
-            });
-            title.setText(bfis.get(i).getQuestion());
+                builder = new AlertDialog.Builder(getContext())
+                        .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                CheckBox checkBox = (CheckBox) v;
+                                checkBox.setChecked(true);
+                                result[position] = i + 1;
+//                                edt.setText( adapter.getItem(i) );
+                                setBtnEnable(validation());
+                            }
+                        });
+                builder.create().show();
+            }
+        });
+        binding.bfiView.setAdapter( adapter );
+//        binding.bfiView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+//
+//            }
+//        });
 
-            wrap.addView(titleWrap);
-            wrap.addView(edt);
-
-            binding.bfiWrap.addView(wrap);
-        }
-
+//        for (int i = 0; i < bfis.size(); i++) {
+//            final int position = i;
+//            LinearLayout wrap = new LinearLayout(getContext());
+//            wrap.setOrientation(LinearLayout.VERTICAL);
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            params.setMargins(0, 0, 0, 50);
+//            wrap.setLayoutParams(params);
+//            LinearLayout titleWrap = new LinearLayout(getContext());
+//            titleWrap.setOrientation(LinearLayout.HORIZONTAL);
+//            TextView title = new TextView(getContext());
+//            titleWrap.addView(title);
+//            titleWrap.setGravity(Gravity.CENTER_VERTICAL);
+//
+//            if ( bfis.get(i).getAdditionalId() > 0 ) {
+//                ImageView icon = new ImageView(getContext());
+//                icon.setImageResource(R.drawable.question_info_icon);
+//                icon.setPadding(10, 10, 10, 10);
+//
+//                icon.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        final BfiAdditionalAlertLayoutBinding alertBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.bfi_additional_alert_layout, null, false);
+//                        alertBinding.setDomain(bfis.get(position));
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+//                                .setView(alertBinding.getRoot());
+//                        Picasso.with(getContext())
+//                                .load(SharedPrefVariable.SERVER_ROOT + bfis.get(position).getImage())
+//                                .skipMemoryCache()
+//                                .into(alertBinding.infoImage, new Callback() {
+//                                    @Override
+//                                    public void onSuccess() {
+//                                        Log.e(TAG, "onSuccess: ");
+//                                    }
+//
+//                                    @Override
+//                                    public void onError() {
+//                                        Log.e(TAG, "onError: ");
+//                                    }
+//                                });
+//                        builder.create().show();
+//                    }
+//                });
+//                titleWrap.addView(icon);
+//            }
+//
+//            final EditText edt = new EditText(getContext());
+//            edt.setFocusable(false);
+//            if ( editType && basicInfo.getPetType() == petType )
+//                edt.setText( bfis.get(i).getAnswers().get( temp[i] ).getAnswer() );
+//            edt.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                    Log.e(TAG, String.format(bfis.get(position).getQuestion() + " : position : %d", position));
+//
+//                    final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
+//                    for (int j = 0; j < bfis.get(position).getAnswers().size(); j++) {
+//                        adapter.add( bfis.get(position).getAnswers().get(j).getAnswer() );
+//                    }
+//
+//                    builder = new AlertDialog.Builder(getContext())
+//                            .setAdapter(adapter, new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    result[position] = i + 1;
+//                                    edt.setText( adapter.getItem(i) );
+//                                    setBtnEnable(validation());
+//                                }
+//                            });
+//                    builder.create().show();
+//                }
+//            });
+//            title.setText(bfis.get(i).getQuestion());
+//
+//            wrap.addView(titleWrap);
+//            wrap.addView(edt);
+//
+//            binding.bfiWrap.addView(wrap);
+//        }
+        setBtnEnable(validation());
     }
 
     public void onClickCompleateBtn(View view) {
@@ -508,16 +545,19 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
         binding.bfiDesc.setText( ((PetRegistActivity) getActivity()).getPetBasicInfo().getPetName() + getContext().getString(R.string.bfi_desc) );
     }
     public boolean validation () {
-        for (int i = 0; i < binding.bfiWrap.getChildCount(); i++) {
-            if ( binding.bfiWrap.getChildAt(i) instanceof LinearLayout ) {
-                LinearLayout wrap = (LinearLayout) binding.bfiWrap.getChildAt(i);
-                if ( wrap.getChildAt(1) instanceof EditText ) {
-                    EditText edt = (EditText) wrap.getChildAt(1);
-                    if ( edt.getText().toString().equals("") )
-                        return false;
-                }
-            }
+        for (int i = 0; i < result.length; i++) {
+            if ( result[i] == 0 )
+                return false;
         }
         return true;
+
+    }
+    private void setBtnEnable(boolean state) {
+        binding.nextStep.setEnabled(state);
+        if (binding.nextStep.isEnabled()) {
+            binding.nextStep.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
+        } else {
+            binding.nextStep.setTextColor(ContextCompat.getColor(getContext(), R.color.mainRed));
+        }
     }
 }

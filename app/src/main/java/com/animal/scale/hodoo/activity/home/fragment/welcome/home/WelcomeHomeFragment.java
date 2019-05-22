@@ -49,6 +49,7 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
@@ -115,6 +116,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
         Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
         //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        getActivity().finish();
     }
 
 
@@ -367,10 +369,17 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
                     //회원가입을 한다.
                     //Log.e("HJLEE", "회원가입을 한다." + result.toString());
                     User user = new User();
-                    user.setEmail(result.getKakaoAccount().getEmail());
+
+                    OptionalBoolean isEmail = result.getKakaoAccount().hasEmail();
+                    OptionalBoolean isGender = result.getKakaoAccount().hasGender();
+                    if ( isEmail.getBoolean() )
+                        user.setEmail(result.getKakaoAccount().getEmail());
+                    if ( isGender.getBoolean() )
+                        user.setSex(result.getKakaoAccount().getGender().getValue());
+
                     user.setNickname(result.getNickname());
                     user.setCountry(VIewUtil.getLocationCode(getActivity()));
-                    user.setSex(result.getKakaoAccount().getGender().getValue());
+
                     user.setSnsToken(Session.getCurrentSession().getAccessToken());
                     user.setLoginType(1);
                     user.setSnsId(String.valueOf(result.getId()));
