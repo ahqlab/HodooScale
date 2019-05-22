@@ -38,4 +38,12 @@ public class MathUtil {
 		String decimal =  fmt.format(value);
 		return decimal;
 	}
+
+	public double cmToInch(int cm){
+		return cm/2.54;
+	}
+
+	public double InchToCm(double Inch){
+		return Inch * 2.54;
+	}
 }

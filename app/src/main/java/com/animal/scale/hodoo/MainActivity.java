@@ -22,7 +22,6 @@ import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeFourFragment
 import com.animal.scale.hodoo.activity.home.fragment.welcome.home.WelcomeHomeFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeSecondFragment;
 import com.animal.scale.hodoo.activity.home.fragment.welcome.WelcomeThirdFragment;
-import com.animal.scale.hodoo.activity.user.login.KakaoLoginActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;

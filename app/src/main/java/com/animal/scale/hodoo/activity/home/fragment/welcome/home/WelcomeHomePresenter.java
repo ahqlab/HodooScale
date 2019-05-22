@@ -71,7 +71,7 @@ public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter {
         String token = FirebaseInstanceId.getInstance().getToken();
         user.setPushToken(token);
 
-        loginModel.sendServer(user, new CommonModel.DomainCallBackListner<CommonResponce<User>>() {
+        loginModel.doSnsLogin(user, new CommonModel.DomainCallBackListner<CommonResponce<User>>() {
             @Override
             public void doPostExecute(CommonResponce<User> resultMessageGroup) {
                 if (resultMessageGroup != null) {
@@ -121,6 +121,7 @@ public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter {
                         view.setProgress(false);
                         view.goHomeActivity();
                         //view.setAutoLoginState();
+                        view.goHomeActivity();
                     } else {
                         //펫이 없음.
                         view.setProgress(false);

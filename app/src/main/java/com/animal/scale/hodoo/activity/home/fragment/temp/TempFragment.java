@@ -353,7 +353,7 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
                 switch (radioId) {
-                    case R.id.chart_day:
+                  /*  case R.id.chart_day:
                         statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
                         break;
                     case R.id.chart_week:
@@ -364,7 +364,7 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
                         break;
                     case R.id.chart_year:
                         statisicsPresenter.getStatisticalDataByYear(TextManager.TEMP_DATA);
-                        break;
+                        break;*/
                 }
             }
         });
