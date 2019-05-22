@@ -11,11 +11,13 @@ public class DateUtil {
         return new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
     }
     public static String getCurrentDatetimeSecond() {
+
         return new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
     }
 
     public static String getCurrentMonth() {
-        return new SimpleDateFormat("MM").format(Calendar.getInstance().getTime());
+        Calendar calendar = Calendar.getInstance();
+        return new SimpleDateFormat("MM").format(calendar.getTime());
     }
 
     public static String getCurrentYear() {

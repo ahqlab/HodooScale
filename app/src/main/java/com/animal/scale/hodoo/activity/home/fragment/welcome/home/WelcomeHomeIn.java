@@ -26,6 +26,8 @@ public interface WelcomeHomeIn {
         void selectTheNextAction();
 
         void setServerError();
+
+        void goHomeActivity();
     }
     interface Presenter{
 

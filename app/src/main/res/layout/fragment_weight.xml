@@ -17,8 +17,19 @@
         android:layout_height="match_parent"
         tools:context=".activity.home.fragment.weight.WeightFragment">
 
+        <TextView
+            android:id="@+id/thisYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:padding="8dp"
+            android:onClick="@{activity::showDatePickerDialog}"
+            android:text="May 2019"/>
+
         <noman.weekcalendar.WeekCalendar
             android:id="@+id/weekCalendar"
+            android:layout_below="@+id/thisYear"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@color/white"

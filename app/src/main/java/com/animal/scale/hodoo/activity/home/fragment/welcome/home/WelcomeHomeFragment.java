@@ -76,6 +76,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
             presenter.doLogin(commonResponce.getDomain());
         }
     }
+
     @Override
     public void goInvitationActivity() {
     }
@@ -107,6 +108,13 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
     @Override
     public void setServerError() {
 
+    }
+
+    @Override
+    public void goHomeActivity() {
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        startActivity(intent);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 
 
@@ -298,7 +306,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
                     dialog.show();
                 }
                 break;
-            case R.id.experience_btn :
+            case R.id.experience_btn:
                 intent = new Intent(getContext(), HomeActivity.class);
                 intent.putExtra(SharedPrefVariable.EXPERIENCE_KEY, true);
                 startActivity(intent);

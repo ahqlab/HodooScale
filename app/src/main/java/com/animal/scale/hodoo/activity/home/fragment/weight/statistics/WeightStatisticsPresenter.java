@@ -44,8 +44,9 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         model.initLoadData(context);
     }
 
-    public void getDailyStatisticalData(int type) {
-        model.getDailyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
+    @Override
+    public void getDailyStatisticalData(int type, String date) {
+        model.getDailyStatisticalData(type, date, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if ( d == null )
@@ -159,8 +160,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     @Override
-    public void getWeeklyStatisticalData(int type) {
-        model.getWeeklyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
+    public void getWeeklyStatisticalData(int type, String month) {
+        model.getWeeklyStatisticalData(type, month , new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if (d.size() > 0) {
@@ -240,8 +241,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     @Override
-    public void getMonthlyStatisticalData(int type) {
-        model.getMonthlyStatisticalData(type, new CommonModel.DomainListCallBackListner<Statistics>() {
+    public void getMonthlyStatisticalData(int type, String month) {
+        model.getMonthlyStatisticalData(type, month, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
                 if (d.size() > 0) {
@@ -266,8 +267,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         });
     }
 
-    @Override
-    public void getStatisticalDataByYear(int type) {
+   /* @Override
+    public void getStatisticalDataByYear(int type, String date) {
         model.getStatisticalDataByYear(type, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
@@ -291,7 +292,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
             }
         });
-    }
+    }*/
 
     private void setStatisticalData(List<Statistics> d, String type) {
         List<Statistics> list = new ArrayList<Statistics>();
