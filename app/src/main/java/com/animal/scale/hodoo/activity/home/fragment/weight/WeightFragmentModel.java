@@ -15,6 +15,7 @@ import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.HodooIndex;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
@@ -232,12 +233,12 @@ public class WeightFragmentModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void getWeightGoal(float currentWeight, int bodyFat, int petType, final CommonDomainCallBackListner<WeightGoalChart> commonDomainCallBackListner) {
+    public void getWeightGoal(int petIdx , final CommonDomainCallBackListner<HodooIndex> commonDomainCallBackListner) {
 
-        Call<CommonResponce<WeightGoalChart>> call = NetRetrofit.getInstance().getWeightGoalChartService().getWeightGoal(currentWeight, bodyFat, petType);
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<WeightGoalChart>>() {
+        Call<CommonResponce<HodooIndex>> call = NetRetrofit.getInstance().getWeightGoalChartService().getWeightGoal(petIdx, mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<HodooIndex>>() {
             @Override
-            protected void doPostExecute(CommonResponce<WeightGoalChart> responce) {
+            protected void doPostExecute(CommonResponce<HodooIndex> responce) {
                 commonDomainCallBackListner.doPostExecute(responce);
             }
 

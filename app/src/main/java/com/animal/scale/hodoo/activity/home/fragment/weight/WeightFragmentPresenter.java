@@ -6,6 +6,7 @@ import android.util.Log;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.HodooIndex;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
@@ -181,10 +182,10 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter {
     }
 
     @Override
-    public void getWeightGoal(float currentWeight, int bodyFat, int petType) {
-        model.getWeightGoal(currentWeight, bodyFat, petType, new CommonModel.CommonDomainCallBackListner<WeightGoalChart>() {
+    public void getWeightGoal(int petIdx) {
+        model.getWeightGoal(petIdx, new CommonModel.CommonDomainCallBackListner<HodooIndex>() {
             @Override
-            public void doPostExecute(CommonResponce<WeightGoalChart> d) {
+            public void doPostExecute(CommonResponce<HodooIndex> d) {
                 view.setWeightGoal(d.getDomain());
             }
 

@@ -101,6 +101,7 @@ public class LoginModel extends CommonModel {
 
         removeSharedValue();
         mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_UNIQUE_ID, user.getUserIdx());
+        //mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_SNS_TOKEN, user.getSnsToken());
         mSharedPrefManager.putIntExtra(SharedPrefVariable.UNIT_STR, unitIdx);
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_EMAIL, user.getEmail());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.GROUP_CODE, user.getGroupCode());
