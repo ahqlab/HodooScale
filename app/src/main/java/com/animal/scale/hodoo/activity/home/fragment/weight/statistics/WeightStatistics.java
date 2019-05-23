@@ -15,7 +15,7 @@ public interface WeightStatistics {
 
         void getDailyStatisticalData(int type, String date);
 
-        void getWeeklyStatisticalData(int type, String month);
+        void getWeeklyStatisticalData(int type, String date , String year, String month);
 
         void getMonthlyStatisticalData(int type, String month);
 

@@ -295,6 +295,14 @@
     <string name="request_for_hodoo_link">그룹 참여하기</string>
     <string name="go_to_regist_pet">펫 등록 하러가기</string>
     <string name="regist_pet_desc">나의 펫을 등록하고 호두를 시작할래요</string>
+    <string name="activity_title_notice">공지사항</string>
+
+    <string name="common__save">저장</string>
 
     <string name="kakao_app_key">6c3ac725269577a6048f062d88866f02</string>
+    <string name="weight_statistics" >체중 통계</string>
+    <string name="starting_weight">시작 체중</string>
+    <string name="current_weight">현재 체중</string>
+    <string name="weight_goal">목표 체중</string>
+    <string name="alarm_setting">알람 설정</string>
 </resources>

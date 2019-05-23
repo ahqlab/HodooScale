@@ -258,7 +258,12 @@
     <string name="invitation_finish_title">요청 링크를\n발송했습니다!</string>
     <string name="invitation_finish_content">기기 소유자가 요청을 수락하면\n앱 메인 페이지로 이동할 수 있습니다.</string>
     <string name="with_a_hodoo_user" />
+    <string name="activity_title_notice">Notice</string>
 
     <string name="kakao_app_key">6c3ac725269577a6048f062d88866f02</string>
+    <string name="starting_weight">STARTING WEIGHT</string>
+    <string name="current_weight">CURRENT WEIGHT</string>
+    <string name="weight_goal">WEIGHT GOAL</string>
+    <string name="alarm_setting">Alarm Settings</string>
 
 </resources>

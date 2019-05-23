@@ -6,18 +6,23 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-public class MyBarDataSet extends BarDataSet {
+public class MonthBarDataSet extends BarDataSet {
 
-    public MyBarDataSet(List<BarEntry> yVals, String label) {
+    private String month;
+
+    public MonthBarDataSet(List<BarEntry> yVals, String label, String month) {
         super(yVals, label);
+        this.month = month;
     }
 
     @Override
     public int getColor(int index) {
-        Calendar calendar = Calendar.getInstance();
-        if (getEntryForIndex(index).getX() == (calendar.get(Calendar.DAY_OF_WEEK) - 2)) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        if (getEntryForIndex(index).getX() == (Integer.parseInt(month) - 1)) {
             return mColors.get(1);
         }
         return mColors.get(0);

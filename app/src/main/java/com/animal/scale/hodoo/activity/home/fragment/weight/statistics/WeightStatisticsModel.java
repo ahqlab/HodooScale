@@ -1,14 +1,14 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight.statistics;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.animal.scale.hodoo.R;
-import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.chart.MyBarDataSet;
+import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.chart.DayBarDataSet;
+import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.chart.MonthBarDataSet;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.chart.MyMarkerView;
-import com.animal.scale.hodoo.activity.user.login.LoginActivity;
+import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.chart.WeekBarDataSet;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
@@ -17,21 +17,16 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Statistics;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.DateUtil;
-import com.animal.scale.hodoo.util.VIewUtil;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -47,8 +42,7 @@ public class WeightStatisticsModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    public void setupChart(BarChart chart, BarData data, final List<Statistics> xValues, final String type) {
-        Log.e("HJLEE", ">>> " + xValues.size());
+    public void setupChart(BarChart chart, BarData data, final List<Statistics> xValues, final String type, final String dateStr) {
         chart.getDescription().setEnabled(false);
         chart.setDrawGridBackground(false);
         chart.setTouchEnabled(true);
@@ -76,7 +70,6 @@ public class WeightStatisticsModel extends CommonModel {
             xAxis.setLabelCount(5);
         else if ( type.matches("Month") )
             xAxis.setLabelCount(7);
-       // xAxis.setDrawGridLines(false);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -97,11 +90,31 @@ public class WeightStatisticsModel extends CommonModel {
         chart.setData(data);
         chart.setFitBars(true);
         chart.getLegend().setEnabled(false);
-        chart.animateX(2500);
+        //chart.animateX(2500);
         chart.invalidate();
 
-        Highlight highlight = new Highlight((float) data.getEntryCount(), 0, -1);
+        Highlight highlight = null;
+
+        if ( type.matches("Day") ){
+            if(dateStr != null){
+                highlight = new Highlight(((DateUtil.getCalendatOfDate(dateStr).get(Calendar.DAY_OF_WEEK) == 1 ? 8 : DateUtil.getCalendatOfDate(dateStr).get(Calendar.DAY_OF_WEEK)) - 2), 0, -1);
+            }else{
+                highlight = new Highlight(0, 0, -1);
+            }
+        }else if ( type.matches("Week") ){
+            if(dateStr != null){
+                highlight = new Highlight((DateUtil.getCalendatOfDate(dateStr).get(Calendar.WEEK_OF_MONTH) - 1), 0, -1);
+            }else{
+                highlight = new Highlight(0, 0, -1);
+            }
+        }else if ( type.matches("Month") ){
+            if(dateStr != null){
+                highlight = new Highlight(Integer.parseInt(dateStr) - 1, 0, -1);
+            }
+        }
         chart.highlightValue(highlight, false);
+
+
         chart.setNoDataText(context.getString(R.string.weight_data_available));
         chart.setNoDataTextColor(context.getResources().getColor(R.color.mainBlack));
     }
@@ -115,31 +128,54 @@ public class WeightStatisticsModel extends CommonModel {
     }
 
     public String setMonthXValueFormatted(float value, AxisBase axis, List<Statistics> xValues) {
-        return xValues.get((int) value % xValues.size()).getTheMonth() + context.getString(R.string.istyle_statistic_month);
+        //return Integer.parseInt(xValues.get((int) value % xValues.size()).getTheMonth()) + context.getString(R.string.istyle_statistic_month);
+        return xValues.get((int) value % xValues.size()).getTheMonth()+ context.getString(R.string.istyle_statistic_month);
     }
 
     public String setYearXValueFormatted(float value, AxisBase axis, List<Statistics> xValues) {
         return xValues.get((int) value % xValues.size()).getTheYear() + context.getString(R.string.istyle_one_year);
     }
 
-    public BarData getData(ArrayList<BarEntry> yVals) {
-        MyBarDataSet set1 = new MyBarDataSet(yVals, "DataSet");
+    public BarData getDayData(ArrayList<BarEntry> yVals, String date) {
+        DayBarDataSet set1 = new DayBarDataSet(yVals, "DataSet", date);
         set1.setColors(new int[]{ContextCompat.getColor(context, R.color.grey),
                 ContextCompat.getColor(context, R.color.mainRed)});
         set1.setDrawValues(false);
-        //커브 곡선
-        //set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        //set1.setCubicIntensity(0.2f);
-        //set1.setDrawFilled(false);
-        //set1.setDrawCircles(false);
-        //set1.setLineWidth(1.8f);
-        //set1.setCircleRadius(4f);
-        //set1.setCircleColor(context.getResources().getColor(R.color.mainRed));
         set1.setHighLightColor(context.getResources().getColor(R.color.mainRed));
+        BarData data = new BarData(set1);
+        data.setBarWidth(0.1f);
+        return data;
+    }
 
-        //set1.setColor(context.getResources().getColor(R.color.mainRed));
+    public BarData getDayData(ArrayList<BarEntry> yVals ) {
+        DayBarDataSet set1 = new DayBarDataSet(yVals, "DataSet", "");
+        set1.setColors(new int[]{ContextCompat.getColor(context, R.color.grey),
+                ContextCompat.getColor(context, R.color.mainRed)});
+        set1.setDrawValues(false);
+        set1.setHighLightColor(context.getResources().getColor(R.color.mainRed));
+        BarData data = new BarData(set1);
+        data.setBarWidth(0.1f);
+        return data;
+    }
 
-        //set1.setDrawHorizontalHighlightIndicator(false);
+
+    public BarData getWeekData(ArrayList<BarEntry> yVals, String date) {
+        WeekBarDataSet set1 = new WeekBarDataSet(yVals, "DataSet", date);
+        set1.setColors(new int[]{ContextCompat.getColor(context, R.color.grey),
+                ContextCompat.getColor(context, R.color.mainRed)});
+        set1.setDrawValues(false);
+        set1.setHighLightColor(context.getResources().getColor(R.color.mainRed));
+        BarData data = new BarData(set1);
+        data.setBarWidth(0.1f);
+        return data;
+    }
+
+    public BarData getMonthData(ArrayList<BarEntry> yVals, String month) {
+        MonthBarDataSet set1 = new MonthBarDataSet(yVals, "DataSet", month);
+        set1.setColors(new int[]{ContextCompat.getColor(context, R.color.grey),
+                ContextCompat.getColor(context, R.color.mainRed)});
+        set1.setDrawValues(false);
+        set1.setHighLightColor(context.getResources().getColor(R.color.mainRed));
         BarData data = new BarData(set1);
         data.setBarWidth(0.1f);
         return data;
@@ -166,8 +202,8 @@ public class WeightStatisticsModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void getWeeklyStatisticalData(int type, String month , final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
-        Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfWeek(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), month, type,
+    public void getWeeklyStatisticalData(int type, String year, String month , final CommonModel.DomainListCallBackListner<Statistics> domainListCallBackListner) {
+        Call<List<Statistics>> call = NetRetrofit.getInstance().getRealTimeWeightService().getStatisticsOfWeek(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), year , month, type,
                 mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<Statistics>() {
             @Override
