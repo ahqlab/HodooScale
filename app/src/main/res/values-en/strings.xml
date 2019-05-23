@@ -307,7 +307,12 @@
     <string name="invitation__error_overlab_invitation">You have already requested to join that group.</string>
 
     <string name="basic_infomation_regist__pet_breed_title">Breed</string>
+    <string name="dog">DOG</string>
+    <string name="cat">CAT</string>
 
+    <string name="search_pet_breed_hint">Please search for varieties</string>
+
+    <string name="pet_type_explain">Please select your pet type.</string>
 
 
     <string name="user_group_manager__tool_bar_title">Group management</string>
@@ -336,4 +341,8 @@
     <string name="weight_goal">WEIGHT GOAL</string>
     <string name="alarm_setting">Alarm Settings</string>
 
+    <string name="enter_weight">Enter Weight</string>
+
+    <string name="regist_done_msg">Registration is complete</string>
+    <string name="edit_done_msg">Edit is complete</string>
 </resources>

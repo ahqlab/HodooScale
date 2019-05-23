@@ -147,10 +147,10 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
         presenter.loadData(getContext());
 
         callback = new SessionCallback();
-        if (sharedPrefManager.getStringExtra(SharedPrefVariable.USER_SNS_TOKEN) != null) {
-            Session.getCurrentSession().addCallback(callback);
-            Session.getCurrentSession().checkAndImplicitOpen();
-        }
+
+        Session.getCurrentSession().addCallback(callback);
+        Session.getCurrentSession().checkAndImplicitOpen();
+
         return binding.getRoot();
     }
 
@@ -316,6 +316,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
 
         @Override
         public void onSessionOpened() {
+            Log.d("HJLEE", "onSessionOpen");
             if (Session.getCurrentSession().getTokenInfo() != null) {
                 Toast.makeText(getActivity(), "Logged in!\ntoken: " + Session.getCurrentSession().getAccessToken(), Toast.LENGTH_SHORT).show();
                 //로그인 되어있음.
@@ -362,11 +363,11 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
                     User user = new User();
                     OptionalBoolean isEmail = result.getKakaoAccount().hasEmail();
                     OptionalBoolean isGender = result.getKakaoAccount().hasGender();
-
-                    if (isEmail.getBoolean())
+                    if ( isEmail.getBoolean() )
                         user.setEmail(result.getKakaoAccount().getEmail());
-                    if (isGender.getBoolean())
-                        user.setSex(result.getKakaoAccount().getGender().getValue());
+                    if ( isGender.getBoolean() )
+                        if ( result.getKakaoAccount().getGender() != null )
+                            user.setSex(result.getKakaoAccount().getGender().getValue().toUpperCase());
 
                     user.setNickname(result.getNickname());
                     user.setCountry(VIewUtil.getLocationCode(getActivity()));

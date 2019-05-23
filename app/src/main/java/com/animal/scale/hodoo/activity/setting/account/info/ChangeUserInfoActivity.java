@@ -13,17 +13,25 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.animal.scale.hodoo.HodooApplication;
+import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.change.password.ChangePasswordActivity;
+import com.animal.scale.hodoo.activity.user.login.KakaoLoginActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityChangeUserInfoBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.Country;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.util.VIewUtil;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -270,7 +278,65 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         this.country = countreis;
         presenter.initUserData();
     }
-    public void snsClick ( View v ) {
 
+    @Override
+    public void goLoginPage() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
+        startActivity(intent);
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+
+        finishAffinity();
+        finish();
+    }
+
+    public void snsClick ( View v ) {
+        switch( v.getId() ) {
+            case R.id.sns_logout :
+                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+                        Log.d(TAG, "sessionClosed!!\n" + errorResult.toString());
+                    }
+                    @Override
+                    public void onNotSignedUp() {
+                        Log.d(TAG, "NotSignedUp!!");
+                    }
+                    @Override
+                    public void onSuccess(Long result) {
+                        presenter.logout();
+//                        Toast.makeText(KakaoLoginActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onCompleteLogout() {
+//                        Toast.makeText(KakaoLoginActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case R.id.sns_withdraw :
+                UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                    @Override
+                    public void onFailure(ErrorResult errorResult) {
+                        Log.e("HJLEE", "onFailure : " + errorResult.toString());
+                    }
+
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+                        Log.e("HJLEE", "onSessionClosed : " + errorResult.toString());
+                    }
+
+                    @Override
+                    public void onNotSignedUp() {
+                        Log.e("HJLEE", "onNotSignedUp : ");
+                    }
+
+                    @Override
+                    public void onSuccess(Long userId) {
+                        Log.e("HJLEE", "onSuccess : " + userId);
+                        presenter.logout();
+                    }
+                });
+                break;
+        }
     }
 }

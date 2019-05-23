@@ -89,4 +89,10 @@ public class ChangeUserInfoPresenter implements ChangeUserInfoIn.Presenter{
             }
         });
     }
+
+    @Override
+    public void logout() {
+        model.logout();
+        view.goLoginPage();
+    }
 }

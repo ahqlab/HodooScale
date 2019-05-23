@@ -14,7 +14,7 @@
                 android:id="@+id/breed_edt"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="품종을 검색해주세요"/>
+                android:hint="@string/search_pet_breed_hint"/>
             <!--<ImageButton-->
                 <!--android:id="@+id/breed_search_icon"-->
                 <!--android:layout_centerVertical="true"-->

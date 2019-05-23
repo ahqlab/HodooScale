@@ -113,6 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Button
+                        android:id="@+id/sns_logout"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
                         android:paddingTop="10dp"
@@ -130,6 +131,7 @@
                         android:textColor="@color/mainRed"
                         android:textSize="11sp"/>
                     <Button
+                        android:id="@+id/sns_withdraw"
                         android:layout_marginLeft="10dp"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
