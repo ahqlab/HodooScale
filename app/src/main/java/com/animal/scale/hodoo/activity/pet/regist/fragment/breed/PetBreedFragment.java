@@ -90,7 +90,7 @@ public class PetBreedFragment extends PetRegistFragment implements PetBreedIn.Vi
             return;
         values = new String[breeds.size()];
         for (int i = 0; i < breeds.size(); i++)
-            values[i] = breeds.get(i).getName();
+            values[i] = breeds.get(i).getName() != null ? breeds.get(i).getName() : "";
 
         final LayoutPetBreedBinding petBreedBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_pet_breed, null, false);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, values);
@@ -164,6 +164,8 @@ public class PetBreedFragment extends PetRegistFragment implements PetBreedIn.Vi
     @Override
     public void getAllPetBreed(CommonResponce<List<PetBreed>> breeds) {
         this.breeds = breeds.domain;
+        if ( petBasicInfo.getPetBreed() == null )
+            return;
         for (int i = 0; i < this.breeds.size(); i++) {
             if ( this.breeds.get(i).getName().equals(petBasicInfo.getPetBreed()) ) {
                 breedIndex = this.breeds.get(i).getId();

@@ -346,15 +346,21 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
     }
     public void setPetType ( int type ) {
         this.type = type;
+
+        String[] physiqueStrArr = null;
         switch (type) {
             case PetRegistActivity.DOG_TYPE :
-                binding.first.setText( "체장" );
-                binding.second.setText( "체고" );
+                physiqueStrArr = getActivity().getResources().getStringArray(R.array.dog_type_physique_str_arr);
                 break;
             case PetRegistActivity.CAT_TYPE :
-                binding.first.setText( "배 둘레" );
-                binding.second.setText( "다리길이" );
+                physiqueStrArr = getActivity().getResources().getStringArray(R.array.cat_type_physique_str_arr);
+                break;
+            default:
+                physiqueStrArr = getActivity().getResources().getStringArray(R.array.dog_type_physique_str_arr);
                 break;
         }
+
+        binding.first.setText( physiqueStrArr[0] );
+        binding.second.setText( physiqueStrArr[1] );
     }
 }

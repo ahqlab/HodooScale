@@ -91,9 +91,14 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
         }*/
        String titleStr = getGroup(groupPosition).getTitle() + createdStr;
         SpannableStringBuilder ssb = new SpannableStringBuilder(titleStr);
-        ssb.setSpan(new AbsoluteSizeSpan(35), getGroup(groupPosition).getTitle().length(), getGroup(groupPosition).getTitle().length() + createdStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ssb.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.mainBlack)), 0, getGroup(groupPosition).getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        viewHolder.title.setText(ssb);
+       if ( getGroup(groupPosition).getTitle() != null ) {
+           ssb.setSpan(new AbsoluteSizeSpan(35), getGroup(groupPosition).getTitle().length(), getGroup(groupPosition).getTitle().length() + createdStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+           ssb.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.mainBlack)), 0, getGroup(groupPosition).getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+           viewHolder.title.setText(ssb);
+       } else {
+           viewHolder.title.setText(createdStr);
+       }
+
         viewHolder.indicator.setSelected(isExpanded);
 //        viewHolder.created.setText(getGroup(groupPosition).getCreateDate());
         return v;
