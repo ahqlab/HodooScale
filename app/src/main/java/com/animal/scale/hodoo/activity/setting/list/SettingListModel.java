@@ -5,6 +5,7 @@ import android.content.Context;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.SettingMenu;
 
 import java.util.ArrayList;
@@ -23,6 +24,13 @@ public class SettingListModel extends CommonModel {
 
     public void logout() {
         sharedPrefManager.removeAllPreferences();
+    }
+
+    public int getUnitIdx () {
+        return sharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR);
+    }
+    public void saveUnitIdx ( int unitIdx ) {
+        sharedPrefManager.putIntExtra(SharedPrefVariable.UNIT_STR, unitIdx);
     }
 
 }

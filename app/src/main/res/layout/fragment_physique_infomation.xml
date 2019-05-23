@@ -245,7 +245,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:hint="0"
-                                android:focusable="false"
+                                android:inputType="numberDecimal"
                                 android:text="@={domain.width}"
                                 android:onClick="@{() -> activity.onClickWidthEt(domain)}" />
 
@@ -255,16 +255,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:hint="0"
-                                android:focusable="false"
+                                android:inputType="numberDecimal"
                                 android:text="@={domain.height}"
                                 android:onClick="@{() -> activity.onClickHightEt(domain)}"/>
 
-                            <EditText
+                            <TextView
+                                android:id="@+id/unitStr"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:focusable="false"
-                                android:text="@string/pet_unit" />
+                                android:textAlignment="center"/>
                         </LinearLayout>
 
                         <LinearLayout

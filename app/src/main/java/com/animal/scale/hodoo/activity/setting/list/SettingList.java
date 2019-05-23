@@ -30,5 +30,7 @@ public interface SettingList {
 
         void getInvitationCount();
 
+        void saveUnit( int unitIdx );
+
     }
 }

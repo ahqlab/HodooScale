@@ -44,9 +44,11 @@ public class SettingListPresenter implements SettingList.Presenter {
         /* content (e) */
 
         contentList.get(SettingListActivity.HODOO_LINK).get(SettingListActivity.REQUEST).setBadgeCount(notificationModel.getInvitationCount());
+        contentList.get(SettingListActivity.USER).get(SettingListActivity.UNIT).setStringState(true);
+        int unitIdx = settingListModel.getUnitIdx();
+        String[] unitArr = context.getResources().getStringArray(R.array.unit_str_arr);
+        contentList.get(SettingListActivity.USER).get(SettingListActivity.UNIT).setSettingStr(unitArr[unitIdx]);
         settingListView.setExpandableListAdapter(titleList, contentList);
-
-
     }
 
     @Override
@@ -59,6 +61,12 @@ public class SettingListPresenter implements SettingList.Presenter {
     public void getInvitationCount() {
         settingListView.updateBadgeCount(notificationModel.getInvitationCount());
     }
+
+    @Override
+    public void saveUnit(int unitIdx) {
+        settingListModel.saveUnitIdx(unitIdx);
+    }
+
     public ArrayList<List<SettingMenu>> setList( String[]...param ) {
         ArrayList<List<SettingMenu>> array = new ArrayList<>();
 

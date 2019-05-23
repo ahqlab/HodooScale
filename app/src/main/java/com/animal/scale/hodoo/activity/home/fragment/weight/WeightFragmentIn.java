@@ -68,5 +68,7 @@ public interface WeightFragmentIn {
         void updatePhysical(PetPhysicalInfo info);
 
         void getWeekRate();
+
+        int getWeightUnit();
     }
 }

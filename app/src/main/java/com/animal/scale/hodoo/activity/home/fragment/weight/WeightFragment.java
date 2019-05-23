@@ -42,6 +42,7 @@ import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightGoalChart;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.MathUtil;
 import com.animal.scale.hodoo.util.TextManager;
 
 import org.joda.time.DateTime;
@@ -110,6 +111,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     String currentWeekCalendarDate;
     String currentWeekCalendarMonth;
     String currentWeekCalendarYear;
+
+    private int unitIdx;
 
     public WeightFragment() {
     }
@@ -236,8 +239,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         } else {
             //String[] numbers = String.valueOf(goal).split("\\.");
             DecimalFormat df = new DecimalFormat("#.#");
-            String result = df.format(goal);
-            binding.goal.setText(result + "Kg");
+//            String result = df.format(goal);
+            String result = df.format( unitIdx == 1 ? MathUtil.kgTolb(goal) : goal );
+//            binding.goal.setText((int) ( unitIdx == 1 ? MathUtil.kgTolb(goal) : goal )  + getResources().getStringArray(R.array.unit_str_arr)[unitIdx]);
+            binding.goal.setText(result + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
 //            binding.bcsSubscript.setText(result + "Kg");
             //Log.e("HJLEE", "result : " + result);
             //if(numbers[1].equals("0")){
@@ -457,6 +462,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void onResume() {
         super.onResume();
+
+//        setWeight();
         app = (HodooApplication) getActivity().getApplication();
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -499,18 +506,26 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     private void setWeight() {
+        unitIdx = presenter.getWeightUnit();
         float petWeight = Float.valueOf(selectPet.getPet().getFixWeight());
         float compareWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight()) - petWeight;
         DecimalFormat df = new DecimalFormat("#.#");
-        binding.nowWeight.setText(Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight()) != 0 ? selectPet.getPetPhysicalInfo().getWeight() + " kg" : "-");
-        binding.petWeight.setText(df.format(petWeight) + " kg");
-        binding.compareWeight.setText(compareWeight > 0 ? "+" + df.format(compareWeight) : df.format(compareWeight));
+        String[] unitArr = getResources().getStringArray(R.array.weight_unit);
+        binding.nowWeight.setText(
+                Float.parseFloat(
+                        selectPet.getPetPhysicalInfo().getWeight()) != 0 ?
+                        (unitIdx == 1 ? String.valueOf( df.format(MathUtil.kgTolb( (Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight()))  )) ) : selectPet.getPetPhysicalInfo().getWeight()) + getResources().getStringArray(R.array.weight_unit)[unitIdx]  :
+                        "-");
+        binding.petWeight.setText(df.format( unitIdx == 1 ? MathUtil.kgTolb(petWeight) : petWeight ) + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
+        binding.compareWeight.setText(compareWeight > 0 ? "+" + df.format( unitIdx == 1 ? MathUtil.kgTolb(compareWeight) : compareWeight ) : df.format( unitIdx == 1 ? MathUtil.kgTolb(compareWeight) : compareWeight ));
 
         /* 체중 */
         String fixWeight = binding.petWeight.getText().toString();
-        fixWeight = fixWeight.replace(" kg", "");
+        fixWeight = fixWeight.replace(getResources().getStringArray(R.array.weight_unit)[unitIdx], "");
+        if ( unitIdx == 1 )
+            fixWeight = String.valueOf( MathUtil.kgTolb( Float.parseFloat(fixWeight)  ) );
         if (Float.parseFloat(fixWeight) == 0)
-            binding.petWeight.setText(selectPet.getPetPhysicalInfo().getWeight() + " kg");
+            binding.petWeight.setText(selectPet.getPetPhysicalInfo().getWeight() + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
         presenter.getWeekRate();
         binding.editWeightBtn.setOnClickListener(new View.OnClickListener() {
             @Override

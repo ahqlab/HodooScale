@@ -94,4 +94,9 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
             }
         });
     }
+
+    @Override
+    public int getUnitIdx() {
+        return model.getUnitIdx();
+    }
 }

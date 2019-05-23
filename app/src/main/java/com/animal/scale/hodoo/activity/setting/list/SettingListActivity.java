@@ -1,14 +1,18 @@
 package com.animal.scale.hodoo.activity.setting.list;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 
 import com.animal.scale.hodoo.MainActivity;
@@ -71,7 +75,8 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     // user
     public final static int ACCOUNT = 0;
     public final static int NOTIFICATION = 1;
-    public final static int LOGOUT = 2;
+    public final static int UNIT = 2;
+    public final static int LOGOUT = 3;
 
     //device
     public final static int POTTY = 0;
@@ -146,7 +151,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     }
 
     @Override
-    public void setExpandableListAdapter(final ArrayList<String> title, ArrayList<List<SettingMenu>> content) {
+    public void setExpandableListAdapter(final ArrayList<String> title, final ArrayList<List<SettingMenu>> content) {
         settingMenus = content;
         adapter = new AdapterOfExpandable(this, title, content);
 
@@ -177,6 +182,22 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                         SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
                     else if ( contentPosition == NOTIFICATION ) {
                         SettingListActivity.super.moveIntent(SettingListActivity.this, AlarmItemListActivity.class, 0,0, false);
+                    }
+                    else if ( contentPosition == UNIT ) {
+                        final String[] unitStrArr = getResources().getStringArray(R.array.unit_str_arr);
+                        final ArrayAdapter<String> alertAdapter = new ArrayAdapter<>(SettingListActivity.this, android.R.layout.simple_list_item_1);
+                        alertAdapter.addAll(unitStrArr);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SettingListActivity.this)
+                                .setAdapter(alertAdapter, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        presenter.saveUnit(i);
+                                        content.get(USER).get(UNIT).setSettingStr( unitStrArr[i] );
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                });
+                        builder.create().show();
+
                     }
                     else if ( contentPosition == LOGOUT ) {
                         presenter.logout();

@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -21,4 +22,8 @@ public class SettingMenu {
     private boolean badgeState;
 
     private int badgeCount;
+
+    private String settingStr;
+
+    private boolean stringState = false;
 }

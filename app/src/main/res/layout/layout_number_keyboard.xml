@@ -48,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="90dp"
                 android:gravity="center"
-                android:text='@{weight + "kg"}'
                 android:textAlignment="center"
                 android:textColor="@color/mainBlack"
                 android:textSize="48sp" />

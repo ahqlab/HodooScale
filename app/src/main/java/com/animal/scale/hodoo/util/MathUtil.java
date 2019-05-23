@@ -39,11 +39,18 @@ public class MathUtil {
 		return decimal;
 	}
 
-	public double cmToInch(int cm){
+	public static double cmToInch(double cm){
 		return cm/2.54;
 	}
 
-	public double InchToCm(double Inch){
+	public static double InchToCm(double Inch){
 		return Inch * 2.54;
+	}
+
+	public static float kgTolb( float kg ) {
+		return (kg * (1f / 2.2f));
+	}
+	public static float lbToKg( float lb ) {
+		return ( lb * (1f * 2.2f) );
 	}
 }
