@@ -33,7 +33,7 @@ public interface RealTimeWeightService {
 
     //USE
     @POST("weight/get/statistics/list/of/week.do")
-    Call<List<Statistics>> getStatisticsOfWeek(@Query("groupCode") String groupCode, @Query("month") String month, @Query("type") int type, @Query("petIdx") int petIdx);
+    Call<List<Statistics>> getStatisticsOfWeek(@Query("groupCode") String groupCode, @Query("year") String year ,@Query("month") String month, @Query("type") int type, @Query("petIdx") int petIdx);
 
     //USE
     @POST("weight/get/statistics/list/of/month.do")

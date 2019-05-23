@@ -74,6 +74,7 @@
     <string name="istyle_management_pet">Pet</string>
     <string name="istyle_management_user">Group Users</string>
     <string name="istyle_find_password">Reset Password</string>
+    <string name="istyle_app_version">App version</string>
     <!-- Setting List -->
     <string name="istyle_setting_menu_my_account">Account</string>
     <string name="istyle_setting_menu_notice">Notice</string>
@@ -320,10 +321,19 @@
     <string name="auto_login">Remember Me</string>
 
     <string name="common__recommend_calorie">700kcal\n(recommend quantity)</string>
-    <string name="request_for_hodoo_link">그룹 참여하기</string>
-    <string name="go_to_regist_pet" >펫 등록 하러가기</string>
-    <string name="regist_pet_desc">나의 펫을 등록하고 호두를 시작할래요</string>
+    <string name="request_for_hodoo_link">Join a group</string>
+    <string name="this_is_latest_version">This is the latest version.</string>
+    <string name="current_app_version">Current Version</string>
+    <string name="you_need_update">Please update it to the latest version!</string>
+    <string name="go_to_regist_pet" >Go to pet registration</string>
+    <string name="regist_pet_desc">I\'ll register my pet and start Hodoo</string>
+    <string name="activity_title_notice">Notice</string>
 
     <string name="kakao_app_key">6c3ac725269577a6048f062d88866f02</string>
+    <string name="weight_statistics" >WEIGHT STATISTICS</string>
+    <string name="starting_weight">STARTING WEIGHT</string>
+    <string name="current_weight">CURRENT WEIGHT</string>
+    <string name="weight_goal">WEIGHT GOAL</string>
+    <string name="alarm_setting">Alarm Settings</string>
 
 </resources>

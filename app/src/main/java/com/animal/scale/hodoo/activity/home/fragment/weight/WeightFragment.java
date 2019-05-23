@@ -109,6 +109,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     String currentWeekCalendarDate;
     String currentWeekCalendarMonth;
+    String currentWeekCalendarYear;
 
     public WeightFragment() {
     }
@@ -207,7 +208,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarDate != null ? currentWeekCalendarDate : DateUtil.getCurrentDatetime()));
                 break;
             case 1:
-                statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()));
+                statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarDate != null ? currentWeekCalendarDate : DateUtil.getCurrentDatetime()), (currentWeekCalendarYear != null ? currentWeekCalendarYear : DateUtil.getCurrentYear()),(currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()) );
                 break;
             case 2:
                 statisicsPresenter.getMonthlyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()));
@@ -351,16 +352,16 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             public void onDateClick(DateTime dateTime) {
                 DateTime dt = dateTime;
                 DateTime now = new DateTime();
-                currentWeekCalendarDate = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
-                currentWeekCalendarDate = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
 
+                currentWeekCalendarDate = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
+                currentWeekCalendarMonth = dt.toString(DateTimeFormat.forPattern("MM"));
+                currentWeekCalendarYear = dt.toString(DateTimeFormat.forPattern("yyyy"));
 
                 weekCal = dateTime.toCalendar(Locale.getDefault());
                 DateFormat formatter1 = DateFormat.getDateInstance(DateFormat.DEFAULT);
                 formatter1.setTimeZone(weekCal.getTimeZone());
                 String formatted1 = formatter1.format(weekCal.getTime());
                 binding.thisYear.setText(formatted1);
-
 
                 HomeActivity.setCalendarDate(currentWeekCalendarDate);
                 if (now.toDateTime().toString().compareTo(currentWeekCalendarDate) < 0) {
@@ -470,7 +471,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                         break;
                     case R.id.chart_week:
                         currentChart = 1;
-                        statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()));
+                        statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarDate != null ? currentWeekCalendarDate : DateUtil.getCurrentDatetime()), (currentWeekCalendarYear != null ? currentWeekCalendarYear : DateUtil.getCurrentYear()),(currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()) );
                         break;
                     case R.id.chart_month:
                         currentChart = 2;
@@ -536,7 +537,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                     .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                            refrashChart();
                         }
                     });
             builder.create().show();
@@ -574,12 +575,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
                         binding.weekCalendar.setSelectedDate( dialogSelectedDate );
 
-
                         currentWeekCalendarDate = dialogSelectedDate.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
                         currentWeekCalendarMonth = dialogSelectedDate.toString(DateTimeFormat.forPattern("MM"));
-
-                        Toast.makeText(getActivity(), "You Selected " + currentWeekCalendarDate, Toast
-                                .LENGTH_SHORT).show();
+                        currentWeekCalendarYear = dialogSelectedDate.toString(DateTimeFormat.forPattern("yyyy"));
 
                         refrashChart();
 

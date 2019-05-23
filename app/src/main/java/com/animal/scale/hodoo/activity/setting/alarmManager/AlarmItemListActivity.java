@@ -42,7 +42,7 @@ public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> i
         //setContentView(R.layout.activity_notification_manager);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_notification_manager);
         binding.setActivity(AlarmItemListActivity.this);
-        binding.setActivityInfo(new ActivityInfo("알람 설정"));
+        binding.setActivityInfo(new ActivityInfo(getString(R.string.alarm_setting)));
         super.setToolbarColor();
         presenter = new AlarmItemListPresenter(AlarmItemListActivity.this);
         presenter.loadData(AlarmItemListActivity.this);

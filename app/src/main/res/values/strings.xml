@@ -354,4 +354,9 @@
     <!-- 2019-01-30 new code (e) -->
 
     <string name="kakao_app_key">6c3ac725269577a6048f062d88866f02</string>
+    <string name="weight_statistics" >WEIGHT STATISTICS</string>
+    <string name="starting_weight">STARTING WEIGHT</string>
+    <string name="current_weight">CURRENT WEIGHT</string>
+    <string name="weight_goal">WEIGHT GOAL</string>
+    <string name="alarm_setting">Alarm Settings</string>
 </resources>

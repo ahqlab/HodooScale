@@ -50,7 +50,7 @@
                 android:textSize="14sp"
                 android:textColor="#4a4a4a"
                 android:letterSpacing="0.01"
-                android:text="알림 설정"
+                android:text="@string/alarm_setting"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="32dp"
