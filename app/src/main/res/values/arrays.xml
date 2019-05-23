@@ -385,4 +385,14 @@ If you\'re really hungry and eat something, you can give them snacks with less c
         <item>inch</item>
     </string-array>
 
+    <string-array name="cat_type_physique_str_arr">
+        <item>배 둘레</item>
+        <item>다리길이</item>
+    </string-array>
+
+    <string-array name="dog_type_physique_str_arr">
+        <item>체장</item>
+        <item>체고</item>
+    </string-array>
+
 </resources>

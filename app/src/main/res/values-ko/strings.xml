@@ -305,4 +305,6 @@
     <string name="current_weight">현재 체중</string>
     <string name="weight_goal">목표 체중</string>
     <string name="alarm_setting">알람 설정</string>
+
+    <string name="enter_weight">무게 입력</string>
 </resources>

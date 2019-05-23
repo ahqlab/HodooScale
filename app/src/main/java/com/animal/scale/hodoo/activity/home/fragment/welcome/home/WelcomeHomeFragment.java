@@ -375,7 +375,8 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
                     if ( isEmail.getBoolean() )
                         user.setEmail(result.getKakaoAccount().getEmail());
                     if ( isGender.getBoolean() )
-                        user.setSex(result.getKakaoAccount().getGender().getValue());
+                        if ( result.getKakaoAccount().getGender() != null )
+                            user.setSex(result.getKakaoAccount().getGender().getValue().toUpperCase());
 
                     user.setNickname(result.getNickname());
                     user.setCountry(VIewUtil.getLocationCode(getActivity()));

@@ -18,6 +18,8 @@ public interface ChangeUserInfoIn {
         void showResultPopup(Integer integer);
 
         void setCountry(List<Country> country);
+
+        void goLoginPage();
     }
 
     interface Presenter{
@@ -29,6 +31,8 @@ public interface ChangeUserInfoIn {
         void updateBasicInfo(User user);
 
         void getCountry ( int language );
+
+        void logout();
 
     }
 }

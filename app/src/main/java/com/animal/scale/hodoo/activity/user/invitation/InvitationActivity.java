@@ -48,8 +48,8 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
         binding.email.editText.addTextChangedListener(new CommonTextWatcher(
                 binding.email,
                 this,
-                CommonTextWatcher.EMAIL_TYPE,
-                R.string.istyle_not_valid_email_format,
+                CommonTextWatcher.EMPTY_TYPE,
+                R.string.invitation__content,
                 new CommonTextWatcher.CommonTextWatcherCallback() {
                     @Override
                     public void onChangeState(boolean state) {
@@ -67,7 +67,7 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
         presenter.sendInvitation( binding.email.editText.getText().toString() );
     }
     private void validation() {
-        setBtnEnable(ValidationUtil.isValidEmail(binding.email.editText.getText().toString()));
+        setBtnEnable(!ValidationUtil.isEmpty(binding.email.editText.getText().toString()));
     }
     private void setBtnEnable ( boolean state ) {
         binding.confirm.setEnabled(state);

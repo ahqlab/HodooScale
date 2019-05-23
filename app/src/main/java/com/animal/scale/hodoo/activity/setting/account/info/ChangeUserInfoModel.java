@@ -63,4 +63,7 @@ public class ChangeUserInfoModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    public void logout() {
+        sharedPrefManager.removeAllPreferences();
+    }
 }
