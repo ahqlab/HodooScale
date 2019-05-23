@@ -60,6 +60,7 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
             petUserSelectionQuestion = new PetUserSelectionQuestion();
             setBtnEnable(false);
         }
+        loadData(null);
 
         return binding.getRoot();
     }
@@ -180,7 +181,7 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
     @Override
     public void setPetBasicInfo(PetBasicInfo petBasicInfo) {
         super.setPetBasicInfo(petBasicInfo);
-        loadData(null);
-        setBtnEnable(validation());
+        loadData(petUserSelectionQuestion != null ? petUserSelectionQuestion : null);
+        setBtnEnable(petUserSelectionQuestion != null ? true : false);
     }
 }

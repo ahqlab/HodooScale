@@ -295,4 +295,7 @@ public class WeightFragmentModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    public int getWeightUnit() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR);
+    }
 }

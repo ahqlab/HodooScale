@@ -33,5 +33,7 @@ public interface PhysiqueInformationRegistIn {
         void deletePhysiqueInformation(int petIdx, int id);
 
         void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain);
+
+        int getUnitIdx();
     }
 }

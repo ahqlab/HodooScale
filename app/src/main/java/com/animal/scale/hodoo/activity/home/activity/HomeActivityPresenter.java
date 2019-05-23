@@ -208,7 +208,8 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
         model.getPetAllInfo(new CommonModel.ObjectCallBackListner<CommonResponce<List<PetAllInfos>>>() {
             @Override
             public void doPostExecute(CommonResponce<List<PetAllInfos>> listCommonResponce) {
-                view.setCustomPetListDialog(listCommonResponce.domain);
+                if ( listCommonResponce != null )
+                    view.setCustomPetListDialog(listCommonResponce.domain);
             }
 
             @Override

@@ -21,6 +21,7 @@ import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.databinding.FragmentPhysiqueInfomationBinding;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
+import com.animal.scale.hodoo.util.MathUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.tistory.dwfox.dwrulerviewlibrary.utils.DWUtils;
@@ -111,6 +112,7 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
         }
         presenter = new PhysiqueInformationRegistPresenter(this);
         presenter.loadData(getContext());
+        binding.unitStr.setText( getContext().getResources().getStringArray(R.array.height_unit)[presenter.getUnitIdx()] );
 //        presenter.setNavigation();
 
         presenter.getPhysiqueInformation(petIdx);
@@ -124,6 +126,10 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
 
     @Override
     public void setDiseaseInfo(PetPhysicalInfo petPhysicalInfo) {
+        if ( presenter.getUnitIdx() == 1 ) {
+            petPhysicalInfo.setWidth( String.valueOf(  MathUtil.cmToInch( Double.parseDouble( petPhysicalInfo.getWidth() ) ) ) );
+            petPhysicalInfo.setHeight( String.valueOf( MathUtil.cmToInch( Double.parseDouble( petPhysicalInfo.getHeight() ) ) ) );
+        }
         if (petPhysicalInfo != null) {
             binding.setDomain(petPhysicalInfo);
             if ( Float.parseFloat(petPhysicalInfo.getWeight()) > 0 )
@@ -142,12 +148,12 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
     public void onClickWidthEt(PetPhysicalInfo petPhysicalInfo) {
         if (petPhysicalInfo != null) {
             if (petPhysicalInfo.getWidth() != null) {
-                presenter.showRulerBottomDlg(binding.editWidth, petPhysicalInfo.getWidth());
+//                presenter.showRulerBottomDlg(binding.editWidth, petPhysicalInfo.getWidth());
             } else {
-                presenter.showRulerBottomDlg(binding.editWidth, "0");
+//                presenter.showRulerBottomDlg(binding.editWidth, "0");
             }
         } else {
-            presenter.showRulerBottomDlg(binding.editWidth, "0");
+//            presenter.showRulerBottomDlg(binding.editWidth, "0");
         }
     }
 
@@ -223,7 +229,14 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
     }
 
     public void onClickNextBtn(View view) {
-        ((PetRegistActivity) getActivity()).setPetPhysicalInfo(binding.getDomain());
+        PetPhysicalInfo info = binding.getDomain();
+        if ( presenter.getUnitIdx() == 1 ) {
+
+            info.setWidth(String.valueOf(MathUtil.InchToCm( Double.parseDouble( info.getWidth() ) )));
+            info.setHeight(String.valueOf(MathUtil.InchToCm( Double.parseDouble( info.getHeight() ) )));
+        }
+
+        ((PetRegistActivity) getActivity()).setPetPhysicalInfo(info);
         ((PetRegistActivity) getActivity()).nextFragment();
     }
 
@@ -323,8 +336,12 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
         }
     }
     public void updateView() {
-        if ( ((PetRegistActivity) getActivity()).getPetBasicInfo() != null )
-            binding.infoText.setText( ((PetRegistActivity) getActivity()).getPetBasicInfo().getPetName() + getContext().getString(R.string.physical_info_text) );
+        if ( ((PetRegistActivity) getActivity()).getPetBasicInfo() != null ) {
+            binding.infoText.setText(((PetRegistActivity) getActivity()).getPetBasicInfo().getPetName() + getContext().getString(R.string.physical_info_text));
+        }
+        if ( petIdx != 0 ) {
+            presenter.getPhysiqueInformation(petIdx);
+        }
         validation();
     }
     public void setPetType ( int type ) {

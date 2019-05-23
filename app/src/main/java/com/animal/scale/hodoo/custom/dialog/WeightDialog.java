@@ -10,10 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.LayoutNumberKeyboardBinding;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.single.PetAllInfo;
+import com.animal.scale.hodoo.util.MathUtil;
 
 import java.text.DecimalFormat;
 
@@ -23,9 +26,11 @@ import java.text.DecimalFormat;
 public class WeightDialog extends Dialog {
     private LayoutNumberKeyboardBinding keyboardBinding;
     private KeypadCallback callback;
-    private final String suffixStr = "kg";
+    private String suffixStr = "kg";
     private boolean state;
     private PetAllInfos selectPet;
+    private Context context;
+    private SharedPrefManager sharedPrefManager;
 
     public interface KeypadCallback {
         void keypadCallback(PetAllInfos selectPet);
@@ -62,8 +67,15 @@ public class WeightDialog extends Dialog {
             if ( Float.parseFloat( selectPet.petPhysicalInfo.getWeight() ) > 0 )
                 keyboardBinding.setState(true);
         }
+        final DecimalFormat df = new DecimalFormat("#.#");
+        if ( sharedPrefManager == null )
+            sharedPrefManager = SharedPrefManager.getInstance(context);
+        final int unitIdx = sharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR);
+        suffixStr = context.getResources().getStringArray(R.array.weight_unit)[unitIdx];
 
-        keyboardBinding.setWeight(selectPet.petPhysicalInfo.getWeight());
+        float kilogram = Float.parseFloat( selectPet.petPhysicalInfo.getWeight() );
+        keyboardBinding.kilogram.setText( String.valueOf(df.format(unitIdx == 1 ? MathUtil.kgTolb( kilogram ) : kilogram)) + suffixStr );
+        keyboardBinding.setWeight(String.valueOf(df.format(unitIdx == 1 ? MathUtil.kgTolb( kilogram ) : kilogram)));
         this.setContentView(keyboardBinding.getRoot());
         for (int i = 0; i < keyboardBinding.numericKeybord.getChildCount(); i++) {
             final int position = i;
@@ -114,6 +126,8 @@ public class WeightDialog extends Dialog {
             public void onClick(View view) {
                 float kilogram = Float.valueOf(selectPet.getPetPhysicalInfo().getWeight());
                 DecimalFormat df = new DecimalFormat("###.###");
+                if ( unitIdx == 1 )
+                    kilogram = MathUtil.lbToKg( kilogram );
                 selectPet.getPetPhysicalInfo().setWeight(df.format(kilogram));
                 if ( callback != null ) {
                     callback.keypadCallback( selectPet );

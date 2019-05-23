@@ -63,6 +63,7 @@
     <string-array name="user_settings">
         <item>계정</item>
         <item>알림</item>
+        <item>측정단위</item>
         <item>로그아웃</item>
     </string-array>
 
@@ -369,6 +370,19 @@ If you\'re really hungry and eat something, you can give them snacks with less c
         <item>조용한편</item>
         <item>보통인편</item>
         <item>활발한편</item>
+    </string-array>
+
+    <string-array name="unit_str_arr">
+        <item>cm / kg</item>
+        <item>inch / lb</item>
+    </string-array>
+    <string-array name="weight_unit">
+        <item>kg</item>
+        <item>lb</item>
+    </string-array>
+    <string-array name="height_unit">
+        <item>cm</item>
+        <item>inch</item>
     </string-array>
 
 </resources>

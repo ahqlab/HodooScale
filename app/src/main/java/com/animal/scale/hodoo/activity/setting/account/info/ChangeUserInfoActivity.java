@@ -235,7 +235,11 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         if ( user != null ) {
             binding.password.editText.setText(user.getPassword());
             binding.nickName.editText.setText(user.getNickname());
-            binding.country.editText.setText(country[user.getCountry() - 1]);
+            if ( user.getCountry() > 0 )
+                binding.country.editText.setText(country[user.getCountry() - 1]);
+            else {
+                binding.country.editText.setText(country[0]);
+            }
             selectCountry = user.getCountry();
             binding.email.editText.setText(user.getEmail());
             binding.setDomain(user);
@@ -265,5 +269,8 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         countries = country;
         this.country = countreis;
         presenter.initUserData();
+    }
+    public void snsClick ( View v ) {
+
     }
 }

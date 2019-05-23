@@ -238,4 +238,9 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter {
             }
         });
     }
+
+    @Override
+    public int getWeightUnit() {
+        return model.getWeightUnit();
+    }
 }

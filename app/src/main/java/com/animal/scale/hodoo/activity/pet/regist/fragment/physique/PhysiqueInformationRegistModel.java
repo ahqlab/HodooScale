@@ -24,6 +24,10 @@ public class PhysiqueInformationRegistModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
+    public int getUnitIdx() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR);
+    }
+
     public void getPhysiqueInformation(int petIdx, final DomainCallBackListner<PetPhysicalInfo> domainCallBackListner) {
         Call<PetPhysicalInfo> call = NetRetrofit.getInstance().getPetPhysicalInfoService().getPhysicalIformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetPhysicalInfo>(){

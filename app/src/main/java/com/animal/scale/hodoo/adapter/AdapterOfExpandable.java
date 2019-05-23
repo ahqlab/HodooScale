@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animal.scale.hodoo.R;
@@ -88,6 +89,8 @@ public class AdapterOfExpandable extends BaseExpandableListAdapter {
             convertView = mInflater.inflate(R.layout.setting_listview_content, null);
             mViewHolder.content = convertView.findViewById(R.id.expandable_content);
             mViewHolder.badge = convertView.findViewById(R.id.setting_badge);
+            mViewHolder.arrow = convertView.findViewById(R.id.setting_arrow);
+            mViewHolder.settingStr = convertView.findViewById(R.id.setting_str);
             convertView.setTag(mViewHolder);
         } else {
             mViewHolder = (ViewHolder) convertView.getTag();
@@ -95,6 +98,14 @@ public class AdapterOfExpandable extends BaseExpandableListAdapter {
         mViewHolder.badge.setVisibility( getChild(titlePosition, contentPosition).getBadgeCount() > 0 ? View.VISIBLE : View.GONE );
         mViewHolder.badge.setText( String.valueOf(Math.min(getChild(titlePosition, contentPosition).getBadgeCount(), 99)) );
         mViewHolder.content.setText( getChild(titlePosition, contentPosition).getName() );
+        if ( mContent.get(titlePosition).get(contentPosition).isStringState() ){
+            mViewHolder.settingStr.setVisibility(View.VISIBLE);
+            mViewHolder.arrow.setVisibility(View.GONE);
+            mViewHolder.settingStr.setText( mContent.get(titlePosition).get(contentPosition).getSettingStr() );
+        } else {
+            mViewHolder.arrow.setVisibility(View.VISIBLE);
+            mViewHolder.settingStr.setVisibility(View.GONE);
+        }
         return convertView;
     }
 
@@ -106,6 +117,8 @@ public class AdapterOfExpandable extends BaseExpandableListAdapter {
         private TextView title;
         private TextView content;
         private TextView badge;
+        private ImageView arrow;
+        private TextView settingStr;
     }
     public void setBadge( int titlePosition, int contentPosition, int count ) {
         getChild(titlePosition, contentPosition).setBadgeCount( count );
