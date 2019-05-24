@@ -64,6 +64,7 @@ public class WelcomeHomePresenter implements WelcomeHomeIn.Presenter {
 
             }
         });
+
     }
 
     @Override

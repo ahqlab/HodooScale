@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
@@ -72,6 +73,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
     @Override
     public void setSnsLoginResult(CommonResponce<User> commonResponce) {
         if(commonResponce.getDomain() != null){
+            ((HodooApplication) getActivity().getApplication()).setSnsLoginState(true);
             presenter.doLogin(commonResponce.getDomain());
         }else{
             Toast.makeText(getActivity(), "서버와의 연결이 원활하지 않습니다. 네트워크 상태를 확인하세요.", Toast.LENGTH_SHORT).show();

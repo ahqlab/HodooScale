@@ -68,7 +68,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                     if ( ((HodooApplication) getApplicationContext()).isExperienceState() )
                         return;
 
-                    if ( UserManagement.getInstance() == null )
+                    if ( !((HodooApplication) getApplication()).isSnsLoginState() )
                         presenter.checkGroupCount(getApplicationContext());
                     else
                         UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
