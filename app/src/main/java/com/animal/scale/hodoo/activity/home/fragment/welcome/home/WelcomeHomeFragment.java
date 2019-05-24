@@ -71,10 +71,10 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
 
     @Override
     public void setSnsLoginResult(CommonResponce<User> commonResponce) {
-        Log.e("HJLEE", commonResponce.toString());
-        if (commonResponce.getResultMessage().equals(ResultMessage.ALREADY_REGISTERED)) {
-            Log.e("HJLEE", "로그인 하세요.");
+        if(commonResponce.getDomain() != null){
             presenter.doLogin(commonResponce.getDomain());
+        }else{
+            Toast.makeText(getActivity(), "서버와의 연결이 원활하지 않습니다. 네트워크 상태를 확인하세요.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -286,7 +286,6 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
     }
 
     public void onButtonClick(View v) {
-        Log.e("HJLEE", "buttonClick");
         switch (v.getId()) {
             case R.id.signup_btn:
               /*  intent = new Intent(getContext(), SignUpActivity.class);
@@ -331,7 +330,6 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
 
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
-            Log.d("HJLEE", "onSessionOpenFailed");
             if (exception != null) {
                 Logger.e(exception);
             }
@@ -365,11 +363,8 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
             @Override
             public void onSuccess(MeV2Response result) {
                 if (result.getKakaoAccount().getEmail() != null) {
-                    //Log.e("HJLEE", "result.getKakaoAccount().getEmail() : " + result.getKakaoAccount().toString());
-                    //회원가입을 한다.
-                    //Log.e("HJLEE", "회원가입을 한다." + result.toString());
-                    User user = new User();
 
+                    User user = new User();
                     OptionalBoolean isEmail = result.getKakaoAccount().hasEmail();
                     OptionalBoolean isGender = result.getKakaoAccount().hasGender();
                     if ( isEmail.getBoolean() )
@@ -385,7 +380,6 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
                     user.setLoginType(1);
                     user.setSnsId(String.valueOf(result.getId()));
                     user.setUserCode(1);
-                    Log.e("HJLEE", "user : " + user.toString());
                     Toast.makeText(getActivity(), "Logged in!\n정보: " + user.toString(), Toast.LENGTH_SHORT).show();
                     presenter.doSnsLogin(user);
                 } else {

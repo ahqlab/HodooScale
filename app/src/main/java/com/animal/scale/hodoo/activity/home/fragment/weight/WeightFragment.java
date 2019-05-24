@@ -34,6 +34,7 @@ import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.custom.dialog.WeightDialog;
 import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
+import com.animal.scale.hodoo.domain.HodooIndex;
 import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
@@ -220,36 +221,24 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     @Override
-    public void setWeightGoal(WeightGoalChart d) {
-        Log.e("HJLEE", d.toString());
+    public void setWeightGoal(HodooIndex d) {
+        //목표체중
+        float minGoal = d.getMinWeightStd();
+        float maxGoal = d.getMaxWeightStd();
 
-        float currentWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight());
-        float goal = d.getWeightGoal();
-        float remains = currentWeight - goal;
-        if (remains == 0) {
-            binding.bcsStep.setText((int) remains + "Kg");
-        } else {
-            DecimalFormat df = new DecimalFormat("#.#");
-            String result = df.format(remains);
-            binding.bcsStep.setText(result + "Kg");
-        }
-        if (goal == 0) {
+        DecimalFormat df = new DecimalFormat("#.#");
+        String minGoalStr = df.format( unitIdx == 1 ? MathUtil.kgTolb(minGoal) : minGoal );
+        String maxGoalStr = df.format( unitIdx == 1 ? MathUtil.kgTolb(maxGoal) : maxGoal );
+        binding.goal.setText(minGoalStr + getResources().getStringArray(R.array.weight_unit)[unitIdx] + " ~ " + maxGoalStr + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
+        binding.weightGoalDesc.setText(d.getHodooIndexDesc());
+        /*if (goal == 0) {
             binding.goal.setText((int) goal + "Kg");
-//            binding.bcsSubscript.setText((int) goal + "Kg");
         } else {
-            //String[] numbers = String.valueOf(goal).split("\\.");
             DecimalFormat df = new DecimalFormat("#.#");
-//            String result = df.format(goal);
             String result = df.format( unitIdx == 1 ? MathUtil.kgTolb(goal) : goal );
-//            binding.goal.setText((int) ( unitIdx == 1 ? MathUtil.kgTolb(goal) : goal )  + getResources().getStringArray(R.array.unit_str_arr)[unitIdx]);
+            String result = df.format( unitIdx == 1 ? MathUtil.kgTolb(goal) : goal );
             binding.goal.setText(result + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
-//            binding.bcsSubscript.setText(result + "Kg");
-            //Log.e("HJLEE", "result : " + result);
-            //if(numbers[1].equals("0")){
-            //    binding.bcsSubscript.setText(numbers[0] + "Kg");
-            //}else{
-            //}
-        }
+        }*/
     }
 
 
@@ -273,7 +262,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         float currentWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight());
         int bodyFat = selectPet.getPetUserSelectionQuestion().getBodyFat();
         int petType = selectPet.getPetBasicInfo().getPetType();
-        presenter.getWeightGoal(currentWeight, bodyFat, petType);
+        presenter.getWeightGoal(selectPet.getPet().getPetIdx());
 
         setWeight();
 
