@@ -90,6 +90,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                             @Override
                             public void onSuccess(Long userId) {
                                 Log.e("HJLEE", "onSuccess : " + userId);
+                                ((HodooApplication) getApplication()).setSnsLoginState(false);
                                 presenter.logout();
                             }
                         });

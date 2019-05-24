@@ -457,6 +457,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
 
                                     @Override
                                     public void onSuccess(Long userId) {
+                                        ((HodooApplication) getActivity().getApplication()).setSnsLoginState(false);
                                         Log.e("HJLEE", "onSuccess : " + userId);
                                     }
                                 });
