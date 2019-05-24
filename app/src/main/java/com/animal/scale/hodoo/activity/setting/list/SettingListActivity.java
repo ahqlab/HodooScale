@@ -37,6 +37,9 @@ import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivitySettingListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -200,7 +203,28 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
 
                     }
                     else if ( contentPosition == LOGOUT ) {
-                        presenter.logout();
+                        if ( UserManagement.getInstance() == null )
+                            presenter.logout();
+                        else
+                            UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                                @Override
+                                public void onSessionClosed(ErrorResult errorResult) {
+                                    Log.d(TAG, "sessionClosed!!\n" + errorResult.toString());
+                                }
+                                @Override
+                                public void onNotSignedUp() {
+                                    Log.d(TAG, "NotSignedUp!!");
+                                }
+                                @Override
+                                public void onSuccess(Long result) {
+                                    presenter.logout();
+//                        Toast.makeText(KakaoLoginActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
+                                }
+                                @Override
+                                public void onCompleteLogout() {
+//                        Toast.makeText(KakaoLoginActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         return false;
                     }
                 } else if ( titlePosition == DEVICE ) {

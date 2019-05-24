@@ -345,4 +345,6 @@
 
     <string name="regist_done_msg">Registration is complete</string>
     <string name="edit_done_msg">Edit is complete</string>
+
+    <string name="weight_loss_ratio_per_week_msg">Weight loss ratio per week</string>
 </resources>
