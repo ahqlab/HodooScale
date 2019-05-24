@@ -71,7 +71,11 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
 
     @Override
     public void setSnsLoginResult(CommonResponce<User> commonResponce) {
-        presenter.doLogin(commonResponce.getDomain());
+        if(commonResponce.getDomain() != null){
+            presenter.doLogin(commonResponce.getDomain());
+        }else{
+            Toast.makeText(getActivity(), "서버와의 연결이 원활하지 않습니다. 네트워크 상태를 확인하세요.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

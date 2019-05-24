@@ -14,6 +14,8 @@ import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
+import retrofit2.Call;
+
 
 public class WelcomeHomeModel extends CommonModel {
 
@@ -28,7 +30,7 @@ public class WelcomeHomeModel extends CommonModel {
 
 
     public void doSnsLogin(User user, final ObjectCallBackListner<CommonResponce<User>> commonDomainCallBackListner) {
-        retrofit2.Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().doSnsRegist(user);
+        Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().doSnsRegist(user);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<User>>() {
             @Override
             protected void doPostExecute(CommonResponce<User> commonResponce) {
