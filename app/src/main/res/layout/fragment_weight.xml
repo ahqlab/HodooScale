@@ -352,7 +352,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="전 주 대비 감량 비율"/>
+                        android:text="@string/weight_loss_ratio_per_week_msg"/>
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_alignParentRight="true"

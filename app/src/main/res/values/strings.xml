@@ -365,4 +365,6 @@
 
     <string name="regist_done_msg">등록이 완료되었습니다</string>
     <string name="edit_done_msg">수정이 완료되었습니다</string>
+    
+    <string name="weight_loss_ratio_per_week_msg">전 주 대비 감량 비율</string>
 </resources>
