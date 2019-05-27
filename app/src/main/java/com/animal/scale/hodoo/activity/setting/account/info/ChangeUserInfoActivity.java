@@ -293,26 +293,32 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
     public void snsClick ( View v ) {
         switch( v.getId() ) {
             case R.id.sns_logout :
-                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
-                    @Override
-                    public void onSessionClosed(ErrorResult errorResult) {
-                        Log.d(TAG, "sessionClosed!!\n" + errorResult.toString());
-                    }
-                    @Override
-                    public void onNotSignedUp() {
-                        Log.d(TAG, "NotSignedUp!!");
-                    }
-                    @Override
-                    public void onSuccess(Long result) {
-                        ((HodooApplication) getApplication()).setSnsLoginState(false);
-                        presenter.logout();
+                if ( ((HodooApplication) getApplication()).isSnsLoginState() ) {
+                    UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                        @Override
+                        public void onSessionClosed(ErrorResult errorResult) {
+                            Log.d(TAG, "sessionClosed!!\n" + errorResult.toString());
+                        }
+                        @Override
+                        public void onNotSignedUp() {
+                            Log.d(TAG, "NotSignedUp!!");
+                        }
+                        @Override
+                        public void onSuccess(Long result) {
+                            ((HodooApplication) getApplication()).setSnsLoginState(false);
+                            presenter.logout();
 //                        Toast.makeText(KakaoLoginActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onCompleteLogout() {
+                        }
+                        @Override
+                        public void onCompleteLogout() {
 //                        Toast.makeText(KakaoLoginActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        }
+                    });
+                } else {
+                    presenter.logout();
+                }
+
+
                 break;
             case R.id.sns_withdraw :
                 UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {

@@ -309,11 +309,11 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
                     dialog.show();
                 }
                 break;
-            case R.id.experience_btn:
-                intent = new Intent(getContext(), HomeActivity.class);
-                intent.putExtra(SharedPrefVariable.EXPERIENCE_KEY, true);
-                startActivity(intent);
-                break;
+//            case R.id.experience_btn:
+//                intent = new Intent(getContext(), HomeActivity.class);
+//                intent.putExtra(SharedPrefVariable.EXPERIENCE_KEY, true);
+//                startActivity(intent);
+//                break;
         }
     }
 

@@ -25,13 +25,20 @@ public class AdapterOfBfi extends BaseAdapter {
         void onItemChecked( int position, View v );
     }
     private Context context;
-    private List<BfiModel> items;
+    private List<String> items;
     private LayoutBfiBinding binding;
     private LayoutInflater inflater;
     private OnCheckedListener callback;
-    private int[] selected;
+    private int selected;
 
-    public AdapterOfBfi (Context context, List<BfiModel> items, int[] selected, OnCheckedListener callback) {
+//    public AdapterOfBfi (Context context, List<BfiModel> items, int[] selected, OnCheckedListener callback) {
+//        this.context = context;
+//        this.items = items;
+//        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        this.callback = callback;
+//        this.selected = selected;
+//    }
+    public AdapterOfBfi (Context context, List<String> items, int selected, OnCheckedListener callback) {
         this.context = context;
         this.items = items;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -72,7 +79,7 @@ public class AdapterOfBfi extends BaseAdapter {
                     callback.onItemChecked(i, view);
             }
         });
-        if ( selected[i] != 0 )
+        if ( selected != 0 )
             binding.bfiImg.setChecked(true);
         binding.bfiImg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
