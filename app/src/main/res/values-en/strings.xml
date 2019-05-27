@@ -43,7 +43,7 @@
     <string name="food">Food</string>
     <string name="edit_success">Information has been changed</string>
     //setting - > user
-    <string name="log_out">Sign out</string>
+    <string name="log_out">Logout</string>
     <string name="change_user_account_info">User Account</string>
     <string name="withdraw">Membership withdrawal</string>
     <string name="withdraw_subscript">If you leave, you cannot use the HODOO service. Are you sure you want to leave?</string>

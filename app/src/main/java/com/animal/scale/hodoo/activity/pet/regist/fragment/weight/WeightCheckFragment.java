@@ -81,6 +81,8 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
     private AlertDialog.Builder builder;
     private int[] result;
 
+    private int count = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -194,25 +196,36 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
                 result[i] = Integer.parseInt(split[i]) + 1;
             }
         }
-        AdapterOfBfi adapter = new AdapterOfBfi(getContext(), bfis, result, new AdapterOfBfi.OnCheckedListener() {
+//        AdapterOfBfi adapter = new AdapterOfBfi(getContext(), bfis, result, new AdapterOfBfi.OnCheckedListener() {
+//            @Override
+//            public void onItemChecked(final int position, final View v) {
+//                final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
+//                for (int j = 0; j < bfis.get(position).getAnswers().size(); j++) {
+//                    adapter.add( bfis.get(position).getAnswers().get(j).getAnswer() );
+//                }
+//                builder = new AlertDialog.Builder(getContext())
+//                        .setAdapter(adapter, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                CheckBox checkBox = (CheckBox) v;
+//                                checkBox.setChecked(true);
+//                                result[position] = i + 1;
+////                                edt.setText( adapter.getItem(i) );
+//                                setBtnEnable(validation());
+//                            }
+//                        });
+//                builder.create().show();
+//            }
+//        });
+        ArrayList<String> items = new ArrayList<>();
+        for (int i = 0; i < bfis.get(count).getAnswers().size(); i++) {
+            items.add( bfis.get(count).getAnswers().get(i).getAnswer() );
+        }
+        AdapterOfBfi adapter = new AdapterOfBfi(getContext(),items , result[count], new AdapterOfBfi.OnCheckedListener() {
+
             @Override
-            public void onItemChecked(final int position, final View v) {
-                final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
-                for (int j = 0; j < bfis.get(position).getAnswers().size(); j++) {
-                    adapter.add( bfis.get(position).getAnswers().get(j).getAnswer() );
-                }
-                builder = new AlertDialog.Builder(getContext())
-                        .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                CheckBox checkBox = (CheckBox) v;
-                                checkBox.setChecked(true);
-                                result[position] = i + 1;
-//                                edt.setText( adapter.getItem(i) );
-                                setBtnEnable(validation());
-                            }
-                        });
-                builder.create().show();
+            public void onItemChecked(int position, View v) {
+
             }
         });
         binding.bfiView.setAdapter( adapter );

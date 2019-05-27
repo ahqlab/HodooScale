@@ -64,7 +64,7 @@
         <item>계정</item>
         <item>알림</item>
         <item>측정단위</item>
-        <item>로그아웃</item>
+        <!--<item>로그아웃</item>-->
     </string-array>
 
     <string-array name="device_settings">

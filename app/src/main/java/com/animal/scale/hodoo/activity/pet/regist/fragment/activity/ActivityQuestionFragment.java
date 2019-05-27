@@ -45,6 +45,7 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
 
     public final int WALK_QUESTION_TYPE = 0;
     public final int ACTIVITY_QUESTION = 1;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
