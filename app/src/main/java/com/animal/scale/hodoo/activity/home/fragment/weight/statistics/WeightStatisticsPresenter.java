@@ -216,7 +216,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                     String[] weeks = new String[0];
                     try {
                         weeks = new String[DateUtil.getWeekNumOfMonthTsst(cal)];
-                        //Log.e("HJLEE", "주차는 : " + DateUtil.getWeekNumOfMonthTsst(cal) + "month : " + month + " year + month : " + year + month);
+                        Log.e("HJLEE", "주차는 : " + DateUtil.getWeekNumOfMonthTsst(cal) + "month : " + month + " year + month : " + year + month);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
