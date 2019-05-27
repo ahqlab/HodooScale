@@ -15,9 +15,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.MyAccountActivity;
+import com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity;
 import com.animal.scale.hodoo.activity.setting.device.bowelplate.list.BowelPlateListActivity;
 import com.animal.scale.hodoo.activity.setting.device.feeder.FeederOrderActivity;
 import com.animal.scale.hodoo.activity.setting.device.list.DeviceListActivity;
@@ -180,9 +182,13 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                         SettingListActivity.super.moveIntent(SettingListActivity.this, VersionActivity.class, 0,0, false);
                     }
                 }else if ( titlePosition == USER ) {
-                    if ( contentPosition == ACCOUNT)
-                        SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
-                    else if ( contentPosition == NOTIFICATION ) {
+                    if ( contentPosition == ACCOUNT) {
+                        if ( !((HodooApplication) getApplication()).isSnsLoginState() )
+                            SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
+                        else  //ChangeUserInfoActivity
+                            SettingListActivity.super.moveIntent(SettingListActivity.this, ChangeUserInfoActivity.class, 0,0, false);
+//                        SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
+                    } else if ( contentPosition == NOTIFICATION ) {
                         SettingListActivity.super.moveIntent(SettingListActivity.this, AlarmItemListActivity.class, 0,0, false);
                     }
                     else if ( contentPosition == UNIT ) {
@@ -202,7 +208,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
 
                     }
                     else if ( contentPosition == LOGOUT ) {
-                        if ( UserManagement.getInstance() == null )
+                        if ( !((HodooApplication) getApplication()).isSnsLoginState() )
                             presenter.logout();
                         else
                             UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
@@ -216,6 +222,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                                 }
                                 @Override
                                 public void onSuccess(Long result) {
+                                    ((HodooApplication) getApplication()).setSnsLoginState(false);
                                     presenter.logout();
 //                        Toast.makeText(KakaoLoginActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
                                 }

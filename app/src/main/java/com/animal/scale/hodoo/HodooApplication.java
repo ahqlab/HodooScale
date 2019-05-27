@@ -17,6 +17,7 @@ import com.kakao.auth.KakaoSDK;
 public class HodooApplication extends Application {
     private static Context context;
     private boolean experienceState = false;
+    private boolean snsLoginState = false;
 
     public boolean isExperienceState() {
         return experienceState;
@@ -76,5 +77,13 @@ public class HodooApplication extends Application {
         super.onCreate();
         context = this.getApplicationContext();
         KakaoSDK.init(new HodooApplication.KakaoSDKAdapter());
+    }
+
+    public boolean isSnsLoginState() {
+        return snsLoginState;
+    }
+
+    public void setSnsLoginState(boolean snsLoginState) {
+        this.snsLoginState = snsLoginState;
     }
 }

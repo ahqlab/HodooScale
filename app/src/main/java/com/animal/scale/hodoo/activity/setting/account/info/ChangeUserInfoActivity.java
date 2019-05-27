@@ -304,6 +304,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
                     }
                     @Override
                     public void onSuccess(Long result) {
+                        ((HodooApplication) getApplication()).setSnsLoginState(false);
                         presenter.logout();
 //                        Toast.makeText(KakaoLoginActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
                     }
@@ -333,6 +334,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
                     @Override
                     public void onSuccess(Long userId) {
                         Log.e("HJLEE", "onSuccess : " + userId);
+                        ((HodooApplication) getApplication()).setSnsLoginState(false);
                         presenter.logout();
                     }
                 });

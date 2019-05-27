@@ -163,6 +163,19 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                             }
                         }
 
+                        /* 데이터 정렬 */
+                        for (int i = ko.length; i > 0; i--) {
+                            for (int j=0; j < i-1; j++) {
+                                if (ko[j].equals(d.get(j + 1).getTheDay())) {
+                                    if (i == j) break;
+                                    Statistics tempData = d.get(j);
+                                    d.set(j, d.get(j +1));
+                                    d.set(j + 1, tempData);
+                                    break;
+                                }
+                            }
+                        }
+
                         for (Statistics value : d) {
                             for (int i = 0; i < ko.length; i++) {
                                 if (value.getTheDay().equals(ko[i])) {
@@ -242,11 +255,13 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
                     }
 
                     /* 데이터 정렬 */
-                    for (int i = 0; i < d.size() - 1; i++) {
-                        if (Integer.parseInt(d.get(i).getTheWeek()) > Integer.parseInt(d.get(i + 1).getTheWeek())) {
-                            Statistics temp = d.get(i);
-                            d.set(i, d.get(i + 1));
-                            d.set(i + 1, temp);
+                    for (int i = d.size(); i > 0; i--) {
+                        for (int j=0; j < i-1; j++) {
+                            if (Integer.parseInt(d.get(j).getTheWeek()) > Integer.parseInt(d.get(j+1).getTheWeek())) {
+                                Statistics temp = d.get(j);
+                                d.set(j, d.get(j + 1));
+                                d.set(j + 1, temp);
+                            }
                         }
                     }
 
