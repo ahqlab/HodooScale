@@ -141,7 +141,6 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         binding.settingListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Log.e("HJLEE",  "position : " + position);
                 if(position == MY_CAAOUNT){
                     SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
                 }else if(position == DEVICE_SETTING){
@@ -215,11 +214,11 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                             UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
                                 @Override
                                 public void onSessionClosed(ErrorResult errorResult) {
-//                                    Log.d(TAG, "sessionClosed!!\n" + errorResult.toString());
+                                   // Log.d(TAG, "sessionClosed!!\n" + errorResult.toString());
                                 }
                                 @Override
                                 public void onNotSignedUp() {
-//                                    Log.d(TAG, "NotSignedUp!!");
+                                    //Log.d(TAG, "NotSignedUp!!");
                                 }
                                 @Override
                                 public void onSuccess(Long result) {
