@@ -128,7 +128,7 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
                 if ( pet != null )
                     view.setPetIdx(pet.getPetIdx());
                 else
-                    view.nextStep(PetRegistActivity.DISEASE_TYPE);
+                    view.nextStep(PetRegistActivity.PHYSIQUE_TYPE);
             }
 
             @Override
@@ -156,7 +156,7 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         model.updateBasicInfo(requestUrl, info, profile, new BasicInformationRegistModel.BasicInfoUpdateListner() {
             @Override
             public void doPostExecute() {
-                view.nextStep(PetRegistActivity.DISEASE_TYPE);
+                view.nextStep(PetRegistActivity.PHYSIQUE_TYPE);
             }
 
             @Override
@@ -309,7 +309,8 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         model.registWeightInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(CommonResponce<Integer> d) {
-                view.nextStep(PetRegistActivity.PET_USER_SELECT_QUESTION_TYPE);
+                view.registFinish();
+//                view.nextStep(PetRegistActivity.PET_USER_SELECT_QUESTION_TYPE);
             }
 
             @Override

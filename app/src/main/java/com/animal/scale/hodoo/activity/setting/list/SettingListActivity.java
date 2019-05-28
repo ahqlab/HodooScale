@@ -73,6 +73,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     public final static int PET_MANAGEMENT = 6;
     /* public final static int SUPPORT = 4; */
 
+    /* 참조 1-1 (s) */
     // general
     public final static int NOTICE = 0;
    /* public final static int HOMEPAGE = 1;*/
@@ -91,6 +92,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     public final static int CUSHION = 3;
     public final static int HARNESS = 4;
     public final static int TAG = 5;
+    /* 참조 1-1 (e) */
 
     //link
     public final static int GROUP_LIST = 0;
@@ -156,6 +158,15 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         });
     }
 
+    /**
+     * 셋팅에서 보여지는 리스트를 셋팅한다.
+     *
+     * @param title   셋팅에서 사용하는 그룹 타이틀 리스트
+     * @param content 셋팅에서 사용하는 차일드 리스트
+     * @return
+     * @description   확장 리스트 뷰 사용으로 그룹과 차일드 두개의 리스트가 필요하다.
+     *                  차일드 리스트 터치시 각각 다른 일을 해야하므로 인덱스를 가지고 조작한다. 인덱스는 상단 변수 선언을 참조(1-1)
+    */
     @Override
     public void setExpandableListAdapter(final ArrayList<String> title, final ArrayList<List<SettingMenu>> content) {
         settingMenus = content;
@@ -252,6 +263,13 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         });
     }
 
+    /**
+     * 로그아웃 시 사용하는 로그인페이지로 보내는 메서드
+     *
+     * @param
+     * @return
+     * @description
+    */
     @Override
     public void goLoginPage() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -262,7 +280,13 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         finishAffinity();
         finish();
     }
-
+    /**
+     * 뱃지 셋팅에 사용하는 메서드
+     *
+     * @param count   뱃지의 값
+     * @return
+     * @description
+    */
     @Override
     public void updateBadgeCount( int count ) {
         //null 처리

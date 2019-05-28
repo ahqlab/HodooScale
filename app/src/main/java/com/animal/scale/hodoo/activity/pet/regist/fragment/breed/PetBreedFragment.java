@@ -85,6 +85,13 @@ public class PetBreedFragment extends PetRegistFragment implements PetBreedIn.Vi
     public static PetRegistFragment newInstance() {
         return new PetBreedFragment();
     }
+
+    /**
+     * 펫의 품종의 에디트 텍스트를 터치했을 경우 이벤트 처리
+     *
+     * @param
+     * @return
+    */
     public void onClickSelectEditText(View view) {
         if ( breeds == null )
             return;
@@ -161,6 +168,13 @@ public class PetBreedFragment extends PetRegistFragment implements PetBreedIn.Vi
 //                }).show();
     }
 
+    /**
+     * 데이터 베이스에 있는 품종의 값을 가져온다
+     *
+     * @param breeds   품종이 들어있는 리스트 값
+     * @return
+     * @description     breeds를 먼저 로드 후 등록된 값이 있으면 그 품종의 값을 에디트 텍스트에 넣는다.
+    */
     @Override
     public void getAllPetBreed(CommonResponce<List<PetBreed>> breeds) {
         this.breeds = breeds.domain;
@@ -175,6 +189,13 @@ public class PetBreedFragment extends PetRegistFragment implements PetBreedIn.Vi
         }
 
     }
+    /**
+     * 펫의 종류에 따라 품종 리스트를 달리 가져와서 펫의 타입을 먼저 등록한다.
+     *
+     * @param petType   펫의 타입
+     * @return
+     * @description
+    */
     public void setPetType ( int petType ) {
         petBasicInfo = getPetBasicInfo();
 //        this.petType = petType;

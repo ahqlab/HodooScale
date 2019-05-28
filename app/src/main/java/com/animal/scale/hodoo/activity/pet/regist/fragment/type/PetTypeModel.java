@@ -50,6 +50,12 @@ public class PetTypeModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    /**
+     * 서버에 저장되어 있는 펫의 기본정보를 가져온다.
+     *
+     * @param location   다국어를 위한 지역값 (ko : 한국어, en : 영어, ja : 일본어)
+     * @return
+    */
     public void getPetBasicInformation(String location, int petIdx, final DomainCallBackListner<PetBasicInfo> domainCallBackListner) {
         Call<PetBasicInfo> call = NetRetrofit.getInstance().getPetService().getBasicInformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx, location);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetBasicInfo>() {

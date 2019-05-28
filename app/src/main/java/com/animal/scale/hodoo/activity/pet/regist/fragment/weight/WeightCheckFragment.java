@@ -35,6 +35,8 @@ import java.util.List;
 
 /**
  * Created by SongSeokwoo on 2019-04-02.
+ *
+ * 2019-05-28 현재 Weight 값이 아닌 BFI값 등록으로 변경되어 사용됨
  */
 public class WeightCheckFragment extends PetRegistFragment implements WeightCheckIn.View {
 
@@ -139,10 +141,18 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
         });
     }
 
+    /**
+     * 펫의 bfi를 등록한다.
+     *
+     * @param
+     * @return
+     * @description
+    */
     @Override
     public void registWeightInformation() {
         presenter.registWeightInfo(petIdx, binding.getDomain());
     }
+
 
     @Override
     public void registResult(Integer integer) {
@@ -159,6 +169,13 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
         }
     }
 
+    /**
+     * bfi 질문을 출력한다.
+     *
+     * @param bfis   가져온 bfi의 리스트
+     * @return
+     * @description
+    */
     @Override
     public void setQuestion(final List<BfiModel> bfis) {
         boolean editType = false;
@@ -198,6 +215,13 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
 //        setBtnEnable(validation());
     }
 
+    /**
+     * 선택한 bfi를 액티비티에 전달한다.
+     *
+     * @param
+     * @return
+     * @description   2019-05-28 현재 bfi값으로 단계로 변환하는 알고리즘은 사용하지않음
+    */
     public void onClickCompleateBtn(View view) {
 
         if ( count != maxCount - 1 ) {
@@ -250,7 +274,7 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
 
         if (binding.getDomain().getBcs() > 0) {
             ((PetRegistActivity) getActivity()).setPetWeightInfo(binding.getDomain());
-            ((PetRegistActivity) getActivity()).nextFragment();
+            ((PetRegistActivity) getActivity()).regist();
 //            presenter.deleteWeightInfo(petIdx, binding.getDomain().getId());
         } else {
             showBasicOneBtnPopup(null, getResources().getString(R.string.istyle_required_select_bcs_message))
