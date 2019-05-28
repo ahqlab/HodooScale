@@ -494,13 +494,9 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         List<Statistics> list = new ArrayList<Statistics>();
         ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
         for (int i = 0; i < d.size(); i++) {
-           /* if (sharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR) == 1) {
-                d.get(i).setAverage();
-            }*/
-           Log.e("HJLEE", "(float) MathUtil.cmToInch(d.get(i).getAverage()) : " + (float) MathUtil.cmToInch(d.get(i).getAverage()));
+            //Log.e("HJLEE", "(float) MathUtil.cmToInch(d.get(i).getAverage()) : " + (float) MathUtil.cmToInch(d.get(i).getAverage()));
             yVals.add(new BarEntry(i, sharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR) == 1 ? (float) MathUtil.kgTolb(d.get(i).getAverage()) :  d.get(i).getAverage()));
         }
-
         if (type.matches("Day")) {
             model.setupChart(chart, model.getDayData(yVals, date), d, type, date);
         } else if (type.matches("Week")) {
