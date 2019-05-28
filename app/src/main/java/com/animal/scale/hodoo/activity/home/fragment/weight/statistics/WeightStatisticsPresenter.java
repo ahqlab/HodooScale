@@ -216,6 +216,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         model.getWeeklyStatisticalData(type, year, month, new CommonModel.DomainListCallBackListner<Statistics>() {
             @Override
             public void doPostExecute(List<Statistics> d) {
+                if ( d == null )
+                    return;
                 if (d.size() > 0) {
                     if (chart.getData() != null) {
                         chart.getData().notifyDataChanged();
