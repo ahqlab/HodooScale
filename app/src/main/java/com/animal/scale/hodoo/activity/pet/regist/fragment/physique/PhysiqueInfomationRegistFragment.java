@@ -126,7 +126,7 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
 
     @Override
     public void setDiseaseInfo(PetPhysicalInfo petPhysicalInfo) {
-        if ( presenter.getUnitIdx() == 1 ) {
+        if ( presenter.getUnitIdx() == 1 && petPhysicalInfo != null ) {
             petPhysicalInfo.setWidth( String.valueOf(  MathUtil.cmToInch( Double.parseDouble( petPhysicalInfo.getWidth() ) ) ) );
             petPhysicalInfo.setHeight( String.valueOf( MathUtil.cmToInch( Double.parseDouble( petPhysicalInfo.getHeight() ) ) ) );
         }

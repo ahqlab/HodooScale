@@ -105,6 +105,12 @@ public class PetTypeFragment extends PetRegistFragment implements View.OnClickLi
 
     }
 
+    /**
+     * 펫의 기본정보에 펫 타입을 등록한다.
+     *
+     * @param basicInfo   펫의 기본정보
+     * @return
+    */
     @Override
     public void setBasicInfo(PetBasicInfo basicInfo) {
         if ( basicInfo != null ) {
