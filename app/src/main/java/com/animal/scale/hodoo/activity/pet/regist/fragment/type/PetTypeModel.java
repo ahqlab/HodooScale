@@ -23,6 +23,13 @@ public class PetTypeModel extends CommonModel {
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
+    /**
+     * 서버에 등록된 펫의 타입을 가져온다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param callback 콜백함수
+     * @return
+    */
     public void getPetType( int petIdx, final DomainCallBackListner<Integer> callback ) {
         Call<Integer> call = NetRetrofit.getInstance().getPetService().getPetType(petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){

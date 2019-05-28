@@ -237,7 +237,10 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter {
         model.getWeekRate(new CommonModel.ObjectCallBackListner<Float>() {
             @Override
             public void doPostExecute(Float result) {
-                view.setWeekRate(result);
+                if ( result != null )
+                    view.setWeekRate(result);
+                else
+                    view.setWeekRate(0);
             }
 
             @Override
