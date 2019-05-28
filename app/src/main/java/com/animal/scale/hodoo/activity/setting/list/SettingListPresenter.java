@@ -37,10 +37,11 @@ public class SettingListPresenter implements SettingList.Presenter {
         contentList = setList(
                 context.getResources().getStringArray(R.array.general_settings),
                 context.getResources().getStringArray(R.array.user_settings),
-                context.getResources().getStringArray(R.array.device_settings),
+               /* context.getResources().getStringArray(R.array.device_settings),*/
                 context.getResources().getStringArray(R.array.hodoo_link_settings),
-                context.getResources().getStringArray(R.array.pet_settings),
-                context.getResources().getStringArray(R.array.support_settings) );
+                context.getResources().getStringArray(R.array.pet_settings)
+                /*, context.getResources().getStringArray(R.array.support_settings)*/
+        );
         /* content (e) */
 
         contentList.get(SettingListActivity.HODOO_LINK).get(SettingListActivity.REQUEST).setBadgeCount(notificationModel.getInvitationCount());

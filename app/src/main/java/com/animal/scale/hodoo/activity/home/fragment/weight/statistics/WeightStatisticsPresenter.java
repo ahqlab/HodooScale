@@ -4,8 +4,11 @@ import android.content.Context;
 import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.Statistics;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.MathUtil;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarEntry;
 
@@ -29,6 +32,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
     private Context mContext;
 
+    private SharedPrefManager sharedPrefManager;
+
     public WeightStatisticsPresenter(WeightStatistics.View view, BarChart chart) {
         this.view = view;
         this.chart = chart;
@@ -39,6 +44,7 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     public void initLoadData(Context context) {
         mContext = context;
         model.initLoadData(context);
+        sharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
     @Override
@@ -165,11 +171,11 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
                         /* 데이터 정렬 */
                         for (int i = ko.length; i > 0; i--) {
-                            for (int j=0; j < i-1; j++) {
+                            for (int j = 0; j < i - 1; j++) {
                                 if (ko[j].equals(d.get(j + 1).getTheDay())) {
                                     if (i == j) break;
                                     Statistics tempData = d.get(j);
-                                    d.set(j, d.get(j +1));
+                                    d.set(j, d.get(j + 1));
                                     d.set(j + 1, tempData);
                                     break;
                                 }
@@ -256,8 +262,8 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
                     /* 데이터 정렬 */
                     for (int i = d.size(); i > 0; i--) {
-                        for (int j=0; j < i-1; j++) {
-                            if (Integer.parseInt(d.get(j).getTheWeek()) > Integer.parseInt(d.get(j+1).getTheWeek())) {
+                        for (int j = 0; j < i - 1; j++) {
+                            if (Integer.parseInt(d.get(j).getTheWeek()) > Integer.parseInt(d.get(j + 1).getTheWeek())) {
                                 Statistics temp = d.get(j);
                                 d.set(j, d.get(j + 1));
                                 d.set(j + 1, temp);
@@ -486,7 +492,11 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
         List<Statistics> list = new ArrayList<Statistics>();
         ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
         for (int i = 0; i < d.size(); i++) {
-            yVals.add(new BarEntry(i, d.get(i).getAverage()));
+           /* if (sharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR) == 1) {
+                d.get(i).setAverage();
+            }*/
+           Log.e("HJLEE", "(float) MathUtil.cmToInch(d.get(i).getAverage()) : " + (float) MathUtil.cmToInch(d.get(i).getAverage()));
+            yVals.add(new BarEntry(i, sharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR) == 1 ? (float) MathUtil.kgTolb(d.get(i).getAverage()) :  d.get(i).getAverage()));
         }
 
         if (type.matches("Day")) {

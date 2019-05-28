@@ -60,22 +60,23 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     SettingList.Presenter presenter;
 
     public final static int MY_CAAOUNT = 0;
-    public final static int DEVICE_SETTING = 4;
-    public final static int USER_MANAGEMENT = 5;
-    public final static int PET_MANAGEMENT = 6;
+
 
     public final static int GENERAL = 0;
     public final static int USER = 1;
-    public final static int DEVICE= 2;
-    public final static int HODOO_LINK = 3;
-    public final static int PET = 4;
-    public final static int SUPPORT = 5;
+/*    public final static int DEVICE= 2;*/
+    public final static int HODOO_LINK = 2;
+    public final static int PET = 3;
 
+    public final static int DEVICE_SETTING = 4;
+    public final static int USER_MANAGEMENT = 5;
+    public final static int PET_MANAGEMENT = 6;
+    /* public final static int SUPPORT = 4; */
 
     // general
     public final static int NOTICE = 0;
-    public final static int HOMEPAGE = 1;
-    public final static int APP_VERSION = 2;
+   /* public final static int HOMEPAGE = 1;*/
+    public final static int APP_VERSION = 1;
 
     // user
     public final static int ACCOUNT = 0;
@@ -130,7 +131,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     public void setListviewAdapter(int badgeCount, List<SettingMenu> menus) {
         this.menus = menus;
         for (int i = 0; i < menus.size(); i++) {
-            if ( i == 5 ) {
+            if ( i == 3 ) {
                 menus.get(i).setBadgeCount(badgeCount);
             } else {
                 menus.get(i).setBadgeCount(0);
@@ -147,9 +148,10 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                     SettingListActivity.super.moveIntent(SettingListActivity.this, DeviceListActivity.class, 0,0, false);
                 }else if(position == PET_MANAGEMENT){
                     SettingListActivity.super.moveIntent(SettingListActivity.this, PetAccountsActivity.class, 0,0, false);
-                }else if(position == USER_MANAGEMENT){
-                    SettingListActivity.super.moveIntent(SettingListActivity.this, UserGroupManagerActivity.class, 0,0, false);
                 }
+                /*else if(position == USER_MANAGEMENT){
+                    SettingListActivity.super.moveIntent(SettingListActivity.this, UserGroupManagerActivity.class, 0,0, false);
+                }*/
             }
         });
     }
@@ -176,7 +178,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                 if(titlePosition == GENERAL){
                     if(contentPosition == NOTICE){
                         SettingListActivity.super.moveIntent(SettingListActivity.this, NoticeActivity.class, 0,0, false);
-                    }else if(contentPosition == HOMEPAGE){
+                   /* }else if(contentPosition == HOMEPAGE){*/
 
                     }else if(contentPosition == APP_VERSION){
                         SettingListActivity.super.moveIntent(SettingListActivity.this, VersionActivity.class, 0,0, false);
@@ -190,8 +192,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
 //                        SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
                     } else if ( contentPosition == NOTIFICATION ) {
                         SettingListActivity.super.moveIntent(SettingListActivity.this, AlarmItemListActivity.class, 0,0, false);
-                    }
-                    else if ( contentPosition == UNIT ) {
+                    } else if ( contentPosition == UNIT ) {
                         final String[] unitStrArr = getResources().getStringArray(R.array.unit_str_arr);
                         final ArrayAdapter<String> alertAdapter = new ArrayAdapter<>(SettingListActivity.this, android.R.layout.simple_list_item_1);
                         alertAdapter.addAll(unitStrArr);
@@ -233,11 +234,11 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
                             });
                         return false;
                     }
-                } else if ( titlePosition == DEVICE ) {
+             /*   } else if ( titlePosition == DEVICE ) {
                     if ( contentPosition == POTTY )
                         SettingListActivity.super.moveIntent(SettingListActivity.this, BowelPlateListActivity.class, 0,0, false);
                     else if ( contentPosition == FEEDER )
-                        SettingListActivity.super.moveIntent(SettingListActivity.this, FeederOrderActivity.class, 0,0, false);
+                        SettingListActivity.super.moveIntent(SettingListActivity.this, FeederOrderActivity.class, 0,0, false);*/
                 } else if ( titlePosition == HODOO_LINK ) {
                     if ( contentPosition == GROUP_LIST )
                         SettingListActivity.super.moveIntent(SettingListActivity.this, UserAccountActivity.class, 0,0, false);

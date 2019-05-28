@@ -42,10 +42,8 @@
     <string-array name="setting_title">
         <item>GENERAL</item>
         <item>USER</item>
-        <item>DEVICE</item>
         <item>HODOO LINK</item>
         <item>PET</item>
-        <item>SUPPORT</item>
     </string-array>
 
     <string-array name="general_settings">
