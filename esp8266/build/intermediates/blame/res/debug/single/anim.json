@@ -1,66 +1,66 @@
 [
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_tooltip_enter.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_tooltip_enter.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_slide_out_top.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_popup_exit.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_fade_out.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_slide_out_bottom.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\936da39391e7f93fa3c936fb8913edd1\\res\\anim\\design_snackbar_out.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_slide_in_bottom.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\936da39391e7f93fa3c936fb8913edd1\\res\\anim\\design_bottom_sheet_slide_in.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_tooltip_enter.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_tooltip_enter.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\936da39391e7f93fa3c936fb8913edd1\\res\\anim\\design_snackbar_in.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_fade_out.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\936da39391e7f93fa3c936fb8913edd1\\res\\anim\\design_bottom_sheet_slide_out.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_slide_out_top.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_popup_exit.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_fade_in.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_fade_in.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\anim\\design_snackbar_out.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_popup_enter.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_slide_in_top.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_tooltip_exit.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_tooltip_exit.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\anim\\design_snackbar_in.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_slide_in_top.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_tooltip_exit.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_tooltip_exit.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_slide_in_bottom.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\anim\\design_bottom_sheet_slide_out.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_slide_out_bottom.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
     },
     {
-        "merged": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\anim\\abc_popup_enter.xml"
+        "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\anim\\design_bottom_sheet_slide_in.xml"
     }
 ]

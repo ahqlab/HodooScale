@@ -287,6 +287,12 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
         Session.getCurrentSession().removeCallback(callback);
     }
 
+    /**
+     * 버튼에 대한 이벤트 처리를 한다.
+     *
+     * @param View v    클릭한 대상 뷰
+     * @return
+    */
     public void onButtonClick(View v) {
         switch (v.getId()) {
             case R.id.signup_btn:

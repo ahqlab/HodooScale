@@ -200,6 +200,12 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter {
             }
         });
     }
+    /*
+     * 수정한 몸무게를 서버로 보내 리턴값을 받아온다.
+     *
+     * @param   PetPhysicalInfo info    수정한 몸무게가 담겨있는 모델
+     * @return
+    */
     @Override
     public void updatePhysical(PetPhysicalInfo info) {
         model.updatePhysical(info, new CommonModel.ObjectCallBackListner<CommonResponce<PetPhysicalInfo>>() {
@@ -220,6 +226,12 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter {
         });
     }
 
+    /*
+     * 전 주 대비 감량비를 서버에서 받아서 리턴한다.
+     *
+     * @param
+     * @return
+    */
     @Override
     public void getWeekRate() {
         model.getWeekRate(new CommonModel.ObjectCallBackListner<Float>() {
@@ -240,6 +252,12 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter {
         });
     }
 
+    /**
+     * 저장되어있는 단위를 가져온다
+     *
+     * @param
+     * @return int type 0 : cm/kg, 1 : inch/lb
+     */
     @Override
     public int getWeightUnit() {
         return model.getWeightUnit();

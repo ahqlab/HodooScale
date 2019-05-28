@@ -134,6 +134,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         cumtomPetListDialog.show();
     }
 
+    /* 셋팅버튼 이벤트 처리 */
     public void onSettingBtnClick(View view) {
         Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
         startActivity(intent);

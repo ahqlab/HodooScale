@@ -347,4 +347,5 @@
     <string name="edit_done_msg">Edit is complete</string>
 
     <string name="weight_loss_ratio_per_week_msg">Weight loss ratio per week</string>
+    <string name="weight_check_description">The more accurate the entered information, the more accurate the analysis results are</string>
 </resources>
