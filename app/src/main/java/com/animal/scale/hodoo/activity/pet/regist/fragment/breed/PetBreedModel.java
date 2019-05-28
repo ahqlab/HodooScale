@@ -26,6 +26,15 @@ public class PetBreedModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
+    /**
+     * 펫의 전체 품종을 가져온다
+     *
+     * @param location   다국어를 위한 지역값
+     * @param typeIdx    펫의 타입 인덱스 값
+     * @param callback   콜백함수
+     * @return
+     * @description     펫의 타입에 따라 가져오는 품종이 다르다.
+    */
     public void getAllPetBreed(String location, int typeIdx, final ObjectCallBackListner<CommonResponce<List<PetBreed>>> callback) {
         final Call<CommonResponce<List<PetBreed>>> call = NetRetrofit.getInstance().getPetService().getAllBreed( location, typeIdx );
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<List<PetBreed>>>() {

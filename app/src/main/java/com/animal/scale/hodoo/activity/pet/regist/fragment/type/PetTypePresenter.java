@@ -15,6 +15,12 @@ public class PetTypePresenter implements PetTypeIn.Presenter {
         this.view = view;
         model = new PetTypeModel();
     }
+    /**
+     * 펫의 타입을 가져온다
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @return
+    */
     @Override
     public void getType(int petIdx) {
         model.getPetType(petIdx, new CommonModel.DomainCallBackListner<Integer>() {

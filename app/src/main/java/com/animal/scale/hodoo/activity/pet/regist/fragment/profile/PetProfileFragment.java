@@ -87,6 +87,12 @@ public class PetProfileFragment extends PetRegistFragment implements PetProfileI
         return new PetProfileFragment();
     }
 
+    /**
+     * 하단 다이얼로그를 오픈한다.
+     *
+     * @param
+     * @return
+    */
     public void onClickOpenBottomDlg ( View v ) {
         dialog = BottomDialog.getInstance();
         List<IosStyleBottomAlert> btns = new ArrayList<>();
@@ -123,12 +129,24 @@ public class PetProfileFragment extends PetRegistFragment implements PetProfileI
         });
         dialog.show(getActivity().getSupportFragmentManager(), "");
     }
+    /**
+     * 갤러리에서 사진을 가져올 수 있도록 갤러리를 오픈한다.
+     *
+     * @param
+     * @return
+    */
     public void openGallery () {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_REQUEST);
     }
+    /**
+     * 카메라에서 사진 촬영 후 사진을 가져올 수 있도록 카메라를 오픈한다.
+     *
+     * @param
+     * @return
+    */
     public void openCamera() {
 //        builder.dismiss();
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -143,6 +161,7 @@ public class PetProfileFragment extends PetRegistFragment implements PetProfileI
             }
         }
     }
+
     public File saveImageFile (Context context) {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "hodoo_" + timeStamp + "_";

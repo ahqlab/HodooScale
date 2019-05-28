@@ -75,8 +75,8 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 
 
     public static final int PET_PHYSIQUE_INFO = 7;
-    public static final int PET_DISEASE_INFO = 8;
-    public static final int PET_WEIGHT_INFO = 9;
+//    public static final int PET_DISEASE_INFO = 8;
+    public static final int PET_WEIGHT_INFO = 8;
 
     private ActivityPetRegistBinding binding;
     private int petIdx;
@@ -92,9 +92,9 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 
 
             PhysiqueInfomationRegistFragment.newInstance(),
-            DiseaseInfomationFragment.newInstance(),
+//            DiseaseInfomationFragment.newInstance(),
             WeightCheckFragment.newInstance(),
-            ActivityQuestionFragment.newInstance()
+//            ActivityQuestionFragment.newInstance()
     };
     private int fragmentPosition = 0;
     private PetRegistIn.Presenter presenter;
@@ -180,9 +180,10 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
             ((PhysiqueInfomationRegistFragment) fragment).updateView();
             ((PhysiqueInfomationRegistFragment) fragment).setPetType(petBasicInfo.getPetType());
             super.setSubBtn("건너뛰기", this);
-        } else if ( fragmentPosition == PET_DISEASE_INFO )  {
-            ((DiseaseInfomationFragment) fragment).setPetIdx(petIdx);
         }
+//        else if ( fragmentPosition == PET_DISEASE_INFO )  {
+//            ((DiseaseInfomationFragment) fragment).setPetIdx(petIdx);
+//        }
         if ( fragmentPosition != PET_PHYSIQUE_INFO )
             super.hideSubBtn();
 
@@ -213,6 +214,8 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
      *
      * @param int type    클릭한 대상 프래그먼트의 인덱스 값
      * @return
+     * @description     type이 WEIGHT_TYPE 일 경우 등록을 완료한다.(2019.05.28일 시점)
+     *                    등록 순서 : PetBasicInfo -> PetPhysicalInfo -> PetWeightInfo
     */
     @Override
     public void nextStep(int type) {
@@ -252,16 +255,16 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     }
 
     /**
-     * 펫 타입을 저장한다.
+     * 펫 인덱스 값을 저장한다.
      *
-     * @param int    petIdx 펫 타입 1 : 강아지, 2 : 고양이
+     * @param petIdx    펫의 인덱스 값
      * @return
     */
     @Override
     public void setPetIdx(int petIdx) {
         if ( this.petIdx == 0 ) {
             this.petIdx = petIdx;
-            nextStep(PetRegistActivity.DISEASE_TYPE);
+            nextStep(PetRegistActivity.PHYSIQUE_TYPE);
         }
     }
 
@@ -546,6 +549,7 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 
     @Override
     public void onClick(View v) {
+        petPhysicalInfo = new PetPhysicalInfo();
         nextFragment();
     }
 

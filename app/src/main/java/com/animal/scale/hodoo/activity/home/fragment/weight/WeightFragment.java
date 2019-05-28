@@ -260,7 +260,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             return;
         Log.e("HJLEE", selectPet.toString());
         float currentWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight());
-        int bodyFat = selectPet.getPetUserSelectionQuestion().getBodyFat();
+//        int bodyFat = selectPet.getPetUserSelectionQuestion().getBodyFat();
         int petType = selectPet.getPetBasicInfo().getPetType();
         presenter.getWeightGoal(selectPet.getPet().getPetIdx());
 
