@@ -68,6 +68,12 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
     public static ActivityQuestionFragment newInstance() {
         return new ActivityQuestionFragment();
     }
+    /**
+     * 완료버튼을 클릭했을 경우
+     *
+     * @param v   클릭한 버튼의 뷰
+     * @return
+    */
     public void onClickCompleateBtn ( View v ) {
         if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() ) {
             getActivity().finish();
@@ -77,6 +83,12 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
         ((PetRegistActivity) getActivity()).regist();
     }
 
+    /**
+     * 질문 내역을 출력한다.
+     *
+     * @param inPetUserSelectionQuestion   수정일 경우 등록된 값을 출력하고, 등록일 경우 질문 내역만 셋팅한다.
+     * @return
+    */
     private void loadData ( PetUserSelectionQuestion inPetUserSelectionQuestion ) {
         titleArr = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.activity_question_title)));
         ArrayList<PetUserSelectItem> items = new ArrayList<>();
@@ -135,6 +147,12 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
         }
     }
 
+    /**
+     * 서버에서 질문 내역을 가져온다.
+     *
+     * @param petUserSelectQuestion   서버에서 가져온 질문 내역
+     * @return
+    */
     @Override
     public void setPetUserSelectQuestion(CommonResponce<PetUserSelectionQuestion> petUserSelectQuestion) {
         if ( petUserSelectQuestion.domain == null ) {
@@ -145,6 +163,12 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
             loadData(petUserSelectionQuestion);
         }
     }
+    /**
+     * 문제가 선택 되었는지 검증한다.
+     *
+     * @param
+     * @return
+    */
     public boolean validation() {
         for (int i = 0; i < binding.activityQuestionWrap.getChildCount(); i++) {
             LinearLayout wrap = (LinearLayout) binding.activityQuestionWrap.getChildAt(i);
@@ -161,6 +185,12 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
             return false;
         return true;
     }
+    /**
+     * 버튼의 활성도를 체크한다.
+     *
+     * @param state   상태값
+     * @return
+    */
     private void setBtnEnable(boolean state) {
         binding.nextStep.setEnabled(state);
         if (binding.nextStep.isEnabled()) {

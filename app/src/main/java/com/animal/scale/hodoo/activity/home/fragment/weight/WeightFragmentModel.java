@@ -274,6 +274,13 @@ public class WeightFragmentModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    
+    /*
+     * 서버에서 전 주 대비 감량비를 가져온다.
+     *
+     * @param   CommonModel.ObjectCallBackListner<Float> callback   콜백함수   
+     * @return 
+    */
     public void getWeekRate(final CommonModel.ObjectCallBackListner<Float> callback ) {
         Call<CommonResponce<Float>> call = NetRetrofit.getInstance().getPetWeightInfoService().getWeekRate(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Float>>() {
@@ -296,6 +303,12 @@ public class WeightFragmentModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    /*
+     * 저장되어있는 단위를 가져온다
+     *
+     * @param   
+     * @return int type 0 : cm/kg, 1 : inch/lb
+    */
     public int getWeightUnit() {
         return mSharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR);
     }

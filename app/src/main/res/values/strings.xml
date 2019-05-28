@@ -367,4 +367,5 @@
     <string name="edit_done_msg">수정이 완료되었습니다</string>
     
     <string name="weight_loss_ratio_per_week_msg">전 주 대비 감량 비율</string>
+    <string name="weight_check_description">입력 된 정보가 정확할수록 분석 결과가 정확합니다.</string>
 </resources>

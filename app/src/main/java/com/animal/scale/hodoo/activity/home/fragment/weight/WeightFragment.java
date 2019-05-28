@@ -390,6 +390,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         setKg();
     }
 
+    /*
+     * 새로고침 버튼을 클릭했을 경우(현재 사용하지 않음)
+     *
+     * @param View
+     * @return 
+    */
     public void onRefreshClick(View v) {
         if (rotationView == null)
             rotationView = v;
@@ -494,6 +500,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         //setWeightGoal();
     }
 
+    /*
+     * 화면에 몸무게를 출력한다.
+     *
+     * @param 
+     * @return 
+    */
     private void setWeight() {
         unitIdx = presenter.getWeightUnit();
         float petWeight = Float.valueOf(selectPet.getPet().getFixWeight());
@@ -531,6 +543,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         });
     }
 
+    /*
+     * 몸무게 수정 완료버튼을 클릭했을때 사용
+     *
+     * @param PetPhysicalInfo
+     * @return
+    */
     @Override
     public void physicalUpdateDone(PetPhysicalInfo result) {
         if (result != null) {
@@ -550,6 +568,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         }
     }
 
+    /*
+     * 전 주 대비 감량 비율을 출력
+     *
+     * @param float rate 감량비
+     * @return
+    */
     @Override
     public void setWeekRate(float rate) {
         if (rate > 0)

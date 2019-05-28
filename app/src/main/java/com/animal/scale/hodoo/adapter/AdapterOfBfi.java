@@ -6,8 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.GridView;
+import android.widget.RelativeLayout;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.databinding.LayoutBfiBinding;
@@ -61,7 +65,7 @@ public class AdapterOfBfi extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int i, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, final ViewGroup viewGroup) {
         if ( view == null ) {
             binding = DataBindingUtil.inflate(inflater, R.layout.layout_bfi, viewGroup, false);
             view = binding.getRoot();
@@ -69,30 +73,39 @@ public class AdapterOfBfi extends BaseAdapter {
         } else {
             binding = (LayoutBfiBinding) view.getTag();
         }
-//        binding.bfiImg.setImageResource(R.drawable.d01d);
-//        binding.bfiImg.setBackgroundResource(R.drawable.d01d);
         binding.bfiImg.setButtonDrawable(R.drawable.d01d);
         binding.bfiImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if ( callback != null )
-                    callback.onItemChecked(i, view);
+                    callback.onItemChecked(position, view);
             }
         });
-        if ( selected != 0 )
+        if ( selected - 1 == position )
             binding.bfiImg.setChecked(true);
+        else
+            binding.bfiImg.setChecked(false);
         binding.bfiImg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if ( !compoundButton.isChecked() ) {
-                    if (compoundButton.isPressed())
-                        compoundButton.setChecked( !compoundButton.isChecked() );
-                } else {
-                    if (compoundButton.isPressed())
-                        compoundButton.setChecked(false);
+                for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                    RelativeLayout wrap = (RelativeLayout) viewGroup.getChildAt(i);
+                    CheckBox checkBox = (CheckBox) wrap.getChildAt(0);
+                    checkBox.setChecked(false);
                 }
+//                if ( !compoundButton.isChecked() ) {
+                    if (compoundButton.isPressed())
+                        compoundButton.setChecked( b );
+//                } else {
+//                    if (compoundButton.isPressed())
+//                        compoundButton.setChecked(false);
+//                }
             }
         });
         return view;
+    }
+
+    public void setSelected(int selected) {
+        this.selected = selected;
     }
 }

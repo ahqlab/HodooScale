@@ -17,6 +17,7 @@ import android.view.View;
 import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.activity.ActivityQuestionFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.basic.BasicInfomationFragment;
 import com.animal.scale.hodoo.activity.pet.regist.fragment.basic.PetBasicInfoBaseFragment;
@@ -58,14 +59,15 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     public static final int WEIGHT_TYPE = 3;
     public static final int PET_USER_SELECT_QUESTION_TYPE = 4;
 
-    public static final int PET_TYPE_TYPE = 0;
-    public static final int PET_NAME_TYPE = 1;
-    public static final int PET_PROFILE_TYPE = 2;
-    public static final int PET_BIRTHDAY_TYPE = 3;
-    public static final int PET_BREED_TYPE = 4;
-    public static final int PET_GENDER_TYPE = 5;
-    public static final int PET_NEUTER_TYPE = 6;
-
+    /* 참조 1-1 (s) */
+    public static final int PET_TYPE_TYPE = 0;      //펫의 타입
+    public static final int PET_NAME_TYPE = 1;      //펫의 이름
+    public static final int PET_PROFILE_TYPE = 2;   //펫의 프로필 사진
+    public static final int PET_BIRTHDAY_TYPE = 3;  //펫의 생일
+    public static final int PET_BREED_TYPE = 4;     //펫의 품종
+    public static final int PET_GENDER_TYPE = 5;    //펫의 성별
+    public static final int PET_NEUTER_TYPE = 6;    //중성화 여부
+    /* 참조 1-1 (e) */
 
 
     public static final int PET_TYPE_INFO = 0;
@@ -168,7 +170,6 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
         PetRegistFragment fragment = fragments[fragmentPosition];
         Bundle bundle = new Bundle();
         bundle.putInt("petIdx", petIdx);
-//        if ( fragmentPosition == PET_BASIC_INFO )
         fragment.setPetBasicInfo( petBasicInfo );
         if ( fragmentPosition == PET_BREED_TYPE ) {
             ((PetBreedFragment) fragment).setPetType( petBasicInfo.getPetType() );
@@ -207,6 +208,12 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 
     }
 
+    /**
+     * 프래그먼트에서 다음 또는 완료 버튼을 클릭했을경우
+     *
+     * @param int type    클릭한 대상 프래그먼트의 인덱스 값
+     * @return
+    */
     @Override
     public void nextStep(int type) {
         switch (type) {
@@ -244,6 +251,12 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
         }
     }
 
+    /**
+     * 펫 타입을 저장한다.
+     *
+     * @param int    petIdx 펫 타입 1 : 강아지, 2 : 고양이
+     * @return
+    */
     @Override
     public void setPetIdx(int petIdx) {
         if ( this.petIdx == 0 ) {
@@ -252,6 +265,12 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
         }
     }
 
+    /**
+     * PetBasicInfo를 서버에 저장한다.
+     *
+     * @param int    result     결과값
+     * @return
+    */
     @Override
     public void registBasicInfo(int result) {
         String REQUEST_URL = "";
@@ -267,26 +286,56 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 
     }
 
+    /**
+     * 펫의 병력을 서버에 저장한다.
+     *
+     * @param
+     * @return
+    */
     @Override
     public void registDiseaseInfo() {
         presenter.registDiseaseInformation(petDiseaseInfo, petIdx);
     }
 
+    /**
+     * 펫의 체중, 체장, 체고를 서버에 저장한다.
+     *
+     * @param
+     * @return
+    */
     @Override
     public void registPhysiqueInfo() {
         presenter.registPhysiqueInformation(petIdx, petPhysicalInfo);
     }
 
+    /**
+     * 펫의 bfi단계를 서버에 저장한다.
+     *
+     * @param
+     * @return
+    */
     @Override
     public void registWeightInfo() {
         presenter.registWeightInfo(petIdx, petWeightInfo);
     }
 
+    /**
+     * 펫의 활동성을 서버에 저장한다.
+     *
+     * @param
+     * @return
+    */
     @Override
     public void registPetUserSelectQuestion() {
         presenter.registPetUserSelectQuestion(petIdx, petUserSelectionQuestion);
     }
 
+    /**
+     * 저장이 완료했을 경우 처리
+     *
+     * @param
+     * @return
+    */
     @Override
     public void registFinish() {
         binding.setStatus(false);
@@ -309,32 +358,82 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
         builder.show();
     }
 
+    /**
+     * PetBasicInfo를 변수에 저장한다.
+     *
+     * @param CircleImageView    profile    이미지 뷰
+     * @param PetBasicInfo       petBasicInfo   펫에 대한 정보
+     * @return
+    */
     public void setPetBasicInfo ( CircleImageView profile, PetBasicInfo petBasicInfo ) {
         this.profile = profile;
         this.petBasicInfo = petBasicInfo;
     }
+    /**
+     * 변수 PetBasicInfo를 가져온다.
+     *
+     * @param
+     * @return PetBasicInfo
+    */
     public PetBasicInfo getPetBasicInfo () {
         return petBasicInfo;
     }
+
+    /**
+     * 펫의 병력을 변수에 저장한다.
+     *
+     * @param petDiseaseInfo    펫의 병력
+     * @return
+    */
     public void setPetDiseaseInfo ( PetChronicDisease petDiseaseInfo ) {
         this.petDiseaseInfo = petDiseaseInfo;
     }
 
+    /**
+     * 펫의 체장, 체고, 체중을 변수에 저장한다.
+     *
+     * @param petPhysicalInfo   펫의 체장, 체고, 체중 정보
+     * @return
+    */
     public void setPetPhysicalInfo ( PetPhysicalInfo petPhysicalInfo ) {
         this.petPhysicalInfo = petPhysicalInfo;
     }
+    /**
+     * 선택한 bfi를 변수에 저장한다.
+     *
+     * @param petWeightInfo     선택한 bif
+     * @return
+    */
     public void setPetWeightInfo ( PetWeightInfo petWeightInfo ) {
         this.petWeightInfo = petWeightInfo;
     }
+    /**
+     * 선택한 산책횟수, 활동성을 변수에 저장한다.
+     *
+     * @param petUserSelectionQuestion   선택한 산책횟수, 활동성
+     * @return
+    */
     public void setPetUserSelectionQuestion ( PetUserSelectionQuestion petUserSelectionQuestion ) {
         this.petUserSelectionQuestion = petUserSelectionQuestion;
     }
+    /**
+     * 선택한 펫타입
+     *
+     * @param petType   1 : 강아지, 2 : 고양이
+     * @return
+    */
     public void setPetType ( int petType ) {
 //        this.petType = petType;
         if ( petBasicInfo == null )
             petBasicInfo = new PetBasicInfo();
         petBasicInfo.setPetType( petType );
     }
+    /**
+     * 서버에 저장을 시작한다.
+     *
+     * @param    
+     * @return
+    */
     public void regist() {
         binding.setStatus(true);
         String REQUEST_URL = "";
@@ -357,7 +456,24 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
     public void onBackPressed() {
         backButtonAction();
     }
+    
+    /**
+     * 뒤로가기 버튼을 클릭했을 경우 처리
+     * 체장, 체고, 체중을 입력하는 프래그먼트에서는 건너뛰기 버튼을 위에 보여지게 하고,
+     * bif선택 프래그먼트의 경우 단계를 뒤로 보낸다.
+     *
+     * @param    
+     * @return
+    */
     private void backButtonAction () {
+        if ( fragmentPosition == PET_WEIGHT_INFO ) {
+            PetRegistFragment fragment = fragments[fragmentPosition];
+            if ( ((WeightCheckFragment) fragment).backState() ) {
+                ((WeightCheckFragment) fragment).changeStep(-1);
+                return;
+            }
+
+        }
         if ( !editModeState ) {
             if ( fragmentPosition > 0 )
                 fragmentPosition--;
@@ -370,9 +486,6 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
             super.setSubBtn("건너뛰기", this);
         } else if ( fragmentPosition != PET_PHYSIQUE_INFO )
             super.hideSubBtn();
-
-
-
 
         if ( fragmentPosition == 0 ) {
 //            Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -441,6 +554,12 @@ public class PetRegistActivity extends BaseActivity<PetRegistActivity> implement
 
         Log.e(TAG, String.format("pet type data : %d", (int) data));
     }
+    /**
+     * 펫의 타입, 이름, 프로필 사진 등을 등록한다.
+     *
+     * @param type   상단 상수 참조 (1-1)
+     * @return
+    */
     public void setPetBasicInfoData ( int type, Object data ) {
 //        if ( petBasicInfo == null )
 //            petBasicInfo = new PetBasicInfo();
