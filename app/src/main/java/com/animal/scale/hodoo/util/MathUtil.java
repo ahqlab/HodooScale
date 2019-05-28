@@ -48,7 +48,7 @@ public class MathUtil {
 	}
 
 	public static float kgTolb( float kg ) {
-		return (kg * (1f / 2.2f));
+		return (float) (kg * 2.2046);
 	}
 	public static float lbToKg( float lb ) {
 		return ( lb * (1f * 2.2f) );

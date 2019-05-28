@@ -31,6 +31,7 @@ import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.device.regist.DeviceRegistActivity;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
+import com.animal.scale.hodoo.activity.user.signup.SignUpActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
@@ -112,6 +113,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
     public void setServerError() {
 
     }
+
 
     @Override
     public void goHomeActivity() {
@@ -296,9 +298,9 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
     public void onButtonClick(View v) {
         switch (v.getId()) {
             case R.id.signup_btn:
-              /*  intent = new Intent(getContext(), SignUpActivity.class);
-                startActivity(intent);*/
-                onClickUnlink();
+                intent = new Intent(getContext(), SignUpActivity.class);
+                startActivity(intent);
+                //onClickUnlink();
                 break;
             case R.id.login_btn:
                 intent = new Intent(getContext(), LoginActivity.class);
