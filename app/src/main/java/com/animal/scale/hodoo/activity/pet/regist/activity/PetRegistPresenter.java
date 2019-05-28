@@ -33,6 +33,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         model.loadData(context);
     }
 
+    /**
+     * 서버에서 PetBasicInfo를 가져온다.
+     *
+     * @param location   위치값 -> 언어를 선택하기 위해 사용
+     * @param petIdx     가져올 펫의 인덱스
+     * @return
+    */
     @Override
     public void getPetBasicInformation(String location, int petIdx) {
         model.getPetBasicInformation(location, petIdx, new CommonModel.DomainCallBackListner<PetBasicInfo>() {
