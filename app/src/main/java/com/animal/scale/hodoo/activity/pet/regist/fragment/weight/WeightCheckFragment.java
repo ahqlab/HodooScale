@@ -195,7 +195,7 @@ public class WeightCheckFragment extends PetRegistFragment implements WeightChec
             }
         });
         binding.bfiView.setAdapter( adapter );
-        setBtnEnable(validation());
+//        setBtnEnable(validation());
     }
 
     public void onClickCompleateBtn(View view) {

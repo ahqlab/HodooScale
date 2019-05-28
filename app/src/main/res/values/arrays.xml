@@ -48,15 +48,13 @@
     <string-array name="setting_title">
         <item>일반 설정</item>
         <item>사용자</item>
-        <item>디바이스</item>
         <item>함께관리</item>
         <item>펫 관리</item>
-        <item>고객관리</item>
     </string-array>
 
     <string-array name="general_settings">
         <item>공지사항</item>
-        <item>홈페이지</item>
+     <!--   <item>홈페이지</item>-->
         <item>앱 버전</item>
     </string-array>
 
