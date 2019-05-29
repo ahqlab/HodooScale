@@ -32,6 +32,16 @@ public class InvitationConfirmModel extends CommonModel {
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
+    /**
+     * 서버의 초대 상태값을 바꿔준다
+     *
+     * @param state   상태값
+     * @param toUserIdx   초대 받는 유저 인덱스 값
+     * @param fromUseridx   초대한 유저 인덱스 값
+     * @param callback   콜백함수
+     * @return
+     * @description
+    */
     public void setInvitationState(int state, int toUserIdx, int fromUseridx, final UserGroupListModel.DomainCallBackListner<Integer> callback) {
         Call<Integer> call = NetRetrofit.getInstance().getInvitationService().setInvitationType(state, toUserIdx, fromUseridx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
@@ -51,6 +61,15 @@ public class InvitationConfirmModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+    /**
+     * 초대 승인
+     *
+     * @param toUserIdx   초대 받는 유저 인덱스 값
+     * @param fromUseridx   초대한 유저 인덱스 값
+     * @param callback   콜백함수
+     * @return
+     * @description     
+    */
     public void invitationApproval ( int toUserIdx, int fromUserIdx, final InvitationConfirmModel.DomainCallBackListner<Integer> callback ) {
         Call<Integer> call = NetRetrofit.getInstance().getUserService().invitationApproval(toUserIdx, fromUserIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
@@ -89,7 +108,15 @@ public class InvitationConfirmModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
-
+    /**
+     * 뱃지값을 바꿔준다.
+     *
+     * @param to   초대 받는 유저 인덱스 값
+     * @param from   초대한 유저 인덱스 값
+     * @param callback   콜백함수
+     * @return
+     * @description     
+    */
     public int updateBadgeCount ( int to, int from ) {
         Map<String, String> firebaseInfos = (Map<String, String>) VIewUtil.fromJson( mSharedPrefManager.getStringExtra(SharedPrefVariable.FIREBASE_NOTI), new TypeToken< Map<String,String>>(){}.getType());
         List<InvitationUser> invitationUsers = new ArrayList<>();
@@ -115,6 +142,13 @@ public class InvitationConfirmModel extends CommonModel {
         }
         return invitationUsers.size();
     }
+    /**
+     * 뱃지값을 저장한다.
+     *
+     * @param count   뱃지 카운트
+     * @return
+     * @description
+    */
     public void saveBadgeCount( int count ) {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.BADGE_COUNT, count);
         BadgeUtils.setBadge(context, count);
