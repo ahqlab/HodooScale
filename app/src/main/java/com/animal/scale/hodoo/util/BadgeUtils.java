@@ -18,7 +18,14 @@ public class BadgeUtils {
         clearBadgeSony(context);
     }
 
-
+    /**
+     * 삼성폰의 경우의 뱃지 셋팅(어플 아이콘)
+     *
+     * @param context   컨텍스트
+     * @param count   뱃지 갯수
+     * @return
+     * @description
+    */
     private static void setBadgeSamsung(Context context, int count) {
         String launcherClassName = getLauncherClassName(context);
         if (launcherClassName == null) {
@@ -31,6 +38,14 @@ public class BadgeUtils {
         context.sendBroadcast(intent);
     }
 
+    /**
+     * 소니폰의 경우의 뱃지 셋팅(어플 아이콘)
+     *
+     * @param context   컨텍스트
+     * @param count   뱃지 갯수
+     * @return
+     * @description
+     */
     private static void setBadgeSony(Context context, int count) {
         String launcherClassName = getLauncherClassName(context);
         if (launcherClassName == null) {
