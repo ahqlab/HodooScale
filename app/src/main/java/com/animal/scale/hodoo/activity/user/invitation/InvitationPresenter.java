@@ -22,6 +22,13 @@ public class InvitationPresenter implements Invitation.Presenter {
         model.loadData(context);
     }
 
+    /**
+     * 초대를 발송한다.
+     *
+     * @param to   초대 받을 대상의 유저 이메일 또는 고유 아이디값
+     * @return
+     * @description
+    */
     @Override
     public void sendInvitation(final String to) {
         mView.setProgress(true);

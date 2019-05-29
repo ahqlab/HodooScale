@@ -26,7 +26,13 @@ public class SettingListPresenter implements SettingList.Presenter {
         settingListModel.loadData(context);
         notificationModel = CommonNotificationModel.getInstance(context);
     }
-
+    /**
+     * 셋팅 문자열 배열을 가져와 리스트로 만들어준다.
+     *
+     * @param context   컨텍스트
+     * @return
+     * @description   문자열은 배열 리소스에 저장되어있고, 다국어적용됨
+    */
     @Override
     public void getStringSettingList( Context context ) {
         ArrayList<String> titleList = new ArrayList<>( Arrays.asList( context.getResources().getStringArray(R.array.setting_title) ) );

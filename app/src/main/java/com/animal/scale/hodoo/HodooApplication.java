@@ -79,6 +79,13 @@ public class HodooApplication extends Application {
         KakaoSDK.init(new HodooApplication.KakaoSDKAdapter());
     }
 
+    /**
+     * 어플에 SNS로 로그인했는지 확인한다.
+     *
+     * @param
+     * @return
+     * @description
+    */
     public boolean isSnsLoginState() {
         return snsLoginState;
     }

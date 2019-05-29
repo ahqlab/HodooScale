@@ -63,12 +63,15 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
     protected BaseActivity<InvitationActivity> getActivityClass() {
         return this;
     }
+
     public void sendInvition(View view) {
         presenter.sendInvitation( binding.email.editText.getText().toString() );
     }
+
     private void validation() {
         setBtnEnable(!ValidationUtil.isEmpty(binding.email.editText.getText().toString()));
     }
+
     private void setBtnEnable ( boolean state ) {
         binding.confirm.setEnabled(state);
         if ( binding.confirm.isEnabled() ) {

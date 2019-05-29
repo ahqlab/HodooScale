@@ -65,6 +65,16 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 //        sendNotification(getApplicationContext(), data, type);
     }
 
+    /**
+     * 서버에서 발송한 푸시를 받는다.
+     *
+     * @param data   서버에서 전송한 데이터
+     * @return
+     * @description   타입에 따라 푸시를 다르게 처리.
+     *                  FIREBASE_NORMAL_TYPE : 기본 푸시 타입
+     *                  FIREBASE_WEIGHT_TYPE : 몸무게 푸시 타입
+     *                  FIREBASE_FEED_TYPE   : 식사 푸시 타입
+    */
     public void sendNotification( Map<String, String> data) {
 
         /* variable (s) */
@@ -245,6 +255,13 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
         super.onDestroy();
 //        unbindService(connection);
     }
+    /**
+     * 어플이 백그라운드로 실행되는지 확인.
+     *
+     * @param context   컨텍스트
+     * @return  boolean
+     * @description
+    */
     private boolean isAppIsInBackground(Context context) {
         boolean isInBackground = true;
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
