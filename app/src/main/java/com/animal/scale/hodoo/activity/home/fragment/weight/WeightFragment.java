@@ -554,8 +554,8 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         if (result != null) {
             weightDialog.dismiss();
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                    .setTitle("변경완료")
-                    .setMessage("현재 체중이 변경완료되었습니다.")
+                    .setTitle(getResources().getString(R.string.change_compleate))
+                    .setMessage(getResources().getString(R.string.change_compleate_message))
                     .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -588,10 +588,11 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         int month = weekCal.get(Calendar.MONTH);
         int year = weekCal.get(Calendar.YEAR);
         // date picker dialog
-        picker = new DatePickerDialog(getContext(),
-                new DatePickerDialog.OnDateSetListener() {
+        picker = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        view.setMaxDate(Calendar.getInstance().getTimeInMillis());
 
                         DateTime dialogSelectedDate = new DateTime(year,  (monthOfYear + 1) , dayOfMonth, 12, 12);
 
@@ -600,6 +601,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                         formatter1.setTimeZone(weekCal.getTimeZone());
                         String formatted1 = formatter1.format(weekCal.getTime());
                         binding.thisYear.setText(formatted1);
+
 
                         binding.weekCalendar.setSelectedDate( dialogSelectedDate );
 
@@ -611,6 +613,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
                     }
                 }, year, month, day);
+        picker.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
         picker.show();
     }
 
