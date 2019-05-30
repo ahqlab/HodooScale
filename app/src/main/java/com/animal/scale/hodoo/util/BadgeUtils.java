@@ -63,6 +63,10 @@ public class BadgeUtils {
     }
 
 
+    /**
+     * 소니 디바이스의 뱃지를 없앴다.
+     * @param context
+     */
     private static void clearBadgeSony(Context context) {
         String launcherClassName = getLauncherClassName(context);
         if (launcherClassName == null) {
