@@ -81,15 +81,16 @@ public class HodooApplication extends Application {
 
     /**
      * 어플에 SNS로 로그인했는지 확인한다.
-     *
-     * @param
      * @return
-     * @description
-    */
+     */
     public boolean isSnsLoginState() {
         return snsLoginState;
     }
 
+    /**
+     * 어플에 SNS 로그인했는지 확인 하는 상태를 변경한다.
+     * @param snsLoginState
+     */
     public void setSnsLoginState(boolean snsLoginState) {
         this.snsLoginState = snsLoginState;
     }

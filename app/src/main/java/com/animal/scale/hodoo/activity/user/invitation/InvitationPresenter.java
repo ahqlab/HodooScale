@@ -67,11 +67,18 @@ public class InvitationPresenter implements Invitation.Presenter {
         });
     }
 
+    /**
+     * 초대 상태를 변경한다.
+     * @param mail
+     */
     @Override
     public void setInvitationData(String mail) {
         model.setInvitationUser(mail);
     }
 
+    /**
+     * 자동로그인 상태를 삭제한다.
+     */
     @Override
     public void removeAutoLogin() {
         model.removeAutoLogin();

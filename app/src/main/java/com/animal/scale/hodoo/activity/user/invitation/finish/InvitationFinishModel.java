@@ -21,11 +21,14 @@ public class InvitationFinishModel extends CommonModel {
         super.loadData(context);
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
+
+    /**
+     * 초대를 재발송한다.
+     * @param to
+     * @param callback
+     */
     public void resend( String to, final InvitationFinishModel.DomainCallBackListner<Integer> callback ) {
         String from = mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL);
-
-
-
 
         Call<Integer> call = NetRetrofit.getInstance().getFcmService().sendInvitation(to, from);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>() {
@@ -45,6 +48,12 @@ public class InvitationFinishModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
+
+    /**
+     * 초대를 취소한다
+     * @param to
+     * @param callback
+     */
     public void cancel (String to, final InvitationFinishModel.DomainCallBackListner<Integer> callback ) {
         int from = mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
         Call<Integer> call = NetRetrofit.getInstance().getFcmService().cancelInvitation(to, from);
