@@ -307,4 +307,6 @@
     <string name="alarm_setting">알람 설정</string>
 
     <string name="enter_weight">무게 입력</string>
+    <string name="change_compleate">변경완료</string>
+    <string name="change_compleate_message">현제 체중변경이 완료되었습니다.</string>
 </resources>

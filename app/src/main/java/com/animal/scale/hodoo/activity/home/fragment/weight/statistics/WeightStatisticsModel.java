@@ -59,10 +59,15 @@ public class WeightStatisticsModel extends CommonModel {
         chart.setMarker(mv); // Set the marker to the chart
 //        chart.setBackgroundColor(Color.parseColor("#f7f7f7"));
         chart.getAxisRight().setEnabled(false);
-        //chart.getXAxis().setDrawGridLines(false);
+        //chart 의 x 축 선의 유무를 결정한다.
+        chart.getXAxis().setDrawGridLines(false);
+        //chart.getAxisLeft().setDrawGridLines(false); // disable grid lines for the left YAxis
+        chart.getAxisRight().setDrawGridLines(false); // disable grid lines for the right YAxis
+        //chart.getYAxis().setDrawGridLines(false);
 
 
         XAxis xAxis = chart.getXAxis();
+        xAxis.setDrawAxisLine(false);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         if ( type.matches("Day") )
             xAxis.setLabelCount(7);
