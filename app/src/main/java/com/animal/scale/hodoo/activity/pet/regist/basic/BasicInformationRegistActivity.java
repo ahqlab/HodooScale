@@ -107,7 +107,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         Log.e("HJLEE", "basic - deleteAllPet : " + deleteAllPet);
         String location = VIewUtil.getMyLocationCode(this);
         presenter.getPetBasicInformation(location, petIdx);
-
+        //중성화 설정
         binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -118,6 +118,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 }
             }
         });
+        //설병 설정
         binding.radioGroupSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -132,12 +133,14 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 validation();
             }
         });
+        //견종 설정
         binding.petBreed.editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickSelectEditText(view);
             }
         });
+        //생년월일 성정
         binding.petBirthday.editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,18 +149,21 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         });
         validation();
 //        binding.nextStep.setEnabled(validation());
+        //펫 네임 설정
         binding.petName.editText.addTextChangedListener(new CommonTextWatcher(binding.petName, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
             @Override
             public void onChangeState(boolean state) {
                 validation();
             }
         }));
+        //펫 네임 설정
         binding.petBreed.editText.addTextChangedListener(new CommonTextWatcher(binding.petBreed, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_name_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
             @Override
             public void onChangeState(boolean state) {
                 validation();
             }
         }));
+        //펫 네임 설정
         binding.petBirthday.editText.addTextChangedListener(new CommonTextWatcher(binding.petBirthday, this, CommonTextWatcher.EMPTY_TYPE, R.string.pet_birthday_empty_msg, new CommonTextWatcher.CommonTextWatcherCallback() {
             @Override
             public void onChangeState(boolean state) {
@@ -171,10 +177,20 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 //binding.dogToggle.
             }
         });*/
-
+        /**
+         * 서버요청
+         * 모든 Pet 종류
+         */
         presenter.getAllPetBreed( location, 0 );
     }
 
+    /**
+     * 서버 Callback
+     * 기본정보 셋팅
+     * 1. 기본정보가 있다면, 업데이트
+     * 2. 기본정보가 없다면 ? 등록
+     * @param basicInfo
+     */
     @Override
     public void setBasicInfo(PetBasicInfo basicInfo) {
         if (basicInfo != null) {
@@ -194,11 +210,19 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         }
     }
 
+    /**
+     * 에러처리 (비워둠)
+     */
     @Override
     public void showErrorToast() {
 //        showToast("ERROR");
     }
 
+    /**
+     * 서버 Callback
+     * UI 기본정보 셋팅
+     * @param basicInfo
+     */
     @Override
     public void setView(PetBasicInfo basicInfo) {
 
@@ -224,6 +248,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         validation();
     }
 
+    /**
+     * 다음페이지 이동
+     * @param pet
+     */
     @Override
     public void goNextPage(Pet pet) {
         Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
@@ -234,6 +262,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         finish();
     }
 
+    /**
+     * 업데이트 성공
+     */
     @Override
     public void successUpdate() {
         Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
@@ -244,11 +275,20 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 //        finish();
     }
 
+    /**
+     * 프로파일 이미지 설정
+     * @param image
+     */
     @Override
     public void setSaveImageFile(Bitmap image) {
         binding.profile.setImageBitmap(image);
     }
 
+    /**
+     * 서버 Callback
+     * 모든 견종, 모종 리스트
+     * @param responce
+     */
     @Override
     public void getAllPetBreed(CommonResponce<List<PetBreed>> responce) {
 
@@ -274,6 +314,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         binding.getInfo().setSex("FEMALE");
     }
 
+    /**
+     * Call Bottom Dialog
+     * @param view
+     */
     public void onClickOpenBottomDlg(View view) {
         dialog = BottomDialog.getInstance();
         List<IosStyleBottomAlert> btns = new ArrayList<>();
@@ -311,6 +355,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         dialog.show(getSupportFragmentManager(), TAG);
     }
 
+    /**
+     * 카메라 오픈
+     */
     @Override
     public void openCamera() {
 //        builder.dismiss();
@@ -326,6 +373,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             }
         }
     }
+
+    /**
+     * 사진 갤러리
+     */
     public void openGallery () {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -333,6 +384,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         startActivityForResult(intent, GALLERY_REQUEST);
     }
 
+    /**
+     * 프로그래스 바 컨트롤
+     * @param play
+     */
     @Override
     public void setProgress(Boolean play) {
         if (play) {
@@ -343,6 +398,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         }
     }
 
+    /**
+     * 생년월일 입력 다이얼로그
+     * @param v
+     */
     public void onClickCalDalog(View v) {
         final Calendar cldr = Calendar.getInstance();
         int day = cldr.get(Calendar.DAY_OF_MONTH);
@@ -360,7 +419,12 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         picker.show();
     }
 
-
+    /**
+     * 카메라 퍼미션 Result
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -408,6 +472,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * 질별등록 페이지 이동
+     * @param view
+     */
     public void goDiseaseActivity(View view) {
         setBasicInfo();
         PetBasicInfo info = binding.getInfo();
@@ -422,12 +490,18 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
 
     }
 
+    /**
+     * 기본정보 셋팅
+     */
     private void setBasicInfo() {
         binding.getInfo().setPetName(binding.petName.editText.getText().toString());
         binding.getInfo().setPetBreed(binding.petBreed.editText.getText().toString());
         binding.getInfo().setBirthday(binding.petBirthday.editText.getText().toString());
     }
 
+    /**
+     * 사용안함.
+     */
     @Override
     public void setNavigation() {
         binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
@@ -466,6 +540,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         });*/
     }
 
+    /**
+     * 품종 선택 다이얼로그
+     * @param view
+     */
     public void onClickSelectEditText(View view) {
         final String[] values = new String[breeds.size()];
         for (int i = 0; i < breeds.size(); i++)
@@ -482,6 +560,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
                 }).show();
     }
 
+    /**
+     * Validation Check 후
+     * 버튼 상태 변경 CAll
+     */
     private void validation() {
         if (!ValidationUtil.isEmpty(binding.petName.editText.getText().toString()) &&
                 !ValidationUtil.isEmpty(binding.petBreed.editText.getText().toString()) &&
@@ -493,6 +575,10 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         }
     }
 
+    /**
+     * 버튼 상태 변경
+     * @param state
+     */
     private void setBtnEnable(boolean state) {
         binding.nextStep.setEnabled(state);
         if (binding.nextStep.isEnabled()) {

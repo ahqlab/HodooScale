@@ -36,6 +36,9 @@ import com.animal.scale.hodoo.util.RER;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 오늘 섭취한 사료 리스트
+ */
 public class FeedListActivity extends BaseActivity<FeedListActivity> implements FeedListIn.View {
 
     SharedPrefManager mSharedPrefManager;
@@ -74,11 +77,18 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         setPetAllInfo();
     }
 
+    /**
+     * catch the intent value
+     */
     private void getIntentValue(){
         Intent intent = getIntent();
         selectPet = (PetAllInfos) intent.getSerializableExtra("selectPet");
     }
 
+    /**
+     * 오늘 섭취한 총 칼로리
+     * @param mealHistory
+     */
     @Override
     public void setTodaySumCalorie(MealHistory mealHistory) {
         if (mealHistory != null) {
@@ -108,6 +118,11 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         binding.seekBar.setEnabled(true);
     }
 
+    /**
+     * 1. Pet 의 정보를 가져온다.
+     * 2. Pet의 정보를 RER을 보여준다.
+     * @param petAllInfos
+     */
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
         if ( petAllInfos != null ) {
@@ -118,6 +133,10 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         }
     }
 
+    /**
+     * 1. Pet 의 정보를 가져온다.
+     * 2. Pet의 정보를 RER을 보여준다.
+     */
     public void setPetAllInfo(){
         if ( selectPet != null ) {
             rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
@@ -132,6 +151,10 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         return FeedListActivity.this;
     }
 
+    /**
+     * Progress control
+     * @param play
+     */
     @Override
     public void setProgress(boolean play) {
         if (play) {
@@ -141,6 +164,11 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         }
     }
 
+
+    /**
+     * MealHistoryContent Listview adapter 셋팅
+     * @param d
+     */
     @Override
     public void setListView(List<MealHistoryContent> d) {
         adapter = new AdapterOfMealManager(this, d);
@@ -150,6 +178,10 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         setProgress(false);
     }
 
+    /**
+     * 롱클릭 이벤트 클릭시 항목을 삭제한다.
+     * DB에는 상태를 변경한다.
+     */
     private AdapterView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -158,6 +190,11 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         }
     };
 
+    /**
+     * 변경 후 호출함수
+     * 식사가 삭제됨으로 따라 오늘먹은 총 칼로리와 리스트를 다시 셋팅한다.
+     * @param result
+     */
     @Override
     public void deleteResult(Integer result) {
         if(result != 0){
@@ -166,6 +203,11 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         }
     }
 
+
+    /**
+     * Listview onclick 이벤트
+     * 식사 업데이트 Activirty로 이동
+     */
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -178,6 +220,10 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
         }
     };
 
+    /**
+     * 삭제 여부 뭍는 Dialog
+     * @param historyIdx
+     */
     public void deleteDlalog(final int historyIdx) {
         final String[] values = new String[]{
                 getResources().getString(R.string.delete)
@@ -192,12 +238,21 @@ public class FeedListActivity extends BaseActivity<FeedListActivity> implements 
                 }).show();
     }
 
+
+    /**
+     * 1. 플로팅 버튼 클릭
+     * 2. 식사 검색 페이지 이동
+     * @param view
+     */
     public void onClickFloatingBtn(View view) {
         Intent intent = new Intent(getApplicationContext(), MealSearchActivity.class);
         intent.putExtra("selectPet", selectPet);
         startActivity(intent);
     }
 
+    /**
+     * 다시 돌아왔을때 리프래쉬
+     */
     @Override
     protected void onResume() {
         super.onResume();

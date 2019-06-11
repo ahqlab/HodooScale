@@ -40,6 +40,9 @@ import com.github.javiersantos.bottomdialogs.BottomDialog;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class MealRegistrationActivity extends BaseActivity<MealRegistrationActivity> implements MealRegistrationIn.View {
 
     ActivityMealRegistrationBinding binding;
@@ -97,7 +100,11 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         //binding.seekBar.initData(progressItemList);
     }
 
-
+    /**
+     * 사료량을 입력하기 위한 넘버 피커 셋팅
+     * 지금은 사용안함.
+     * @param numberPicker
+     */
     private void setNumberPicker(NumberPicker numberPicker) {
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(1000);
@@ -109,7 +116,11 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
             }
         });
     }
-
+    /**
+     * 사료량을 입력하기 위한 넘버 피커 셋팅
+     * 지금은 사용안함.
+     * @param numberPicker
+     */
     private void setDecimalNumberPicker(NumberPicker numberPicker) {
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(3);
@@ -123,7 +134,11 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
             }
         });
     }
-
+    /**
+     * 단위를 입력하기 위한 피커
+     * 지금은 사용안함.
+     * @param numberPicker
+     */
     private void setStringNumberPicker(NumberPicker numberPicker, Feed feed) {
         numberPicker.setMinValue(0);
         if (feed.getTag().equals("D")) {
@@ -149,6 +164,10 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         return MealRegistrationActivity.this;
     }
 
+    /**
+     * 사용안함.
+     * @param feed
+     */
     @Override
     public void setFeedInfo(Feed feed) {
         binding.setDomain(feed);
@@ -160,6 +179,12 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
 
     }
 
+    /**
+     * 사료등록결과
+     * DB(SQLight)에 입력한다. (최근검색어를 위해)
+     *
+     * @param result
+     */
     @Override
     public void setInsertResult(Integer result) {
         if (result == 1)
@@ -167,11 +192,19 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         finish();
     }
 
+    /**
+     * RER 을 보여준다.
+     */
     public void setPetAllInfo() {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
         binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
 
+
+    /**
+     * 오늘 섭취한 총 칼로리
+     * @param mealHistory
+     */
     @Override
     public void setTodaySumCalorie(MealHistory mealHistory) {
         this.mealHistory = mealHistory;
@@ -205,6 +238,12 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         binding.seekBar.setEnabled(true);
     }
 
+
+    /**
+     * 1. 사료의 영양분을 볼 수 있는 버튼 클릭
+     * 2. 디테일 정보 다이얼로그 출력
+     * @param view
+     */
     public void onClickDetailBtn(View view) {
         dialog.show(getFragmentManager(), "dialog");
     }
@@ -215,6 +254,10 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
                 .start();
     }*/
 
+    /**
+     * meterageCup 을 설정한 후 Save 버튼 클릭 시 호출
+     * @param view
+     */
     public void onClickSaveBtn(View view) {
         StringBuilder AmountOfFeed = new StringBuilder();
         AmountOfFeed.append(binding.meterageCup.getValue());
@@ -232,6 +275,9 @@ public class MealRegistrationActivity extends BaseActivity<MealRegistrationActiv
         presenter.saveMeal(mealHistory);
     }
 
+    /**
+     * 변화 되는 부분 Refrash
+     */
     @Override
     protected void onResume() {
         super.onResume();

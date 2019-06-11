@@ -13,12 +13,17 @@ import com.animal.scale.hodoo.domain.Feed;
 
 public class IngredientsOfMealActivity extends BaseActivity<IngredientsOfMealActivity> implements IngredientsOfMealIn.View{
 
+
     ActivityIngredientsOfMealBinding binding;
 
     IngredientsOfMealIn.Presenter presenter;
 
     private int feedId;
 
+    /**
+     * IngredientsOfMealActivity 사용안함.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
