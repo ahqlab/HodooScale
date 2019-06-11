@@ -15,6 +15,8 @@ import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.HodooIndex;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
@@ -231,12 +233,12 @@ public class WeightFragmentModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void getWeightGoal(float currentWeight, int bodyFat, int petType, final CommonDomainCallBackListner<WeightGoalChart> commonDomainCallBackListner) {
+    public void getWeightGoal(int petIdx , final CommonDomainCallBackListner<HodooIndex> commonDomainCallBackListner) {
 
-        Call<CommonResponce<WeightGoalChart>> call = NetRetrofit.getInstance().getWeightGoalChartService().getWeightGoal(currentWeight, bodyFat, petType);
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<WeightGoalChart>>() {
+        Call<CommonResponce<HodooIndex>> call = NetRetrofit.getInstance().getWeightGoalChartService().getWeightGoal(petIdx, mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<HodooIndex>>() {
             @Override
-            protected void doPostExecute(CommonResponce<WeightGoalChart> responce) {
+            protected void doPostExecute(CommonResponce<HodooIndex> responce) {
                 commonDomainCallBackListner.doPostExecute(responce);
             }
 
@@ -251,5 +253,63 @@ public class WeightFragmentModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
 
+    }
+    public void updatePhysical(PetPhysicalInfo info, final CommonModel.ObjectCallBackListner<CommonResponce<PetPhysicalInfo>> callBackListner) {
+        Call<CommonResponce<PetPhysicalInfo>> call = NetRetrofit.getInstance().getPetPhysicalInfoService().update(mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX), mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE),info);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<PetPhysicalInfo>>() {
+
+            @Override
+            protected void doPostExecute(CommonResponce<PetPhysicalInfo> mealHistoryCommonResponce) {
+                callBackListner.doPostExecute(mealHistoryCommonResponce);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+    
+    /*
+     * 서버에서 전 주 대비 감량비를 가져온다.
+     *
+     * @param   CommonModel.ObjectCallBackListner<Float> callback   콜백함수   
+     * @return 
+    */
+    public void getWeekRate(final CommonModel.ObjectCallBackListner<Float> callback ) {
+        Call<CommonResponce<Float>> call = NetRetrofit.getInstance().getPetWeightInfoService().getWeekRate(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Float>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<Float> floatCommonResponce) {
+                if ( floatCommonResponce != null )
+                    callback.doPostExecute( floatCommonResponce.domain );
+                else
+                    callback.doPostExecute(0f);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+    /*
+     * 저장되어있는 단위를 가져온다
+     *
+     * @param   
+     * @return int type 0 : cm/kg, 1 : inch/lb
+    */
+    public int getWeightUnit() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR);
     }
 }

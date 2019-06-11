@@ -1,37 +1,5 @@
 [
     {
-<<<<<<< HEAD
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/drawable-v21/abc_btn_colored_material.xml"
-    },
-    {
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/drawable-v21/abc_action_bar_item_background_material.xml"
-    },
-    {
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/drawable-v21/avd_show_password.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/c354c773c5f3efb4ff8870c478fa428f/res/drawable-v21/avd_show_password.xml"
-    },
-    {
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/drawable-v21/design_bottom_navigation_item_background.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/c354c773c5f3efb4ff8870c478fa428f/res/drawable-v21/design_bottom_navigation_item_background.xml"
-    },
-    {
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/36f3074257a286cd17a4683a3db2f019/res/drawable-v21/notification_action_background.xml"
-    },
-    {
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/drawable-v21/abc_edit_text_material.xml"
-    },
-    {
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/drawable-v21/avd_hide_password.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/c354c773c5f3efb4ff8870c478fa428f/res/drawable-v21/avd_hide_password.xml"
-    },
-    {
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/drawable-v21/design_password_eye.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/c354c773c5f3efb4ff8870c478fa428f/res/drawable-v21/design_password_eye.xml"
-=======
         "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\design_password_eye.xml",
         "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\drawable-v21\\design_password_eye.xml"
     },
@@ -62,6 +30,5 @@
     {
         "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_btn_colored_material.xml",
         "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\drawable-v21\\abc_btn_colored_material.xml"
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
     }
 ]

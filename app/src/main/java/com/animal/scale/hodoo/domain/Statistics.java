@@ -26,6 +26,8 @@ public class Statistics implements Serializable {
 
     private String theYear;
 
+    private String today;
+
     private float average;
 
 }

@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.activity.ActivityFragment;
@@ -34,6 +35,7 @@ import com.animal.scale.hodoo.activity.home.fragment.dashboard.DashBoardFragment
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
+import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.adapter.AbsractCommonAdapter;
@@ -46,6 +48,7 @@ import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.databinding.ActivityHomeBinding;
 import com.animal.scale.hodoo.databinding.PetsListviewItemBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.domain.WeightTip;
@@ -57,6 +60,8 @@ import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.VIewUtil;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -104,6 +109,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     public static FragmentTip[] fragmentTips = new FragmentTip[2];
 
+    private HodooApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,13 +119,22 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         binding.setActivity(this);
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
-        presenter.loginCheck();
+
+        app = (HodooApplication) getApplication();
+        app.setExperienceState(getIntent().getBooleanExtra(SharedPrefVariable.EXPERIENCE_KEY, false));
+
+
+        if ( !app.isExperienceState() )
+            presenter.loginCheck();
+        else
+            setFragment();
     }
 
     public void onPetImageClick(View view) {
         cumtomPetListDialog.show();
     }
 
+    /* 셋팅버튼 이벤트 처리 */
     public void onSettingBtnClick(View view) {
         Intent intent = new Intent(getApplicationContext(), SettingListActivity.class);
         startActivity(intent);
@@ -142,13 +158,13 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Bundle bundle = new Bundle();
             switch (item.getItemId()) {
-                case R.id.navigation_home :
-                    binding.setActivityInfo(new ActivityInfo("Home"));
-                    bundle.putSerializable("selectPet", selectPet);
-                    DashBoardFragment df = DashBoardFragment.newInstance();
-                    df.setArguments(bundle);
-                    replaceFragment(df);
-                    return true;
+//                case R.id.navigation_home :
+//                    binding.setActivityInfo(new ActivityInfo("Home"));
+//                    bundle.putSerializable("selectPet", selectPet);
+//                    DashBoardFragment df = DashBoardFragment.newInstance();
+//                    df.setArguments(bundle);
+//                    replaceFragment(df);
+//                    return true;
                 case R.id.navigation_weight:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
                     bundle.putSerializable("selectPet", selectPet);
@@ -156,23 +172,27 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     wf.setArguments(bundle);
                     replaceFragment(wf);
                     return true;
+                case R.id.navigation_settings :
+                    Intent intent = new Intent(HomeActivity.this, SettingListActivity.class);
+                    startActivity(intent);
+                    return false;
 //                case R.id.navigation_temp:
 //                    binding.setActivityInfo(new ActivityInfo(getString(R.string.temp_title)));
 //                    replaceFragment(TempFragment.newInstance());
 //                    mViewPager.setCurrentItem(1);
 //                    presenter.loadCustomDropdownView();
 //                    return true;
-                case R.id.navigation_meal:
-                    binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
-                    bundle.putSerializable("selectPet", selectPet);
-                    MealFragment mf = MealFragment.newInstance();
-                    mf.setArguments(bundle);
-                    replaceFragment(mf);
-                    return true;
-                case R.id.navigation_activity:
-                    replaceFragment(ActivityFragment.newInstance());
-                    binding.setActivityInfo(new ActivityInfo(getString(R.string.activity)));
-                    return true;
+//                case R.id.navigation_meal:
+//                    binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
+//                    bundle.putSerializable("selectPet", selectPet);
+//                    MealFragment mf = MealFragment.newInstance();
+//                    mf.setArguments(bundle);
+//                    replaceFragment(mf);
+//                    return true;
+//                case R.id.navigation_activity:
+//                    replaceFragment(ActivityFragment.newInstance());
+//                    binding.setActivityInfo(new ActivityInfo(getString(R.string.activity)));
+//                    return true;
             }
             return false;
         }
@@ -224,6 +244,24 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     public void setCustomPetListDialog(final List<PetAllInfos> petAllInfos) {
 
         saveDefaultPetIdx(petAllInfos);
+
+        /* 상단 우측 펫 리스트 정렬 관련 (s) */
+        List<PetAllInfos> tempList = new ArrayList<>();
+        Collections.addAll(petAllInfos);
+
+        Iterator<PetAllInfos> iterator = petAllInfos.iterator();
+        while (iterator.hasNext()) {
+            PetAllInfos infos = iterator.next();
+            if ( infos == selectPet ) {
+                tempList.add(infos);
+                iterator.remove();
+                break;
+            }
+        }
+        tempList.addAll(petAllInfos);
+        petAllInfos.clear();
+        petAllInfos.addAll(tempList);
+        /* 상단 우측 펫 리스트 정렬 관련 (e) */
 
         apaterOfPetList = new AbsractCommonAdapter<PetAllInfos>(HomeActivity.this, petAllInfos) {
 
@@ -292,7 +330,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
                 intent.putExtra("petIdx", ADD_PET);
                 startActivity(intent);
                 //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
@@ -331,18 +369,32 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
      * @param data
      */
     private void saveDefaultPetIdx(List<PetAllInfos> data) {
-        Log.e(TAG, String.format("pet idx : %d", mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
-        if (mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) == 0) {
-            mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, data.get(0).getPet().getPetIdx());
-            selectPet = data.get(0);
+//        Log.e(TAG, String.format("pet idx : %d", mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
+
+        /* 체험하기 버튼 클릭시 임의의 데이터 설정 (s) */
+        if ( app.isExperienceState() ) {
+            selectPet = null;
+//            data.clear();
+//            PetAllInfos experienceData = new PetAllInfos();
+//            Pet experiencePet = new Pet();
+//            experiencePet.setPetIdx(0);
+//            experienceData.setPet( experiencePet );
+//            data.add(experienceData);
         } else {
-            for (int i = 0; i < data.size(); i++) {
-                if( data.get(i).getPet().getPetIdx() == mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) ) {
-                    selectPet = data.get(i);
-                    break;
+            if (mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) == 0) {
+                mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, data.get(0).getPet().getPetIdx());
+                selectPet = data.get(0);
+            } else {
+                for (int i = 0; i < data.size(); i++) {
+                    if( data.get(i).getPet().getPetIdx() == mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) ) {
+                        selectPet = data.get(i);
+                        break;
+                    }
                 }
             }
         }
+        /* 체험하기 버튼 클릭시 임의의 데이터 설정 (e) */
+
         setFragmentContent();
     }
 
@@ -383,7 +435,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        fragmentTransaction.add(R.id.fragment_container, DashBoardFragment.newInstance()).commit();
+        WeightFragment fragment = WeightFragment.newInstance();
+        fragmentTransaction.add(R.id.fragment_container, fragment).commit();
         binding.setActivityInfo(new ActivityInfo("Home"));
         VIewUtil vIewUtil = new VIewUtil(HomeActivity.this);
         VIewUtil.getLocationCode(HomeActivity.this);
@@ -419,13 +472,13 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     navigation.setSelectedItemId(R.id.navigation_weight);
                     presenter.loadCustomPetListDialog();
                     break;
-                case HodooConstant.FIREBASE_FEED_TYPE :
-                    MealFragment mf = MealFragment.newInstance();
-                    mf.setArguments(bundle);
-                    replaceFragment(mf);
-                    navigation.setSelectedItemId(R.id.navigation_meal);
-                    binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
-                    break;
+//                case HodooConstant.FIREBASE_FEED_TYPE :
+//                    MealFragment mf = MealFragment.newInstance();
+//                    mf.setArguments(bundle);
+//                    replaceFragment(mf);
+//                    navigation.setSelectedItemId(R.id.navigation_meal);
+//                    binding.setActivityInfo(new ActivityInfo(getString(R.string.meal_title)));
+//                    break;
             }
         }
         Log.e(TAG, String.format(" shared pet idx : %d ", mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="checked"
+            type="Boolean"/>
+    </data>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_below="@+id/add_pet_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Did you neuter Hodoo?"/>
+
+        <RadioGroup
+            android:layout_centerInParent="true"
+            android:id="@+id/petNatuerRadioGroup"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <RadioButton
+                android:padding="20dp"
+                android:id="@+id/yes"
+                android:gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/pet_type_radio_color"
+                android:text="Yes"
+                android:drawableTop="@drawable/pet_neuter_true_radio_button"
+                android:button="@null"
+                android:textSize="32sp"/>
+            <RadioButton
+                android:padding="20dp"
+                android:id="@+id/no"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:textColor="@drawable/pet_type_radio_color"
+                android:drawableTop="@drawable/pet_neuter_false_radio_button"
+                android:button="@null"
+                android:textSize="32sp"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/done_btn"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:background="@drawable/pink_btn"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/add_pet_next_btn"
+            android:visibility="@{checked ? View.VISIBLE : View.GONE }"/>
+    </RelativeLayout>
+
+</layout>

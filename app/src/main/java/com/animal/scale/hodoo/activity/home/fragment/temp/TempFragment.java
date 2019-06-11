@@ -24,6 +24,8 @@ import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentTempBinding;
+import com.animal.scale.hodoo.domain.HodooIndex;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightGoalChart;
@@ -206,12 +208,22 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
     }
 
     @Override
-    public void setWeightGoal(WeightGoalChart d) {
+    public void setWeightGoal(HodooIndex d) {
 
     }
 
     @Override
     public void setLastCollectionData(RealTimeWeight d) {
+
+    }
+
+    @Override
+    public void physicalUpdateDone(PetPhysicalInfo result) {
+
+    }
+
+    @Override
+    public void setWeekRate(float rate) {
 
     }
 
@@ -342,7 +354,7 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
                 switch (radioId) {
-                    case R.id.chart_day:
+                  /*  case R.id.chart_day:
                         statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
                         break;
                     case R.id.chart_week:
@@ -353,7 +365,7 @@ public class TempFragment extends Fragment implements NavigationView.OnNavigatio
                         break;
                     case R.id.chart_year:
                         statisicsPresenter.getStatisticalDataByYear(TextManager.TEMP_DATA);
-                        break;
+                        break;*/
                 }
             }
         });

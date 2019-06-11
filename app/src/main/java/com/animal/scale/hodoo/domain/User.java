@@ -31,11 +31,17 @@ public class User implements Domain{
 
     private String pushToken;
 
+    private String snsId;
+
+    private String snsToken;
+
     private String createDate;
     //joinColumn
     private String groupCode;
 
     private int accessType;
+
+    private int loginType;
 
     private int userCode;
 

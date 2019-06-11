@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.meal.list.FeedListActivity;
@@ -48,6 +49,7 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
     private Dialog dialog;
 
     private PetAllInfos petAllInfos;
+    private HodooApplication app;
 
     @Nullable
     @Override
@@ -55,6 +57,7 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dash_board, container, false);
         presenter = new DashBoardPresenter(this);
         presenter.initData(getContext());
+        app = (HodooApplication) getActivity().getApplication();
 
         binding.mealBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,9 +73,9 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                 state = false;
 
                 final LayoutNumberKeyboardBinding keyboardBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_number_keyboard, null, false);
-                keyboardBinding.setActivity(DashBoardFragment.this);
+//                keyboardBinding.setActivity(DashBoardFragment.this);
                 keyboardBinding.setState(false);
-                keyboardBinding.setWeight("0");
+                keyboardBinding.setWeight(petAllInfos.petPhysicalInfo.getWeight());
 
                 dialog = new Dialog(getContext(), android.R.style.Theme_Light_NoTitleBar_Fullscreen);
                 dialog.setContentView(keyboardBinding.getRoot());
@@ -110,7 +113,8 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                                 if ( kilogram.equals("") ) {
                                     kilogram = "0";
                                     state = false;
-                                }
+                                } else
+                                    state = true;
                             }
                             info.setWeight(kilogram);
                             keyboardBinding.setState(state);
@@ -118,6 +122,8 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                         }
                     });
                 }
+                if ( Float.parseFloat( petAllInfos.petPhysicalInfo.getWeight() ) > 0 )
+                    keyboardBinding.setState(true);
 //                keyboardBinding.ㅇ.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {
@@ -128,6 +134,10 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                 keyboardBinding.doneBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if ( app.isExperienceState() ) {
+                            dialog.dismiss();
+                            return;
+                        }
                         if ( info == null ) {
                             info = new PetPhysicalInfo();
                             info.setWeight("0");
@@ -149,8 +159,21 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
             }
         });
 
-        if ( getArguments() != null ) {
-            setSelectPet((PetAllInfos) getArguments().getSerializable("selectPet"));
+        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() ) {
+            petAllInfos = new PetAllInfos();
+            PetPhysicalInfo petPhysicalInfo = new PetPhysicalInfo();
+            petPhysicalInfo.setWeight("0");
+            petAllInfos.setPetPhysicalInfo(petPhysicalInfo);
+            binding.setDomain(petAllInfos);
+
+            binding.goalWeight.setText("0" + suffixStr);
+            String[] reskLevelArr = getContext().getResources().getStringArray(R.array.risk_level_item);
+            binding.riskLevel.setText( reskLevelArr[0] );
+            binding.goalMeal.setText( "0 kcal" );
+        } else {
+            if ( getArguments() != null ) {
+                setSelectPet((PetAllInfos) getArguments().getSerializable("selectPet"));
+            }
         }
         return binding.getRoot();
     }
@@ -197,7 +220,8 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
             builder.create().show();
             HomeActivity.selectPet.setPetPhysicalInfo(result);
             selectPet = HomeActivity.selectPet;
-            binding.nowWeight.setText( selectPet.petPhysicalInfo.getWeight() + "kg");
+            binding.setDomain( selectPet );
+//            binding.nowWeight.setText( selectPet.petPhysicalInfo.getWeight() + "kg");
             presenter.getGoalWeight(
                     Float.parseFloat(selectPet.petPhysicalInfo.getWeight()),
                     petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20,

@@ -48,22 +48,21 @@
     <string-array name="setting_title">
         <item>일반 설정</item>
         <item>사용자</item>
-        <item>디바이스</item>
         <item>함께관리</item>
         <item>펫 관리</item>
-        <item>고객관리</item>
     </string-array>
 
     <string-array name="general_settings">
         <item>공지사항</item>
-        <item>홈페이지</item>
+     <!--   <item>홈페이지</item>-->
         <item>앱 버전</item>
     </string-array>
 
     <string-array name="user_settings">
         <item>계정</item>
         <item>알림</item>
-        <item>로그아웃</item>
+        <item>측정단위</item>
+        <!--<item>로그아웃</item>-->
     </string-array>
 
     <string-array name="device_settings">
@@ -369,6 +368,29 @@ If you\'re really hungry and eat something, you can give them snacks with less c
         <item>조용한편</item>
         <item>보통인편</item>
         <item>활발한편</item>
+    </string-array>
+
+    <string-array name="unit_str_arr">
+        <item>cm / kg</item>
+        <item>inch / lb</item>
+    </string-array>
+    <string-array name="weight_unit">
+        <item>kg</item>
+        <item>lb</item>
+    </string-array>
+    <string-array name="height_unit">
+        <item>cm</item>
+        <item>inch</item>
+    </string-array>
+
+    <string-array name="cat_type_physique_str_arr">
+        <item>배 둘레</item>
+        <item>다리길이</item>
+    </string-array>
+
+    <string-array name="dog_type_physique_str_arr">
+        <item>체장</item>
+        <item>체고</item>
     </string-array>
 
 </resources>

@@ -1,10 +1,13 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.HodooIndex;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
@@ -17,7 +20,9 @@ import com.github.mikephil.charting.data.Entry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
+import static com.animal.scale.hodoo.custom.view.input.CommonTextWatcher.TAG;
+
+public class WeightFragmentPresenter implements WeightFragmentIn.Presenter {
 
     WeightFragmentIn.View view;
 
@@ -177,10 +182,10 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
     }
 
     @Override
-    public void getWeightGoal(float currentWeight, int bodyFat, int petType) {
-        model.getWeightGoal(currentWeight, bodyFat, petType, new CommonModel.CommonDomainCallBackListner<WeightGoalChart>() {
+    public void getWeightGoal(int petIdx) {
+        model.getWeightGoal(petIdx, new CommonModel.CommonDomainCallBackListner<HodooIndex>() {
             @Override
-            public void doPostExecute(CommonResponce<WeightGoalChart> d) {
+            public void doPostExecute(CommonResponce<HodooIndex> d) {
                 view.setWeightGoal(d.getDomain());
             }
 
@@ -194,5 +199,70 @@ public class WeightFragmentPresenter implements WeightFragmentIn.Presenter{
 
             }
         });
+    }
+    /*
+     * 수정한 몸무게를 서버로 보내 리턴값을 받아온다.
+     *
+     * @param   PetPhysicalInfo info    수정한 몸무게가 담겨있는 모델
+     * @return
+    */
+    @Override
+    public void updatePhysical(PetPhysicalInfo info) {
+        model.updatePhysical(info, new CommonModel.ObjectCallBackListner<CommonResponce<PetPhysicalInfo>>() {
+            @Override
+            public void doPostExecute(CommonResponce<PetPhysicalInfo> integerCommonResponce) {
+                view.physicalUpdateDone(integerCommonResponce.domain);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+
+    /*
+     * 전 주 대비 감량비를 서버에서 받아서 리턴한다.
+     *
+     * @param
+     * @return
+    */
+    @Override
+    public void getWeekRate() {
+        model.getWeekRate(new CommonModel.ObjectCallBackListner<Float>() {
+            @Override
+            public void doPostExecute(Float result) {
+                if ( result != null )
+                    view.setWeekRate(result);
+                else
+                    view.setWeekRate(0);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+    }
+
+    /**
+     * 저장되어있는 단위를 가져온다
+     *
+     * @param
+     * @return int type 0 : cm/kg, 1 : inch/lb
+     */
+    @Override
+    public int getWeightUnit() {
+        return model.getWeightUnit();
     }
 }

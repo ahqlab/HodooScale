@@ -7,6 +7,7 @@ import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PetAccountPresenter implements PetAccounts.Presenter{
@@ -76,5 +77,12 @@ public class PetAccountPresenter implements PetAccounts.Presenter{
 
             }
         });
+    }
+
+    @Override
+    public void addPetBtn() {
+        List<PetAllInfos> data = new ArrayList<>();
+        model.addRegistBtn(data);
+        view.setAdapter(data);
     }
 }

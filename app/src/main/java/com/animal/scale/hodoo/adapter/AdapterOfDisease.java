@@ -23,6 +23,10 @@ public class AdapterOfDisease extends RecyclerView.Adapter<AdapterOfDisease.Item
     public List<Disease> mItems;
     private PetChronicDisease mPetChronicDisease;
     int number = 0;
+    private OnCheckListener callback;
+    public interface OnCheckListener {
+        void setOnChecked( int number );
+    }
     public AdapterOfDisease ( List<Disease> items, PetChronicDisease petChronicDisease ) {
         mItems = items;
         mPetChronicDisease = petChronicDisease;
@@ -94,6 +98,8 @@ public class AdapterOfDisease extends RecyclerView.Adapter<AdapterOfDisease.Item
                     if ( !b )
                         number -= (0x01<<position);
                 }
+                if ( callback != null )
+                    callback.setOnChecked(number);
                 compoundButton.setChecked(b);
             }
         });
@@ -111,6 +117,9 @@ public class AdapterOfDisease extends RecyclerView.Adapter<AdapterOfDisease.Item
     }
     public int getCheckNumber() {
         return number;
+    }
+    public void setOnCheckListener ( OnCheckListener callback ) {
+        this.callback = callback;
     }
     public Disease getItem ( int position ) {
         return mItems.get(position);

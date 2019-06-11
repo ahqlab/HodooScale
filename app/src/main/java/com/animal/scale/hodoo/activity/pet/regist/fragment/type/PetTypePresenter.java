@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.activity.pet.regist.fragment.type;
 import android.content.Context;
 
 import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.domain.PetBasicInfo;
 
 /**
  * Created by SongSeokwoo on 2019-04-09.
@@ -14,6 +15,12 @@ public class PetTypePresenter implements PetTypeIn.Presenter {
         this.view = view;
         model = new PetTypeModel();
     }
+    /**
+     * 펫의 타입을 가져온다
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @return
+    */
     @Override
     public void getType(int petIdx) {
         model.getPetType(petIdx, new CommonModel.DomainCallBackListner<Integer>() {
@@ -43,5 +50,23 @@ public class PetTypePresenter implements PetTypeIn.Presenter {
     @Override
     public void setNavigation() {
         view.setNavigation();
+    }
+    @Override
+    public void getPetBasicInformation(String location, int petIdx) {
+        model.getPetBasicInformation(location, petIdx, new CommonModel.DomainCallBackListner<PetBasicInfo>() {
+            @Override
+            public void doPostExecute(PetBasicInfo basicInfo) {
+                view.setBasicInfo(basicInfo);
+            }
+
+            @Override
+            public void doPreExecute() {
+                //view.showErrorToast();
+            }
+            @Override
+            public void doCancelled() {
+
+            }
+        });
     }
 }

@@ -1,6 +1,12 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,34 +21,50 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.DatePicker;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatistics;
 import com.animal.scale.hodoo.activity.home.fragment.weight.statistics.WeightStatisticsPresenter;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.custom.dialog.WeightDialog;
 import com.animal.scale.hodoo.databinding.FragmentWeightBinding;
+import com.animal.scale.hodoo.domain.HodooIndex;
 import com.animal.scale.hodoo.domain.MealTip;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.WeightGoalChart;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
+import com.animal.scale.hodoo.util.MathUtil;
 import com.animal.scale.hodoo.util.TextManager;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 import noman.weekcalendar.listener.OnWeekChangeListener;
+
+import static com.animal.scale.hodoo.R.style.AppTheme;
+import static com.animal.scale.hodoo.constant.HodooConstant.DEBUG;
 
 public class WeightFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
 
@@ -78,6 +100,20 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     private boolean realTimeMode = true;
 
     private int currentChart = 0;
+
+    private WeightDialog weightDialog;
+
+    private HodooApplication app;
+
+    private DatePickerDialog picker;
+
+    Calendar weekCal;
+
+    String currentWeekCalendarDate;
+    String currentWeekCalendarMonth;
+    String currentWeekCalendarYear;
+
+    private int unitIdx;
 
     public WeightFragment() {
     }
@@ -117,7 +153,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
         statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
         statisicsPresenter.initLoadData(getContext());
-        statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
+        statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarDate != null ? currentWeekCalendarDate : DateUtil.getCurrentDatetime()));
         //달력 init
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
@@ -133,6 +169,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 setBcsOrBscDescAndTip(selectPet);
                 serChartOfDay();
                 presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
+                setWeight();
                 //presenter.getTipMessageOfCountry();
             }
         }
@@ -140,6 +177,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     }
 
     public void getTipMessageOfCountry(PetAllInfos selectPet) {
+        if (((HodooApplication) getActivity().getApplication()).isExperienceState())
+            return;
+        if (selectPet == null)
+            return;
         presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
     }
 
@@ -150,6 +191,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     //BCS or BCS DESC and TIP
     public void setBcsOrBscDescAndTip(PetAllInfos petAllInfos) {
+        if (((HodooApplication) getActivity().getApplication()).isExperienceState())
+            return;
+
+        if (petAllInfos == null)
+            return;
+        selectPet = petAllInfos;
         setBcsAndBcsDesc(petAllInfos.getPetWeightInfo().getBcs());
     }
 
@@ -157,48 +204,41 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     public void setKg() {
         presenter.getLastCollectionData(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate(), TextManager.WEIGHT_DATA);
     }
+
     //
-    public void refrashChart(){
-        switch (currentChart){
-            case 0 :
-                statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
+    public void refrashChart() {
+        switch (currentChart) {
+            case 0:
+                statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarDate != null ? currentWeekCalendarDate : DateUtil.getCurrentDatetime()));
                 break;
-            case 1 :
-                statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA);
+            case 1:
+                statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarDate != null ? currentWeekCalendarDate : DateUtil.getCurrentDatetime()), (currentWeekCalendarYear != null ? currentWeekCalendarYear : DateUtil.getCurrentYear()),(currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()) );
                 break;
-            case 2 :
-                statisicsPresenter.getMonthlyStatisticalData(TextManager.WEIGHT_DATA);
+            case 2:
+                statisicsPresenter.getMonthlyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()));
                 break;
         }
     }
 
     @Override
-    public void setWeightGoal(WeightGoalChart d) {
-        Log.e("HJLEE", d.toString());
+    public void setWeightGoal(HodooIndex d) {
+        //목표체중
+        float minGoal = d.getMinWeightStd();
+        float maxGoal = d.getMaxWeightStd();
 
-        float currentWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight());
-        float goal = d.getWeightGoal();
-        float remains = currentWeight - goal;
-        if(remains == 0){
-            binding.bcsStep.setText((int) remains + "Kg");
-        }else{
+        DecimalFormat df = new DecimalFormat("#.#");
+        String minGoalStr = df.format( unitIdx == 1 ? MathUtil.kgTolb(minGoal) : minGoal );
+        String maxGoalStr = df.format( unitIdx == 1 ? MathUtil.kgTolb(maxGoal) : maxGoal );
+        binding.goal.setText(minGoalStr + getResources().getStringArray(R.array.weight_unit)[unitIdx] + " ~ " + maxGoalStr + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
+        binding.weightGoalDesc.setText(d.getHodooIndexDesc());
+        /*if (goal == 0) {
+            binding.goal.setText((int) goal + "Kg");
+        } else {
             DecimalFormat df = new DecimalFormat("#.#");
-            String result = df.format(remains);
-            binding.bcsStep.setText(result + "Kg");
-        }
-        if(goal == 0){
-            binding.bcsSubscript.setText((int) goal + "Kg");
-        }else{
-            //String[] numbers = String.valueOf(goal).split("\\.");
-            DecimalFormat df = new DecimalFormat("#.#");
-            String result = df.format(goal);
-            binding.bcsSubscript.setText(result + "Kg");
-            //Log.e("HJLEE", "result : " + result);
-            //if(numbers[1].equals("0")){
-            //    binding.bcsSubscript.setText(numbers[0] + "Kg");
-            //}else{
-            //}
-        }
+            String result = df.format( unitIdx == 1 ? MathUtil.kgTolb(goal) : goal );
+            String result = df.format( unitIdx == 1 ? MathUtil.kgTolb(goal) : goal );
+            binding.goal.setText(result + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
+        }*/
     }
 
 
@@ -216,12 +256,15 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void setBcsAndBcsDesc(int bcs) {
-
+        if (((HodooApplication) getActivity().getApplication()).isExperienceState())
+            return;
         Log.e("HJLEE", selectPet.toString());
         float currentWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight());
-        int bodyFat = selectPet.getPetUserSelectionQuestion().getBodyFat();
+//        int bodyFat = selectPet.getPetUserSelectionQuestion().getBodyFat();
         int petType = selectPet.getPetBasicInfo().getPetType();
-        presenter.getWeightGoal(currentWeight, bodyFat, petType);
+        presenter.getWeightGoal(selectPet.getPet().getPetIdx());
+
+        setWeight();
 
         //this.bcs = bcs;
         //if (bcs < 3) {checkBCS = 0; //부족 } else if (bcs > 3) { //초과 checkBCS = 1; } else { checkBCS = 2; //적정 }*/
@@ -258,6 +301,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             binding.weightView.setNumber(0f);
             mSharedPrefManager.putStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT, String.valueOf(0));
         }
+
         /*} else {
             if ( HomeActivity.selectPet != null )
                 if ( HomeActivity.selectPet.petPhysicalInfo != null )
@@ -282,6 +326,14 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void initWeekCalendar() {
+
+
+        weekCal = Calendar.getInstance();
+        DateFormat formatter1 = DateFormat.getDateInstance(DateFormat.DEFAULT);
+        formatter1.setTimeZone(weekCal.getTimeZone());
+        String formatted1 = formatter1.format(weekCal.getTime());
+        binding.thisYear.setText(formatted1);
+
          /* binding.weekCalendar.today;
         Button todaysDate = (Button) findViewById(R.id.today);
         Button selectedDate = (Button) findViewById(R.id.selectedDateButton);
@@ -294,12 +346,23 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             public void onDateClick(DateTime dateTime) {
                 DateTime dt = dateTime;
                 DateTime now = new DateTime();
-                String date = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
-                HomeActivity.setCalendarDate(date);
-                if (now.toDateTime().toString().compareTo(date) < 0) {
+
+                currentWeekCalendarDate = dt.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
+                currentWeekCalendarMonth = dt.toString(DateTimeFormat.forPattern("MM"));
+                currentWeekCalendarYear = dt.toString(DateTimeFormat.forPattern("yyyy"));
+
+                weekCal = dateTime.toCalendar(Locale.getDefault());
+                DateFormat formatter1 = DateFormat.getDateInstance(DateFormat.DEFAULT);
+                formatter1.setTimeZone(weekCal.getTimeZone());
+                String formatted1 = formatter1.format(weekCal.getTime());
+                binding.thisYear.setText(formatted1);
+
+                HomeActivity.setCalendarDate(currentWeekCalendarDate);
+                if (now.toDateTime().toString().compareTo(currentWeekCalendarDate) < 0) {
                 } else {
-                    presenter.getLastCollectionData(date, TextManager.WEIGHT_DATA);
+                    presenter.getLastCollectionData(currentWeekCalendarDate, TextManager.WEIGHT_DATA);
                     presenter.setBcsAndBcsDesc(bcs);
+                    refrashChart();
                 }
             }
         });
@@ -327,6 +390,12 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         setKg();
     }
 
+    /*
+     * 새로고침 버튼을 클릭했을 경우(현재 사용하지 않음)
+     *
+     * @param View
+     * @return 
+    */
     public void onRefreshClick(View v) {
         if (rotationView == null)
             rotationView = v;
@@ -388,26 +457,36 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void onResume() {
         super.onResume();
+
+//        setWeight();
+        app = (HodooApplication) getActivity().getApplication();
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int radioId) {
+                if (app.isExperienceState())
+                    return;
+
                 switch (radioId) {
                     case R.id.chart_day:
                         currentChart = 0;
-                        statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA);
+                        statisicsPresenter.getDailyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarDate != null ? currentWeekCalendarDate : DateUtil.getCurrentDatetime()));
                         break;
                     case R.id.chart_week:
                         currentChart = 1;
-                        statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA);
+                        statisicsPresenter.getWeeklyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarDate != null ? currentWeekCalendarDate : DateUtil.getCurrentDatetime()), (currentWeekCalendarYear != null ? currentWeekCalendarYear : DateUtil.getCurrentYear()),(currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()) );
                         break;
                     case R.id.chart_month:
                         currentChart = 2;
-                        statisicsPresenter.getMonthlyStatisticalData(TextManager.WEIGHT_DATA);
+                        statisicsPresenter.getMonthlyStatisticalData(TextManager.WEIGHT_DATA, (currentWeekCalendarMonth != null ? currentWeekCalendarMonth : DateUtil.getCurrentMonth()));
                         break;
                 /*    case R.id.chart_year:
                         statisicsPresenter.getStatisticalDataByYear(TextManager.WEIGHT_DATA);
                         break;*/
                 }
+                if (currentChart == 1)
+                    binding.weekRateWrap.setVisibility(View.VISIBLE);
+                else
+                    binding.weekRateWrap.setVisibility(View.GONE);
             }
         });
 
@@ -420,4 +499,122 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         setKg();
         //setWeightGoal();
     }
+
+    /*
+     * 화면에 몸무게를 출력한다.
+     *
+     * @param 
+     * @return 
+    */
+    private void setWeight() {
+        unitIdx = presenter.getWeightUnit();
+        float petWeight = Float.valueOf(selectPet.getPet().getFixWeight());
+        float compareWeight = Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight()) - petWeight;
+        DecimalFormat df = new DecimalFormat("#.#");
+        String[] unitArr = getResources().getStringArray(R.array.weight_unit);
+        binding.nowWeight.setText(
+                Float.parseFloat(
+                        selectPet.getPetPhysicalInfo().getWeight()) != 0 ?
+                        (unitIdx == 1 ? String.valueOf( df.format(MathUtil.kgTolb( (Float.parseFloat(selectPet.getPetPhysicalInfo().getWeight()))  )) ) : selectPet.getPetPhysicalInfo().getWeight()) + getResources().getStringArray(R.array.weight_unit)[unitIdx]  :
+                        "-");
+        binding.petWeight.setText(df.format( unitIdx == 1 ? MathUtil.kgTolb(petWeight) : petWeight ) + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
+        binding.compareWeight.setText(compareWeight > 0 ? "+" + df.format( unitIdx == 1 ? MathUtil.kgTolb(compareWeight) : compareWeight ) : df.format( unitIdx == 1 ? MathUtil.kgTolb(compareWeight) : compareWeight ));
+
+        /* 체중 */
+        String fixWeight = binding.petWeight.getText().toString();
+        fixWeight = fixWeight.replace(getResources().getStringArray(R.array.weight_unit)[unitIdx], "");
+        if ( unitIdx == 1 )
+            fixWeight = String.valueOf( MathUtil.kgTolb( Float.parseFloat(fixWeight)  ) );
+        if (Float.parseFloat(fixWeight) == 0)
+            binding.petWeight.setText(selectPet.getPetPhysicalInfo().getWeight() + getResources().getStringArray(R.array.weight_unit)[unitIdx]);
+        presenter.getWeekRate();
+        binding.editWeightBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                weightDialog = new WeightDialog(getContext(), android.R.style.Theme_Light_NoTitleBar_Fullscreen, selectPet, new WeightDialog.KeypadCallback() {
+                    @Override
+                    public void keypadCallback(PetAllInfos petAllInfos) {
+                        if (DEBUG) Log.e(TAG, "debug");
+                        petAllInfos.getPetPhysicalInfo().setId(selectPet.pet.getPhysical());
+                        presenter.updatePhysical(petAllInfos.petPhysicalInfo);
+                    }
+                });
+            }
+        });
+    }
+
+    /*
+     * 몸무게 수정 완료버튼을 클릭했을때 사용
+     *
+     * @param PetPhysicalInfo
+     * @return
+    */
+    @Override
+    public void physicalUpdateDone(PetPhysicalInfo result) {
+        if (result != null) {
+            weightDialog.dismiss();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                    .setTitle(getResources().getString(R.string.change_compleate))
+                    .setMessage(getResources().getString(R.string.change_compleate_message))
+                    .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            refrashChart();
+                        }
+                    });
+            builder.create().show();
+            selectPet.setPetPhysicalInfo(result);
+            setWeight();
+        }
+    }
+
+    /*
+     * 전 주 대비 감량 비율을 출력
+     *
+     * @param float rate 감량비
+     * @return
+    */
+    @Override
+    public void setWeekRate(float rate) {
+        if (rate > 0)
+            binding.rateArrow.setRotation(-180);
+        else
+            binding.rateArrow.setRotation(0);
+        binding.weekRate.setText(String.format("%.2f", rate) + "%");
+    }
+
+    public void showDatePickerDialog(View view) {
+        int day = weekCal.get(Calendar.DAY_OF_MONTH);
+        int month = weekCal.get(Calendar.MONTH);
+        int year = weekCal.get(Calendar.YEAR);
+        // date picker dialog
+        picker = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        view.setMaxDate(Calendar.getInstance().getTimeInMillis());
+
+                        DateTime dialogSelectedDate = new DateTime(year,  (monthOfYear + 1) , dayOfMonth, 12, 12);
+
+                        weekCal = dialogSelectedDate.toCalendar(Locale.getDefault());
+                        DateFormat formatter1 = DateFormat.getDateInstance(DateFormat.DEFAULT);
+                        formatter1.setTimeZone(weekCal.getTimeZone());
+                        String formatted1 = formatter1.format(weekCal.getTime());
+                        binding.thisYear.setText(formatted1);
+
+
+                        binding.weekCalendar.setSelectedDate( dialogSelectedDate );
+
+                        currentWeekCalendarDate = dialogSelectedDate.toString(DateTimeFormat.forPattern("yyyy-MM-dd"));
+                        currentWeekCalendarMonth = dialogSelectedDate.toString(DateTimeFormat.forPattern("MM"));
+                        currentWeekCalendarYear = dialogSelectedDate.toString(DateTimeFormat.forPattern("yyyy"));
+
+                        refrashChart();
+
+                    }
+                }, year, month, day);
+        picker.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
+        picker.show();
+    }
+
 }

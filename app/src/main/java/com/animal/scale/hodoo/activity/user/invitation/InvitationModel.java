@@ -19,6 +19,13 @@ public class InvitationModel extends CommonModel {
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
+    /**
+     * 로그인한 본인의 이메일을 가져온다.
+     *
+     * @param
+     * @return
+     * @description
+    */
     public String getUserEmail () {
         return mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL);
     }

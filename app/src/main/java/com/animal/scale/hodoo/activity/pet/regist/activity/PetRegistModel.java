@@ -46,6 +46,7 @@ public class PetRegistModel extends CommonModel {
     }
 
     public void registBasicInfo(final String requestUrl, final PetBasicInfo info, final CircleImageView profile, final DomainCallBackListner<Pet> domainCallBackListner) {
+        info.setGroupCode( mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE) );
         new AsyncTaskCancelTimerTask(new AsyncTask<Void, String, Pet>() {
             @Override
             protected Pet doInBackground(Void... voids) {

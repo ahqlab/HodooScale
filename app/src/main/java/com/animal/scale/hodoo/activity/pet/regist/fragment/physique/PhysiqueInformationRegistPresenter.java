@@ -23,6 +23,13 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
         view.setNavigation();
     }
 
+    /**
+     * 펫의 피지컬을 가져온다.
+     *
+     * @param
+     * @return
+     * @description
+    */
     @Override
     public void getPhysiqueInformation(int petIdx) {
         model.getPhysiqueInformation(petIdx, new CommonModel.DomainCallBackListner<PetPhysicalInfo>() {
@@ -53,6 +60,13 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
         view.showRulerBottomDlg(editText, value);
     }
 
+    /**
+     * 펫의 피지컬을 삭제한다.
+     *
+     * @param
+     * @return
+     * @description
+    */
     @Override
     public void deletePhysiqueInformation(int petIdx, int id) {
         model.deletePhysiqueInformation(petIdx, id, new CommonModel.DomainCallBackListner<Integer>() {
@@ -73,7 +87,13 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
         });
     }
 
-
+    /**
+     * 펫의 피지컬을 등록한다.
+     *
+     * @param
+     * @return
+     * @description
+    */
     @Override
     public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain) {
         model.registPhysiqueInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
@@ -93,5 +113,17 @@ public class PhysiqueInformationRegistPresenter implements PhysiqueInformationRe
 
             }
         });
+    }
+
+    /**
+     * 단위를 가져온다.
+     *
+     * @param
+     * @return
+     * @description
+    */
+    @Override
+    public int getUnitIdx() {
+        return model.getUnitIdx();
     }
 }

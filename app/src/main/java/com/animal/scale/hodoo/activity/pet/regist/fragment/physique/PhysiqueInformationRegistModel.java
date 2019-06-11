@@ -24,6 +24,25 @@ public class PhysiqueInformationRegistModel extends CommonModel {
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
+    /**
+     * 등록되어있는 단위값을 가져온다.
+     *
+     * @param
+     * @return
+     * @description     등록되어 있는 단위가 없을경우 0을 리턴한다.
+    */
+    public int getUnitIdx() {
+        return mSharedPrefManager.getIntExtra(SharedPrefVariable.UNIT_STR);
+    }
+
+    /**
+     * 등록되어 있는 피지컬 값을 가져온다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param domainCallBackListner   콜백함수
+     * @return
+     * @description
+    */
     public void getPhysiqueInformation(int petIdx, final DomainCallBackListner<PetPhysicalInfo> domainCallBackListner) {
         Call<PetPhysicalInfo> call = NetRetrofit.getInstance().getPetPhysicalInfoService().getPhysicalIformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetPhysicalInfo>(){
@@ -43,7 +62,15 @@ public class PhysiqueInformationRegistModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
-
+    /**
+     * 서버 있는 피지컬 값을 삭제한다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param id       피지컬의 인덱스 값
+     * @param domainCallBackListner   콜백함수
+     * @return
+     * @description
+    */
     public void deletePhysiqueInformation(int petIdx, int id, final DomainCallBackListner<Integer> domainCallBackListner) {
         Call<Integer> call = NetRetrofit.getInstance().getPetPhysicalInfoService().delete(petIdx, id);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
@@ -65,6 +92,15 @@ public class PhysiqueInformationRegistModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
+    /**
+     * 펫의 피지컬을 서버에 등록한다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param domain   피지컬 도메인
+     * @param domainCallBackListner   콜백함수
+     * @return
+     * @description
+    */
     public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain, final CommonDomainCallBackListner<Integer> domainCallBackListner) {
         Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetPhysicalInfoService().regist(petIdx, mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), domain);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>(){

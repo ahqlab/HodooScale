@@ -48,6 +48,12 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
         view.setCurcleImage(info);
     }
 
+    /* 초대한 유저가 있는지 확인
+     *
+     * @param
+     * @return
+     *
+     */
     @Override
     public void getInvitationToServer() {
         model.getInvitationCount(new CommonModel.DomainListCallBackListner<InvitationUser>() {
@@ -194,6 +200,12 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
         });
     }
 
+    /*
+     * 로그인 된 유저인지 확인
+     *
+     * @param
+     * @return
+    */
     @Override
     public void loginCheck() {
         int idx = model.getUserIdx();
@@ -208,7 +220,8 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
         model.getPetAllInfo(new CommonModel.ObjectCallBackListner<CommonResponce<List<PetAllInfos>>>() {
             @Override
             public void doPostExecute(CommonResponce<List<PetAllInfos>> listCommonResponce) {
-                view.setCustomPetListDialog(listCommonResponce.domain);
+                if ( listCommonResponce != null )
+                    view.setCustomPetListDialog(listCommonResponce.domain);
             }
 
             @Override

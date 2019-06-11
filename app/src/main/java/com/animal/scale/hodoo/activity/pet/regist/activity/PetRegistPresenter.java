@@ -33,6 +33,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         model.loadData(context);
     }
 
+    /**
+     * 서버에서 PetBasicInfo를 가져온다.
+     *
+     * @param location   위치값 -> 언어를 선택하기 위해 사용
+     * @param petIdx     가져올 펫의 인덱스
+     * @return
+    */
     @Override
     public void getPetBasicInformation(String location, int petIdx) {
         model.getPetBasicInformation(location, petIdx, new CommonModel.DomainCallBackListner<PetBasicInfo>() {
@@ -72,6 +79,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
 //        });
 //    }
 
+    /**
+     * 펫 타입을 등록한다.
+     *
+     * @param petType   펫의 타입 1 : 강아지, 2 : 고양이
+     * @param editType  수정인지 등록인지 체크하는 상태값
+     * @return
+    */
     @Override
     public void registPetType(int petType, boolean editType) {
         String path = "";
@@ -97,15 +111,24 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         });
     }
 
+    /**
+     * 펫의 기본정보를 등록한다.
+     *
+     * @param requestUrl   등록할 서버 URL
+     * @param info         펫의 정보가 들어있는 도메인
+     * @param profile      펫의 프로필 사진
+     * @return
+    */
     @Override
     public void registBasicInfo(String requestUrl, PetBasicInfo info, CircleImageView profile) {
+
         model.registBasicInfo(requestUrl, info, profile, new CommonModel.DomainCallBackListner<Pet>() {
             @Override
             public void doPostExecute(Pet pet) {
                 if ( pet != null )
                     view.setPetIdx(pet.getPetIdx());
                 else
-                    view.nextStep(PetRegistActivity.DISEASE_TYPE);
+                    view.nextStep(PetRegistActivity.PHYSIQUE_TYPE);
             }
 
             @Override
@@ -120,12 +143,20 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         });
     }
 
+    /**
+     * 펫의 기본 정보를 업데이트 한다.
+     *
+     * @param requestUrl   등록할 서버 URL
+     * @param info         펫의 정보가 들어있는 도메인
+     * @param profile      펫의 프로필 사진
+     * @return
+    */
     @Override
     public void updateBasicInfo(String requestUrl, PetBasicInfo info, CircleImageView profile) {
         model.updateBasicInfo(requestUrl, info, profile, new BasicInformationRegistModel.BasicInfoUpdateListner() {
             @Override
             public void doPostExecute() {
-                view.nextStep(PetRegistActivity.DISEASE_TYPE);
+                view.nextStep(PetRegistActivity.PHYSIQUE_TYPE);
             }
 
             @Override
@@ -135,6 +166,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         });
     }
 
+    /**
+     * 펫의 병력 값을 삭제한다. *펫의 병력을 삭제 후 다시 등록시킨 후 인덱스 값을 저장한다.
+     *
+     * @param petIdx       펫의 인덱스 값
+     * @param diseaseIdx   등록할 병력의 이진값 (0, 2, 4, 8, 16 ...)
+     * @return
+    */
     @Override
     public void deleteDiseaseInformation(int petIdx, int diseaseIdx) {
         model.deleteDiseaseformation(petIdx, diseaseIdx, new CommonModel.DomainCallBackListner<Integer>()  {
@@ -155,6 +193,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         });
     }
 
+    /**
+     * 병력을 등록한다.
+     *
+     * @param petChronicDisease   병력의 정보가 들어있는 도메인
+     * @param petIdx              펫의 인덱스 값
+     * @return
+    */
     @Override
     public void registDiseaseInformation(PetChronicDisease petChronicDisease, int petIdx) {
         model.registDiseaseformation(petChronicDisease, petIdx, new CommonModel.DomainCallBackListner<Integer>()  {
@@ -173,6 +218,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         });
     }
 
+    /**
+     * 펫의 피지컬 값을 삭제한다 (펫 병력과 동일한 로직)
+     *
+     * @param petIdx        펫의 인덱스 값
+     * @param physiqueIdx   피지컬의 인덱스 값
+     * @return
+    */
     @Override
     public void deletePhysiqueInformation(int petIdx, int physiqueIdx) {
         model.deletePhysiqueInformation(petIdx, physiqueIdx, new CommonModel.DomainCallBackListner<Integer>() {
@@ -192,6 +244,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
             }
         });
     }
+    /**
+     * 피지컬 정보를 등록한다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param domain   피지컬의 정보가 들어있는 도메인
+     * @return
+    */
     @Override
     public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain) {
         model.registPhysiqueInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
@@ -211,6 +270,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
             }
         });
     }
+    /**
+     * 펫의 몸무게 정보를 삭제 한다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param id       몸무게 정보의 인덱스 값
+     * @return
+    */
     @Override
     public void deleteWeightInfo(int petIdx, int id) {
         model.deleteWeightInformation(petIdx, id, new CommonModel.DomainCallBackListner<Integer>() {
@@ -231,12 +297,20 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         });
     }
 
+    /**
+     * 펫의 몸무게 정보를 등록한다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param domain   펫의 몸무게 정보가 있는 도메인
+     * @return
+    */
     @Override
     public void registWeightInfo(int petIdx, PetWeightInfo domain) {
         model.registWeightInformation(petIdx, domain, new CommonModel.CommonDomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(CommonResponce<Integer> d) {
-                view.nextStep(PetRegistActivity.PET_USER_SELECT_QUESTION_TYPE);
+                view.registFinish();
+//                view.nextStep(PetRegistActivity.PET_USER_SELECT_QUESTION_TYPE);
             }
 
             @Override
@@ -251,6 +325,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         });
     }
 
+    /**
+     * 펫의 활동 정보를 등록한다.
+     *
+     * @param petIdx                     펫의 인덱스 값
+     * @param petUserSelectionQuestion   펫의 활동 정보가 들어있는 도메인
+     * @return
+    */
     @Override
     public void registPetUserSelectQuestion(int petIdx, PetUserSelectionQuestion petUserSelectionQuestion) {
         model.registPetUserSelectQuestion(petIdx, petUserSelectionQuestion, new CommonModel.ObjectCallBackListner<CommonResponce<Integer>>() {
@@ -273,6 +354,13 @@ public class PetRegistPresenter implements PetRegistIn.Presenter {
         });
     }
 
+    /**
+     * 펫의 활동 정보를 삭제한다.
+     *
+     * @param petIdx        펫의 인덱스 값
+     * @param questionIdx   펫의 활동 정보의 인덱스 값
+     * @return
+    */
     @Override
     public void deletePetUserSelectQuestion(int petIdx, int questionIdx) {
         model.deletePetUserSelectQuestion(petIdx, questionIdx, new CommonModel.ObjectCallBackListner<CommonResponce<Integer>>() {

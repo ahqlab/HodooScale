@@ -14,12 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.base.BaseFragment;
 import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.databinding.FragmentPhysiqueInfomationBinding;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
+import com.animal.scale.hodoo.util.MathUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 import com.tistory.dwfox.dwrulerviewlibrary.utils.DWUtils;
@@ -52,6 +54,7 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
     private boolean deleteAllPet;
     private boolean state = false;
     private final String suffixStr = "kg";
+    private int type;
 
     @Nullable
     @Override
@@ -59,58 +62,17 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_physique_infomation, container, false);
         binding.setActivity(this);
 
-        for (int i = 0; i < binding.numericKeybord.getChildCount(); i++) {
-            final int position = i;
-            binding.numericKeybord.getChildAt(i).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String kilogram = binding.kilogram.getText().toString();
-                    kilogram = kilogram.replaceAll(suffixStr, "");
-
-                    float kilogramInt = Float.parseFloat(kilogram);
-
-                    if ( view instanceof TextView ) {
-                        TextView textView = (TextView) view;
-                        if ( kilogramInt == 0 ) {
-                            kilogram = textView.getText().toString();
-                        } else {
-                            kilogram += textView.getText().toString();
-                        }
-                        state = true;
-                    } else if ( view instanceof ImageView ) {
-                        kilogram = kilogram.substring(0, kilogram.length() - 1);
-                        if ( kilogram.indexOf(".") > -1 ) {
-                            String[] splitStr = kilogram.split("\\.");
-                            if ( splitStr.length == 1 ) {
-                                kilogram = splitStr[0];
-                            }
-                        }
-                        if ( kilogram.equals("") ) {
-                            kilogram = "0";
-                            state = false;
-                        }
-                    }
-
-                    PetPhysicalInfo info = binding.getDomain();
-                    info.setWeight(kilogram);
-                    binding.setDomain(info);
-                    binding.setState(state);
-                    binding.kilogram.setText(kilogram + suffixStr);
-                }
-            });
-        }
-
-
         if ( getArguments() != null ) {
             petIdx = getArguments().getInt("petIdx");
             deleteAllPet = getArguments().getBoolean("deleteAllPet", false);
         }
         presenter = new PhysiqueInformationRegistPresenter(this);
         presenter.loadData(getContext());
-        presenter.setNavigation();
+        binding.unitStr.setText( getContext().getResources().getStringArray(R.array.height_unit)[presenter.getUnitIdx()] );
+//        presenter.setNavigation();
 
         presenter.getPhysiqueInformation(petIdx);
-        setTextWatcher(binding.editWidth, binding.editHeight, binding.editWeight);
+        setTextWatcher(binding.editWidth, binding.editHeight);
         return binding.getRoot();
     }
     public static PetRegistFragment newInstance() {
@@ -119,6 +81,10 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
 
     @Override
     public void setDiseaseInfo(PetPhysicalInfo petPhysicalInfo) {
+        if ( presenter.getUnitIdx() == 1 && petPhysicalInfo != null ) {
+            petPhysicalInfo.setWidth( String.valueOf(  MathUtil.cmToInch( Double.parseDouble( petPhysicalInfo.getWidth() ) ) ) );
+            petPhysicalInfo.setHeight( String.valueOf( MathUtil.cmToInch( Double.parseDouble( petPhysicalInfo.getHeight() ) ) ) );
+        }
         if (petPhysicalInfo != null) {
             binding.setDomain(petPhysicalInfo);
             if ( Float.parseFloat(petPhysicalInfo.getWeight()) > 0 )
@@ -137,12 +103,12 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
     public void onClickWidthEt(PetPhysicalInfo petPhysicalInfo) {
         if (petPhysicalInfo != null) {
             if (petPhysicalInfo.getWidth() != null) {
-                presenter.showRulerBottomDlg(binding.editWidth, petPhysicalInfo.getWidth());
+//                presenter.showRulerBottomDlg(binding.editWidth, petPhysicalInfo.getWidth());
             } else {
-                presenter.showRulerBottomDlg(binding.editWidth, "0");
+//                presenter.showRulerBottomDlg(binding.editWidth, "0");
             }
         } else {
-            presenter.showRulerBottomDlg(binding.editWidth, "0");
+//            presenter.showRulerBottomDlg(binding.editWidth, "0");
         }
     }
 
@@ -160,15 +126,6 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
     }
 
     public void onClickWeightEt(PetPhysicalInfo petPhysicalInfo) {
-        if (petPhysicalInfo != null) {
-            if (petPhysicalInfo.getWeight() != null) {
-                presenter.showRulerBottomDlg(binding.editWeight, petPhysicalInfo.getWeight());
-            } else {
-                presenter.showRulerBottomDlg(binding.editWeight, "0");
-            }
-        } else {
-            presenter.showRulerBottomDlg(binding.editWeight, "0");
-        }
 
     }
 
@@ -181,30 +138,30 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
                 .setNegativeText(getString(R.string.confirm))
                 .show();
 
-        myScrollingValuePicker = (ScrollingValuePicker) customView.findViewById(R.id.myScrollingValuePicker);
-        myScrollingValuePicker.setViewMultipleSize(LINE_RULER_MULTIPLE_SIZE);
-        myScrollingValuePicker.setMaxValue(MIN_VALUE, MAX_VALUE);
-        myScrollingValuePicker.setValueTypeMultiple(3);
-        myScrollingValuePicker.setInitValue(Integer.parseInt(value));
-        myScrollingValuePicker.getScrollView().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    myScrollingValuePicker.getScrollView().startScrollerTask();
-                }
-                return false;
-            }
-        });
-        myScrollingValuePicker.setOnScrollChangedListener(new ObservableHorizontalScrollView.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged(ObservableHorizontalScrollView view, int l, int t) {
-            }
-
-            @Override
-            public void onScrollStopped(int l, int t) {
-                editText.setText(String.valueOf(DWUtils.getValueAndScrollItemToCenter(myScrollingValuePicker.getScrollView(), l, t, MAX_VALUE, MIN_VALUE, myScrollingValuePicker.getViewMultipleSize())));
-            }
-        });
+//        myScrollingValuePicker = (ScrollingValuePicker) customView.findViewById(R.id.myScrollingValuePicker);
+//        myScrollingValuePicker.setViewMultipleSize(LINE_RULER_MULTIPLE_SIZE);
+//        myScrollingValuePicker.setMaxValue(MIN_VALUE, MAX_VALUE);
+//        myScrollingValuePicker.setValueTypeMultiple(3);
+//        myScrollingValuePicker.setInitValue(Integer.parseInt(value));
+//        myScrollingValuePicker.getScrollView().setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    myScrollingValuePicker.getScrollView().startScrollerTask();
+//                }
+//                return false;
+//            }
+//        });
+//        myScrollingValuePicker.setOnScrollChangedListener(new ObservableHorizontalScrollView.OnScrollChangedListener() {
+//            @Override
+//            public void onScrollChanged(ObservableHorizontalScrollView view, int l, int t) {
+//            }
+//
+//            @Override
+//            public void onScrollStopped(int l, int t) {
+//                editText.setText(String.valueOf(DWUtils.getValueAndScrollItemToCenter(myScrollingValuePicker.getScrollView(), l, t, MAX_VALUE, MIN_VALUE, myScrollingValuePicker.getViewMultipleSize())));
+//            }
+//        });
     }
 
     @Override
@@ -217,36 +174,49 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
 
     }
 
+    /**
+     * 펫의 피지컬을 액티비티에 저장한다.
+     *
+     * @param    
+     * @return
+     * @description   설정에서 단위를 인치로 바꾸면 입력된 인치를 센치로 변환해서 넣는다
+    */
     public void onClickNextBtn(View view) {
-        ((PetRegistActivity) getActivity()).setPetPhysicalInfo(binding.getDomain());
+        PetPhysicalInfo info = binding.getDomain();
+        if ( presenter.getUnitIdx() == 1 ) {
+            info.setWidth(String.valueOf(MathUtil.InchToCm( Double.parseDouble( info.getWidth() ) )));
+            info.setHeight(String.valueOf(MathUtil.InchToCm( Double.parseDouble( info.getHeight() ) )));
+        }
+
+        ((PetRegistActivity) getActivity()).setPetPhysicalInfo(info);
         ((PetRegistActivity) getActivity()).nextFragment();
     }
 
     @Override
     public void setNavigation() {
-        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              /*  Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
-                intent.putExtra("petIdx", petIdx);
-                startActivity(intent);
-                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();*/
-            }
-        });
-        binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               /* Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
-                intent.putExtra("petIdx", petIdx);
-                startActivity(intent);
-                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-                finish();*/
-            }
-        });
+//        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.basicBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//              /*  Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+//                intent.putExtra("petIdx", petIdx);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+//                finish();*/
+//            }
+//        });
+//        binding.addPetNavigation.diseaseBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//               /* Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
+//                intent.putExtra("petIdx", petIdx);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+//                finish();*/
+//            }
+//        });
        /* binding.addPetNavigation.physiqueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -290,21 +260,65 @@ public class PhysiqueInfomationRegistFragment extends PetRegistFragment implemen
         }
     }
 
+    /**
+     * 검증처리
+     *
+     * @param
+     * @return
+     * @description
+    */
     private void validation() {
-        String kilogram = binding.kilogram.getText().toString();
-        kilogram = kilogram.replaceAll(suffixStr, "");
-        float kilogramFloat = 0;
-        if ( !kilogram.equals("null") )
-            kilogramFloat = Float.parseFloat(kilogram);
-        if ( kilogramFloat > 0 ) {
+        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() ) {
+            binding.setState(true);
+            binding.nextStep.setEnabled(true);
+            return;
+        }
+
+        if (
+                !ValidationUtil.isEmpty(binding.editWidth.getText().toString()) &&
+                        !ValidationUtil.isEmpty(binding.editHeight.getText().toString()) ) {
             binding.nextStep.setEnabled(true);
         } else {
             binding.nextStep.setEnabled(false);
         }
     }
+    /**
+     * 펫의 인덱스 값을 가지고 등록되어있는 피지컬을 가져와 뷰에 출력한다.
+     *
+     * @param
+     * @return
+     * @description
+    */
     public void updateView() {
-        if ( ((PetRegistActivity) getActivity()).getPetBasicInfo() != null )
-            binding.infoText.setText( ((PetRegistActivity) getActivity()).getPetBasicInfo().getPetName() + getContext().getString(R.string.physical_info_text) );
+        if ( petIdx != 0 ) {
+            presenter.getPhysiqueInformation(petIdx);
+        }
         validation();
+    }
+    /**
+     * 펫 타입을 셋팅한다.
+     *
+     * @param type   펫 타입
+     * @return
+     * @description
+    */
+    public void setPetType ( int type ) {
+        this.type = type;
+
+        String[] physiqueStrArr = null;
+        switch (type) {
+            case PetRegistActivity.DOG_TYPE :
+                physiqueStrArr = getActivity().getResources().getStringArray(R.array.dog_type_physique_str_arr);
+                break;
+            case PetRegistActivity.CAT_TYPE :
+                physiqueStrArr = getActivity().getResources().getStringArray(R.array.cat_type_physique_str_arr);
+                break;
+            default:
+                physiqueStrArr = getActivity().getResources().getStringArray(R.array.dog_type_physique_str_arr);
+                break;
+        }
+
+        binding.first.setText( physiqueStrArr[0] );
+        binding.second.setText( physiqueStrArr[1] );
     }
 }

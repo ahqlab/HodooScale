@@ -127,6 +127,7 @@ public class AlwaysOnTopService extends Service implements View.OnClickListener 
         return super.onStartCommand(intent, flags, startId);
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();

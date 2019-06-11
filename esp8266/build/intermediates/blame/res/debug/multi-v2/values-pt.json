@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-<<<<<<< HEAD
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/values-pt/values-pt.xml",
-            "map": [
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values-pt/values-pt.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,225,331,438,527,628,746,829,909,996,1103,1215,1317,1425,1532,1642,1804,1904",
-                        "endColumns": "119,105,106,88,100,117,82,79,86,106,111,101,107,106,109,161,99,84",
-                        "endOffsets": "220,326,433,522,623,741,824,904,991,1098,1210,1312,1420,1527,1637,1799,1899,1984"
-                    }
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/36f3074257a286cd17a4683a3db2f019/res/values-pt/values-pt.xml",
-=======
             "outputFile": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt\\values-pt.xml",
             "map": [
                 {
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\c88fab7c50a87e137205f160d346113f\\res\\values-pt\\values-pt.xml",
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -36,18 +19,9 @@
                         "endColumns": "100",
                         "endOffsets": "2085"
                     }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt/values-pt.xml",
-            "map": [
+                },
                 {
-<<<<<<< HEAD
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values-pt/values-pt.xml",
-=======
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-pt\\values-pt.xml",
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,11 +29,6 @@
                         "endColumns": "119,105,106,88,100,117,82,79,86,106,111,101,107,106,109,161,99,84",
                         "endOffsets": "220,326,433,522,623,741,824,904,991,1098,1210,1312,1420,1527,1637,1799,1899,1984"
                     }
-<<<<<<< HEAD
-                },
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/36f3074257a286cd17a4683a3db2f019/res/values-pt/values-pt.xml",
-=======
                 }
             ]
         },
@@ -68,7 +37,6 @@
             "map": [
                 {
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\c88fab7c50a87e137205f160d346113f\\res\\values-pt\\values-pt.xml",
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -83,8 +51,6 @@
                         "endColumns": "100",
                         "endOffsets": "2085"
                     }
-<<<<<<< HEAD
-=======
                 },
                 {
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-pt\\values-pt.xml",
@@ -95,7 +61,6 @@
                         "endColumns": "119,105,106,88,100,117,82,79,86,106,111,101,107,106,109,161,99,84",
                         "endOffsets": "220,326,433,522,623,741,824,904,991,1098,1210,1312,1420,1527,1637,1799,1899,1984"
                     }
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
                 }
             ]
         }

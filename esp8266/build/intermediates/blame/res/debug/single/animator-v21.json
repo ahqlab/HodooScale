@@ -1,11 +1,6 @@
 [
     {
-<<<<<<< HEAD
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/animator-v21/design_appbar_state_list_animator.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/c354c773c5f3efb4ff8870c478fa428f/res/animator-v21/design_appbar_state_list_animator.xml"
-=======
         "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\animator-v21\\design_appbar_state_list_animator.xml",
         "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\bb8fc58b6922b050d3577f51fe7a432e\\res\\animator-v21\\design_appbar_state_list_animator.xml"
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
     }
 ]

@@ -26,7 +26,13 @@ public class SettingListPresenter implements SettingList.Presenter {
         settingListModel.loadData(context);
         notificationModel = CommonNotificationModel.getInstance(context);
     }
-
+    /**
+     * 셋팅 문자열 배열을 가져와 리스트로 만들어준다.
+     *
+     * @param context   컨텍스트
+     * @return
+     * @description   문자열은 배열 리소스에 저장되어있고, 다국어적용됨
+    */
     @Override
     public void getStringSettingList( Context context ) {
         ArrayList<String> titleList = new ArrayList<>( Arrays.asList( context.getResources().getStringArray(R.array.setting_title) ) );
@@ -37,16 +43,19 @@ public class SettingListPresenter implements SettingList.Presenter {
         contentList = setList(
                 context.getResources().getStringArray(R.array.general_settings),
                 context.getResources().getStringArray(R.array.user_settings),
-                context.getResources().getStringArray(R.array.device_settings),
+               /* context.getResources().getStringArray(R.array.device_settings),*/
                 context.getResources().getStringArray(R.array.hodoo_link_settings),
-                context.getResources().getStringArray(R.array.pet_settings),
-                context.getResources().getStringArray(R.array.support_settings) );
+                context.getResources().getStringArray(R.array.pet_settings)
+                /*, context.getResources().getStringArray(R.array.support_settings)*/
+        );
         /* content (e) */
 
         contentList.get(SettingListActivity.HODOO_LINK).get(SettingListActivity.REQUEST).setBadgeCount(notificationModel.getInvitationCount());
+        contentList.get(SettingListActivity.USER).get(SettingListActivity.UNIT).setStringState(true);
+        int unitIdx = settingListModel.getUnitIdx();
+        String[] unitArr = context.getResources().getStringArray(R.array.unit_str_arr);
+        contentList.get(SettingListActivity.USER).get(SettingListActivity.UNIT).setSettingStr(unitArr[unitIdx]);
         settingListView.setExpandableListAdapter(titleList, contentList);
-
-
     }
 
     @Override
@@ -59,6 +68,12 @@ public class SettingListPresenter implements SettingList.Presenter {
     public void getInvitationCount() {
         settingListView.updateBadgeCount(notificationModel.getInvitationCount());
     }
+
+    @Override
+    public void saveUnit(int unitIdx) {
+        settingListModel.saveUnitIdx(unitIdx);
+    }
+
     public ArrayList<List<SettingMenu>> setList( String[]...param ) {
         ArrayList<List<SettingMenu>> array = new ArrayList<>();
 

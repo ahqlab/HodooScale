@@ -50,6 +50,8 @@ public class NoticeActivity extends BaseActivity<NoticeActivity> implements Noti
 
     BaseExpandableAdapter adapter;
 
+    View footerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,9 @@ public class NoticeActivity extends BaseActivity<NoticeActivity> implements Noti
 
         adapter = new BaseExpandableAdapter(this, mGroupList, mChildList);
         binding.noticeListview.setAdapter(adapter);
-        binding.noticeListview.addFooterView(inflater.inflate(R.layout.notice_listview_footer, null));
+
+        footerView = inflater.inflate(R.layout.notice_listview_footer, null);
+        binding.noticeListview.addFooterView( footerView );
         binding.noticeListview.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -127,6 +131,11 @@ public class NoticeActivity extends BaseActivity<NoticeActivity> implements Noti
 
     @Override
     public void setNoticeListview(List<Notice> noticeList) {
+        if ( noticeList.size() == 0 ) {
+            binding.noticeListview.removeFooterView( footerView );
+            return;
+        }
+
         List<Notice> list = noticeList;
         List<Notice> list2 = noticeList;
 

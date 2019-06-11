@@ -2,6 +2,10 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="checked"
+            type="Boolean"/>
         <variable
             name="activity"
             type="com.animal.scale.hodoo.activity.pet.regist.fragment.disease.DiseaseInfomationFragment" />
@@ -33,9 +37,9 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <include
-                        android:id="@+id/add_pet_navigation"
-                        layout="@layout/add_pet_nav"/>
+                    <!--<include-->
+                        <!--android:id="@+id/add_pet_navigation"-->
+                        <!--layout="@layout/add_pet_nav"/>-->
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recyclerview"
@@ -65,7 +69,8 @@
                     android:text="@string/add_pet_next_btn"
                     android:onClick="@{activity::onClickNextBtn}"
                     android:textColor="@color/white"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="@{checked ? View.VISIBLE : View.GONE }"/>
             </LinearLayout>
         </LinearLayout>
 

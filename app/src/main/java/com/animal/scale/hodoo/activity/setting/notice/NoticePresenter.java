@@ -31,7 +31,7 @@ public class NoticePresenter implements NoticeIn.Presenter {
         model.getNoticeList(startRow, pageSize, new CommonModel.CommonDomainListCallBackListner<Notice>() {
             @Override
             public void doPostExecute(CommonResponce<List<Notice>> d) {
-                if(d.getStatus() == HodooConstant.OK_RESPONSE|| d.getStatus() == HodooConstant.NO_CONTENT_RESPONSE)
+                if(d.getStatus() == HodooConstant.OK_RESPONSE || d.getStatus() == HodooConstant.NO_CONTENT_RESPONSE)
                  view.setNoticeListview(d.getDomain());
             }
 

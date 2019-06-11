@@ -119,6 +119,7 @@ public class MyAccountPresenter implements MyAccount.Presenter {
         myAccountModel.checkGroupCount(new CommonModel.DomainCallBackListner<Integer>() {
             @Override
             public void doPostExecute(Integer result) {
+                if ( result == null )  return;
                 switch ( result ) {
                     case HodooConstant.SUCCESS_CODE :
                     case HodooConstant.NOT_GROUP_MASTER :

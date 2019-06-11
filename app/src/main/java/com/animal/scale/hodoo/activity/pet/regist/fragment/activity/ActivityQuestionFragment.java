@@ -6,18 +6,24 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
-import com.animal.scale.hodoo.adapter.AdapterOfString;
+import com.animal.scale.hodoo.adapter.AdapterOfPetUserSelectItem;
 import com.animal.scale.hodoo.base.PetRegistFragment;
 import com.animal.scale.hodoo.databinding.FragmentActivityQuestionBinding;
 import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetUserSelectItem;
 import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 
@@ -39,6 +45,7 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
 
     public final int WALK_QUESTION_TYPE = 0;
     public final int ACTIVITY_QUESTION = 1;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,19 +59,36 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
             presenter.getPetUserSelectQuestion(petIdx);
         } else {
             petUserSelectionQuestion = new PetUserSelectionQuestion();
-            loadData(null);
+            setBtnEnable(false);
         }
+        loadData(null);
 
         return binding.getRoot();
     }
     public static ActivityQuestionFragment newInstance() {
         return new ActivityQuestionFragment();
     }
+    /**
+     * 완료버튼을 클릭했을 경우
+     *
+     * @param v   클릭한 버튼의 뷰
+     * @return
+    */
     public void onClickCompleateBtn ( View v ) {
+        if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() ) {
+            getActivity().finish();
+            return;
+        }
         ((PetRegistActivity) getActivity()).setPetUserSelectionQuestion(petUserSelectionQuestion);
         ((PetRegistActivity) getActivity()).regist();
     }
 
+    /**
+     * 질문 내역을 출력한다.
+     *
+     * @param inPetUserSelectionQuestion   수정일 경우 등록된 값을 출력하고, 등록일 경우 질문 내역만 셋팅한다.
+     * @return
+    */
     private void loadData ( PetUserSelectionQuestion inPetUserSelectionQuestion ) {
         titleArr = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.activity_question_title)));
         ArrayList<PetUserSelectItem> items = new ArrayList<>();
@@ -83,7 +107,7 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
             }
             items.add(item);
         }
-        AdapterOfString adapter = new AdapterOfString(getContext(), items, new AdapterOfString.ItemClickListener() {
+        AdapterOfPetUserSelectItem adapter = new AdapterOfPetUserSelectItem(getContext(), items, new AdapterOfPetUserSelectItem.ItemClickListener() {
             @Override
             public void OnClickListener(final int position, final View view) {
                 final ArrayAdapter<String> alertAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
@@ -105,13 +129,16 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
                                         break;
                                 }
                                 ((EditText) view).setText( alertAdapter.getItem(i) );
+                                setBtnEnable(validation());
                             }
                         });
                 builder.create().show();
             }
         });
-
+//        binding.activityQuestionGridWrap
+//        binding.activityQuestionGridWrap.setAdapter( adapter );
         binding.activityQuestionWrap.setAdapter(adapter);
+
         if ( inPetUserSelectionQuestion != null ) {
             items.get(WALK_QUESTION_TYPE).setSelectNum( inPetUserSelectionQuestion.getPlayTime() );
             items.get(ACTIVITY_QUESTION).setSelectNum( inPetUserSelectionQuestion.getActive() );
@@ -120,6 +147,12 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
         }
     }
 
+    /**
+     * 서버에서 질문 내역을 가져온다.
+     *
+     * @param petUserSelectQuestion   서버에서 가져온 질문 내역
+     * @return
+    */
     @Override
     public void setPetUserSelectQuestion(CommonResponce<PetUserSelectionQuestion> petUserSelectQuestion) {
         if ( petUserSelectQuestion.domain == null ) {
@@ -130,13 +163,56 @@ public class ActivityQuestionFragment extends PetRegistFragment implements Activ
             loadData(petUserSelectionQuestion);
         }
     }
+    /**
+     * 문제가 선택 되었는지 검증한다.
+     *
+     * @param
+     * @return
+    */
+    public boolean validation() {
+        for (int i = 0; i < binding.activityQuestionWrap.getChildCount(); i++) {
+            LinearLayout wrap = (LinearLayout) binding.activityQuestionWrap.getChildAt(i);
+            for (int j = 0; j < wrap.getChildCount(); j++) {
+                if ( !(wrap.getChildAt(i) instanceof EditText) )
+                    continue;
+                EditText edt = (EditText) wrap.getChildAt(i);
+                if ( edt.getText().toString().equals("") )
+                    return false;
+
+            }
+        }
+        if ( binding.activityQuestionWrap.getChildCount() == 0 )
+            return false;
+        return true;
+    }
+    /**
+     * 버튼의 활성도를 체크한다.
+     *
+     * @param state   상태값
+     * @return
+    */
+    private void setBtnEnable(boolean state) {
+        binding.nextStep.setEnabled(state);
+        if (binding.nextStep.isEnabled()) {
+            binding.nextStep.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
+        } else {
+            binding.nextStep.setTextColor(ContextCompat.getColor(getContext(), R.color.mainRed));
+        }
+    }
 
     @Override
     public void setNavigation() {
-        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
-        binding.addPetNavigation.activityBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.diseaseBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.physiqueBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.weightBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+//        binding.addPetNavigation.activityBtn.setBackgroundResource(R.drawable.rounded_pink_btn);
+    }
+
+    @Override
+    public void setPetBasicInfo(PetBasicInfo petBasicInfo) {
+        super.setPetBasicInfo(petBasicInfo);
+        loadData(petUserSelectionQuestion != null ? petUserSelectionQuestion : null);
+        setBtnEnable(petUserSelectionQuestion != null ? true : false);
     }
 }

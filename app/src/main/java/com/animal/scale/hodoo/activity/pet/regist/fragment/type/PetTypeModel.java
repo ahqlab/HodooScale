@@ -6,6 +6,8 @@ import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
 import retrofit2.Call;
@@ -21,6 +23,13 @@ public class PetTypeModel extends CommonModel {
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
+    /**
+     * 서버에 등록된 펫의 타입을 가져온다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param callback 콜백함수
+     * @return
+    */
     public void getPetType( int petIdx, final DomainCallBackListner<Integer> callback ) {
         Call<Integer> call = NetRetrofit.getInstance().getPetService().getPetType(petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
@@ -33,6 +42,32 @@ public class PetTypeModel extends CommonModel {
             @Override
             protected void doPreExecute() {
                 callback.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+    /**
+     * 서버에 저장되어 있는 펫의 기본정보를 가져온다.
+     *
+     * @param location   다국어를 위한 지역값 (ko : 한국어, en : 영어, ja : 일본어)
+     * @return
+    */
+    public void getPetBasicInformation(String location, int petIdx, final DomainCallBackListner<PetBasicInfo> domainCallBackListner) {
+        Call<PetBasicInfo> call = NetRetrofit.getInstance().getPetService().getBasicInformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx, location);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetBasicInfo>() {
+
+            @Override
+            protected void doPostExecute(PetBasicInfo basicInfo) {
+                domainCallBackListner.doPostExecute(basicInfo);
+            }
+
+            @Override
+            protected void doPreExecute() {
+                domainCallBackListner.doPreExecute();
             }
 
             @Override

@@ -27,5 +27,7 @@ public interface PetAccounts {
         void saveCurrentIdx( int idx );
 
         void deletePet(int petIdx);
+
+        void addPetBtn();
     }
 }

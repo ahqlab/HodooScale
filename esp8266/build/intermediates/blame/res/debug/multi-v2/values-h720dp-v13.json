@@ -2,6 +2,7 @@
     "logs": [
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
@@ -12,6 +13,12 @@
                 {
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
 >>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
+=======
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+>>>>>>> 25997b79d4928fb0273b15b8649389fca0688637
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -24,6 +31,7 @@
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
@@ -34,6 +42,12 @@
                 {
                     "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
 >>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
+=======
+            "outputFile": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+>>>>>>> 25997b79d4928fb0273b15b8649389fca0688637
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

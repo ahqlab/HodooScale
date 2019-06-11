@@ -19,9 +19,15 @@ public class ActivityQuestionPresenter implements ActivityQuestionIn.Presenter {
     public void loadData(Context context){
         model = new ActivityQuestionModel();
         model.loadData(context);
-        view.setNavigation();
+//        view.setNavigation();
     }
 
+    /**
+     * 등록된 활동을 서버에서 가져온다
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @return
+    */
     @Override
     public void getPetUserSelectQuestion(int petIdx) {
         model.registPetUserSelectQuestion(petIdx, new CommonModel.ObjectCallBackListner<CommonResponce<PetUserSelectionQuestion>>() {

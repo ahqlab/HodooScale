@@ -50,6 +50,8 @@ public class FeederOrderActivity extends BaseActivity<FeederOrderActivity> imple
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setPetAllInfo(PetAllInfos petAllInfos) {
+        if ( petAllInfos == null )
+            return;
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)) , petAllInfos.getFactor()).getRER();
         Log.e("HJLEE", "RER : " + rer);
     }

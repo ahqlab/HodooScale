@@ -70,15 +70,39 @@ public class LoginModel extends CommonModel {
 
     }
 
+    public void doSnsLogin(User user, final DomainCallBackListner<CommonResponce<User>> domainCallBackListner) {
+        Call<CommonResponce<User>> call = NetRetrofit.getInstance().getUserService().snsLogin(user);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<User>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<User> resultMessageGroup) {
+                domainCallBackListner.doPostExecute(resultMessageGroup);
+            }
+            @Override
+            protected void doPreExecute() {
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+                domainCallBackListner.doCancelled();
+            }
+        }.execute(call), limitedTime, interval, true).start();
+
+
+    }
+
     public void saveUserSharedValue(User user){
 
         Log.e(TAG, "userEmail : " + mSharedPrefManager.getStringExtra(SharedPrefVariable.USER_EMAIL));
         int savePetIdx = -1;
+        int unitIdx = mSharedPrefManager.getIntExtra( SharedPrefVariable.UNIT_STR );
         if ( mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID) == user.getUserIdx() )
             savePetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
 
         removeSharedValue();
         mSharedPrefManager.putIntExtra(SharedPrefVariable.USER_UNIQUE_ID, user.getUserIdx());
+        //mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_SNS_TOKEN, user.getSnsToken());
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.UNIT_STR, unitIdx);
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_EMAIL, user.getEmail());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.GROUP_CODE, user.getGroupCode());
         mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_PASSWORD, user.getPassword());

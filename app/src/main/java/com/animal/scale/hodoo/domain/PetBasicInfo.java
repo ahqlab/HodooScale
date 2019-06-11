@@ -21,6 +21,7 @@ public class PetBasicInfo implements Serializable{
 	private int id;
 	//이미지 경로
 	private String profileFilePath;
+	private String groupCode;
 	//이미지 이름
 	private String profileFileName;
 	//성병

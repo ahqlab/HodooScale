@@ -1,11 +1,6 @@
 [
     {
-<<<<<<< HEAD
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/menu/main.xml",
-        "source": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/src/main/res/menu/main.xml"
-=======
         "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
         "source": "D:\\app_work\\HodooScale\\esp8266\\src\\main\\res\\menu\\main.xml"
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
     }
 ]

@@ -43,7 +43,7 @@
     <string name="food">Food</string>
     <string name="edit_success">Information has been changed</string>
     //setting - > user
-    <string name="log_out">Sign out</string>
+    <string name="log_out">Logout</string>
     <string name="change_user_account_info">User Account</string>
     <string name="withdraw">Membership withdrawal</string>
     <string name="withdraw_subscript">If you leave, you cannot use the HODOO service. Are you sure you want to leave?</string>
@@ -74,6 +74,7 @@
     <string name="istyle_management_pet">Pet</string>
     <string name="istyle_management_user">Group Users</string>
     <string name="istyle_find_password">Reset Password</string>
+    <string name="istyle_app_version">App version</string>
     <!-- Setting List -->
     <string name="istyle_setting_menu_my_account">Account</string>
     <string name="istyle_setting_menu_notice">Notice</string>
@@ -306,7 +307,12 @@
     <string name="invitation__error_overlab_invitation">You have already requested to join that group.</string>
 
     <string name="basic_infomation_regist__pet_breed_title">Breed</string>
+    <string name="dog">DOG</string>
+    <string name="cat">CAT</string>
 
+    <string name="search_pet_breed_hint">Please search for varieties</string>
+
+    <string name="pet_type_explain">Please select your pet type.</string>
 
 
     <string name="user_group_manager__tool_bar_title">Group management</string>
@@ -320,7 +326,28 @@
     <string name="auto_login">Remember Me</string>
 
     <string name="common__recommend_calorie">700kcal\n(recommend quantity)</string>
-    <string name="request_for_hodoo_link">그룹 참여하기</string>
-    <string name="go_to_regist_pet" >펫 등록 하러가기</string>
-    <string name="regist_pet_desc">나의 펫을 등록하고 호두를 시작할래요</string>
+    <string name="request_for_hodoo_link">Join a group</string>
+    <string name="this_is_latest_version">This is the latest version.</string>
+    <string name="current_app_version">Current Version</string>
+    <string name="you_need_update">Please update it to the latest version!</string>
+    <string name="go_to_regist_pet" >Go to pet registration</string>
+    <string name="regist_pet_desc">I\'ll register my pet and start Hodoo</string>
+    <string name="activity_title_notice">Notice</string>
+
+    <string name="kakao_app_key">6c3ac725269577a6048f062d88866f02</string>
+    <string name="weight_statistics" >WEIGHT STATISTICS</string>
+    <string name="starting_weight">STARTING WEIGHT</string>
+    <string name="current_weight">CURRENT WEIGHT</string>
+    <string name="weight_goal">WEIGHT GOAL</string>
+    <string name="alarm_setting">Alarm Settings</string>
+
+    <string name="enter_weight">Enter Weight</string>
+
+    <string name="regist_done_msg">Registration is complete</string>
+    <string name="edit_done_msg">Edit is complete</string>
+
+    <string name="weight_loss_ratio_per_week_msg">Weight loss ratio per week</string>
+    <string name="weight_check_description">The more accurate the entered information, the more accurate the analysis results are</string>
+    <string name="change_compleate">변경완료</string>
+    <string name="change_compleate_message">현제 체중변경이 완료되었습니다.</string>
 </resources>

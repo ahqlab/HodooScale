@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="activity"
             type="com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity" />
@@ -71,6 +72,7 @@
                 <!-- app:editText="@={domain.email}" -->
 
                 <RelativeLayout
+                    android:visibility="@{domain.loginType == 1 ? View.GONE : View.VISIBLE}"
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -103,6 +105,51 @@
                         android:textSize="11sp"/>
 
                 </RelativeLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/sns_logout"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="13dp"
+                        android:paddingRight="13dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:text="@string/log_out"
+                        android:onClick="@{activity::snsClick}"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:background="@drawable/rounded_rect_radius_4_with_border"
+                        android:textColor="@color/mainRed"
+                        android:textSize="11sp"/>
+                    <Button
+                        android:id="@+id/sns_withdraw"
+                        android:layout_marginLeft="10dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="13dp"
+                        android:paddingRight="13dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="0dp"
+                        android:minWidth="0dp"
+                        android:text="@string/withdraw"
+                        android:onClick="@{activity::snsClick}"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:background="@drawable/rounded_rect_radius_4_with_border"
+                        android:textColor="@color/mainRed"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
 
 
 

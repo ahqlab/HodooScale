@@ -38,4 +38,19 @@ public class MathUtil {
 		String decimal =  fmt.format(value);
 		return decimal;
 	}
+
+	public static double cmToInch(double cm){
+		return cm/2.54;
+	}
+
+	public static double InchToCm(double Inch){
+		return Inch * 2.54;
+	}
+
+	public static float kgTolb( float kg ) {
+		return (float) (kg * 2.2046);
+	}
+	public static float lbToKg( float lb ) {
+		return ( lb * (1f * 2.2f) );
+	}
 }

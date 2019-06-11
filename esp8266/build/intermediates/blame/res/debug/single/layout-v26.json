@@ -1,11 +1,6 @@
 [
     {
-<<<<<<< HEAD
-        "merged": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/layout-v26/abc_screen_toolbar.xml",
-        "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/layout-v26/abc_screen_toolbar.xml"
-=======
         "merged": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\layout-v26\\abc_screen_toolbar.xml",
         "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\layout-v26\\abc_screen_toolbar.xml"
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
     }
 ]

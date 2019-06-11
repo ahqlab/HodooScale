@@ -27,15 +27,18 @@ public interface RealTimeWeightService {
     @POST("weight/get/statistics/list/of/time.do")
     Call<List<Statistics>> getStatisticsOfTime(@Query("groupCode") String groupCode, @Query("today") String today, @Query("type") int type, @Query("petIdx") int petIdx);
 
+    //USE
     @POST("weight/get/statistics/list/of/day.do")
-    Call<List<Statistics>> getStatisticsOfDay(@Query("groupCode") String groupCode, @Query("type") int type, @Query("petIdx") int petIdx);
+    Call<List<Statistics>> getStatisticsOfDay(@Query("groupCode") String groupCode, @Query("type") int type, @Query("date") String date, @Query("petIdx") int petIdx);
 
+    //USE
     @POST("weight/get/statistics/list/of/week.do")
-    Call<List<Statistics>> getStatisticsOfWeek(@Query("groupCode") String groupCode, @Query("month") String month, @Query("type") int type, @Query("petIdx") int petIdx);
+    Call<List<Statistics>> getStatisticsOfWeek(@Query("groupCode") String groupCode, @Query("year") String year ,@Query("month") String month, @Query("type") int type, @Query("petIdx") int petIdx);
 
+    //USE
     @POST("weight/get/statistics/list/of/month.do")
-    Call<List<Statistics>> getStatisticsOfMonth(@Query("groupCode") String groupCode, @Query("year") String month, @Query("type") int type, @Query("petIdx") int petIdx);
+    Call<List<Statistics>> getStatisticsOfMonth(@Query("groupCode") String groupCode, @Query("year") String year, @Query("month") String month, @Query("type") int type, @Query("petIdx") int petIdx);
 
-    @POST("weight/get/statistics/list/of/year.do")
-    Call<List<Statistics>> getStatisticsOfYear(@Query("groupCode") String groupCode, @Query("type") int type, @Query("petIdx") int petIdx);
+    /*@POST("weight/get/statistics/list/of/year.do")
+    Call<List<Statistics>> getStatisticsOfYear(@Query("groupCode") String groupCode, @Query("type") int type, @Query("petIdx") int petIdx);*/
 }

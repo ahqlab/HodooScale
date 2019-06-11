@@ -4,9 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.animal.scale.hodoo.HodooApplication;
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.setting.account.info.ChangeUserInfoActivity;
@@ -18,6 +20,9 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.ActivityMyAccountBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.SettingMenu;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 import java.util.List;
 
@@ -60,7 +65,35 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                 } else if(position == MyAccount.CHANGE_USER_INFO){
                     presenter.changePassword();
                 }  else if ( position == MyAccount.WITHDRAW ) {
-                    presenter.checkGroupCount(getApplicationContext());
+                    if ( ((HodooApplication) getApplicationContext()).isExperienceState() )
+                        return;
+
+                    if ( !((HodooApplication) getApplication()).isSnsLoginState() )
+                        presenter.checkGroupCount(getApplicationContext());
+                    else
+                        UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                            @Override
+                            public void onFailure(ErrorResult errorResult) {
+                                Log.e("HJLEE", "onFailure : " + errorResult.toString());
+                            }
+
+                            @Override
+                            public void onSessionClosed(ErrorResult errorResult) {
+                                Log.e("HJLEE", "onSessionClosed : " + errorResult.toString());
+                            }
+
+                            @Override
+                            public void onNotSignedUp() {
+                                Log.e("HJLEE", "onNotSignedUp : ");
+                            }
+
+                            @Override
+                            public void onSuccess(Long userId) {
+                                Log.e("HJLEE", "onSuccess : " + userId);
+                                ((HodooApplication) getApplication()).setSnsLoginState(false);
+                                presenter.logout();
+                            }
+                        });
                 }
             }
         });

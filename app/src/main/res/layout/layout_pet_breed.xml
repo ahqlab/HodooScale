@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:padding="10dp"
+                android:id="@+id/breed_edt"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/search_pet_breed_hint"/>
+            <!--<ImageButton-->
+                <!--android:id="@+id/breed_search_icon"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:src="@drawable/meal_search_drawleft"-->
+                <!--android:background="@null"/>-->
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/breed_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</layout>

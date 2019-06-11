@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <CheckBox
+            android:id="@+id/bfi_img"
+            android:background="@drawable/bfi_rect_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:clickable="false"/>
+        <!--<ImageView-->
+            <!--android:background="@drawable/bfi_rect_wrap"-->
+            <!--android:id="@+id/bfi_img"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+
+    </RelativeLayout>
+
+</layout>

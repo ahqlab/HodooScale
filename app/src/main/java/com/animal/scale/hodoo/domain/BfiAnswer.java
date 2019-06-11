@@ -11,4 +11,5 @@ import lombok.Data;
 public class BfiAnswer implements Serializable {
     private int id;
     private String answer;
+    private String answerImg;
 }

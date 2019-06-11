@@ -14,6 +14,11 @@ public class InvitationFinishPresenter implements InvitationFinish.Presenter {
         mModel = new InvitationFinishModel(context);
     }
 
+    /**
+     * 초대를 재발송한다
+     * @param context
+     * @param to
+     */
     @Override
     public void resend(final Context context, final String to) {
         mModel.resend(to, new CommonModel.DomainCallBackListner<Integer>() {
@@ -43,6 +48,10 @@ public class InvitationFinishPresenter implements InvitationFinish.Presenter {
         });
     }
 
+    /**
+     * 초대를 취소한다.
+     * @param to
+     */
     @Override
     public void cancel(String to) {
         mModel.cancel(to, new CommonModel.DomainCallBackListner<Integer>() {

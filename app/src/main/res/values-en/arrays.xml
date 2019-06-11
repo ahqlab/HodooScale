@@ -42,10 +42,8 @@
     <string-array name="setting_title">
         <item>GENERAL</item>
         <item>USER</item>
-        <item>DEVICE</item>
         <item>HODOO LINK</item>
         <item>PET</item>
-        <item>SUPPORT</item>
     </string-array>
 
     <string-array name="general_settings">
@@ -57,7 +55,8 @@
     <string-array name="user_settings">
         <item>Account</item>
         <item>Notification</item>
-        <item>Logout</item>
+        <item>Unit of Measurement</item>
+        <!--<item>Logout</item>-->
     </string-array>
 
     <string-array name="device_settings">
@@ -180,6 +179,36 @@ A low-calorie diet can help. It is recommended that you reduce your salary slowl
 
 If you\'re really hungry and eat something, you can give them snacks with less calories. You can give a little bit of feed or a little bit of low-calorie vegetables such as boiled cabbage, boiled broccoli and raw cucumbers. However, the next time you give food, remember to reduce the amount by taking into account the amount of snacks.
 </item>
+    </string-array>
+
+    <string-array name="cat_type_physique_str_arr">
+        <item>Waist Width</item>
+        <item>Leg Length</item>
+    </string-array>
+
+    <string-array name="dog_type_physique_str_arr">
+        <item>Length</item>
+        <item>Height</item>
+    </string-array>
+
+    <string-array name="activity_question_title">
+        <item>Number of walks</item>
+        <item>Activity</item>
+    </string-array>
+
+    <string-array name="walk_question">
+        <item>Week 1 time</item>
+        <item>Week 2 time</item>
+        <item>Week 3 time</item>
+        <item>Week 4 time</item>
+        <item>Week 5 time</item>
+        <item>Week 6 time</item>
+    </string-array>
+
+    <string-array name="activity_question">
+        <item>Quiet</item>
+        <item>Normal</item>
+        <item>Active</item>
     </string-array>
 
 </resources>

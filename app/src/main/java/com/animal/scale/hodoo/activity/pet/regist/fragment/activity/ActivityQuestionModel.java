@@ -23,6 +23,13 @@ public class ActivityQuestionModel extends CommonModel {
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
+    /**
+     * 펫의 활동 정보를 등록한다.
+     *
+     * @param petIdx   펫의 인덱스 값
+     * @param callback 서버에서 가져 온 후 리턴시키는 콜백함수
+     * @return
+    */
     public void registPetUserSelectQuestion (int petIdx, final CommonModel.ObjectCallBackListner<CommonResponce<PetUserSelectionQuestion>> callback) {
         Call<CommonResponce<PetUserSelectionQuestion>> call = NetRetrofit.getInstance().getPetUserSelectionQuestionService().getPetUserSelectQuestion(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
         new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<PetUserSelectionQuestion>>() {

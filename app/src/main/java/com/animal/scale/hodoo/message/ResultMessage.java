@@ -14,7 +14,10 @@ public enum ResultMessage {
     // DIVICE 등록 관련
     DUPLICATE_DEVICE(300), NOT_FOUND_DEVICE(301),
     // 메일 관련 에러 메시지
-    FAILED_TO_SEND_MAIL(510);
+    FAILED_TO_SEND_MAIL(510),
+
+    ALREADY_REGISTERED(600);
+
 
     @Getter
     private final int name;

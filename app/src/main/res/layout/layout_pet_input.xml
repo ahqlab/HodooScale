@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="checked"
+            type="Boolean"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/infomation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/input_wrap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/done_btn"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:background="@drawable/pink_btn"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/add_pet_next_btn"
+            android:visibility="@{checked ? View.VISIBLE : View.GONE }"/>
+
+    </RelativeLayout>
+
+</layout>
