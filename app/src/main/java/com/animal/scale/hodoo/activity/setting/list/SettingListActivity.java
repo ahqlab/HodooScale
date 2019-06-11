@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
@@ -16,10 +17,13 @@ import com.animal.scale.hodoo.activity.setting.account.MyAccountActivity;
 import com.animal.scale.hodoo.activity.setting.device.bowelplate.list.BowelPlateListActivity;
 import com.animal.scale.hodoo.activity.setting.device.feeder.FeederOrderActivity;
 import com.animal.scale.hodoo.activity.setting.device.list.DeviceListActivity;
+import com.animal.scale.hodoo.activity.setting.alarmManager.AlarmItemListActivity;
+import com.animal.scale.hodoo.activity.setting.notice.NoticeActivity;
 import com.animal.scale.hodoo.activity.setting.pet.accounts.PetAccountsActivity;
 import com.animal.scale.hodoo.activity.setting.user.account.UserAccountActivity;
 import com.animal.scale.hodoo.activity.setting.user.group.list.UserGroupListActivity;
 import com.animal.scale.hodoo.activity.setting.user.group.manager.UserGroupManagerActivity;
+import com.animal.scale.hodoo.activity.setting.version.VersionActivity;
 import com.animal.scale.hodoo.adapter.AdapterOfExpandable;
 import com.animal.scale.hodoo.adapter.AdapterOfSetting;
 import com.animal.scale.hodoo.base.BaseActivity;
@@ -59,7 +63,12 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     public final static int SUPPORT = 5;
 
 
-    //general
+    // general
+    public final static int NOTICE = 0;
+    public final static int HOMEPAGE = 1;
+    public final static int APP_VERSION = 2;
+
+    // user
     public final static int ACCOUNT = 0;
     public final static int NOTIFICATION = 1;
     public final static int LOGOUT = 2;
@@ -122,6 +131,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         binding.settingListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Log.e("HJLEE",  "position : " + position);
                 if(position == MY_CAAOUNT){
                     SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
                 }else if(position == DEVICE_SETTING){
@@ -154,9 +164,20 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         binding.settingList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int titlePosition, int contentPosition, long l) {
-                if ( titlePosition == USER ) {
+                if(titlePosition == GENERAL){
+                    if(contentPosition == NOTICE){
+                        SettingListActivity.super.moveIntent(SettingListActivity.this, NoticeActivity.class, 0,0, false);
+                    }else if(contentPosition == HOMEPAGE){
+
+                    }else if(contentPosition == APP_VERSION){
+                        SettingListActivity.super.moveIntent(SettingListActivity.this, VersionActivity.class, 0,0, false);
+                    }
+                }else if ( titlePosition == USER ) {
                     if ( contentPosition == ACCOUNT)
                         SettingListActivity.super.moveIntent(SettingListActivity.this, MyAccountActivity.class, 0,0, false);
+                    else if ( contentPosition == NOTIFICATION ) {
+                        SettingListActivity.super.moveIntent(SettingListActivity.this, AlarmItemListActivity.class, 0,0, false);
+                    }
                     else if ( contentPosition == LOGOUT ) {
                         presenter.logout();
                         return false;

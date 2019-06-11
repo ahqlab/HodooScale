@@ -1,5 +1,6 @@
 package com.animal.scale.hodoo.service;
 
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Groups;
 import com.animal.scale.hodoo.domain.MealHistory;
 import com.animal.scale.hodoo.domain.MealHistoryContent;
@@ -23,6 +24,9 @@ public interface MealHistoryService {
 
     @POST("history/meal/get/today/sum/calorie.do")
     Call<MealHistory> getTodaySumCalorie(@Query("petIdx") int petIdx, @Query("date") String date);
+
+    @POST("android/history/meal/get/today/sum/calorie.do")
+    Call<CommonResponce<MealHistory>> getAndroidTodaySumCalorie(@Query("petIdx") int petIdx, @Query("date") String date);
 
 
     @POST("history/meal/get/this/history.do")

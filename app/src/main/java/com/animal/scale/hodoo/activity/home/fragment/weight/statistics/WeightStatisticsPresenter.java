@@ -1,13 +1,17 @@
 package com.animal.scale.hodoo.activity.home.fragment.weight.statistics;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -17,11 +21,11 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
 
     WeightStatisticsModel model;
 
-    LineChart chart;
+    BarChart chart;
 
     private Context mContext;
 
-    public WeightStatisticsPresenter(WeightStatistics.View view, LineChart chart) {
+    public WeightStatisticsPresenter(WeightStatistics.View view, BarChart chart) {
         this.view = view;
         this.chart = chart;
         this.model = new WeightStatisticsModel();
@@ -168,11 +172,57 @@ public class WeightStatisticsPresenter implements WeightStatistics.Presenter {
     }
 
     private void setStatisticalData(List<Statistics> d, String type) {
-        ArrayList<Entry> yVals = new ArrayList<Entry>();
+        List<Statistics> list = new ArrayList<Statistics>();
+        ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
         for (int i = 0; i < d.size(); i++) {
-            yVals.add(new Entry(i, d.get(i).getAverage()));
+            yVals.add(new BarEntry(i, d.get(i).getAverage()));
         }
         model.setupChart(chart, model.getData(yVals), d, type);
+    }
+
+    public static String getDayOfHan(int dayOfWeek) {
+        //System.err.println(dayOfWeek);
+        if(dayOfWeek == 0) {
+            dayOfWeek = 7;
+        }else if(dayOfWeek == -1) {
+            dayOfWeek = 6;
+        }else if(dayOfWeek == -2) {
+            dayOfWeek = 5;
+        }else if(dayOfWeek == -3) {
+            dayOfWeek = 4;
+        }else if(dayOfWeek == -4) {
+            dayOfWeek = 3;
+        }else if(dayOfWeek == -5) {
+            dayOfWeek = 2;
+        }else if(dayOfWeek == -6) {
+            dayOfWeek = 1;
+        }
+
+        String day = "";
+        switch (dayOfWeek) {
+            case 1:
+                day = "일";
+                break;
+            case 2:
+                day = "월";
+                break;
+            case 3:
+                day = "화";
+                break;
+            case 4:
+                day = "수";
+                break;
+            case 5:
+                day = "목";
+                break;
+            case 6:
+                day = "금";
+                break;
+            case 7:
+                day = "토";
+                break;
+        }
+        return day;
     }
 
     @Override

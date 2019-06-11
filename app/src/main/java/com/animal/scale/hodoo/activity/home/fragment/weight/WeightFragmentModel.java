@@ -14,9 +14,11 @@ import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
 import com.animal.scale.hodoo.domain.Statistics;
+import com.animal.scale.hodoo.domain.WeightGoalChart;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.service.NetRetrofit;
 import com.animal.scale.hodoo.util.DateUtil;
@@ -80,8 +82,8 @@ public class WeightFragmentModel extends CommonModel {
         chart.setDragEnabled(false);
         chart.setScaleEnabled(false);
         chart.setPinchZoom(false);
-        chart.getAxisLeft().setAxisMaxValue(7f);
-        chart.getAxisLeft().setAxisMinValue(5f);
+        //chart.getAxisLeft().setAxisMaxValue(7f);
+        //chart.getAxisLeft().setAxisMinValue(5f);
 
         MyMarkerView mv = new MyMarkerView(context, R.layout.mpchart_market_layout);
         mv.setChartView(chart); // For bounds control
@@ -227,5 +229,27 @@ public class WeightFragmentModel extends CommonModel {
 
             }
         }.execute(call), limitedTime, interval, true).start();
+    }
+
+    public void getWeightGoal(float currentWeight, int bodyFat, int petType, final CommonDomainCallBackListner<WeightGoalChart> commonDomainCallBackListner) {
+
+        Call<CommonResponce<WeightGoalChart>> call = NetRetrofit.getInstance().getWeightGoalChartService().getWeightGoal(currentWeight, bodyFat, petType);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<WeightGoalChart>>() {
+            @Override
+            protected void doPostExecute(CommonResponce<WeightGoalChart> responce) {
+                commonDomainCallBackListner.doPostExecute(responce);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+
     }
 }

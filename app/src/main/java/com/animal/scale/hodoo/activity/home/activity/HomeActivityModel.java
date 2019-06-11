@@ -2,13 +2,17 @@ package com.animal.scale.hodoo.activity.home.activity;
 
 import android.content.Context;
 
+import com.animal.scale.hodoo.common.AbstractAsyncTask;
 import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
 import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.PetBreed;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
 import java.util.List;
@@ -26,11 +30,11 @@ public class HomeActivityModel extends CommonModel{
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
 
-    public void getPetAllInfo(final DomainListCallBackListner<PetAllInfos> domainListCallBackListner) {
-        Call<List<PetAllInfos>> call = NetRetrofit.getInstance().getPetBasicInfoService().getAboutMyPetList(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetAllInfos>() {
+    public void getPetAllInfo(final CommonModel.ObjectCallBackListner<CommonResponce<List<PetAllInfos>>> domainListCallBackListner) {
+        Call<CommonResponce<List<PetAllInfos>>> call = NetRetrofit.getInstance().getPetBasicInfoService().getAboutMyPetListForAndroid(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE));
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<List<PetAllInfos>>>() {
             @Override
-            protected void doPostExecute(List<PetAllInfos> petAllInfos) {
+            protected void doPostExecute(CommonResponce<List<PetAllInfos>> petAllInfos) {
                 domainListCallBackListner.doPostExecute(petAllInfos);
             }
 
@@ -82,5 +86,26 @@ public class HomeActivityModel extends CommonModel{
     }
     public int getUserIdx () {
         return mSharedPrefManager.getIntExtra(SharedPrefVariable.USER_UNIQUE_ID);
+    }
+
+    public void getTipOfCountry(WeightTip weightTip , final DomainCallBackListner<WeightTip> domainCallBackListner) {
+        Call<WeightTip> call = NetRetrofit.getInstance().getWeightTipService().getWeightTipOfCountry(weightTip);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<WeightTip>() {
+            @Override
+            protected void doPostExecute(WeightTip tip) {
+                domainCallBackListner.doPostExecute(tip);
+            }
+
+            @Override
+            protected void doPreExecute() {
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+
     }
 }

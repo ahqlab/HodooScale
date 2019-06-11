@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.databinding.FragmentTempBinding;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.domain.RealTimeWeight;
+import com.animal.scale.hodoo.domain.WeightGoalChart;
 import com.animal.scale.hodoo.domain.WeightTip;
 import com.animal.scale.hodoo.util.DateUtil;
 import com.animal.scale.hodoo.util.TextManager;
@@ -39,7 +41,7 @@ import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 import noman.weekcalendar.listener.OnWeekChangeListener;
 
-public class TempFragment extends BaseFragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
+public class TempFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, WeightFragmentIn.View, WeightStatistics.View {
 
     FragmentTempBinding binding;
 
@@ -98,9 +100,9 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
         binding.chart1.setNoDataText(getActivity().getString(R.string.weight_data_available));
         binding.chart1.setNoDataTextColor(getActivity().getResources().getColor(R.color.mainBlack));
 
-        statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
-        statisicsPresenter.initLoadData(getContext());
-        statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
+        //statisicsPresenter = new WeightStatisticsPresenter(this, binding.chart1);
+        //statisicsPresenter.initLoadData(getContext());
+        //statisicsPresenter.getDailyStatisticalData(TextManager.TEMP_DATA);
         //Kcal 로리 표시
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(),TextManager.TEMP_DATA);
 
@@ -200,6 +202,16 @@ public class TempFragment extends BaseFragment implements NavigationView.OnNavig
 
     @Override
     public void setCalendar() {
+
+    }
+
+    @Override
+    public void setWeightGoal(WeightGoalChart d) {
+
+    }
+
+    @Override
+    public void setLastCollectionData(RealTimeWeight d) {
 
     }
 

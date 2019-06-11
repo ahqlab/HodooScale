@@ -12,8 +12,8 @@ public class WeightTip  extends FragmentTip implements Domain{
 	public WeightTip() {
 	}
 
-	public WeightTip(String country, int bcs) {
-		this.language = country;
+	public WeightTip(String language, int bcs) {
+		this.language = language;
 		this.bcs = bcs;
 	}
 

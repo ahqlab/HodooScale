@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -17,11 +18,13 @@ import com.animal.scale.hodoo.activity.pet.regist.disease.DiseaseInformationRegi
 import com.animal.scale.hodoo.activity.pet.regist.physique.PhysiqueInformationRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.weight.WeightCheckActivity;
 import com.animal.scale.hodoo.activity.user.agree.TermsOfServiceActivity;
+import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
 import com.animal.scale.hodoo.activity.user.reset.password.send.SendCertificationNumberActivity;
 import com.animal.scale.hodoo.activity.user.signup.SignUpFinishActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityLoginBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -267,6 +270,32 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         presenter.saveFCMToken(user);
     }
 
+    @Override
+    public void selectTheNextAction() {
+        mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
+        Intent intent = new Intent(getApplicationContext(), DeviceRegistActivity.class);
+        intent.putExtra(HodooConstant.LOGIN_PET_REGIST, true);
+        startActivity(intent);
+        //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        finish();
+    }
+
+    @Override
+    public void setServerError() {
+
+    }
+
+    @Override
+    public void goInvitationActivity() {
+        String email = mSharedPrefManager.getStringExtra(SharedPrefVariable.INVITATION_USER_EMAIL);
+        Intent intent = new Intent(this, InvitationFinishActivity.class);
+        intent.putExtra(HodooConstant.INVITATION_EMAIL_KEY, email);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
+        startActivity(intent);
+        finish();
+    }
+
     public void onClickForgotPasswordBtn(View view) {
         Intent intent = new Intent(getApplicationContext(), SendCertificationNumberActivity.class);
         startActivity(intent);
@@ -276,12 +305,19 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
     private void checkState () {
         setBtnEnable(emailState && pwState);
     }
-    private void setBtnEnable ( boolean state ) {
+    @Override
+    public void setBtnEnable ( boolean state ) {
         binding.signupBtn.setEnabled(state);
         if ( binding.signupBtn.isEnabled() ) {
             binding.signupBtn.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         } else {
             binding.signupBtn.setTextColor(ContextCompat.getColor(this, R.color.mainRed));
         }
+    }
+
+    @Override
+    public void removeAutoLogin() {
+        presenter.removeAutoLogin();
+        binding.autoLogin.setChecked(false);
     }
 }

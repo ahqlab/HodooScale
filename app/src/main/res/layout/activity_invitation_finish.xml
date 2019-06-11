@@ -26,16 +26,17 @@
             app:scale_base_height="640"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
-                android:layout_below="@+id/common_toolbar"
-                app:scale_width="360"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/common_toolbar"
                 android:text="@string/invitation_finish_title"
-                app:scale_textsize="34"
                 android:textAlignment="center"
-                android:textColor="@color/mainBlack"
-                />
+                android:textColor="#200000"
+                android:textStyle="bold"
+                app:scale_textsize="32"
+                app:scale_width="360" />
             <TextView
                 app:scale_top="110"
                 app:scale_width="360"

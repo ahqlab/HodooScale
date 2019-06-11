@@ -80,7 +80,7 @@
                 android:textSize="11dp" />
         </LinearLayout>
 
-        <com.github.mikephil.charting.charts.LineChart
+        <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/chart1"
             android:layout_width="match_parent"
             android:layout_height="310dp"

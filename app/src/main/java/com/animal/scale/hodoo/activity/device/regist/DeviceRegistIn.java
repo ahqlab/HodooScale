@@ -11,6 +11,8 @@ public interface DeviceRegistIn {
         void moveWIFISetting();
 
         void moveInvitationFinish( String email );
+
+        void goPetRegist();
     }
 
     interface Presenter{

@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.animal.scale.hodoo.MainActivity;
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.fragment.activity.ActivityFragment;
+import com.animal.scale.hodoo.activity.home.fragment.dashboard.DashBoardFragment;
 import com.animal.scale.hodoo.activity.home.fragment.meal.MealFragment;
 import com.animal.scale.hodoo.activity.home.fragment.temp.TempFragment;
 import com.animal.scale.hodoo.activity.home.fragment.weight.WeightFragment;
@@ -48,6 +49,7 @@ import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.domain.SettingMenu;
 import com.animal.scale.hodoo.domain.WeightTip;
+import com.animal.scale.hodoo.domain.single.ActivityStack;
 import com.animal.scale.hodoo.domain.single.PetAllInfo;
 import com.animal.scale.hodoo.helper.BottomNavigationViewHelper;
 import com.animal.scale.hodoo.util.BadgeUtils;
@@ -108,7 +110,6 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         hActivity = HomeActivity.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.setActivity(this);
-        sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
         presenter = new HomeActivityPresenter(this);
         presenter.loadData(HomeActivity.this);
         presenter.loginCheck();
@@ -141,6 +142,13 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Bundle bundle = new Bundle();
             switch (item.getItemId()) {
+                case R.id.navigation_home :
+                    binding.setActivityInfo(new ActivityInfo("Home"));
+                    bundle.putSerializable("selectPet", selectPet);
+                    DashBoardFragment df = DashBoardFragment.newInstance();
+                    df.setArguments(bundle);
+                    replaceFragment(df);
+                    return true;
                 case R.id.navigation_weight:
                     binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
                     bundle.putSerializable("selectPet", selectPet);
@@ -251,6 +259,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                         mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, selectPet.getPet().getPetIdx());
                         apaterOfPetList.notifyDataSetChanged();
                         presenter.chageCurcleImageOfSelectPet(selectPet);
+                        //presenter.getTipOfCountry(new WeightTip("ko", 3));
                         setFragmentContent();
                     }
                 });
@@ -295,12 +304,18 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     public void setFragmentContent() {
         android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (tf instanceof WeightFragment) {
+        if ( tf instanceof DashBoardFragment ) {
+            DashBoardFragment dashBoardFragment = (DashBoardFragment) tf;
+            dashBoardFragment.setSelectPet(selectPet);
+        }
+        else if (tf instanceof WeightFragment) {
             WeightFragment weightFragment = (WeightFragment) tf;
             weightFragment.setBcsOrBscDescAndTip(selectPet);
-            weightFragment.serChartOfDay();
-            weightFragment.getTipMessageOfCountry(selectPet);
+            //일일 데이터 삭제
+            //weightFragment.serChartOfDay();
             weightFragment.setKg();
+            weightFragment.refrashChart();
+            weightFragment.getTipMessageOfCountry(selectPet);
         } else if (tf instanceof MealFragment) {
             MealFragment mealFragment = (MealFragment) tf;
             mealFragment.initRaderChart(DateUtil.getCurrentDatetime());
@@ -316,9 +331,17 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
      * @param data
      */
     private void saveDefaultPetIdx(List<PetAllInfos> data) {
+        Log.e(TAG, String.format("pet idx : %d", mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
         if (mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) == 0) {
             mSharedPrefManager.putIntExtra(SharedPrefVariable.CURRENT_PET_IDX, data.get(0).getPet().getPetIdx());
             selectPet = data.get(0);
+        } else {
+            for (int i = 0; i < data.size(); i++) {
+                if( data.get(i).getPet().getPetIdx() == mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) ) {
+                    selectPet = data.get(i);
+                    break;
+                }
+            }
         }
         setFragmentContent();
     }
@@ -360,8 +383,8 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         BottomNavigationViewHelper.disableShiftMode(navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        fragmentTransaction.add(R.id.fragment_container, WeightFragment.newInstance()).commit();
-        binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
+        fragmentTransaction.add(R.id.fragment_container, DashBoardFragment.newInstance()).commit();
+        binding.setActivityInfo(new ActivityInfo("Home"));
         VIewUtil vIewUtil = new VIewUtil(HomeActivity.this);
         VIewUtil.getLocationCode(HomeActivity.this);
     }
@@ -375,6 +398,11 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
     @Override
     protected void onResume() {
         super.onResume();
+        ActivityStack<HomeActivity> stack =  ActivityStack.getInstance();
+        Log.e("HJLEE", " >>>>> " + stack.getClasses().size());
+        //stack.getClasses().get(0).finish();
+        sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+
         presenter.getInvitationToServer();
         setBadge();
         int notitype = getIntent().getIntExtra(HodooConstant.NOTI_TYPE_KEY, -1);
@@ -384,7 +412,7 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
             bundle.putBoolean("push", true);
             switch (notitype) {
                 case HodooConstant.FIREBASE_WEIGHT_TYPE :
-                    binding.setActivityInfo(new ActivityInfo(getString(R.string.weight_title)));
+                    binding.setActivityInfo(new ActivityInfo("Home"));
                     WeightFragment wf = WeightFragment.newInstance();
                     wf.setArguments(bundle);
                     replaceFragment(wf);
@@ -400,6 +428,15 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                     break;
             }
         }
+        Log.e(TAG, String.format(" shared pet idx : %d ", mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
+        if ( sharedPetIdx != mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX) ) {
+            sharedPetIdx = mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX);
+
+
+            Log.e(TAG, "sharedPetIdx 다름");
+            Log.e(TAG, String.format("null check : %b, sharedPetIdx : %d, id : %d", apaterOfPetList != null, sharedPetIdx, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
+        }
+//        Log.e(TAG, String.format("null check : %b, id : %d", apaterOfPetList != null, mSharedPrefManager.getIntExtra(SharedPrefVariable.CURRENT_PET_IDX)));
     }
     public static void setCalendarDate ( String calendarDate ) {
         mCalendarDate = calendarDate;
@@ -411,5 +448,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
 
     public static void setWeightTip ( WeightTip weightTip ) {
         mWeightTip = weightTip;
+    }
+
+    @Override
+    public void setTipOfCountry(WeightTip weightTips) {
+        Log.e("HJLEE", "weightTips  ) : " + weightTips);
     }
 }

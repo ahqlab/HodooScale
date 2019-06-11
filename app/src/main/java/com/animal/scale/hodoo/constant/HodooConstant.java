@@ -48,6 +48,8 @@ public class HodooConstant {
     /* fcm 관련 (e) */
     public static final int AUTO_LOGIN_SUCCESS = 1;
 
+    public static final String LOGIN_PET_REGIST = "LOGIN_PET_REGIST";
+
 
     public static final int WITHDRAW = -1;
 
@@ -56,6 +58,12 @@ public class HodooConstant {
     /* pet 관련 등록 여부 체크 (s) */
     public static final String PET_REGIST_RESULT_KEY = "PET_REGIST_RESULT_KEY";
     public static final String PET_IDX_KEY = "PET_IDX_KEY";
+
+    public static final String PET_REGIST_BASIC_DATA_KEY = "PET_REGIST_BASIC_DATA_KEY";
+    public static final String PET_BREED_DATA_KEY = "PET_REGIST_BASIC_DATA_KEY";
+
+    public static final String PET_REGIST_MODE_KEY = "PET_REGIST_MODE_KEY";
+    public static final String PET_EDIT_MODE_KEY = "PET_REGIST_MODE_KEY";
 
     public static final int PET_REGIST_SUCESS = 1;
     public static final int PET_NOT_REGIST_PET = 0;
@@ -70,6 +78,12 @@ public class HodooConstant {
     public static final int INTERVAL = 1000;
     /* Retrofit 관련 (e) */
 
+    /* SERVER RESPONSE */
 
+    public static final int NO_CONTENT_RESPONSE = 204;
+    public static final int OK_RESPONSE = 200;
+    public static final int BAD_REQUEST = 400;
+    public static final int SERVER_ERROR = 500;
+    public static final int SQL_ERROR_RESPONSE = 500;
 
 }

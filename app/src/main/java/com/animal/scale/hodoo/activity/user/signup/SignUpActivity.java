@@ -192,93 +192,10 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
 
     //ESP31
     public void onClickSubmitBtn(View view) {
-//        if (!ValidationUtil.isValidEmail(binding.email.getText().toString())) {
-//            //이메일 형식에 어긋납니다.
-//            super.showBasicOneBtnPopup(null, getString(R.string.istyle_not_valid_email_format))
-//                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    }).show();
-//            return;
-//        } else if (ValidationUtil.isEmpty(binding.password)) {
-//            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_the_password))
-//                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    }).show();
-//            return;
-//        } else if (ValidationUtil.isEmpty(binding.passwordCheck)) {
-//            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_confirmation_password))
-//                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    }).show();
-//        } else if (!binding.passwordCheck.getText().toString().matches(binding.password.getText().toString())) {
-//            super.showBasicOneBtnPopup(null, getString(R.string.istyle_password_is_incorrect))
-//                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    }).show();
-//        } else if (ValidationUtil.isEmpty(binding.nickName)) {
-//            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_nik_name))
-//                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    }).show();
-//        } else if (!binding.radioFemale.isChecked() && !binding.radioMale.isChecked()) {
-//            super.showBasicOneBtnPopup(null, getString(R.string.istyle_select_gender))
-//                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    }).show();
-//        } else if (ValidationUtil.isEmpty(binding.from)) {
-//            super.showBasicOneBtnPopup(null, getString(R.string.istyle_enter_your_place_of_residence))
-//                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    }).show();
-//        } else {
         registUser();
-
-//        }
     }
 
-   /* public void sendServer() {
-        Call<ResultMessageGroup> result = NetRetrofit.getInstance().getUserService().registUser(binding.getUser());
-        result.enqueue(new Callback<ResultMessageGroup>() {
-            @Override
-            public void onResponse(Call<ResultMessageGroup> call, Response<ResultMessageGroup> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        if((int) Double.parseDouble(response.body().getDomain().toString()) == 1){
-                            goNextPage();
-                        }else{
-                            Toast.makeText(getApplicationContext(), getString(R.string.user_regist_failed_message), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), getString(R.string.user_regist_failed_message), Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<ResultMessageGroup> call, Throwable t) {
-            }
-        });
-    }*/
+
 
     @Override
     public void goNextPage() {

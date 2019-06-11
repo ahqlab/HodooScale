@@ -80,6 +80,18 @@ public class HttpUtill {
             dos.writeBytes(lineEnd);
             dos.write(basicInfo.getPetName().getBytes("utf-8"));
             dos.writeBytes(lineEnd);
+            // 펫 종류
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"petType\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(String.valueOf(basicInfo.getPetType()));
+            dos.writeBytes(lineEnd);
+            // 선택된 BFI
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"selectedBfi\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(basicInfo.getSelectedBfi());
+            dos.writeBytes(lineEnd);
             // 개 품종
             dos.writeBytes(twoHyphens + boundary + lineEnd);
             dos.writeBytes("Content-Disposition: form-data; name=\"petBreed\"" + lineEnd);
@@ -178,6 +190,12 @@ public class HttpUtill {
             dos.writeBytes(lineEnd);
             dos.writeBytes(groupCode);
             dos.writeBytes(lineEnd);
+            // 아이디
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"id\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(String.valueOf(basicInfo.getId()));
+            dos.writeBytes(lineEnd);
             // 성별
             dos.writeBytes(twoHyphens + boundary + lineEnd);
             dos.writeBytes("Content-Disposition: form-data; name=\"sex\"" + lineEnd);
@@ -189,6 +207,18 @@ public class HttpUtill {
             dos.writeBytes("Content-Disposition: form-data; name=\"petName\"" + lineEnd);
             dos.writeBytes(lineEnd);
             dos.write(basicInfo.getPetName().getBytes("utf-8"));
+            dos.writeBytes(lineEnd);
+            // 펫 종류
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"petType\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(String.valueOf(basicInfo.getPetType()));
+            dos.writeBytes(lineEnd);
+            // 선택된 BFI
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"selectedBfi\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(basicInfo.getSelectedBfi());
             dos.writeBytes(lineEnd);
             // 개 품종
             dos.writeBytes(twoHyphens + boundary + lineEnd);

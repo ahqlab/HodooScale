@@ -13,8 +13,8 @@ import retrofit2.http.Query;
 
 public interface UserService{
 
-    @POST("user/regist.do")
-    Call<ResultMessageGroup> registUser(@Body User user);
+    @POST("android/user/regist.do")
+    Call<CommonResponce<User>> registUser(@Body User user);
 
     @POST("user/login2.do")
     Call<CommonResponce<User>> login(@Body User user);

@@ -1,0 +1,118 @@
+package com.animal.scale.hodoo.activity.pet.regist.fragment.weight;
+
+import android.content.Context;
+
+import com.animal.scale.hodoo.common.AbstractAsyncTask;
+import com.animal.scale.hodoo.common.AbstractAsyncTaskOfList;
+import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
+import com.animal.scale.hodoo.common.CommonModel;
+import com.animal.scale.hodoo.common.SharedPrefManager;
+import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.BfiModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
+import com.animal.scale.hodoo.domain.PetWeightInfo;
+import com.animal.scale.hodoo.service.NetRetrofit;
+
+import java.util.List;
+
+import retrofit2.Call;
+
+public class WeightCheckModel extends CommonModel {
+
+    public Context context;
+
+    public SharedPrefManager mSharedPrefManager;
+
+    public void loadData(Context context){
+        this.context = context;
+        mSharedPrefManager = SharedPrefManager.getInstance(context);
+    };
+
+    public void getWeightInformation(int petIdx, final DomainCallBackListner<PetWeightInfo> domainCallBackListner) {
+        Call<PetWeightInfo> call = NetRetrofit.getInstance().getPetWeightInfoService().getPetWeightInformation(mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), petIdx);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<PetWeightInfo>() {
+            @Override
+            protected void doPostExecute(PetWeightInfo petWeightInfo) {
+                domainCallBackListner.doPostExecute(petWeightInfo);
+            }
+
+            @Override
+            protected void doPreExecute() {
+                domainCallBackListner.doPreExecute();
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
+    public void deleteWeightInformation(int petIdx, int id, final DomainCallBackListner<Integer> domainCallBackListner) {
+        Call<Integer> call = NetRetrofit.getInstance().getPetWeightInfoService().delete(petIdx, id);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
+
+            @Override
+            protected void doPostExecute(Integer result) {
+                domainCallBackListner.doPostExecute(result);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
+    public void registWeightInformation(int petIdx, PetWeightInfo petWeightInfo,  final CommonDomainCallBackListner<Integer> domainCallBackListner) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetWeightInfoService().regist(petIdx , petWeightInfo);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>(){
+            @Override
+            protected void doPostExecute(CommonResponce<Integer> commonResponce) {
+                domainCallBackListner.doPostExecute(commonResponce);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+    public void getBfiQuestion (String location, int type, final DomainListCallBackListner<BfiModel> callback) {
+        Call<List<BfiModel>> call = NetRetrofit.getInstance().getPetWeightInfoService().getBfiQuestion(location, type);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<BfiModel>() {
+
+
+            @Override
+            protected void doPostExecute(List<BfiModel> d) {
+                callback.doPostExecute(d);
+            }
+
+            @Override
+            protected void doPreExecute() {
+
+            }
+
+            @Override
+            protected void doCancelled() {
+
+            }
+        }.execute(call), limitedTime, interval, true).start();
+    }
+
+
+    public interface ResultListner {
+        void doPostExecute(PetWeightInfo petWeightInfo);
+        void doPreExecute();
+    }
+}

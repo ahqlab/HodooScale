@@ -1,6 +1,10 @@
 package com.animal.scale.hodoo.service;
 
+import com.animal.scale.hodoo.domain.BfiModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,13 +19,13 @@ public interface PetWeightInfoService {
     @POST("pet/weight/delete.do")
     Call<Integer> delete(@Query("petIdx") int petIdx, @Query("id") int id);
 
-    @POST("pet/weight/regist.do")
-    Call<Integer> regist(@Query("petIdx") int petIdx, @Body PetWeightInfo petWeightInfo);
+    @POST("android/pet/weight/regist.do")
+    Call<CommonResponce<Integer>> regist(@Query("petIdx") int petIdx, @Body PetWeightInfo petWeightInfo);
 
     @POST("pet/weight/bcs.do")
     Call<PetWeightInfo> getBcs(@Query("basicIdx") int basicIdx);
 
-
-
+    @POST("pet/weight/bfi.do")
+    Call<List<BfiModel>> getBfiQuestion(@Query("location") String location, @Query("type") int type);
 
 }

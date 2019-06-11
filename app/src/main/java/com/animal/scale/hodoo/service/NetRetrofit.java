@@ -2,6 +2,7 @@ package com.animal.scale.hodoo.service;
 
 import com.animal.scale.hodoo.common.SharedPrefVariable;
 import com.animal.scale.hodoo.constant.HodooConstant;
+import com.animal.scale.hodoo.domain.PetUserSelectionQuestion;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class NetRetrofit {
+
     private static NetRetrofit ourInstance = new NetRetrofit();
 
     public static NetRetrofit getInstance() {
@@ -55,6 +57,14 @@ public class NetRetrofit {
     FeederService feederService = retrofit.create(FeederService.class);
     WeightTipService weightTipService =  retrofit.create(WeightTipService.class);
     MealTipService mealTipService =  retrofit.create(MealTipService.class);
+    AppVersionService appVersionService =  retrofit.create(AppVersionService.class);
+    AlarmItemService alarmItemService =  retrofit.create(AlarmItemService.class);
+    NoticeService noticeService =  retrofit.create(NoticeService.class);
+    BodyFatRiskService bodyFatRiskService = retrofit.create(BodyFatRiskService.class);
+    WeightGoalChartService weightGoalChartService =  retrofit.create(WeightGoalChartService.class);
+
+    PetUserSelectQuestionService petUserSelectionQuestionService = retrofit.create(PetUserSelectQuestionService.class);
+
 
     public UserService getUserService() {
         return service;
@@ -105,6 +115,24 @@ public class NetRetrofit {
 
     public MealTipService getMealTipService() {
         return mealTipService;
+    }
+
+    public AppVersionService getAppVersionService() { return appVersionService; }
+
+    public AlarmItemService getAlarmItemService() {
+        return alarmItemService;
+    }
+
+    public NoticeService getNoticeService() {
+        return noticeService;
+    }
+    public PetUserSelectQuestionService getPetUserSelectionQuestionService() {return petUserSelectionQuestionService;}
+    public BodyFatRiskService getBodyFatRiskService(){
+        return  bodyFatRiskService;
+    }
+
+    public WeightGoalChartService getWeightGoalChartService(){
+        return weightGoalChartService;
     }
 }
 

@@ -30,7 +30,8 @@ public class DeviceRegistPresenter implements DeviceRegistIn.Presenter {
                 view.setProgress(true);
             }
         });*/
-        view.moveWIFISetting();
+        view.goPetRegist();
+        //view.moveWIFISetting();
     }
 
     @Override

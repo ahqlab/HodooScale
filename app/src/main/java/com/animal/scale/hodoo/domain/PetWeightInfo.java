@@ -12,4 +12,6 @@ public class PetWeightInfo implements Serializable{
 	private int bcs;
 
 	private String createDate;
+
+	private String selectedBfi;
 }

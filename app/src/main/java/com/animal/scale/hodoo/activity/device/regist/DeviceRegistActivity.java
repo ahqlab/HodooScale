@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.animal.scale.hodoo.R;
+import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
+import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.activity.user.invitation.InvitationActivity;
 import com.animal.scale.hodoo.activity.user.invitation.finish.InvitationFinishActivity;
 import com.animal.scale.hodoo.activity.user.login.LoginActivity;
@@ -26,6 +28,10 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
 
     private boolean inAppSettingState = false;
 
+    private final int ADD_PET = 0;
+
+    private boolean loginRegistState = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,7 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         presenter.loadData(getApplicationContext());
         presenter.checkInvitation();
         inAppSettingState = getIntent().getBooleanExtra(HodooConstant.IN_APP_SETTING_KEY, false);
+        loginRegistState = getIntent().getBooleanExtra(HodooConstant.LOGIN_PET_REGIST, false);
     }
 
     @Override
@@ -71,11 +78,15 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
 
     @Override
     public void moveWIFISetting() {
-        Intent intent = new Intent(getApplicationContext(), WifiSearchActivity.class);
+       /* Intent intent = new Intent(getApplicationContext(), WifiSearchActivity.class);
         intent.putExtra(HodooConstant.IN_APP_SETTING_KEY, inAppSettingState);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
-        if( inAppSettingState ) this.finish();
+        if( inAppSettingState ) this.finish();*/
+        Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+        intent.putExtra("petIdx", ADD_PET);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -84,6 +95,16 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         intent.putExtra(HodooConstant.INVITATION_EMAIL_KEY, email);
         intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(SharedPrefVariable.LOGIN_PAGE_INTENT, true);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void goPetRegist() {
+        Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
+        intent.putExtra("petIdx", ADD_PET);
+        if ( loginRegistState )
+            intent.putExtra(HodooConstant.LOGIN_PET_REGIST, loginRegistState);
         startActivity(intent);
         finish();
     }

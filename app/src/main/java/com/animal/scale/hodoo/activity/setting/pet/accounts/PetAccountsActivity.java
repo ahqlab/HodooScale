@@ -11,10 +11,12 @@ import android.widget.ImageView;
 
 import com.animal.scale.hodoo.R;
 import com.animal.scale.hodoo.activity.home.activity.HomeActivity;
+import com.animal.scale.hodoo.activity.pet.regist.activity.PetRegistActivity;
 import com.animal.scale.hodoo.activity.pet.regist.basic.BasicInformationRegistActivity;
 import com.animal.scale.hodoo.activity.setting.list.SettingListActivity;
 import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.constant.HodooConstant;
 import com.animal.scale.hodoo.custom.view.BottomDialog;
 import com.animal.scale.hodoo.databinding.ActivityPetAccountsBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
@@ -50,7 +52,7 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         super.setToolbarColor();
         presenter = new PetAccountPresenter(this);
         presenter.initUserData(getApplicationContext());
-        presenter.getData();
+
         homeActivity = (HomeActivity)HomeActivity.hActivity;
         settingListActivity = (SettingListActivity) SettingListActivity.settingListActivity;
 
@@ -69,9 +71,8 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         binding.petGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> adapterView, View view, final int position, long l) {
-
                 if(position == ADD_PET){
-                    Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
                     intent.putExtra("petIdx", ADD_PET);
                     startActivity(intent);
                     overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
@@ -115,7 +116,9 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
 
                                 break;
                             case R.id.pet_info :
-                                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+//                                Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
+//                                intent.putExtra(HodooConstant.PET_EDIT_MODE_KEY, true);
                                 intent.putExtra("petIdx", petAllInfos.getPet().getPetIdx());
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
@@ -167,10 +170,15 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
     public void goToPetRegistActivity() {
         homeActivity.finish();
         settingListActivity.finish();
-        Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
-        intent.putExtra("petIdx", 0);
-        intent.putExtra("deleteAllPet", true);
+        Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);
+        intent.putExtra(HodooConstant.LOGIN_PET_REGIST, true);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.getData();
     }
 }

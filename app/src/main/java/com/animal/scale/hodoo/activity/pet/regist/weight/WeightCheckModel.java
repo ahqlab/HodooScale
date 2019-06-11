@@ -8,6 +8,7 @@ import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetWeightInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
@@ -65,13 +66,12 @@ public class WeightCheckModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void registWeightInformation(int petIdx, PetWeightInfo petWeightInfo, final DomainCallBackListner<Integer> domainCallBackListner) {
-        Call<Integer> call = NetRetrofit.getInstance().getPetWeightInfoService().regist(petIdx, petWeightInfo);
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
-
+    public void registWeightInformation(int petIdx, PetWeightInfo petWeightInfo, final CommonDomainCallBackListner<Integer> domainCallBackListner) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetWeightInfoService().regist(petIdx, petWeightInfo);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>(){
             @Override
-            protected void doPostExecute(Integer integer) {
-                domainCallBackListner.doPostExecute(integer);
+            protected void doPostExecute(CommonResponce<Integer> commonResponce) {
+                domainCallBackListner.doPostExecute(commonResponce);
             }
 
             @Override
@@ -85,7 +85,6 @@ public class WeightCheckModel extends CommonModel {
             }
         }.execute(call), limitedTime, interval, true).start();
     }
-
 
     public interface ResultListner {
         void doPostExecute(PetWeightInfo petWeightInfo);

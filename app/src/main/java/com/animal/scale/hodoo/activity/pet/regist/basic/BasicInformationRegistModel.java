@@ -11,6 +11,7 @@ import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.domain.PetBreed;
@@ -35,8 +36,6 @@ public class BasicInformationRegistModel extends CommonModel {
         this.context = context;
         mSharedPrefManager = SharedPrefManager.getInstance(context);
     }
-
-    ;
 
     public View onClickOpenBottomDlg() {
         return null;
@@ -107,12 +106,13 @@ public class BasicInformationRegistModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void getAllPetBreed(String location, final DomainListCallBackListner<PetBreed> callback) {
-        final Call<List<PetBreed>> call = NetRetrofit.getInstance().getPetService().getAllBreed( location );
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTaskOfList<PetBreed>() {
+    public void getAllPetBreed(String location, int typeIdx, final ObjectCallBackListner<CommonResponce<List<PetBreed>>> callback) {
+        final Call<CommonResponce<List<PetBreed>>> call = NetRetrofit.getInstance().getPetService().getAllBreed( location, typeIdx );
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<List<PetBreed>>>() {
+
             @Override
-            protected void doPostExecute(List<PetBreed> d) {
-                callback.doPostExecute(d);
+            protected void doPostExecute(CommonResponce<List<PetBreed>> responce) {
+                callback.doPostExecute(responce);
             }
 
             @Override

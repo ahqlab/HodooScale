@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="activity"
+            type="com.animal.scale.hodoo.activity.pet.regist.fragment.activity.ActivityQuestionFragment"/>
+    </data>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/add_pet_navigation"
+            layout="@layout/add_pet_nav"/>
+        <ListView
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/add_pet_navigation"
+            android:layout_above="@+id/next_step"
+            android:id="@+id/activity_question_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"/>
+        <Button
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/next_step"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/pink_btn"
+            android:onClick="@{activity::onClickCompleateBtn}"
+            android:text="@string/compleate"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="40dp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</layout>

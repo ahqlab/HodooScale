@@ -7,6 +7,7 @@ import com.animal.scale.hodoo.common.AsyncTaskCancelTimerTask;
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.SharedPrefManager;
 import com.animal.scale.hodoo.common.SharedPrefVariable;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.PetPhysicalInfo;
 import com.animal.scale.hodoo.service.NetRetrofit;
 
@@ -64,13 +65,13 @@ public class PhysiqueInformationRegistModel extends CommonModel {
         }.execute(call), limitedTime, interval, true).start();
     }
 
-    public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain, final DomainCallBackListner<Integer> domainCallBackListner) {
-        Call<Integer> call = NetRetrofit.getInstance().getPetPhysicalInfoService().regist(petIdx, domain);
-        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<Integer>(){
+    public void registPhysiqueInformation(int petIdx, PetPhysicalInfo domain, final CommonDomainCallBackListner<Integer> domainCallBackListner) {
+        Call<CommonResponce<Integer>> call = NetRetrofit.getInstance().getPetPhysicalInfoService().regist(petIdx, mSharedPrefManager.getStringExtra(SharedPrefVariable.GROUP_CODE), domain);
+        new AsyncTaskCancelTimerTask(new AbstractAsyncTask<CommonResponce<Integer>>(){
 
             @Override
-            protected void doPostExecute(Integer result) {
-                domainCallBackListner.doPostExecute(result);
+            protected void doPostExecute(CommonResponce<Integer> commonResponce) {
+                domainCallBackListner.doPostExecute(commonResponce);
             }
 
             @Override

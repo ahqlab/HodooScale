@@ -33,6 +33,7 @@ import com.animal.scale.hodoo.custom.view.BottomDialog;
 import com.animal.scale.hodoo.custom.view.input.CommonTextWatcher;
 import com.animal.scale.hodoo.databinding.ActivityBasicInformaitonRegistBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.IosStyleBottomAlert;
 import com.animal.scale.hodoo.domain.Pet;
 import com.animal.scale.hodoo.domain.PetBasicInfo;
@@ -60,7 +61,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     public static final int CAMERA_PERMISSION_CODE = 100;
     public static final int STORAGE_PERMISSION_CODE = 101;
 
-    private int breedIndex;
+    private int breedIndex = -1;
 
     ProgressDialog progressDialog;
 
@@ -171,7 +172,7 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             }
         });*/
 
-        presenter.getAllPetBreed( location );
+        presenter.getAllPetBreed( location, 0 );
     }
 
     @Override
@@ -249,8 +250,15 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
     }
 
     @Override
-    public void getAllPetBreed(List<PetBreed> breeds) {
-        this.breeds = breeds;
+    public void getAllPetBreed(CommonResponce<List<PetBreed>> responce) {
+
+        this.breeds = responce.domain;
+        for (int i = 0; i < breeds.size(); i++) {
+            if ( breeds.get(i).getName().equals(binding.getInfo().getPetBreed()) ) {
+                breedIndex = breeds.get(i).getId();
+                break;
+            }
+        }
     }
 
     @Override
@@ -409,6 +417,9 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
         } else {
             presenter.registBasicInfo(REQUEST_URL, info, binding.profile);
         }
+
+
+
     }
 
     private void setBasicInfo() {
@@ -490,4 +501,5 @@ public class BasicInformationRegistActivity extends BaseActivity<BasicInformatio
             binding.nextStep.setTextColor(ContextCompat.getColor(this, R.color.mainRed));
         }
     }
+
 }

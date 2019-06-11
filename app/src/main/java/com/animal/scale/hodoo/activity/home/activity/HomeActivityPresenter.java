@@ -5,8 +5,10 @@ import android.util.Log;
 
 import com.animal.scale.hodoo.common.CommonModel;
 import com.animal.scale.hodoo.common.CommonNotificationModel;
+import com.animal.scale.hodoo.domain.CommonResponce;
 import com.animal.scale.hodoo.domain.InvitationUser;
 import com.animal.scale.hodoo.domain.PetAllInfos;
+import com.animal.scale.hodoo.domain.WeightTip;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -203,10 +205,32 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
 
     @Override
     public void loadCustomPetListDialog() {
-        model.getPetAllInfo(new CommonModel.DomainListCallBackListner<PetAllInfos>() {
+        model.getPetAllInfo(new CommonModel.ObjectCallBackListner<CommonResponce<List<PetAllInfos>>>() {
             @Override
-            public void doPostExecute(List<PetAllInfos> petAllInfos) {
-                view.setCustomPetListDialog(petAllInfos);
+            public void doPostExecute(CommonResponce<List<PetAllInfos>> listCommonResponce) {
+                view.setCustomPetListDialog(listCommonResponce.domain);
+            }
+
+            @Override
+            public void doPreExecute() {
+
+            }
+
+            @Override
+            public void doCancelled() {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void getTipOfCountry(WeightTip weightTip) {
+        model.getTipOfCountry(weightTip, new CommonModel.DomainCallBackListner<WeightTip>() {
+            @Override
+            public void doPostExecute(WeightTip weightTips) {
+                view.setTipOfCountry(weightTips);
             }
 
             @Override
@@ -219,7 +243,5 @@ public class HomeActivityPresenter implements HomeActivityIn.Presenter {
                 //view.setProgress(false);
             }
         });
-
-
     }
 }

@@ -3,6 +3,7 @@ package com.animal.scale.hodoo.custom.binding;
 import android.databinding.BindingAdapter;
 import android.graphics.Color;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -169,4 +170,6 @@ public class CustomBinding {
             checkBox.setChecked(false);
         }
     }
+
+
 }
