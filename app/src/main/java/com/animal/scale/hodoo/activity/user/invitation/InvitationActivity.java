@@ -21,6 +21,9 @@ import com.animal.scale.hodoo.util.ValidationUtil;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
+/**
+ * 그룹 초대 요청
+ */
 public class InvitationActivity extends BaseActivity<InvitationActivity> implements Invitation.View {
 
     public static int NOT_TO_DEVICE = -2;

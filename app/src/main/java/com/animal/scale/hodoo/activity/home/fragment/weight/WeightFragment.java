@@ -166,6 +166,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
                 setCalendar();
             selectPet = (PetAllInfos) getArguments().getSerializable("selectPet");
             if (null != selectPet) {
+                //중요로직
                 setBcsOrBscDescAndTip(selectPet);
                 serChartOfDay();
                 presenter.getTipMessageOfCountry(new WeightTip(country, selectPet.getPetWeightInfo().getBcs()));
@@ -176,6 +177,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         return binding.getRoot();
     }
 
+    /**
+     * 오늘의 팁
+     * @param selectPet
+     */
     public void getTipMessageOfCountry(PetAllInfos selectPet) {
         if (((HodooApplication) getActivity().getApplication()).isExperienceState())
             return;
@@ -205,7 +210,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         presenter.getLastCollectionData(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate(), TextManager.WEIGHT_DATA);
     }
 
-    //
+    //차트 갱신
     public void refrashChart() {
         switch (currentChart) {
             case 0:
@@ -220,6 +225,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         }
     }
 
+    /**
+     * 목표체중을을 보여준다.
+     * @param d
+     */
     @Override
     public void setWeightGoal(HodooIndex d) {
         //목표체중
@@ -241,7 +250,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         }*/
     }
 
-
+    /**
+     * 오늘의 평군 체중
+     * @param d
+     */
     @Override
     public void setLastCollectionData(RealTimeWeight d) {
         if (d != null) {
@@ -290,6 +302,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.weightView.setNumber(0);
     }
 
+    /**
+     *
+     * @param d
+     */
     @Override
     public void setLastCollectionDataOrSaveAvgWeight(RealTimeWeight d) {
         //if ( realTimeMode ) {
@@ -311,8 +327,13 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             rotationStop(rotationView);*/
     }
 
+    /**
+     * 사용안함.
+     * @param weightTip
+     */
     @Override
     public void setTipMessageOfCountry(WeightTip weightTip) {
+        //저장만함.
         HomeActivity.setWeightTip(weightTip);
         //binding.collapse.setTitle(weightTip.getTitle());
         // binding.collapse.setContent(weightTip.getContent());
@@ -323,7 +344,9 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         binding.weekCalendar.setSelectedDate(DateTime.now());
     }
 
-
+    /**
+     * 수평캘린더와 캘린더 Dialog 그리고 그래프까지 시간 동기를 맞춘다.
+     */
     @Override
     public void initWeekCalendar() {
 
@@ -379,6 +402,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         return false;
     }
 
+    //BCS를 사용하지 않음으로 사용안함.
     @Override
     public void setBcs(PetWeightInfo petWeightInfo) {
         presenter.setBcsAndBcsDesc(petWeightInfo.getBcs());
@@ -408,7 +432,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
             rotationStop(v);
         }
     }
-
+    //사용안함.
     private void refreshData() {
         nowTime = System.currentTimeMillis();
         //binding.lastRefresh.setText(getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)));
@@ -417,6 +441,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         presenter.getLastCollectionData(DateUtil.getCurrentDatetime(), TextManager.WEIGHT_DATA);
     }
 
+    /**
+     * 사용안함.
+     * @param v
+     */
     private void rotationStart(View v) {
         RotateAnimation rotate = new RotateAnimation(
                 0, 360,
@@ -430,6 +458,10 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
         refrashState = true;
     }
 
+    /**
+     * 사용안함.
+     * @param v
+     */
     private void rotationStop(final View v) {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -457,7 +489,7 @@ public class WeightFragment extends Fragment implements NavigationView.OnNavigat
     @Override
     public void onResume() {
         super.onResume();
-
+        //차트를 갱신함.
 //        setWeight();
         app = (HodooApplication) getActivity().getApplication();
         binding.chartWrap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

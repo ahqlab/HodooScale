@@ -41,7 +41,7 @@ import com.github.javiersantos.bottomdialogs.BottomDialog;
 import java.util.ArrayList;
 
 /**
- *
+ *  식사 등록 Activity
  */
 public class MealRegistrationActivity extends BaseActivity<MealRegistrationActivity> implements MealRegistrationIn.View {
 

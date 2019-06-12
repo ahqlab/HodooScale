@@ -32,6 +32,9 @@ import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.util.VIewUtil;
 import com.animal.scale.hodoo.util.ValidationUtil;
 
+/**
+ * 자체 로그인을 구현하는 기능이였으나, SNS로그인만 허용되는 쪽으로 변경되었음.
+ */
 public class LoginActivity extends BaseActivity<LoginActivity> implements Login.View {
 
     ActivityLoginBinding binding;
@@ -112,7 +115,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         return super.onKeyDown(keyCode, event);
     }
 
-    //onClick
+    //onClick login 버튼
     public void onClickLoginBtn(View view) {
         User user = new User();
         user.setEmail(binding.email.getText());
@@ -124,7 +127,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         }
     }
 
-    //onClick
+    //onClick 회원가입 버튼
     public void onClickCreateAccountBtn(View view) {
         goTermsOfServiceActivity();
     }
@@ -155,6 +158,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         setProgress(false);
     }
 
+    //프로그래스바 컨트롤
     @Override
     public void setProgress(Boolean play) {
         if (play) {
@@ -164,6 +168,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         }
     }
 
+    //질병등록 페이지로 이동(사용안됨)
     @Override
     public void goDeviceRegistActivity() {
         //token 등록
@@ -174,6 +179,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         finish();
     }
 
+    //펫 등록페이지로 이동
     @Override
     public void goPetRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
@@ -184,6 +190,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         finish();
     }
 
+    //질병등록 페이지로 이동
     @Override
     public void goDiseasesRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
@@ -192,7 +199,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
-
+    //피지컬 정보 등록 페이지로 이동(사용안됨)
     @Override
     public void goPhysicalRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
@@ -202,6 +209,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         finish();
     }
 
+    //무게등록 페이지로 이동(사용안됨)
     @Override
     public void goWeightRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
@@ -211,6 +219,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         finish();
     }
 
+    //홈으로 이동
     @Override
     public void goHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -218,8 +227,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
         finish();
     }
-
-
+    //.. 이동
     @Override
     public void goTermsOfServiceActivity() {
         Intent intent = new Intent(getApplicationContext(), TermsOfServiceActivity.class);
@@ -228,17 +236,20 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         finish();
     }
 
+    //오토로그인 상태로 변경
     @Override
     public void setAutoLoginState() {
         presenter.setAutoLogin( autoLoginState );
     }
 
+    //오토로그인 상태 변경
     @Override
     public void setAutoLogin(boolean state) {
         binding.autoLogin.setChecked(state);
         autoLoginState = state;
     }
 
+    //이메일 전송 페이지로 이동
     @Override
     public void goEmailCertified() {
         Intent intent = new Intent(getApplicationContext(), SignUpFinishActivity.class);
@@ -247,11 +258,13 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         //overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 
+    //페스워드 셋팅
     @Override
     public void setPassword(String pw) {
         binding.password.editText.setText(pw);
     }
 
+    //버튼 상태 변경
     @Override
     public void setBtnState(boolean state) {
         if ( ValidationUtil.isValidEmail(binding.email.getText().toString()) ) {
@@ -263,6 +276,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         checkState();
     }
 
+    //Fcm토큰 저장
     @Override
     public void saveFcmToken() {
         User user = new User();
@@ -270,6 +284,10 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         presenter.saveFCMToken(user);
     }
 
+    /**
+     * 로그인 후 등록되 다비이스가 없다면
+     * 디바이스 등록 페이지로 이동한다.
+     */
     @Override
     public void selectTheNextAction() {
         mSharedPrefManager.putIntExtra(SharedPrefVariable.AUTO_LOGIN, 0);
@@ -285,6 +303,9 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
 
     }
 
+    /**
+     * 사용가자 회원가입 후 그룹 초대장을 보내고 승인을 받지 않았다면, 승일을 기다리는 페이지로 이동한다.
+     */
     @Override
     public void goInvitationActivity() {
         String email = mSharedPrefManager.getStringExtra(SharedPrefVariable.INVITATION_USER_EMAIL);
@@ -296,15 +317,18 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
         finish();
     }
 
+    //비밀번호 분실 페이지로 이동
     public void onClickForgotPasswordBtn(View view) {
         Intent intent = new Intent(getApplicationContext(), SendCertificationNumberActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 
+    //EditText의 상태를 체크한다.validation
     private void checkState () {
         setBtnEnable(emailState && pwState);
     }
+    //버튼 상태 변경
     @Override
     public void setBtnEnable ( boolean state ) {
         binding.signupBtn.setEnabled(state);
@@ -314,7 +338,7 @@ public class LoginActivity extends BaseActivity<LoginActivity> implements Login.
             binding.signupBtn.setTextColor(ContextCompat.getColor(this, R.color.mainRed));
         }
     }
-
+    //자동 로그인 삭제
     @Override
     public void removeAutoLogin() {
         presenter.removeAutoLogin();

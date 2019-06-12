@@ -30,7 +30,7 @@ import com.tistory.dwfox.dwrulerviewlibrary.view.ObservableHorizontalScrollView;
 import com.tistory.dwfox.dwrulerviewlibrary.view.ScrollingValuePicker;
 
 /**
- * Created by SongSeokwoo on 2019-04-02.
+ * Created by SongSeokwoo on 2019-04-02..
  */
 public class PhysiqueInfomationRegistFragment extends PetRegistFragment implements PhysiqueInformationRegistIn.View {
     private FragmentPhysiqueInfomationBinding binding;

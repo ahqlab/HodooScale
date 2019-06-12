@@ -15,6 +15,9 @@ import com.animal.scale.hodoo.domain.ActivityInfo;
 
 import butterknife.ButterKnife;
 
+/**
+ * 서비스 이용약관
+ */
 public class TermsOfServiceActivity extends BaseActivity<TermsOfServiceActivity> {
 
     ActivityTermsOfServiceBinding binding;
@@ -52,6 +55,7 @@ public class TermsOfServiceActivity extends BaseActivity<TermsOfServiceActivity>
         }
     }
 
+    //Checkbox 상태 check
     public boolean isCheckStatus(){
         if(binding.personalInformationCheck.isChecked() &&  binding.termsOfUseCheck.isChecked()){
             return true;

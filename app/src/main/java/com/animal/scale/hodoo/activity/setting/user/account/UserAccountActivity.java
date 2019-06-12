@@ -19,6 +19,9 @@ import com.animal.scale.hodoo.domain.User;
 
 import java.util.List;
 
+/**
+ * 그룹 유저 그리드 리스트
+ */
 public class UserAccountActivity extends BaseActivity<UserAccountActivity> implements UserAccountIn.View {
 
     ActivityUserAccountBinding binding;
@@ -42,6 +45,7 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
         presenter = new UserAccountPresenter(this);
         presenter.initUserData(getApplicationContext());
         presenter.getAccessType();
+        //리스트 요청
         presenter.getData();
     }
 
@@ -50,7 +54,7 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
         return UserAccountActivity.this;
     }
 
-
+    //버튼 상태 변경
     @Override
     public void setEditBtn() {
         super.setSubBtn(getString(R.string.edit_btn_text), new OnSubBtnClickListener() {
@@ -161,10 +165,17 @@ public class UserAccountActivity extends BaseActivity<UserAccountActivity> imple
                 }).show();
     }
 
+    /**
+     * 서버 그룹 요청 Callback
+     * @param idx
+     * @param data
+     * @Description 서버에서 온 유저 리스트로 그리드 아답터에 셋팅한다.
+     */
     @Override
     public void setAdapter(int idx, List<User> data) {
         if ( adapter == null ) {
             adapter = new UserAccountGridAdapter(UserAccountActivity.this, idx, data);
+            //그룹 탈퇴
             adapter.setClickListener(new UserAccountGridAdapter.EditBtnClickListener() {
                 @Override
                 public void onClick(final User user) {

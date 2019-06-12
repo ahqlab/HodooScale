@@ -24,6 +24,10 @@ import com.animal.scale.hodoo.domain.AlarmItem;
 
 import java.util.List;
 
+
+/**
+ * 알람 설정 제어 Activity
+ */
 public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> implements AlarmItemListIn.View {
 
     ActivityNotificationManagerBinding binding;
@@ -46,6 +50,7 @@ public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> i
         super.setToolbarColor();
         presenter = new AlarmItemListPresenter(AlarmItemListActivity.this);
         presenter.loadData(AlarmItemListActivity.this);
+        //알람 목록을 서버에 요청한다.
         presenter.getAlarmItems();
     }
 
@@ -57,6 +62,12 @@ public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> i
     public void setAdapter(List<AlarmItem> alarmItems) {
     }
 
+    /**
+     * 알람목록 서버 요청 Callback
+     * @param alarmItems
+     * @Description alarmItems list 를 adater 셋팅한다.
+     *
+     */
     @Override
     public void setAlarmItem(final List<AlarmItem> alarmItems) {
 
@@ -84,9 +95,15 @@ public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> i
             }
         };
         binding.notificationListview.setAdapter(adapterOfNotification);
+        //서버에 저장된 알람정보를 가져온다.
         presenter.getAlarm();
     }
 
+    /**
+     * 서버 알람정보 Callback
+     * @param number Shift 연산된 알람카운터를 받는다.
+     * @Description 서버정보를 View 에 매핑하여 상태를 변경한다.
+     */
     @Override
     public void setAlarm(int number) {
         mNumber = number;
@@ -220,6 +237,10 @@ public class AlarmItemListActivity extends BaseActivity<AlarmItemListActivity> i
         presenter.saveAlarm(mNumber);
     }
 
+    /**
+     * 저장완료 후 팝업
+     * @param result
+     */
     @Override
     public void done( int result ) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this)

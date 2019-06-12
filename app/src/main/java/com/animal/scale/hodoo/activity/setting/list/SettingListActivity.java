@@ -46,6 +46,10 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 셋팅 메뉴 리스트 Activity
+ */
 public class SettingListActivity extends BaseActivity<SettingListActivity> implements SettingList.View{
 
 
@@ -102,7 +106,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
     List<SettingMenu> menus;
 
     ArrayList<List<SettingMenu>> settingMenus;
-
+    //Bedge count를 위한 push broadcast
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -121,6 +125,7 @@ public class SettingListActivity extends BaseActivity<SettingListActivity> imple
         sharedPrefManager = SharedPrefManager.getInstance(this);
         presenter = new SettingListPresenter(this);
         presenter.loadData(SettingListActivity.this);
+        //셋팅 메뉴 리스트를 요청한다. (셋팅메뉴는 xml 로 존재함 array.xml)
         presenter.getStringSettingList(this);
     }
 

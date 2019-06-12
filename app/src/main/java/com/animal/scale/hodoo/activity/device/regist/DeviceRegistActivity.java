@@ -129,11 +129,19 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         finish();
     }
 
+    /**
+     * 그룹 초대 페이지로 이동
+     * @param v
+     */
     public void moveInvitation( View v ) {
         Intent intent = new Intent(getApplicationContext(), InvitationActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
+
+    /**
+     * Back 버튼 클릭시 호출
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();

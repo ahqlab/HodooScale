@@ -98,6 +98,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         return FindHodoosActivity.this;
     }
 
+    /**
+     * java code 로 Connect 버튼 생성
+     *
+     */
     public void createConnectBtn(){
         VIewUtil vIewUtil = new VIewUtil(this);
         final int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 58, getResources().getDisplayMetrics());
@@ -122,7 +126,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         binding.btnArea.addView(connectBtn);
     }
 
-
+    /**
+     * java code 로 Sane 버튼 생성
+     *
+     */
     public void createSaveBtn(final String bssid){
         VIewUtil vIewUtil = new VIewUtil(this);
         final int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 58, getResources().getDisplayMetrics());
@@ -150,7 +157,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         binding.btnArea.removeAllViews();
         binding.btnArea.addView(btn);
     }
-
+    /**
+     * java code 로 Rerty 버튼 생성
+     *
+     */
     public void createRetryBtn(){
         VIewUtil vIewUtil = new VIewUtil(this);
         final int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 58, getResources().getDisplayMetrics());
@@ -175,7 +185,13 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         binding.btnArea.addView(btn);
     }
 
-
+    /**
+     * EsptouchAsyncTask3 에 공유기 정보 SEND
+     * TaskExcute
+     * @param pSsid
+     * @param pBssid
+     * @param pPassword
+     */
     private void showEsptouchInfo(String pSsid, String pBssid, String pPassword) {
         String isSsidHiddenStr = "NO";
         String taskResultCountStr = "1";
@@ -201,6 +217,9 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         }
     }
 
+    /**
+     * 디바이스 등록 성공 함수
+     */
     @Override
     public void successDevideResigt() {
         wifiSearchActivity.finish();
@@ -216,6 +235,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         finish();
     }
 
+    /**
+     * Pet등록 페이지로 이동
+     * @param petIdx
+     */
     @Override
     public void goBasicRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), BasicInformationRegistActivity.class);
@@ -225,6 +248,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         finish();
     }
 
+    /**
+     * 질병등록 페이지 이동
+     * @param petIdx
+     */
     @Override
     public void goDiseasesRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), DiseaseInformationRegistActivity.class);
@@ -234,6 +261,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         finish();
     }
 
+    /**
+     * 피지컬 등록 페이지 이동
+     * @param petIdx
+     */
     @Override
     public void goPhysicalRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
@@ -243,6 +274,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         finish();
     }
 
+    /**
+     * 무게등록 페이지 이동
+     * @param petIdx
+     */
     @Override
     public void goWeightRegistActivity(int petIdx) {
         Intent intent = new Intent(getApplicationContext(), WeightCheckActivity.class);
@@ -349,6 +384,10 @@ public class FindHodoosActivity extends BaseActivity<FindHodoosActivity> impleme
         }
     }*/
 
+    /**
+     * 여기서부터는 ESP32 API
+     * @param result
+     */
     private void onEsptoucResultAddedPerform(final IEsptouchResult result) {
         runOnUiThread(new Runnable() {
             @Override

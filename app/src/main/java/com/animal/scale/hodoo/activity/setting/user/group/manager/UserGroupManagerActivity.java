@@ -22,6 +22,9 @@ import com.animal.scale.hodoo.domain.SettingMenu;
 
 import java.util.List;
 
+/**
+ * 사용안함.
+ */
 public class UserGroupManagerActivity extends BaseActivity<UserGroupManagerActivity> implements UserGropManager.View {
     private ActivityUserGroupManagerBinding binding;
     private UserGropManager.Presenter presenter;

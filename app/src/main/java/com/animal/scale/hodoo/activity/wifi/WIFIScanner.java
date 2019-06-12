@@ -9,7 +9,7 @@ import com.animal.scale.hodoo.R;
  * WIFI Scanner
  *
  * @author Seon
- *
+ * 삭제
  */
 public class WIFIScanner extends Activity{
 

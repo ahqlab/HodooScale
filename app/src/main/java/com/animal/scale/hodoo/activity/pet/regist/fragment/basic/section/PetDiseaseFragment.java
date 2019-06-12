@@ -5,6 +5,7 @@ import com.animal.scale.hodoo.base.PetRegistFragment;
 
 /**
  * Created by SongSeokwoo on 2019-05-13.
+ * 질병 등록 프레그먼트
  */
 public class PetDiseaseFragment extends PetRegistFragment {
 

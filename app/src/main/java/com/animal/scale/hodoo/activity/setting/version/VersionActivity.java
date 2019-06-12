@@ -48,6 +48,10 @@ public class VersionActivity extends BaseActivity<VersionActivity> implements Ve
         return VersionActivity.this;
     }
 
+    /**
+     * 버전 비교하여 텍스트 노출함.
+     * @param appVersion
+     */
     @Override
     public void setServerAppVersion(CommonResponce<AppVersion> appVersion) {
 
@@ -67,6 +71,9 @@ public class VersionActivity extends BaseActivity<VersionActivity> implements Ve
         }
     }
 
+    /**
+     * 새로운 버전이 있읅경우 마켓으로 이동한다.
+     */
     @Override
     public void goToMarket() {
         final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object

@@ -38,7 +38,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by SongSeokwoo on 2019-05-13.
+ * Created by SongSeokwoo on 2019-05-13..
  */
 public class PetProfileFragment extends PetRegistFragment implements PetProfileIn.View {
 

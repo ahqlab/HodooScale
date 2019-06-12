@@ -14,6 +14,10 @@ import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityDeviceListBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 
+
+/**
+ * 디바이스 선택 Activity 현재 사용안함.
+ */
 public class DeviceListActivity extends BaseActivity<DeviceListActivity> {
 
     ActivityDeviceListBinding binding;

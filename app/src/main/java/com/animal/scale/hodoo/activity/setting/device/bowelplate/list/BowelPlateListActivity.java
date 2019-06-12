@@ -29,6 +29,9 @@ import com.animal.scale.hodoo.util.MathUtil;
 
 import java.util.List;
 
+/**
+ * 등록된 배변판 리스트
+ */
 public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity> implements ActivityBowelPlateListIn.View {
 
     ActivityBowelPlateListBinding binding;
@@ -68,11 +71,16 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
 
     @Override
     protected void onResume() {
-
+        //서버에 리스트 요청
         presenter.getMyBowlPlateList();
         super.onResume();
     }
 
+    /**
+     * 서버 요청 Callback
+     * @param list
+     * @Description 다비이스 리스트를 아답터에 셋팅한다.
+     */
     @Override
     public void MyBowlPlateList(final List<Device> list) {
         if(list.size() > 0){
@@ -92,6 +100,7 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
                     convertView.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
+                            //디바이스 삭제
                             deleteDlalog(adapter.data.get(position).getDeviceIdx(), list.size());
                             return false;
                         }
@@ -141,6 +150,11 @@ public class BowelPlateListActivity extends BaseActivity<BowelPlateListActivity>
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 
+    /**
+     * 삭제시 보여지는 Dialog
+     * @param deviceIdx
+     * @param size
+     */
     public void deleteDlalog(final int deviceIdx, final int size) {
         final String[] values = new String[]{
                 getResources().getString(R.string.delete)

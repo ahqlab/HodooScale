@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Created by SongSeokwoo on 2019-04-02.
  *
- * 2019-05-28 현재 Weight 값이 아닌 BFI값 등록으로 변경되어 사용됨
+ * 2019-05-28 현재 Weight 값이 아닌 BFI값 등록으로 변경되어 사용됨.
  */
 public class WeightCheckFragment extends PetRegistFragment implements WeightCheckIn.View {
 

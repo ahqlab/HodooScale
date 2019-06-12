@@ -263,6 +263,11 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         petAllInfos.addAll(tempList);
         /* 상단 우측 펫 리스트 정렬 관련 (e) */
 
+
+        /**
+         * 상단 펫 다이얼로그 아답터
+         * 데이타 바인딩으로 추가적으로 파일생성을 안함.
+         */
         apaterOfPetList = new AbsractCommonAdapter<PetAllInfos>(HomeActivity.this, petAllInfos) {
 
             PetsListviewItemBinding binding;
@@ -304,6 +309,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 return binding.getRoot();
             }
 
+            /**
+             * 생성자 로직에 추가되는 함수
+             *
+             */
             @Override
             protected void setUsetEditConstructor() {
                 View view = LayoutInflater.from(HomeActivity.this).inflate(R.layout.pets_listview_item, null);
@@ -340,6 +349,10 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         cumtomPetListDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
+
+    /**
+     * 현제 프레그먼트에 따라 각 프레그먼트의 함수를 호출한다.
+     */
     public void setFragmentContent() {
         android.support.v4.app.Fragment tf = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if ( tf instanceof DashBoardFragment ) {
@@ -398,6 +411,11 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         setFragmentContent();
     }
 
+    /**
+     * 펫의 프로필 사진을 셋팅한다.
+     * lib picasso
+     * @param info
+     */
     @Override
     public void setCurcleImage(PetAllInfos info) {
         Picasso.with(this)
@@ -406,11 +424,17 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
                 .into(binding.appBarNavigation.petImage);
     }
 
+    /**
+     * bedge 관련
+     */
     @Override
     public void refreshBadge() {
         this.setBadge();
     }
 
+    /**
+     * bedge 관련
+     */
     @Override
     public void setPushCount(int count) {
         if (count <= 0) {
@@ -420,6 +444,9 @@ public class HomeActivity extends BaseActivity<HomeActivity> implements Navigati
         }
     }
 
+    /**
+     * 메인페이지로 이동한다.
+     */
     @Override
     public void moveLoginActivity() {
         Intent intent = new Intent(this, MainActivity.class);

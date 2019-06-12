@@ -8,6 +8,9 @@ import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivitySearchFailedBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 
+/**
+ * 삭제
+ */
 public class SearchFailedActivity extends BaseActivity<SearchFailedActivity> {
 
     ActivitySearchFailedBinding binding;

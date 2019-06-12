@@ -26,6 +26,9 @@ import com.animal.scale.hodoo.domain.Notice;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 공지사항 Activity
+ */
 public class NoticeActivity extends BaseActivity<NoticeActivity> implements NoticeIn.View {
 
     ActivityNoticeBinding binding;
@@ -69,6 +72,10 @@ public class NoticeActivity extends BaseActivity<NoticeActivity> implements Noti
         addItem(startRow, pageSize);
     }
 
+
+    /**
+     * 제목과 내용을 분리하기 위해 Expenderble 리스트뷰를 사용함.
+     */
     private void initNoticeAdapter() {
 
         List<Notice> list = new ArrayList<Notice>();
@@ -99,6 +106,13 @@ public class NoticeActivity extends BaseActivity<NoticeActivity> implements Noti
             public void onScrollStateChanged(AbsListView absListView, int i) {
             }
 
+            /**
+             * 하단 스크롤 이벤트
+             * @param absListView
+             * @param firstVisibleItem
+             * @param visibleItemCount
+             * @param totalItemCount
+             */
             @Override
             public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 int count = totalItemCount - visibleItemCount;
@@ -116,6 +130,12 @@ public class NoticeActivity extends BaseActivity<NoticeActivity> implements Noti
         return NoticeActivity.this;
     }
 
+
+    /**
+     * 아이템 추가시 딜레이를 준 후 프로그래스를 보여준다.
+     * @param startRow
+     * @param pageSize
+     */
     private void addItem(final int startRow, final int pageSize) {
         mLockListview = true;
         Runnable run = new Runnable() {

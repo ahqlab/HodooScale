@@ -28,6 +28,9 @@ import com.tistory.dwfox.dwrulerviewlibrary.view.DWRulerSeekbar;
 import com.tistory.dwfox.dwrulerviewlibrary.view.ObservableHorizontalScrollView;
 import com.tistory.dwfox.dwrulerviewlibrary.view.ScrollingValuePicker;
 
+/**
+ * 질병등록 Activity > 이후 Fragment 로 변경되어 현제 사용안함.
+ */
 public class PhysiqueInformationRegistActivity extends BaseActivity<PhysiqueInformationRegistActivity> implements PhysiqueInformationRegistIn.View {
 
     public static Context mContext;

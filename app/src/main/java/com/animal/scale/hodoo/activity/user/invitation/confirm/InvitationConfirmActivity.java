@@ -20,6 +20,9 @@ import com.animal.scale.hodoo.util.BadgeUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 상대방의 초대 알림
+ */
 public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> implements InvitationConfirm.View {
     private String TAG = InvitationConfirmActivity.class.getSimpleName();
     private ActivityInvitationConfirmBinding binding;
@@ -52,6 +55,10 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
         return this;
     }
 
+    /**
+     * 수락 과 거절 버튼 클릭
+     * @param v
+     */
     public void btnClick ( View v ) {
         if ( v == binding.confirm ) {
             try {
@@ -88,6 +95,7 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
         showPopup( getString(title), getString(content), callback );
     }
 
+    //Bedge 상태를 클리어한다.
     @Override
     public void clearBadge() {
         BadgeUtils.clearBadge(this);
@@ -99,6 +107,10 @@ public class InvitationConfirmActivity extends BaseActivity<InvitationActivity> 
         finish();
     }
 
+    /**
+     * 번들로 받은 초대메시지
+     * @param intent
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

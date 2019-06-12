@@ -18,6 +18,7 @@ import com.animal.scale.hodoo.domain.PetBasicInfo;
 
 /**
  * Created by SongSeokwoo on 2019-05-13.
+ * 성별 입력 Fragment
  */
 public class PetGenderFragment extends PetRegistFragment {
     private FragmentPetGenderBinding binding;

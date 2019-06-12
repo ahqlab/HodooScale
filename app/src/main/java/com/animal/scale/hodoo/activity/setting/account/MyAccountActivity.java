@@ -26,6 +26,10 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 import java.util.List;
 
+
+/**
+ * 유저 관련 셋팅 메뉴 Activity
+ */
 public class MyAccountActivity extends BaseActivity<MyAccountActivity> implements MyAccount.View {
 
     ActivityMyAccountBinding binding;
@@ -45,6 +49,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
         super.setToolbarColor();
         presenter = new MyAccountPresenter(this);
         presenter.initLoadData(getApplicationContext());
+        //메뉴를 로드한다.
         presenter.getSttingListMenu();
     }
 
@@ -53,6 +58,11 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
         return MyAccountActivity.this;
     }
 
+    /**
+     * 메뉴 로드 서버 Callback
+     * @param menus
+     * @Descrtion 메뉴 Listview Adapter 셋팅
+     */
     @Override
     public void setListviewAdapter(List<SettingMenu> menus) {
         adapter = new AdapterOfMyAccountList(MyAccountActivity.this, menus);
@@ -71,6 +81,7 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                     if ( !((HodooApplication) getApplication()).isSnsLoginState() )
                         presenter.checkGroupCount(getApplicationContext());
                     else
+                        //카카오톡 로그아웃
                         UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
                             @Override
                             public void onFailure(ErrorResult errorResult) {
@@ -99,6 +110,10 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
         });
     }
 
+
+    /**
+     * 로그아웃 후 로그인페이지로 이동.
+     */
     @Override
     public void goLoginPage() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -110,6 +125,9 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
         finish();
     }
 
+    /**
+     * 비밀번호 변경 페이지로 이동
+     */
     @Override
     public void goChangePasswordPage() {
         Intent intent = new Intent(getApplicationContext(), ChangeUserInfoActivity.class);
@@ -118,6 +136,10 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
         finish();
     }
 
+    /**
+     * 팝업 다이얼로그
+     * @param message
+     */
     @Override
     public void showPopup( String message ) {
         super.showBasicOneBtnPopup(getString(R.string.message), message)
@@ -130,6 +152,11 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                 ).show();
     }
 
+    /**
+     * 팝업
+     * @param message
+     * @param clickListener
+     */
     @Override
     public void singleShowPopup(String message, final CommonListener.PopupClickListener clickListener) {
         super.showBasicOneBtnPopup(getString(R.string.message), message)
@@ -141,6 +168,12 @@ public class MyAccountActivity extends BaseActivity<MyAccountActivity> implement
                         }
                 ).show();
     }
+
+    /**
+     * 팝업
+     * @param message
+     * @param clickListener
+     */
     @Override
     public void showPopup(String message, final CommonListener.PopupClickListener clickListener) {
         super.showBasicOneBtnPopup(getString(R.string.message), message)

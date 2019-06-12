@@ -28,6 +28,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 등록된 펫 리스트 Activity
+ */
 public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> implements PetAccounts.View {
 
     public static final String TAG = PetAccountsActivity.class.getSimpleName();
@@ -65,6 +69,10 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         return PetAccountsActivity.this;
     }
 
+    /**
+     * GridAdater 셋팅
+     * @param data
+     */
     @Override
     public void setAdapter(final List<PetAllInfos> data) {
         adapter = new PetGridAdapter(PetAccountsActivity.this, data);
@@ -80,6 +88,7 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
                     return;
 //                    finish();
                 }
+                //펫등록 시 보여질 Bottom Dialog 셋팅
                 final BottomDialog dialog = BottomDialog.getInstance();
                 List<IosStyleBottomAlert> btns = new ArrayList<>();
                 btns.add( IosStyleBottomAlert.builder().btnName(getString(R.string.pet_account__main_pet_btn)).id(R.id.main_pet).build() );
@@ -154,12 +163,21 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         });
     }
 
+    /**
+     * Adapter refrash
+     * @param idx
+     */
     @Override
     public void reFreshData( int idx ) {
         adapter.setPetIdx(idx);
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * 펫 삭제 후 Callback
+     * @param result
+     * @Description 0 실패, 1 성공 >  성공 후 다시 리스트를 요청한다. (Refrash)
+     */
     @Override
     public void petDeleteResult(Integer result) {
         if(result == 1){
@@ -167,6 +185,9 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         }
     }
 
+    /**
+     * 플러스 버튼 클릭 시 펫 등록 페이지로 이동
+     */
     @Override
     public void goToPetRegistActivity() {
         homeActivity.finish();
@@ -177,6 +198,9 @@ public class PetAccountsActivity extends BaseActivity<PetAccountsActivity> imple
         finish();
     }
 
+    /**
+     * 펫 리스트 서버요청 및 펫 클릭시 보여질 버튼을 생성함.
+     */
     @Override
     protected void onResume() {
         super.onResume();

@@ -37,6 +37,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 무게 BSC 체크 Activity > 이후 Fragment 로 변경되어 현제 사용안함.
+ */
 public class WeightCheckActivity extends YouTubeBaseActivity implements WeightCheckIn.View {
 
     public static Context mContext;

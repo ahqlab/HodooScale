@@ -39,6 +39,9 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+/**
+ * 유저의 계정정보를 변경한다.
+ */
 public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity> implements ChangeUserInfoIn.View {
 
     ActivityChangeUserInfoBinding binding;
@@ -61,7 +64,7 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 //        binding.setActivityInfo(new ActivityInfo(getString(R.string.change_user_info_title)));
         super.setToolbarColor();
         presenter = new ChangeUserInfoPresenter(this);
-
+        //Conponent 컨트롤
         binding.email.editText.setFocusable(false);
         binding.email.editText.setEnabled(false);
 
@@ -142,6 +145,10 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 
     }
 
+    /**
+     * password 변경시 확인 메시지
+     * @param view
+     */
     private void onClickPasswordEditTextClick(View view) {
         super.showBasicOneBtnPopup(null, getString(R.string.question_of_change_the_password))
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -160,6 +167,11 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
                 }).show();
     }
 
+
+    /**
+     * 국가 변경시 나오는 Dialog
+     * @param view
+     */
     private void onClickCountryEditTextClick(View view) {
 
         AlertDialog.Builder builder = super.showBasicOneBtnPopup(getResources().getString(R.string.choice_country), null);
@@ -187,6 +199,11 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         return ChangeUserInfoActivity.this;
     }
 
+
+    /**
+     * 비밀번호 변경 페이지 이동
+     * @param view
+     */
     public void onClickResetPassword(View view){
         Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
         startActivity(intent);
@@ -196,6 +213,11 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
 
     }
 */
+
+    /**
+     * 회원정보 변경 수행
+     * @param view
+     */
     public void onConfirmBtn(View view) {
 
         if ( ((HodooApplication) getApplication()).isExperienceState() ) {
@@ -221,6 +243,10 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         finish();*/
     }
 
+    /**
+     * 버튼 상태 변경
+     * @param state
+     */
     private void setBtnEnable(boolean state) {
         binding.confirm.setEnabled(state);
         if (binding.confirm.isEnabled()) {
@@ -238,6 +264,11 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         }
     }
 
+    /**
+     * 유저 정보 서버 Callback
+     * @param user
+     * @Description 서버에서 받은 정보를 Component에 셋팅한다.
+     */
     @Override
     public void setUserInfo(User user) {
         if ( user != null ) {
@@ -268,6 +299,10 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         }
     }
 
+    /**
+     * 국가를 셋팅한다.
+     * @param country
+     */
     @Override
     public void setCountry(List<Country> country) {
         String[] countreis = new String[country.size()];
@@ -279,6 +314,9 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         presenter.initUserData();
     }
 
+    /**
+     * 메인페이지로 이동
+     */
     @Override
     public void goLoginPage() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -290,6 +328,10 @@ public class ChangeUserInfoActivity extends BaseActivity<ChangeUserInfoActivity>
         finish();
     }
 
+    /**
+     * SNS 회원탈퇴 및 회원가입 로직
+     * @param v
+     */
     public void snsClick ( View v ) {
         switch( v.getId() ) {
             case R.id.sns_logout :

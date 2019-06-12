@@ -10,6 +10,10 @@ import android.widget.BaseAdapter;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 공통 아답터 데이터 바인딩으로 사용한다.
+ * @param <D>
+ */
 public abstract class AbsractCommonAdapter<D extends Serializable> extends BaseAdapter {
 
     Activity activity;

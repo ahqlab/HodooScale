@@ -11,6 +11,10 @@ import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityDeviceSettingBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 
+
+/**
+ * 삭제
+ */
 public class DeviceSettingActivity extends BaseActivity<DeviceSettingActivity> {
 
     ActivityDeviceSettingBinding binding;

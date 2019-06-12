@@ -19,6 +19,9 @@ import com.animal.scale.hodoo.domain.User;
 import com.animal.scale.hodoo.message.ResultMessage;
 import com.animal.scale.hodoo.util.ValidationUtil;
 
+/**
+ * 비밀번호 임시 발송 Activity
+ */
 public class SendCertificationNumberActivity extends BaseActivity<SendCertificationNumberActivity> implements SendCertificationNumberIn.View {
 
     ActivitySendCertificationNumberBinding binding;
@@ -50,6 +53,7 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
         return SendCertificationNumberActivity.this;
     }
 
+    //비밇번호 발송
     public void onClickSendBtn(View view) {
         String email = binding.email.editText.getText().toString();
         String password = sharedPrefManager.getStringExtra(SharedPrefVariable.USER_PASSWORD);
@@ -60,6 +64,7 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
         presenter.sendTempPassword(user);
     }
 
+    //EditText의 상태를 체크해 버튼 상태를 변경한다.s
     private void checkState() {
         if (!ValidationUtil.isValidEmail(binding.email.editText.getText().toString())) {
             setBtnEnable(false);
@@ -67,7 +72,7 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
             setBtnEnable(true);
         }
     }
-
+    //버튼 상태 변경
     private void setBtnEnable(boolean state) {
         binding.sendBtn.setEnabled(state);
         if (binding.sendBtn.isEnabled()) {
@@ -83,6 +88,11 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
         checkState();
     }
 
+    /**
+     * 요청 서버 Callback
+     * @param userCommonResponce
+     * @Description 메일전송이 완료되면 엑티비티를 종료한다.
+     */
     @Override
     public void sendResult(CommonResponce<User> userCommonResponce) {
         if (userCommonResponce.getResultMessage().equals(ResultMessage.SUCCESS)) {
@@ -103,6 +113,10 @@ public class SendCertificationNumberActivity extends BaseActivity<SendCertificat
         }
     }
 
+    /**
+     * 프로그래스 바 컨트롤
+     * @param play
+     */
     @Override
     public void setProgress(Boolean play) {
         if (play) {

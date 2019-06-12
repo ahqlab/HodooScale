@@ -39,6 +39,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 카카오 로그인 예제
+ */
 public class KakaoLoginActivity extends AppCompatActivity  implements View.OnClickListener{
 
 

@@ -17,6 +17,10 @@ import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.PetAllInfos;
 import com.animal.scale.hodoo.util.RER;
 
+
+/**
+ * 급식기 관련 임시 Activity
+ */
 public class FeederOrderActivity extends BaseActivity<FeederOrderActivity> implements FeederOrderIn.View{
 
     ActivityFeederOrderBinding binding;

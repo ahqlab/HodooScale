@@ -16,6 +16,9 @@ import com.animal.scale.hodoo.base.BaseActivity;
 import com.animal.scale.hodoo.databinding.ActivityConfirmCertificationNumberBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 
+/**
+ * 비밀번호 임시 발송 안내 Activity
+ */
 public class ConfirmCertificationNumberActivity extends BaseActivity<ConfirmCertificationNumberActivity> {
 
     ActivityConfirmCertificationNumberBinding binding;

@@ -42,6 +42,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * 와이파이 목록 및 디바이스 등록
+ */
 public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
 
     private static final String TAG = "WIFIScanner";
@@ -84,6 +87,7 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
     /*    if (wifimanager.isWifiEnabled() == false) {
             wifimanager.setWifiEnabled(true);
         }*/
+        //WIFI 퍼미션 획득 (카메라 아님)
         int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION);
         if (permissionCamera == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(WifiSearchActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
@@ -153,7 +157,7 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
         return WifiSearchActivity.this;
     }
 
-
+    //와이파이 목록 브로드 케스트로 획득
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -171,7 +175,11 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
         }
     };
 
-
+    /**
+     * 와이파이 목록 클릭 시 보여지는 Dialog
+     * @param SSID
+     * @param bSSID
+     */
     public void showPopup(final String SSID, final String bSSID) {
         Log.e("HJLEE", "SSID : "+ SSID);
         Log.e("HJLEE", "bSSID : "+ bSSID);
@@ -209,6 +217,11 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
         builder.show();
     }
 
+    /**
+     * ...maybe... wifi connect?
+     * @param WIFI_NAME
+     * @param WIFI_PASSWORD
+     */
     public void connect(String WIFI_NAME, String WIFI_PASSWORD) {
         WifiConfiguration wificonfig = new WifiConfiguration();
         wificonfig.SSID = String.format("\"%s\"", WIFI_NAME);
@@ -229,7 +242,9 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
         wifimanager.startScan();
     }
 
-
+    /**
+     * 브로드케스트로 받은 와이파이 리스트를 아답터에 셋팅한다.
+     */
     public void getWIFIScanResult() {
         mScanResult = wifimanager.getScanResults(); // ScanResult
         if(getCurrentSsid(getApplicationContext()) != null){
@@ -260,6 +275,9 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
         }
     };
 
+    /**
+     * 와이파이 스캔 시작
+     */
     public void initWIFIScan() {
         // init WIFISCAN
         final IntentFilter filter = new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
@@ -280,7 +298,7 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
         }
     }
 
-
+    //다시 시작
     @Override
     protected void onResume() {
         wifimanager.startScan(); // for refresh
@@ -309,6 +327,11 @@ public class WifiSearchActivity extends BaseActivity<WifiSearchActivity> {
         }
     }
 
+    /**
+     * 선택한 아이파이의 SSID를 가져온다.
+     * @param context
+     * @return
+     */
     public static String getCurrentSsid(Context context) {
         String ssid = null;
         ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

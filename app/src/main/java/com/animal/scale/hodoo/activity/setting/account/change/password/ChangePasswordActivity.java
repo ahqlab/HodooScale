@@ -16,6 +16,10 @@ import com.animal.scale.hodoo.databinding.ActivityChangePasswordBinding;
 import com.animal.scale.hodoo.domain.ActivityInfo;
 import com.animal.scale.hodoo.domain.User;
 
+
+/***
+ * 비밀번호 변경 Activity
+ */
 public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity> implements ChangePassword.View {
 
     public SharedPrefManager mSharedPrefManager;
@@ -93,6 +97,11 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity>
         ));
     }
 
+    /**
+     * 버튼 상태 변경
+     * @param state
+     * @Description 버튼 상태를 변경하여. 사용자의 버튼 입력을 제어한다.
+     */
     private void setBtnEnable(boolean state) {
         binding.submit.setEnabled(state);
         if (binding.submit.isEnabled()) {
@@ -102,6 +111,11 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity>
         }
     }
 
+    /**
+     *
+     * 벨리데이션 처리
+     * @Description TextWatcher 에서 변경한 Boolean Flag 들을 확인 후 버튼 상태를 변경한다.
+     */
     private void vaildation() {
         if (oldPasswordStatus && newPasswordStatus && confirmPasswordStatus) {
             setBtnEnable(true);
@@ -115,7 +129,10 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity>
         return ChangePasswordActivity.this;
     }
 
-    //onCLick
+    /**
+     * 변경 버튼 클릭
+     * @param view
+     */
     public void onClickSubmitBtn(View view) {
         User user = new User();
         user.setPassword(binding.newPassword.editText.getText().toString());
@@ -123,6 +140,11 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity>
         presenter.changeUserPassword(user);
     }
 
+    /**
+     * 변경 완료 후 서버 Callback
+     * @param integer
+     * @Desctiption 0 실패, 1 성공
+     */
     @Override
     public void userPasswordUpdateResult(Integer integer) {
         if (integer == 1) {
@@ -131,6 +153,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordActivity>
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
+                            //새로운 비밀번호를 저장한다.
                             mSharedPrefManager.putStringExtra(SharedPrefVariable.USER_PASSWORD, binding.newPassword.editText.getText().toString());
                             finish();
                         }

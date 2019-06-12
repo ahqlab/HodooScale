@@ -41,6 +41,9 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+/**
+ * 회원가입 Activity
+ */
 public class SignUpActivity extends BaseActivity<SignUpActivity> implements SignUpIn.View {
 
     ActivitySignUpBinding binding;
@@ -206,6 +209,9 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         finish();
     }
 
+    /**
+     * 유저 등록버튼 클릭
+     */
     @Override
     public void registUser() {
         User user = binding.getUser();
@@ -219,6 +225,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
             binding.getUser().setSex("MALE");
         }
         setProgress(true);
+        //등록 수행
         presenter.registUser(binding.getUser());
     }
 
@@ -238,18 +245,18 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
                         }
                 ).show();
     }
-
+    //이메일 전송
     @Override
     public void sendEmail(String userEmail) {
         presenter.userCertifiedMailSend(userEmail);
     }
-
+    //프로그래스 바 상태 변경
     @Override
     public void setProgress(boolean state) {
         binding.signupProgress.setVisibility( state ? View.VISIBLE : View.GONE );
     }
 
-
+    //국가 EditText클릭 시 Dialog 생성
     public void onClickCountryEditTextClick(View view) {
         if ( countries != null ) {
             String[] countreis = new String[countries.size()];
@@ -293,6 +300,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
     private boolean checkValidation( int type ) {
         return true;
     }
+    //버튼 상태 변경
     private void setBtnEnable ( boolean state ) {
         binding.confirm.setEnabled(state);
         if ( binding.confirm.isEnabled() ) {
@@ -301,6 +309,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
             binding.confirm.setTextColor(ContextCompat.getColor(this, R.color.mainRed));
         }
     }
+    //Validation 처리
     private void vaildation() {
         if (
                 emailState &&
@@ -335,6 +344,7 @@ public class SignUpActivity extends BaseActivity<SignUpActivity> implements Sign
         return mix;
     }
 
+    //Refrash 항목 수행
     @Override
     protected void onResume() {
         super.onResume();

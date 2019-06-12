@@ -19,6 +19,9 @@ import com.animal.scale.hodoo.util.BadgeUtils;
 
 import java.util.List;
 
+/**
+ * 그룹참여 요청 히스토리 로그
+ */
 public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> implements UserGroupList.View {
 
     public static final int ACCEPT_TYPE = 1;
@@ -30,6 +33,7 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
     private List<InvitationUser> users;
     private UserGroupList.Presenter presenter;
 
+    //새로운 아이템 추가를 위한 broadcast
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -51,6 +55,7 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
     @Override
     protected void onResume() {
         super.onResume();
+        //그룹 요청 히스토리 리승트 서버 요청
         presenter.getInvitationList();
         registerReceiver(receiver, new IntentFilter(HodooConstant.FCM_RECEIVER_NAME));
     }
@@ -60,6 +65,11 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
         return this;
     }
 
+    /**
+     * 그룹 요청 서버 Callback
+     * @param users
+     * @Description 리스르 셋팅하며 승인 및 거절 버튼을 제공한다.
+     */
     @Override
     public void setAdapterData(List<InvitationUser> users) {
         if ( adapter == null ) {
@@ -67,11 +77,13 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
             adapter.setOnBtnClickListener(new AdapterOfUserGroup.OnBtnClickListener() {
                 @Override
                 public void onDeclineBtn(int toIdx, int fromIdx) {
+                    //상태 승인으로 변경
                     presenter.setInvitationState(DECLINE_TYPE, toIdx, fromIdx);
                 }
 
                 @Override
                 public void onAcceptBtn(int toIdx, int fromIdx) {
+                    //거절
                     presenter.setInvitationState(ACCEPT_TYPE, toIdx, fromIdx);
                 }
             });
@@ -81,7 +93,7 @@ public class UserGroupListActivity extends BaseActivity<UserGroupListActivity> i
         }
 
     }
-
+    //벳지 상태 클리어
     @Override
     public void setPushCount(int count) {
 

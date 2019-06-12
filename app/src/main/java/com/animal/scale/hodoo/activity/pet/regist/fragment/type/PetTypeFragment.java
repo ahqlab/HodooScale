@@ -18,7 +18,7 @@ import com.animal.scale.hodoo.domain.PetBasicInfo;
 import com.animal.scale.hodoo.util.VIewUtil;
 
 /**
- * Created by SongSeokwoo on 2019-04-04.
+ * Created by SongSeokwoo on 2019-04-04..
  */
 public class PetTypeFragment extends PetRegistFragment implements View.OnClickListener, PetTypeIn.View {
     private String TAG = PetTypeFragment.class.getSimpleName();

@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         Log.e("HJLEE", key);
     }
 
+    /**
+     * 프레그먼트를 셋팅한다.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -88,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         super.onResume();
     }
 
+    /**
+     * Home Activity로 이동한다.
+     * Fragment 부모
+     */
     @Override
     public void goHomeActivity() {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -96,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         finish();
     }
 
+    /**
+     * 자동 로그인
+     */
     @Override
     public void goAutoLogin() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -105,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         finish();
     }
 
+    /**
+     * 푸쉬가 왔을때 다이얼로그로 보여주기위한 퍼미션
+     */
     public void systemAlertPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
@@ -150,6 +163,11 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     }
 
 
+    /**
+     * Key Hash 를 얻는 로직
+     * @param context
+     * @return
+     */
     public static String getKeyHash(final Context context) {
         PackageManager pm = context.getPackageManager();
         try {
