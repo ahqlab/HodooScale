@@ -61,7 +61,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
         nowTime = System.currentTimeMillis();
         binding.lastRefresh.setText( getString(R.string.last_sync_refresh_str) + " " + lastRefreshSdf.format(new Date(nowTime)) );
         int permissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
-
+        //GPS 관련 퍼미션
         if (permissionCheck == PackageManager.PERMISSION_DENIED) {
             // 권한 없음
             if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -85,6 +85,10 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
         return new ActivityFragment();
     }
 
+    /**
+     * 날씨 아이콘 설정
+     * @param image
+     */
     @Override
     public void setWeatherIcon(final int image) {
         getActivity().runOnUiThread(new Runnable() {
@@ -120,7 +124,7 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
         if ( lm == null )
             lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         if ( !isLocation ) isLocation = true;
-
+            //GPS 관련 퍼미션
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -196,15 +200,26 @@ public class ActivityFragment extends Fragment implements ActivityFragmentIn.Vie
         }
 
     }
+
+    /**
+     * Weather 정보를 갱신한다.
+     * @param view
+     */
     public void refreshWeather( View view ) {
         getWeather();
     }
+
+    /**
+     * Weather 정보를 서버에 요청한다.
+     * @param location
+     */
     public void setWeather( Location location ) {
         if ( isLocation ) {
             double lon = location.getLongitude(); //경도
             double lat= location.getLatitude();   //위도
             float acc = location.getAccuracy();    //정확도
             String provider = location.getProvider();
+            //위도 경도 기반으로 기상정보를 서버에 요청한다.
             presenter.getWeather(lat, lon, new ActivityFragmentPresenter.WeatherCallback() {
                 @Override
                 public <T> void onResponse(Response<T> response) {

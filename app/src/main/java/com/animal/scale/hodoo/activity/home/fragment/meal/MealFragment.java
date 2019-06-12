@@ -123,8 +123,11 @@ public class MealFragment extends Fragment implements NavigationView.OnNavigatio
 
         country = mSharedPrefManager.getStringExtra(SharedPrefVariable.CURRENT_COUNTRY);
 //        presenter.getTipMessageOfCountry(new MealTip(country));
+        //Calendar init
         presenter.initWeekCalendar();
+        //Draw Chart
         presenter.initRaderChart(HomeActivity.getCalendarDate().equals("") ? DateUtil.getCurrentDatetime() : HomeActivity.getCalendarDate());
+        //Message 를 가져온다.
         presenter.getTipMessageOfCountry(new MealTip(country));
         if (getArguments() != null) {
            /* if (getArguments().getBoolean("push"))

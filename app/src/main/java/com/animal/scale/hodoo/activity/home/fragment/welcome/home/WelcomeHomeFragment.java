@@ -71,10 +71,15 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
 
     SharedPrefManager sharedPrefManager;
 
+    /**
+     * sns 회원가입 결과
+     * @param commonResponce
+     */
     @Override
     public void setSnsLoginResult(CommonResponce<User> commonResponce) {
         if(commonResponce.getDomain() != null){
             ((HodooApplication) getActivity().getApplication()).setSnsLoginState(true);
+            //로그인을 진행한다.
             presenter.doLogin(commonResponce.getDomain());
         }else{
             Toast.makeText(getActivity(), "서버와의 연결이 원활하지 않습니다. 네트워크 상태를 확인하세요.", Toast.LENGTH_SHORT).show();
@@ -190,6 +195,11 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
         return availableAuthTypes;
     }
 
+    /**
+     * 가능한 로그인 개체들을 보여준다.
+     * @param authTypes
+     * @return
+     */
     private KakaoAuthItem[] createAuthItemArray(final List<AuthType> authTypes) {
         final List<KakaoAuthItem> kakaoAuthItemList = new ArrayList<KakaoAuthItem>();
         if (authTypes.contains(AuthType.KAKAO_TALK)) {
@@ -325,7 +335,9 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
         }
     }
 
-
+    /**
+     * 카카오 세션정보 콜벡 리스너
+     */
     private class SessionCallback implements ISessionCallback {
 
         @Override
@@ -346,7 +358,9 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
         }
     }
 
-
+    /**
+     * 카카오 정보 보여주는 함수
+     */
     public void requestMe() {
         List<String> keys = new ArrayList<>();
         keys.add("properties.nickname");
@@ -391,6 +405,7 @@ public class WelcomeHomeFragment extends Fragment implements WelcomeHomeIn.View 
                     user.setSnsId(String.valueOf(result.getId()));
                     user.setUserCode(1);
                     Toast.makeText(getActivity(), "Logged in!\n정보: " + user.toString(), Toast.LENGTH_SHORT).show();
+                    //회원가입을 진행한다. 만약 회원가입이 되어있고, sns Token 이 변경되었다면, 업데이트 시킨다.
                     presenter.doSnsLogin(user);
                 } else {
                     handleScopeError(result);

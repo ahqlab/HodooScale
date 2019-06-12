@@ -58,7 +58,7 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
         presenter = new DashBoardPresenter(this);
         presenter.initData(getContext());
         app = (HodooApplication) getActivity().getApplication();
-
+        //목표체중 변경하기
         binding.mealBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +67,7 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                 startActivity(intent);
             }
         });
+        //현제 체중 변경하기 버튼 클릭
         binding.weightModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +144,7 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
                             info.setWeight("0");
                         }
                         info.setId(selectPet.pet.getPhysical());
+                        //피지컬 정보를 업데이트 한다.
                         presenter.updatePhysical(info);
 
                     }
@@ -158,7 +160,9 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
 
             }
         });
-
+        /**
+         * 체험하기 구분
+         */
         if ( ((HodooApplication) getActivity().getApplication()).isExperienceState() ) {
             petAllInfos = new PetAllInfos();
             PetPhysicalInfo petPhysicalInfo = new PetPhysicalInfo();
@@ -190,11 +194,17 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
     public void setSelectPet(PetAllInfos selectPet) {
         if ( selectPet != null ) {
             this.selectPet = selectPet;
+            //펫 정보 가져오기
             presenter.getPetAllInfos( selectPet.getPet().getPetIdx() );
+            //오늘 먹은 칼로리 가져오기
             presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());
         }
     }
 
+    /**
+     * 오늘 먹은 칼로리 양을 보여준다.
+     * @param mealHistoryCommonResponce
+     */
     @Override
     public void setMealHistory(MealHistory mealHistoryCommonResponce) {
         if ( mealHistoryCommonResponce != null ) {
@@ -204,6 +214,10 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
 //        binding.nowCalorie.setText( String.format("%fkcal", mealHistory.getCalorie()) ) ;
     }
 
+    /**
+     * 체중 변경완료
+     * @param result
+     */
     @Override
     public void physicalUpdateDone(PetPhysicalInfo result) {
         if ( result != null ) {
@@ -221,7 +235,8 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
             HomeActivity.selectPet.setPetPhysicalInfo(result);
             selectPet = HomeActivity.selectPet;
             binding.setDomain( selectPet );
-//            binding.nowWeight.setText( selectPet.petPhysicalInfo.getWeight() + "kg");
+//          binding.nowWeight.setText( selectPet.petPhysicalInfo.getWeight() + "kg");
+            //목표 체중을 구한다.
             presenter.getGoalWeight(
                     Float.parseFloat(selectPet.petPhysicalInfo.getWeight()),
                     petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20,
@@ -241,7 +256,9 @@ public class DashBoardFragment extends Fragment implements DashBoardIn.View, Nav
     public void setPetAllInfos(PetAllInfos petAllInfos) {
         this.petAllInfos = petAllInfos;
         binding.nowWeight.setText( petAllInfos.petPhysicalInfo.getWeight() + "kg");
+        //체중을 SharedPrefrense 에 저장한디.
         presenter.setAverageWeight(petAllInfos.petPhysicalInfo.getWeight());
+        //목표 체중을 구한다.
         presenter.getGoalWeight(
                 Float.parseFloat(petAllInfos.petPhysicalInfo.getWeight()),
                 petAllInfos.petUserSelectionQuestion != null ? petAllInfos.petUserSelectionQuestion.getBodyFat() : 20,
