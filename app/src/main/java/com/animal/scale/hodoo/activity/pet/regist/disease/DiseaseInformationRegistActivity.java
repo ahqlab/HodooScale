@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * 징별등록 Activity (현재 사용안함.)
+ */
 public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInformationRegistActivity> implements DiseaseInformationIn.View{
 
     public static Context mContext;
@@ -68,6 +71,11 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
 
     }
 
+    /**
+     * 질병정보 셋팅
+     *
+     * @param petChronicDisease
+     */
     @Override
     public void setDiseaseInfo(PetChronicDisease petChronicDisease) {
         List<PetChronicDisease> list;
@@ -82,6 +90,10 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         }
     }
 
+    /**
+     * 질별 리스트 아답터 셋팅
+     * @param petChronicDisease
+     */
     public void setListviewAdapter(PetChronicDisease petChronicDisease){
         final List<Disease> diseases = new ArrayList<Disease>();
 
@@ -111,11 +123,19 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         return DiseaseInformationRegistActivity.this;
     }
 
+    /**
+     * 다음 버튼 클릭
+     * @param view
+     */
     public void onClickNextBtn(View view){
         if ( binding.getDomain() != null )
             presenter.deleteDiseaseInformation(petIdx, binding.getDomain().getId());
     }
 
+    /**
+     * ?????
+     * @return
+     */
     public String getDiseaName(){
         StringBuilder sb = new StringBuilder();
 //        if (Adapter.getCheckedCount() > 0) {
@@ -140,6 +160,9 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         return sb.toString();
     }
 
+    /**
+     * 질병 등록
+     */
     @Override
     public void registDiseaseInformation() {
         PetChronicDisease petChronicDisease =  binding.getDomain();
@@ -147,6 +170,11 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
         presenter.registDiseaseInformation(petChronicDisease,  petIdx);
     }
 
+    /**
+     * 다음페이지 이동
+     *
+     * @param result
+     */
     @Override
     public void nextStep(int result) {
         Intent intent = new Intent(getApplicationContext(), PhysiqueInformationRegistActivity.class);
@@ -157,6 +185,9 @@ public class DiseaseInformationRegistActivity extends BaseActivity<DiseaseInform
 //        finish();
     }
 
+    /**
+     * 사용안함.
+     */
     @Override
     public void setNavigation() {
         binding.addPetNavigation.basicBtn.setBackgroundResource(R.drawable.rounded_pink_btn);

@@ -64,14 +64,26 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
         return this;
     }
 
+    /**
+     * 초대 요청
+     * @param view
+     */
     public void sendInvition(View view) {
         presenter.sendInvitation( binding.email.editText.getText().toString() );
     }
 
+    /**
+     * 벨리데이션 체크 후 버튼 상태를 변경한다.
+     */
     private void validation() {
         setBtnEnable(!ValidationUtil.isEmpty(binding.email.editText.getText().toString()));
     }
 
+
+    /**
+     * 버튼 상태 변경
+     * @param state
+     */
     private void setBtnEnable ( boolean state ) {
         binding.confirm.setEnabled(state);
         if ( binding.confirm.isEnabled() ) {
@@ -81,6 +93,12 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
         }
     }
 
+    /**
+     * 팝업
+     * @param title
+     * @param content
+     * @param callback
+     */
     @Override
     public void showPopup(String title, String content, final CustomDialogCallback callback) {
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -97,6 +115,12 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
         dialog.show();
     }
 
+    /**
+     * 팝업
+     * @param title
+     * @param content
+     * @param callback
+     */
     @Override
     public void showPopup(int title, int content, final CustomDialogCallback callback) {
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -113,11 +137,19 @@ public class InvitationActivity extends BaseActivity<InvitationActivity> impleme
         dialog.show();
     }
 
+    /**
+     * 프로그래스 바 컨트롤
+     * @param state
+     */
     @Override
     public void setProgress(boolean state) {
         binding.progress.setVisibility(state ? View.VISIBLE : View.GONE);
     }
 
+
+    /**
+     * 참여 요청 후 페이지 이동
+     */
     @Override
     public void goFinishPage() {
 //        mSharedPrefManager.removeAllPreferences();

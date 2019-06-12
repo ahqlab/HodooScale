@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import lombok.Data;
 
+/**
+ * 사료 영양분 (DB 와 동일 )
+ */
 @Data
 public class AutoCompleateFeed implements Serializable {
 

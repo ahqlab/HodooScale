@@ -94,11 +94,18 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         //binding.seekBar.initData(progressItemList);
     }
 
+    /**
+     * Intent로 받은 SelectPet 에 대한 RER을 구한다.
+     */
     private void setPetAllInfo() {
         rer = new RER(Float.parseFloat(mSharedPrefManager.getStringExtra(SharedPrefVariable.TODAY_AVERAGE_WEIGHT)), selectPet.getFactor()).getRER();
         binding.rer.setText(MathUtil.DecimalCut(rer) + "kcal\n(" + getResources().getString(R.string.recommend) + ")");
     }
-
+    /**
+     * 사료량을 입력하기 위한 넘버 피커 셋팅
+     * 지금은 사용안함.
+     * @param numberPicker
+     */
     private void setNumberPicker(NumberPicker numberPicker) {
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(1000);
@@ -110,7 +117,11 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
             }
         });
     }
-
+    /**
+     * 사료량을 입력하기 위한 넘버 피커 셋팅
+     * 지금은 사용안함.
+     * @param numberPicker
+     */
     private void setDecimalNumberPicker(NumberPicker numberPicker) {
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(3);
@@ -123,7 +134,11 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
             }
         });
     }
-
+    /**
+     * 단위를 입력하기 위한 피커 셋팅
+     * 지금은 사용안함.
+     * @param numberPicker
+     */
     private void setStringNumberPicker(NumberPicker numberPicker, Feed feed) {
         numberPicker.setMinValue(0);
         if (feed.getTag().equals("D")) {
@@ -148,7 +163,11 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         return MealUpdateActivity.this;
     }
 
-
+    /**
+     * 사용안함.
+     * @param rer
+     * @param kcal
+     */
     public void initDataToSeekbar(float rer, float kcal) {
         mProgressItem = new ProgressItem();
         mProgressItem.progressItemPercentage = (float) (((rer * 0.7) / kcal) * 100);
@@ -167,7 +186,11 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
 
         binding.seekBar.invalidate();
     }
-
+    /**
+     * 사용안함.
+     * @param rer
+     * @param kcal
+     */
     public void initDataToSeekbar(float rer) {
         mProgressItem = new ProgressItem();
         mProgressItem.progressItemPercentage = (float) (((rer * 0.7) / rer) * 100);
@@ -192,6 +215,12 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         dialog = IngredientsOfMealDialog.newInstance(feed);
     }
 
+    /**
+     * 사료등록결과
+     * DB(SQLight)에 입력한다. (최근검색어를 위해)
+     *
+     * @param result
+     */
     @Override
     public void setInsertResult(Integer result) {
         if (result == 1) {
@@ -200,6 +229,10 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         }
     }
 
+    /**
+     * 오늘 섭취한 총 칼로리
+     * @param mealHistory
+     */
     @Override
     public void setTodaySumCalorie(MealHistory mealHistory) {
         if (mealHistory != null) {
@@ -233,6 +266,10 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         binding.seekBar.setEnabled(true);
     }
 
+    /**
+     * 컵과  MealHistory 객체에 값을 셋팅한다.
+     * @param mealHistory
+     */
     @Override
     public void setThisHistory(MealHistory mealHistory) {
         binding.setHistory(mealHistory);
@@ -255,6 +292,11 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         }
     }
 
+    /**
+     * 업데이트 결과
+     * 1이면 성공 종료한다.
+     * @param result
+     */
     @Override
     public void setUpdateResult(int result) {
         if (result == 1) {
@@ -262,10 +304,18 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         }
     }
 
+    /**
+     * 디테일 버튼 클릭
+     * @param view
+     */
     public void onClickDetailBtn(View view) {
         dialog.show(getFragmentManager(), "dialog");
     }
 
+    /**
+     * 업데이트 버튼 클릭
+     * @param view
+     */
     public void onClickSaveBtn(View view) {
         StringBuilder AmountOfFeed = new StringBuilder();
         AmountOfFeed.append(binding.meterageCup.getValue());
@@ -308,6 +358,9 @@ public class MealUpdateActivity extends BaseActivity<MealUpdateActivity> impleme
         return Integer.parseInt(String.valueOf(calorie));
     }
 
+    /**
+     * 변경 항목 리프레쉬
+     */
     @Override
     protected void onResume() {
         presenter.getTodaySumCalorie(DateUtil.getCurrentDatetime());

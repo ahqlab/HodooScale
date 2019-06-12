@@ -16,6 +16,9 @@ import com.animal.scale.hodoo.domain.SearchHistory;
 
 import java.util.List;
 
+/**
+ * 커스텀 TextWatcher 사료 검색시 , 최근 목록과, DB 검색을 같이 함.
+ */
 public class CustomAutoCompleateTextChageListner implements TextWatcher , MealSearchIn.AdapterView, AdapterOfSearchHistory.ListBtnClickListener{
 
     Context context;
@@ -47,6 +50,13 @@ public class CustomAutoCompleateTextChageListner implements TextWatcher , MealSe
 
     }
 
+    /**
+     * 검색어가 없으면 최근검색어 & 검새어가 있으면, DB검색
+     * @param charSequence
+     * @param i
+     * @param i1
+     * @param i2
+     */
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         if(charSequence.toString().matches("")){

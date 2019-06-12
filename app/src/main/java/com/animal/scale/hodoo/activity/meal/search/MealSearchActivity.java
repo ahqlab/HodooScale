@@ -58,6 +58,10 @@ public class MealSearchActivity extends BaseActivity<MealSearchActivity> impleme
         selectPet = (PetAllInfos) intent.getSerializableExtra("selectPet");
     }
 
+    /**
+     * 검색 목록 아이템 클릭 리스너
+     * MealRegistrationActivity 로 이동한다.
+     */
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

@@ -51,6 +51,10 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         return DeviceRegistActivity.this;
     }
 
+    /**
+     * 디바이스 등록 버튼 클릭
+     * @param view
+     */
     public void onClickRegistBtn(View view){
         presenter.tempRegist();
     }
@@ -62,6 +66,10 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         finish();
     }*/
 
+    /**
+     * 프로그래스 바 컨트롤
+     * @param play
+     */
     @Override
     public void setProgress(boolean play) {
         if (play) {
@@ -76,6 +84,10 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         }
     }
 
+    /**
+     * 와이파이 설정 페이지로 이동
+     * 변경 > 펫 등록 페이지로 이동
+     */
     @Override
     public void moveWIFISetting() {
        /* Intent intent = new Intent(getApplicationContext(), WifiSearchActivity.class);
@@ -89,6 +101,10 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         finish();
     }
 
+    /**
+     * 그룹 참여 요청 기다림
+     * @param email
+     */
     @Override
     public void moveInvitationFinish(String email) {
         Intent intent = new Intent(this, InvitationFinishActivity.class);
@@ -99,6 +115,10 @@ public class DeviceRegistActivity extends BaseActivity<DeviceRegistActivity> imp
         finish();
     }
 
+
+    /**
+     * 펫등록 페이지로 이동
+     */
     @Override
     public void goPetRegist() {
         Intent intent = new Intent(getApplicationContext(), PetRegistActivity.class);

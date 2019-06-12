@@ -1,19 +1,6 @@
 {
     "logs": [
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/res/merged/debug/values-fr/values-fr.xml",
-            "map": [
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/36f3074257a286cd17a4683a3db2f019/res/values-fr/values-fr.xml",
-=======
-            "outputFile": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr\\values-fr.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\c88fab7c50a87e137205f160d346113f\\res\\values-fr\\values-fr.xml",
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
-=======
             "outputFile": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr\\values-fr.xml",
             "map": [
                 {
@@ -28,7 +15,6 @@
                 },
                 {
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\921a637b00511d2794a739da6b0ee3a0\\res\\values-fr\\values-fr.xml",
->>>>>>> 25997b79d4928fb0273b15b8649389fca0688637
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -50,15 +36,7 @@
             "outputFile": "E:\\AndroidStudio\\Projects\\HodooScaleAfter\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-fr\\values-fr.xml",
             "map": [
                 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values-fr/values-fr.xml",
-=======
-                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-fr\\values-fr.xml",
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
-=======
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\003d33bdf52ca9fcbac82b94a2c68087\\res\\values-fr\\values-fr.xml",
->>>>>>> 25997b79d4928fb0273b15b8649389fca0688637
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -66,27 +44,9 @@
                         "endColumns": "110,114,110,81,105,129,82,79,85,109,111,102,110,106,106,158,98,85",
                         "endOffsets": "211,326,437,519,625,755,838,918,1004,1114,1226,1329,1440,1547,1654,1813,1912,1998"
                     }
-<<<<<<< HEAD
-                }
-            ]
-        },
-        {
-<<<<<<< HEAD
-            "outputFile": "/Users/hyeongjoon/Documents/StudioProjects/HodooScale2/esp8266/build/intermediates/incremental/mergeDebugResources/merged.dir/values-fr/values-fr.xml",
-            "map": [
-                {
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/36f3074257a286cd17a4683a3db2f019/res/values-fr/values-fr.xml",
-=======
-            "outputFile": "D:\\app_work\\HodooScale\\esp8266\\build\\intermediates\\res\\merged\\debug\\values-fr\\values-fr.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\c88fab7c50a87e137205f160d346113f\\res\\values-fr\\values-fr.xml",
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
-=======
                 },
                 {
                     "source": "C:\\Users\\silve\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\921a637b00511d2794a739da6b0ee3a0\\res\\values-fr\\values-fr.xml",
->>>>>>> 25997b79d4928fb0273b15b8649389fca0688637
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -101,23 +61,6 @@
                         "endColumns": "100",
                         "endOffsets": "2099"
                     }
-<<<<<<< HEAD
-                },
-                {
-<<<<<<< HEAD
-                    "source": "/Users/hyeongjoon/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/efc8af4e6a67f4a9177bee6c9ce36808/res/values-fr/values-fr.xml",
-=======
-                    "source": "C:\\Users\\AHQLab\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\0ffde027e566714f24c32616940d7887\\res\\values-fr\\values-fr.xml",
->>>>>>> a57a5e73ef63c67fd56462caa0ab9ba41d393a73
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,216,331,442,524,630,760,843,923,1009,1119,1231,1334,1445,1552,1659,1818,1917",
-                        "endColumns": "110,114,110,81,105,129,82,79,85,109,111,102,110,106,106,158,98,85",
-                        "endOffsets": "211,326,437,519,625,755,838,918,1004,1114,1226,1329,1440,1547,1654,1813,1912,1998"
-                    }
-=======
->>>>>>> 25997b79d4928fb0273b15b8649389fca0688637
                 }
             ]
         }
